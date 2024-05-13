@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가게 상세 조회 페이지</title>
+
+     <!-- templetes/common/common.html  조각 추가 -->
+     <th:block th:replace="~{common/common}"></th:block>
+
+     <link rel="stylesheet" href="/css/store/storeDetail.css">
+
+</head>
+<body>
+    <main>
+
+    <!-- templetes/common/header.html  조각 추가 -->
+     <th:block th:replace="~{common/header}"></th:block>
+
+    
+
+
+
+     <!-- section 1 가게 상세 -->
+     <!-- 가게 사진 , 식당 이름, 북마크, 지역, 카테고리, 별점, 지도, 가게 정보,  -->
+
+       <!-- 공간 나누는 칸 ex) 가게 정보랑 지도 나눔 -->
+       <section class="store-detail"> 
+         
+
+            <!--회색 실선 박스 -->
+            <div class="store-container">
+
+
+        
+                <div class="storedetail-all"> <!-- 걍 가운데 위치해주는 용도 -->
+                    
+
+
+                    <!-- main에 들어가는 가게 대표 이미지 
+                   (가게 이미지 조회) -->
+                    <img class="storedetail-thumbnail" 
+                    src="/images/storeDetail/store.jpg" alt="가게 기본 이미지">
+                
+                
+                   <!-- ************* 가게 내용 ************ -->
+
+                    <div class="storedetail-content">
+
+                    </div>
+                            <!-- 상세 내용 박스 -->
+                        <div class="storedetail-box">
+
+                        
+
+                            <!-- 식당 이름 / 북마크 -->
+                            <div class="storedetail-two">
+
+                                <!-- 안에 이름이랑 북마크 만들고 
+                                    양 옆으로 보내기 -->
+                                <div class="storedetail-name">
+                                    <span id="storeName">집게리아</span> 
+                                </div>
+                                
+                                <div class="bookmark">
+                                    <i class="fa-regular fa-bookmark" id="bookmarkCheck"
+                                    th:classappend="*{bookmark == 1} ? fa-solid : fa-regular"></i>
+                                    
+                                </div>
+                            
+                            </div>
+
+
+
+                            <!-- 지역 / 카테고리 -->
+                            <div class="storedetail-row">
+                                <!-- 회원 정보 조회
+                                    클릭하면 검색 페이지로 이동 -->
+                            <span>비키니시티 | 햄버거</span>
+                            </div>
+
+
+
+                            <!-- 별점 / 클릭시 아래 리뷰 페이지로 내려가는 버튼 -->
+                            <div class="storedetail-row">
+                                <span>⭐⭐⭐⭐⭐ 점수</span>
+                                <a href="#">리뷰></a>
+                            </div>
+
+
+
+                            <!-- // 윗 칸이랑 공간 분리 //-->
+                            
+                            <div class="storedetail-mid">
+
+                            
+                                <!-- 가게 주소 / 지역 -->
+                                <div class="storedetail-two">
+                                    <span>
+                                        가게 주소 : 비키니시티 닻도로 3051
+                                    </span>
+
+                                    <!-- 누르면 상세 페이지로 이동
+                                        해당 가게의 위치가 상세 페이지에서 검색됨 -->
+                                    <button id="storedetailmapbutton">지도</button>
+                                </div>
+
+
+                                <!-- 가게 전화번호 -->
+                                <div class="storedetail-row">
+                                    
+                                    <span type="text" id="memberTel">
+                                    가게 전화번호 : 031-369-3690
+                                    </span>
+                                </div>
+
+
+                            
+                                <!-- 가게 정보 해시태그 -->
+                                <div id="storedetail-row">
+                                    <!-- 클릭 시 상세 검색 페이지로 이동(카테고리 선택됨) -->
+                                <p>#패스트푸드</p>
+                                </div>
+
+
+                                <!-- 폐업 신고 페이지로 이동-->
+                                <a href="#">폐업신고</a>
+
+
+
+                            </div>
+
+                        <!-- // 아래 칸과 공간 분리 // -->
+
+
+                        </div>
+
+
+                    <!-- 가게 소개 조회
+                        // 이거도 더보기로 할까... 화면 안 이쁜데 뺄 수도-->
+
+                    <!-- 가게 예약 버튼-->
+                    <div class="storedetail-reservationbuttonbox">
+                        <!-- 클릭하면 예약하기 페이지로 이동 -->
+                        <button id="storereservationbutton">예약하기</button>
+                    </div>
+                    
+
+                </div>
+
+
+            
+            </div> 
+            <!-- 회색 실선 container -->
+
+        </section>
+      <!-- section 1 끝 -->
+
+
+
+
+<!-- ************************************************************ -->
+
+
+
+     <!-- section 2 지도 -->
+     <section class="store-detail">
+        <!-- 지도 들어갈 자리 -->
+        <img class="store-map" 
+        src="/images/storeDetail/mapimage.png" alt="가게 지도 이미지">
+     </section>
+
+
+<!-- ************************************************************ -->
+
+
+   
+     <!-- section 3 가게 정보 -->
+     <section class="store-detail">
+
+        <div class="store-container">
+
+          
+           <!-- 영업 시간/ 영업 상태(일주일) 등 조회 -->
+
+          <div class="storedetail-box">
+  
+            <div class="storedetail-opencontainer">
+
+                
+                
+
+                    <div class="store-reportcontainer">
+                        <button id="storeReport">
+                        <!-- 팝업 -->
+                        <a href="#storeReport" class="btn_open">🚨 폐점 / 가게 정보 정정 신고</a>
+                            
+                            
+                       
+                        </button>
+                    </div>
+
+                   <!-- ************************************************************** -->
+                    <!-- 신고 팝업 공간 -->
+
+                                                
+                        <!-- 할 일 상세 조회 시 출력되는 화면  
+                            popup layer : 현재 페이지 위에 새로운 레이어를 띄우는 것
+                        -->
+                                                <!-- 처음에 숨겨놓기 -->
+                       
+                           
+
+                   <!-- ************************************************************** -->
+                    <div class="store-statuscontainer">
+                        <div class="store-opentime">
+                            <span>영업시간</span>
+                            <span>11:00 ~ 22:00</span>
+                        </div>
+                    
+                        <div class="store-statusbox">
+                            <!-- 가게 상태 조회(휴무일/ 브레이크타임/라스트오더) -->
+                        <span id="storeStatusText">영업 중</span>
+                        </div>
+                    </div>
+
+                    <div class="store-today">
+                        <!-- 오늘 날짜 조회 -->
+                        <span>
+                            [오늘] 05.09(목)
+                        </span>
+
+                    </div>
+        
+    
+            </div>
+             <!-- 바텀 선 css 주기 -->
+
+             <!-- // 메뉴 공간 // -->
+                
+             <!-- 메뉴 ( 사진 확대 팝업/ 더보기) -->
+                <div class="storedetail-menucontainer">
+
+                    <span id="menuInfoTitle">메뉴 정보</span>
+
+                    <!-- 메뉴 이미지 div 3개 추가 -->
+                    <div class="menuimage-container">
+                        <div>
+                            <img src="/images/storeDetail/burger4.jpg" class="storedetail-menuimage" 
+                             alt="메뉴 사진">
+                        </div>
+
+                        <div class="menu-info">
+                            <span id="menuName">게살버거</span>
+                            <span id="menuPrice">4000 원</span>
+                        </div>
+                    </div>
+                    
+                    <div class="menuimage-container">
+                        <div>
+                            <img src="/images/storeDetail/burger.jpg" class="storedetail-menuimage" 
+                             alt="메뉴 사진">
+                        </div>
+
+                        <div class="menu-info">
+                            <span id="menuName">스페셜버거</span>
+                            <span id="menuPrice">22000 원</span>
+                        </div>
+                    </div>
+                    
+                    <div class="menuimage-container">
+                        <div>
+                            <img src="/images/storeDetail/pizza.jpg" class="storedetail-menuimage" 
+                             alt="메뉴 사진">
+                        </div>
+
+                        <div class="menu-info">
+                            <span id="menuName">피자</span>
+                            <span id="menuPrice">9000 원</span>
+                        </div>
+                    </div>
+                    
+                    <div class="moreMenuImageBtnBox">
+                        <button id="moreMenuImageBtn">더보기</button>
+                    </div>
+                </div>
+
+
+
+
+
+             <!-- 해시태그(댓글에 달린 해시들) -->
+
+            <div class="storedetail-hashtagcontainer">
+                <span>#버거가 친절하고_사장님이 맛있어요</span>
+                <span>#주문 받는 알바가 불친절함</span>
+                <span>#매장 안에 아메바 돌아다닙니다</span>
+            </div>
+
+            
+
+
+
+           </div>
+ 
+        </div>
+
+     </section>
+
+
+<!-- ************************************************************ -->
+
+
+     <!-- section 4 가게 이미지 -->
+     <section class="store-detail">
+
+        <div class="store-container">
+
+        <div class="storedetail-box">
+
+        
+        <div class="detail-images">
+
+            <div class="storeLookText">
+                <span>식당 사진</span>
+            </div>
+              
+            <img class="store-look" src="/images/storeDetail/hotdog.jpg">
+            <img class="store-look" src="/images/storeDetail/cooking.jpg">
+            <img class="store-look" src="/images/storeDetail/counter2.jpg">
+            <img class="store-look" src="/images/storeDetail/counter3.jpg">
+            <img class="store-look" src="/images/storeDetail/counter.jpg">
+            <img class="store-look" src="/images/storeDetail/burger2.jpg" >
+           
+        </div>
+
+        <div class="moreStoreImageBtnBox">
+            <button id="moreStoreImageBtn">사진 더보기</button>
+        </div>
+
+        </div>
+        </div>
+     </section>
+     
+
+
+<!-- ****************************나중에 합치기*************************** -->
+
+
+     <!-- section 5 가게 리뷰 -->
+
+     <section class="store-detail">
+
+     <div class="store-container">
+
+        <div class="storedetail-box">
+
+            <div class="storereview-container">
+
+                <span>댓글 들어갈 자리</span>
+            </div>
+       
+            
+        </div>
+     </div>
+    </section>
+    
+
+
+    
+    </main>
+       <!-- templetes/common/footer.html  조각 추가 -->
+   <th:block th:replace="~{common/footer}"></th:block> 
+
+   <script src="/js/store/storeDetail.js"></script>
+
+</body>
+</html>

@@ -1,11 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FOODPIN</title>
+
+      <!-- templetes/common/common.html  조각 추가 -->
+     <th:block th:replace="~{common/common}"></th:block>
+
 </head>
 <body>
-    메인
+  <main>
+     
+     <!-- templetes/common/header.html  조각 추가 -->
+     <th:block th:replace="~{common/header}"></th:block>
+
+     <!-- section 1 검색하는 공간 -->
+       <div class="main-search-container">
+
+        <p>장소, 음식, 가게명, 주소 검색</p>
+
+        <input type="text" name="mainSearch" id="mainSearch" 
+         placeholder="정확한 주소로 검색해 주세요">
+
+       </div>
+      
+
+
+     <!-- section 2  카테고리 공간 -->
+     <section class="main-category-container">
+
+      <div class="main-category-content">
+
+        <div id="main-category-text">
+          <p>뭘 먹을까...</p>
+        </div>
+        
+        <div class="main-category-button">
+          <button >한식</button>
+          <button>중식</button>
+          <button>일식</button>
+          <button>양식</button>
+          <button>지중해식</button>
+          <button>분식</button>
+          <button>카페.디저트</button>
+          <button>패스트푸드</button>
+          <button>찜.탕.찌개</button>
+          <button>맛집랭킹</button>
+        </div>
+         
+      </div>
+      
+     </section>
+
+
+     <!-- section 3 내 근처 맛집 사진 4개 -->
+      <section class="main-store-image-container">
+        <div class="main-store-image-content">
+
+          <div id="main-store-text">
+            <p>내 근처 맛집</p>
+          </div>
+          
+          <div class="main-store-img">
+            
+              <a href="/store/storeDetail" class="store-img" > 
+                <img class="store-thumbnail" src="images/20240405165305_00002.gif" alt="가게 기본 이미지">
+                <span class="store-name">집게리아</span>
+              </a>
+              <a  href="/store/storeDetail" class="store-img"> 
+                <img class="store-thumbnail" src="images/20240405165305_00002.gif" alt="가게 기본 이미지">
+                <span class="store-name">집게리아</span>
+              </a>
+              <a  href="/store/storeDetail" class="store-img"> 
+                <img class="store-thumbnail" src="images/20240405165305_00002.gif" alt="가게 기본 이미지">
+                <span class="store-name">집게리아</span>
+              </a>
+              <a  href="/store/storeDetail" class="store-img"> 
+                <img class="store-thumbnail" src="images/20240405165305_00002.gif" alt="가게 기본 이미지">
+                <span class="store-name">집게리아</span>
+              </a>
+              
+            </div>
+           
+            
+         
+           
+        </div>
+      </section>
+
+  </main>
+
+     
+   <!-- templetes/common/footer.html  조각 추가 -->
+   <th:block th:replace="~{common/footer}"></th:block> 
+
+   <script src="/js/main.js"></script>
+
 </body>
 </html>
