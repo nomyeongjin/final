@@ -1,0 +1,326 @@
+:root{
+    --main-color : rgb(204, 204, 204);
+   
+    --hover-color : #b1ab9a;
+    --point-color : #ffbe0c;
+    --submit-color : #b92828;
+ }
+
+
+/* 가게 section 1 칸 */
+.store-detail{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+/* section 1 내용 가운데 배치 */
+.storedetail-all{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+}
+
+.storedetail-box >*{
+    margin: 15px 0px;
+}
+/* 회색 테두리 */
+.store-container{ 
+    border: 1px solid var(--main-color);
+    border-radius: 15px;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 가게 대표 이미지 */
+.storedetail-thumbnail {
+
+    width: 600px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    margin: 50px auto;
+    border-radius: 5px;
+   
+}
+
+/********** 가게 내용 1 ************/
+
+.storedetail-box{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.storedetail-two{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+
+
+.storedetail-mid{
+    margin: 30px 0px 50px 0px;
+}
+
+.storedetail-mid >*{
+    margin: 5px 0px;
+}
+
+
+/* 식당 이름 */
+#storeName{
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(43, 38, 38);
+}
+
+/* 북마크바 check시 색 변환 */
+#bookmarkCheck{
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+  
+
+
+/* 해당 가게 위치 검색된 상세 페이지로 이동하는 지도 버튼 */
+#storedetailmapbutton{
+  cursor: pointer;
+  width: 50px;
+  
+  border: 1px solid var(--main-color);
+  border-radius: 10px;
+  background-color: white;
+  color: rgb(46, 41, 41);
+}
+/* 예약 버튼 공간 */
+.storedetail-reservationbuttonbox{
+    margin: 50px 0px;
+}
+
+/* 예약 버튼 */
+#storereservationbutton{
+    cursor: pointer;
+    border: 1px solid var(--main-color);
+    width: 400px;
+    height: 45px;
+    font-size: 18px;
+    background-color: white;
+    color: rgb(46, 41, 41);
+}
+
+#storereservationbutton:hover{
+    background-color: white;
+    color: #4ed231;
+    border: 1px solid #4ed231;
+}
+
+/********** 가게 내용 1 ************/
+
+
+/* ************************************************** */
+
+/* 지도 컨테이너 */
+.store-map{
+    height: 250px;
+    width: 800px;
+    border: 1px solid var(--main-color);
+    border-radius: 15px;
+}
+
+
+
+/* 가게 이미지 컨테이너 */
+.detail-store-image{
+    height: 600px;
+}
+
+/* ************************************************** */
+
+
+/********** 가게 내용 2 ************/
+
+/* 폐점/ 가게 정보 정정 신고 위치 */
+.store-reportcontainer{
+    display: flex;
+    justify-content: end;
+    margin: 20px 0px;
+    font-size: 15px;
+    color: rgb(46, 41, 41);
+}
+/* ***************************************** */
+/* 팝업 영역 */
+
+/* ***************************************** */
+#storeReport{
+    cursor: pointer;
+    border: none;
+    background-color: white;
+}
+
+/* 영업 시간 / 영업 상태 위치 */
+.store-statuscontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.store-opentime{
+
+flex-direction: column;
+display: flex;
+
+}
+.store-statuscontainer span{
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(46, 41, 41);
+    margin: 5px 0px;
+
+}
+
+#storeStatusText{
+ color: rgb(26, 180, 232);
+}
+
+.store-today{
+    margin-bottom: 50px;
+    font-weight: bold;
+    color: rgb(46, 41, 41);
+}
+
+.storedetail-opencontainer{
+    border-bottom: 1px solid var(--main-color);
+}
+
+
+/* 메뉴 컨테이너 */
+
+.storedetail-menucontainer >*{
+    margin: 15px 0px;
+}
+
+.storedetail-menucontainer{
+  border-bottom: 1px solid var(--main-color);
+}
+
+#menuInfoTitle{
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(46, 41, 41);
+    margin: 10px 0px;
+
+}
+.storedetail-menuimage{
+  width: 100px;
+  height: 110px;
+  border-radius: 5px;
+}
+
+.menuimage-container{
+    display: flex;
+    flex-direction: row;
+  
+}
+
+.menu-info{
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    
+}
+
+#menuName{
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: rgb(46, 41, 41);
+}
+
+#menuPrice{
+    color: rgb(127, 127, 127);
+}
+.moreMenuImageBtnBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+#moreMenuImageBtn{
+    cursor: pointer;
+    width: 50px;
+    border: 1px solid var(--main-color);
+    border-radius: 10px;
+    color: rgb(46, 41, 41);  
+    background-color: white;
+}
+
+#moreMenuImageBtn.hidden{
+    display: none;
+}
+
+
+/* 해시태그 컨테이너 */
+.storedetail-hashtagcontainer{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px 0px 50px 0px;
+}
+
+.storedetail-hashtagcontainer >*{
+    margin: 5px;
+}
+
+/********** 가게 내용 2 ************/
+
+/* 식당 사진 컨테이너 */
+
+.storeLookText{
+
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(46, 41, 41);
+    margin: 20px;
+
+}
+
+.store-look{
+    margin: 8px;
+    width: 180px;
+    height: 190px;
+    border-radius: 5px;
+}
+
+/* 식당 사진 더보기 버튼 박스 */
+.moreStoreImageBtnBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 60px;
+}
+
+/* 사진 더보기 버튼 */
+#moreStoreImageBtn{
+
+    cursor: pointer;
+    border: 1px solid var(--main-color);
+    width: 300px;
+    height: 35px;
+    font-size: 15px;
+    color: rgb(46, 41, 41);
+    background-color: white;
+
+}
+/* 클릭하면 버튼 사라지도록 */
+#moreStoreImageBtn.hidden{
+    display: none;
+}
