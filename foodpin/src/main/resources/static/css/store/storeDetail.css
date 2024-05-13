@@ -324,3 +324,140 @@ display: flex;
 #moreStoreImageBtn.hidden{
     display: none;
 }
+
+.review-title{
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid var(--main-color);
+
+    display: flex;
+    align-items: center;
+}
+
+.reiview-avgScore{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--main-color);
+    padding: 20px 0;
+}
+
+.review-member-profile{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.storereview-top{
+    padding: 20px 0;
+    border-bottom: 1px solid var(--main-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.storereview-top-left{
+    display: flex;
+    align-items: center;
+}
+
+.review-info{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.review-info:first-child{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+
+
+.storereview-top-right{
+    display: flex;
+    font-size: 0.8em;
+    flex-direction: column;
+}
+
+.storereview-top-right > a {
+    margin-bottom: 10px;
+}
+
+
+.storereview-mid{
+    width: 100%;
+    max-width: 300px;
+    padding: 20px;
+}
+
+.storereview-bottom{
+    margin-bottom: 15px;
+}
+
+.storereview-bottom > p{
+    width: 100px;
+    height: 20px;
+    text-align: center;
+    border: 1px solid var(--main-color);
+    border-radius:24px;
+    margin: 10px 0;
+}
+
+.store-reply{
+    border-top: 1px solid var(--main-color);
+    display: flex;
+}
+
+
+.review-store-profile{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.reply-content-bubble {
+    position:relative;
+    margin-top: 23px;
+    margin-left: 10px;
+    padding: 20px;
+    max-width: 480px;
+    background:#666;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.reply-content-bubble:after {
+    border-top:15px solid #666;
+    border-left: 15px solid transparent;
+    border-right: 0px solid transparent;
+    border-bottom: 0px solid transparent;
+    content:"";
+    position:absolute;
+    top:17px;
+    left:-15px;
+}
+
+.review-more-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    border-top: 1px solid var(--main-color);
+}
+
+.review-more-button > button{
+    cursor: pointer;
+    border: 1px solid var(--main-color);
+    width: 300px;
+    height: 35px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: rgb(46, 41, 41);
+    background-color: white;
+}
+
