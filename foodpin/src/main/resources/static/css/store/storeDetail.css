@@ -23,7 +23,7 @@
 }
 
 .storedetail-box >*{
-    margin: 15px 0px;
+    margin: 10px 0px;
 }
 /* 회색 테두리 */
 .store-container{ 
@@ -38,20 +38,27 @@
 
 /* 가게 대표 이미지 */
 .storedetail-thumbnail {
-
-    width: 600px;
-    height: 400px;
+    width: 500px;
+    height: 350px;
     display: flex;
     justify-content: center;
     margin: 50px auto;
     border-radius: 5px;
-   
+    margin-top: 70px;
+}
+
+.storedetail-thumbnailbox{
+    width: 660px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
 /********** 가게 내용 1 ************/
 
 .storedetail-box{
-    width: 600px;
+    width: 500px;
     display: flex;
     flex-direction: column;
 }
@@ -288,14 +295,19 @@ display: flex;
     font-size: 20px;
     font-weight: bold;
     color: rgb(46, 41, 41);
-    margin: 20px;
+    margin-top: 30px;
 
 }
 
+.detail-images{
+    display: flex;
+    flex-wrap: wrap;
+
+}
 .store-look{
     margin: 8px;
-    width: 180px;
-    height: 190px;
+    width: 150px;
+    height: 170px;
     border-radius: 5px;
 }
 
