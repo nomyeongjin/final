@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약하기</title>
+</head>
+<body>
+
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/reservation/reservationDetail.css">
+
+    <main>
+
+        <!-- header.html 추가 -->
+        <th:block th:replace="~{common/header}"></th:block>
+
+        <!-- section 지정 -->
+
+        <!-- 안내 section -->
+        <section class="reservation-header-container">
+
+            <img class="store-image" src="#">
+
+            <div class="header-container">
+
+                <div class="title-container">
+                    <i class="fa-regular fa-clock"></i>
+                    <p class="title">예약 안내</p>
+                </div>
+
+
+                <div class="content-container">
+                    <i class="fa-solid fa-message"></i>
+                    <p class="header-content">
+                        가게 정보 어쩌구 저쩌구 
+    
+                        <a class="more" href="#">더보기</a> <!-- 상세 정보로 넘어감 -->
+                    </p>
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- 예약 인원, 날짜 section -->
+        <section class="reservation-body-container">
+
+            <!-- 예약하기 / 상세정보 / 리뷰 -->
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#">예약하기</a>
+                    </li>
+
+                    <li>
+                        <a href="#">상세정보</a>
+                    </li>
+                    
+                    <li>
+                        <a href="#">리뷰 20</a>  <!-- count로 리뷰 댓글 수 조회 예정 -->
+                    </li>
+                </ul>
+            </nav>
+
+
+            <div class="content-container">
+                <i class="fa-solid fa-user"></i>
+                <p class="title">인원을 선택해 주세요</p>
+            </div>
+
+            <span class="content">3~4명까지 선택 가능 합니다.</span>
+
+            <!-- 가게별 최대 예약 인원에 따라 체크박스가 달라짐 -->
+            <div class="reservation-count">
+                <div class="checkbox-area">
+    
+                    <label for="reservCount">
+                        <input type="checkbox" class="checkbox-element" name="reservCount" id="reservCount">1명
+                    </label>
+    
+                    <label for="reservCount">
+                        <input type="checkbox" class="checkbox-element" name="reservCount" id="reservCount">1명
+                    </label>
+    
+                    <label for="reservCount">
+                        <input type="checkbox" class="checkbox-element" name="reservCount" id="reservCount">1명
+                    </label>
+    
+                    <label for="reservCount">
+                        <input type="checkbox" class="checkbox-element" name="reservCount" id="reservCount">1명
+                    </label>
+    
+                </div>
+                
+                <span class="content">* n명 이상 인원의 예약을 원하시는 경우 별도 문의 부탁드립니다.</span>
+            </div>
+
+
+            <div class="reservation-date">
+                <i class="fa-solid fa-calendar-days"></i>
+                <p class="title">0.0 (0) 시간을 선택해 주세요</p> <!-- 타임리프로 달력에 선택된 날짜 출력 -->
+    
+                <!-- 달력 API 예정 -->
+                <div class="calendar">
+                    <!-- API -->
+                </div>
+
+            </div>
+
+            <div class="reservation-time" id=""></div>
+
+        </section>
+
+
+        <!-- 예약시 주의 사항 section -->
+        <section class="reservation-footer-container">
+
+            <!-- 예약시 확인해 주세요 -->
+            <div class="reservation-check">
+
+                <div class="reservation-check-inner">
+
+                    <button type="button" class="checkTitle">
+                        <i class="fa-regular fa-caret-down"></i> <!-- 기본 아래방향 -->
+                        <!-- <i class="fa-solid fa-caret-up"></i> -->  <!-- 펼쳐보기 눌렀을 때 접기  -->
+                    </button>
+                </div>
+
+                <div class="checkContent">
+                    
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 버튼 section -->
+        <section class="button-area">
+
+        </section>
+
+
+
+
+    </main>
+
+    <!-- footer.html 추가 -->
+    <th:block th:replace="~{common/footer}"></th:block> 
+    
+</body>
+</html> 
