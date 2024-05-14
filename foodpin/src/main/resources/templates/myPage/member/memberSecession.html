@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 탈퇴</title>
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/myPage/myPage.css">
+</head>
+<body>
+    <main>
+        <th:block th:replace="~{common/header}"></th:block>
+
+        <section class="myPage-content">
+            <th:block th:replace="~{myPage/member/memberSide}"></th:block>
+
+        </section>
+
+
+
+
+
+
+
+    </main>
+
+    <script th:inline="javascript">
+        const loginMember = /*[[${session.loginMember}]]*/ "로그인 회원 정보";
+    </script>
+
+    <th:block th:replace="~{common/footer}"></th:block> 
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
