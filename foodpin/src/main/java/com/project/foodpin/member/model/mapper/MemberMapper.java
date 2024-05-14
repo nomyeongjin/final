@@ -7,6 +7,6 @@ import com.project.foodpin.member.model.dto.Member;
 @Mapper
 public interface MemberMapper {
 
-	Member login(String memberEmail);
+	Member login(String memberId);
 
 }
