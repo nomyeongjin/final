@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>FOODPIN</title>
+
+   <!-- templetes/common/common.html  조각 추가 -->
+   <th:block th:replace="~{common/common}"></th:block>
+   <link rel="stylesheet" href="/css/myPage/myPage-style.css">
+</head>
+<body>
+
+   <main>
+
+   <!-- templetes/common/header.html  조각 추가 -->
+   <th:block th:replace="~{common/header}"></th:block>
+
+   <div class="myPage-container">
+
+      <!-- templetes/myPage/store/storeSide.html  조각 추가 -->
+      <th:block th:replace="~{myPage/store/storeSide}"></th:block>
+      
+      <hr>
+
+      <!-- 마이페이지 본문 -->
+      <section class="content-container">
+
+         <!-- 타이틀 영역 -->
+         <div class="myPage-title-container">
+            <section class="myPage-title">가게 정보 수정</section>
+   
+            <!-- 서브타이틀 버튼 -->
+            <section class="myPage-sub-title">
+               <button class="sub-title-btn" id="infoBtn">기본 정보</button>
+               <button class="sub-title-btn" id="menuBtn">메뉴 정보</button>
+               <button class="sub-title-btn" id="dayoffBtn">휴무일</button>
+            </section>
+   
+         </div>
+         
+
+
+
+
+      </section>
+
+
+
+
+
+
+   </div>  
+
+      
+
+
+   </main>
+
+
+   <!-- templetes/common/footer.html  조각 추가 -->
+   <th:block th:replace="~{common/footer}"></th:block> 
+
+</body>
+</html>

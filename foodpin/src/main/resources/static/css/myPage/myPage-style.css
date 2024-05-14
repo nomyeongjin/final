@@ -1,0 +1,51 @@
+/* 전체 컨테이너 */
+.myPage-container{
+   display: flex;
+   flex-direction: row;
+}
+
+hr{
+   margin-top: 80px;
+}
+/* 사이드 메뉴 */
+.left-side{
+   width: 20%;
+   margin: 50px;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+li{
+   list-style: none;
+   margin: 50px;
+   font-size: 20px;
+   text-align: center;
+}
+
+/* 마이페이지 본문 */
+.content-container{
+   width: 80%;
+   padding: 50px;
+}
+
+/* 타이틀 영역 */
+.myPage-title-container{
+   padding: 20px 20px 20px 0px;
+}
+.myPage-title{
+   font-size: 20px;
+   padding: 15px;
+}
+.myPage-sub-title{
+   padding: 10px;
+}
+.sub-title-btn{
+   width: 90px;
+   height: 28px;
+   margin-right: 20px;
+   border-radius: 20px;
+   border: 1px solid lightgray;
+   background: lightgray;
+}
