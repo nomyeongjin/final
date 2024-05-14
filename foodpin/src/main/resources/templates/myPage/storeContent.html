@@ -1,0 +1,35 @@
+!<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOODPIN</title>
+
+      <!-- templetes/common/common.html  조각 추가 -->
+     <th:block th:replace="~{common/common}"></th:block>
+
+</head>
+<body>
+  <main>
+
+      <!-- templetes/common/header.html  조각 추가 -->
+      <th:block th:replace="~{common/header}"></th:block>
+
+      <!-- templetes/myPage/storeSide.html  조각 추가 -->
+      <th:block th:replace="~{myPage/storeSide}"></th:block>
+
+
+
+
+
+
+  </main>
+
+     
+   <!-- templetes/common/footer.html  조각 추가 -->
+   <th:block th:replace="~{common/footer}"></th:block> 
+
+   <script src="/js/main.js"></script>
+
+</body>
+</html>

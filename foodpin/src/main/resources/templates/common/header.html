@@ -9,14 +9,31 @@
 
             <!-- 로그인, 프로필이미지/닉네임/로그이웃 -->
             <div class="login-box" th:if="${session.loginMember != null}">
+
                 <div class="profileArea">
-                    <a href="/myPage/first">
-                        <img th:with="user=#{user.default.image}" 
-                        th:src="${session.loginMember.profileImg ?:user}"  
-                          id="memberProfile">&nbsp;
-                        <span th:text="${session.loginMember.memberNickname}" id="nickname">닉네임</span>&nbsp;<span>님</span>
+
+                    <!-- 일반 회원 -->
+                    <th:block th:if="${session.loginMember.memberCode == 1}">
+                        <a href="/myPage/member/editInfo">
+                    </th:block>
+
+                    <!-- 사업자 회원 -->
+                    <th:block th:if="${session.loginMember.memberCode == 2}">
+                        <a href="/myPage/store/storeInfo">
+                    </th:block>
+
+                    <!-- 관리자 회원 -->
+                    <th:block th:if="${session.loginMember.memberCode == 3}">
+                        <a href="/myPage/manager/registList">
+                    </th:block>
+                    
+                    <img th:with="user=#{user.default.image}" 
+                    th:src="${session.loginMember.profileImg ?:user}"  
+                        id="memberProfile">&nbsp;
+                    <span th:text="${session.loginMember.memberNickname}" id="nickname">닉네임</span>&nbsp;<span>님</span>
                     </a>
                 </div>
+
                 <a href="/member/logout" id="logoutBtn">로그아웃</a>
             </div>
 
