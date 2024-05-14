@@ -5,22 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>예약 내역 확인</title>
     <th:block th:replace="~{common/common}"></th:block>
-    <link rel="stylesheet" href="/css/myPage/myPage.css">
+    <link rel="stylesheet" href="/css/myPage/myPage-style.css">
 </head>
 <body>
     <main>
         <th:block th:replace="~{common/header}"></th:block>
 
-        <section class="myPage-content">
+        <div class="myPage-container">
             <th:block th:replace="~{myPage/member/memberSide}"></th:block>
 
-        </section>
+            <hr>
+
+            <section class="content-container">
+                <div class="myPage-title-container">
+                    <section class="myPage-title">예약 현황</section>
+
+                    <section class="myPage-sub-title">
+                        <button class="sub-title-btn" id="confirmReservation">예약 확정</button>
+                        <button class="sub-title-btn" id="waitReservation">예약 대기</button>
+                        <button class="sub-title-btn" id="lastReservation">지난 예약</button>
+                        <button class="sub-title-btn" id="cancelNoshow">취소/노쇼</button>
+                    </section>
+
+                </div>
+    
+                <!-- 예약 확정 창 -->
+                총 3건
+                <table class="reservationTable">
+                    <ul>
+                        <li class="reservationList">
+                            <div class="reservationStore">
+                                <span class="storeName">대박고깃집</span>
+                                <span class="reservationPeople">3명</span> <br>
+                                <i class="fa-solid fa-clock"></i> 오후 7시 30분 <br>
+                                서울시 중구 마조로 56길 <br>
+                            </div>
+                            <span>
+                                <button id="cancelReservation">예약 취소</button>
+                            </span>
+                        </li>
+                    </ul>
+                </table>
+            </section>
 
 
-
-
-
-
+        </div>
 
     </main>
 
