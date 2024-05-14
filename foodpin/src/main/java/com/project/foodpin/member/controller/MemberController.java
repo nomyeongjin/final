@@ -129,6 +129,15 @@ public class MemberController {
 	}
 	
 	
+	/** 회원가입 유형 선택
+	 * @return
+	 */
+	@GetMapping("signupBtn")
+	public String signupBtn() {
+		
+		return "/member/signupBtn";
+		
+	}
 	
 	
 }

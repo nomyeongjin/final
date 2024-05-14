@@ -13,17 +13,17 @@
                 <div class="profileArea">
 
                     <!-- 일반 회원 -->
-                    <th:block th:if="${session.loginMember.memberCode == 1}">
+                    <th:block th:if="${session.loginMember?.memberCode == 1}">
                         <a href="/myPage/member/memberInfo">
                     </th:block>
 
                     <!-- 사업자 회원 -->
-                    <th:block th:if="${session.loginMember.memberCode == 2}">
+                    <th:block th:if="${session.loginMember?.memberCode == 2}">
                         <a href="/myPage/store/storeInfo">
                     </th:block>
 
                     <!-- 관리자 회원 -->
-                    <th:block th:if="${session.loginMember.memberCode == 3}">
+                    <th:block th:if="${session.loginMember?.memberCode == 3}">
                         <a href="/myPage/manager/registList">
                     </th:block>
                     
@@ -39,7 +39,7 @@
 
             <!-- 미로그인, 로그인/회원가입 -->
             <div class="login-area" th:if="${session.loginMember == null}">
-                <a href="/member/login">로그인</a>|<a href="/member/signup">회원가입</a>
+                <a href="/member/login">로그인</a>|<a href="/member/signupBtn">회원가입</a>
         </div>
 
 

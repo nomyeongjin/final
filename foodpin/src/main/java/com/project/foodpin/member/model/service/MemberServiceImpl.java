@@ -24,10 +24,10 @@ public class MemberServiceImpl implements MemberService{
 	public Member login(Member inputMember) {
 
 
-		// 1. 이메일이 일치하면서 탈퇴하지 않은 회원 조회
+		// 1. 아이디가 일치하면서 탈퇴하지 않은 회원 조회
 		Member loginMember = mapper.login(inputMember.getMemberId());
 		
-		// 2. 만약에 일치하는 이메일이 없어서 조회 결과가 null인 경우
+		// 2. 만약에 일치하는 아이디가 없어서 조회 결과가 null인 경우
 		if(loginMember == null) return null;
 		
 		// 3. 입력 받은 비밀번호(inputMember.getMemberPw() (평문))와
@@ -59,6 +59,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		return loginMember;
 	}
+	
 	
 	
 	
