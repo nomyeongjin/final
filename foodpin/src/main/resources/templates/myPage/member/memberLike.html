@@ -5,22 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>찜 목록</title>
     <th:block th:replace="~{common/common}"></th:block>
-    <link rel="stylesheet" href="/css/myPage/myPage.css">
+    <link rel="stylesheet" href="/css/myPage/myPage-style.css">
 </head>
 <body>
     <main>
         <th:block th:replace="~{common/header}"></th:block>
 
-        <section class="myPage-content">
+        <div class="myPage-container">
+
+            <!-- templetes/myPage/store/storeSide.html  조각 추가 -->
             <th:block th:replace="~{myPage/member/memberSide}"></th:block>
+            
+            <hr>
+      
+            <!-- 마이페이지 본문 -->
+            <section class="content-container">
+      
+               <!-- 타이틀 영역 -->
+               <div class="myPage-title-container">
+                  <section class="myPage-title">찜 목록</section>
+         
+                    <table class="likeTable">
+                        <ul>
+                            <li class="likeList">
+                                <span class="likeStore">
+                                    대박고깃집  > <br>
+                                    서울시 중구 마조로 56길
+                                </span>
+                                <i class="fa-solid fa-bookmark like"></i>
+                            </li>
+                            
+                            <li class="likeList">
+                                <span class="likeStore">
+                                    대박고깃집  > <br>
+                                    서울시 중구 마조로 56길
+                                </span>
+                                <i class="fa-solid fa-bookmark like"></i>
+                            </li>
+                            
 
-        </section>
-
-
-
-
-
-
+                        </ul>
+                    </table>
+         
+               </div>
+      
+            </section>
+      
+        </div>
 
     </main>
 

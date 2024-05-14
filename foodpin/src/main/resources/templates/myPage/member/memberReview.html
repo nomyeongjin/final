@@ -5,22 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내가 쓴 리뷰</title>
     <th:block th:replace="~{common/common}"></th:block>
-    <link rel="stylesheet" href="/css/myPage/myPage.css">
+    <link rel="stylesheet" href="/css/myPage/myPage-style.css">
 </head>
 <body>
     <main>
         <th:block th:replace="~{common/header}"></th:block>
 
-        <section class="myPage-content">
+        <div class="myPage-container">
             <th:block th:replace="~{myPage/member/memberSide}"></th:block>
 
-        </section>
+            <hr>
+
+            <section class="content-container">
+                <div class="myPage-title-container">
+                    <section class="myPage-title">
+                        내가 쓴 리뷰
+                        <span>5개</span>
+                    </section>
 
 
+                    <div class="reviewContainer">
+                        <div class="storeName">
+                            <a href="/store/storeDetail">대박 고깃집  ></a>
+                        </div>
+                        <span class="reviewScore">★ ★ ★ ★ ☆</span>
+                        <span class="reviewDate">5개월 전</span>
+                        <div class="review">
+                            <div class="reviewPhoto">
+                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDAyMjJfMjgg%2FMDAxNzA4NTg2NTAwNDgy.kcEWp-6taz-owgm71kI4HC5e-VLxlPGSp4DHIjFasvsg.gO78YMsaI-54CleGKxrjPs8SUYNRJ9kCC34dXCwNJDQg.JPEG%2FIMG_2620.JPG&type=sc960_832" alt="">
+                            </div>
+                            <div class="reviewContent">
+                                너무너무 맛있어요 하하하하 최고입니다
+                            </div>
+                        </div>
+                    </div>
 
 
+                    <div class="reviewContainer">
+                        <div class="storeName">
+                            <a href="/store/storeDetail">대박 고깃집  ></a>
+                        </div>
+                        <span class="reviewScore">★ ★ ★ ★ ☆</span>
+                        <span class="reviewDate">5개월 전</span>
+                        <div class="review">
+                            <div class="reviewPhoto">
+                                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA0MDhfMTc0%2FMDAxNzEyNTM2NDQ2ODU0.5cSYkfl1rPEdBZ38mATTL_be_fqUY7RE4ksS2Jip3g4g.WURNxArSf1xXPGuITI2aDNXbD924POKq5gK9hT0cvw0g.PNG%2Fimage.png&type=sc960_832" alt="">
+                            </div>
+                            <div class="reviewContent">
+                                너무너무 맛있어요 하하하하 최고입니다
+                            </div>
+                        </div>
+                        <div class="replyContainer">
+                            <span class="ceo">사장님</span>
+                            <span class="replyDate">5개월 전</span>
+                            <div class="replyContent">
+                                ㄳㄳ 합니다 손님~~~ ^^
+                            </div>
+                        </div>
+                    </div>
 
 
+                </div>
+            </section>
+
+        </div>
 
     </main>
 
