@@ -3,10 +3,10 @@
    display: flex;
    flex-direction: row;
 }
-
 hr{
-   margin-top: 80px;
+   margin-top: 60px;
 }
+
 /* 사이드 메뉴 */
 .left-side{
    width: 20%;
@@ -14,9 +14,8 @@ hr{
 
    display: flex;
    justify-content: center;
-   align-items: center;
+   /* align-items: center; */
 }
-
 li{
    list-style: none;
    margin: 50px;
@@ -48,4 +47,10 @@ li{
    border-radius: 20px;
    border: 1px solid lightgray;
    background: lightgray;
+   cursor: pointer;
+}
+.sub-title-btn :hover{
+   background: grey;
+   border: grey;
+   color: white;
 }

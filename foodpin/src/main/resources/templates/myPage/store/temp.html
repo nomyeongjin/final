@@ -1,0 +1,104 @@
+         <!-- 본문 (메뉴 정보) -->
+         <div class="myPage-content-container">
+            
+            <!-- 프로필 수정 폼 -->
+            <form action="#" id="profileEditFrm" method="POST">
+
+               <!-- 프로필 이미지 -->
+               <div class="profile-img">
+                  <!-- <img th:with="user=#{user.default.image}" th:src="${session.loginMember.profileImg ?:user}"> -->
+               </div>
+               
+               <div class="profile-input-area">
+                  <label for="storeName">상호명 : </label><input type="text" name="storeName" id="storeName">
+               </div>
+
+               <div class="profile-input-area">
+                  <label for="">전화번호 : </label><input type="number" name="storeTel" id="storeTel">
+               </div>
+
+               <!-- 주소 입력 -->
+               <div class="address-input-area">
+                  <label for="storeLocation">가게 주소 :</label>
+                  <input type="text" name="storeLocation" placeholder="우편번호" maxlength="6" id="postcode">                       
+                  
+                  <button type="button" id="searchAddress">검색</button>
+               </div>
+
+               <div class="address-input-area align-right">
+                  <input type="text" name="storeLocation" placeholder="도로명/지번 주소" id="address">
+               </div>
+
+               <div class="address-input-area align-right">
+                  <input type="text" name="storeLocation" placeholder="상세 주소" id="detailAddress">
+               </div>
+
+               <!-- 영업시간 -->
+               <div class="time-input-area">
+                  <label for="openHour">영업시간 : </label>
+                  <input type="time" name="openHour" id="openHour"><span>~</span>
+                  <input type="time" name="closeHour" id="closeHour">
+               </div>
+
+               <!-- 브레이크 타임 -->
+               <div class="time-input-area">
+                  <label for="breacktimeStart">브레이크 타임 : </label>
+                  <input type="time" name="breacktimeStart" id="breacktimeStart"><span>~</span>
+                  <input type="time" name="breacktimeEnd" id="breacktimeEnd">
+               </div>
+
+               <!-- 가게 소개 -->
+               <textarea name="storeInfo" id="storeInfo" rows="10" placeholder="내용을 입력해주세요."></textarea>
+            
+               <button id="storeInfoEditBtn">수정</button>
+
+            </form>
+
+            <a id="withdraw">서비스 탈퇴</a>
+         </div>
+
+
+<!-- ------------------------------------------------ -->
+
+         
+         <!-- 본문 (메뉴 정보) -->
+         <div class="myPage-content-container">
+            
+            <div class="menu-container">
+               
+            <!-- 프로필 수정 폼 -->
+               <form action="#" id="menuEditFrm" method="POST">
+
+                  <!-- 메뉴 -->
+                  <div class="menu-row">
+                     <img src="../../../static/images/menu.jpg" class="menu-img">
+                     <input name="menuTitle" id="menuTitle" placeholder="메뉴">
+                     <input name="menuAmount" id="menuAmount" placeholder="가격">
+                     <input name="menuContent" id="menuContent" placeholder="추가 내용">
+                  </div>
+
+                  <div class="menu-row">
+                     <!-- <img src="#" alt="#" class="menu-img"> -->
+                     <div class="menu-img">메뉴 사진</div>
+                     <input name="menuTitle" id="menuTitle" value="메뉴">
+                     <input name="menuAmount" id="menuAmount" value="가격">
+                     <input name="menuContent" id="menuContent" value="추가 내용">
+                  </div>
+                  <div class="menu-row">
+                     <!-- <img src="#" alt="#" class="menu-img"> -->
+                     <div class="menu-img">메뉴 사진</div>
+                     <input name="menuTitle" id="menuTitle" value="메뉴">
+                     <input name="menuAmount" id="menuAmount" value="가격">
+                     <input name="menuContent" id="menuContent" value="추가 내용">
+                  </div>
+
+                  <!-- 버튼 영역 -->
+                  <div class="btn-area">
+                     <button id="addMenuRow">메뉴 추가</button>
+                     <button id="menuUpdateBtn">수정</button>
+                  </div>
+
+               </form>
+
+            </div>
+         </div>
