@@ -352,7 +352,7 @@ display: flex;
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--main-color);
-    padding: 20px 0;
+    padding: 27px 0;
 }
 
 .review-member-profile{
@@ -444,7 +444,7 @@ display: flex;
 
 .reply-content-bubble:after {
     border-top:15px solid #666;
-    border-left: 15px solid transparent;
+    border-left: 16px solid transparent;
     border-right: 0px solid transparent;
     border-bottom: 0px solid transparent;
     content:"";
