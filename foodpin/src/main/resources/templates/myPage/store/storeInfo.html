@@ -7,7 +7,9 @@
 
    <!-- templetes/common/common.html  조각 추가 -->
    <th:block th:replace="~{common/common}"></th:block>
+   
    <link rel="stylesheet" href="/css/myPage/myPage-style.css">
+   <link rel="stylesheet" href="/css/myPage/store-myPage.css">
 </head>
 <body>
 
@@ -39,17 +41,14 @@
    
          </div>
          
+         <!-- 본문 (휴무일) -->
+         <div class="myPage-content-container">
+            
 
 
 
-
+         </div>
       </section>
-
-
-
-
-
-
    </div>  
 
       
@@ -61,5 +60,10 @@
    <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 
 
+   <!-- 다음 주소 API 추가 -->
+   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+   <!-- 마이페이지 JS 추가 -->
+   <script src="/js/myPage/storeMyPage.js"></script>
 </body>
 </html>
