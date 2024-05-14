@@ -1,0 +1,234 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* 안내 section */
+.reservation-header-container {
+    display: block;
+    justify-content: center;
+    border-bottom: 1px solid #cecece;
+    width: 800px;
+}
+
+.check-container {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    width: 600px;
+    margin-top: 20px;
+}
+
+.check-title{
+    font-size: 18px;
+    margin-left: 20px;
+}
+
+.checkcard-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:30px;
+}
+
+.card-inner{
+    position: relative;
+    padding: 10px 20px;
+}
+
+.card-list {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.card-item {
+    display: flex;
+    padding: 3px;
+}
+
+.card-border{
+    border: 1px solid #4A4848;
+    border-radius: 10px;
+    height: 120px;
+    width: 350px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.item-title{
+    font-size: 15px;
+    color: #999999;
+}
+
+.reserv-date-count{
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 30px;
+}
+
+/* 예약 정보 확인 section */
+.reservation-body-container{
+    display: flex;
+    align-items: center;
+    /* border: 1px solid #cecece; */
+    flex-direction: column;
+    width: 800px;
+    height: 320px;
+    border-bottom: 1px solid #cecece;
+}
+
+.span{
+    margin-top: 5px;
+    font-size: 13px;
+    color: red;
+}
+.reserv-form{
+    margin-top: 20px;
+}
+
+.reserv-item {
+    display: flex;
+}
+
+.name{
+    float: left;
+    position: relative;
+    width: 73px;
+    font-size: 17px;
+    line-height: 45px;
+}
+
+.input-name{
+    height: 40px;
+    width: 300px;
+    border: 1px solid #cecece;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.input-name:focus {outline:none;}
+
+#reservReqeust{
+    height: 70px;
+    width: 300px;
+    border: 1px solid #cecece;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* 예약시 주의 사항 section */
+.reservation-footer-container{
+    display: flex;
+    justify-content: center;
+    width: 800px;
+}
+
+.info-border {
+    margin-top: 30px;
+}
+
+.agree {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+    border: 1px solid #cecece;
+    border-radius: 5px;
+}
+
+.agree-title{
+    display: flex;
+    justify-content: start;
+    margin: 20px;
+}
+
+.collection-agree, .offer-agree{
+    padding: 15px;
+    width: 600px;
+    height: 300px;
+    overflow: auto;
+    font-size: 15px;
+}
+
+.emphasis{
+    font-weight: bold;
+    font-size: 17px;
+    color: #2b2b2b;
+}
+
+.check-agree{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding: 30px;
+    cursor: pointer;
+}
+
+#check-content{
+    width: 500px;
+    margin-left: 20px;
+    user-select: none;
+}
+
+#checkAgree{
+    display: none;
+}
+
+/* 버튼 section */
+
+.button-area {
+    display: flex;
+    justify-content: center;
+    width: 800px;
+    margin: 20px;
+}
+
+.buttons {
+    display: flex;
+    width: 500px;
+    justify-content: space-around;
+}
+
+#cancelBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+
+    border: 1px solid #4A4848;
+    font-size: 15px;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#nextBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 40px;
+
+    border: none;
+    font-size: 15px;
+    background-color: #4A4848;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
