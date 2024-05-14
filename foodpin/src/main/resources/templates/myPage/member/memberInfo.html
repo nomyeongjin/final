@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 정보 수정</title>
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/myPage/myPage.css">
+</head>
+<body>
+    <main>
+        <th:block th:replace="~{common/header}"></th:block>
+
+        <section class="myPage-content">
+            <th:block th:replace="~{myPage/member/memberSide}"></th:block>
+
+            <section class="myPage-main">
+                <h1 class="myPage-title">프로필 수정</h1>
+                <h3>닉네임 : </h3>
+                <h3>전화번호 : </h3>
+                
+                <button>수정</button>
+
+            </section>
+
+            
+        </section>
+
+
+
+
+
+    </main>
+
+    <script th:inline="javascript">
+        const loginMember = /*[[${session.loginMember}]]*/ "로그인 회원 정보";
+    </script>
+
+    <th:block th:replace="~{common/footer}"></th:block> 
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

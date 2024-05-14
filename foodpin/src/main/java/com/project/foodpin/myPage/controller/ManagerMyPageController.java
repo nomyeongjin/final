@@ -16,6 +16,4 @@ public class ManagerMyPageController {
 	private final ManagerMyPageService serivce;
 	
 	
-	
-	
 }
