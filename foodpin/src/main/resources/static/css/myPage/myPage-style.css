@@ -3,9 +3,8 @@
    display: flex;
    flex-direction: row;
 }
-
 hr{
-   margin-top: 80px;
+   margin-top: 60px;
 }
 
 /* 사이드 메뉴 */
@@ -18,6 +17,11 @@ hr{
 }
 
 .left-side li{
+
+   /* align-items: center; */
+}
+
+li{
    list-style: none;
    margin: 50px;
    font-size: 20px;
@@ -60,6 +64,7 @@ hr{
    border-radius: 20px;
    border: 1px solid lightgray;
    background: lightgray;
+
 }
 
 .sub-title-btn:hover {
@@ -254,4 +259,10 @@ form[name='myPageFrm']{
 
 .reservationPeople {
    margin-left: 10px;
+   cursor: pointer;
+}
+.sub-title-btn :hover{
+   background: grey;
+   border: grey;
+   color: white;
 }

@@ -1,0 +1,149 @@
+
+/* 본문 */
+.myPage-content-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   padding-top: 30px;
+   margin: 15px;
+}
+
+/* 프로필 수정 폼 */
+#profileEditFrm{
+   display: flex;
+   flex-direction: column;
+   padding: 20px;
+}
+.profile-input-area{
+   margin: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+.address-input-area, .time-input-area{
+   margin: 10px;
+   display: flex;
+   justify-content: space-between;
+}
+.align-right{
+   display: flex;
+   flex-direction: row-reverse;
+}
+
+/* 프로필 이미지 */
+.profile-img {
+   width: 150px;
+   height: 150px;
+   border: 1px solid grey;
+   border-radius: 75px;
+   margin: 40px auto;
+
+}
+
+/* label */
+#profileEditFrm label{
+   width: 110px;
+   font-size: 16px;
+}
+
+/* input */
+.profile-input-area > input, .align-right > input{
+   width: 240px;
+   height: 26px;
+   outline: none;
+   padding-left: 5px;
+}
+#postcode{
+   width: 150px;
+   height: 26px;
+   outline: none;
+   padding-left: 5px;
+   margin-right: 5px;
+}
+.time-input-area > span{
+   padding: 0 15px;
+}
+
+/* 가게 소개 */
+#storeInfo{
+   margin: 10px;
+}
+
+/* 버튼 */
+#searchAddress{
+   width: 70px;
+   height: 26px;
+   background: lightgray;
+   border: 1px solid lightgray;
+   border-radius: 10px;
+   cursor: pointer;
+}
+#storeInfoEditBtn{
+   margin: 10px;
+   height: 26px;
+   background: lightgray;
+   border: 1px solid lightgray;
+   border-radius: 10px;
+   cursor: pointer;
+}
+#withdraw{
+   font-size: 14px;
+   color: grey;
+}
+
+/* ----------------------------------------------- */
+*{
+   /* border: 1px solid grey; */
+}
+/* ------------------------------------------------ */
+
+/* 본문 */
+.menu-container{
+   width: 80%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   border-radius: 20px;
+   background: lightgoldenrodyellow;
+   padding: 50px 20px;
+
+}
+
+/* 메뉴 */
+.menu-row{
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+}
+.menu-img{
+   width: 50px;
+   height: 50px;
+   border: 1px solid grey;
+}
+.menu-img, .menu-row > input{
+   margin: 10px;
+}
+.menu-row > input{
+   width: 20%;
+   height: 26px;
+   outline: none;
+   padding: 5px;
+}
+
+/* 버튼 */
+.btn-area{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+#addMenuRow, #menuUpdateBtn{
+   width: 100px;
+   margin: 10px;
+   height: 26px;
+   background: lightgray;
+   border: 1px solid lightgray;
+   border-radius: 10px;
+   cursor: pointer;
+}
