@@ -623,8 +623,59 @@ CREATE SEQUENCE SEQ_IMAGE_NO NOCACHE;
 CREATE SEQUENCE SEQ_NOTIFICATION_NO NOCACHE;
 
 
+--------------------------------------------------------
+
+-- 멤버 샘플 데이터
+INSERT INTO "MEMBER" VALUES(
+ SEQ_MEMBER_NO.NEXTVAL,
+ 1,
+ 'member01',
+ 'member01@naver.com',
+ '김일반',
+ '일반 회원',
+ '$2a$10$Hk7o/lS4Zebk3OMVyIbqqO3bcCGCG6WeMpqYz2K9accxXuB/S1aWm',
+ '01011112222',
+ '프로필',
+ DEFAULT,
+ 'Y',
+	0
+ );
+INSERT INTO "MEMBER" VALUES(
+ SEQ_MEMBER_NO.NEXTVAL,
+ 2,
+ 'member02',
+ 'member02@naver.com',
+ '김사장',
+ '사장 회원',
+ '$2a$10$Hk7o/lS4Zebk3OMVyIbqqO3bcCGCG6WeMpqYz2K9accxXuB/S1aWm',
+ '01033334444',
+ '프로필',
+ DEFAULT,
+ 'Y',
+	0
+ );
+INSERT INTO "MEMBER" VALUES(
+ SEQ_MEMBER_NO.NEXTVAL,
+ 3,
+ 'member03',
+ 'member03@naver.com',
+ '관리자',
+ '관리자',
+ '$2a$10$Hk7o/lS4Zebk3OMVyIbqqO3bcCGCG6WeMpqYz2K9accxXuB/S1aWm',
+ '01055552222',
+ '프로필',
+ DEFAULT,
+ 'Y',
+	0
+ );
 
 
+SELECT MEMBER_NO, MEMBER_ID, MEMBER_CODE, MEMBER_EMAIL, MEMBER_NAME, MEMBER_NICKNAME, MEMBER_PW,
+					MEMBER_TEL, PROFILE_IMG, MEMBER_STATUS, MEMBER_FLAG, 
+					TO_CHAR(ENROLL_DATE,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') ENROLL_DATE
+			FROM MEMBER
+			WHERE MEMBER_ID = 'member01'
+			AND MEMBER_STATUS = 'Y';
 
 
 

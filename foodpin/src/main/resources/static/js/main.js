@@ -7,3 +7,23 @@
 
         });
     });
+
+/* 빠른 로그인 */
+// 버튼 얻어오기
+const quickLoginBtn = document.querySelectorAll(".main-quick-login");
+
+quickLoginBtn.forEach((item) =>{
+
+
+   // list로 얻어온 quickLoginBtn 요소 하나씩 꺼내서 이벤트 추가하기
+   item.addEventListener("click", e=>{
+
+      const id = item.innerText; // 버튼에 작성된 이메일 얻어오기
+
+      location.href = "/member/quickLogin?memberId=" + id;
+   })
+
+   
+})
+
+console.log(loginMember);

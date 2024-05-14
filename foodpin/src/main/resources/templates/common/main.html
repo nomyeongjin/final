@@ -18,9 +18,9 @@
      <!-- section 1 검색하는 공간 -->
        <div class="main-search-container">
 
-        <button id="mainQuickLogin1">빠른 로그인 (일반)</button><br>
-        <button id="mainQuickLogin2">빠른 로그인 (사장님)</button><br>
-        <button id="mainQuickLogin3">빠른 로그인 (관리자)</button><br>
+        <button class="main-quick-login">member01</button><br>
+        <button class="main-quick-login">member02</button><br>
+        <button class="main-quick-login">member03</button><br>
 
         <p>장소, 음식, 가게명, 주소 검색</p>
 
@@ -95,6 +95,12 @@
 
   </main>
 
+
+  <script th:inline="javascript">
+
+    const loginMember = /*[[${session.loginMember}]]*/"로그인 회원 정보";
+
+  </script>
      
    <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 
