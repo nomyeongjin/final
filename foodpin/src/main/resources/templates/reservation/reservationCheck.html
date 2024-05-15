@@ -77,7 +77,7 @@
                             <label for="memberName" class="name">예약자</label>
 
                             <div class="input-box">
-                                <input type="text" name="memberName" id="memberName" class="input-name" readonly>
+                                <input type="text" name="memberName" id="memberName" class="input-name" readonly value="길동이">
                             </div>
                         </div>
 
@@ -86,7 +86,7 @@
                             <label for="memberTel" class="name">연락처</label>
 
                             <div class="input-box">
-                                <input type="text" name="memberTel" id="memberTel" class="input-name" readonly>
+                                <input type="text" name="memberTel" id="memberTel" class="input-name" readonly value="010-xxxx-xxxx">
                             </div>
                         </div>
 
@@ -95,7 +95,7 @@
                             <label for="memberEmail" class="name">이메일</label>
 
                             <div class="input-box">
-                                <input type="text" name="memberEmail" id="memberEmail " class="input-name">
+                                <input type="text" name="memberEmail" id="memberEmail " class="input-name" value="xxxxxx@xxxx.xxx">
                             </div>
                         </div>
 
@@ -170,7 +170,7 @@
     
                             <br><br>
     
-                            <span class="emphasis">1. 개인정보를 제공받는 자</span>
+                            <span class="emphasis">1. 개인정보를 제공받는 자 : (가게상호명)</span>
     
                             <br><br>
     
@@ -205,12 +205,13 @@
                         <input type="checkbox" name="checkAgree" id="checkAgree"> 
 
                         <!-- 동의 체크 -->
-                        <i class="fa-regular fa-circle-check"></i>
+                        
 
                         <!-- 체크 클릭 시 채워진 체크버튼 이용 -->
-                        <!-- <i class="fa-solid fa-circle-check"></i> -->
 
-                        <label for="checkAgree"  id="check-content"> 예약 서비스 이용을 위한 개인정보 수집 및 제3자 제공 규정을 확인하였으며 이에 동의합니다.</label>
+                        <label for="checkAgree"  id="checkContent">
+                            <i class="fas fa-check"></i><span class="agree-info">예약 서비스 이용을 위한 개인정보 수집 및 제3자 제공 규정을 확인하였으며 이에 동의합니다.</span>
+                        </label>
                     </div>
                 </div>
                 
