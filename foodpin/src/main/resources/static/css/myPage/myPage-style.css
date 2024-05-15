@@ -91,7 +91,7 @@ li{
 .likeList {
    list-style: none;
    display: flex;
-   align-items: center;
+   /* align-items: center; */
    margin: 30px 0;
 }
 
