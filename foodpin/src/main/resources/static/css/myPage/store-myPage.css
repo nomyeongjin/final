@@ -379,6 +379,8 @@ font-size: 14px;
    background:#666;
    color: #fff;
    border-radius: 10px;
+   display: flex;
+   justify-content: space-between;
 }
 .reply-content-bubble:after {
    border-top:15px solid #666;
@@ -389,4 +391,18 @@ font-size: 14px;
    position:absolute;
    top:17px;
    left:-15px;
+}
+.review-comment{
+   width: 80%;
+   background-color: #666;
+   outline: none;
+   border: 1px solid #666;
+   height: 26px;
+}
+#commentBtn{
+   width: 60px;
+   height: 26px;
+   background: white;
+   border: 1px solid grey;
+   border-radius: 13px;
 }
