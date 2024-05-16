@@ -1,0 +1,66 @@
+/* .map_wrap {position:relative;width:100%;height:350px;} */
+:root {
+   --main-color : #b1ab9a ;
+   /* --hover-color : #e9ae2f; */
+}
+* {
+   
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   font-family: 'Pretendard-Regular';
+}
+
+body{
+    overflow: hidden;
+ 
+}
+.map_wrap{
+ width: 100%;
+}
+
+#map{
+   
+  
+    user-select: none;
+    height: 100vh;
+   
+   
+}
+
+.store-search{
+   display: flex;
+   flex-direction: row;
+   
+}
+.storeSearch-header{
+   flex: 0 0 63px; 
+   background-color: #f1f1f1; 
+  
+   
+}
+
+#searchHeader{
+
+   width: 63px;
+
+}
+.search-logobox{
+   width: 63px;
+   height: 76px;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+#searchLogo{
+   width: 41px;
+   height: 41px;
+ 
+}
+
+
+/* nav */
+.search-navbar li{
+   height: 66px;
+}
