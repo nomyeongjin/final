@@ -1,0 +1,81 @@
+
+.reveiwComplete-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reveiwComplete-container{
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 60px;
+}
+
+.check-icon > img{
+  width: 90px;
+  height: 90px;
+  user-select: none;
+  margin-bottom: 15px;
+}
+
+.reveiwComplete-container > p:nth-child(2){
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.reveiwComplete-container > p:nth-child(3){
+  color: #7a7979;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+.review-comment{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+  height: 100px;
+  border: 1px solid var(--main-color);
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.review-comment > p:first-child{
+  height: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.review-comment > p:last-child{
+  height: 50%;
+  border-top: 1px solid var(--main-color);
+  display: flex;
+  align-items: center;
+}
+
+.move-review{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 77%;
+  height: 48px;
+  margin-top: 30px;
+  border: 1px solid var(--main-color);
+  background-color: #454545;
+  border-radius: 15px;
+}
+
+.move-review > a{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+

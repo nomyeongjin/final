@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>리뷰 완료</title>
+
+  <th:block th:replace="~{common/common}"></th:block>
+  <link rel="stylesheet" href="/css/storeReview/storeReviewComplete.css">
+  
+</head>
+<body>
+
+  <main>
+    <th:block th:replace="~{common/header}"></th:block>
+    
+    <section class="reveiwComplete-section">
+      <div class="reveiwComplete-container">
+        <span class="check-icon">
+          <img src="/images/storeReview/checkbox.png" alt="">
+        </span>
+        <p>리뷰 쓰기 완료!</p>
+        <p>장소를 찾는 사람들에게 많은 도움이 될 거예요!</p>
+        
+        <div class="review-comment">
+          <p>"@@" 님</p>
+          <p>@@ 번 째 리뷰를 남겨주셨어요!</p>
+        </div>
+        
+        <div class="move-review">
+          <a href="#">방금 쓴 리뷰 보러 가기</a>
+        </div>
+       
+      </div>
+    </section>
+
+
+
+  </main>
+  
+  <th:block th:replace="~{common/footer}"></th:block>
+  
+</body>
+</html>
