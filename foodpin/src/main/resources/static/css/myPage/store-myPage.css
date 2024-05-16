@@ -291,3 +291,102 @@ font-size: 14px;
    cursor: pointer;
    margin: 10px 15px;
 }
+
+/* -----           ----- */
+/* ----- 리뷰 관리 ----- */
+/* -----          ----- */
+/* 예약 목록 */
+#reviewListContainer{
+   padding: 15px;
+}
+/* 목록 1행 */
+.review-card{
+   padding: 10px 20px;
+   border: 1px solid grey;
+   border-radius: 20px;
+   /* background: lightgray; */
+   margin: 15px;
+}
+.list-profile-area{
+   margin: 10px 5px;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+}
+/* 프로필 이미지 */ 
+.review-profile-img{
+   width: 49px;
+   height: 49px;
+   border: 1px solid grey;
+   border-radius: 25px;
+   background: white;
+}
+.list-profile-area > span{
+   margin: 0 20px;
+}
+
+/* 리뷰 이미지 */
+.img-container{
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   margin: 15px 0;
+}
+.big-img{
+   width: 336px;
+   height: 336px;
+}
+.small-img-area{
+   display: flex;
+   flex-direction: column;
+}
+.small-img{
+   width: 112px;
+   height: 112px;
+}
+.big-img, .small-img{
+   object-fit: cover;
+   padding: 5px;
+   border-radius: 15px;
+
+}
+/* 별점 */
+.rating-area{
+   margin: 10px;
+}
+.fa-star{
+   color: black;
+   outline: 1px;
+}
+.rating-area > span{
+   margin: 0 5px;
+}
+/* 내용 */
+.review-content{
+   padding: 10px;
+}
+.review-content .fa-solid{
+   margin: 20px 10px;
+}
+/* 사장님 댓글 */
+.reply-content-bubble {
+   position:relative;
+   margin-top: 23px;
+   margin-left: 10px;
+   padding: 20px;
+   max-width: 480px;
+   background:#666;
+   color: #fff;
+   border-radius: 10px;
+}
+.reply-content-bubble:after {
+   border-top:15px solid #666;
+   border-left: 16px solid transparent;
+   border-right: 0px solid transparent;
+   border-bottom: 0px solid transparent;
+   content:"";
+   position:absolute;
+   top:17px;
+   left:-15px;
+}

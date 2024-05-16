@@ -40,13 +40,71 @@
 
             <!-- 서브타이틀 버튼 -->
             <section class="myPage-sub-title">
-               <button class="sub-title-btn" id="infoBtn">전체</button>
-               <button class="sub-title-btn" id="menuBtn">미답변</button>
+               <button class="sub-title-btn" id="reviewAll">전체</button>
+               <button class="sub-title-btn" id="Unanswered">미답변</button>
             </section>
          </div>
          
          <!-- 리뷰 관리 -->
          <div class="myPage-content-container">
+         
+            <!-- 리뷰 목록 -->
+            <div id="reviewListContainer">
+
+               <!-- 예약 확정 -->
+               <div class="review-card">
+
+                  <div class="list-profile-area">
+                     <img class="review-profile-img" th:unless="${profileImg}" th:src="#{user.default.image}">
+                     <span>회원 닉네임</span>
+                  </div>
+
+                  <div class="list-content">
+
+                     <!-- 리뷰 이미지 -->
+                     <div class="img-container">
+                        <img class="big-img" img src="/images/storeDetail/burger.jpg" alt="">
+                        
+                        <div class="small-img-area">
+                           <img class="small-img" src="/images/storeDetail/burger2.jpg">
+                           <img class="small-img" src="/images/storeDetail/buger3.jpg" alt="">
+                           <img class="small-img" src="/images/storeDetail/burger4.jpg" alt="">
+                        </div>
+                     </div>
+
+                     <!-- 별점 -->
+                     <div class="rating-area">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+   
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <span>3점</span>
+                     </div>
+
+                     <div class="review-content">
+
+                        <pre>우
+                           와
+                              짱
+                                 존
+                                    맛~~
+                        사장님이 맛있고 음식이 친절해요!</pre>
+                     
+                        <span><i class="fa-solid fa-utensils"></i>맛있는 가게</span>
+                        <span><i class="fa-solid fa-location-dot"></i>맛집 골목</span>
+                     </div>
+
+                     <p class="reply-content-bubble">
+                        사장님 답글 댓글 후기 댓글
+                    </p>
+                     
+                  </div>
+               </div>
+            </div>
+
+
 
 
          </div>
