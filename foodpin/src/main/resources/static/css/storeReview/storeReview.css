@@ -74,6 +74,9 @@
 }
 
 .review-pay span:nth-child(2){
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   font-weight: bold;
   font-size: 17px;
 }
@@ -88,7 +91,7 @@
 }
 
 .review-keyword > span{
-  margin-top: 10px;
+  margin-top: 20px;
   color: #919191;
 }
 
@@ -127,18 +130,32 @@
   cursor: pointer;
 }
 
+
+
 .keyword-box > ul > li:hover{
   background-color: #d7d7d7;
   transition: 0.3s;
+  border: 1px solid rgb(52, 99, 253);
 }
 
-.keyword-box > ul > li:visited{
-  background-color: #d7d7d7;
+.keyword-box > ul > li >label{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+.keyword-checkbox:checked + label{
+  color: rgb(36, 86, 253);;
 }
 
 
 .review-image-box{
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   width: 90%;
   height: auto;
@@ -328,11 +345,11 @@
   text-align: center;
 }
 
-.menu-list > table > tbody > tr > input{
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+.menu-list > table > tbody > tr > td > input{
+  width: 20px;
+  height: 20px;
 }
+
 
 .button-area{
   display: flex;
@@ -376,7 +393,40 @@
   display: none !important;
 }
 
+/* ****************** */
+.review-score {
+  position: relative;
+  width: 50%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .3em;
+  padding: 5px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  border-radius: 15px;
+}
 
+.rating__result {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: 20px;
+  font-size: 18px;
+}
+
+
+.rating__star {
+  font-size: 1.4em;
+  cursor: pointer;
+  color: #ff5500;
+  transition: filter linear .3s;
+}
+
+.rating__star:hover {
+  color: rgba(255, 85, 0, 0.761);
+}
 
 
 

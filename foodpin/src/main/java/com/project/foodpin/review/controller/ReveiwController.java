@@ -15,6 +15,11 @@ public class ReveiwController {
 	}
 	
 	
+	@GetMapping("reviewComplete")
+	public String reviewComplete() {
+		return "storeReview/storeReviewComplete";
+	}
+	
 	
 }
 	
