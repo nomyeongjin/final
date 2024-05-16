@@ -32,5 +32,10 @@ public class StoreMyPageController {
 		return "myPage/store/review";
 	}
 	
+	@GetMapping("ceoInfo")
+	public String ceoInfo() {
+		return "myPage/store/ceoInfo";
+	}
+	
 	
 }
