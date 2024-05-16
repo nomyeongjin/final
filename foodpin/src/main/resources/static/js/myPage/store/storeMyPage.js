@@ -28,3 +28,14 @@ function execDaumPostcode() {
  /* 주소 검색 버튼 클릭시 */
  document.querySelector("#searchAddress").addEventListener("click", execDaumPostcode); // <- 함수 이름만 넣어서 코드 내용을 그대로 들어감
 
+/* -------------------------------------- */
+/* ----------- 휴무일 변경 --------------- */
+/* -------------------------------------- */
+
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth'
+  });
+  calendar.render();
+});

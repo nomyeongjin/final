@@ -102,3 +102,46 @@
 
             </div>
          </div>
+
+
+<!-- ------------------------------------------------ -->
+
+         <!-- 본문 (휴무일) -->
+         <div class="myPage-content-container">
+
+            <!-- 고정 휴무일 (요일) -->
+            <section class="section-title">고정 휴무일</section>
+
+            <form action="#" id="offWeekEditFrm" method="POST"></form>
+               <div class="off-container">
+                  <div class="week-row">
+                     <button class="week-btn checked" id="offWeek1">월요일</button>
+                     <button class="week-btn" id="offWeek2">화요일</button>
+                     <button class="week-btn" id="offWeek3">수요일</button>
+                     <button class="week-btn" id="offWeek4">목요일</button>
+                  </div>
+                  
+                  <div class="week-row">
+                     <button class="week-btn" id="offWeek5">금요일</button>
+                     <button class="week-btn" id="offWeek6">토요일</button>
+                     <button class="week-btn checked" id="offWeek7">일요일</button>
+                  </div>
+
+                  <button class="update-btn" id="offWeekUpdateBtn">수정</button>
+               </div>
+            </form>
+
+            <!-- 지정 휴무일 (일정 추가) -->
+            <section class="section-title">지정 휴무일</section>
+
+            <form action="" id="offDayEditFrm" method="POST">
+               <div class="off-container">
+
+                  <!-- full calander -->
+                  <div id="calendar"></div>
+                  
+                  <button class="update-btn" id="offWeekUpdateBtn">수정</button>
+               </div>
+            </form>
+
+         </div>
