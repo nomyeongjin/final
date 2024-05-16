@@ -28,9 +28,17 @@
                   <!-- 서브타이틀 버튼 -->
                   <section class="myPage-sub-title">
                      <button class="sub-title-btn" id="infoBtn">기본 정보</button>
-                     <button class="sub-title-btn" id="menuBtn">비밀번호 변경</button>
+                     <button class="sub-title-btn" id="changePwBtn">비밀번호 변경</button>
                   </section>
          
+                  <section id="infoContainer">
+                    기본정보
+
+                  </section>
+
+                  <section id="changePwContainer">
+                    비번 변경
+                  </section>
                </div>
       
             </section>
@@ -46,5 +54,6 @@
     <th:block th:replace="~{common/footer}"></th:block> 
 
     <script src="/js/main.js"></script>
+    <script src="/js/myPage/memberMyPage.js"></script>
 </body>
 </html>
