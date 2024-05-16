@@ -6,6 +6,7 @@
     <title>회원 정보 수정</title>
     <th:block th:replace="~{common/common}"></th:block>
     <link rel="stylesheet" href="/css/myPage/myPage-style.css">
+    <link rel="stylesheet" href="/css/myPage/member-myPage.css">
 </head>
 <body>
     <main>
@@ -21,25 +22,63 @@
             <!-- 마이페이지 본문 -->
             <section class="content-container">
       
-               <!-- 타이틀 영역 -->
-               <div class="myPage-title-container">
-                  <section class="myPage-title">회원 정보 수정</section>
+                <!-- 타이틀 영역 -->
+                <div class="myPage-title-container">
+                    <section class="myPage-title">회원 정보 수정</section>
          
-                  <!-- 서브타이틀 버튼 -->
-                  <section class="myPage-sub-title">
-                     <button class="sub-title-btn" id="infoBtn">기본 정보</button>
-                     <button class="sub-title-btn" id="changePwBtn">비밀번호 변경</button>
-                  </section>
+                    <!-- 서브타이틀 버튼 -->
+                    <section class="myPage-sub-title">
+                        <button class="sub-title-btn" id="infoBtn">기본 정보</button>
+                        <button class="sub-title-btn" id="changePwBtn">비밀번호 변경</button>
+                    </section>
          
-                  <section id="infoContainer">
-                    기본정보
+                    <section id="infoContainer">
+                        <form action="info" method="POST" name="member-myPageFrm" id="updateProfile" enctype="multipart/form-data">
+                            <div class="profile-img-area">
+                                <input type="file" id="profileInput" style="display: none;" accept="image/*">
+                                <img src="https://flexible.img.hani.co.kr/flexible/normal/970/739/imgdb/original/2020/0507/20200507502335.jpg"
+                                     id="profileImg">
+                            </div>
+                            <span id="deleteImage">&times;</span>
+                            <div class="memberNoshow">노쇼 누적 1회</div>
 
-                  </section>
+                            <div class="profile-input-area">
+                                <div>
+                                    <label>
+                                        닉네임 : <input type="text" name="memberNickname" id="memberNickname">
+                                    </label>
+                                    </div>
+                                <div>
+                                    <label>
+                                        전화번호 : <input type="number" name="memberTel" id="memberTel">
+                                    </label>
+                                </div>
+                                
+                            </div>
 
-                  <section id="changePwContainer">
-                    비번 변경
-                  </section>
-               </div>
+                            <button class="updateInfo">회원 정보 수정</button>
+                        </form>
+                    </section>
+
+                    <section id="changePwContainer">
+                        <form action="memberChangePw" method="POST" name="member-myPageFrm" id="memberChangePw">
+                            <div class="member-myPage-row">
+                                현재 비밀번호
+                                <input type="password" name="currentPw" id="currentPw" maxlength="30">
+                            </div>
+                            <div class="member-myPage-row">
+                                새 비밀번호
+                                <input type="password" name="newPw" id="newPw" maxlength="30">
+                            </div>
+                            <div class="member-myPage-row">
+                                새 비밀번호 확인
+                                <input type="password" name="newPwConfirm" id="newPwConfirm" maxlength="30">
+                            </div>
+                            <button class="member-changePw-submit">변경하기</button>
+                        </form>
+                      
+                    </section>
+                </div>
       
             </section>
       
