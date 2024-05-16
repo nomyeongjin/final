@@ -107,9 +107,12 @@ height: 25px;
 /* 로그인, 회원가입 */
 .header-top-menu {
    display: flex;
-   align-items: flex-end;
-   flex-direction: column;
+   align-items: center;
+   justify-content: end;
 }
+/* 알림 아이콘 추가로 로그인/회원가입 위치 조정 */
+
+
 .header-top-menu a {
    padding: 0 10px;
 }
@@ -404,4 +407,197 @@ footer span {
    text-overflow: ellipsis;
    padding: 0 15%;
    text-align: center;
+}
+
+
+/* -----  알림 화면 -----  */
+
+header>section:nth-child(3) {
+   position: relative;
+}
+
+.notification-area{
+   display: flex;
+   justify-content: center;
+   align-items: self-end;
+   flex-direction: column;
+   /* width: 250px; */
+}
+
+
+.notification-bell-btn{
+   font-size: 25px;
+   /* position: absolute; */
+   border: none;
+   background-color: rgba(255, 255, 255, 0);
+   cursor: pointer;
+   width: 40px;
+   height: 40px;
+}
+
+.notification-bell-btn{
+   cursor: pointer;
+}
+
+.notification-bell-btn:hover{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   background-color: #ecececc2;
+   transition: opacity 0.5s
+}
+
+.notification-bell-btn.fa-solid{
+   color: rgb(255, 187, 0);
+   text-shadow: 1px 1px 3px gray, 2px 2px 5px black;
+}
+
+.box-content{
+   display: flex;
+   flex-direction: column;
+   width: 400px;
+   height: 600px;
+   border: 1px solid #cecece;
+   border-radius: 10px;
+   background-color: #f7f7f7;
+   z-index: 1000;
+   display: none;
+}
+
+/* 알림창 보이게 하기 */
+.notification-show {
+   display: block;
+}
+
+.notification-header{
+   display: flex;
+   align-items: center;
+   justify-content: start;
+   padding: 10px 30px;
+   border-bottom: 1px solid #aaaaaa;
+   background-color: white;
+   border-radius: 10px 10px 0 0;
+   height: 50px;
+}
+
+.title {
+   font-size: 18px;
+   font-weight: bold;
+}
+
+.notification-view{
+   display: flex;
+   flex-direction: column;
+   padding: 10px 15px;
+}
+
+.pre-notification>.title{
+   padding: 5px 15px;
+}
+
+.all-notification{
+   margin: 15px;
+}
+
+.all{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 55px;
+   height: 30px;
+   border: 1px solid #4173f5;
+   border-radius: 50px;
+   font-weight: bold;
+   color: #4173f5;
+   background-color: (65, 115, 245, .1);
+}
+
+.notification-list{
+   display: flex;
+   height: 400px;
+   position: absolute;
+   list-style: none;
+   z-index: 2000;
+}
+
+/* 안 읽은 알림 */
+.not-read {
+   background-color: rgba(176, 208, 238, 0.7);
+   color: black;
+   font-weight: bold;
+}
+
+.notification-item{
+   display: flex;
+}
+.notification-text{
+   display: flex;
+   width: 370px;
+}
+
+.notification-content-container{
+   /* height: 100px; */
+   padding: 10px;
+   height: 100px;
+   padding: 15px;
+   background-color: white;
+   border-radius: 10px;
+}
+
+.reservation-info{
+   display: flex;
+   align-items: center;
+   /* justify-content: center; */
+   height: 30px;
+}
+
+#storeLogo{
+   width: 30px;
+   height: 30px;
+   border-radius: 50%;
+   margin-right: 10px;
+}
+
+#notificationDate{
+   margin-left: 10px;
+   font-size: 14px;
+   color: #494949;
+}
+
+.notification-store{
+   font-size: 18px;
+   font-weight: bold;
+   color: #717171;
+}
+
+.notification-content{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: #717171;
+}
+
+.notification-message{
+  font-size: 15px;
+  padding: 15px 0;
+  color: #717171;
+}
+
+.delete-xmark{
+   margin-left: 15px;
+   cursor: pointer;
+   font-size: 18px;
+}
+
+.delete-xmark:hover{
+   color: red;  
+   user-select: none;
+}
+
+.delete-xmark:active {
+   font-size: 20px;
+   user-select: none;
 }

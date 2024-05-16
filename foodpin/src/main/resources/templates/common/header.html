@@ -5,6 +5,7 @@
         
     <!-- 로그인, 회원가입 -->
     <section class="header-top-menu">
+
         <div class="login-area">
 
             <!-- 로그인, 프로필이미지/닉네임/로그이웃 -->
@@ -68,6 +69,61 @@
 
             </div> -->
         </div>
+
+        <div class="notification-area" id="notificationArea">
+            <button type="button" id="myNotification" class="notification-bell-btn fa-regular fa-bell"></button>
+
+            <div class="box-content">
+                <div class="notification-header">
+                    <p class="title">알림</p>
+                </div>
+
+
+                <div class="notification-view">
+
+                    <div class="pre-notification">
+                        <p class="title">이전 알림</p>
+                    </div>
+
+                    <div class="all-notification">
+                        <p class="all">전체</p>
+                    </div>
+
+                        
+                    <ul class="notification-list">
+                        <li class="notification-item">
+                            <div class="notification-text">
+                                <div class="notification-content-container">
+
+                                    <div class="reservation-info">
+                                        <img src="#" alt="가게로고" id="storeLogo" name="storeLogo">
+
+                                        <span class="notification-store" name="storeName">가게이름, 관리자 </span>
+                                        <span id="notificationDate" name="notificationDate">5분전</span>
+                                    </div>
+
+                                    <div class="notification-content">
+                                        <div class="notification-message">
+                                            <span id="reservDate" name="reservDate">5.13.(목) 오후 06:00</span>
+                                            예약이 확정되지 않았습니다.
+
+                                            <span class="delete-xmark">
+                                                <i class="fa-regular fa-circle-xmark"></i>
+                                            </span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            
+        </div>
+
     </section>
 
     <!-- 로고(사진, 글) -->

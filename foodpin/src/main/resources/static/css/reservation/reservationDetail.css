@@ -173,9 +173,9 @@
     cursor: pointer;
 }
 
-.checkbox-element:checked + label {
+.checkbox-element:checked + label > div {
     background-color: #4A4848 !important;
-    color: red;  /* 레이블 글씨 색상 변경 */
+    color: white;  /* 레이블 글씨 색상 변경 */
 }
 
 
