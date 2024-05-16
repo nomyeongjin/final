@@ -25,3 +25,26 @@ if(secession != null){
         }
     })
 }
+
+
+const changePwBtn = document.querySelector("#changePwBtn");
+const infoBtn = document.querySelector("#infoBtn");
+const changePwContainer = document.querySelector("#changePwContainer")
+const infoContainer = document.querySelector("#infoContainer")
+
+document.addEventListener("DOMContentLoaded", function() {    
+
+    infoContainer.style.display = "block";
+    changePwContainer.style.display = "none";
+    
+    infoBtn.addEventListener("click", function() {
+
+        changePwContainer.style.display = "none";
+        infoContainer.style.display = "block";
+    });
+
+    changePwBtn.addEventListener("click", function() {
+        infoContainer.style.display = "none";
+        changePwContainer.style.display = "block";
+    });
+});

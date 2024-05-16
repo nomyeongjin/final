@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.project.foodpin.store.model.service.StoreService;
+import com.project.foodpin.store.model.service.DetailStoreService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,9 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("store")
-public class StoreController {
+public class DetailStoreController {
 	
-	private StoreService service;
+	private DetailStoreService service;
 
 	
 	@GetMapping("storeDetail")

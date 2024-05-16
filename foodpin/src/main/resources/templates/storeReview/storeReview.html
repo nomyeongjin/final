@@ -10,6 +10,88 @@
   <title>리뷰 작성</title>
 </head>
 <body>
+
+  <section id="menuSection" class="popup-hidden">
+    <section class="popupLayer">
+  
+      <p id="p">메뉴 선택</p>
+      <span id="popupClose" class="fa-solid fa-xmark"></span>
+      
+      <div class="menu-list">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>메뉴</th>
+              <th>선택</th>
+            </tr>
+          </thead>
+    
+          <tbody>
+            <tr>
+              <td>
+                <img src="/images/storeDetail/hotdog.jpg" alt="">
+              </td>
+              <td>
+                <p>메뉴</p>
+                <p>가격</p>
+              </td>
+              <td>
+                <input type="checkbox">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="/images/storeDetail/cooking.jpg" alt="">
+              </td>
+              <td>
+                <p>메뉴</p>
+                <p>가격</p>
+              </td>
+              <td>
+                <input type="checkbox">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="/images/storeDetail/counter2.jpg" alt="">
+              </td>
+              <td>
+                <p>메뉴</p>
+                <p>가격</p>
+              </td>
+              <td>
+                <input type="checkbox">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="/images/storeDetail/counter2.jpg" alt="">
+              </td>
+              <td>
+                <p>메뉴</p>
+                <p>가격</p>
+              </td>
+              <td>
+                <input type="checkbox">
+              </td>
+            </tr>
+          </tbody>
+          
+  
+        </table>
+      </div>
+    
+      <div class="button-area">
+        <button id="selectMenuButton" class="select-button">선택</button>
+      </div>
+    </section>
+  </section>
+
+
+
+
+
   
   <main>
     
@@ -27,7 +109,7 @@
           
           <div class="review-pay">
             <span>총 금액</span>
-            <span>10000</span>
+            <span id="totalAmount">10000</span>
             <span>원</span>
           </div>
 
