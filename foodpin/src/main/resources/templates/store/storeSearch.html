@@ -25,55 +25,50 @@
            자동으로 크기 조절되는 지도 -->
         <section class="store-search">
 
-            <!--  -->
-         <div class="storeSearch-header">
 
-            <div id="searchHeader">
-                <!-- 클릭하면 메인으로 가는 로고 -->
-                <div class="search-logobox">
+         <!-- 지도와 더보기 감싸는 div -->
+         
+            <!-- storeHeader 조각 추가 -->
+            <th:block th:replace="~{store/storeHeader}"></th:block>
+
+
+
+         <div class="storesearch-container">
+
+
+            <!-- 더보기 바 -->
+
+            <div class="search-sidebarbox">
+
+                <div class="sidebar-menu">
+
+                    <!-- 검색하는 창 -->
+                  <div class="search-container">
+                    <div class="search-wrap">
+
+                        <div class="search-box">
+                            <button id="searchButton">🔎</button>
+
+                            <input type="text" class="input-box">
+                        </div>
+
+                    </div>
                     
-                    <a href="/">
-                        <img src="/images/storeDetail/pizza.jpg" id="searchLogo" alt="메인로고">
-                    </a>
+                  </div>
+
                 </div>
-
-
-                <!-- 내 찜 목록 비동기로 가게이름, 카테고리, 주소, 사진 -->
-                <nav class="search-navbar">
-                    <ul>
-                        
-                        <li><a href="/">⭐</a></li>
-                        
-                        <li>
-                            <button type="button" class="navbar-button">
-                               <!-- ::before – 실제 내용 바로 앞에서 생성되는 자식요소
-                                    ::after – 실제 내용 바로 뒤에서 생성되는 자식요소​ -->
-                            
-                                <span class="navbar-text">저장</span>
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-              
             </div>
 
-             
 
-            <!-- 여기는 나중에 -->
+               <!-- 여기 map 추가 -->
+            <div class="map_wrap">
+                <div id="map"></div>
             
-         <div class="storeSearch-sidebar">
-
+            </div>
+        
+            
          </div>
-
-         </div>
-
-
-           <!-- 여기 map 추가 -->
-        <div class="map_wrap">
-            <div id="map"></div>
-           
-        </div>
-    
+        
 
         </section>
 

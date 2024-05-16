@@ -7,6 +7,24 @@ async function storelocation() {
 
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
+
+    
+    // 화면 크기가 변경될 때마다 지도 중심을 유지
+    window.addEventListener('resize', function() {
+        var center = map.getCenter();
+
+        /* 지도 크기 줄이면  */
+      mapContainer.style.height = map.innerHeight + 'px';
+      mapContainer.style.width = map.innerWidth + 'px';
+    
+        // 지도를 재배치하여 크기를 적용
+        map.relayout();
+    
+        // 지도의 중심을 현재 중심으로 다시 설정
+        var center = map.getCenter();
+        map.setCenter(center);
+    });
+
     // HTML5의 geolocation으로 사용할 수 있는지 확인
     if (navigator.geolocation) {
         try {
@@ -61,19 +79,6 @@ async function storelocation() {
         map.setCenter(locPosition);      
     }    
 
-    // 화면 크기가 변경될 때마다 지도 중심을 유지
-    window.addEventListener('resize', function() {
-        var center = map.getCenter();
-
-      mapContainer.style.height = windowHeight + 'px';
-    
-        // 지도를 재배치하여 크기를 적용
-        map.relayout();
-    
-        // 지도의 중심을 현재 중심으로 다시 설정
-        var center = map.getCenter();
-        map.setCenter(center);
-    });
 }
 
 /* 화면 생성 시 자동 실행 */
