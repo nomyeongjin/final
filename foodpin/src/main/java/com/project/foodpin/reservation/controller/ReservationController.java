@@ -30,6 +30,11 @@ public class ReservationController {
 	public String reservationConfirm() {
 		return "reservation/reservationConfirm";
 	}
+	
+	@GetMapping("detail")
+	public String detail() {
+		return "reservation/detail";
+	}
 	// ----------------------------------------------
 
 }
