@@ -8,6 +8,9 @@
      <!-- templetes/common/common.html  조각 추가 -->
      <th:block th:replace="~{common/common}"></th:block>
 
+     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0a61513c1f514ea458fa903130cb59a&libraries=services,clusterer,drawing"></script>
+
+
      <link rel="stylesheet" href="/css/store/storeDetail.css">
 
 </head>
@@ -16,8 +19,6 @@
 
     <!-- templetes/common/header.html  조각 추가 -->
      <th:block th:replace="~{common/header}"></th:block>
-
-    
 
 
 
@@ -176,8 +177,12 @@
      <!-- section 2 지도 -->
      <section class="store-detail">
         <!-- 지도 들어갈 자리 -->
-        <img class="store-map" 
-        src="/images/storeDetail/mapimage.png" alt="가게 지도 이미지">
+
+        <div id="detailMapBox">
+            <div id="detailMap"></div> 
+        </div>
+       
+       
      </section>
 
 
