@@ -1,4 +1,4 @@
-         <!-- 본문 (메뉴 정보) -->
+         <!-- 본문 (기본 정보) -->
          <div class="myPage-content-container">
             
             <!-- 프로필 수정 폼 -->
@@ -6,7 +6,7 @@
 
                <!-- 프로필 이미지 -->
                <div class="profile-img">
-                  <!-- <img th:with="user=#{user.default.image}" th:src="${session.loginMember.profileImg ?:user}"> -->
+                  <img th:unless="*{profileImg}" th:src="#{user.default.image}">
                </div>
                
                <div class="profile-input-area">

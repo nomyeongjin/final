@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>FOODPIN</title>
+
+   <!-- templetes/common/common.html  조각 추가 -->
+   <th:block th:replace="~{common/common}"></th:block>
+   
+   <link rel="stylesheet" href="/css/myPage/myPage-style.css">
+   <link rel="stylesheet" href="/css/myPage/store-myPage.css">
+
+</head>
+<body>
+
+   <main>
+
+   <!-- templetes/common/header.html  조각 추가 -->
+   <th:block th:replace="~{common/header}"></th:block>
+
+   <div class="myPage-container">
+
+      <!-- templetes/myPage/store/storeSide.html  조각 추가 -->
+      <th:block th:replace="~{myPage/store/storeSide}"></th:block>
+      
+      <hr>
+
+      <!-- 마이페이지 본문 -->
+      <section class="content-container">
+
+         <!-- 타이틀 영역 -->
+         <div class="myPage-title-container">
+            <section class="myPage-title">예약 정보</section>
+         </div>
+         
+         <!-- 예약 정보 -->
+         <div class="myPage-content-container">
+
+            <!-- 예약 현황 -->
+            <section class="section-title">예약 현황</section>
+            
+            <!-- full calander -->
+            <div class="calendar-container">
+               <div id="calendar"></div>
+            </div>
+
+            <!-- 서브 타이틀 버튼 -->
+            <section class="content-sub-title">
+               <button class="sub-title-btn" id="reservAll">전체</button>
+               <button class="sub-title-btn" id="reservConfirm">예약 정보</button>
+               <button class="sub-title-btn" id="reservApply">예약 요청</button>
+               <button class="sub-title-btn" id="reservcancel">취소 내역</button>
+            </section>
+
+            <!-- 예약 목록 -->
+            <div id="reservListContainer">
+
+               <!-- 예약 확정 -->
+               <div class="reserv-card">
+
+                  <div class="list-title-area">
+                     <p class="list-title">예약 정보</p>
+                     <p class="fa-solid fa-circle"></p>
+                  </div>
+
+                  <div class="list-content">
+                     <div class="row">
+                        <p><span>예약자 이름 : </span>김예약</p>
+                        <p><span>인원 : </span>3명</p>
+                     </div>
+   
+                     <p><span>예약자 전화번호 : </span>010-1234-5678</p>
+                     <p><span>예약자 시간 : </span>13:00 ~ 14:00</p>
+                  </div>
+               </div>
+
+               <!-- 예약 요청 -->
+               <div class="reserv-card">
+                  <div class="list-title-area">
+                     <p class="list-title">예약 요청</p>
+                     <p class="fa-solid fa-circle"></p>
+                  </div>
+
+                  <div class="list-content">
+                     <div class="row">
+                        <p><span>예약자 이름 : </span>박이름</p>
+                        <p><span>인원 : </span>3명</p>
+                     </div>
+   
+                     <p><span>예약자 전화번호 : </span>010-5678-1234</p>
+                     <p><span>예약자 시간 : </span>14:00 ~ 15:00</p>
+                  </div>
+               </div>
+
+               <!-- 예약 취소 내역 -->
+               <div class="reserv-card">
+                  <div class="list-title-area">
+                     <p class="list-title">취소 요청</p>
+                     <p class="fa-solid fa-circle"></p>
+                  </div>
+
+                  <div class="list-content">
+                     <div class="row">
+                        <p><span>예약자 이름 : </span>강이름</p>
+                        <p><span>인원 : </span>3명</p>
+                     </div>
+   
+                     <p><span>예약자 전화번호 : </span>010-1234-5678</p>
+                     <p><span>예약자 시간 : </span>13:00 ~ 14:00</p>
+                  </div>
+
+                  <div class="list-btn-area">
+                     <button class="list-btn" id="cancelBtn">취소 승인</button>
+                     <button class="list-btn" id="cancelRejectBtn">취소 거부</button>
+                  </div>
+
+               </div>
+
+            </div>
+         </div>
+         
+      </section>
+   </div>  
+   </main>
+
+
+   <!-- templetes/common/footer.html  조각 추가 -->
+   <th:block th:replace="~{common/footer}"></th:block> 
+
+   <!-- 풀캘린더 추가 -->
+   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
+   <!-- 마이페이지 JS 추가 -->
+   <script src="/js/myPage/store/reservation.js"></script>
+</body>
+</html>
