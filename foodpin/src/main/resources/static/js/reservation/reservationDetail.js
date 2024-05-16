@@ -5,3 +5,4 @@ if(storereservationbutton != null) {
         location.href = "/reservation/reservationDetail";
     });
 };
+
