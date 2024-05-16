@@ -1,5 +1,4 @@
-
-/* 본문 */
+/* 공용 영역 본문 */
 .myPage-content-container{
    display: flex;
    flex-direction: column;
@@ -7,7 +6,9 @@
    padding-top: 30px;
    margin: 15px;
 }
-
+/* -----           ----- */
+/* ----- 기본 정보 ----- */
+/* -----           ----- */
 /* 프로필 수정 폼 */
 #profileEditFrm{
    display: flex;
@@ -91,13 +92,11 @@
    color: grey;
 }
 
-/* ----------------------------------------------- */
-*{
-   /* border: 1px solid grey; */
-}
-/* ------------------------------------------------ */
+/* -----          ----- */
+/* ----- 메뉴 정보 ----- */
+/* -----          ----- */
 
-/* 본문 */
+/* 영역 */
 .menu-container{
    width: 80%;
    display: flex;
@@ -106,7 +105,6 @@
    border-radius: 20px;
    background: lightgoldenrodyellow;
    padding: 50px 20px;
-
 }
 
 /* 메뉴 */
@@ -146,4 +144,78 @@
    border: 1px solid lightgray;
    border-radius: 10px;
    cursor: pointer;
+}
+
+/* -----        ----- */
+/* ----- 휴무일 ----- */
+/* -----       ----- */
+
+/* ----------------------------------------------- */
+*{
+   /* border: 1px solid grey; */
+}
+/* ------------------------------------------------ */
+
+/* 휴무일 전체 영역 */
+.section-title{
+   font-size: 18px;
+   padding: 10px;
+}
+.off-container{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 20px;
+}
+.week-row{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   padding: 10px 20px;
+}
+.week-btn{
+   width: 100px;
+   margin: 10px;
+   height: 26px;
+   background: lightgray;
+   border: 1px solid lightgray;
+   border-radius: 15px;
+   cursor: pointer;
+}
+.checked{
+   background: white;
+   border: 1px solid lightgray;
+}
+.update-btn{
+   width: 140px;
+   margin: 20px;
+   height: 26px;
+   background: lightgray;
+   border: 1px solid lightgray;
+   border-radius: 15px;
+   cursor: pointer;
+}
+
+/* full calendar */
+#calendar{
+   width: 500px;
+   /* height: 410px; */
+   margin-bottom: 20px;
+}
+/* 월 */
+.fc .fc-toolbar-title {
+   font-size: 18px;
+   margin: 0px;
+}
+
+/* 일 */
+.fc table {
+   font-size: 14px;
+}
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+   max-height: 50px;
+}
+/* 버튼 (today / < / >) */
+.fc .fc-button {
+font-size: 14px;
 }

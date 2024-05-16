@@ -10,6 +10,12 @@
    
    <link rel="stylesheet" href="/css/myPage/myPage-style.css">
    <link rel="stylesheet" href="/css/myPage/store-myPage.css">
+
+      <!-- 풀캘린더 추가 -->
+      <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
+      <!-- 마이페이지 JS 추가 -->
+      <script src="/js/myPage/store/storeOff.js"></script>
 </head>
 <body>
 
@@ -43,17 +49,47 @@
          
          <!-- 본문 (휴무일) -->
          <div class="myPage-content-container">
-            
 
+            <!-- 고정 휴무일 (요일) -->
+            <section class="section-title">고정 휴무일</section>
 
+            <form action="#" id="offWeekEditFrm" method="POST"></form>
+               <div class="off-container">
+                  <div class="week-row">
+                     <button class="week-btn checked" id="offWeek1">월요일</button>
+                     <button class="week-btn" id="offWeek2">화요일</button>
+                     <button class="week-btn" id="offWeek3">수요일</button>
+                     <button class="week-btn" id="offWeek4">목요일</button>
+                  </div>
+                  
+                  <div class="week-row">
+                     <button class="week-btn" id="offWeek5">금요일</button>
+                     <button class="week-btn" id="offWeek6">토요일</button>
+                     <button class="week-btn checked" id="offWeek7">일요일</button>
+                  </div>
+
+                  <button class="update-btn" id="offWeekUpdateBtn">수정</button>
+               </div>
+            </form>
+
+            <!-- 지정 휴무일 (일정 추가) -->
+            <section class="section-title">지정 휴무일</section>
+
+            <form action="" id="offDayEditFrm" method="POST">
+               <div class="off-container">
+
+                  <!-- full calander -->
+                  <div id="calendar"></div>
+                  
+                  <button class="update-btn" id="offWeekUpdateBtn">수정</button>
+               </div>
+            </form>
 
          </div>
+
+         
       </section>
    </div>  
-
-      
-
-
    </main>
 
 
@@ -62,6 +98,9 @@
 
    <!-- 다음 주소 API 추가 -->
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   
+   <!-- 풀캘린더 추가 -->
+   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
    <!-- 마이페이지 JS 추가 -->
    <script src="/js/myPage/storeMyPage.js"></script>
