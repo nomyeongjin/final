@@ -21,8 +21,9 @@ function currentlocation(){
         /* 지금은 현재 위치인데 나중에 가게 위치로 바꾸기 */
         /* 클릭 시 마커 설명 뜨는 이벤트도 추가/ 사진 없이 가게 이름만 */
         
-        /* draggable: false, */ /* 드래그 막기 */
-        /* zoomable:false,  */
+        draggable: false, /* 드래그 막기 */
+        zoomable:false, 
+        disableDoubleClickZoom: true,
 
         level: 2 // 지도의 확대 레벨 
     }; 

@@ -1,6 +1,7 @@
 /* .map_wrap {position:relative;width:100%;height:350px;} */
 :root {
-   --main-color : #b1ab9a ;
+   --main-color : rgb(204, 204, 204);
+   
    /* --hover-color : #e9ae2f; */
 }
 * {
@@ -13,18 +14,47 @@
 
 body{
     overflow: hidden;
- 
+    height: 100vh;
+    user-select: none;
+}
+
+.store-search{
+   display: flex;
+
 }
 .map_wrap{
- width: 100%;
+
+ 
+}
+
+.storesearch-container{
+   flex: 1 1 auto;
+}
+
+.search-sidebarbox{
+
+   transform: translateX(0%);
+   position: absolute;
+   z-index: 200;
+   height: 100%;min-width: 390px;
+   background-color: white;
+   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2),
+               5px 0px 15px 0px rgba(0, 0, 0, 0.1);
+   /* 그림자 효과 */
+
+}
+
+.map_wrap{
+  
 }
 
 #map{
    
-  
-    user-select: none;
-    height: 100vh;
    
+    user-select: none;
+  
+    width: 100vw;
+    height: 100vh;
    
 }
 
@@ -33,9 +63,17 @@ body{
    flex-direction: row;
    
 }
+
+/* storeHeader */
+
+
 .storeSearch-header{
-   flex: 0 0 63px; 
-   background-color: #f1f1f1; 
+   width:63px; 
+   background-color: white; 
+   border-right: 1px solid var(--main-color);
+   display: flex;
+   flex-direction: column;
+   z-index: 300;
   
    
 }
@@ -52,6 +90,9 @@ body{
    display: flex;
    justify-content: center;
    align-items: center;
+
+   border-bottom: 1px solid var(--main-color);
+  
 }
 #searchLogo{
    width: 41px;
@@ -59,8 +100,98 @@ body{
  
 }
 
+/* *************************************************************** */
+/* nav bar */
 
-/* nav */
+.search-navbar{
+   width: 63px;
+}
+
 .search-navbar li{
-   height: 66px;
+   list-style: none;
+   /* height: 66px; */
+}
+.search-navbar li::before{
+   list-style: none;
+   /* height: 66px; */
+}
+
+.navbar-button{
+   cursor: pointer;
+   padding: 13px 0px;
+   text-align: center;
+   background-color: white;
+   color: black;
+   border: none;
+   width: 62px;
+   height: 50px;/* 나중에 이미지 가져오고 바꾸기 */
+
+}
+
+.navbar-button:hover{
+   color: white;
+   background-color: rgb(76, 76, 76);
+   
+}
+
+.navbar-button::before{
+  /* 나중에 여기에 이미지 추가 */
+   
+}
+
+.navbar-button span{
+   display: block;
+   min-height: 13px;
+   margin-top: 3px;
+   font-size: 12px;
+   line-height: 15px;
+   letter-spacing: -0.44px;
+}
+
+
+.sidebar-menu{
+   display: flex;
+   height: 100%;
+   position: relative;
+   justify-content: center;
+
+}
+
+.search-container{
+   position:absolute;
+   z-index: 100;
+   width: 340px;
+   padding: 15px 25px;
+  
+}
+
+.search-container .search-wrap{
+   position: relative;
+}
+
+.search-container .search-box{
+
+   position: relative;
+   z-index: 110;
+   height: 44px;
+   border-radius: 5px;
+   border: 1px solid var(--main-color);
+
+}
+
+#searchButton{
+   border: none;
+   background-color: white;
+   cursor: pointer;
+   margin-left: 10px;
+}
+
+.input-box{
+   position: relative;
+   border: 0px;
+   height: 42px;
+   width: 250px;
+   font-size: 16px;
+   outline: none;
+
 }
