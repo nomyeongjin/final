@@ -1,13 +1,15 @@
-const selectMenu = document.querySelector("#selectMenu");
-const popupClose = document.querySelector("#popoupClose");
+const popupClose = document.querySelector("#popupClose");
 const popupLayer = document.querySelector("#popupLayer");
+const selectMenu = document.querySelector("#selectMenu");
+const menuSection = document.querySelector("#menuSection");
 
-selectMenu.addEventListener("click", () => {
-
-
-
-
-
+popupClose.addEventListener("click", () => {
+  menuSection.classList.add("popup-hidden");
 });
+
+selectMenu.addEventListener("click", ()=>{
+  menuSection.classList.remove("popup-hidden");
+});
+
 
 

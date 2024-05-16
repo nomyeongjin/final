@@ -225,7 +225,156 @@
   background-color: var(--hover-color);
 }
 
+/* *********************************************** */
+.popupLayer{
+  width: 600px;
+  height: 600px;
+  border-radius: 15px;
+  background-color: #e4e4e4;
+  position: relative;
+}
 
+#p {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  
+  padding: 30px 0 ;
+  padding-left:30px ;
+  color: #393939;
+  font-weight: bold;
+  
+  font-size: 24px;
+  margin: 0;
+}
+
+#popupClose {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: absolute;
+  padding-top: 4px; /* x 중앙에 위치 */
+  top: 25px;
+  right: 25px;
+  font-size: 20px;
+  user-select: none;
+  cursor: pointer;
+
+  width: 30px;
+  height: 30px;
+  color: #393939;
+  border-radius: 7px;
+}
+
+#popupClose:hover{
+  color: red;
+}
+
+.menu-list{
+  width: 550px;
+  max-height: 400px;
+  overflow: auto;
+  margin: 25px;
+  margin-top: 5px;
+  padding: 14px;
+}
+
+.menu-list > table{
+  width: 100%;
+}
+
+.menu-list > table > thead > tr{
+  height: 30px;
+  font-weight: bold;
+}
+
+.menu-list > table > thead > tr > th:nth-child(2){
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 100px;
+  padding-top: 6px;
+}
+
+
+.menu-list > table > tbody > tr {
+  height: 90px;
+}
+.menu-list > table > tbody > tr > td:first-child{
+  width: 100px;
+}
+.menu-list > table > tbody > tr > td:first-child > img{
+  border: 1px solid #ccc;
+  width: 88px;
+  height: 88px;
+  border-radius: 6px;
+}
+
+.menu-list > table > tbody > tr > td:nth-child(2) {
+  padding-left: 20px;
+}
+
+.menu-list > table > tbody > tr > td:nth-child(2) > p:first-child{
+  font-size: 19px;
+  margin-bottom: 5px;
+}
+
+.menu-list > table > tbody > tr > td:nth-child(2) > p:last-child{
+  color: #6f6f6f;
+}
+
+
+.menu-list > table > tbody > tr > td:last-child{
+  text-align: center;
+}
+
+.menu-list > table > tbody > tr > input{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.button-area{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding: 35px;
+  padding-top: 20px;
+}
+
+.select-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  width: 70px;
+  height: 27px;
+
+  background-color: #393939;
+  border: 1px solid #393939;
+  border-radius: 15px;
+  color: white;
+  font-size: 15px;
+}
+
+#menuSection {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 1001;
+  background-color: #000c;
+  top: 0px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-hidden{
+  display: none !important;
+}
 
 
 

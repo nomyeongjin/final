@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>FOODPIN</title>
+
+   <!-- templetes/common/common.html  조각 추가 -->
+   <th:block th:replace="~{common/common}"></th:block>
+   
+   <link rel="stylesheet" href="/css/myPage/myPage-style.css">
+   <link rel="stylesheet" href="/css/myPage/store-myPage.css">
+
+      <!-- 풀캘린더 추가 -->
+      <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
+      <!-- 마이페이지 JS 추가 -->
+      <script src="/js/myPage/store/storeOff.js"></script>
+</head>
+<body>
+
+   <main>
+
+   <!-- templetes/common/header.html  조각 추가 -->
+   <th:block th:replace="~{common/header}"></th:block>
+
+   <div class="myPage-container">
+
+      <!-- templetes/myPage/store/storeSide.html  조각 추가 -->
+      <th:block th:replace="~{myPage/store/storeSide}"></th:block>
+      
+      <hr>
+
+      <!-- 마이페이지 본문 -->
+      <section class="content-container">
+
+         <!-- 타이틀 영역 -->
+         <div class="myPage-title-container">
+            <section class="myPage-title">리뷰 관리</section>
+
+            <!-- 서브타이틀 버튼 -->
+            <section class="myPage-sub-title">
+               <button class="sub-title-btn" id="infoBtn">전체</button>
+               <button class="sub-title-btn" id="menuBtn">미답변</button>
+            </section>
+         </div>
+         
+         <!-- 리뷰 관리 -->
+         <div class="myPage-content-container">
+
+
+         </div>
+         
+      </section>
+   </div>  
+   </main>
+
+
+   <!-- templetes/common/footer.html  조각 추가 -->
+   <th:block th:replace="~{common/footer}"></th:block> 
+
+   <!-- 다음 주소 API 추가 -->
+   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   
+   <!-- 풀캘린더 추가 -->
+   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
+   <!-- 마이페이지 JS 추가 -->
+   <script src="/js/myPage/storeMyPage.js"></script>
+</body>
+</html>
