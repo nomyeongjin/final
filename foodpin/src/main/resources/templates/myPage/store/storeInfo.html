@@ -44,48 +44,69 @@
                <button class="sub-title-btn" id="menuBtn">메뉴 정보</button>
                <button class="sub-title-btn" id="dayoffBtn">휴무일</button>
             </section>
-   
          </div>
          
-         <!-- 본문 (휴무일) -->
+         <!-- 본문 (기본 정보) -->
          <div class="myPage-content-container">
+            
+            <!-- 프로필 수정 폼 -->
+            <form action="#" id="profileEditFrm" method="POST">
 
-            <!-- 고정 휴무일 (요일) -->
-            <section class="section-title">고정 휴무일</section>
-
-            <form action="#" id="offWeekEditFrm" method="POST"></form>
-               <div class="off-container">
-                  <div class="week-row">
-                     <button class="week-btn checked" id="offWeek1">월요일</button>
-                     <button class="week-btn" id="offWeek2">화요일</button>
-                     <button class="week-btn" id="offWeek3">수요일</button>
-                     <button class="week-btn" id="offWeek4">목요일</button>
-                  </div>
-                  
-                  <div class="week-row">
-                     <button class="week-btn" id="offWeek5">금요일</button>
-                     <button class="week-btn" id="offWeek6">토요일</button>
-                     <button class="week-btn checked" id="offWeek7">일요일</button>
-                  </div>
-
-                  <button class="update-btn" id="offWeekUpdateBtn">수정</button>
+               <!-- 프로필 이미지 -->
+               <div class="profile-img">
+                  <img th:unless="*{profileImg}" th:src="#{user.default.image}">
                </div>
+               
+               <div class="profile-input-area">
+                  <label for="storeName">상호명 : </label><input type="text" name="storeName" id="storeName">
+               </div>
+
+               <div class="profile-input-area">
+                  <label for="">전화번호 : </label><input type="number" name="storeTel" id="storeTel">
+               </div>
+
+               <!-- 주소 입력 -->
+               <div class="address-input-area">
+                  <label for="storeLocation">가게 주소 :</label>
+                  <input type="text" name="storeLocation" placeholder="우편번호" maxlength="6" id="postcode">                       
+                  
+                  <button type="button" id="searchAddress">검색</button>
+               </div>
+
+               <div class="address-input-area align-right">
+                  <input type="text" name="storeLocation" placeholder="도로명/지번 주소" id="address">
+               </div>
+
+               <div class="address-input-area align-right">
+                  <input type="text" name="storeLocation" placeholder="상세 주소" id="detailAddress">
+               </div>
+
+               <!-- 영업시간 -->
+               <div class="time-input-area">
+                  <label for="openHour">영업시간 : </label>
+                  <input type="time" name="openHour" id="openHour"><span>~</span>
+                  <input type="time" name="closeHour" id="closeHour">
+               </div>
+
+               <!-- 브레이크 타임 -->
+               <div class="time-input-area">
+                  <label for="breacktimeStart">브레이크 타임 : </label>
+                  <input type="time" name="breacktimeStart" id="breacktimeStart"><span>~</span>
+                  <input type="time" name="breacktimeEnd" id="breacktimeEnd">
+               </div>
+
+               <!-- 가게 소개 -->
+               <textarea name="storeInfo" id="storeInfo" rows="10" placeholder="내용을 입력해주세요."></textarea>
+            
+               <button class="update-btn" id="storeInfoEditBtn">수정</button>
+
             </form>
 
-            <!-- 지정 휴무일 (일정 추가) -->
-            <section class="section-title">지정 휴무일</section>
-
-            <form action="" id="offDayEditFrm" method="POST">
-               <div class="off-container">
-
-                  <!-- full calander -->
-                  <div id="calendar"></div>
-                  
-                  <button class="update-btn" id="offWeekUpdateBtn">수정</button>
-               </div>
-            </form>
-
+            <a id="withdraw">서비스 탈퇴</a>
          </div>
+
+
+
 
          
       </section>
@@ -103,6 +124,8 @@
    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
    <!-- 마이페이지 JS 추가 -->
-   <script src="/js/myPage/storeMyPage.js"></script>
+   <script src="/js/myPage/store/storeMyPage.js"></script>
+   <script src="/js/myPage/store/storeOff.js"></script>
+
 </body>
 </html>
