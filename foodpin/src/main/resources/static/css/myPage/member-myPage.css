@@ -69,28 +69,11 @@ form[name='member-myPageFrm']{
 
 .profile-input-area {
     margin-top: 50px;
-    width: 400px;
     height: 150px;
     font-size: 18px;
 }
 
-.profile-input-area > div {
-    margin: 30px;
-}
-
-.profile-input-area > div > label > input{
-    width: 70%;
-    height: 100%;
-    border: none;
-    outline: none;
-    margin-left: 10px;
-    border-bottom: 1px solid #ccc;
-    font-size: 18px;
-}
-
-/* MEMBER CHANGE PW */
-.member-myPage-row > input[type='password']{
-    width: 70%;
+.profile-input-area > div > input{
     height: 100%;
     border: none;
     outline: none;
@@ -108,7 +91,45 @@ form[name='member-myPageFrm']{
     margin: 30px 0;
 }
 
-.member-myPage-row:nth-child(2) {
+.member-myPage-row label {
+    flex: 1;
+    min-width: 120px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.member-myPage-row input {
+    flex: 1;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#memberTel::-webkit-outer-spin-button,
+#memberTel::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+/* MEMBER CHANGE PW */
+.member-changePw-row > input[type='password']{
+    width: 70%;
+    height: 100%;
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+}
+
+.member-changePw-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin: 30px 0;
+}
+
+.member-changePw-row:nth-child(2) {
     margin: 40px 0 0 0 !important;
 }
 
@@ -118,7 +139,7 @@ form[name='member-myPageFrm']{
     font-size: 13px;
 }
 
-.member-myPage-row label {
+.member-changePw-row label {
     flex: 1;
     min-width: 120px;
     text-align: right;
@@ -170,6 +191,7 @@ form[name='member-myPageFrm']{
 
 .likeStoreName {
     font-weight: bold;
+    font-size: 18px;
     margin-bottom: 3px;
 }
 
@@ -344,10 +366,29 @@ form[name='myPageFrm']{
     margin-left: auto;
     cursor: pointer;
 }
+
+.storeName {
+    font-size: 19px;
+}
  
 .reservationPeople {
     margin-left: 10px;
     cursor: pointer;
+    font-size: 16px;
+    color: rgb(63, 63, 63);
+}
+
+.fa-clock {
+    font-size: 17px;
+    margin-right: 3px;
+}
+
+.reservationTime {
+    font-size: 18px;
+}
+
+.storeAddress {
+    font-size: 18px;
 }
 
 .sub-title-btn :hover{

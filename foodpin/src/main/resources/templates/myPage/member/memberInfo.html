@@ -44,15 +44,13 @@
                             <div class="memberNoshow">노쇼 누적 1회</div>
                             
                             <div class="profile-input-area">
-                                <div>
-                                    <label>
-                                        닉네임 : <input type="text" name="memberNickname" id="memberNickname">
-                                    </label>
-                                    </div>
-                                <div>
-                                    <label>
-                                        전화번호 : <input type="number" name="memberTel" id="memberTel">
-                                    </label>
+                                <div class="member-myPage-row">
+                                    <label>닉네임</label> 
+                                    <input type="text" name="memberNickname" id="memberNickname">
+                                </div>
+                                <div class="member-myPage-row">
+                                    <label>전화번호</label> 
+                                    <input type="number" name="memberTel" id="memberTel">
                                 </div>
                                 
                             </div>
@@ -63,18 +61,18 @@
 
                     <section id="changePwContainer">
                         <form action="memberChangePw" method="POST" name="member-myPageFrm" id="memberChangePw">
-                            <div class="member-myPage-row">
+                            <div class="member-changePw-row">
                                 <label>현재 비밀번호</label>
                                 <input type="password" name="currentPw" id="currentPw" maxlength="30">
-                            
                             </div>
-                            <div class="member-myPage-row">
+
+                            <div class="member-changePw-row">
                                 <label>새 비밀번호</label>
                                 <input type="password" name="newPw" id="newPw" maxlength="30">
                             </div>  
-                            <span class="changePwMessage">6~20 자의 영문 대소문자, 숫자 및 특수문자(!,@,#,-,_)를 입력해주세요.</span>
+                            <span class="changePwMessage">6~20 자의 영문 대소문자, 숫자 및 특수문자(!,@,#,-,_)를 입력해주세요</span>
                             
-                            <div class="member-myPage-row">
+                            <div class="member-changePw-row">
                                 <label>새 비밀번호 확인</label>
                                 <input type="password" name="newPwConfirm" id="newPwConfirm" maxlength="30">
                             </div>
