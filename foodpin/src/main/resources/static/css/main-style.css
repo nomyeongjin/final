@@ -8,12 +8,14 @@
    padding: 0;
    margin: 0;
    font-family: 'Pretendard-Regular';
+   scroll-behavior: smooth;
 }
 body {
    display: flex;
    flex-direction: column; /* 중심축 방향 세로 */
    align-items: center;    /* 교차축 방향 가운데 정렬 */
    min-height: 100vh;      /* 최소 높이를 화면 비율 100% */
+   
 }
 main {
    width: 1140px;
@@ -23,6 +25,7 @@ main {
 /* 화면 너비가 1140px이 되기 전에 적용할 css == 1140이하일때 적용 */
 @media (max-width: 1140px) {
    main{width: 100vw;}
+ 
 }
 /* a태그 스타일 지정 */
 a {

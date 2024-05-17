@@ -47,18 +47,16 @@ form[name='member-myPageFrm']{
 
 .memberNoshow {
     position: absolute;
-    /* align-items: center; */
+    top: 175x;
     padding: 5px 10px;
-    margin-right: 24px;
+    width: 300px;
     text-align: center;
-    left: 120px;
-    margin: 0 0 0 20px;
+    left: 29px;
 }
 
 .updateInfo {
     width: 300px;
     padding: 10px;
-    margin: 50px 0;
     border-radius: 10px;
     
     border: none;
@@ -70,13 +68,14 @@ form[name='member-myPageFrm']{
 }
 
 .profile-input-area {
+    margin-top: 50px;
     width: 400px;
-    height: 300px;
+    height: 150px;
     font-size: 18px;
 }
 
 .profile-input-area > div {
-    margin: 20px;
+    margin: 30px;
 }
 
 .profile-input-area > div > label > input{
@@ -100,8 +99,30 @@ form[name='member-myPageFrm']{
     font-size: 18px;
 }
 
-#memberChangePw > * {
+.member-myPage-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 400px;
     margin: 30px 0;
+}
+
+.member-myPage-row:nth-child(2) {
+    margin: 40px 0 0 0 !important;
+}
+
+.changePwMessage {
+    margin-left: 140px !important;
+    color: gray;
+    font-size: 13px;
+}
+
+.member-myPage-row label {
+    flex: 1;
+    min-width: 120px;
+    text-align: right;
+    margin-right: 10px;
 }
 
 .member-changePw-submit {
@@ -145,6 +166,16 @@ form[name='member-myPageFrm']{
 .likeStoreName, .likeStoreAddress {
     display: block;
     flex-grow: 1;
+}
+
+.likeStoreName {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.likeStoreAddress {
+    font-size: 17px;
+    font-weight: lighter;
 }
 
 .like {
@@ -231,7 +262,7 @@ form[name='member-myPageFrm']{
 .myPage-row{
     width: 500px;
     height: 50px;
-    margin: 18px 0 30px 0;
+    margin: 0 0 30px 0;
     border-bottom: 1px solid rgb(161, 161, 161);
     display: flex;
     align-items: center;
@@ -270,6 +301,9 @@ form[name='myPageFrm']{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: 0 20px 20px 20px;
+    padding: 20px;
+    box-sizing: border-box;
 }
  
 .agree {
