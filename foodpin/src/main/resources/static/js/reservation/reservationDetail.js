@@ -29,7 +29,7 @@ for(let li of buttonItem) {
 
         for(let item of buttonItem){
             item.classList.remove("select");
-s        }
+        }
 
         li.classList.add("select");
         console.log(li);
