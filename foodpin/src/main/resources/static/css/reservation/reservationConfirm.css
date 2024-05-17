@@ -66,6 +66,8 @@
 
 .content-border>.content>a {
     padding-left: 8px;
+    text-decoration: underline;
+    color: #4A4848;
 }
 
 .reserv-decision-info {
@@ -165,4 +167,13 @@
     color: white;
     border-radius: 5px;
     cursor: pointer;
+}
+
+#cancelBtn:hover{
+    color: red;
+    border: 1px solid red;
+}
+
+#nextBtn:hover{
+    border: 1px solid black;
 }

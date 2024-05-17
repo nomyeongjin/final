@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>예약하기</title>
-</head>
-<body>
 
     <th:block th:replace="~{common/common}"></th:block>
     <link rel="stylesheet" href="/css/reservation/detail.css">
-
+</head>
+<body>
     <main>
 
         <!-- header.html 추가 -->
@@ -37,7 +36,7 @@
                         <span class="content">
                             가게 정보 어쩌구 저쩌구 
         
-                            <a class="more" href="#">더보기&gt;</a> <!-- 상세 정보로 넘어감 -->
+                            <a class="more" href="#">더보기<i class="fa-solid fa-chevron-down fa-rotate-270"></i></a> <!-- 상세 정보로 넘어감 -->
                         </span>
                     </div>
     
@@ -114,8 +113,8 @@
                                 <!-- 펼처보기 눌렀을 때 class="notice-item-open" 적용 -->
                                 <button type="button" class="notice-title">
                                     꼭 확인해 주세요!
-                                    <i class="fa-solid fa-chevron-down fa-rotate-180"></i> <!-- 기본 아래방향 -->
-                                    <!-- <i class="fa-solid fa-chevron-down"></i> -->  <!-- 펼쳐보기 눌렀을 때 접기  -->
+                                    <i class="fa-solid fa-chevron-down"></i> <!-- 기본 아래방향 -->
+                                    <!-- <i class="fa-solid fa-chevron-down fa-rotate-180"></i> -->  <!-- 펼쳐보기 눌렀을 때 접기  -->
                                 </button>
 
                                 <div class="notice-inner-detail">
@@ -149,6 +148,11 @@
 
     <!-- footer.html 추가 -->
     <th:block th:replace="~{common/footer}"></th:block> 
+
+    <script src="/js/store/storeDetail.js"></script>
+
+    <script src="/js/reservation/reservationDetail.js"></script> 
+    <script src="/js/reservation/detail.js"></script> 
     
 </body>
 </html> 

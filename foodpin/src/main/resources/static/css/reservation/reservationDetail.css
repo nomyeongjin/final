@@ -53,12 +53,16 @@
     font-size: 15px;
 }
 
+.content>a{
+    text-decoration: underline;
+    color: #4A4848;
+}
+
 .title-container {
     display: flex;
     align-items: center;
     
 }
-
 
 .content-container {
     display: flex;
@@ -74,7 +78,7 @@
     /* border: 1px solid #cecece; */
     flex-direction: column;
     width: 800px;
-    height: 1200px;
+    /* height: 1200px; */
 }
 
 .nav-div {
@@ -134,10 +138,16 @@
     margin-top: 30px;
     width: 600px;
     border-bottom: 1px solid #cecece;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .reservation-count {
     margin-bottom: 20px;
+    width: 500px;
 }
 
 .checkbox-area{
@@ -146,16 +156,24 @@
 
 .button-list {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
 }
 
 .button-item {
-    list-style: none;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-.checkbox-element{
-    display: none;
+    width: 100px;
+    height: 45px;
+    margin:10px;
+    
+    border-radius: 5px;
+    border: 1px solid #d6d6d6;
+    font-size: 15px;
+    margin: 5px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .count-number {
@@ -184,8 +202,7 @@
     justify-content: center;
     align-items: center;
     width: 600px;
-    border-bottom: 1px solid #cecece;
-}
+}   
 
 .reservation-date{
     margin-top: 20px;
@@ -198,15 +215,60 @@
 }
 
 .calendar{
-    width: 400px;
+    width: 500px;
     height: 400px;
-    border: 1px solid black;
-    margin: 20px 20px 30px 20px;
+    margin: 40px 20px 30px 20px;
+}
+
+.reserv-time-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 50%;
+    margin: 20px;
 }
 
 .reservation-time{
-    height: 100%;
+    width: 500px;
+    margin: 10px;
 }
+
+.time-title{
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.time-list{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.time-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 45px;
+    margin:10px;
+    
+    border-radius: 5px;
+    border: 1px solid #d6d6d6;
+    font-size: 15px;
+    margin: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.select{
+    background-color: #4A4848;
+    color: white;
+}
+
 
 /* 예약시 주의 사항 section */
 .reservation-footer-container{
@@ -254,12 +316,21 @@
     list-style: none;
 }
 
+.notice-item{
+    width: 400px;
+}
+
 .notice-inner-detail{
     margin-top: 10px;
     padding: 16px;
     border-radius: 12px;
+    background-color: #f3f3f3b0;
+    display: none;
 }
 
+.show-box{
+    display: block;
+}
 
 /* 버튼 section */
 .button-area {
@@ -290,6 +361,15 @@
     cursor: pointer;
 }
 
+#cancelBtn:hover{
+    color: red;
+    border: 1px solid red;
+}
+
+#nextBtn:hover{
+    border: 1px solid black;
+}
+
 #nextBtn{
     display: flex;
     justify-content: center;
@@ -304,4 +384,3 @@
     border-radius: 5px;
     cursor: pointer;
 }
-
