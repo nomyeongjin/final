@@ -581,6 +581,7 @@ CHECK("NOTIFICATION_CHECK" IN('Y','N'));
 -- 시퀀스 번호 모음 -----------------------------------------------------------------
 
 --신고 카테고리 시퀀스 번호
+DROP SEQUENCE SEQ_REQUEST_CATEGORY_CODE ;
 CREATE SEQUENCE SEQ_REQUEST_CATEGORY_CODE NOCACHE;
 
 --음식점 등록정보 시퀀스 번호
@@ -677,6 +678,8 @@ SELECT MEMBER_NO, MEMBER_ID, MEMBER_CODE, MEMBER_EMAIL, MEMBER_NAME, MEMBER_NICK
 			WHERE MEMBER_ID = 'member01'
 			AND MEMBER_STATUS = 'Y';
 
+		
 
-
-
+-- 예약 가능한 팀(테이블) 수 컬럼 추가
+ALTER TABLE "STORE" ADD STORE_MAX_TABLE NUMBER;
+SELECT * FROM STORE;
