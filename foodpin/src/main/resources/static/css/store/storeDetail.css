@@ -461,6 +461,14 @@ aside>a:hover{
     margin-right: 20px;
 }
 
+.storereview-image{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .storereview-top{
     padding: 20px 0;
     border-bottom: 1px solid var(--main-color);
