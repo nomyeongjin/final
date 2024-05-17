@@ -139,5 +139,56 @@ public class MemberController {
 		
 	}
 	
+	/** 일반 회원 가입 페이지 이동
+	 * @return
+	 */
+	@GetMapping("signupCommon")
+	public String signupCommonPage() {
+		return "/member/signupCommon";
+	}
+	
+	/** 사장 회원 가입 페이지 이동
+	 * @return
+	 */
+	@GetMapping("signupStore")
+	public String signupStorePage() {
+		return "/member/signupStore";
+	}
+	
+	
+	/** 일반 회원 가입
+	 * @param inputMember : 입력된 회원 정보
+	 * 		(memberEmail, memberPw, memberNickname, memberTel)
+	 * @param memberAddress : 입력한 주소 input 3개의 값을 배열로 전달
+	 * @param ra : 리다이렉트 시 request scope로 데이터 전달하는 객체
+	 * @return
+	 */
+//	@PostMapping("signupCommon")
+//	public String signupCommon(
+//			Member inputMember,
+//			@RequestParam("memberAddress") String[] memberAddress,
+//			RedirectAttributes ra
+//			) {
+//		
+//		// 회원 가입 서비스 호출
+//		int result = service.signupCommon(inputMember, memberAddress);
+//		
+//		String path = null;
+//		String message = null;
+//		
+//		if(result>0) {
+//			message = inputMember.getMemberNickname()+" 님의 가입을 환영합니다.🤗";
+//			path = "/";
+//		}
+//		else {
+//			message = "회원 가입에 실패했습니다.";
+//			path = "signupCommon";
+//		}
+//		
+//		ra.addFlashAttribute("message",message);
+//		
+//		return "redirect:"+path;
+//	}
+	
 	
 }
