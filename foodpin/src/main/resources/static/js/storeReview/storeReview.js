@@ -87,7 +87,7 @@ for(let i=0 ; i<inputImageList.length ; i++){
   });
 }
 
-/* ************************************************************************ */
+/* ********************************** 별점 ************************************** */
 const ratingStars = [...document.getElementsByClassName("rating__star")];
 const ratingResult = document.querySelector(".rating__result");
 
@@ -119,17 +119,19 @@ function printRatingResult(result, num = 0) {
 
 executeRating(ratingStars, ratingResult);
 
-/* ************************************************************* */
-const keywordUl = document.querySelectorAll("#keywords");
-const keywords = document.querySelectorAll(".keyword-checkbox")
+/* ***************************** 리뷰 해시태그 ******************************** */
+const keywords = document.querySelectorAll(".keyword-checkbox");
 
-for( let i = 0 ; i < keywords.length ; i++ ){
-  if(keywords[i].checked == true){
-    console.log("check");
-  } else{
-    console.log("not check");
-  }
-}
+keywords.forEach((keyword) => {
+  keyword.addEventListener("click", (e) => {
+
+    const checked = document.querySelectorAll(".keyword-checkbox:checked");
+    if (checked.length > 5) {
+      alert("해시태그는 최대 5개까지만 선택할 수 있습니다.");
+      e.preventDefault();
+    }
+  });
+});
 
 
 
