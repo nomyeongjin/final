@@ -14,7 +14,7 @@
      <link rel="stylesheet" href="/css/store/storeDetail.css">
 
 </head>
-<body>
+<body id="bodyTop">
     <main>
 
     <!-- templetes/common/header.html  조각 추가 -->
@@ -74,7 +74,8 @@
                                 </div>
                                 
                                 <div class="bookmark">
-                                    <i class="fa-regular fa-bookmark" id="bookmarkCheck"
+
+                                    <i class="fa-regular fa-heart" id="bookmarkCheck"
                                     th:classappend="*{bookmark == 1} ? fa-solid : fa-regular"></i>
                                     
                                 </div>
@@ -94,8 +95,23 @@
 
                             <!-- 별점 / 클릭시 아래 리뷰 페이지로 내려가는 버튼 -->
                             <div class="storedetail-row">
-                                <span>⭐⭐⭐⭐⭐ 점수</span>
-                                <a href="#">리뷰></a>
+
+
+                                <div class="store-avgScore">
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                   
+                                    &nbsp;
+                                    <span> 점수 </span>
+                                </div>
+
+                                  
+                                    
+                                <span id="showReview">리뷰></span>
+
                             </div>
 
 
@@ -135,7 +151,7 @@
 
 
                                 <!-- 문의(채팅) 페이지로 이동-->
-                                <a href="#">문의하기</a>
+                                <a id="toChatting" href="#">문의하기</a>
 
 
 
@@ -180,11 +196,11 @@
 
         <div id="detailMapBox">
 
-            <a href="/store/storeSearch">
-                <div id="detailMap">
-                
-                </div>
-            </a>
+        
+            <div id="detailMap">
+            
+            </div>
+        
              
         </div>
        
@@ -380,8 +396,13 @@
             <div class="storereview-container">
                 <h3 class="review-title">방문자 리뷰</h3>
                 
-                <div class="reiview-avgScore">
-                    <span>⭐⭐⭐⭐⭐ 평균 점수</span>
+                <div class="review-avgScore">
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <i class="rating__star far fa-star"></i>
+                    <span> 평균 점수</span>
                 </div>
 
                 <div class="storereview-top">
@@ -390,7 +411,16 @@
                         <img class="review-member-profile" src="/images/storeDetail/hotdog.jpg" alt="회원 프로필 이미지">
                         <div class="review-info">
                             <span>닉네임</span>
-                            <span>⭐⭐⭐⭐⭐ 점수</span>
+                            
+                            <div class="review-memberScore">
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <i class="rating__star far fa-star"></i>
+                                <span> 점수</span>
+                            </div>
+                           
                         </div>
                     </div>
     
@@ -448,6 +478,13 @@
 
    <script src="/js/reservation/reservationDetail.js"></script>
    <script src="/js/store/storeDetail.js"></script>
+
+
+    <aside>
+        <div class="top-button">
+         <a href="#bodyTop"><i class="fa-solid fa-arrow-up"></i></a>
+        </div>
+    </aside>
 
 </body>
 </html>
