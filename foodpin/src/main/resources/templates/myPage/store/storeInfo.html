@@ -11,11 +11,11 @@
    <link rel="stylesheet" href="/css/myPage/myPage-style.css">
    <link rel="stylesheet" href="/css/myPage/store-myPage.css">
 
-      <!-- 풀캘린더 추가 -->
-      <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+   <!-- 풀캘린더 추가 -->
+   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
-      <!-- 마이페이지 JS 추가 -->
-      <script src="/js/myPage/store/storeOff.js"></script>
+
+
 </head>
 <body>
 
@@ -49,66 +49,7 @@
          <!-- 본문 (기본 정보) -->
          <div class="myPage-content-container">
             
-            <!-- 프로필 수정 폼 -->
-            <form action="#" id="profileEditFrm" method="POST">
-
-               <!-- 프로필 이미지 -->
-               <div class="profile-img">
-                  <img th:unless="*{profileImg}" th:src="#{user.default.image}">
-               </div>
-               
-               <div class="profile-input-area">
-                  <label for="storeName">상호명 : </label><input type="text" name="storeName" id="storeName">
-               </div>
-
-               <div class="profile-input-area">
-                  <label for="">전화번호 : </label><input type="number" name="storeTel" id="storeTel">
-               </div>
-
-               <!-- 주소 입력 -->
-               <div class="address-input-area">
-                  <label for="storeLocation">가게 주소 :</label>
-                  <input type="text" name="storeLocation" placeholder="우편번호" maxlength="6" id="postcode">                       
-                  
-                  <button type="button" id="searchAddress">검색</button>
-               </div>
-
-               <div class="address-input-area align-right">
-                  <input type="text" name="storeLocation" placeholder="도로명/지번 주소" id="address">
-               </div>
-
-               <div class="address-input-area align-right">
-                  <input type="text" name="storeLocation" placeholder="상세 주소" id="detailAddress">
-               </div>
-
-               <!-- 영업시간 -->
-               <div class="time-input-area">
-                  <label for="openHour">영업시간 : </label>
-                  <input type="time" name="openHour" id="openHour"><span>~</span>
-                  <input type="time" name="closeHour" id="closeHour">
-               </div>
-
-               <!-- 브레이크 타임 -->
-               <div class="time-input-area">
-                  <label for="breacktimeStart">브레이크 타임 : </label>
-                  <input type="time" name="breacktimeStart" id="breacktimeStart"><span>~</span>
-                  <input type="time" name="breacktimeEnd" id="breacktimeEnd">
-               </div>
-
-               <!-- 가게 소개 -->
-               <textarea name="storeInfo" id="storeInfo" rows="10" placeholder="내용을 입력해주세요."></textarea>
-            
-               <button class="update-btn" id="storeInfoEditBtn">수정</button>
-
-            </form>
-
-            <a id="withdraw">서비스 탈퇴</a>
          </div>
-
-
-
-
-         
       </section>
    </div>  
    </main>
@@ -121,10 +62,11 @@
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
    
    <!-- 풀캘린더 추가 -->
-   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
    <!-- 마이페이지 JS 추가 -->
    <script src="/js/myPage/store/storeMyPage.js"></script>
+
+   <!-- 마이페이지 JS 추가 -->
    <script src="/js/myPage/store/storeOff.js"></script>
 
 </body>
