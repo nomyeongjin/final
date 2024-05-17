@@ -581,6 +581,7 @@ CHECK("NOTIFICATION_CHECK" IN('Y','N'));
 -- 시퀀스 번호 모음 -----------------------------------------------------------------
 
 --신고 카테고리 시퀀스 번호
+DROP SEQUENCE SEQ_REQUEST_CATEGORY_CODE ;
 CREATE SEQUENCE SEQ_REQUEST_CATEGORY_CODE NOCACHE;
 
 --음식점 등록정보 시퀀스 번호

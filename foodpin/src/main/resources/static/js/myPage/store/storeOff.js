@@ -24,12 +24,6 @@ const createBtn = (weekList1, weekList2) => {
     weekRow1.append(offBtn2);
 }
 
-
-
-
-
-
-
 // 휴무일 - 서브 타이틀 버튼 클릭시 내용 띄우기
 dayoffBtn.addEventListener("click", () => {
 
