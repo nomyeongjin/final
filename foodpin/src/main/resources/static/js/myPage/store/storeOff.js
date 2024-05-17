@@ -24,6 +24,12 @@ const createBtn = (weekList1, weekList2) => {
     weekRow1.append(offBtn2);
 }
 
+
+
+
+
+
+
 // 휴무일 - 서브 타이틀 버튼 클릭시 내용 띄우기
 dayoffBtn.addEventListener("click", () => {
 
@@ -34,8 +40,24 @@ dayoffBtn.addEventListener("click", () => {
     offWeekSection.classList.add("section-title");
     offWeekSection.innerHTML = "고정 휴무일";
 
-
-
+    // -- 
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        
+        locale: 'kr',
+        timeZone: 'UTC',
+        initialView: 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
+        events:[ // 일정 데이터 추가 , DB의 event를 가져오려면 JSON 형식으로 변환해 events에 넣어주면된다.
+            {
+                title:'개인 사정',
+                start:'2024-05-16',
+                end:'2024-05-16'
+            }
+        ],
+        editable: true // false로 변경 시 draggable 작동 x 
+    });
+    calendar.render();
+    // --
 
     // 지정 휴무일
     const offDaySection = document.createElement("section");
@@ -60,35 +82,26 @@ dayoffBtn.addEventListener("click", () => {
     // 마이페이지 본문 컨테이너에 각 휴무일 section, form 추가
     container.append(offWeekSection, offDaySection, offDayEditFrm);
 
-
-
-
-
-     
-
-
-
-
 });
 
 /* 풀캘린더 */
-document.addEventListener('DOMContentLoaded', function () {
+// document.addEventListener('DOMContentLoaded', function () {
 
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        
-        locale: 'kr',
-        timeZone: 'UTC',
-        initialView: 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
-        events:[ // 일정 데이터 추가 , DB의 event를 가져오려면 JSON 형식으로 변환해 events에 넣어주면된다.
-            {
-                title:'개인 사정',
-                start:'2024-05-16',
-                end:'2024-05-16'
-            }
-        ],
-        editable: true // false로 변경 시 draggable 작동 x 
-    });
-    calendar.render();
-  });
+//   var calendarEl = document.getElementById('calendar');
+//   var calendar = new FullCalendar.Calendar(calendarEl, {
+      
+//       locale: 'kr',
+//       timeZone: 'UTC',
+//       initialView: 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
+//       events:[ // 일정 데이터 추가 , DB의 event를 가져오려면 JSON 형식으로 변환해 events에 넣어주면된다.
+//           {
+//               title:'개인 사정',
+//               start:'2024-05-16',
+//               end:'2024-05-16'
+//           }
+//       ],
+//       editable: true // false로 변경 시 draggable 작동 x 
+//   });
+//   calendar.render();
   
+// });
