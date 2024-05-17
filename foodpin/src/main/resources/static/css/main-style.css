@@ -464,6 +464,8 @@ header>section:nth-child(3) {
    border-radius: 10px;
    background-color: #f7f7f7;
    z-index: 1000;
+   top: 55px;
+   position: absolute;
    display: none;
 }
 
@@ -545,6 +547,7 @@ header>section:nth-child(3) {
    padding: 15px;
    background-color: white;
    border-radius: 10px;
+   margin-top: 100px;
 }
 
 .reservation-info{

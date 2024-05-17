@@ -53,6 +53,11 @@
     font-size: 15px;
 }
 
+.content>a{
+    text-decoration: underline;
+    color: #4A4848;
+}
+
 .title-container {
     display: flex;
     align-items: center;
@@ -183,7 +188,6 @@
     cursor: pointer;
 }
 
-
 .notice-content {
     display: flex;
     justify-content: center;
@@ -195,13 +199,21 @@
     list-style: none;
 }
 
+.notice-item{
+    width: 400px;
+}
+
 .notice-inner-detail{
     margin-top: 10px;
     padding: 25px;
     border-radius: 12px;
     background-color: #f3f3f3b0;
+    display: none;
 }
 
+.show-box{
+    display: block;
+}
 
 /* 버튼 section */
 .button-area {
@@ -247,3 +259,11 @@
     cursor: pointer;
 }
 
+#cancelBtn:hover{
+    color: red;
+    border: 1px solid red;
+}
+
+#nextBtn:hover{
+    border: 1px solid black;
+}

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>예약정보확인</title>
-</head>
-<body>
 
     <th:block th:replace="~{common/common}"></th:block>
-
+    
     <link rel="stylesheet" href="/css/reservation/reservationCheck.css">
-
+</head>
+<body>
+    
     <main>
 
         <!-- header.html 추가 -->
@@ -234,6 +234,12 @@
     </main>
 
     <th:block th:replace="~{common/footer}"></th:block> 
+
+    <script th:inline="javascript">
+
+        const loginMember = /*[[${session.loginMember}]]*/ "로그인회원"
+
+    </script>
     
 </body>
 </html>

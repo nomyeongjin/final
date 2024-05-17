@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>예약하기</title>
+    
+    <link rel="stylesheet" href="/css/reservation/reservationDetail.css">
+    <th:block th:replace="~{common/common}"></th:block>
 </head>
 <body>
-
-    <th:block th:replace="~{common/common}"></th:block>
-    <link rel="stylesheet" href="/css/reservation/reservationDetail.css">
-
     <main>
 
         <!-- header.html 추가 -->
@@ -37,7 +36,7 @@
                         <span class="content" name="storeInfo" id="storeId">
                             가게 정보 어쩌구 저쩌구 
         
-                            <a class="more" href="/reservation/detail">더보기&gt;</a> <!-- 상세 정보로 넘어감 -->
+                            <a class="more" href="/reservation/detail">더보기<i class="fa-solid fa-chevron-down fa-rotate-270"></i></a> <!-- 상세 정보로 넘어감 -->
                         </span>
                     </div>
     
@@ -143,14 +142,48 @@
             
                         <!-- 달력 API 예정 -->
                         <div class="calendar">
-                            <!-- API -->
+                            <div id="calendar"></div>
                         </div>
         
                     </div>
         
                </div>
 
-                <div class="reservation-time" id="reservTime" name="reservTime"></div>
+               <div class="reserv-time-container">
+
+                    <div class="reservation-time" id="reservTime" name="reservTime">
+                        
+                        <div class="time_title">오후</div>
+    
+                        <ul class="time-list">
+                            <li class="time-item">12:00</li>
+                            <li class="time-item">12:30</li>
+                            <li class="time-item">13:00</li>
+                            <li class="time-item">13:30</li>
+                            <li class="time-item">14:00</li>
+                            <li class="time-item">14:30</li>
+                            <li class="time-item">15:00</li>
+                            <li class="time-item">16:00</li>
+                        </ul>
+    
+                    </div>
+                    <!-- <div class="reservation-time" id="reservTime" name="reservTime">
+                        
+                        <div class="time_title">오후</div>
+    
+                        <ul class="time-list">
+                            <li class="time-item">12:00</li>
+                            <li class="time-item">12:30</li>
+                            <li class="time-item">13:00</li>
+                            <li class="time-item">13:30</li>
+                            <li class="time-item">14:00</li>
+                            <li class="time-item">14:30</li>
+                            <li class="time-item">15:00</li>
+                            <li class="time-item">16:00</li>
+                        </ul>
+    
+                    </div> -->
+               </div>
     
             </section>
     
@@ -179,8 +212,8 @@
                                 <!-- 펼처보기 눌렀을 때 class="notice-item-open" 적용 -->
                                 <button type="button" class="notice-title">
                                     꼭 확인해 주세요!
-                                    <i class="fa-solid fa-chevron-down fa-rotate-180"></i> <!-- 기본 아래방향 -->
-                                    <!-- <i class="fa-solid fa-chevron-down"></i> -->  <!-- 펼쳐보기 눌렀을 때 접기  -->
+                                    <i class="fa-solid fa-chevron-down"></i> <!-- 기본 아래방향 -->
+                                    <!-- <i class="fa-solid fa-chevron-down fa-rotate-180"></i> -->  <!-- 펼쳐보기 눌렀을 때 접기  -->
                                 </button>
 
                                 <div class="notice-inner-detail">
@@ -214,6 +247,11 @@
 
     <!-- footer.html 추가 -->
     <th:block th:replace="~{common/footer}"></th:block> 
-    
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
+    <script src="/js/myPage/store/reservation.js"></script>
+    <script src="/js/reservation/reservationDetail.js"></script>
+
 </body>
 </html> 
