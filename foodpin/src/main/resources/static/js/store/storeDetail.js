@@ -113,3 +113,20 @@ var targetID; */
     this.parentNode.parentNode.style.display = 'none';
   });
 } */
+
+
+
+
+/* ***************** 팝업 ****************** */
+const popupClose = document.querySelector("#popupClose");
+const popupLayer = document.querySelector("#popupLayer");
+const reviewReportForm = document.querySelector("#reviewReportForm");
+const reviewReport = document.querySelector("#reviewReport");
+
+popupClose.addEventListener("click", () => {
+  reviewReportForm.classList.add("popup-hidden");
+});
+
+reviewReport.addEventListener("click", ()=>{
+  reviewReportForm.classList.remove("popup-hidden");
+});
