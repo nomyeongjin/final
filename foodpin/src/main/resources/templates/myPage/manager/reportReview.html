@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리뷰 신고</title>
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/myPage/myPage-style.css">
+    <link rel="stylesheet" href="/css/myPage/manager-myPage.css">
+</head>
+<body>
+    <main>
+        <th:block th:replace="~{common/header}"></th:block>
+
+        <div class="myPage-container">
+            <th:block th:replace="~{myPage/manager/managerSide}"></th:block>
+
+            <hr>
+
+            <section class="content-container">
+                <div class="myPage-title-container">
+                    <section class="myPage-title">리뷰 신고</section>
+                </div>
+            </section>
+
+
+        </div>
+    </main>
+
+    <script th:inline="javascript">
+        const loginMember = /*[[${session.loginMember}]]*/ "로그인 회원 정보";
+    </script>
+
+        <th:block th:replace="~{common/footer}"></th:block>
+
+        <script src="/js/main.js"></script>
+        <script src="/js/myPage/managerMyPage.js"></script>
+    
+</body>
+</html>
