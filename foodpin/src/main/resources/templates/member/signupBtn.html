@@ -11,39 +11,45 @@
 </head>
 <body>
 
-    <!-- templetes/common/header.html  조각 추가 -->
-    <th:block th:replace="~{common/header}"></th:block>
-
-    <section class="member-box">
-        
-        <div class="member-title">
-            <h3>회원 유형 선택</h3>
-        </div>
-       
-
-        <div class="member-section">
-            <div class="member-container">
-                <a href="#" class="member-signup-a">
-                    <i class="fa-solid fa-store"></i>
-                    <h2>사장님 회원</h2>
-                </a>
-            </div>
-                
-                
-            <div class="member-container">
-                <a href="#" class="member-signup-a">
-                    <i class="fa-solid fa-person"></i>
-                    <h2>일반 회원</h2>
-                </a>
-            </div>
-                
-        </div>
-                
-    </section>
+    <main>
+        <!-- templetes/common/header.html  조각 추가 -->
+        <th:block th:replace="~{common/header}"></th:block>
     
+        <section class="member-box">
+            
+            <div class="member-title">
+                <h3>회원 유형 선택</h3>
+            </div>
+           
+    
+            <div class="member-section">
+                <div class="member-container">
+                        <i class="fa-solid fa-store"></i>
+                        <span>사장님 회원</span>
+                        <p>정리된 예약 목록으로
+                            편하게 고객 관리를 하고
+                            홍보를 하고 싶어요!</p>
+                        <button id="signupStoreBtn">회원가입하기</button>
+                </div>
+                    
+                    
+                <div class="member-container">
+                        <i class="fa-solid fa-person"></i>
+                        <span>일반 회원</span>
+                        <p>맛집을 미리 예약하고 나만의 맛집을 찜하고 싶어요!</p>
+                        <button id="signupCommonBtn">회원가입하기</button>
+                </div>
+                    
+            </div>
+                    
+        </section>
+        
+    </main>
 
     <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 
+
+   <script src="/js/member/signBtn.js"></script>
 
 
 </body>
