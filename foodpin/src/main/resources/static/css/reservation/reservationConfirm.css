@@ -66,6 +66,8 @@
 
 .content-border>.content>a {
     padding-left: 8px;
+    text-decoration: underline;
+    color: #4A4848;
 }
 
 .reserv-decision-info {

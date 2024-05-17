@@ -138,10 +138,16 @@
     margin-top: 30px;
     width: 600px;
     border-bottom: 1px solid #cecece;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .reservation-count {
     margin-bottom: 20px;
+    width: 500px;
 }
 
 .checkbox-area{
@@ -150,16 +156,24 @@
 
 .button-list {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    flex-wrap: wrap;
 }
 
 .button-item {
-    list-style: none;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-.checkbox-element{
-    display: none;
+    width: 100px;
+    height: 45px;
+    margin:10px;
+    
+    border-radius: 5px;
+    border: 1px solid #d6d6d6;
+    font-size: 15px;
+    margin: 5px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .count-number {
@@ -220,13 +234,15 @@
     margin: 10px;
 }
 
-.time_title{
+.time-title{
     margin: 5px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .time-list{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: start;
     align-items: center;
     list-style: none;
     flex-wrap: wrap;
@@ -246,6 +262,11 @@
     margin: 5px;
     cursor: pointer;
     user-select: none;
+}
+
+.select{
+    background-color: #4A4848;
+    color: white;
 }
 
 
