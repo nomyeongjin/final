@@ -129,7 +129,7 @@
     width:600px;
 }
 
-.nav-item {
+.nav-list>a{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,10 +140,11 @@
     background-color:#F5F5F5;
     border-radius: 5px;
     cursor: pointer;
-}
 
-.nav-item:hover{
-    background-color: #4A4848;
+}   
+
+.nav-list>a:hover{
+    background-color: #afafaf;
     color: white !important;
 }
 
