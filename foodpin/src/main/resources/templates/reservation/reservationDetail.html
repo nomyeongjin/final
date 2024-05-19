@@ -53,17 +53,19 @@
                 <div class="nav-div">
                     <nav>
                         <ul class="nav-list">
-                            <li class="nav-item">
-                                <a href="/reservation/reservationDetail">예약하기</a>
-                            </li>
-        
-                            <li class="nav-item">
-                                <a href="/reservation/detail">상세정보</a>
-                            </li>
+                            <a href="/reservation/reservationDetail">
+                                <li class="nav-item">예약하기</li>
+                            </a>
                             
-                            <li class="nav-item">
-                                <a href="#">리뷰 <span class="review-count" name="reviewCount" id="reviewCount">20</span></a>  <!-- count로 리뷰 댓글 수 조회 예정 -->
-                            </li>
+                            <a href="/reservation/detail">
+                                <li class="nav-item">상세정보</li>
+                            </a>
+
+                            <a href="#">
+                                <li class="nav-item">
+                                    리뷰 <span class="review-count" name="reviewCount" id="reviewCount">20</span> <!-- count로 리뷰 댓글 수 조회 예정 -->
+                                </li>
+                            </a> 
                         </ul>
                     </nav>
     
@@ -119,7 +121,9 @@
                         
                         <div class="calendar-container">
                             <i class="fa-solid fa-calendar-days"></i>
-                            <h3 class="title">0.0 (0) 시간을 선택해 주세요</h3>
+                            <h3 class="title">
+                                <th:block>0.0 (0) 시간을 선택해 주세요</th:block>
+                            </h3>
                         </div> <!-- 타임리프로 달력에 선택된 날짜 출력 -->
             
                         <!-- 달력 API 예정 -->
@@ -230,9 +234,14 @@
     <!-- footer.html 추가 -->
     <th:block th:replace="~{common/footer}"></th:block> 
 
+    <script th:inline="javascript">
+        const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원"
+    </script>
+
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
-    <script src="/js/myPage/store/reservation.js"></script>
+    <!-- 마이페이지 JS 추가 -->
+    <script src="/js/myPage/store/my-reservation.js"></script>
     <script src="/js/reservation/reservationDetail.js"></script>
 
 </body>
