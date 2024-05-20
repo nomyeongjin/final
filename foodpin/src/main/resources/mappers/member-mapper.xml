@@ -30,4 +30,12 @@
 		0
 	)
 	</insert>
+	
+	<!-- ID 중복 검사 -->
+	<select id="checkId">
+	SELECT COUNT(*)
+	FROM "MEMBER"
+	WHERE MEMBER_STATUS = 'N'
+	AND MEMBER_ID = #{memberId}
+	</select>
 </mapper>
