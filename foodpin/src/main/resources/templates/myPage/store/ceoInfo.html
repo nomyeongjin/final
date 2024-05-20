@@ -11,11 +11,6 @@
    <link rel="stylesheet" href="/css/myPage/myPage-style.css">
    <link rel="stylesheet" href="/css/myPage/store-myPage.css">
 
-      <!-- 풀캘린더 추가 -->
-      <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
-
-      <!-- 마이페이지 JS 추가 -->
-      <script src="/js/myPage/store/storeOff.js"></script>
 </head>
 <body>
 
@@ -43,26 +38,43 @@
          <div class="myPage-content-container">
             
             <!-- 사장님 정보 수정 폼 -->
-            <form action="#" id="ceoInfoEditFrm" method="POST">
+            <form action="#" method="POST" class="ceo-info-container">
 
                <div class="ceoInfo-input-area">
-                  <label for="memberEmail">이메일</label><input type="text" name="memberEmail" id="memberEmail">
+                  <label for="memberEmail">이메일</label>
+                  <input id="memberEmail" name="memberEmail" value="member05@gmail.com" readonly></input>
                </div>
 
                <div class="ceoInfo-input-area">
-                  <label for="storeTel">전화번호</label><input type="number" name="storeTel" id="storeTel">
+                  <label for="storeTel">전화번호</label>
+                  <input id="storeTel" name="storeTel" value="010-8978-1234" readonly></input>
                </div>
 
+               <!-- 기존 비밀번호 -->
                <div class="ceoInfo-input-area">
-                  <label for="memberPw">비밀번호</label><input type="password" name="memberPw" id="memberPw">
+                  <label for="memberPw">비밀번호</label>
+                  <input id="memberPw"  name="memberPw" class="blind">
                </div>
 
-               <div class="ceoInfo-input-area">
-                  <label for="memberPwCheck">비밀번호 확인</label><input type="password" name="memberPwCheck" id="memberPwCheck">
+               <!-- 변경 비밀번호 -->
+               <div class="ceoInfo-input-area blind">
+                  <label for="newPw"> 변경 비밀번호</label>
+                  <input id="newPw"  name="newPw">
+               </div>
+
+               <!-- 변경 비밀번호 확인 -->
+               <div class="ceoInfo-input-area blind">
+                  <label for="newPwCheck">변경 비밀번호 확인</label>
+                  <input id="newPwCheck" name="newPwCheck">
                </div>
                
-               <button class="update-btn" id="ceoInfoEditBtn">수정</button>
+               <!-- 수정화면에서만 보이는 폼 제출 버튼 -->
+               <button class="update-btn blind" id="UpdateBtn">수정 완료</button>
+
             </form>
+
+            <!-- 수정화면 전환 버튼 -->
+            <button class="update-btn" id="EditBtn">정보 수정</button>
 
          </div>
 
@@ -78,15 +90,9 @@
    <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 
 
-   <!-- 다음 주소 API 추가 -->
-   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-   
-   <!-- 풀캘린더 추가 -->
-   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
-
    <!-- 마이페이지 JS 추가 -->
-   <script src="/js/myPage/store/storeMyPage.js"></script>
-   <script src="/js/myPage/store/storeOff.js"></script>
+   <!-- <script src="/js/myPage/store/storeMyPage.js"></script> -->
+   <script src="/js/myPage/store/ceoInfo.js"></script>
 
 </body>
 </html>
