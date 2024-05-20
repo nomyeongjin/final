@@ -210,7 +210,6 @@
 
 <!-- ************************************************************ -->
 
-
    
      <!-- section 3 가게 정보 -->
      <section class="store-detail">
@@ -224,17 +223,9 @@
   
             <div class="storedetail-opencontainer">
 
-                
-                
-
+            
                     <div class="store-reportcontainer">
-                        <button id="storeReport">
-                        <!-- 팝업 -->
-                        <a href="#storeReport" class="btn_open">🚨 폐점 / 가게 정보 정정 신고</a>
-                            
-                            
-                       
-                        </button>
+                        <button type="button" id="storeReport">🚨 폐점 / 가게 정보 정정 신고</button>
                     </div>
 
                    <!-- ************************************************************** -->
@@ -245,8 +236,51 @@
                             popup layer : 현재 페이지 위에 새로운 레이어를 띄우는 것
                         -->
                                                 <!-- 처음에 숨겨놓기 -->
+
+
+
+                        <form action="#" id="storeReportForm" class="popup-storereport">
+                            <section class="popupbox">
+                            
+                               <div class="store-report-info">
+
+                                    <div class="store-report-text">
+
+                                        <h4 id="storeReportTitle">폐업신고 / 정보수정 제안</h4>
+                                        <span id="popupShut" class="fa-solid fa-xmark"></span>     
+                                        
+                                        <textarea id="reportStoreContent"
+                                        placeholder="수정이 필요한 내용을 적어주세요. &#13; 예) 맛집 이름, 주소, 전화번호 등"></textarea>
+                                        
+                                    </div>
+
+                                    <div class="check-store-div">
+                                        <label class="checkbox">
+                                        <input type="checkbox" value="Y">
+                                        <i class="check-icon"></i>
+                                        &nbsp; 폐업신고
+
+                                        </label>
+                                        <br>
+                                        <span>해당 음식점이 폐업이 되었을 경우 선택해주세요</span>
+
+                                    </div>
+                               </div>
+                               
+                                
+                                <button>보내기</button>
+                                
+                            </section>
+
+                            
+                        </form>
+
+
+                     
                        
-                           
+                       
+
+                                        
 
                    <!-- ************************************************************** -->
                     <div class="store-statuscontainer">
@@ -329,9 +363,11 @@
              <!-- 해시태그(댓글에 달린 해시들) -->
 
             <div class="storedetail-hashtagcontainer">
-                <span>#버거가 친절하고_사장님이 맛있어요</span>
-                <span>#주문 받는 알바가 불친절함</span>
-                <span>#매장 안에 아메바 돌아다닙니다</span>
+                <span>#음식이 맛있어요!</span>
+                <span>#사장님이 친절해요!</span>
+                <span>#재료가 신선해요!</span>
+                <span>#매장이 청결해요!</span>
+                <span>#분위기가 좋아요!</span>
             </div>
 
             
@@ -382,7 +418,7 @@
      
 
 
-<!-- ****************************나중에 합치기*************************** -->
+<!-- **************************** 리뷰 *************************** -->
 
 
      <!-- section 5 가게 리뷰 -->
@@ -410,22 +446,30 @@
                     <div class="storereview-top">
 
 
-                    <div class="storereview-top-left">
-                        <img class="review-member-profile" src="/images/storeDetail/hotdog.jpg" alt="회원 프로필 이미지">
-                        <div class="review-info">
-                            <span>닉네임</span>
-                            
-                            <div class="review-memberScore">
-                                <i class="rating__star far fa-star"></i>
-                                <i class="rating__star far fa-star"></i>
-                                <i class="rating__star far fa-star"></i>
-                                <i class="rating__star far fa-star"></i>
-                                <i class="rating__star far fa-star"></i>
-                                <span> 점수</span>
-                            </div>
+                        <div class="storereview-top-left">
+                            <img class="review-member-profile" src="/images/storeDetail/hotdog.jpg" alt="회원 프로필 이미지">
+                            <div class="review-info">
+                                <span>닉네임</span>
+                                
+                                <div class="review-memberScore">
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <span> 점수</span>
+                                </div>
 
+                            </div>
                         </div>
+
+                        <div class="storereview-top-right">
+                            <button type="button" id="reviewReport">🚨신고하기</button>
+                            <span>2024-05-17</span>
+                        </div>
+
                     </div>
+
                     
                     <div class="storereview-mid">
                         <p>리뷰 내용</p>

@@ -61,7 +61,10 @@ header {
    display: flex;
    flex-direction: column; 
 
-   
+   position: sticky;
+   top: 0;
+   z-index: 1000;
+   background-color: white;
 }
 
 .login-area{
@@ -439,7 +442,7 @@ header>section:nth-child(3) {
    cursor: pointer;
 }
 
-.notification-bell-btn:hover{
+.action, .notification-bell-btn:hover{
    display: flex;
    align-items: center;
    justify-content: center;
@@ -500,21 +503,25 @@ header>section:nth-child(3) {
    padding: 5px 15px;
 }
 
-.all-notification{
-   margin: 15px;
+.all-list{
+   display: flex;
+   margin: 10px 5px;
+   list-style: none;
 }
 
-.all{
+.all a{
    display: flex;
    justify-content: center;
    align-items: center;
-   width: 55px;
    height: 30px;
    border: 1px solid #4173f5;
    border-radius: 50px;
    font-weight: bold;
    color: #4173f5;
    background-color: (65, 115, 245, .1);
+   cursor: pointer;
+   padding: 15px;
+   margin-left: 5px;
 }
 
 .notification-list{
@@ -537,17 +544,25 @@ header>section:nth-child(3) {
 }
 .notification-text{
    display: flex;
-   width: 370px;
+    /* justify-content: center; */
+   flex-direction: column;
+}
+
+.border{
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   position: relative;
+   top: 100px;
+   overflow: auto;
 }
 
 .notification-content-container{
    /* height: 100px; */
-   padding: 10px;
-   height: 100px;
    padding: 15px;
    background-color: white;
    border-radius: 10px;
-   margin-top: 100px;
+   margin-bottom: 10px;
 }
 
 .reservation-info{
@@ -557,14 +572,14 @@ header>section:nth-child(3) {
    height: 30px;
 }
 
-#storeLogo{
+.profile{
    width: 30px;
    height: 30px;
    border-radius: 50%;
    margin-right: 10px;
 }
 
-#notificationDate{
+.notification-date{
    margin-left: 10px;
    font-size: 14px;
    color: #494949;
@@ -589,18 +604,12 @@ header>section:nth-child(3) {
   color: #717171;
 }
 
-.delete-xmark{
+.fa-circle-xmark{
    margin-left: 15px;
    cursor: pointer;
    font-size: 18px;
 }
-
-.delete-xmark:hover{
+.fa-circle-xmark:hover{
    color: red;  
-   user-select: none;
-}
-
-.delete-xmark:active {
-   font-size: 20px;
    user-select: none;
 }
