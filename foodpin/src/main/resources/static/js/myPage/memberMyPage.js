@@ -90,3 +90,26 @@ if(memberChangePw != null) {
     });
 }
 
+
+/* 회원 정보 / 비밀번호 변경 화면 변경 */
+const confirmReservation = document.querySelector("#confirmReservation");
+const waitReservation = document.querySelector("#waitReservation");
+
+const confirmedContainer = document.querySelector("#reservation-confirmed-container")
+const waitContainer = document.querySelector("#reservation-wait-container")
+
+document.addEventListener("DOMContentLoaded", function() {    
+
+    confirmedContainer.style.display = "block";
+    waitContainer.style.display = "none";
+    
+    confirmReservation.addEventListener("click", function() {
+        waitContainer.style.display = "none";
+        confirmedContainer.style.display = "block";
+    });
+
+    waitReservation.addEventListener("click", function() {
+        confirmedContainer.style.display = "none";
+        waitContainer.style.display = "block";
+    });
+});
