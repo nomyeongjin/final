@@ -28,12 +28,12 @@ const getCookie= key =>{
 }
 
 
-const loginEmail = document.querySelector("#loginForm input[name='memberEmail']")
+const loginId = document.querySelector("#loginForm input[name='memberId']")
 
 // 아이디가 loginForm의 후손 중에서 input name이 memberEmail인 요소
 
 // 로그인 안된 상태인 경우에만 수행
-if(loginEmail != null){// 로그인창의 이메일 입력 부분이 있을 때
+if(loginId != null){// 로그인창의 이메일 입력 부분이 있을 때
 
 
     // 쿠키 중 key값이 "saveId"인 요소의 value 얻어오기
@@ -41,7 +41,7 @@ if(loginEmail != null){// 로그인창의 이메일 입력 부분이 있을 때
 
     // saveId 값이 있을 경우
     if(saveId != undefined){
-        loginEmail.value = saveId; // 쿠키에서 얻어온 값을 input에 value로 세팅
+        loginId.value = saveId; // 쿠키에서 얻어온 값을 input에 value로 세팅
 
         document.querySelector("input[name='saveId']").checked = true;
     }

@@ -21,7 +21,7 @@
             <h3 class="title">사장님 회원 가입</h3>
     
     
-            <form action="member/signupStore" method="POST" name="signUpForm" id="signUpForm" class="signUp-content">
+            <form action="signupStore" method="POST" name="signUpForm" id="signUpForm" class="signUp-content">
                 
                 <div class="form-section">
                     인정사항
@@ -77,6 +77,16 @@
                     </div>
                     <span class="signUp-message" id="authKeyMessage"></span>
                     
+                    <!-- 이름 입력 -->
+                    <label for="memberName">
+                        <span class="required">*</span> 
+                        <span class="required">이름</span> 
+                    </label>
+        
+                    <div class="signUp-input-area">
+                        <input type="text" name="memberName" id="memberName" placeholder="이름" maxlength="10" >
+                    </div>
+
                     <label for="memberEmail">
                         <span class="required">이메일</span> 
                     </label>
