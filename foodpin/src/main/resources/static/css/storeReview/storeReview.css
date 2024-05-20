@@ -116,7 +116,7 @@
 .rating__star {
   font-size: 1.4em;
   cursor: pointer;
-  color: #ff5500;
+  color: #ff2a00;
   transition: filter linear .3s;
 }
 
@@ -374,6 +374,9 @@
 .menu-list > table > tbody > tr > td:first-child{
   width: 100px;
 }
+
+
+
 .menu-list > table > tbody > tr > td:first-child > img{
   border: 1px solid #ccc;
   width: 88px;
@@ -383,6 +386,11 @@
 
 .menu-list > table > tbody > tr > td:nth-child(2) {
   padding-left: 20px;
+  display: flex;
+  justify-content: center !important;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-top: 22px;
 }
 
 .menu-list > table > tbody > tr > td:nth-child(2) > p:first-child{
@@ -412,6 +420,11 @@
 
   padding: 35px;
   padding-top: 20px;
+}
+
+.button-area > button:active{
+  background-color: #6f6f6f;
+  border: 1px solid #6f6f6f;
 }
 
 .select-button{
