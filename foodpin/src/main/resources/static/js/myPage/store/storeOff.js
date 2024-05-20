@@ -37,22 +37,16 @@ function calendar_rendering() {
  * 요일 버튼 생성
  * @param {*} weekList 
  */
-// const createBtn = (weekList) => {
+const createBtn = (weekList) => {
 
-//    for(let week of weekList) {
+   for(let week of weekList) {
 
-//       console.log(week);
+      console.log(week);
       
-//       // const weekLi = document.createElement("li");
-//       // weekLi.innerText = week + "요일";
-//       // ul.append(weekLi);
+      
 
-//       // const btn = document.createElement("button");
-//       // weekBtn.innerText = week + "요일";
-//       // weekRow.append(weekBtn);
-
-//    }
-// }
+   }
+}
 // --------------------------------------
 
 
@@ -82,10 +76,10 @@ dayoffBtn.addEventListener("click", () => {
 
    // weekList = ['월', '화', '수', '목', '금', '토', '일'];s
 
-   // const weekOffContainer = document.createElement("div"); // div 생성
-   // weekOffContainer.classList.add("off-container");
+   const weekOffContainer = document.createElement("div"); // div 생성
+   weekOffContainer.classList.add("off-container");
 
-   // const ul = document.createElement("ul"); // div 생성
+   const ul = document.createElement("ul"); // div 생성
    // // weekRow.classList.add("#");
 
    // createBtn(weekList);
