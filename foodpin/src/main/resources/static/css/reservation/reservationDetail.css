@@ -388,7 +388,22 @@
     cursor: pointer;
 }
 
-.fc-day-today{background-color: (255,220,40,.15);}
+/* .disabled{
+    background-color: #cecece;
+    color:#4A4848
+} */
+
+.selecDate{
+    background-color: #db9494;
+}
+
+.fc-theme-standard {
+    cursor: pointer;
+}
+
+#fc-dom-56 {
+    color: red;
+}
 .fc-direction-ltr .fc-daygrid-event.fc-event-end, 
 .fc-direction-rtl .fc-daygrid-event.fc-event-start {
     display: none;
