@@ -29,6 +29,7 @@
 
 form[name='member-myPageFrm']{
     position: relative;
+    /* left: 50px; */
 }
 
 #profileImg {
@@ -55,6 +56,8 @@ form[name='member-myPageFrm']{
 }
 
 .updateInfo {
+    position: relative;
+    left: 35px;
     width: 300px;
     padding: 10px;
     border-radius: 10px;
@@ -68,6 +71,8 @@ form[name='member-myPageFrm']{
 }
 
 .profile-input-area {
+    position: relative;
+    right: 55px;
     margin-top: 50px;
     height: 150px;
     font-size: 18px;
@@ -110,6 +115,11 @@ form[name='member-myPageFrm']{
 }
 
 /* MEMBER CHANGE PW */
+#changePwContainer {
+    position: relative;
+    top: 30px;
+}
+
 .member-changePw-row > input[type='password']{
     width: 70%;
     height: 100%;
@@ -147,6 +157,8 @@ form[name='member-myPageFrm']{
 }
 
 .member-changePw-submit {
+    position: relative;
+    left: 70px;
     width: 300px;
     padding: 10px;
     margin: 50px 0;
@@ -201,6 +213,7 @@ form[name='member-myPageFrm']{
 }
 
 .like {
+    margin-right: 50px;
     position: absolute;
     right: 0;
     top: 16px;
@@ -319,11 +332,12 @@ form[name='member-myPageFrm']{
  
 /* form태그 */
 form[name='myPageFrm']{
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 0 20px 20px 20px;
+    /* left: 50px; */
+    margin: 0 0 20px 0;
     padding: 20px;
     box-sizing: border-box;
 }
