@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
     calendar.render();
 });
 
+const dateBgColor = document.querySelector(".fc .fc-daygrid-day.fc-day-today");
+const selectDate = document.querySelector(".fc-theme-standard");
+
+
+
 
 const storereservationbutton = document.querySelector("#storereservationbutton");
 
@@ -30,51 +35,55 @@ if(storereservationbutton != null) {
 // 예약 주의 사항
 const noticeTitle = document.querySelector(".notice-title"); // button
 
-noticeTitle.addEventListener("click", () => {
-    const noticeInnerDetail = document.querySelector(".notice-inner-detail");
+if(noticeTitle !=null) {
+    noticeTitle.addEventListener("click", () => {
+        const noticeInnerDetail = document.querySelector(".notice-inner-detail");
 
-    noticeInnerDetail.classList.toggle("show-box");
-});
+        noticeInnerDetail.classList.toggle("show-box");
+    });
+}
 
 //---------------------------
 
 // 예약 인원 수 체크
 const buttonItem = document.querySelectorAll(".button-item");
 
-for(let li of buttonItem) {
+if(buttonItem != null) {
+    for(let li of buttonItem) {
 
-    li.addEventListener("click", () =>{
-        for(let item of buttonItem){item.classList.remove("select");}
-        li.classList.add("select");
-        console.log(li);
-    });
-};
+        li.addEventListener("click", () =>{
+            for(let item of buttonItem){item.classList.remove("select");}
+            li.classList.add("select");
+        });
+    };
+}
 
 // 예약 날짜 체크
 const timeItem = document.querySelectorAll(".time-item");
-
-for(let li of timeItem){
-    li.addEventListener("click", () => {
-        for(let item of timeItem){item.classList.remove("select");}
-        li.classList.add("select");
-    });
-};
+if(timeItem != null) {
+    for(let li of timeItem){
+        li.addEventListener("click", () => {
+            for(let item of timeItem){item.classList.remove("select");}
+            li.classList.add("select");
+        });
+    };
+}
 
 // ------------------------------------------
 
-/* 다음 페이지 클릭 할 때 로그인 검사 */
-
+// 처음 예약 페이지에서 '다음' 버튼 클릭 시 로그인 여부 확인 
 const nextBtn = document.querySelector(".next-btn");
-nextBtn.addEventListener("click", e => {
-    if(loginMember == null) {
-        alert("로그인 후 이용해 주세요");
-        e.preventDefault();
-        return;
-    }
+if(nextBtn != null){
+    nextBtn.addEventListener("click", e => {
+        if(loginMember == null) {
+            alert("로그인 후 이용해 주세요");
+            e.preventDefault();
+            return;
+        }
+    });
+}
 
-
-});
-
+/* 다음 페이지 클릭 할 때 체크박스 검사 */
 const confirmBtn = document.querySelector("#confirmBtn");
 confirmBtn.addEventListener("click", e => {
 
@@ -89,10 +98,11 @@ confirmBtn.addEventListener("click", e => {
 
 });
 
+
+
 /* *** 예약 인원, 날짜 체크 *** */
 // const detailObj = {
 //     "reservCount": reservCount,
 
 // }
-
 
