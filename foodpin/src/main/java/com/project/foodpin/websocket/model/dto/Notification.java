@@ -18,4 +18,7 @@ public class Notification {
 	private int sendMemberNo;
 	private int receiveMemberNo;
 	
+	private String notifiactionType;
+	private String title;
+	private int pkNo;
 }

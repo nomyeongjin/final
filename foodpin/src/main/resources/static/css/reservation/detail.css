@@ -231,7 +231,7 @@
     justify-content: space-around;
 }
 
-#cancelBtn{
+.cancel-btn{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -245,7 +245,16 @@
     cursor: pointer;
 }
 
-#nextBtn{
+.cancel-btn:hover{
+    color: red;
+    border: 1px solid red;
+}
+
+.next-btn:hover{
+    border: 1px solid black;
+}
+
+.next-btn{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -258,13 +267,4 @@
     color: white;
     border-radius: 5px;
     cursor: pointer;
-}
-
-#cancelBtn:hover{
-    color: red;
-    border: 1px solid red;
-}
-
-#nextBtn:hover{
-    border: 1px solid black;
 }

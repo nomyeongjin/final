@@ -56,7 +56,6 @@ a {
 /* ***** header ***** */
 /* ------------------ */
 header {
-   margin: 10px;
    height: 130px;
    display: flex;
    flex-direction: column; 
@@ -489,7 +488,7 @@ header>section:nth-child(3) {
 }
 
 .title {
-   font-size: 18px;
+   font-size: 20px;
    font-weight: bold;
 }
 
