@@ -16,7 +16,10 @@
             <!-- 비동기?? -->
             <nav class="all-notification">
                <ul class="all-list">
-                    <li class="all"><a href="#">전체</a></li>
+                    <li class="all">
+                        <a href="#">전체</a>
+                    </li>
+                   
                </ul>
             </nav>
 
@@ -52,6 +55,7 @@
             </ul>
 
         </div>
+        
         <!-- memberCode == 2 -->
         <div class="notification-view" th:if="${session.loginMember?.memberCode==2}">   
 
@@ -62,10 +66,21 @@
             <!-- 비동기?? -->
             <nav class="all-notification">
                <ul class="all-list">
-                    <li class="all"><a href="#">전체</a></li>
-                    <li class="all"><a href="#">리뷰</a></li>
-                    <li class="all"><a href="#">예약 취소</a></li>
-                    <li class="all"><a href="#">신고</a></li>
+                    <li class="all">
+                        <a href="#">전체</a>
+                    </li>
+
+                    <li class="all">
+                        <a href="#">리뷰</a>
+                    </li>
+
+                    <li class="all">
+                        <a href="#">예약 취소</a>
+                    </li>
+
+                    <li class="all">
+                        <a href="#">신고</a>
+                    </li>
                 </ul>
             </nav>
 
@@ -112,8 +127,13 @@
             <!-- 비동기?? -->
             <nav class="all-notification">
                <ul class="all-list">
-                    <li class="all"><a href="#">전체</a></li>
-                    <li class="all"><a href="#">신고</a></li>
+                    <li class="all">
+                        <a href="#">전체</a>
+                    </li>
+
+                    <li class="all">
+                        <a href="#">신고</a>
+                    </li>
                </ul>
             </nav>
 

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -24,8 +25,13 @@ public class ReservationController {
 	// ----------------- 화면 전환 -------------------
 	
 	@GetMapping("reservationDetail")
-	public String reservationDetail() {
+	public String reservationDetail(
+			Model model,
+			Store store) {
+		
+		
 		return "reservation/reservationDetail";
+//		return service.selectStoreList(store);
 	}
 	
 	@GetMapping("reservationCheck")

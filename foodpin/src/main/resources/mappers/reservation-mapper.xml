@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.project.foodpin.reservation.model.mapper.ReservationMapper">
 
+	<select id="selectStoreList">
+		SELECT *
+		FROM "STORE"
+		WHERE STORE_NO=#{storeNo};
+	</select>
+
 </mapper>

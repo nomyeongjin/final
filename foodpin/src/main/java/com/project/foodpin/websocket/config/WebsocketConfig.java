@@ -21,6 +21,13 @@ public class WebsocketConfig implements WebSocketConfigurer{
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		
+		// 알림 처리하는 핸들러와 주소 연결
+		registry
+			.addHandler(notificationWebsocketHandler, "/notification")
+			.addInterceptors(handshakeInterceptor)
+			.setAllowedOriginPatterns("http://localhost/", "http://127.0.0.1/", "http://192.168.10.31/")
+			.withSockJS();
+		
 	}
 	
 
