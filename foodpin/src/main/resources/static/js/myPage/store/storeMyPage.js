@@ -1,7 +1,7 @@
 /* 다음 주소 API 활용 */
 function execDaumPostcode() {
-   new daum.Postcode({
-     oncomplete: function (data) {
+  new daum.Postcode({
+    oncomplete: function (data) {
        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
  
        // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -32,10 +32,10 @@ function execDaumPostcode() {
 /* ----------- 휴무일 변경 --------------- */
 /* -------------------------------------- */
 
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth'
-  });
-  calendar.render();
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//   var calendarEl = document.getElementById('calendar');
+//   var calendar = new FullCalendar.Calendar(calendarEl, {
+//     initialView: 'dayGridMonth'
+//   });
+//   calendar.render();
+// });
