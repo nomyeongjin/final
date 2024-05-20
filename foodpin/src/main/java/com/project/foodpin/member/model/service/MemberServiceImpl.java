@@ -64,6 +64,9 @@ public class MemberServiceImpl implements MemberService{
 		return loginMember;
 	}
 	
+	/** 일반 회원가입
+	 *
+	 */
 	@Override
 	public int signupCommon(Member inputMember) {
 
@@ -75,6 +78,15 @@ public class MemberServiceImpl implements MemberService{
 		
 		return mapper.signupCommon(inputMember);
 	}
+	
+	/** ID 중복 검사
+	 *
+	 */
+	@Override
+	public int checkId(String memberId) {
+		return mapper.checkId(memberId);
+	}
+	
 	
 	
 	

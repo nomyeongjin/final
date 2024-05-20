@@ -19,4 +19,10 @@ public interface MemberMapper {
 	 */
 	int signupCommon(Member inputMember);
 
+	/** ID 중복 검사
+	 * @param memberId
+	 * @return
+	 */
+	int checkId(String memberId);
+
 }
