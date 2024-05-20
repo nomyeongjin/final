@@ -8,22 +8,26 @@ import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.member.model.mapper.MemberMapper;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Transactional
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MemberServiceImpl implements MemberService{
 
 	private final MemberMapper mapper;
 	
 	// BCrypt 암호화 객체 의존성 주입(SecurityConfig 참고)
-	private BCryptPasswordEncoder bcrypt;
+	private final BCryptPasswordEncoder bcrypt;
 	
 	// 로그인 서비스
 	@Override
 	public Member login(Member inputMember) {
 
 
+		log.debug( inputMember.getMemberPw() + " / " + bcrypt.encode( inputMember.getMemberPw()));
+		
 		// 1. 아이디가 일치하면서 탈퇴하지 않은 회원 조회
 		Member loginMember = mapper.login(inputMember.getMemberId());
 		
@@ -60,6 +64,17 @@ public class MemberServiceImpl implements MemberService{
 		return loginMember;
 	}
 	
+	@Override
+	public int signupCommon(Member inputMember) {
+
+		// 비밀번호를 암호화 하여 inputMember에 세팅
+		String encPw = bcrypt.encode(inputMember.getMemberPw());
+		inputMember.setMemberPw(encPw);
+		
+
+		
+		return mapper.signupCommon(inputMember);
+	}
 	
 	
 	

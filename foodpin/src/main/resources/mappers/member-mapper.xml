@@ -10,6 +10,24 @@
 					TO_CHAR(ENROLL_DATE,'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') ENROLL_DATE
 			FROM MEMBER
 			WHERE MEMBER_ID = #{memberId}
-			AND MEMBER_STATUS = 'Y'
+			AND MEMBER_STATUS = 'N'
 	</select>
+	
+	<!-- 일반 회원가입 -->
+	<insert id="signupCommon">
+	INSERT INTO "MEMBER"
+	VALUES(SEQ_MEMBER_NO.NEXTVAL,
+		DEFAULT,
+		#{memberId},
+		#{memberEmail},
+		#{memberName},
+		#{memberNickname},
+		#{memberPw},
+		#{memberTel},
+		'/images/user.png',
+		DEFAULT,
+		DEFAULT,
+		0
+	)
+	</insert>
 </mapper>

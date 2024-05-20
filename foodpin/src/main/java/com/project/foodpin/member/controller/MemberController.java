@@ -163,32 +163,33 @@ public class MemberController {
 	 * @param ra : 리다이렉트 시 request scope로 데이터 전달하는 객체
 	 * @return
 	 */
-//	@PostMapping("signupCommon")
-//	public String signupCommon(
-//			Member inputMember,
-//			@RequestParam("memberAddress") String[] memberAddress,
-//			RedirectAttributes ra
-//			) {
-//		
-//		// 회원 가입 서비스 호출
-//		int result = service.signupCommon(inputMember, memberAddress);
-//		
-//		String path = null;
-//		String message = null;
-//		
-//		if(result>0) {
-//			message = inputMember.getMemberNickname()+" 님의 가입을 환영합니다.🤗";
-//			path = "/";
-//		}
-//		else {
-//			message = "회원 가입에 실패했습니다.";
-//			path = "signupCommon";
-//		}
-//		
-//		ra.addFlashAttribute("message",message);
-//		
-//		return "redirect:"+path;
-//	}
+	@PostMapping("signupCommon")
+	public String signupCommon(
+			Member inputMember,
+			RedirectAttributes ra
+			) {
+		
+		// 회원 가입 서비스 호출
+		int result = service.signupCommon(inputMember);
+		
+		log.debug("inputMember"+inputMember);
+		
+		String path = null;
+		String message = null;
+		
+		if(result>0) {
+			message = inputMember.getMemberNickname()+" 님의 가입을 환영합니다.🍴";
+			path = "/member/login";
+		}
+		else {
+			message = "회원 가입에 실패했습니다.";
+			path = "/member/signupCommon";
+		}
+		
+		ra.addFlashAttribute("message",message);
+		
+		return "redirect:"+path;
+	}
 	
 	
 }
