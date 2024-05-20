@@ -286,7 +286,7 @@
                     <div class="store-statuscontainer">
                         <div class="store-opentime">
                             <span>영업시간</span>
-                            <span>11:00 ~ 22:00</span>
+                            <span id="storeOpenTime">11:00 ~ 22:00</span>
                         </div>
                     
                         <div class="store-statusbox">
@@ -295,14 +295,69 @@
                         </div>
                     </div>
 
-                    <div class="store-today">
+                    <div class="store-date"> <!-- text 바깥 영역 -->
                         <!-- 오늘 날짜 조회 -->
-                        <span>
-                            [오늘] 05.09(목)
-                        </span>
+
+                        <div class="store-date-list-container">   <!-- 내용 들어갈 곳 -->
+
+                            <div class="date-statusinfo"> 
+
+                                <span>
+                                    [오늘] 05.20(월)
+                                </span>
+                                 
+                            </div>
+    
+                            <div class="date-statusdetail">
+    
+                                <span>영업시간 06:00 ~ 21:30</span>
+    
+                                <span>라스트오더 21:00</span>
+    
+                            </div>
+
+                            
+                         
+                            
+                        </div>
+
+                    
+
+                        <div class="store-date-list-container">
+
+                            <div class="date-statusinfo">
+
+                                <span>
+                                        05.21(화)
+                                </span>
+                                 
+                            </div>
+    
+                            <div class="date-statusdetail">
+    
+                                <span>영업시간 06:00 ~ 21:30</span>
+    
+                                <span>라스트오더 21:00</span>
+    
+                            </div>
+
+
+                            
+                           
+                            
+                        </div>
+
+                      
+                        <div class="more-schedule-info-box">
+                            <button id="moreScheduleInfoBtn">더보기</button>
+                            <button id="shutScheduleInfoBtn">접기</button>
+                        </div>
+            
+                       
 
                     </div>
-        
+
+                    
     
             </div>
              <!-- 바텀 선 css 주기 -->

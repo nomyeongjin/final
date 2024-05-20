@@ -68,7 +68,7 @@ body{
 
 
 .storeSearch-header{
-   width:63px; 
+ 
    background-color: white; 
    border-right: 1px solid var(--main-color);
    display: flex;
@@ -81,17 +81,18 @@ body{
 #searchHeader{
 
    width: 63px;
+   height: 100vh;
 
 }
 .search-logobox{
    width: 63px;
-   height: 76px;
+   height: 10%;
 
    display: flex;
    justify-content: center;
    align-items: center;
 
-   border-bottom: 1px solid var(--main-color);
+  /*  border-bottom: 1px solid var(--main-color); */
   
 }
 #searchLogo{
@@ -104,7 +105,17 @@ body{
 /* nav bar */
 
 .search-navbar{
+   
    width: 63px;
+   height: 90%;
+   align-items: center;
+   justify-content: space-between;
+   display: flex;
+   flex-direction: column;
+}
+
+.search-navbar ul{
+ border-top: 1px solid var(--main-color);
 }
 
 .search-navbar li{
@@ -113,7 +124,7 @@ body{
 }
 .search-navbar li::before{
    list-style: none;
-   /* height: 66px; */
+
 }
 
 .navbar-button{
@@ -123,12 +134,12 @@ body{
    background-color: white;
    color: black;
    border: none;
-   width: 62px;
+   width: 63px;
    height: 50px;/* 나중에 이미지 가져오고 바꾸기 */
 
 }
 
-.navbar-button:hover{
+.navbar-button:hover {
    color: white;
    background-color: rgb(76, 76, 76);
    
@@ -148,6 +159,27 @@ body{
    letter-spacing: -0.44px;
 }
 
+i{
+   font-size: 20px;
+   color: rgb(76, 76, 76);
+}
+
+
+
+.navbar-button a{
+  text-decoration: none;
+  color: black;
+}
+.navbar-button:hover a{
+  
+  color: white;
+}
+.navbar-button:hover i{
+  
+  color: white;
+}
+
+
 
 .sidebar-menu{
    display: flex;
@@ -158,11 +190,9 @@ body{
 }
 
 .search-container{
-   position:absolute;
+   position: absolute;
    z-index: 100;
-   width: 340px;
    padding: 15px 25px;
-  
 }
 
 .search-container .search-wrap{
@@ -173,6 +203,7 @@ body{
 
    position: relative;
    z-index: 110;
+   width: 340px;
    height: 46px;
    border-radius: 5px;
    border: 2px solid var(--main-color);
