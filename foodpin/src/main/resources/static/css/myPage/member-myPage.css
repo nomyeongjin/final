@@ -121,7 +121,7 @@ form[name='member-myPageFrm']{
 }
 
 .member-changePw-row > input[type='password']{
-    width: 70%;
+    width: 80%;
     height: 100%;
     border: none;
     outline: none;

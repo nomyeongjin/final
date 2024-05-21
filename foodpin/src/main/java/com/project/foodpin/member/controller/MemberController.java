@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -189,6 +190,18 @@ public class MemberController {
 		ra.addFlashAttribute("message",message);
 		
 		return "redirect:"+path;
+	}
+	
+	/** 이메일 중복 검사
+	 * @param memberEmail
+	 * @return 중복 1, 아니면 0
+	 */
+	@ResponseBody // 응답 본문(요청한 fetch())로 돌려보냄
+	@GetMapping("checkId")
+	public int checkEmail(
+			@RequestParam("memberId") String memberId
+			) {
+		return service.checkId(memberId);
 	}
 	
 	

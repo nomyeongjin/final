@@ -33,7 +33,7 @@
                     </section>
          
                     <section id="infoContainer">
-                        <form action="info" method="POST" name="member-myPageFrm" id="updateProfile" enctype="multipart/form-data">
+                        <form action="memberInfo" method="POST" name="member-myPageFrm" id="updateInfo" enctype="multipart/form-data">
                             <div class="profile-img-area">
                                 <input type="file" id="profileInput" style="display: none;" accept="image/*">
                                 <img src="https://flexible.img.hani.co.kr/flexible/normal/970/739/imgdb/original/2020/0507/20200507502335.jpg"
@@ -46,11 +46,15 @@
                             <div class="profile-input-area">
                                 <div class="member-myPage-row">
                                     <label>닉네임</label> 
-                                    <input type="text" name="memberNickname" id="memberNickname" maxlength="10">
+                                    <input type="text" name="memberNickname" 
+                                     id="memberNickname" maxlength="10"
+                                     th:value="${session.loginMember.memberNickname}">
                                 </div>
                                 <div class="member-myPage-row">
                                     <label>전화번호</label> 
-                                    <input type="number" name="memberTel" id="memberTel" maxlength="11">
+                                    <input type="text" name="memberTel" 
+                                     id="memberTel" maxlength="11"
+                                     th:value="${session.loginMember.memberTel}">
                                 </div>
                                 
                             </div>

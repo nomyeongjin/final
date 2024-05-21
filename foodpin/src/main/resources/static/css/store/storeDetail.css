@@ -379,7 +379,7 @@ aside>a:hover{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
 }
 
 .store-opentime{
@@ -388,6 +388,7 @@ aside>a:hover{
     display: flex;
 
 }
+
 .store-statuscontainer span{
     font-size: 20px;
     font-weight: bold;
@@ -395,20 +396,83 @@ aside>a:hover{
     margin: 5px 0px;
 
 }
+#storeOpenTime{
+    font-size: 16px;
+    
+}
 
 #storeStatusText{
     color: rgb(26, 180, 232);
 }
 
-.store-today{
-    margin-bottom: 50px;
-    font-weight: bold;
-    color: rgb(46, 41, 41);
+/* *********************************** */
+
+.store-date{
+   
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+  
+}
+
+.store-date-list-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    color:rgb(46, 41, 41); 
+    
+    overflow: hidden;
+    
+}
+
+/* 가게 영업 시간 더보기 */
+
+#moreScheduleInfoBtn{
+    cursor: pointer;
+    width: 50px;
+    border: 1px solid var(--main-color);
+    border-radius: 10px;
+    color: rgb(46, 41, 41);  
+    background-color: white; 
+}
+
+#shutScheduleInfoBtn{
+    cursor: pointer;
+    width: 50px;
+    border: 1px solid var(--main-color);
+    border-radius: 10px;
+    color: rgb(46, 41, 41);  
+    background-color: white; 
+    display: none;
+}
+
+/* *********************************** */
+
+
+.date-statusdetail{
+    display: flex;
+    flex-direction: column;  
+    align-items: flex-end;
+}
+
+.date-statusdetail span{
+    margin-bottom: 10px;
 }
 
 .storedetail-opencontainer{
     border-bottom: 1px solid var(--main-color);
 }
+
+
+
+
+.more-schedule-info-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-bottom: 15px;
+}
+
 
 
 /* 메뉴 컨테이너 */
@@ -559,7 +623,7 @@ aside>a:hover{
 }
 
 .rating__star{
-    color: #ff5500;
+    color: #ff2a00;
 }
 
 .review-member-profile{

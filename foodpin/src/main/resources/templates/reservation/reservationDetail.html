@@ -34,7 +34,7 @@
                     <div class="content-container">
                         <i class="fa-solid fa-message"></i>
                         <span class="content" name="storeInfo" id="storeId">
-                            가게 정보 어쩌구 저쩌구 
+                            <th:block th:text="${storeInfo}">가게 정보 어쩌구 저쩌구 </th:block>
         
                             <a class="more" href="/reservation/detail">더보기<i class="fa-solid fa-chevron-down fa-rotate-270"></i></a> <!-- 상세 정보로 넘어감 -->
                         </span>
@@ -95,17 +95,17 @@
             
                            <ul class="button-list">
                            
-                                <li class="button-item">1명</li>
+                                <li class="button-item" name="reservCount">1명</li>
                                 
-                                <li class="button-item">1명</li>
+                                <li class="button-item" name="reservCount">1명</li>
                                 
-                                <li class="button-item">1명</li>
+                                <li class="button-item" name="reservCount">1명</li>
                                 
-                                <li class="button-item">1명</li>
+                                <li class="button-item" name="reservCount">1명</li>
                                 
-                                <li class="button-item">1명</li>
+                                <li class="button-item" name="reservCount">1명</li>
                                 
-                                <li class="button-item">1명</li>
+                                <li class="button-item" name="reservCount">1명</li>
                                 
                            </ul>
             
@@ -122,7 +122,7 @@
                         <div class="calendar-container">
                             <i class="fa-solid fa-calendar-days"></i>
                             <h3 class="title">
-                                <th:block>0.0 (0) 시간을 선택해 주세요</th:block>
+                                <span id="selectDate" th:text="#{fc-dom-56}">0.0 (0)</span>시간을 선택해 주세요
                             </h3>
                         </div> <!-- 타임리프로 달력에 선택된 날짜 출력 -->
             
@@ -222,8 +222,8 @@
             <section class="button-area">
     
                 <div class="buttons">
-                    <a href="/store/storeDetail"  id="cancelBtn">취소</a>
-                    <a href="/reservation/reservationCheck" id="nextBtn">다음</a>
+                    <a href="/store/storeDetail"  class="cancel-btn">취소</a>
+                    <a href="/reservation/reservationCheck" class="next-btn" id="nextCheckBtn" disabled>다음</a>
                 </div>
     
             </section>
@@ -236,13 +236,14 @@
 
     <script th:inline="javascript">
         const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원"
+
+        const memberCode = /*[[session.loginMember?.memberCode]]*/ "회원코드"
     </script>
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
     <!-- 마이페이지 JS 추가 -->
-    <script src="/js/myPage/store/my-reservation.js"></script>
-    <script src="/js/reservation/reservationDetail.js"></script>
+    <script src="/js/reservation/reservation.js"></script>
 
 </body>
 </html> 

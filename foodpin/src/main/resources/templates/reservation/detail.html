@@ -34,7 +34,7 @@
                     <div class="content-container">
                         <i class="fa-solid fa-message"></i>
                         <span class="content">
-                            가게 정보 어쩌구 저쩌구 
+                            <th:block th:text="${storeInfo}">가게 정보 어쩌구 저쩌구 </th:block>
         
                             <a class="more" href="#">더보기<i class="fa-solid fa-chevron-down fa-rotate-270"></i></a> <!-- 상세 정보로 넘어감 -->
                         </span>
@@ -139,8 +139,8 @@
             <section class="button-area">
     
                 <div class="buttons">
-                    <a href="/store/storeDetail"  id="cancelBtn">취소</a>
-                    <a href="/reservation/reservationCheck" id="nextBtn">다음</a>
+                    <a href="/store/storeDetail" class="cacel-btn"  id="cancelBtn">취소</a>
+                    <a href="/reservation/reservationCheck" class="next-btn" id="nextBtn">다음</a>
                 </div>
     
             </section>
@@ -154,7 +154,7 @@
     <script src="/js/store/storeDetail.js"></script>
 
     <script src="/js/reservation/reservationDetail.js"></script> 
-    <script src="/js/reservation/detail.js"></script> 
+    <!-- <script src="/js/reservation/detail.js"></script>  -->
     
 </body>
 </html> 

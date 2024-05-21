@@ -350,7 +350,7 @@
     justify-content: space-around;
 }
 
-#cancelBtn{
+.cancel-btn{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -364,16 +364,16 @@
     cursor: pointer;
 }
 
-#cancelBtn:hover{
+.cancel-btn:hover{
     color: red;
     border: 1px solid red;
 }
 
-#nextBtn:hover{
+.next-btn:hover{
     border: 1px solid black;
 }
 
-#nextBtn{
+.next-btn{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -388,6 +388,23 @@
     cursor: pointer;
 }
 
-.point{
-    background-color: (255,220,40,.15);
+/* .disabled{
+    background-color: #cecece;
+    color:#4A4848
+} */
+
+.selecDate{
+    background-color: #db9494;
+}
+
+.fc-theme-standard {
+    cursor: pointer;
+}
+
+#fc-dom-56 {
+    color: red;
+}
+.fc-direction-ltr .fc-daygrid-event.fc-event-end, 
+.fc-direction-rtl .fc-daygrid-event.fc-event-start {
+    display: none;
 }
