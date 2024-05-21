@@ -115,7 +115,7 @@ function executeRating(stars, result) {
 }
 
 function printRatingResult(result, num = 0) {
-  result.textContent = `${num} 점`;
+  result.textContent = num;
 }
 
 executeRating(ratingStars, ratingResult);
@@ -152,14 +152,6 @@ reviewForm.addEventListener("submit", e => {
     return;
   }
   
-  // const starResult = document.querySelector(".ratting__result");
-  // if(starResult.innerText.trim() === '0 점'){
-  //   alert("별점을 입력해주세요");
-  //   selectMenu.focus();
-  //   e.preventDefault();
-  //   return;
-  // }
-
   const hashChecked = document.querySelectorAll(".keyword-checkbox:checked");
   if(hashChecked.length == 0) {
     alert("해시태그를 선택해주세요.");
@@ -170,12 +162,10 @@ reviewForm.addEventListener("submit", e => {
 
   if(reviewContent.value.trim().length == 0 ){
     alert("리뷰를 작성해주세요")
-    reviewContent.focus();
-    e.preventDefault
+    e.preventDefault();
     return;
   }
 
-  e.preventDefault();
 });
 
 

@@ -3,9 +3,10 @@
 <mapper namespace="com.project.foodpin.reservation.model.mapper.ReservationMapper">
 
 	<select id="selectStoreList">
-		SELECT *
+		SELECT STORE_NO, STORE_NAME, STORE_INFO, STORE_LOCATION, STORE_STATUS, STORE_MAX_NUMBER, STORE_TEL, OPEN_HOUR, CLOSE_HOUR,
+				BREAKTIME_START, BREAKTIME_END, STORE_CLOSED, STORE_IMG, TOTAL_RATING, STORE_MAX_TABLE, MEMBER_NO
 		FROM "STORE"
-		WHERE STORE_NO=#{storeNo};
+		WHERE STORE_NO=#{storeNo}
 	</select>
 
 </mapper>

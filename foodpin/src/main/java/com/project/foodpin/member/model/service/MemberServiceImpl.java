@@ -1,5 +1,7 @@
 package com.project.foodpin.member.model.service;
 
+import java.util.Map;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -87,9 +89,58 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.checkId(memberId);
 	}
 	
+	/** 인증번호 DB 저장
+	 *
+	 */
+	@Override
+	public int saveAuthKey(Map<String, Object> map) {
+		return mapper.saveAuthKey(map);
+	}
+	
+	/** 같은 전화번호 인증번호 DB에서 수정
+	 *
+	 */
+	@Override
+	public int updateAuthKey(Map<String, Object> map) {
+		return mapper.updateAuthKey(map);
+	}
+	
+	/** DB에 신청 전화번호와 입력한 인증번호가 있는지
+	 *
+	 */
+	@Override
+	public int checkAuthKey(Map<String, Object> map) {
+		return mapper.checkAuthKey(map);
+	}
 	
 	
-	
-	
+	@Override
+	public int signupStore(Member inputMember, String[] storeLocation) {
+		
+		String address = String.join("^^^", storeLocation);
+		
+		inputMember.setStoreLocation(address);
+		
+		// 비밀번호를 암호화 하여 inputMember에 세팅
+		String encPw = bcrypt.encode(inputMember.getMemberPw());
+		inputMember.setMemberPw(encPw);
+		
+		// 회원 정보 먼저 DB에 저장
+		int result = mapper.signupStore(inputMember);
+		
+		if(result!=0) { // 회원 정보 DB에 저장되면
+			
+			// 회원 번호 가져오기
+			int memberNo = mapper.findMemberNo(inputMember);
+			inputMember.setMemberNo(memberNo);
+			
+			result = mapper.signupStoreInfo(inputMember);
+			
+			
+		}
+		
+		
+		return result;
+	}
 	
 }

@@ -29,6 +29,16 @@ public class Member {
 	private String memberStatus;
 	private int memberFlag;
 	
+
 	private int bookmarkCheck;
+
+	// 회원가입시 필요한 가게 정보
+	private String storeNo;
+	private String storeName;
+	private String storeLocation;
+	private String storeTel;
+	private String openHour;
+	private String closeHour;
+
 	
 }
