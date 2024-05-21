@@ -20,5 +20,22 @@
 		MEMBER_PW = #{encPw}
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<select id="selectReservation">
+		SELECT 
+		    R.RESERV_DATE, 
+		    R.RESERV_TIME, 
+		    S.STORE_NAME, 
+		    R.RESERV_COUNT, 
+		    S.STORE_LOCATION
+		FROM 
+		    RESERVATION R
+		JOIN 
+		    STORE S 
+		ON 
+		    R.STORE_NO = S.STORE_NO
+		WHERE 
+		    R.MEMBER_NO = #{memberNo}
+	</select>
 
 </mapper>
