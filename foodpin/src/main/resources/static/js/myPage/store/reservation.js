@@ -122,6 +122,14 @@ reservAll.addEventListener("click", () => {
 
    // 비동기로 데이터 전송 추가 예정!
    // ...
+
+   fetch("reservation/reservAll")
+   .then(resp => resp.json())
+   .then(reservList => {
+
+      console.log(reservList);
+   })
+
 });
 
 

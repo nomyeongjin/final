@@ -2,4 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.project.foodpin.myPage.model.mapper.StoreMyPageMapper">
 
+
+	<!-- 예약 -->
+	
+	<!-- 전체 예약 조회 -->
+	<select id="reservAll">
+		SELECT MEMBER_NAME, MEMBER_TEL, RESERV_DATE, RESERV_TIME, RESERV_REQUEST, RESERV_STATUS_FL
+		FROM "RESERVATION"
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE STORE_NO = (
+			SELECT STORE_NO FROM "STORE"
+			JOIN MEMBER USING(MEMBER_NO)
+			WHERE MEMBER_NO = #{memberNo}
+		)
+		ORDER BY RESERV_DATE
+	</select>
+	
 </mapper>
