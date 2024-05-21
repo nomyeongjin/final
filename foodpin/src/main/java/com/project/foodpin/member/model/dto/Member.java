@@ -29,4 +29,6 @@ public class Member {
 	private String memberStatus;
 	private int memberFlag;
 	
+	private int bookmarkCheck;
+	
 }

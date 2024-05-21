@@ -1,5 +1,6 @@
 package com.project.foodpin.myPage.model.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -20,6 +21,9 @@ public interface MemberMyPageMapper {
 	int memberChangePw(Map<String, Object> paramMap);
 
 	// 예약 목록 조회
-	Reservation selectReservation(int memberNo);
+	List<Reservation> selectReservation(int memberNo);
+
+	Object memberLikeList(int memberNo);
+
 
 }
