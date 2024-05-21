@@ -50,10 +50,15 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 
 	// 예약 목록 조회
 	@Override
-	public Reservation selectReservation(int memberNo) {
+	public List<Reservation> selectReservation(int memberNo) {
 		return mapper.selectReservation(memberNo);
 	}
 
+
+	@Override
+	public Object memberLikeList(int memberNo) {
+		return mapper.memberLikeList(memberNo);
+	}
 
 	
 	

@@ -37,30 +37,21 @@
                         <table class="reservationTable">
                             <ul>
                                 
-                                <li class="reservationList">
-                                    <div class="reservationStore" th:object="${reservation}">
-                                        <span class="reservationDate" th:text="*{reservDate}">2024. 7. 11</span>
-                                        <span class="storeName" th:text="*{store.storeName}">대박고깃집</span>
-                                        <span class="reservationPeople" th:text="*{reservCount}">3명</span> <br>
-                                        <i class="fa-solid fa-clock"></i><span class="reservationTime" th:text="*{reservTime}">오후 7시 30분</span>  <br>
-                                        <span class="storeAddress" th:text="*{store.storeLocation}">서울시 중구 마조로 56길</span> <br>
-                                    </div>
-                                    <span>
-                                        <button id="cancelReservation">예약 취소</button>
-                                    </span>
+                                <li class="reservationList" th:each="reservation : ${reservation}">
+
+                                        <div class="reservationStore" th:object="${reservation}">
+                                            <div class="reservationDate" th:text="*{reservDate}">2024. 7. 11</div>
+                                            <span class="storeName" th:text="*{storeName}">대박고깃집</span>
+                                            <span class="reservationPeople" th:text="|*{reservCount}명|">예약인원</span> <br>
+                                            <i class="fa-solid fa-clock"></i><span class="reservationTime" th:text="*{reservTime}">오후 7시 30분</span>  <br>
+                                            <span class="storeAddress" th:text="*{storeLocation}">서울시 중구 마조로 56길</span> <br>
+                                        </div>
+                                        <span>
+                                            <button id="cancelReservation">예약 취소</button>
+                                        </span>
                                 </li>
                                 
-                                <li class="reservationList">
-                                    <div class="reservationStore">
-                                        <span class="storeName">대박고깃집</span>
-                                        <span class="reservationPeople">3명</span> <br>
-                                        <i class="fa-solid fa-clock"></i><span class="reservationTime">오후 7시 30분</span>  <br>
-                                        <span class="storeAddress">서울시 중구 마조로 56길</span> <br>
-                                    </div>
-                                    <span>
-                                        <button id="cancelReservation">예약 취소</button>
-                                    </span>
-                                </li>
+     
         
                             </ul>
                         </table>

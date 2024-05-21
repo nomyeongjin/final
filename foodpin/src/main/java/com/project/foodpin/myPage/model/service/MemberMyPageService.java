@@ -15,6 +15,9 @@ public interface MemberMyPageService {
 	int memberChangePw(Map<String, Object> paramMap, int memberNo);
 
 	// 예약 목록 조회
-	Reservation selectReservation(int memberNo);
+	List<Reservation> selectReservation(int memberNo);
+
+	// 북마크 목록 조회
+	Object memberLikeList(int memberNo);
 
 }
