@@ -21,4 +21,6 @@ public class Notification {
 	private String notifiactionType;
 	private String title;
 	private int pkNo;
+	
+	private String reservDate;
 }
