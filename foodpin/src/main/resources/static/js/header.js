@@ -30,12 +30,13 @@ if(notificationLoginCheck) {
     
 
     /* 웹소켓을 이용해 알림을 전달하는 함수 */
-    sendNotificationFn = (type, url, pkNo) => {
+    sendNotificationFn = (type, url, pkNo, reservDate) => {
 
         const notification = {
             "notificationType" : type,
             "notificationUrl": url,
-            "pkNo" : pkNo
+            "pkNo" : pkNo,
+            "reservDate" : reservDate
         }
 
         notificationSock.send(JSON.stringify(notification));
@@ -87,6 +88,11 @@ if(notificationLoginCheck) {
 
                     location.href = data.notificationUrl;
                 })
+
+                // 알림 보낸 회원의 프로필 이미지
+                const senderProfile = document.createElement(img);
+                if(data.senderProfile == null) senderProfile.src = notificationDefaultImage;  // 기본 이미지
+                else  senderProfile.src = data.sendMemberProfileImg; // 프로필 이미지
 
                 // 알림 내용 
 

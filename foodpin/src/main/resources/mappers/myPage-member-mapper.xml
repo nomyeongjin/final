@@ -15,7 +15,7 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
-	<update id="changePw">
+	<update id="memberChangePw">
 		UPDATE "MEMBER" SET
 		MEMBER_PW = #{encPw}
 		WHERE MEMBER_NO = #{memberNo}

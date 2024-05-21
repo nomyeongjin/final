@@ -12,4 +12,7 @@ public interface MemberMyPageService {
 	// 회원 비밀번호 변경
 	int memberChangePw(Map<String, Object> paramMap, int memberNo);
 
+	// 예약 목록 조회
+	Map<String, Object> selectReservation(Map<String, Object> paramMap);
+
 }
