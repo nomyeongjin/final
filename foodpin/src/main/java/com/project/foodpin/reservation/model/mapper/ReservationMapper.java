@@ -7,6 +7,7 @@ import com.project.foodpin.store.model.dto.Store;
 @Mapper
 public interface ReservationMapper {
 
-	String selectStoreList(Store store);
+	String selectStoreList(int storeNo);
+
 
 }

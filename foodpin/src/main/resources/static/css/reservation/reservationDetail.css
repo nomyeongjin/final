@@ -268,7 +268,7 @@
 }
 
 .select{
-    background-color: #4A4848;
+    background-color: #4a484a;
     color: white;
 }
 
@@ -393,18 +393,35 @@
     color:#4A4848
 } */
 
-.selecDate{
-    background-color: #db9494;
-}
+/* ****** 달력 ****** */
 
-.fc-theme-standard {
+.fc-scrollgrid-sync-inner {
     cursor: pointer;
 }
 
-#fc-dom-56 {
-    color: red;
+ .fc .fc-daygrid-day.fc-day-today{
+    background-color: rgb(250, 255, 226);
+} 
+
+/* .fc-daygrid-day-number {
+    color: rgb(0, 0, 0);
+    
 }
+.fc-daygrid-day{
+    background-color: #608cdf;
+} */
+
 .fc-direction-ltr .fc-daygrid-event.fc-event-end, 
 .fc-direction-rtl .fc-daygrid-event.fc-event-start {
     display: none;
+}
+
+.fc-today-button.fc-button.fc-button-primary{
+    border: none;
+    cursor: pointer;
+    user-select: none;
+}
+
+.fc .fc-highlight {
+    background-color: rgb(233, 255, 226);
 }
