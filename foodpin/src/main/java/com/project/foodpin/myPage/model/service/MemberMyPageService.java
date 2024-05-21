@@ -1,8 +1,10 @@
 package com.project.foodpin.myPage.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.project.foodpin.member.model.dto.Member;
+import com.project.foodpin.reservation.model.dto.Reservation;
 
 public interface MemberMyPageService {
 
@@ -13,6 +15,6 @@ public interface MemberMyPageService {
 	int memberChangePw(Map<String, Object> paramMap, int memberNo);
 
 	// 예약 목록 조회
-	Map<String, Object> selectReservation(Map<String, Object> paramMap);
+	Reservation selectReservation(int memberNo);
 
 }

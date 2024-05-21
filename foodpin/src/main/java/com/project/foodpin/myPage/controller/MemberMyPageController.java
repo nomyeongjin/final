@@ -1,5 +1,6 @@
 package com.project.foodpin.myPage.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.service.MemberMyPageService;
+import com.project.foodpin.reservation.model.dto.Reservation;
 
 import lombok.RequiredArgsConstructor;
 
@@ -87,25 +89,39 @@ public class MemberMyPageController {
 	
 	// 회원 예약 확인창으로
 	@GetMapping("memberReservation")
-	public String memberReservation() {
-		return "myPage/member/memberReservation";
+	public String memberReservation(
+		@SessionAttribute("loginMember") Member loginMember,
+		Model model,
+		RedirectAttributes ra
+		) {
+
+		int memberNo = loginMember.getMemberNo();
+		
+		Reservation reservation = service.selectReservation(memberNo);
+		String path = null;
+		
+		path = "myPage/member/memberReservation";
+		
+		model.addAttribute("reservation", reservation);
+		
+		return path;
 	}
 	
-	// 회원 예약 목록 조회
-	@PostMapping("memberReservation")
-	public String selectReservation(
-		@RequestParam Map<String, Object> paramMap,
-		Model model
-		) {
-		
-		Map<String, Object> map = null;
-		
-		map = service.selectReservation(paramMap);
-		
-		model.addAttribute("memberReservation");
-		
-		return "myPage/member/memberReservation";
-	}
+//	// 회원 예약 목록 조회
+//	@PostMapping("memberReservation")
+//	public String selectReservation(
+//		@RequestParam Map<String, Object> paramMap,
+//		Model model
+//		) {
+//		
+//		Map<String, Object> map = null;
+//		
+//		map = service.selectReservation(paramMap);
+//		
+//		model.addAttribute("memberReservation");
+//		
+//		return "myPage/member/memberReservation";
+//	}
 	
 	@GetMapping("memberLike")
 	public String memberLike() {
