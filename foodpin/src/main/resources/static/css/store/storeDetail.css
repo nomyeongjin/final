@@ -374,32 +374,35 @@ aside>a:hover{
     background-color: white;
 }
 
-/* 영업 시간 / 영업 상태 위치 */
-.store-statuscontainer{
+
+/* 영업 시간, 영업 상태 표시 */
+.store-statusbox{
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 35px;
-}
-
-.store-opentime{
-
-    flex-direction: column;
-    display: flex;
-
-}
-
-.store-statuscontainer span{
+    margin-bottom: 25px;
     font-size: 20px;
     font-weight: bold;
-    color: rgb(46, 41, 41);
-    margin: 5px 0px;
+}
 
+ul{
+    list-style-type: none;
 }
-#storeOpenTime{
-    font-size: 16px;
-    
+
+li{
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    color: rgb(65, 65, 65);
 }
+
+hr{
+  border: 0px;
+  height: 1px; /* hr은 height 속성으로 두께 지정 */
+  background-color:var(--main-color); 
+  margin: 14px 0;
+}
+
 
 #storeStatusText{
     color: rgb(26, 180, 232);
@@ -415,17 +418,28 @@ aside>a:hover{
   
 }
 
-.store-date-list-container{
+.store-statuscontainer{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between; 
+    flex-direction: column;
     color:rgb(46, 41, 41); 
-    
+    margin-bottom: 15px;
     overflow: hidden;
     
 }
 
 /* 가게 영업 시간 더보기 */
+
+.busi-hours-short{
+    display: none;
+}
+
+.more-schedule-info-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-top: 15px;
+}
+
 
 #moreScheduleInfoBtn{
     cursor: pointer;
@@ -466,12 +480,6 @@ aside>a:hover{
 
 
 
-.more-schedule-info-box{
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    margin-bottom: 15px;
-}
 
 
 
@@ -479,10 +487,12 @@ aside>a:hover{
 
 .storedetail-menucontainer >*{
     margin: 15px 0px;
+    
 }
 
 .storedetail-menucontainer{
     border-bottom: 1px solid var(--main-color);
+    width: 500px;
 }
 
 #menuInfoTitle{
@@ -498,9 +508,19 @@ aside>a:hover{
     border-radius: 5px;
 }
 
-.menuimage-container{
+.store-menu-list{
+   
+    height: 380px;
+    overflow: hidden;
+}
+
+
+
+.store-menu-list >*{
+    margin: 10px 0px;
+}
+.menu-image-container{
     display: flex;
-    flex-direction: row;
   
 }
 
@@ -533,12 +553,19 @@ aside>a:hover{
     border: 1px solid var(--main-color);
     border-radius: 10px;
     color: rgb(46, 41, 41);  
-    background-color: white;
+    background-color: white; 
 }
 
-#moreMenuImageBtn.hidden{
+#shutMenuImageBtn{
+    cursor: pointer;
+    width: 50px;
+    border: 1px solid var(--main-color);
+    border-radius: 10px;
+    color: rgb(46, 41, 41);  
+    background-color: white; 
     display: none;
 }
+
 
 
 /* 해시태그 컨테이너 */

@@ -117,6 +117,70 @@ storeReport.addEventListener("click", ()=>{
 
 /* ****************** 가게 영업 시간 더보기 *********************  */
 
+const openContainer = document.querySelector(".storedetail-opencontainer");
+const busiHoursShort = document.querySelector(".busi-hours-short");
+
+const moreScheduleInfoBtn = document.querySelector("#moreScheduleInfoBtn");
+const shutScheduleInfoBtn = document.querySelector("#shutScheduleInfoBtn");
+
+moreScheduleInfoBtn.addEventListener('click',()=>{
+
+
+  // 더보기 버튼을 숨기고 줄이기 버튼 보이게 하기
+  moreScheduleInfoBtn.style.display = 'none'; 
+  shutScheduleInfoBtn.style.display = 'inline-block'; 
+  busiHoursShort.style.display = 'inline';
+})
+
+shutScheduleInfoBtn.addEventListener("click",()=>{
+
+  
+  shutScheduleInfoBtn.style.display = 'none'; 
+  moreScheduleInfoBtn.style.display = 'inline-block';
+  busiHoursShort.style.display = 'none'; 
+})
+
+
+/* ************************************************************* */
+
+
+
+
+/* 메뉴 이미지 더보기 */
+
+// 3개씩 불러오기
+
+
+
+
+const storeMenuList = document.querySelector(".store-menu-list");
+const menuImageContainer = document.querySelector(".menu-image-container");
+
+const moreMenuImageBtn = document.querySelector("#moreMenuImageBtn");
+const shutMenuImageBtn = document.querySelector("#shutMenuImageBtn");
+
+
+
+moreMenuImageBtn.addEventListener('click',()=>{
+
+
+  
+
+  moreMenuImageBtn.style.display = 'none'; 
+  shutMenuImageBtn.style.display = 'inline-block'; 
+  
+  storeMenuList.style.display = 'visible';
+ 
+})
+
+shutMenuImageBtn.addEventListener("click",()=>{
+
+  
+  shutMenuImageBtn.style.display = 'none'; 
+  moreMenuImageBtn.style.display = 'inline-block';
+  storeMenuList.style.display = 'hidden';
+ 
+})
 
 /* ***************** 팝업 ****************** */
 const popupClose = document.querySelector("#popupClose");
