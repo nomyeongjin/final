@@ -34,7 +34,7 @@ const createCard = () => {
     // for(let reserv of reservList){
     // }
 
-    // -- 샘플 요소 생성
+   // -- 샘플 요소 생성
    const reservCard = document.createElement("div");
    reservCard.classList.add("reserv-card");
 
@@ -74,8 +74,11 @@ const createCard = () => {
    const time = document.createElement("p"); // 예약 시간 -listContent
    time.innerHTML = "<span>예약자 시간 : </span>" + "13:00 ~ 14:00";
 
+   const request = document.createElement("p"); // 요청사항 -listContent
+   request.innerHTML = "<span>요청사항 : </span>" + "창가 자리로 예약해주세요.";
+
    row.append(name, number);
-   listContent.append(row, tel, time);
+   listContent.append(row, tel, time, request);
 
    // 예약 대기 목록 조회시에만
    if(titleStatus == "N") {
@@ -116,7 +119,17 @@ let titleStatus = ""; // 메뉴 구분용 변수 (임시)
 * (메뉴) 전체 버튼 클릭
 */
 reservAll.addEventListener("click", () => {
-   // 추가할것
+
+   // 비동기로 데이터 전송 추가 예정!
+   // ...
+
+   fetch("reservation/reservAll")
+   .then(resp => resp.json())
+   .then(reservList => {
+
+      console.log(reservList);
+   })
+
 });
 
 
@@ -125,6 +138,7 @@ reservAll.addEventListener("click", () => {
    */
 reservConfirm.addEventListener("click", () => {
    // 비동기로 정보 받아올것 (reservList)
+   // ...
 
    // 데이터 넣기 전까지 임시로 구분
    titleStatus = "Y";
@@ -136,7 +150,8 @@ reservConfirm.addEventListener("click", () => {
   * (메뉴) 예약 요청 버튼 클릭
   */
 reservApply.addEventListener("click", () => {
-    // 비동기로 정보 받아올것 (reservList)
+   // 비동기로 정보 받아올것 (reservList)
+   // ...
 
     // 데이터 넣기 전까지 임시로 구분
    titleStatus = "N";
@@ -149,6 +164,7 @@ reservApply.addEventListener("click", () => {
 */
 reservcancel.addEventListener("click", () => {
    // 비동기로 정보 받아올것 (reservList)
+   // ...
 
    // 데이터 넣기 전까지 임시로 구분
    titleStatus = "C";

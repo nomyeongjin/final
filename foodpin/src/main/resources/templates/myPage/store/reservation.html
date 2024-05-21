@@ -55,68 +55,39 @@
 
             <!-- 예약 목록 -->
             <div id="reservListContainer">
-               <!-- 아래부터 내용 초기화 -->
 
-               <!-- 예약 확정 -->
-               <div class="reserv-card">
-
-                  <div class="list-title-area">
-                     <p class="list-title">예약 정보</p>
-                     <p class="fa-solid fa-circle"></p>
+               <!-- 예약 목록 미존재시 -->
+               <th:block th:if="${#lists.isEmpty(reservList)}">
+                  <div class="reserv-card">
+                     <div class="list-content">
+                        <div class="row"><p>예약 정보가 존재하지 않습니다.</p></div>
+                     </div>
                   </div>
+               </th:block>
 
-                  <div class="list-content">
-                     <div class="row">
-                        <p><span>예약자 이름 : </span>김예약</p>
-                        <p><span>인원 : </span>3명</p>
+               <!-- 예약 목록 존재시 -->
+               <th:block th:unless="${#lists.isEmpty(reservList)}">
+                  
+                  <div th:each="reserv : ${reservList}" th:object="${reserv}" class="reserv-card">
+                     
+                     <div class="list-title-area">
+                        <p class="list-title">예약 정보</p>
                      </div>
    
-                     <p><span>예약자 전화번호 : </span>010-1234-5678</p>
-                     <p><span>예약자 시간 : </span>13:00 ~ 14:00</p>
-                  </div>
-               </div>
-
-               <!-- 예약 요청 -->
-               <div class="reserv-card">
-                  <div class="list-title-area">
-                     <p class="list-title">예약 요청</p>
-                     <p class="fa-solid fa-circle"></p>
-                  </div>
-
-                  <div class="list-content">
-                     <div class="row">
-                        <p><span>예약자 이름 : </span>박이름</p>
-                        <p><span>인원 : </span>3명</p>
+                     <div class="list-content">
+                        <div class="row">
+                           <p>예약자명 : <th:block th:text="*{memberName}">예약자명</th:block></p>
+                           <p>예약 인원 : <th:block th:text="*{reservCount}">예약 인원</th:block></p>
+                        </div>
+      
+                        <p>예약자 전화번호 :<th:block th:text="*{reservDate}">예약자 전화번호</th:block></p>
+                        <p>예약 시간 : <th:block th:text="*{reservTime}">예약 시간</th:block></p>
+                        <p>예약 시간 : <th:block th:text="*{reservTime}">예약 시간</th:block></p>
+                        <p>예약 요청사항 : <th:block th:text="*{reservRequest}">예약 요청사항</th:block></p>
                      </div>
-   
-                     <p><span>예약자 전화번호 : </span>010-5678-1234</p>
-                     <p><span>예약자 시간 : </span>14:00 ~ 15:00</p>
                   </div>
+               </th:block>
 
-                  <div class="list-btn-area">
-                     <button class="list-btn" id="reservBtn">예약 승인</button>
-                     <button class="list-btn" id="reservRejectBtn">예약 거부</button>
-                  </div>
-               </div>
-
-               <!-- 예약 취소 내역 -->
-               <div class="reserv-card">
-                  <div class="list-title-area">
-                     <p class="list-title">취소 요청</p>
-                     <p class="fa-solid fa-circle"></p>
-                  </div>
-
-                  <div class="list-content">
-                     <div class="row">
-                        <p><span>예약자 이름 : </span>강이름</p>
-                        <p><span>인원 : </span>3명</p>
-                     </div>
-   
-                     <p><span>예약자 전화번호 : </span>010-1234-5678</p>
-                     <p><span>예약자 시간 : </span>13:00 ~ 14:00</p>
-                  </div>
-
-               </div>
 
             </div>
          </div>

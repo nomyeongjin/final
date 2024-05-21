@@ -19,5 +19,6 @@ public class Reservation {
 	private int memberNo;
 	private int storeNo; // 음식점 번호
 	
-
+	private String memberName; // 예약 회원명
+	private String memberTel; // 예약 회원 연락처
 }
