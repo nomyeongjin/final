@@ -53,12 +53,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 /* 회원 비밀번호 변경 */
 const memberChangePw = document.querySelector("#memberChangePw");
-const memberChangePwBtn = document.querySelector("#member-changePw-submit");
 
 if(memberChangePw != null) {
     memberChangePw.addEventListener("submit", e => {
 
-        const currentPw = document.querySelector("#currnetPw");
+        const currentPw = document.querySelector("#currentPw");
         const newPw = document.querySelector("#newPw");
         const newPwConfirm = document.querySelector("#newPwConfirm");
 
@@ -90,26 +89,26 @@ if(memberChangePw != null) {
     });
 }
 
+const updateInfo = document.querySelector("#updateInfo");
 
-/* 회원 정보 / 비밀번호 변경 화면 변경 */
-const confirmReservation = document.querySelector("#confirmReservation");
-const waitReservation = document.querySelector("#waitReservation");
+if(updateInfo != null) {
+    updateInfo.addEventListener("submit", e => {
+        const memberNickname = document.querySelector("#memberNickname");
+        const memberTel = document.querySelector("#memberTel");
 
-const confirmedContainer = document.querySelector("#reservation-confirmed-container")
-const waitContainer = document.querySelector("#reservation-wait-container")
+        let str;
 
-document.addEventListener("DOMContentLoaded", function() {    
+        if(memberNickname.value.trim().length == 0) str = "닉네임을 입력해 주세요";
+        else if(memberTel.value.trim().length == 0) str = "전화번호를 입력해 주세요";
 
-    confirmedContainer.style.display = "block";
-    waitContainer.style.display = "none";
-    
-    confirmReservation.addEventListener("click", function() {
-        waitContainer.style.display = "none";
-        confirmedContainer.style.display = "block";
-    });
+        if(str != undefined) {
+            alert(str);
+            e.preventDefault();
+            return;
+        }
 
-    waitReservation.addEventListener("click", function() {
-        confirmedContainer.style.display = "none";
-        waitContainer.style.display = "block";
-    });
-});
+        // 닉네임, 전번 유효성 추가하세요
+
+
+    })
+}

@@ -1,10 +1,12 @@
 package com.project.foodpin.myPage.model.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.foodpin.member.model.dto.Member;
+import com.project.foodpin.reservation.model.dto.Reservation;
 
 @Mapper
 public interface MemberMyPageMapper {
@@ -19,6 +21,9 @@ public interface MemberMyPageMapper {
 	int memberChangePw(Map<String, Object> paramMap);
 
 	// 예약 목록 조회
-	Map<String, Object> selectReservation(Map<String, Object> paramMap);
+	List<Reservation> selectReservation(int memberNo);
+
+	Object memberLikeList(int memberNo);
+
 
 }

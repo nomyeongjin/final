@@ -4,6 +4,8 @@ import com.project.foodpin.store.model.dto.Store;
 
 public interface ReservationService {
 
-	String selectStoreList(Store store);
+	String selectStoreList(int storeNo);
+
+
 
 }

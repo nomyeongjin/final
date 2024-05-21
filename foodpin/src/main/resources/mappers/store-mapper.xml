@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.project.foodpin.store.model.mapper.StoreMappers">
+<mapper namespace="com.project.foodpin.review.model.mapper.ReviewMapper">
+
+	<insert id="reviewInsert" useGeneratedKeys="true" parameterType="Review">
+	
+		<selectKey order="BEFORE" resultType="_int" keyProperty="reviewNo">
+			SELECT SEQ_REVIEW_NO.NEXTVAL FROM DUAL
+		</selectKey>
+	
+	
+		INSERT INTO "REVIEW" 
+		  	VALUES( #{reviewNo},
+		  			#{reviewRating},
+		  			#{reviewContent},
+		  			SYSDATE,
+		  			DEFAULT,
+		  			#{memberNo},
+		  			1, 1
+  		)
+	</insert>
+	
+	<insert id="insertUploadList" parameterType="list">
+		INSERT INTO "UPLOAD_IMAGE"
+		
+		<foreach collection="list" item="img" open="(" close=")" separator=" UNION ">
+			SELECT NEXT_IMAGE_NO(), #{img.imagePath}, #{img.imgRename}, DEFAULT, #{img.imageOrder}, 1, #{img.reviewNo}, #{img.imgOriginalName} FROM DUAL
+		</foreach>
+	</insert>
+
 
 
 </mapper>

@@ -1,5 +1,7 @@
 package com.project.foodpin.myPage.model.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.mapper.MemberMyPageMapper;
+import com.project.foodpin.reservation.model.dto.Reservation;
 
 import lombok.RequiredArgsConstructor;
 
@@ -47,9 +50,16 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 
 	// 예약 목록 조회
 	@Override
-	public Map<String, Object> selectReservation(Map<String, Object> paramMap) {
-		return mapper.selectReservation(paramMap);
+	public List<Reservation> selectReservation(int memberNo) {
+		return mapper.selectReservation(memberNo);
 	}
+
+
+	@Override
+	public Object memberLikeList(int memberNo) {
+		return mapper.memberLikeList(memberNo);
+	}
+
 	
 	
 

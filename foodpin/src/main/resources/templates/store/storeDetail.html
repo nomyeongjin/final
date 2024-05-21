@@ -212,16 +212,16 @@
 
    
      <!-- section 3 가게 정보 -->
-     <section class="store-detail">
+    <section class="store-detail">
 
         <div class="store-container">
 
           
            <!-- 영업 시간/ 영업 상태(일주일) 등 조회 -->
 
-          <div class="storedetail-box">
+            <div class="storedetail-box">
   
-            <div class="storedetail-opencontainer">
+                <div class="storedetail-opencontainer">
 
             
                     <div class="store-reportcontainer">
@@ -283,83 +283,177 @@
                                         
 
                    <!-- ************************************************************** -->
-                    <div class="store-statuscontainer">
-                        <div class="store-opentime">
-                            <span>영업시간</span>
-                            <span id="storeOpenTime">11:00 ~ 22:00</span>
+                    <div class="store-statuscontainer"> <!-- 영업 시간 리스트 만들 곳 -->
+
+
+                        <div class="busi-hours-today">
+                            
+                            <div class="store-statusbox">
+
+                                <span>영업시간</span>
+                          
+                                <!-- 가게 상태 조회(휴무일/ 브레이크타임/라스트오더) -->
+                             <span id="storeStatusText">영업 중</span>
+                            </div>
+
+
+                            <ul class="store-hours-list">
+                                <li>
+                                    <p class="t-txt">
+                                      <Strong>
+                                        [오늘] 05.21 (화)
+                                      </Strong>
+                                    </p>
+                                    <p class="l-txt">
+                                        영업시간: 11:00 - 21:30                      
+                                    </p>
+                                </li>
+       
+                                <li>
+                                    <p class="t-txt"></p>
+                                    <p class="l-txt">
+                                        브레이크타임: 14:30 - 17:00                                           
+                                    </p>
+                                </li>
+                             
+                            </ul>
+
                         </div>
                     
-                        <div class="store-statusbox">
-                            <!-- 가게 상태 조회(휴무일/ 브레이크타임/라스트오더) -->
-                        <span id="storeStatusText">영업 중</span>
+
+             
+                      <!--  반복하는 구간 -->
+
+                        <div class="busi-hours-short">
+
+                            
+                            <ul class="store-hours-list">
+
+                                <hr>
+
+                                <li>
+                                    <p class="t-txt">   
+                                         05.22 (수)  
+                                    </p>
+                                    <p class="l-txt">
+                                        영업시간: 11:00 - 21:30                      
+                                    </p>
+                                </li>  
+
+                                <li>
+                                    <p class="t-txt"></p>
+                                    <p class="l-txt">
+                                        브레이크타임: 14:30 - 17:00                                           
+                                    </p>
+                                </li>
+                                <hr>
+
+                                <li>
+                                    <p class="t-txt">   
+                                         05.23 (목)  
+                                    </p>
+                                    <p class="l-txt">
+                                        영업시간: 11:00 - 21:30                      
+                                    </p>
+                                </li>  
+
+                                <li>
+                                    <p class="t-txt"></p>
+                                    <p class="l-txt">
+                                        브레이크타임: 14:30 - 17:00                                           
+                                    </p>
+                                </li>
+                                <hr>
+
+                                <li>
+                                    <p class="t-txt">   
+                                         05.24 (금)  
+                                    </p>
+                                    <p class="l-txt">
+                                        영업시간: 11:00 - 21:30                      
+                                    </p>
+                                </li>  
+
+                                <li>
+                                    <p class="t-txt"></p>
+                                    <p class="l-txt">
+                                        브레이크타임: 14:30 - 17:00                                           
+                                    </p>
+                                </li>
+                                <hr>
+
+                                <li>
+                                    <p class="t-txt">   
+                                         05.25 (토)  
+                                    </p>
+                                    <p class="l-txt">
+                                        영업시간: 11:00 - 21:30                      
+                                    </p>
+                                </li>  
+
+                                <li>
+                                    <p class="t-txt"></p>
+                                    <p class="l-txt">
+                                        브레이크타임: 14:30 - 17:00                                           
+                                    </p>
+                                </li>
+                                <hr>
+
+                                <li>
+                                    <p class="t-txt">   
+                                         05.26 (일)  
+                                    </p>
+                                    <p class="l-txt">
+                                        영업시간: 11:00 - 21:30                      
+                                    </p>
+                                </li>  
+
+                                <li>
+                                    <p class="t-txt"></p>
+                                    <p class="l-txt">
+                                        브레이크타임: 14:30 - 17:00                                           
+                                    </p>
+                                </li>
+                                <hr>
+
+                                <li>
+                                    <p class="t-txt">   
+                                         05.27 (월)  
+                                    </p>
+                                    <p class="l-txt">
+                                        영업시간: 11:00 - 21:30                      
+                                    </p>
+                                </li>  
+
+                                <li>
+                                    <p class="t-txt"></p>
+                                    <p class="l-txt">
+                                        브레이크타임: 14:30 - 17:00                                           
+                                    </p>
+                                </li>
+                             
+                            </ul>
+  
+                          
                         </div>
-                    </div>
 
-                    <div class="store-date"> <!-- text 바깥 영역 -->
-                        <!-- 오늘 날짜 조회 -->
-
-                        <div class="store-date-list-container">   <!-- 내용 들어갈 곳 -->
-
-                            <div class="date-statusinfo"> 
-
-                                <span>
-                                    [오늘] 05.20(월)
-                                </span>
-                                 
-                            </div>
-    
-                            <div class="date-statusdetail">
-    
-                                <span>영업시간 06:00 ~ 21:30</span>
-    
-                                <span>라스트오더 21:00</span>
-    
-                            </div>
-
-                            
-                         
-                            
-                        </div>
-
-                    
-
-                        <div class="store-date-list-container">
-
-                            <div class="date-statusinfo">
-
-                                <span>
-                                        05.21(화)
-                                </span>
-                                 
-                            </div>
-    
-                            <div class="date-statusdetail">
-    
-                                <span>영업시간 06:00 ~ 21:30</span>
-    
-                                <span>라스트오더 21:00</span>
-    
-                            </div>
-
-
-                            
-                           
-                            
-                        </div>
-
-                      
                         <div class="more-schedule-info-box">
                             <button id="moreScheduleInfoBtn">더보기</button>
                             <button id="shutScheduleInfoBtn">접기</button>
                         </div>
             
                        
+                       
 
                     </div>
 
+
+                 </div>
+
+
                     
     
-            </div>
+                
              <!-- 바텀 선 css 주기 -->
 
              <!-- // 메뉴 공간 // -->
@@ -369,8 +463,9 @@
 
                     <span id="menuInfoTitle">메뉴 정보</span>
 
+                    <div class="store-menu-list">
                     <!-- 메뉴 이미지 div 3개 추가 -->
-                    <div class="menuimage-container">
+                    <div class="menu-image-container">
                         <div>
                             <img src="/images/storeDetail/burger4.jpg" class="storedetail-menuimage" 
                              alt="메뉴 사진">
@@ -382,7 +477,7 @@
                         </div>
                     </div>
                     
-                    <div class="menuimage-container">
+                    <div class="menu-image-container">
                         <div>
                             <img src="/images/storeDetail/burger.jpg" class="storedetail-menuimage" 
                              alt="메뉴 사진">
@@ -394,7 +489,7 @@
                         </div>
                     </div>
                     
-                    <div class="menuimage-container">
+                    <div class="menu-image-container">
                         <div>
                             <img src="/images/storeDetail/pizza.jpg" class="storedetail-menuimage" 
                              alt="메뉴 사진">
@@ -405,35 +500,76 @@
                             <span id="menuPrice">9000 원</span>
                         </div>
                     </div>
+                    <div class="menu-image-container">
+                        <div>
+                            <img src="/images/storeDetail/burger4.jpg" class="storedetail-menuimage" 
+                             alt="메뉴 사진">
+                        </div>
+
+                        <div class="menu-info">
+                            <span id="menuName">게살버거</span>
+                            <span id="menuPrice">4000 원</span>
+                        </div>
+                    </div>
                     
+                    <div class="menu-image-container">
+                        <div>
+                            <img src="/images/storeDetail/burger.jpg" class="storedetail-menuimage" 
+                             alt="메뉴 사진">
+                        </div>
+
+                        <div class="menu-info">
+                            <span id="menuName">스페셜버거</span>
+                            <span id="menuPrice">22000 원</span>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-image-container">
+                        <div>
+                            <img src="/images/storeDetail/pizza.jpg" class="storedetail-menuimage" 
+                             alt="메뉴 사진">
+                        </div>
+
+                        <div class="menu-info">
+                            <span id="menuName">피자</span>
+                            <span id="menuPrice">9000 원</span>
+                        </div>
+                    </div>
+
+                 </div>
+
                     <div class="moreMenuImageBtnBox">
                         <button id="moreMenuImageBtn">더보기</button>
+                        <button id="shutMenuImageBtn">접기</button>
                     </div>
+    
+    
+    
+                  
                 </div>
 
+                  
+                
+
+                <!-- 해시태그(댓글에 달린 해시들) -->
+
+                <div class="storedetail-hashtagcontainer">
+                    <span>#음식이 맛있어요!</span>
+                    <span>#사장님이 친절해요!</span>
+                    <span>#재료가 신선해요!</span>
+                    <span>#매장이 청결해요!</span>
+                    <span>#분위기가 좋아요!</span>
+                </div>
+
+                
 
 
 
-
-             <!-- 해시태그(댓글에 달린 해시들) -->
-
-            <div class="storedetail-hashtagcontainer">
-                <span>#음식이 맛있어요!</span>
-                <span>#사장님이 친절해요!</span>
-                <span>#재료가 신선해요!</span>
-                <span>#매장이 청결해요!</span>
-                <span>#분위기가 좋아요!</span>
             </div>
-
-            
-
-
-
-           </div>
  
         </div>
 
-     </section>
+    </section>
 
 
 <!-- ************************************************************ -->
@@ -558,7 +694,7 @@
                         <button id="reviewMoreButton">리뷰 더보기</button>
                     </div>
 
-                    <a href="/review/insertReview">리뷰쓰기</a>
+                    <a href="/review/reviewPage">리뷰쓰기</a>
 
 
 

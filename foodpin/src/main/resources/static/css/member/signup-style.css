@@ -86,6 +86,13 @@
       background-color: transparent;
     }
   
+    .signUp-input-area > #openHour{
+      width: 150px;
+    }
+    
+    .signUp-input-area > #closeHour{
+      width: 150px;
+    }
    
     .signUp-input-area > button{
       width: 30%;

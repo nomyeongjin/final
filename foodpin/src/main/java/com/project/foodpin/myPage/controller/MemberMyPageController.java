@@ -1,5 +1,6 @@
 package com.project.foodpin.myPage.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.service.MemberMyPageService;
+import com.project.foodpin.reservation.model.dto.Reservation;
 
 import lombok.RequiredArgsConstructor;
 
@@ -85,30 +87,25 @@ public class MemberMyPageController {
 		return "redirect:" + path;
 	}
 	
-	// 회원 예약 확인창으로
+	// 회원 예약창 목록조회
 	@GetMapping("memberReservation")
-	public String memberReservation() {
-		return "myPage/member/memberReservation";
-	}
-	
-	// 회원 예약 목록 조회
-	@PostMapping("memberReservation")
 	public String selectReservation(
-		@RequestParam Map<String, Object> paramMap,
-		Model model
-		) {
-		
-		Map<String, Object> map = null;
-		
-		map = service.selectReservation(paramMap);
-		
-		model.addAttribute("memberReservation");
-		
+		Model model,
+		@SessionAttribute("loginMember") Member loginMember) {
+		int memberNo = loginMember.getMemberNo();
+		List<Reservation> reservation = service.selectReservation(memberNo);
+		model.addAttribute("reservation", reservation);
 		return "myPage/member/memberReservation";
 	}
 	
+	// 북마크 목록 조회
 	@GetMapping("memberLike")
-	public String memberLike() {
+	public String memberLikeList(
+		@SessionAttribute("loginMember") Member loginMember) {
+		
+		int memberNo = loginMember.getMemberNo();
+		service.memberLikeList(memberNo);
+		
 		return "myPage/member/memberLike";
 	}
 	
