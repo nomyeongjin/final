@@ -21,11 +21,72 @@ function execDaumPostcode() {
         document.getElementById("address").value = addr;
         // 커서를 상세주소 필드로 이동한다.
         document.getElementById("detailAddress").focus();
+      
+
+        
+
+        /* 가게 주소 유효성 검사 */
+        const postcode = document.querySelector("#postcode")
+        const postcodeMessage = document.querySelector("#postcodeMessage")
+        const inputPostcode = postcode.value;
+
+        if(inputPostcode.trim().length === 0){
+          postcodeMessage.innerText = "우편번호를 입력해주세요. (5글자)";
+          postcodeMessage.classList.remove("confirm", "error");
+          checkObj.postcode = false;
+          postcodeMessage.value = "";
+          return;
+        }
+
+        const regExp = /^[0-9]{5}$/;;
+
+        if( !regExp.test(inputPostcode) ){
+          postcodeMessage.innerText = "숫자 5자리를 입력해주세요.";
+          postcodeMessage.classList.add("error");
+          postcodeMessage.classList.remove("confirm");
+          checkObj.postcode = false;
+          return;
+        }
+
+        postcodeMessage.innerText = "";
+        checkObj.postcode = true;
+
+        const address = document.querySelector("#address")
+        const addressMessage = document.querySelector("#addressMessage")
+
+
+        const inputAddress = address.value;
+
+        if(inputAddress.trim().length === 0){
+          addressMessage.innerText = "주소를 입력해주세요.";
+          addressMessage.classList.remove("confirm", "error");
+          checkObj.address = false;
+          addressMessage.value = "";
+          return;
+        }
+      
+        addressMessage.innerText = "";
+        checkObj.address = true;
+
+
+
       }
     }).open();
   }
+
+
+  postcode.addEventListener("input",()=>{
+    checkObj.postcode = false;
+    postcode.focus();
+
+  })
+  address.addEventListener("input",()=>{
+    checkObj.address = false;
+    address.focus();
+  })
   
-  
+
+
   /* 주소 검색 버튼 클릭 시 */
   document.querySelector("#searchAddress").addEventListener("click", execDaumPostcode);
   
@@ -36,7 +97,7 @@ function execDaumPostcode() {
 /* ***** 회원 가입 유효성 검사 ***** */
   
   // 필수 입력 항목의 유효성 검사 여부를 체크하기위한 객체(체크리스트)
-  // - true   == 해당 항목은 유효한 형식으로 작성됨
+  // - true   == 해당 항목은 올바른 형식으로 작성됨
   // - false  == 해당 항목은 유효하지 않은 형식으로 작성됨
   const checkObj = {
     "memberId"        : false,
@@ -48,13 +109,13 @@ function execDaumPostcode() {
     "memberEmail"     : false,
     "storeNo"         : false,
     "storeName"       : false,
-    "storeLocation"   : false,
+    "postcode"        : false,
+    "address"         : false,
     "storeTel"        : false,
     "openHour"        : false,
     "closeHour"       : false
   };
   
-/* 이름 : /^[가-힣a-zA-Z]+$/ */
 
 /* 아이디유효성 검사 */
   
@@ -71,6 +132,7 @@ memberId.addEventListener("input", e => {
     idMessage.classList.remove("confirm", "error");
     checkObj.memberId = false;
     memberId.value = "";
+    memberId.focus();
     return;
   }
 
@@ -83,11 +145,12 @@ memberId.addEventListener("input", e => {
     idMessage.classList.add("error");
     idMessage.classList.remove("confirm");
     checkObj.memberId = false;
+    memberId.focus();
     return;
   }
 
 
-  // 3) 중복 검사(유효한 경우)
+  // 3) 중복 검사(올바른 경우)
   fetch("/member/checkId?memberId=" + inputId)
   .then(response => response.text())
   .then(count => {
@@ -97,6 +160,7 @@ memberId.addEventListener("input", e => {
         idMessage.classList.add("error");
         idMessage.classList.remove("confirm");
       checkObj.memberId = false;
+      memberId.focus();
       return;
     }
 
@@ -159,6 +223,10 @@ memberId.addEventListener("input", e => {
       return;
     }
   
+    emailMessage.innerText = "올바른 이메일 형식 입니다.";
+    emailMessage.classList.add("confirm");
+    emailMessage.classList.remove("error");
+    checkObj.memberEmail = true;
   
   });
   
@@ -220,8 +288,8 @@ memberId.addEventListener("input", e => {
       return;
     }
   
-    // 유효한 경우
-    pwMessage.innerText = "유효한 비밀번호 형식입니다";
+    // 올바른 경우
+    pwMessage.innerText = "올바른 비밀번호 형식입니다";
     pwMessage.classList.add("confirm");
     pwMessage.classList.remove("error");
     checkObj.memberPw = true;
@@ -240,7 +308,7 @@ memberId.addEventListener("input", e => {
   // 단, 비밀번호(memberPw)가 유효할 때만 검사 수행
   memberPwConfirm.addEventListener("input", () => {
   
-    if(checkObj.memberPw){ // memberPw가 유효한 경우
+    if(checkObj.memberPw){ // memberPw가 올바른 경우
       checkPw(); // 비교하는 함수 수행
       return;
     }
@@ -265,9 +333,7 @@ memberId.addEventListener("input", e => {
   
   memberTel.addEventListener("input", e => {
 
-    // 휴대폰 인증후 전화번호가 변경된 경우
-    checkObj.authKey = false;
-    document.querySelector("#authKeyMessage").innerText = "";
+    
 
     const inputTel = e.target.value;
   
@@ -289,7 +355,7 @@ memberId.addEventListener("input", e => {
       return;
     }
   
-    telMessage.innerText = "유효한 전화번호 형식입니다";
+    telMessage.innerText = "올바른 전화번호 형식입니다";
     telMessage.classList.add("confirm");
     telMessage.classList.remove("error");
     checkObj.memberTel = true;
@@ -328,9 +394,9 @@ sendAuthKeyBtn.addEventListener("click", () => {
   checkObj.authKey = false;
   document.querySelector("#authKeyMessage").innerText = "";
 
-  // 중복되지 않은 유효한 이메일을 입력한 경우가 아니면
+  // 중복되지 않은 올바른 이메일을 입력한 경우가 아니면
   if ( !checkObj.memberTel ){
-    alert("유효한 전화번호 작성 후 클릭해 주세요");
+    alert("올바른 전화번호 작성 후 클릭해 주세요");
     return;
   }
 
@@ -344,17 +410,20 @@ sendAuthKeyBtn.addEventListener("click", () => {
   checkObj.authKey = false; // 인증 유효성 검사 여부 false
 
   // ***************************************
-  // 비동기로 서버에서 메일 보내기
+  // 비동기로 서버에서 문자 보내기
 
-  fetch("/email/signup", {
+  fetch("/member/sendSMS", {
     method : "POST",
     headers : {"Content-Type" : "application/json"},
-    body : memberEmail.value
+    body : memberTel.value
   })
   .then(response => response.text())
   .then(result => {
-    if(result == 1){
+    if(result != null){
       console.log("인증 번호 발송 성공");
+
+
+
     }else{
       console.log("인증 번호 발송 실패");
     }
@@ -411,8 +480,6 @@ function addZero(number){
 }
 
 
-
-
 // 인증하기 버튼을 눌렀을때
 checkAuthKeyBtn.addEventListener("click", () => {
 
@@ -428,11 +495,11 @@ checkAuthKeyBtn.addEventListener("click", () => {
 
   // 입력 받은 이메일, 인증번호로 객체 생성
   const obj = {
-    "id"   : memberId.value,
+    "telNumber"   : memberTel.value,
     "authKey" : authKey.value
   };
 
-  fetch("/id/checkAuthKey", {
+  fetch("/member/checkAuthKey", {
     method : "POST",
     headers : {"Content-Type" : "application/json"},
     body : JSON.stringify(obj) // obj를 JSON 변경
@@ -471,10 +538,6 @@ checkAuthKeyBtn.addEventListener("click", () => {
   
   storeNo.addEventListener("input", e => {
 
-    // 휴대폰 인증후 전화번호가 변경된 경우
-    checkObj.authKey = false;
-    document.querySelector("#authKeyMessage").innerText = "";
-
     const inputStoreNo = e.target.value;
   
     if(inputStoreNo.trim().length === 0){
@@ -495,7 +558,7 @@ checkAuthKeyBtn.addEventListener("click", () => {
       return;
     }
   
-    storeNoMessage.innerText = "유효한 사업자 등록 번호 형식입니다";
+    storeNoMessage.innerText = "올바른 사업자 등록 번호 형식입니다";
     storeNoMessage.classList.add("confirm");
     storeNoMessage.classList.remove("error");
     checkObj.storeNo = true;
@@ -529,11 +592,12 @@ storeName.addEventListener("input", e => {
     return;
   }
 
-  storeNameMessage.innerText = "유효한 상호명 형식입니다";
+  storeNameMessage.innerText = "올바른 상호명 형식입니다";
   storeNameMessage.classList.add("confirm");
   storeNameMessage.classList.remove("error");
   checkObj.storeName = true;
 });
+
 
 //----------------------------------------------------------------------
 
@@ -542,10 +606,6 @@ storeName.addEventListener("input", e => {
   const storeTelMessage = document.querySelector("#storeTelMessage");
   
   storeTel.addEventListener("input", e => {
-
-    // 휴대폰 인증후 전화번호가 변경된 경우
-    checkObj.authKey = false;
-    document.querySelector("#authKeyMessage").innerText = "";
 
     const inputStoreTel = e.target.value;
   
@@ -567,7 +627,7 @@ storeName.addEventListener("input", e => {
       return;
     }
   
-    storeTelMessage.innerText = "유효한 전화번호 형식입니다";
+    storeTelMessage.innerText = "올바른 전화번호 형식입니다";
     storeTelMessage.classList.add("confirm");
     storeTelMessage.classList.remove("error");
     checkObj.storeTel = true;
@@ -578,6 +638,88 @@ storeName.addEventListener("input", e => {
 
 
 // ---------------------------------------------------------------------------------------------------------------
+const memberName = document.querySelector("#memberName")
+
+const nameMessage = document.querySelector("#nameMessage");
+  
+memberName.addEventListener("input", e => {
+
+  const inputName = e.target.value;
+
+  if(inputName.trim().length === 0){
+    nameMessage.innerText = "이름을 입력해주세요.";
+    nameMessage.classList.remove("confirm", "error");
+    checkObj.memberName = false;
+    nameMessage.value = "";
+    return;
+  }
+
+  const regExp = /^[가-힣a-zA-Z]{2,20}$/;
+
+  if( !regExp.test(inputName) ){
+    nameMessage.innerText = "유효하지 않은 이름 형식입니다";
+    nameMessage.classList.add("error");
+    nameMessage.classList.remove("confirm");
+    checkObj.memberName = false;
+    return;
+  }
+
+  nameMessage.innerText = "올바른 이름 형식입니다";
+  nameMessage.classList.add("confirm");
+  nameMessage.classList.remove("error");
+  checkObj.memberName = true;
+});
+
+// ---------------------------------------------------------------------------------------------------------------
+const openHour = document.querySelector("#openHour")
+
+const openHourMessage = document.querySelector("#openHourMessage");
+  
+openHour.addEventListener("input", e => {
+
+  const inputOpenHour = e.target.value;
+
+  if(inputOpenHour.trim().length === 0){
+    openHourMessage.innerText = "가게 오픈 시간을 기입해주세요.";
+    openHourMessage.classList.remove("confirm", "error");
+    checkObj.openHour = false;
+    openHourMessage.value = "";
+    return;
+  }
+
+
+  openHourMessage.innerText = "";
+  openHourMessage.classList.add("confirm");
+  openHourMessage.classList.remove("error");
+  checkObj.openHour = true;
+});
+
+// ---------------------------------------------------------------------------------------------------------------
+const closeHour = document.querySelector("#closeHour")
+
+const closeHourMessage = document.querySelector("#closeHourMessage");
+  
+closeHour.addEventListener("input", e => {
+
+  const inputCloseHour = e.target.value;
+
+  if(inputCloseHour.trim().length === 0){
+    closeHourMessage.innerText = "가게 마감 시간을 기입해주세요.";
+    closeHourMessage.classList.remove("confirm", "error");
+    checkObj.closeHour = false;
+    closeHourMessage.value = "";
+    return;
+  }
+
+
+  closeHourMessage.innerText = "";
+  closeHourMessage.classList.add("confirm");
+  closeHourMessage.classList.remove("error");
+  checkObj.closeHour = true;
+});
+
+
+//----------------------------------------------------------------------------------------------------------------
 
 
 /* 회원 가입 버튼 클릭 시 전체 유효성 검사 여부 확인 */
@@ -618,11 +760,29 @@ signUpForm.addEventListener("submit", e => {
       case "memberName": 
       str = "이름이 유효하지 않습니다"; break;
       
-      case "memberNickname": 
-      str = "닉네임이 유효하지 않습니다"; break;
-      
       case "memberEmail": 
       str = "이메일이 유효하지 않습니다"; break;
+
+      case "storeNo": 
+      str = "사업자 등록 번호가 유효하지 않습니다"; break;
+
+      case "storeName": 
+      str = "상호명이 유효하지 않습니다"; break;
+
+      case "postcode": 
+      str = "우편번호가 유효하지 않습니다"; break;
+
+      case "address": 
+      str = "도로명/지번 주소가 유효하지 않습니다"; break;
+
+      case "storeTel": 
+      str = "가게 전화번호가 유효하지 않습니다"; break;
+
+      case "openHour": 
+      str = "오픈 시간이 유효하지 않습니다"; break;
+
+      case "closeHour": 
+      str = "마감 시간이 유효하지 않습니다"; break;
           
       }
       

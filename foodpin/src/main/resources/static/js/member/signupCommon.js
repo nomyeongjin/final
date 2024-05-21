@@ -1,7 +1,7 @@
 /* ***** 회원 가입 유효성 검사 ***** */
   
   // 필수 입력 항목의 유효성 검사 여부를 체크하기위한 객체(체크리스트)
-  // - true   == 해당 항목은 유효한 형식으로 작성됨
+  // - true   == 해당 항목은 올바른 형식으로 작성됨
   // - false  == 해당 항목은 유효하지 않은 형식으로 작성됨
   const checkObj = {
     "memberId"        : false,
@@ -14,7 +14,7 @@
     "memberEmail"     : false
   };
   
-/* 이름 : /^[가-힣a-zA-Z]+$/ */
+
 
 /* 아이디유효성 검사 */
   
@@ -47,7 +47,7 @@ memberId.addEventListener("input", e => {
   }
 
 
-  // 3) 중복 검사(유효한 경우)
+  // 3) 중복 검사(올바른 경우)
   fetch("/member/checkId?memberId=" + inputId)
   .then(response => response.text())
   .then(count => {
@@ -91,14 +91,8 @@ memberId.addEventListener("input", e => {
     if(inputEmail.trim().length === 0){
   
       emailMessage.innerText = "메일을 받을 수 있는 이메일을 입력해주세요.";
-  
-      // 메시지에 색상을 추가하는 클래스 모두 제거
       emailMessage.classList.remove('confirm', 'error');
-  
-      // 이메일 유효성 검사 여부를 false 변경
       checkObj.memberEmail = false;
-  
-      // 잘못 입력한 띄어쓰기가 있을 경우 없앰
       memberEmail.value = "";
       
       return;
@@ -118,7 +112,11 @@ memberId.addEventListener("input", e => {
       checkObj.memberEmail = false; // 유효하지 않은 이메일임을 기록
       return;
     }
-  
+
+    emailMessage.innerText = "올바른 이메일 형식 입니다.";
+    emailMessage.classList.add("confirm");
+    emailMessage.classList.remove("error");
+    checkObj.memberEmail = true;
   
   });
   
@@ -180,8 +178,8 @@ memberId.addEventListener("input", e => {
       return;
     }
   
-    // 유효한 경우
-    pwMessage.innerText = "유효한 비밀번호 형식입니다";
+    // 올바른 경우
+    pwMessage.innerText = "올바른 비밀번호 형식입니다";
     pwMessage.classList.add("confirm");
     pwMessage.classList.remove("error");
     checkObj.memberPw = true;
@@ -200,7 +198,7 @@ memberId.addEventListener("input", e => {
   // 단, 비밀번호(memberPw)가 유효할 때만 검사 수행
   memberPwConfirm.addEventListener("input", () => {
   
-    if(checkObj.memberPw){ // memberPw가 유효한 경우
+    if(checkObj.memberPw){ // memberPw가 올바른 경우
       checkPw(); // 비교하는 함수 수행
       return;
     }
@@ -243,6 +241,11 @@ memberId.addEventListener("input", e => {
       checkObj.memberNickname = false;
       return;
     }
+
+    nickMessage.innerText = "올바른 닉네임 형식입니다";
+    nickMessage.classList.add("confirm");
+    nickMessage.classList.remove("error");
+    checkObj.memberNickname = true;
   
     
   });
@@ -284,7 +287,7 @@ memberId.addEventListener("input", e => {
       return;
     }
   
-    telMessage.innerText = "유효한 전화번호 형식입니다";
+    telMessage.innerText = "올바른 전화번호 형식입니다";
     telMessage.classList.add("confirm");
     telMessage.classList.remove("error");
     checkObj.memberTel = true;
@@ -323,9 +326,9 @@ sendAuthKeyBtn.addEventListener("click", () => {
   checkObj.authKey = false;
   document.querySelector("#authKeyMessage").innerText = "";
 
-  // 중복되지 않은 유효한 이메일을 입력한 경우가 아니면
+  // 중복되지 않은 올바른 이메일을 입력한 경우가 아니면
   if ( !checkObj.memberTel ){
-    alert("유효한 전화번호 작성 후 클릭해 주세요");
+    alert("올바른 전화번호 작성 후 클릭해 주세요");
     return;
   }
 
@@ -341,15 +344,18 @@ sendAuthKeyBtn.addEventListener("click", () => {
   // ***************************************
   // 비동기로 서버에서 메일 보내기
 
-  fetch("/email/signup", {
+  fetch("/member/sendSMS", {
     method : "POST",
     headers : {"Content-Type" : "application/json"},
-    body : memberEmail.value
+    body : memberTel.value
   })
   .then(response => response.text())
   .then(result => {
-    if(result == 1){
+    if(result != null){
       console.log("인증 번호 발송 성공");
+
+
+
     }else{
       console.log("인증 번호 발송 실패");
     }
@@ -423,11 +429,11 @@ checkAuthKeyBtn.addEventListener("click", () => {
 
   // 입력 받은 이메일, 인증번호로 객체 생성
   const obj = {
-    "id"   : memberId.value,
+    "telNumber"   : memberTel.value,
     "authKey" : authKey.value
   };
 
-  fetch("/id/checkAuthKey", {
+  fetch("/member/checkAuthKey", {
     method : "POST",
     headers : {"Content-Type" : "application/json"},
     body : JSON.stringify(obj) // obj를 JSON 변경
@@ -459,6 +465,42 @@ checkAuthKeyBtn.addEventListener("click", () => {
 
 // ---------------------------------------------------------------------------------------------------------------
 
+const memberName = document.querySelector("#memberName")
+
+const nameMessage = document.querySelector("#nameMessage");
+  
+memberName.addEventListener("input", e => {
+
+  const inputName = e.target.value;
+
+  if(inputName.trim().length === 0){
+    nameMessage.innerText = "이름을 입력해주세요.";
+    nameMessage.classList.remove("confirm", "error");
+    checkObj.memberName = false;
+    nameMessage.value = "";
+    return;
+  }
+
+  const regExp = /^[가-힣a-zA-Z]{2,20}$/;
+
+  if( !regExp.test(inputName) ){
+    nameMessage.innerText = "유효하지 않은 이름 형식입니다";
+    nameMessage.classList.add("error");
+    nameMessage.classList.remove("confirm");
+    checkObj.memberName = false;
+    return;
+  }
+
+  nameMessage.innerText = "올바른 이름 형식입니다";
+  nameMessage.classList.add("confirm");
+  nameMessage.classList.remove("error");
+  checkObj.memberName = true;
+});
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------
 
 /* 회원 가입 버튼 클릭 시 전체 유효성 검사 여부 확인 */
 

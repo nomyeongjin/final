@@ -31,6 +31,53 @@
 	)
 	</insert>
 	
+	<!-- 사장님 회원가입 -->
+	<insert id="signupStore">
+	INSERT INTO "MEMBER"
+	VALUES(SEQ_MEMBER_NO.NEXTVAL,
+		2,
+		#{memberId},
+		#{memberEmail},
+		#{memberName},
+		NULL,
+		#{memberPw},
+		#{memberTel},
+		'/images/user.png',
+		DEFAULT,
+		'W',
+		0
+	)
+	</insert>
+	<!-- 사장님 멤버 회원 정보 -->
+	<select id="findMemberNo">
+	SELECT MEMBER_NO
+	FROM "MEMBER"
+	WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<!-- 사장님 가게정보 입력 -->
+	<insert id="signupStoreInfo">
+	INSERT INTO "STORE"
+	VALUES(
+		#{storeNo},
+		#{storeName},
+		NULL,
+		#{storeLocation},
+		DEFAULT,
+		NULL,
+		#{storeTel},
+		#{openHour},
+		#{closeHour},
+		NULL,
+		NULL,
+		DEFAULT,
+		'/images/storeDetail/store.jpg',
+		0,
+		#{memberNo},
+		0
+	)
+	</insert>
+	
 	<!-- ID 중복 검사 -->
 	<select id="checkId">
 	SELECT COUNT(*)
@@ -38,4 +85,31 @@
 	WHERE MEMBER_STATUS = 'N'
 	AND MEMBER_ID = #{memberId}
 	</select>
+	
+	<!-- 인증번호 DB에 저장 -->
+	<insert id="saveAuthKey">
+	INSERT INTO "AUTH_KEY"
+	VALUES(
+		SEQ_KEY_NO.NEXTVAL,
+		#{memberTel},
+		#{authKey},
+		DEFAULT
+	)
+	</insert>
+	
+	<!-- 해당 번호가 DB에 있을 경우 authkey 수정 -->
+	<update id="updateAuthKey">
+	UPDATE "AUTH_KEY"
+	SET AUTH_KEY = #{authKey}, 
+	    CREATE_TIME = SYSDATE
+	WHERE TEL_NUMBER=#{memberTel}
+	</update>
+	
+	<!-- 인증번호가 DB가 있는지 확인 -->
+	  <select id="checkAuthKey" resultType="_int">
+	  	SELECT COUNT(*) 
+		FROM "AUTH_KEY"
+		WHERE TEL_NUMBER = #{telNumber}
+		AND AUTH_KEY = #{authKey}
+	  </select>
 </mapper>

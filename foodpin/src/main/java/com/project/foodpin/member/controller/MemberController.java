@@ -1,9 +1,13 @@
 package com.project.foodpin.member.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +22,10 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
+import net.nurigo.sdk.message.response.SingleMessageSentResponse;
+import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @SessionAttributes({"loginMember"})
 @Controller
@@ -26,6 +34,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MemberController {
 
+	// 쿨SMS 서비스 
+	private final DefaultMessageService messageService;
+	
 	private final MemberService service;
 	
 	/** 로그인 페이지로 이동
@@ -179,7 +190,7 @@ public class MemberController {
 		String message = null;
 		
 		if(result>0) {
-			message = inputMember.getMemberNickname()+" 님의 가입을 환영합니다.🍴";
+			message = inputMember.getMemberNickname()+" 님의 가입을 환영합니다.🍜";
 			path = "/member/login";
 		}
 		else {
@@ -192,6 +203,33 @@ public class MemberController {
 		return "redirect:"+path;
 	}
 	
+	@PostMapping("signupStore")
+	public String signupStore(
+			Member inputMember,
+			@RequestParam("storeLocation") String[] storeLocation,
+			RedirectAttributes ra
+			) {
+		
+		int result = service.signupStore(inputMember, storeLocation);
+				
+		String path = null;
+		String message = null;
+		
+		if(result>0) {
+			message = inputMember.getMemberName()+" 님의 가입신청이 완료되었습니다.";
+			path = "/member/login";
+		}
+		else {
+			message = "회원 가입에 실패했습니다.";
+			path = "/member/signupStore";
+		}
+		
+		ra.addFlashAttribute("message",message);
+		
+		return "redirect:"+path;
+	}
+	
+	
 	/** 이메일 중복 검사
 	 * @param memberEmail
 	 * @return 중복 1, 아니면 0
@@ -203,6 +241,72 @@ public class MemberController {
 			) {
 		return service.checkId(memberId);
 	}
+	
+	/** SMS 인증번호 보내기 + DB에 인증번호 저장
+	 * @param memberTel
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("sendSMS")
+	public String sendSMS(
+			@RequestBody String memberTel
+			) {
+		String authKey = createAuthKey();
+		Message message = new Message();
+        // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
+        message.setFrom("01026624515");
+        message.setTo(memberTel);
+        message.setText("인증번호는 ["+authKey+"] 입니다.");
+
+        SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+
+        Map<String, Object> map = new HashMap<>();
+        
+        map.put("authKey", authKey);
+        map.put("memberTel", memberTel);
+        
+        int result = service.updateAuthKey(map);
+        
+        // 같은 번호가 DB에 없을 경우 INSERT 시도
+        if(result==0) {
+        	result = service.saveAuthKey(map);
+        }
+        
+        if(result==0) return null;
+        
+        
+        return authKey;
+
+	}
+	
+	/** 인증번호 생성 (숫자 6자리)
+     * @return authKey
+     */
+    public String createAuthKey() {
+    	String key = "";
+        for(int i=0 ; i< 6 ; i++) {
+             
+                int num = (int)(Math.random() * 10); // 0~9
+                key += num;
+            
+        }
+        return key;
+    }
+    
+    
+    @ResponseBody
+	@PostMapping("checkAuthKey")
+	public int checkAuthKey(@RequestBody Map<String, Object> map) {
+		
+		// 입력 받은 전화번호, 인증 번호가 DB에 있는지 조회
+		// 전화번호 있고, 인증번호 일치 == 1
+		// 아니면 0
+		return service.checkAuthKey(map);
+	}
+	
+	
+	
+	
 	
 	
 }
