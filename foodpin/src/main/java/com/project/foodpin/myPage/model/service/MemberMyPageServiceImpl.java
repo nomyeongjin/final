@@ -20,7 +20,6 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 	
 	private final BCryptPasswordEncoder bcrypt;
 	
-	
 
 	// 회원 정보 수정
 	@Override
@@ -43,7 +42,13 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		paramMap.put("encPw", encPw);
 		paramMap.put("memberNo", memberNo);
 		
-		return mapper.changePw(paramMap);
+		return mapper.memberChangePw(paramMap);
+	}
+
+	// 예약 목록 조회
+	@Override
+	public Map<String, Object> selectReservation(Map<String, Object> paramMap) {
+		return mapper.selectReservation(paramMap);
 	}
 	
 	
