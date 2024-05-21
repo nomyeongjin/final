@@ -1,11 +1,14 @@
 package com.project.foodpin.myPage.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.project.foodpin.member.model.dto.Member;
@@ -50,17 +53,28 @@ public class StoreMyPageController {
 	/** 예약 전체 조회
 	 * @return reservList
 	 */
-	@GetMapping("reservation/reservAll")
+	@GetMapping("reservAll")
 	public List<Reservation> reservAll(@SessionAttribute Member loginMember) {
 		
-//		int MemberNo = loginMember.getMemberNo();
-//		
-//		
-//		List<Reservation> reservList = service.reservAll(MemberNo);
+		int memberNo = loginMember.getMemberNo();
 		
+		List<Reservation> reservList = service.reservAll(memberNo);
 		
+		return reservList;
+	}
+	
+	/** 확정된 예약 조회
+	 * @return reservList
+	 */
+	@GetMapping("reservConfirm")
+	public List<Reservation> reservConfirm(@SessionAttribute Member loginMember, 
+			@RequestParam("reservStatusFl") String reservStatusFl) {
 		
-		return null;
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberNo", loginMember.getMemberNo());
+		map.put("reservStatusFl", reservStatusFl);
+		
+		return service.reservConfirm(map);
 	}
 	
 	

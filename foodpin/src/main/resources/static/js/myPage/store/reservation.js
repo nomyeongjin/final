@@ -113,7 +113,7 @@ const reservConfirm = document.querySelector("#reservConfirm");
 const reservApply = document.querySelector("#reservApply");
 const reservcancel = document.querySelector("#reservcancel");
 
-let titleStatus = ""; // 메뉴 구분용 변수 (임시)
+let reservStatusFl = ""; // 메뉴 구분용 변수 (임시)
 
 /**
 * (메뉴) 전체 버튼 클릭
@@ -123,7 +123,7 @@ reservAll.addEventListener("click", () => {
    // 비동기로 데이터 전송 추가 예정!
    // ...
 
-   fetch("reservation/reservAll")
+   fetch("/myPage/store/reservAll")
    .then(resp => resp.json())
    .then(reservList => {
 
@@ -137,11 +137,20 @@ reservAll.addEventListener("click", () => {
    * (메뉴) 확정 예약 버튼 클릭
    */
 reservConfirm.addEventListener("click", () => {
-   // 비동기로 정보 받아올것 (reservList)
-   // ...
+
+   reservStatusFl = "Y";
+
+   fetch("/myPage/store/reservConfirm?reservStatusFl=" + reservStatusFl)
+   .then(resp => resp.json())
+   .then(reservList => {
+
+      console.log(reservList);
+   });
+
+
 
    // 데이터 넣기 전까지 임시로 구분
-   titleStatus = "Y";
+   
 
    createCard();
 });
