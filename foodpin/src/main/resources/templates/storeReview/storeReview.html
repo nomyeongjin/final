@@ -10,17 +10,13 @@
   <title>리뷰 작성</title>
 </head>
 <body>
-
-  
-
-
   
   <main>
     
     <th:block th:replace="~{common/header}"></th:block>
     <section class="review-section">
       
-      <form action="#" id="reviewForm">
+      <form action="/review/insertReview" method="POST" id="reviewForm" enctype="multipart/form-data">
         <div class="review-container"> 
           <h2>OOO 장소의 방문 리뷰쓰기</h2>
           <div class="review-selectBox">
@@ -56,7 +52,7 @@
                           <p>가격</p>
                         </td>
                         <td>
-                          <input type="checkbox"  class="menu-checkbox" >
+                          <input type="checkbox"  class="menu-checkbox">
                         </td>
                       </tr>
                       <tr>
@@ -124,7 +120,8 @@
             <i class="rating__star far fa-star"></i>
             <i class="rating__star far fa-star"></i>
             
-            <span class="rating__result"></span> 
+            <span class="rating__result" name="reviewRating"></span> 
+            <span>점</span>
   
           </div>
     
