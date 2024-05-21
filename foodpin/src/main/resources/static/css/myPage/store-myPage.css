@@ -188,15 +188,21 @@
    flex-direction: row;
    justify-content: center;
    padding: 10px 20px;
+   width: 60%;
+   flex-wrap: wrap;
 }
-.week-btn{
-   width: 100px;
+.week-li{
+   width: 20%;
    margin: 10px;
    height: 26px;
    background: lightgray;
    border: 1px solid lightgray;
    border-radius: 15px;
    cursor: pointer;
+   list-style: none;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 .checked{
    background: white;

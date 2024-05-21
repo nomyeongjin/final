@@ -32,24 +32,21 @@ function calendar_rendering() {
    calendar.render();
 }
 
-
 /**
- * 요일 버튼 생성
- * @param {*} weekList 
+ * 
+ * @param {*} tagName 태그명
+ * @param {*} text : week + "요일"
+ * @returns 
  */
-const createBtn = (weekList) => {
-
-   for(let week of weekList) {
-
-      console.log(week);
-      
-      
-
-   }
-}
+const createLi = (tagName, week) => {
+   const el = document.createElement(tagName); // li 태그 생성
+   el.classList.add("week-li"); // 클래스 추가
+   
+   el.innerText = week; // 내용 추가
+ 
+   return el;
+ }
 // --------------------------------------
-
-
 
 /* 본문 영역, 서브메뉴 버튼 변수 선언 */
 const container = document.querySelector(".myPage-content-container"); // 본문 div 영역
@@ -74,20 +71,52 @@ dayoffBtn.addEventListener("click", () => {
    offWeekSection.classList.add("section-title");
    offWeekSection.innerHTML = "고정 휴무일";
 
-   // weekList = ['월', '화', '수', '목', '금', '토', '일'];s
-
-   const weekOffContainer = document.createElement("div"); // div 생성
+   const weekOffContainer = document.createElement("form"); // div 생성
    weekOffContainer.classList.add("off-container");
 
-   const ul = document.createElement("ul"); // div 생성
-   // // weekRow.classList.add("#");
+   const ul = document.createElement("ul"); // ul 생성
+   ul.classList.add("week-row");
 
-   // createBtn(weekList);
+   const weekList = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'];
 
-   // weekOffContainer.append(ul);
-   // -- 
+   //
+   const week0 = document.createElement("li");
+   week0.classList.add("week-li");
+   week0.innerText = weekList[0];
 
-   // --
+   const week1 = document.createElement("li");
+   week1.classList.add("week-li");
+   week1.innerText = weekList[1];
+
+   const week2 = document.createElement("li");
+   week2.classList.add("week-li");
+   week2.innerText = weekList[2];
+
+   const week3 = document.createElement("li");
+   week3.classList.add("week-li");
+   week3.innerText = weekList[3];
+
+   const week4 = document.createElement("li");
+   week4.classList.add("week-li");
+   week4.innerText = weekList[4];
+
+   const week5 = document.createElement("li");
+   week5.classList.add("week-li");
+   week5.innerText = weekList[5];
+
+   const week6 = document.createElement("li");
+   week6.classList.add("week-li");
+   week6.innerText = weekList[6];
+   //
+
+   const weekBtn = document.createElement("button");
+   weekBtn.classList.add("update-btn");
+   weekBtn.innerText = "고정 휴무일 수정";
+   
+   ul.append(week0, week1, week2, week3, week4, week5, week6);
+   weekOffContainer.append(ul, weekBtn);
+
+   // 고정휴무일 비동기 db 저장 .. .
 
    // 지정 휴무일
    const offDaySection = document.createElement("section");
@@ -105,6 +134,6 @@ dayoffBtn.addEventListener("click", () => {
    offDayEditFrm.append(dayOffContainer);
    
    // 마이페이지 본문 컨테이너에 각 휴무일 section, form 추가
-   container.append(offWeekSection, offDaySection, offDayEditFrm);
+   container.append(offWeekSection, weekOffContainer, offDaySection, offDayEditFrm);
    calendar_rendering() // 달력 생성 함수 호출(calendarEl 내부에 생성)
 });
