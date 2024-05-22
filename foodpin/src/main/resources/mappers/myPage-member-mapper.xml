@@ -40,9 +40,15 @@
 	<!-- 북마크 목록 조회 -->
 	<select id="memberLikeList">
 		SELECT STORE_NAME, STORE_LOCATION
-		FROM BOOKMARK B
-		JOIN STORE S ON B.STORE_NO = S.STORE_NO
-		WHERE MEMBER_NO = #{memberNo}
+		FROM STORE, BOOKMARK B
+		WHERE B.MEMBER_NO = #{memberNo}
+	</select>
+	
+	<select id="selectReviewList">
+		SELECT STORE_NAME, REVIEW_RATING, REVIEW__REG_DATE, REVIEW_CONTENT 
+		FROM REVIEW R, STORE
+		WHERE REVIEW_DEL_FL = 'N'
+		AND R.MEMBER_NO = #{memberNo}
 	</select>
 
 </mapper>

@@ -16,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.service.MemberMyPageService;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
 
@@ -101,16 +103,25 @@ public class MemberMyPageController {
 	// 북마크 목록 조회
 	@GetMapping("memberLike")
 	public String memberLikeList(
+		Model model,
 		@SessionAttribute("loginMember") Member loginMember) {
 		
 		int memberNo = loginMember.getMemberNo();
-		service.memberLikeList(memberNo);
+		List<Store> store = service.memberLikeList(memberNo);
+		model.addAttribute("store", store);
 		
 		return "myPage/member/memberLike";
 	}
 	
+	// 리뷰 목록 조회
 	@GetMapping("memberReview")
-	public String memberReview() {
+	public String memberReview(
+		Model model,
+		@SessionAttribute("loginMember") Member loginMember) {
+		
+		int memberNo = loginMember.getMemberNo();
+		List<Review> review = service.selectReviewList(memberNo);
+		model.addAttribute("review", review);
 		return "myPage/member/memberReview";
 	}
 	

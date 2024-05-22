@@ -29,10 +29,13 @@
          
                     <table class="likeTable">
                         <ul>
-                            <li class="likeList" th:object="${store}">
-                                <span class="likeStoreName" th:text="*{storeName}"><a href="/store/storeDetail">대박고깃집  ></a></span>
-                                <span class="likeStoreAddress" th:text="*{storeLocation}">서울시 중구 마조로 56길</span>
-                                <i class="fa-solid fa-bookmark like"></i>
+                            <li class="likeList" th:each="store : ${store}">
+
+                               <div th:object="${store}">
+                                    <span class="likeStoreName" th:text="*{storeName}"><a href="/store/storeDetail">대박고깃집  ></a></span>
+                                    <span class="likeStoreAddress" th:text="*{storeLocation}">서울시 중구 마조로 56길</span>
+                                    <i class="fa-solid fa-bookmark like"></i>
+                               </div>
                             </li>
 
                             <li class="likeList">
