@@ -93,17 +93,19 @@
                   <div th:if="*{reservStatusFl == 'N'}" class="list-btn-area">
                      <button id="reservBtn" class="list-btn">예약 승인</button>
                      <button id="reservRejectBtn" class="list-btn">예약 거부</button>
+                     
                   </div>
                </div>
-
-
             </div>
          </div>
          
       </section>
    </div>  
    </main>
-
+   
+   <script th:inline="javascript">
+      const storeNo = /*[[${storeNo}]]*/ '가게번호';
+   </script>
 
    <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 

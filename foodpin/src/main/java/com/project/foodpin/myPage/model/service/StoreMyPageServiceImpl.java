@@ -1,7 +1,6 @@
 package com.project.foodpin.myPage.model.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -17,6 +16,13 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	private final StoreMyPageMapper mapper;
 
 	
+	// 회원번호로 사업자번호 조회
+	@Override
+	public int selectStoreNo(int memberNo) {
+		return mapper.selectStoreNo(memberNo);
+	}
+	
+	
 	// 전체 예약 조회
 	@Override
 	public List<Reservation> reservAll(int memberNo) {
@@ -26,9 +32,12 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 
 	// 확정된 예약 조회
 	@Override
-	public List<Reservation> reservConfirm(Map<String, Object> map) {
-		return mapper.reservConfirm(map);
+	public List<Reservation> reservConfirm(int memberNo) {
+		return mapper.reservConfirm(memberNo);
 	}
+
+
+
 
 
 }
