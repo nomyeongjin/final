@@ -27,7 +27,7 @@ memberId.addEventListener("input", e => {
 
   // 1) 입력 안한 경우
   if(inputId.trim().length === 0){
-    idMessage.innerText = "영어(소문자),숫자로만 8~20글자 사이로 입력해주세요.";
+    idMessage.innerText = "영어(소문자),숫자로만 5~20글자 사이로 입력해주세요.";
     idMessage.classList.remove("confirm", "error");
     checkObj.memberId = false;
     memberId.value = "";
@@ -36,7 +36,7 @@ memberId.addEventListener("input", e => {
 
 
   // 2) 정규식 검사
-  const regExp = /^[a-z\d]{8,20}$/;
+  const regExp = /^[a-z\d]{5,20}$/;
 
   if( !regExp.test(inputId) ){ // 유효 X
     idMessage.innerText = "유효하지 않은 아이디 형식입니다.";
