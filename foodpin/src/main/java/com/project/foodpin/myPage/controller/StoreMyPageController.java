@@ -1,8 +1,6 @@
 package com.project.foodpin.myPage.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class StoreMyPageController {
 
 	private final StoreMyPageService service;
+
 	
 	
 	@GetMapping("storeInfo")
@@ -33,7 +32,7 @@ public class StoreMyPageController {
 	
 	// -----------------------------
 	
-	/** 예약 관리 화면 이동
+	/** 예약 관리 화면 이동 (+ 예약 전체 조회)
 	 * @param loginMember
 	 * @param model
 	 * @return
@@ -56,25 +55,14 @@ public class StoreMyPageController {
 	@GetMapping("reservAll")
 	public List<Reservation> reservAll(@SessionAttribute Member loginMember) {
 		
-		int memberNo = loginMember.getMemberNo();
+//		int MemberNo = loginMember.getMemberNo();
+//		
+//		
+//		List<Reservation> reservList = service.reservAll(MemberNo);
 		
-		List<Reservation> reservList = service.reservAll(memberNo);
 		
-		return reservList;
-	}
-	
-	/** 확정된 예약 조회
-	 * @return reservList
-	 */
-	@GetMapping("reservConfirm")
-	public List<Reservation> reservConfirm(@SessionAttribute Member loginMember, 
-			@RequestParam("reservStatusFl") String reservStatusFl) {
 		
-		Map<String, Object> map = new HashMap<>();
-		map.put("memberNo", loginMember.getMemberNo());
-		map.put("reservStatusFl", reservStatusFl);
-		
-		return service.reservConfirm(map);
+		return null;
 	}
 	
 	

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -104,6 +105,9 @@
    </div>  
    </main>
 
+   <script th:inline="javascript">
+      const regionName = /*[[${param.regionName}]]*/ '지역명';
+   </script>
 
    <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 
