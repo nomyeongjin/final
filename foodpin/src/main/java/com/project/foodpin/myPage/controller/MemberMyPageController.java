@@ -89,16 +89,60 @@ public class MemberMyPageController {
 		return "redirect:" + path;
 	}
 	
-	// 회원 예약창 목록조회
-	@GetMapping("memberReservation")
-	public String selectReservation(
-		Model model,
-		@SessionAttribute("loginMember") Member loginMember) {
+	
+	// 예약 확정 조회
+	@GetMapping("reservation/fix")
+	public String reservationFix(
+		@SessionAttribute("loginMember") Member loginMember,
+		Model model) {
+		
 		int memberNo = loginMember.getMemberNo();
-		List<Reservation> reservation = service.selectReservation(memberNo);
+		List<Reservation> reservation = service.reservationFix(memberNo);
 		model.addAttribute("reservation", reservation);
-		return "myPage/member/memberReservation";
+		
+		return "myPage/member/reservation/fix";
 	}
+	
+	// 예약 대기 조회
+	@GetMapping("reservation/wait")
+	public String reservationWait(
+		@SessionAttribute("loginMember") Member loginMember,
+		Model model) {
+		
+		int memberNo = loginMember.getMemberNo();
+		List<Reservation> reservation = service.reservationWait(memberNo);
+		model.addAttribute("reservation", reservation);
+		
+		return "myPage/member/reservation/wait";
+	}
+	
+	// 지난 예약 조회
+	@GetMapping("reservation/last")
+	public String reservationLast(
+			@SessionAttribute("loginMember") Member loginMember,
+			Model model) {
+		
+		int memberNo = loginMember.getMemberNo();
+		List<Reservation> reservation = service.reservationLast(memberNo);
+		model.addAttribute("reservation", reservation);
+		
+		return "myPage/member/reservation/last";
+	}
+	
+	// 취소/노쇼 예약 조회
+	@GetMapping("reservation/cancelNoshow")
+	public String reservationCancelNoshow(
+			@SessionAttribute("loginMember") Member loginMember,
+			Model model) {
+		
+		int memberNo = loginMember.getMemberNo();
+		List<Reservation> reservation = service.reservationCancelNoshow(memberNo);
+		model.addAttribute("reservation", reservation);
+		
+		return "myPage/member/reservation/cancelNoshow";
+	}
+	
+	
 	
 	// 북마크 목록 조회
 	@GetMapping("memberLike")
@@ -125,6 +169,7 @@ public class MemberMyPageController {
 		return "myPage/member/memberReview";
 	}
 	
+	// 회원 탈퇴 페이지로
 	@GetMapping("memberSecession")
 	public String memberSecession() {
 		return "myPage/member/memberSecession";

@@ -26,26 +26,27 @@
                <!-- 타이틀 영역 -->
                <div class="myPage-title-container">
                   <section class="myPage-title">찜 목록</section>
+
+                    <!-- 아무 내역 없을 때 -->
+                    <th:block th:if="${#lists.isEmpty(store)}">
+                        <div class="emptyList">찜한 가게가 없습니다</div>
+                    </th:block>
          
-                    <table class="likeTable">
-                        <ul>
-                            <li class="likeList" th:each="store : ${store}">
+                    <th:block th:unless="${#lists.isEmpty(store)}">
+                        <table class="likeTable">
+                            <ul>
+                                <li class="likeList" th:each="store : ${store}">
 
-                               <div th:object="${store}">
-                                    <span class="likeStoreName" th:text="*{storeName}"><a href="/store/storeDetail">대박고깃집  ></a></span>
-                                    <span class="likeStoreAddress" th:text="*{storeLocation}">서울시 중구 마조로 56길</span>
-                                    <i class="fa-solid fa-bookmark like"></i>
-                               </div>
-                            </li>
-
-                            <li class="likeList">
-                                <span class="likeStoreName"><a href="/store/storeDetail">대박고깃집  ></a></span>
-                                <span class="likeStoreAddress">서울시 중구 마조로 56길</span>
-                                <i class="fa-solid fa-bookmark like"></i>
-                            </li>
-                            
-                        </ul>
-                    </table>
+                                <div th:object="${store}">
+                                        <span class="likeStoreName" th:text="*{storeName}"><a href="/store/storeDetail">대박고깃집  ></a></span>
+                                        <span class="likeStoreAddress" th:text="*{storeLocation}">서울시 중구 마조로 56길</span>
+                                        <i class="fa-solid fa-bookmark like"></i>
+                                </div>
+                                </li>
+                                
+                            </ul>
+                        </table>
+                    </th:block>
          
                </div>
       

@@ -381,6 +381,14 @@ form[name='myPageFrm']{
     cursor: pointer;
 }
 
+.emptyList {
+    width: 400px;
+    margin-top: 150px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+}
+
 .storeName {
     font-size: 19px;
 }
