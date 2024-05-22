@@ -89,6 +89,14 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.checkId(memberId);
 	}
 	
+	/** 사업자 등록번호 중복 검사
+	 *
+	 */
+	@Override
+	public int checkStoreNo(String storeNo) {
+		return mapper.checkStoreNo(storeNo);
+	}
+	
 	/** 인증번호 DB 저장
 	 *
 	 */
@@ -114,6 +122,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	
+	/** 가게 사장님 회원가입
+	 *
+	 */
 	@Override
 	public int signupStore(Member inputMember, String[] storeLocation) {
 		
