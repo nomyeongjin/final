@@ -1,6 +1,5 @@
 package com.project.foodpin.myPage.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.mapper.MemberMyPageMapper;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
 
@@ -54,12 +55,17 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		return mapper.selectReservation(memberNo);
 	}
 
-
+	// 찜 목록 조회
 	@Override
-	public Object memberLikeList(int memberNo) {
+	public List<Store> memberLikeList(int memberNo) {
 		return mapper.memberLikeList(memberNo);
 	}
 
+	// 리뷰 목록 조회
+	@Override
+	public List<Review> selectReviewList(int memberNo) {
+		return mapper.selectReviewList(memberNo);
+	}
 	
 	
 

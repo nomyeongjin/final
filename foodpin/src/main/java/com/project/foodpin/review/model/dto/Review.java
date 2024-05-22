@@ -25,4 +25,5 @@ public class Review {
 	private int hashNo;
 	private String hashTitle;
 	
+	private String storeName;
 }

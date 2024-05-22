@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.store.model.dto.Store;
 
 @Mapper
 public interface MemberMyPageMapper {
@@ -23,7 +25,11 @@ public interface MemberMyPageMapper {
 	// 예약 목록 조회
 	List<Reservation> selectReservation(int memberNo);
 
-	Object memberLikeList(int memberNo);
+	// 찜 목록 조회
+	List<Store> memberLikeList(int memberNo);
+
+	// 리뷰 목록 조회
+	List<Review> selectReviewList(int memberNo);
 
 
 }
