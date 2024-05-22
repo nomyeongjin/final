@@ -128,7 +128,7 @@ memberId.addEventListener("input", e => {
 
   // 1) 입력 안한 경우
   if(inputId.trim().length === 0){
-    idMessage.innerText = "영어(소문자),숫자로만 8~20글자 사이로 입력해주세요.";
+    idMessage.innerText = "영어(소문자),숫자로만 5~20글자 사이로 입력해주세요.";
     idMessage.classList.remove("confirm", "error");
     checkObj.memberId = false;
     memberId.value = "";
@@ -138,7 +138,7 @@ memberId.addEventListener("input", e => {
 
 
   // 2) 정규식 검사
-  const regExp = /^[a-z\d]{8,20}$/;
+  const regExp = /^[a-z\d]{5,20}$/;
 
   if( !regExp.test(inputId) ){ // 유효 X
     idMessage.innerText = "유효하지 않은 아이디 형식입니다.";
@@ -558,32 +558,27 @@ checkAuthKeyBtn.addEventListener("click", () => {
       return;
     }
   
-    storeNoMessage.innerText = "올바른 사업자 등록 번호 형식입니다";
-    storeNoMessage.classList.add("confirm");
-    storeNoMessage.classList.remove("error");
-    checkObj.storeNo = true;
-
 
     // 3) 중복 검사(올바른 경우)
-  fetch("/member/checkStoreNo?storeNo=" + inputStoreNo)
-  .then(response => response.text())
-  .then(count => {
+    fetch("/member/checkStoreNo?storeNo=" + inputStoreNo)
+    .then(response => response.text())
+    .then(count => {
 
-    if(count == 1){ // 중복 O
-      storeNoMessage.innerText = "이미 등록된 사업자 등록 번호 입니다.";
-      storeNoMessage.classList.add("error");
-      storeNoMessage.classList.remove("confirm");
-      checkObj.storeNo = false;
-      storeNo.focus();
-      return;
-    }
+      if(count == 1){ // 중복 O
+        storeNoMessage.innerText = "이미 등록된 사업자 등록 번호 입니다.";
+        storeNoMessage.classList.add("error");
+        storeNoMessage.classList.remove("confirm");
+        checkObj.storeNo = false;
+        storeNo.focus();
+        return;
+      }
 
-    idMessage.innerText = "사용 가능한 아이디 입니다.";
-    idMessage.classList.add("confirm");
-    idMessage.classList.remove("error");
-    checkObj.memberId = true;
+      storeNoMessage.innerText = "올바른 사업자 등록 번호 형식입니다";
+      storeNoMessage.classList.add("confirm");
+      storeNoMessage.classList.remove("error");
+      checkObj.storeNo = true;
 
-  })
+    })
 
   .catch(e => console.log(e));
   
