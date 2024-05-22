@@ -48,11 +48,29 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		
 		return mapper.memberChangePw(paramMap);
 	}
-
-	// 예약 목록 조회
+	
+	// 예약 확정 조회
 	@Override
-	public List<Reservation> selectReservation(int memberNo) {
-		return mapper.selectReservation(memberNo);
+	public List<Reservation> reservationFix(int memberNo) {
+		return mapper.reservationFix(memberNo);
+	}	
+	
+	// 예약 대기 조회
+	@Override
+	public List<Reservation> reservationWait(int memberNo) {
+		return mapper.reservationWait(memberNo);
+	}
+	
+	// 지난 예약 조회
+	@Override
+	public List<Reservation> reservationLast(int memberNo) {
+		return mapper.reservationLast(memberNo);
+	}
+	
+	// 예약 취소/노쇼 조회
+	@Override
+	public List<Reservation> reservationCancelNoshow(int memberNo) {
+		return mapper.reservationCancelNoshow(memberNo);
 	}
 
 	// 찜 목록 조회
@@ -66,6 +84,7 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 	public List<Review> selectReviewList(int memberNo) {
 		return mapper.selectReviewList(memberNo);
 	}
+
 	
 	
 

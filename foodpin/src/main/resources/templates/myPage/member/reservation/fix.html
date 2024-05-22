@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약 내역 확인</title>
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/myPage/myPage-style.css">
+    <link rel="stylesheet" href="/css/myPage/member-myPage.css">
+
+</head>
+<body>
+    <main>
+        <th:block th:replace="~{common/header}"></th:block>
+
+        <div class="myPage-container">
+            <th:block th:replace="~{myPage/member/memberSide}"></th:block>
+
+            <hr>
+
+            <section class="content-container">
+                <div class="myPage-title-container">
+                    <section class="myPage-title">예약 현황</section>
+
+                    <section class="myPage-sub-title">
+                        <button class="sub-title-btn" id="confirmReservation">
+                            <a href="/myPage/member/reservation/fix">예약 확정</a>
+                        </button>
+                        <button class="sub-title-btn" id="waitReservation">
+                            <a href="/myPage/member/reservation/wait">예약 대기</a>
+                        </button>
+                        <button class="sub-title-btn" id="lastReservation">
+                            <a href="/myPage/member/reservation/last">지난 예약</a>
+                        </button>
+                        <button class="sub-title-btn" id="cancelNoshow">
+                            <a href="/myPage/member/reservation/cancelNoshow">취소/노쇼</a>
+                        </button>
+                    </section>
+
+                    <!-- 아무 내역 없을 때 -->
+                    <th:block th:if="${#lists.isEmpty(reservation)}">
+                        <div class="emptyList">확정된 예약이 없습니다</div>
+
+                    </th:block>
+
+                    <th:block th:unless="${#lists.isEmpty(reservation)}">
+                        <section id="reservation">
+                            총 3건
+                            <table>
+                                <ul>
+                                    <li class="reservationList" th:each="reservation : ${reservation}">
+                                        <div class="reservationStore" th:object="${reservation}">
+                                            <div class="reservationDate" th:text="*{reservDate}"></div>
+                                            <span class="storeName" th:text="*{storeName}"></span>
+                                            <span class="reservationPeople" th:text="|*{reservCount}명|"></span> <br>
+                                            <i class="fa-solid fa-clock"><span class="reservationTime" th:text="| *{reservTime}|"></span></i>
+                                            <span class="storeAddress" th:text="*{storeLocation}"></span>
+                                        </div>
+                                        <span>
+                                            <button id="cancelReservation">예약 취소</button>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </table>
+                        </section>
+                    </th:block>
+
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <script th:inline="javascript">
+        const loginMember = /*[[${session.loginMember}]]*/ "로그인 회원 정보";
+    </script>
+
+    <th:block th:replace="~{common/footer}"></th:block> 
+
+    <script src="/js/main.js"></script>
+    <script src="/js/myPage/memberMyPage.js"></script>
+</body>
+</html>
