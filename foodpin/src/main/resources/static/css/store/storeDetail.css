@@ -201,6 +201,55 @@ aside>a:hover{
     background-color: white;
     color: rgb(120, 120, 120);
 }
+
+/* 가게 상세 설명 */
+.store-detail-content{
+ width: 500px;
+ display: inline-table;
+ border: 1px solid var(--main-color);
+ border-radius: 15px;
+ padding: 10px;
+}
+
+.store-detail-text{
+width: 100%;
+text-overflow: ellipsis;
+overflow: hidden;
+display: -webkit-box;
+-webkit-box-orient: vertical;
+
+white-space: pre-wrap;
+-webkit-line-clamp: 3;
+color: rgb(66, 66, 66);
+
+}
+
+
+
+.more-text{
+    
+    width: 490px;
+    height: 30px;
+    border-bottom: 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    margin-bottom: 10px;
+    color: var(--main-color);
+    shape-outside: inset(calc(100% - 10px) 0 0 0);
+   
+}
+.less-text{
+     cursor: pointer;
+    display: none;
+    height: 30px;
+    margin-top: 10px;
+    color: var(--main-color);
+}
+
+
+
 /* 예약 버튼 공간 */
 .storedetail-reservationbuttonbox{
     margin: 50px 0px;
@@ -485,21 +534,17 @@ hr{
 
 /* 메뉴 컨테이너 */
 
-.storedetail-menucontainer >*{
-    margin: 15px 0px;
-    
-}
 
 .storedetail-menucontainer{
     border-bottom: 1px solid var(--main-color);
     width: 500px;
 }
 
-#menuInfoTitle{
+.menu-info-title{
     font-size: 20px;
     font-weight: bold;
     color: rgb(46, 41, 41);
-    margin: 10px 0px;
+    margin-bottom: 15px;
 
 }
 .storedetail-menuimage{
@@ -510,14 +555,17 @@ hr{
 
 .store-menu-list{
    
-    height: 380px;
+    flex-direction: column;
+    height: 370px;
     overflow: hidden;
+    
+    
 }
 
 
 
 .store-menu-list >*{
-    margin: 10px 0px;
+    margin-top: 10px;
 }
 .menu-image-container{
     display: flex;
@@ -544,8 +592,10 @@ hr{
 .moreMenuImageBtnBox{
     display: flex;
     flex-direction: row;
+    margin-bottom: 15px;
     justify-content: end;
 }
+
 
 #moreMenuImageBtn{
     cursor: pointer;
@@ -626,8 +676,15 @@ hr{
 
 }
 /* 클릭하면 버튼 사라지도록 */
-#moreStoreImageBtn.hidden{
+#shutStoreImageBtn{
     display: none;
+    cursor: pointer;
+    border: 1px solid var(--main-color);
+    width: 300px;
+    height: 35px;
+    font-size: 15px;
+    color: rgb(46, 41, 41);
+    background-color: white;
 }
 
 .review-title{

@@ -30,49 +30,25 @@
            자동으로 크기 조절되는 지도 -->
         <section class="store-search">
 
+           <div>
+
+               <!-- storeHeader 조각 추가 -->
+               <th:block th:replace="~{store/storeHeader}"></th:block>
+            
+           </div>
 
          <!-- 지도와 더보기 감싸는 div -->
          
-            <!-- storeHeader 조각 추가 -->
-            <th:block th:replace="~{store/storeHeader}"></th:block>
-
+         
 
 
          <div class="storesearch-container">
 
 
-            <!-- 더보기 바 -->
+               <!-- storeViewMoreBar 조각 추가 -->
+               <th:block th:replace="~{store/storeViewMoreBar}"></th:block>
 
-            <div class="search-sidebarbox">
-
-                <div class="sidebar-menu">
-
-                    <!-- 검색하는 창 -->
-                  <div class="search-container">
-                    <div class="search-wrap">
-
-                        <div class="search-box">
-                            <button id="searchButton">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-
-                            <input type="text" class="input-box" placeholder="장소, 가게 검색">
-                        </div>
-
-                    </div>
-
-
-                    <div class="search-panelContent">
-
-                    </div>
-                    
-                  </div>
-
-                </div>
-            </div>
-
-
-               <!-- 여기 map 추가 -->
+           <!-- 여기 map 추가 -->
             <div class="map_wrap">
                 <div id="map"></div>
             
