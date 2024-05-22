@@ -31,78 +31,83 @@ const createCard = () => {
 
    listContainer.innerHTML = "";
 
-    // for(let reserv of reservList){
-    // }
+   for(let reserv of reservList) {
+      
+      // -- 샘플 요소 생성
+      const reservCard = document.createElement("div");
+      reservCard.classList.add("reserv-card");
 
-   // -- 샘플 요소 생성
-   const reservCard = document.createElement("div");
-   reservCard.classList.add("reserv-card");
+      // 예약 유형
+      const listTitleArea = document.createElement("div");
+      listTitleArea.classList.add("list-title-area");
 
-   // 예약 유형
-   const listTitleArea = document.createElement("div");
-   listTitleArea.classList.add("list-title-area");
+      const listTitle = document.createElement("p");
+      listTitle.classList.add("list-title");
 
-   const listTitle = document.createElement("p");
-   listTitle.classList.add("list-title");
+      if(reserv.reservStatusFl == "Y") listTitle.innerText = "확정 예약"; 
+      if(reserv.reservStatusFl == "N") listTitle.innerText = "예약 요청"; 
+      if(reserv.reservStatusFl == "C") listTitle.innerText = "취소 내역";
+
+      const notification = document.createElement("p");
+      notification.classList.add("fa-solid", "fa-circle");
    
-   // 데이터 넣기 전까지 임시
-   if(titleStatus == "Y") listTitle.innerText = "확정 예약"; 
-   if(titleStatus == "N") listTitle.innerText = "예약 요청"; 
-   if(titleStatus == "C") listTitle.innerText = "취소 내역";
-
-   const notification = document.createElement("p");
-   notification.classList.add("fa-solid", "fa-circle");
-
-   listTitleArea.append(listTitle, notification);
-
-   // 예약 내용
-   const listContent = document.createElement("div");
-   listContent.classList.add("list-content");
-
-   const row = document.createElement("div");
-   row.classList.add("row");
-
-   const name = document.createElement("p"); // 예약자 이름 -row -listContent
-   name.innerHTML = "<span>예약자 이름 : </span>" + "김예약";
-
-   const number = document.createElement("p"); // 예약자 이름 -row -listContent
-   number.innerHTML = "<span>인원 : </span>" + "3명";
-
-   const tel = document.createElement("p"); // 예약자 전화번호 -listContent
-   tel.innerHTML = "<span>예약자 전화번호 : </span>" + "010-1234-5678";
-
-   const time = document.createElement("p"); // 예약 시간 -listContent
-   time.innerHTML = "<span>예약자 시간 : </span>" + "13:00 ~ 14:00";
-
-   const request = document.createElement("p"); // 요청사항 -listContent
-   request.innerHTML = "<span>요청사항 : </span>" + "창가 자리로 예약해주세요.";
-
-   row.append(name, number);
-   listContent.append(row, tel, time, request);
-
-   // 예약 대기 목록 조회시에만
-   if(titleStatus == "N") {
-      // 버튼 영역
-      const listBtnArea = document.createElement("div");
-      listBtnArea.classList.add("list-btn-area");
+      listTitleArea.append(listTitle, notification);
    
-      const reservBtn = document.createElement("button");
-      reservBtn.classList.add("list-btn");
-      reservBtn.id = "reservBtn";
-      reservBtn.innerText = "예약 승인";
-
-      const reservRejectBtn = document.createElement("button");
-      reservRejectBtn.classList.add("list-btn");
-      reservRejectBtn.id = "reservRejectBtn";
-      reservRejectBtn.innerText = "예약 거부";
-
-      listBtnArea.append(reservBtn, reservRejectBtn);
-
-      listContent.append(listBtnArea);
+      // 예약 내용
+      const listContent = document.createElement("div");
+      listContent.classList.add("list-content");
+   
+      const row = document.createElement("div");
+      row.classList.add("row");
+   
+      const name = document.createElement("p"); // 예약자 이름 -row -listContent
+      name.innerHTML = "<span>예약자 이름 : </span>" + "김예약";
+   
+      const number = document.createElement("p"); // 예약자 이름 -row -listContent
+      number.innerHTML = "<span>인원 : </span>" + "3명";
+   
+      const tel = document.createElement("p"); // 예약자 전화번호 -listContent
+      tel.innerHTML = "<span>예약자 전화번호 : </span>" + "010-1234-5678";
+   
+      const time = document.createElement("p"); // 예약 시간 -listContent
+      time.innerHTML = "<span>예약자 시간 : </span>" + "13:00 ~ 14:00";
+   
+      const request = document.createElement("p"); // 요청사항 -listContent
+      request.innerHTML = "<span>요청사항 : </span>" + "창가 자리로 예약해주세요.";
+   
+      row.append(name, number);
+      listContent.append(row, tel, time, request);
+   
+      // 예약 대기 목록 조회시에만
+      if(titleStatus == "N") {
+         // 버튼 영역
+         const listBtnArea = document.createElement("div");
+         listBtnArea.classList.add("list-btn-area");
+      
+         const reservBtn = document.createElement("button");
+         reservBtn.classList.add("list-btn");
+         reservBtn.id = "reservBtn";
+         reservBtn.innerText = "예약 승인";
+   
+         const reservRejectBtn = document.createElement("button");
+         reservRejectBtn.classList.add("list-btn");
+         reservRejectBtn.id = "reservRejectBtn";
+         reservRejectBtn.innerText = "예약 거부";
+   
+         listBtnArea.append(reservBtn, reservRejectBtn);
+   
+         listContent.append(listBtnArea);
+      }
+   
+      reservCard.append(listTitleArea, listContent);
+      listContainer.append(reservCard);
    }
 
-   reservCard.append(listTitleArea, listContent);
-   listContainer.append(reservCard);
+
+   
+
+
+
 };
 
 /* 본문 영역, 메뉴 버튼 변수 선언 */
@@ -120,15 +125,15 @@ let reservStatusFl = ""; // 메뉴 구분용 변수 (임시)
 */
 reservAll.addEventListener("click", () => {
 
-   // 비동기로 데이터 전송 추가 예정!
-   // ...
+   listContainer.innerHTML = "";
 
-   fetch("/myPage/store/reservAll")
-   .then(resp => resp.json())
+   fetch("/myPage/store/reservAll?storeNo")
+   .then(resp => resp.text())
    .then(reservList => {
-
+      
       console.log(reservList);
    })
+
 
 });
 
@@ -140,11 +145,13 @@ reservConfirm.addEventListener("click", () => {
 
    reservStatusFl = "Y";
 
-   fetch("/myPage/store/reservConfirm?reservStatusFl=" + reservStatusFl)
+   fetch("/myPage/store/reservConfirm")
    .then(resp => resp.json())
    .then(reservList => {
 
       console.log(reservList);
+
+      createCard();
    });
 
 

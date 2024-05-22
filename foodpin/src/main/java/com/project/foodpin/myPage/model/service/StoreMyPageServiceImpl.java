@@ -16,11 +16,28 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	private final StoreMyPageMapper mapper;
 
 	
+	// 회원번호로 사업자번호 조회
+	@Override
+	public int selectStoreNo(int memberNo) {
+		return mapper.selectStoreNo(memberNo);
+	}
+	
+	
 	// 전체 예약 조회
 	@Override
 	public List<Reservation> reservAll(int memberNo) {
 		return mapper.reservAll(memberNo);
 	}
+
+
+	// 확정된 예약 조회
+	@Override
+	public List<Reservation> reservConfirm(int memberNo) {
+		return mapper.reservConfirm(memberNo);
+	}
+
+
+
 
 
 }
