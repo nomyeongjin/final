@@ -32,17 +32,23 @@ public class ReservationController {
 			) {
 		
 		
+		
+		
 		return "reservation/reservationDetail";
 //		return service.selectStoreList(store.getStoreNo());
 	}
+	
+	
+	
 	
 	@GetMapping("reservationCheck")
 	public String reservationCheck(
 			Reservation reservation, 
 			Store store,
+			Member member,
 			Model model) {
 		
-
+//		return service.selectChekcList();
 		return "reservation/reservationCheck";
 	}
 

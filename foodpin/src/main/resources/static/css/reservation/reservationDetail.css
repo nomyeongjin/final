@@ -422,6 +422,15 @@
     user-select: none;
 }
 
-.fc .fc-highlight {
+.select-bg{
     background-color: rgb(233, 255, 226);
 }
+
+.fc .fc-day-disabled{
+    background: none;
+}
+
+.fc-daygrid-day-top{
+    visibility: visible;
+}
+
