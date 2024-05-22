@@ -7,6 +7,32 @@ storedetailmapbutton.addEventListener("click", () => {
 
 });
 
+
+
+/* 가게 상세 설명 더보기 */
+const storeDetailContent =document.querySelector('.store-detail-content');
+const storeDetailText =document.querySelector('.store-detail-text');
+const moreText =document.querySelector('.more-text');
+const lessText =document.querySelector('.less-text');
+
+moreText.addEventListener("click", () => {
+  
+  moreText.style.display = 'none'; 
+  lessText.style.display = 'block'; 
+  storeDetailText.style.display = 'inline';
+});
+
+
+lessText.addEventListener("click", ()=>{
+ 
+ 
+  
+  lessText.style.display = 'none'; 
+  moreText.style.display = 'flex';
+  storeDetailText.style.display = '-webkit-box'; 
+});
+
+
 /* ****************지도******************* */
 
 
@@ -143,9 +169,6 @@ shutScheduleInfoBtn.addEventListener("click",()=>{
 
 /* ************************************************************* */
 
-
-
-
 /* 메뉴 이미지 더보기 */
 
 // 3개씩 불러오기
@@ -167,9 +190,10 @@ moreMenuImageBtn.addEventListener('click',()=>{
   
 
   moreMenuImageBtn.style.display = 'none'; 
-  shutMenuImageBtn.style.display = 'inline-block'; 
+  shutMenuImageBtn.style.display = 'inline'; 
   
-  storeMenuList.style.display = 'visible';
+  storeMenuList.style.display = 'inline';
+ 
  
 })
 
@@ -177,10 +201,30 @@ shutMenuImageBtn.addEventListener("click",()=>{
 
   
   shutMenuImageBtn.style.display = 'none'; 
-  moreMenuImageBtn.style.display = 'inline-block';
-  storeMenuList.style.display = 'hidden';
+  moreMenuImageBtn.style.display = 'inline';
+
+  storeMenuList.style.display = 'flex';
+ /*  storeMenuList.style.height = '370px'; */
+
+  storeMenuList.style.overflow = 'hidden';
+
+ 
  
 })
+
+
+/* ****************************식당 사진 더보기*********************************** */
+
+const detailImages = document.querySelector(".detail-images");
+const storeLook = document.querySelector(".store-look");
+
+const moreStoreImageBtn = document.querySelector("#moreStoreImageBtn");
+const shutStoreImageBtn = document.querySelector("#shutStoreImageBtn");
+
+
+
+
+
 
 /* ***************** 팝업 ****************** */
 const popupClose = document.querySelector("#popupClose");

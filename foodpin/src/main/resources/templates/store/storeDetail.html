@@ -56,9 +56,7 @@
                 
                    <!-- ************* 가게 내용 ************ -->
 
-                    <div class="storedetail-content">
-
-                    </div>
+                  
                             <!-- 상세 내용 박스 -->
                         <div class="storedetail-box">
 
@@ -163,14 +161,43 @@
                         </div>
 
 
-                    <!-- 가게 소개 조회
+                     <!-- 가게 소개 조회
                         // 이거도 더보기로 할까... 화면 안 이쁜데 뺄 수도-->
+                        <div class="store-detail-content">
 
-                    <!-- 가게 예약 버튼-->
-                    <div class="storedetail-reservationbuttonbox">
+                            <pre class="store-detail-text">
+집게리아(영어: Krusty Krab)는 해양생물 애니메이션인《네모바지 스폰지밥》에 등장하는 가상의 즉석식 레스토랑이다. 
+시그니처 버거인 게살버거(영어: Krabby Patty)로 유명하며, 그 요리법은 영업 비밀로 엄격히 보호되고 있다.
+
+이 레스토랑은 소유자이자 매니저인 집게사장이 설립하였다. 
+스폰지밥 뮤지컬에 따르면 집게사장의 딸 진주가 커서 집게리아를 물려받을 예정이라고 한다. 
+[1] 스폰지밥과 징징이가 유일한 정규직 직원인 이 레스토랑은 비키니시티에서 "식사를 위해 설립된 최고의 식당"으로 간주하며, 
+주요 경쟁자인 플랑크톤과 슈퍼컴퓨터이자 플랑크톤의 아내인 카렌이 운영하는 첨 버켓의 끊임없는 도전을 받고 있다.
+
+시리즈의 주요 설정 중 하나인 집게리아는 스폰지밥이 레스토랑의 튀김 요리사 일자리에 지원하는 파일럿 에피소드 '직원구함'에서 소개되었다. 
+집게리아는 《보글보글 스폰지밥》(2002년작), 《스폰지밥 3D》(2015년작) 등 극장용 영화 시리즈, 브로드웨이 뮤지컬, 비디오 게임, 장난감 등 다른 미디어에도 등장했다. 
+이 레스토랑은 대중문화 전반에 걸쳐 언급되거나 패러디되었다. 또한 실제 레스토랑에도 영감을 주었다.
+
+                    
+                            </pre>
+
+                           
+                        </div>
+                        <span  class="more-text">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                        <span  class="less-text">
+                            <i class="fa-solid fa-chevron-up"></i>
+                        </span>
+
+                        <hr>
+                     
+
+                     <!-- 가게 예약 버튼-->
+                     <div class="storedetail-reservationbuttonbox">
                         <!-- 클릭하면 예약하기 페이지로 이동 -->
                         <button id="storereservationbutton">예약하기</button>
-                    </div>
+                     </div>
                     
 
                 </div>
@@ -461,8 +488,11 @@
              <!-- 메뉴 ( 사진 확대 팝업/ 더보기) -->
                 <div class="storedetail-menucontainer">
 
-                    <span id="menuInfoTitle">메뉴 정보</span>
-
+                    <div class="menu-info-title">
+                        <span>메뉴 정보</span>
+ 
+                    </div>
+                   
                     <div class="store-menu-list">
                     <!-- 메뉴 이미지 div 3개 추가 -->
                     <div class="menu-image-container">
@@ -601,6 +631,7 @@
 
         <div class="moreStoreImageBtnBox">
             <button id="moreStoreImageBtn">사진 더보기</button>
+            <button id="shutStoreImageBtn">사진 접기</button>
         </div>
 
         </div>
