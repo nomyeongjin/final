@@ -67,9 +67,12 @@ public class MemberController {
 		// 로그인 서비스 호출
 		Member loginMember = service.login(inputMember);
 		
+		String path="";
+		
 		// 로그인 실패 시
 		if(loginMember == null) {
 			ra.addFlashAttribute("message","아이디 또는 비밀번호가 일치하지 않습니다.");
+			path = "/member/login";
 		}
 		
 		// 로그인 성공 시
@@ -96,9 +99,11 @@ public class MemberController {
 			
 			
 			/*************************************************************/
+			path = "/";
+		
 		}
 		
-		return "redirect:/";
+		return "redirect:"+path;
 	}
 	
 	
