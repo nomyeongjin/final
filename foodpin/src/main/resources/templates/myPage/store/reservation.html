@@ -57,36 +57,44 @@
             <div id="reservListContainer">
 
                <!-- 예약 목록 미존재시 -->
-               <th:block th:if="${#lists.isEmpty(reservList)}">
-                  <div class="reserv-card">
-                     <div class="list-content">
-                        <div class="row"><p>예약 정보가 존재하지 않습니다.</p></div>
-                     </div>
+               <div th:if="${#lists.isEmpty(reservList)}" class="reserv-card">
+                  <div class="list-content">
+                     <div class="row"><p>예약 정보가 존재하지 않습니다.</p></div>
                   </div>
-               </th:block>
+               </div>
 
                <!-- 예약 목록 존재시 -->
-               <th:block th:unless="${#lists.isEmpty(reservList)}">
+               <div th:unless="${#lists.isEmpty(reservList)}" th:each="reserv : ${reservList}" th:object="${reserv}" class="reserv-card">
                   
-                  <div th:each="reserv : ${reservList}" th:object="${reserv}" class="reserv-card">
-                     
-                     <div class="list-title-area">
-                        <p class="list-title">예약 정보</p>
-                     </div>
-   
-                     <div class="list-content">
-                        <div class="row">
-                           <p>예약자명 : <th:block th:text="*{memberName}">예약자명</th:block></p>
-                           <p>예약 인원 : <th:block th:text="*{reservCount}">예약 인원</th:block></p>
-                        </div>
-      
-                        <p>예약자 전화번호 :<th:block th:text="*{reservDate}">예약자 전화번호</th:block></p>
-                        <p>예약 시간 : <th:block th:text="*{reservTime}">예약 시간</th:block></p>
-                        <p>예약 시간 : <th:block th:text="*{reservTime}">예약 시간</th:block></p>
-                        <p>예약 요청사항 : <th:block th:text="*{reservRequest}">예약 요청사항</th:block></p>
-                     </div>
+                  <div class="list-title-area">
+                        <p th:if="*{reservStatusFl == 'Y'}" class="list-title">확정 예약</p>
+                        <p th:if="*{reservStatusFl == 'N'}" class="list-title">예약 요청</p>
+                        <p th:if="*{reservStatusFl == 'C'}" class="list-title">취소 내역</p>
                   </div>
-               </th:block>
+
+                  <div class="list-content">
+                     <div class="row">
+                        <p>예약 일시 : 
+                           <span th:text="*{reservDate}">예약 일자</span>
+                           <span th:text="*{reservTime}">예약 시간</span>
+                           <p>예약 인원 : <th:block th:text="*{reservCount}">예약 인원</th:block>명</p>
+                        </p>
+                     </div>
+
+                     <div class="row">
+                        <p>예약자명 : <th:block th:text="*{memberName}">예약자명</th:block></p>
+                        <p>예약자 전화번호 : <th:block th:text="*{memberTel}">예약자 전화번호</th:block></p>
+                     </div>
+                     
+                     <p>예약 요청사항 : <th:block th:text="*{reservRequest}">예약 요청사항</th:block></p>
+                  </div>
+                  
+                  <!-- 예약 대기인 경우 승인/거부 버튼 생성 -->
+                  <div th:if="*{reservStatusFl == 'N'}" class="list-btn-area">
+                     <button id="reservBtn" class="list-btn">예약 승인</button>
+                     <button id="reservRejectBtn" class="list-btn">예약 거부</button>
+                  </div>
+               </div>
 
 
             </div>
