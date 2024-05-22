@@ -55,4 +55,10 @@ public interface MemberService {
 	 */
 	int signupStore(Member inputMember, String[] storeLocation);
 
+	/** 사업자 등록번호 중복 체크
+	 * @param storeNo
+	 * @return
+	 */
+	int checkStoreNo(String storeNo);
+
 }

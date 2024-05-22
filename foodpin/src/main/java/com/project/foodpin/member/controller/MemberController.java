@@ -203,6 +203,12 @@ public class MemberController {
 		return "redirect:"+path;
 	}
 	
+	/** 가게 사장님 회원가입
+	 * @param inputMember
+	 * @param storeLocation
+	 * @param ra
+	 * @return
+	 */
 	@PostMapping("signupStore")
 	public String signupStore(
 			Member inputMember,
@@ -217,7 +223,7 @@ public class MemberController {
 		
 		if(result>0) {
 			message = inputMember.getMemberName()+" 님의 가입신청이 완료되었습니다.";
-			path = "/member/login";
+			path = "/";
 		}
 		else {
 			message = "회원 가입에 실패했습니다.";
@@ -230,8 +236,8 @@ public class MemberController {
 	}
 	
 	
-	/** 이메일 중복 검사
-	 * @param memberEmail
+	/** 아이디 중복 검사
+	 * @param memberId
 	 * @return 중복 1, 아니면 0
 	 */
 	@ResponseBody // 응답 본문(요청한 fetch())로 돌려보냄
@@ -241,6 +247,20 @@ public class MemberController {
 			) {
 		return service.checkId(memberId);
 	}
+	
+	/** 아이디 중복 검사
+	 * @param memberId
+	 * @return 중복 1, 아니면 0
+	 */
+	@ResponseBody // 응답 본문(요청한 fetch())로 돌려보냄
+	@GetMapping("checkStoreNo")
+	public int checkStoreNo(
+			@RequestParam("storeNo") String storeNo
+			) {
+		return service.checkStoreNo(storeNo);
+	}
+	
+	
 	
 	/** SMS 인증번호 보내기 + DB에 인증번호 저장
 	 * @param memberTel

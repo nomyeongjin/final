@@ -63,4 +63,10 @@ public interface MemberMapper {
 	 */
 	int signupStoreInfo(Member inputMember);
 
+	/** 사업자 등록 번호 중복 검사
+	 * @param storeNo
+	 * @return
+	 */
+	int checkStoreNo(String storeNo);
+
 }

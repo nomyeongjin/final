@@ -562,7 +562,35 @@ checkAuthKeyBtn.addEventListener("click", () => {
     storeNoMessage.classList.add("confirm");
     storeNoMessage.classList.remove("error");
     checkObj.storeNo = true;
-  });
+
+
+    // 3) 중복 검사(올바른 경우)
+  fetch("/member/checkStoreNo?storeNo=" + inputStoreNo)
+  .then(response => response.text())
+  .then(count => {
+
+    if(count == 1){ // 중복 O
+      storeNoMessage.innerText = "이미 등록된 사업자 등록 번호 입니다.";
+      storeNoMessage.classList.add("error");
+      storeNoMessage.classList.remove("confirm");
+      checkObj.storeNo = false;
+      storeNo.focus();
+      return;
+    }
+
+    idMessage.innerText = "사용 가능한 아이디 입니다.";
+    idMessage.classList.add("confirm");
+    idMessage.classList.remove("error");
+    checkObj.memberId = true;
+
+  })
+
+  .catch(e => console.log(e));
+  
+});
+
+
+  
 //---------------------------------------------------------------------
 
 /* 상호명 유효성 검사 */
