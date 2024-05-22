@@ -24,32 +24,31 @@ if(noticeTitle !=null) {
 
 // 예약 시 인원/날짜 체크 함수
 
-const checkList = () => {
 
-    // 예약 인원 수 체크
-    const buttonItem = document.querySelectorAll(".button-item");
-    if(buttonItem != null) {
-        for(let li of buttonItem) {
 
-            li.addEventListener("click", () =>{
-                for(let item of buttonItem){item.classList.remove("select");}
-                li.classList.add("select");
-            });
-        };
-    }
+// 예약 인원 수 체크
+const buttonItem = document.querySelectorAll(".button-item");
+if(buttonItem != null) {
+    for(let li of buttonItem) {
 
-    // 예약 날짜 체크
-    const timeItem = document.querySelectorAll(".time-item");
-    if(timeItem != null) {
-        for(let li of timeItem){
-            li.addEventListener("click", () => {
-                for(let item of timeItem){item.classList.remove("select");}
-                li.classList.add("select");
-            });
-        };
-    }
+        li.addEventListener("click", () =>{
+            for(let item of buttonItem){item.classList.remove("select");}
+            li.classList.add("select");
+        });
+    };
 }
-checkList();
+
+// 예약 날짜 체크
+const timeItem = document.querySelectorAll(".time-item");
+if(timeItem != null) {
+    for(let li of timeItem){
+        li.addEventListener("click", () => {
+            for(let item of timeItem){item.classList.remove("select");}
+            li.classList.add("select");
+        });
+    };
+}
+
 
 // ----------------------------------------------------------------------------------------
 
@@ -73,23 +72,35 @@ if(nextBtn != null){
             e.preventDefault();
             return;
         }
+
+        /* ****** 버튼 클릭 될 때 form 태그 생성 ******  */
+        const form = document.createElement("form");
+        form.action="/reservation/nextPage";
+        form.method="POST";
+
+        // 인원 선택한 값 저장 input
+        const input1 = document.createElement("input");
+        input1.type="text";
+        input1.name="reservCount";
+
+
     });
 }
 
 /* 다음 페이지 클릭 할 때 체크박스 검사 */
-// const confirmBtn = document.querySelector("#confirmBtn");
-// confirmBtn.addEventListener("click", e => {
+const confirmBtn = document.querySelector("#confirmBtn");
+confirmBtn.addEventListener("click", e => {
 
-//     /* 동의버튼 체크 x */
-//     const checkAgree = document.querySelector("#checkAgree");
+    /* 동의버튼 체크 x */
+    const checkAgree = document.querySelector("#checkAgree");
 
-//     if(!checkAgree.checked){
-//         alert("개인정보 수집 및 제공 동의를 체크해 주세요");
-//         e.preventDefault();
-//         return;
-//     }
+    if(!checkAgree.checked){
+        alert("개인정보 수집 및 제공 동의를 체크해 주세요");
+        e.preventDefault();
+        return;
+    }
 
-// });
+});
 
 
 
@@ -132,9 +143,29 @@ const getTimeSplit = (startTime, endTime, interval) => {
         times.push(`${hours}:${mins}`);
     }
 
+    // li 태그 얻어오기
+    const timeItme = document.querySelectorAll(".time-item");
+    
+    // for(let li of timeItem){
+        
+    //     li.innerHTML="";
+
+        for(let detailTime of times){ 
+            
+            
+
+            console.log(detailTime);
+            // li.innerText=detailTime;
+        }
+    // }
+
+
+
     console.log(times);
     return;
 }
 getTimeSplit(startTime, endTime, interval);
+
+
 
 
