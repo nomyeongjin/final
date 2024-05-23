@@ -4,14 +4,16 @@ import java.util.List;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.store.model.dto.Store;
 
 public interface StoreMyPageService {
 
-	/** 회원번호로 사업자번호 조회
+	/** 가게 기본 정보 조회
 	 * @param memberNo
-	 * @return storeNo
+	 * @return store
 	 */
-	int selectStoreNo(int memberNo); 
+	Store selectstoreInfo(int memberNo);
+	
 	
 	/** 전체 예약 조회
 	 * @param storeNo
@@ -36,6 +38,8 @@ public interface StoreMyPageService {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+
+
 
 
 
