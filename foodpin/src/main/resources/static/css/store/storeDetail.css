@@ -43,8 +43,9 @@ aside >a{
     font-size: 20px;
     justify-content: center;
     align-items: center;
-    
     flex-direction: column;
+    color: rgb(66, 66, 66);
+   
 
 }
 
@@ -76,14 +77,14 @@ aside p{
     font-weight: bold;
 } */
 aside>a:hover{
-    background-color: #9c9c9c;
+    background-color: rgb(148, 148, 148);
     color: #fff;
    
 }
 
 
 
-@media screen and (max-width:1140px) {
+@media screen and (max-width:960px) {
     /* 화면 너비가 0~1500px 사이일때 적용할 CSS 코드 */
 
     /* 1500px 이하일때 사이드 메뉴를 보이지 않게 함 */
