@@ -32,49 +32,31 @@
          <!-- 타이틀 영역 -->
          <div class="myPage-title-container">
             <section class="myPage-title">사장님 정보 수정</section>
+
+            <!-- 서브 타이틀 버튼 -->
+            <section class="content-sub-title">
+               <button class="sub-title-btn" id="ceoInfoEdit">사장님 정보 변경</button>
+               <button class="sub-title-btn" id="pwEdit">비밀번호 변경</button>
+            </section>
          </div>
          
          <!-- 본문 (기본 정보) -->
          <div class="myPage-content-container">
             
-            <!-- 사장님 정보 수정 폼 -->
-            <form action="#" method="POST" class="ceo-info-container">
-
+            <!-- 사장님 정보 확인란 -->
+            <form action="/myPage/store/ceoInfoUpdate" method="POST" class="ceo-info-container" th:object="${member}">
                <div class="ceoInfo-input-area">
                   <label for="memberEmail">이메일</label>
-                  <input id="memberEmail" name="memberEmail" value="member05@gmail.com" readonly></input>
+                  <input id="memberEmail" name="memberEmail" th:value="*{memberEmail}"></input>
                </div>
 
                <div class="ceoInfo-input-area">
-                  <label for="storeTel">전화번호</label>
-                  <input id="storeTel" name="storeTel" value="010-8978-1234" readonly></input>
+                  <label for="memberTel">전화번호</label>
+                  <input id="memberTel" name="memberTel" th:value="*{memberTel}"></input>
                </div>
 
-               <!-- 기존 비밀번호 -->
-               <div class="ceoInfo-input-area">
-                  <label for="memberPw">비밀번호</label>
-                  <input id="memberPw"  name="memberPw" class="blind">
-               </div>
-
-               <!-- 변경 비밀번호 -->
-               <div class="ceoInfo-input-area blind">
-                  <label for="newPw"> 변경 비밀번호</label>
-                  <input id="newPw"  name="newPw">
-               </div>
-
-               <!-- 변경 비밀번호 확인 -->
-               <div class="ceoInfo-input-area blind">
-                  <label for="newPwCheck">변경 비밀번호 확인</label>
-                  <input id="newPwCheck" name="newPwCheck">
-               </div>
-               
-               <!-- 수정화면에서만 보이는 폼 제출 버튼 -->
-               <button class="update-btn blind" id="updateBtn">수정 완료</button>
-
+               <button class="update-btn" id="updateBtn">정보 수정</button>
             </form>
-
-            <!-- 수정화면 전환 버튼 -->
-            <button class="update-btn" id="editBtn">정보 수정</button>
 
          </div>
 

@@ -2,6 +2,7 @@ package com.project.foodpin.myPage.model.service;
 
 import java.util.List;
 
+import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.reservation.model.dto.Reservation;
 
 public interface StoreMyPageService {
@@ -23,6 +24,18 @@ public interface StoreMyPageService {
 	 * @return
 	 */
 	List<Reservation> reservConfirm(int memberNo);
+
+	/** 사장님 정보 변경 화면으로 전환
+	 * @param memberNo
+	 * @return
+	 */
+	Member selectCeoInfo(int memberNo);
+
+	/** 사장님 정보 변경
+	 * @param inputMember
+	 * @return result
+	 */
+	int ceoInfoUpdate(Member inputMember);
 
 
 
