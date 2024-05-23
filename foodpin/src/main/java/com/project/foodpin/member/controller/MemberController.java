@@ -1,6 +1,7 @@
 package com.project.foodpin.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -319,6 +320,10 @@ public class MemberController {
     }
     
     
+    /** 인증번호 있는지 없는지
+     * @param map
+     * @return
+     */
     @ResponseBody
 	@PostMapping("checkAuthKey")
 	public int checkAuthKey(@RequestBody Map<String, Object> map) {
@@ -329,6 +334,51 @@ public class MemberController {
 		return service.checkAuthKey(map);
 	}
 	
+    /** 아이디 찾기 페이지 이동
+     * @return
+     */
+    @GetMapping("findId")
+    public String findIdPage() {
+    	return "/member/findId";
+    }
+    /** 아이디 찾기 페이지 이동
+     * @return
+     */
+    @GetMapping("findIdResult")
+    public String findIdResultPage() {
+    	return "/member/findIdResult";
+    }
+    
+    
+    
+    
+    
+    /** 아이디 목록 결과
+     * @return
+     */
+    @PostMapping("findIdResult")
+    	public String findId(
+    			Member inputMember,
+    			RedirectAttributes ra
+    			) {
+    	
+    	List<Member> idList = service.findIdList(inputMember);
+    	
+    	String path = null;
+    	String message = null;
+    	
+    	if(!idList.isEmpty()) {
+    		path = "/member/findIdResult";
+    		message = "아이디 조회에 성공했습니다.";
+    		
+    	}else {
+    		
+    		path = "/member/findId";
+    		message = "아이디 조회에 실패하였습니다...";
+    		
+    	}
+    		return "redirect:"+path;
+    	}
 	
 	
 	
