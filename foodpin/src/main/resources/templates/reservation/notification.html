@@ -1,27 +1,21 @@
-<div class="notification-area" id="notificationArea">
-    <button type="button" id="myNotification" class="notification-bell-btn fa-regular fa-bell"></button>
+<div class="notification-area" id="notificationArea" >
+    <button type="button" id="myNotification" class="notification-bell-btn fa-regular fa-bell" th:if="${session.loginMember}"></button>
+    <div th:unless="${session.loginMember}" class="temp"></div>
 
-    <div class="box-content" th:if="${session.loginMember}">
+    <div class="box-content">
         <div class="notification-header">
             <p class="title">알림</p>
         </div>
 
         <!-- memberCode == 1 -->
-        <div class="notification-view" th:if="${session.loginMember?.memberCode==1}">   
+        <div class="notification-view">   
 
             <div class="pre-notification">
                 <p class="title">이전 알림</p>
             </div>
 
             <!-- 비동기?? -->
-            <nav class="all-notification">
-               <ul class="all-list">
-                    <li class="all">
-                        <a href="#">전체</a>
-                    </li>
-                   
-               </ul>
-            </nav>
+            <th:block th:replace="~{reservation/notificationCategory}"></th:block>
 
             <ul class="notification-list">
                 <li class="notification-item">
@@ -41,121 +35,6 @@
                                     <div class="notification-message">
                                         <span id="reservDate" name="reservDate">5.13.(목) 오후 06:00</span>
                                         예약이 확정되지 않았습니다.
-
-                                        <i class="fa-regular fa-circle-xmark"></i>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        
-                       </div>
-                    </div>
-
-                </li>
-            </ul>
-
-        </div>
-        
-        <!-- memberCode == 2 -->
-        <div class="notification-view" th:if="${session.loginMember?.memberCode==2}">   
-
-            <div class="pre-notification">
-                <p class="title">이전 알림</p>
-            </div>
-
-            <!-- 비동기?? -->
-            <nav class="all-notification">
-               <ul class="all-list">
-                    <li class="all">
-                        <a href="#">전체</a>
-                    </li>
-
-                    <li class="all">
-                        <a href="#">리뷰</a>
-                    </li>
-
-                    <li class="all">
-                        <a href="#">예약 취소</a>
-                    </li>
-
-                    <li class="all">
-                        <a href="#">신고</a>
-                    </li>
-                </ul>
-            </nav>
-
-            <ul class="notification-list">
-                <li class="notification-item">
-                    <div class="notification-text">
-                       <div class="border">
-
-                            <div class="notification-content-container">
-
-                                <div class="reservation-info">
-                                    <img src="#" alt="가게로고" class="image" id="storeLogo" name="storeLogo">
-
-                                    <span class="notification-store" name="storeName">가게이름, 관리자 </span>
-                                    <span class="notification-date" id="notificationDate" name="notificationDate">5분전</span>
-                                </div>
-
-                                <div class="notification-content">
-                                    <div class="notification-message">
-                                        <span id="reservDate" name="reservDate">5.13.(목) 오후 06:00</span>
-                                        예약이 확정되지 않았습니다.
-
-                                        <i class="fa-regular fa-circle-xmark"></i>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        
-                       </div>
-                    </div>
-
-                </li>
-            </ul>
-
-        </div>
-
-        <!-- memberCode == 3 -->
-        <div class="notification-view" th:if="${session.loginMember?.memberCode==3}">   
-
-            <div class="pre-notification">
-                <p class="title">이전 알림</p>
-            </div>
-
-            <!-- 비동기?? -->
-            <nav class="all-notification">
-               <ul class="all-list">
-                    <li class="all">
-                        <a href="#">전체</a>
-                    </li>
-
-                    <li class="all">
-                        <a href="#">신고</a>
-                    </li>
-               </ul>
-            </nav>
-
-            <ul class="notification-list">
-                <li class="notification-item">
-                    <div class="notification-text">
-                       <div class="border">
-
-                            <div class="notification-content-container">
-
-                                <div class="reservation-info">
-                                    <img src="#" alt="가게로고" class="profile" id="storeLogo" name="storeLogo">
-
-                                    <span class="notification-store" name="storeName">가게이름, 관리자 </span>
-                                    <span class="notification-date" id="notificationDate" name="notificationDate">5분전</span>
-                                </div>
-
-                                <div class="notification-content">
-                                    <div class="notification-message">
-                                        <span class="message-content" id="notificationContent" name="notificationContent">
-                                            5.13.(목) 오후 06:00  예약이 확정되지 않았습니다.
-                                        </span>
 
                                         <i class="fa-regular fa-circle-xmark"></i>
                                     </div>

@@ -190,7 +190,17 @@
                      <!-- 가게 예약 버튼-->
                      <div class="storedetail-reservationbuttonbox">
                         <!-- 클릭하면 예약하기 페이지로 이동 -->
-                        <button id="storereservationbutton">예약하기</button>
+                        <th:block th:if="${session.loginMember?.memberCode==1 || session.loginMember==null}">
+                            <a href="/reservation/reservationDetail" id="storereservationbutton">예약하기</a>
+                        </th:block>
+
+                        <th:block th:unless="${session.loginMember?.memberCode==1|| session.loginMember==null}">
+                            <a href="/" id="storereservationbutton">예약하기</a>
+                        </th:block>
+
+                        <!-- <th:block th:unless="${session.loginMember}">
+                            <a href="/reservation/reservationDetail" id="storereservationbutton">예약하기</a>
+                        </th:block> -->
                      </div>
                     
 
@@ -834,6 +844,11 @@
     </main>
        <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 
+
+    <script th:inline="javascript">
+        const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원";
+        const memberCode = /*[[${session.loginMember?.memberCode}]]*/ "회원코드";
+    </script>
 
    <script src="/js/reservation/reservation.js"></script>
    <script src="/js/store/storeDetail.js"></script>
