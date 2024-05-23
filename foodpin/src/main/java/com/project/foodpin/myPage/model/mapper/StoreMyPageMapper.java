@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.reservation.model.dto.Reservation;
 
 @Mapper
@@ -30,6 +31,18 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	List<Reservation> reservConfirm(int memberNo);
+
+	/** 사장님 정보 변경 화면으로 전환
+	 * @param memberNo
+	 * @return
+	 */
+	Member selectCeoInfo(int memberNo);
+
+	/** 사장님 정보 변경
+	 * @param inputMember
+	 * @return result
+	 */
+	int ceoInfoUpdate(Member inputMember);
 
 
 }

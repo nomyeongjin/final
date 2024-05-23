@@ -2,6 +2,7 @@ package com.project.foodpin.myPage.controller;
 
 import java.util.List;
 
+import org.eclipse.angus.mail.handlers.message_rfc822;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.service.StoreMyPageService;
@@ -67,10 +69,17 @@ public class StoreMyPageController {
 	 * @return reservList
 	 */
 	@ResponseBody
-	@GetMapping("reservAll")
-	public List<Reservation> reservAll(@SessionAttribute("loginMember") Member loginMember) {
+	@GetMapping("selectReserv")
+	public List<Reservation> selectReserv(@RequestParam("statusFl") String statusFl, @SessionAttribute("loginMember") Member loginMember) {
+		
 		int memberNo = loginMember.getMemberNo();
-		return service.reservAll(memberNo);
+		
+		System.out.println(statusFl);
+		if(statusFl == null) {
+			List<Reservation> reservList = service.reservAll(memberNo);
+		}
+		
+		return null;
 	}
 	
 	/** 확정된 예약 전체 조회 (비동기)
@@ -91,13 +100,49 @@ public class StoreMyPageController {
 		return "myPage/store/review";
 	}
 	
+	
+	// -----
+	
+
+	/** 사장님 정보 변경 화면으로 전환
+	 * @param loginMember
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("ceoInfo")
-	public String ceoInfo() {
+	public String ceoInfo(@SessionAttribute("loginMember") Member loginMember, Model model) {
+		
+		Member member = service.selectCeoInfo(loginMember.getMemberNo());
+		
+		model.addAttribute("member", member);
+		
 		return "myPage/store/ceoInfo";
 	}
-
 	
-	
+	/** 사장님 정보 변경
+	 * @param loginMember
+	 * @param inputMember
+	 * @param model
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("ceoInfoUpdate")
+	public String ceoInfoUpdate(@SessionAttribute("loginMember") Member loginMember, Member inputMember, 
+			Model model, RedirectAttributes ra) {
+		
+		inputMember.setMemberNo(loginMember.getMemberNo());
+		
+		int result = service.ceoInfoUpdate(inputMember);
+		
+		String message = "";
+		
+		if(result > 0)	message = "사장님 정보가 변경되었습니다.";
+		else	message = "사장님 정보에 실패했습니다.";
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:/myPage/store/ceoInfo";
+	}
 	
 	
 	
