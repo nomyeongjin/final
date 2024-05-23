@@ -50,8 +50,8 @@ public class StoreMyPageController {
 	@GetMapping("storeInfo")
 	public String storeInfo(@SessionAttribute("loginMember") Member loginMember, Model model) {
 		
+
 		Store store = service.selectstoreInfo(loginMember.getMemberNo());
-		
 		model.addAttribute("store", store);
 		
 		return "myPage/store/storeInfo";

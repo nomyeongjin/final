@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기</title>
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/member/findId.css">
+</head>
+<body>
+    <main>
+        <!-- templetes/common/header.html  조각 추가 -->
+        <th:block th:replace="~{common/header}"></th:block>
+
+
+        <section class="member-box">
+            <div class="member-title">
+                <h3>아이디 목록</h3>
+            </div>
+
+            <div>
+                <input type="radio" 
+                th:each="id : ${idList}"
+                th:object="${id}"
+                th:text="${memberId}">
+            </div>        
+            <div>
+                <button>로그인 하기</button>
+                <button>비밀번호 찾기</button>
+            </div>
+
+        </section>
+
+
+    </main>
+
+    <th:block th:replace="~{common/footer}"></th:block> 
+
+    <script src="/js/member/findIdResult.js"></script>
+    
+</body>
+</html>

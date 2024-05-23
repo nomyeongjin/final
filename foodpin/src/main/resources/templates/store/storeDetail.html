@@ -190,7 +190,17 @@
                      <!-- 가게 예약 버튼-->
                      <div class="storedetail-reservationbuttonbox">
                         <!-- 클릭하면 예약하기 페이지로 이동 -->
-                        <button id="storereservationbutton">예약하기</button>
+                        <th:block th:if="${session.loginMember?.memberCode==1 || session.loginMember==null}">
+                            <a href="/reservation/reservationDetail" id="storereservationbutton">예약하기</a>
+                        </th:block>
+
+                        <th:block th:unless="${session.loginMember?.memberCode==1|| session.loginMember==null}">
+                            <a href="/" id="storereservationbutton">예약하기</a>
+                        </th:block>
+
+                        <!-- <th:block th:unless="${session.loginMember}">
+                            <a href="/reservation/reservationDetail" id="storereservationbutton">예약하기</a>
+                        </th:block> -->
                      </div>
                     
 
@@ -701,9 +711,9 @@
                     <div class="storereview-bottom">
                         <p>주문 내역</p>
                         <div class="storereview-image">
-                            <img class="store-look" src="/images/storeDetail/counter2.jpg">
-                            <img class="store-look" src="/images/storeDetail/counter3.jpg">
-                            <img class="store-look" src="/images/storeDetail/counter.jpg">
+                            <img class="review-look" src="/images/storeDetail/counter2.jpg">
+                            <img class="review-look" src="/images/storeDetail/counter3.jpg">
+                            <img class="review-look" src="/images/storeDetail/counter.jpg">
                         </div>
                         <p>해시태그</p>
                         <div class="review-hashtag">
@@ -835,6 +845,11 @@
        <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 
 
+    <script th:inline="javascript">
+        const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원";
+        const memberCode = /*[[${session.loginMember?.memberCode}]]*/ "회원코드";
+    </script>
+
    <script src="/js/reservation/reservation.js"></script>
    <script src="/js/store/storeDetail.js"></script>
 
@@ -843,12 +858,12 @@
         
          <a href="#bodyTop"><i class="fa-solid fa-angles-up"></i></a>
        
-         <a href="#bodyBottom"><i class="fa-solid fa-angles-down"></i></a>        
-        
+         
          <a href="#"><i class="fa-regular fa-comment"></i></a>
          
-         <a href="#"><i class="fa-regular fa-circle-user"></i></a>
-        
+         <a href="/store/storeSearch"><i class="fa-solid fa-location-dot"></i></a>
+         
+         <a href="#bodyBottom"><i class="fa-solid fa-angles-down"></i></a>        
     </aside>
 
 </body>

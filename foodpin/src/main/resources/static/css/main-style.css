@@ -460,6 +460,11 @@ header>section:nth-child(3) {
    /* width: 250px; */
 }
 
+/* 로그인X 인 경우 아이콘 안보일 때 위치 조정을 위한 임시 네모 */
+.temp{
+   width: 40px;
+   height: 40px;
+}
 
 .notification-bell-btn{
    font-size: 25px;
@@ -533,25 +538,40 @@ header>section:nth-child(3) {
    padding: 5px 15px;
 }
 
+.all-notification{
+   z-index: 2500;
+}
+
 .all-list{
    display: flex;
    margin: 10px 5px;
    list-style: none;
 }
 
-.all a{
+.category{
    display: flex;
    justify-content: center;
    align-items: center;
    height: 30px;
-   border: 1px solid #4173f5;
    border-radius: 50px;
-   font-weight: bold;
-   color: #4173f5;
-   background-color: (65, 115, 245, .1);
    cursor: pointer;
    padding: 15px;
    margin-left: 5px;
+   /* font-weight: bold; */
+   color: #a0a0a0;
+   border: 1px solid #ebebeb;
+   background-color: white;
+}
+
+/* .category:hover{
+   color: #717171;
+   border: 1px solid #717171;
+   cursor: pointer;
+} */
+.click{
+   color: #4173f5;
+   border: 1px solid #4173f5;
+   background-color:  rgba(114, 154, 255, 0.041);
 }
 
 .notification-list{
@@ -602,7 +622,7 @@ header>section:nth-child(3) {
    height: 30px;
 }
 
-.profile{
+.image{
    width: 30px;
    height: 30px;
    border-radius: 50%;
