@@ -35,44 +35,24 @@
 
                     </thead>
                     <tbody>
-                        <!-- <th:block th:if="${lists.isEmpty(enrollList)}">
+                        <th:block th:if="${#lists.isEmpty(storeMember)}">
                             <tr>
                                 <th colspan="4">입점 내역이 존재하지 않습니다</th>
                             </tr>
-                        </th:block> -->
+                        </th:block> 
 
-                        <!-- <th:block th:unless="${#lists.isEmpty(enrollList)}"> -->
-                            <tr>
-                                <td>김사장</td>
-                                <td>대박고깃집</td>
-                                <td>24.05.22</td>
+                        <th:block th:unless="${#lists.isEmpty(storeMember)}">
+                            <tr th:each="member : ${storeMember}">
+                                <td th:text="*{member.memberName}">김사장</td>
+                                <td th:text="*{member.storeName}">대박고깃집</td>
+                                <td th:text="*{member.enrollDate}">24.05.22</td>
                                 <td>
-                                    <button class="approval">승인</button>
-                                    <button class="refuse">거절</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>김사장</td>
-                                <td>
-                                    <a href="#" class="open-storeDetail">대박고깃집</a>
-                                </td>
-                                <td>24.05.22</td>
-                                <td>
-                                    <button class="approval">승인</button>
-                                    <button class="refuse">거절</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>김사장</td>
-                                <td>대박고깃집</td>
-                                <td>24.05.22</td>
-                                <td>
-                                    <button class="approval">승인</button>
-                                    <button class="refuse">거절</button>
+                                    <button class="approval" data-memberNo="*{member.memberNo}">승인</button>
+                                    <button class="refuse" data-memberNo="*{member.memberNo}">거절</button>
                                 </td>
                             </tr>
 
-                        <!-- </th:block> -->
+                        </th:block>
                     </tbody>
 
                 </table>

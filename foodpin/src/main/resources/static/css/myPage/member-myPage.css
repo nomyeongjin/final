@@ -349,6 +349,7 @@ form[name='myPageFrm']{
 .fa-circle-exclamation {
     margin-left: 7px;
     cursor: pointer;
+    position: relative;
 }
 
 .fa-circle-exclamation:hover .tooltip {
@@ -374,7 +375,7 @@ form[name='myPageFrm']{
 }
 
 .tooltip::after {
-    content: "바보야";
+    content: "qkqhdi";
     position: absolute;
     top: 100%;
     left: 50%;

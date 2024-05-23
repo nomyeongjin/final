@@ -27,6 +27,48 @@ if(secession != null){
     })
 }
 
+/* 노쇼 경고 팝업 */
+document.addEventListener('DOMContentLoaded', () => {
+    const icons = document.querySelectorAll('.fa-circle-exclamation');
+
+    icons.forEach(icon => {
+        const tooltipText = icon.getAttribute('data-tooltip');
+        const tooltip = document.createElement('span');
+        tooltip.className = 'tooltip';
+        tooltip.textContent = tooltipText;
+        icon.parentNode.appendChild(tooltip);
+    });
+});
+
+/* 가게 찜 */
+const like = document.querySelector(".like");
+like.addEventListener("click", e => {
+    const obj = {
+        "memberNo" : loginMemberNo,
+        "storeNo" : storeNo,
+        "likeCheck" : likeCheck
+    };
+
+    fetch("/myPage/member/memberLike", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(obj)
+    })
+    .then(resp => resp.text())
+    .then(count => {
+        if(count == -1) {
+            return;
+        }
+
+        likeCheck = likeCheck == 0 ? 1 : 0;
+
+        e.target.classList.toggle("fa-regular");
+        e.target.classList.toggle("fa-solid");
+
+        
+    })
+})
+
 /* 회원 정보 / 비밀번호 변경 화면 변경 */
 const changePwBtn = document.querySelector("#changePwBtn");
 const infoBtn = document.querySelector("#infoBtn");
@@ -112,16 +154,3 @@ if(updateInfo != null) {
 
     })
 }
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const icons = document.querySelectorAll('.fa-circle-exclamation');
-
-    icons.forEach(icon => {
-        const tooltipText = icon.getAttribute('data-tooltip');
-        const tooltip = document.createElement('span');
-        tooltip.className = 'tooltip';
-        tooltip.textContent = tooltipText;
-        icon.parentNode.appendChild(tooltip);
-    });
-});
