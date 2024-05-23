@@ -767,12 +767,12 @@ hr{
 
 .storereview-mid{
     width: 100%;
-    max-width: 300px;
     overflow: auto;
-    padding: 20px;
+    padding: 25px;
 }
 
 .storereview-bottom{
+    padding: 0 25px;
     margin-bottom: 15px;
 }
 
@@ -790,19 +790,27 @@ hr{
     margin: 10px 0;
 }
 
+.review-look{
+    margin: 8px;
+    width: 205px;
+    height: 205px;
+    border-radius: 5px;
+}
+
 .review-hashtag{
     margin: 18px 0;
 }
 
 .store-reply{
-    border-top: 1px solid var(--main-color);
+    padding: 0 25px;
     display: flex;
+    margin-top: 10px;
 }
 
 
 .review-store-profile{
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     margin-right: 20px;
     margin-top: 20px;
@@ -813,7 +821,7 @@ hr{
     margin-top: 23px;
     margin-left: 10px;
     padding: 20px;
-    max-width: 480px;
+    width: 480px;
     background:#666;
     color: #fff;
     border-radius: 10px;
@@ -835,7 +843,7 @@ hr{
     justify-content: center;
     align-items: center;
     margin-top: 25px;
-    border-top: 1px solid var(--main-color);
+    border-top: 2px solid var(--main-color);
 }
 
 .review-more-button > button{

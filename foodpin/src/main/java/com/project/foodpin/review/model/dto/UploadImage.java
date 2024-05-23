@@ -15,7 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class UploadImg {
+public class UploadImage {
 
 	private int imageNo;
 	private String imagePath;

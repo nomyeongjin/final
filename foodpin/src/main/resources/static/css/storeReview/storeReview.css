@@ -110,8 +110,14 @@
   align-items: center;
   margin-left: 20px;
   font-size: 18px;
+  border: none;
+  user-select: none;
+  width: 12px;
 }
-
+.rating__result:focus-within{
+  outline: none;
+  border: none;
+}
 
 .rating__star {
   font-size: 1.4em;
@@ -288,7 +294,7 @@
   color: rgb(46, 41, 41);;
   font-size: 15px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 45px;
   margin-top: 35px;
 }
 
