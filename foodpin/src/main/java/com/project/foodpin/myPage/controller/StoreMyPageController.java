@@ -48,7 +48,7 @@ public class StoreMyPageController {
 	 * @return
 	 */
 	@GetMapping("storeInfo")
-	public String storeInfo(@SessionAttribute("logiinMember") Member loginMember, Model model) {
+	public String storeInfo(@SessionAttribute("loginMember") Member loginMember, Model model) {
 		
 		Store store = service.selectstoreInfo(loginMember.getMemberNo());
 		model.addAttribute("store", store);
