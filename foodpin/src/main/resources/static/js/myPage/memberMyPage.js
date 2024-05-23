@@ -112,3 +112,16 @@ if(updateInfo != null) {
 
     })
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const icons = document.querySelectorAll('.fa-circle-exclamation');
+
+    icons.forEach(icon => {
+        const tooltipText = icon.getAttribute('data-tooltip');
+        const tooltip = document.createElement('span');
+        tooltip.className = 'tooltip';
+        tooltip.textContent = tooltipText;
+        icon.parentNode.appendChild(tooltip);
+    });
+});

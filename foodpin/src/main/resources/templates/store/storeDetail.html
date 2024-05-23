@@ -147,10 +147,10 @@
                                 <p>#패스트푸드</p>
                                 </div>
 
+                                <a href="#" id="toChatting">문의하기</a>
+         
 
-                                <!-- 문의(채팅) 페이지로 이동-->
-                                <a id="toChatting" href="#">문의하기</a>
-
+                               
 
 
                             </div>
@@ -166,20 +166,14 @@
                         <div class="store-detail-content">
 
                             <pre class="store-detail-text">
-집게리아(영어: Krusty Krab)는 해양생물 애니메이션인《네모바지 스폰지밥》에 등장하는 가상의 즉석식 레스토랑이다. 
-시그니처 버거인 게살버거(영어: Krabby Patty)로 유명하며, 그 요리법은 영업 비밀로 엄격히 보호되고 있다.
+집게리아(영어: Krusty Krab)는 즉석식 레스토랑으로 시그니처 버거인 게살버거(영어: Krabby Patty)로 유명하며, 그 요리법은 영업 비밀로 엄격히 보호되고 있다.
 
 이 레스토랑은 소유자이자 매니저인 집게사장이 설립하였다. 
-스폰지밥 뮤지컬에 따르면 집게사장의 딸 진주가 커서 집게리아를 물려받을 예정이라고 한다. 
-[1] 스폰지밥과 징징이가 유일한 정규직 직원인 이 레스토랑은 비키니시티에서 "식사를 위해 설립된 최고의 식당"으로 간주하며, 
-주요 경쟁자인 플랑크톤과 슈퍼컴퓨터이자 플랑크톤의 아내인 카렌이 운영하는 첨 버켓의 끊임없는 도전을 받고 있다.
+소문에 따르면 집게사장의 딸 진주가 커서 집게리아를 물려받을 예정이라고 한다. 
 
-시리즈의 주요 설정 중 하나인 집게리아는 스폰지밥이 레스토랑의 튀김 요리사 일자리에 지원하는 파일럿 에피소드 '직원구함'에서 소개되었다. 
-집게리아는 《보글보글 스폰지밥》(2002년작), 《스폰지밥 3D》(2015년작) 등 극장용 영화 시리즈, 브로드웨이 뮤지컬, 비디오 게임, 장난감 등 다른 미디어에도 등장했다. 
-이 레스토랑은 대중문화 전반에 걸쳐 언급되거나 패러디되었다. 또한 실제 레스토랑에도 영감을 주었다.
-
-                    
-                            </pre>
+스폰지밥과 징징이가 유일한 정규직 직원인 이 레스토랑은 비키니시티에서 "식사를 위해 설립된 최고의 식당"으로 간주하며, 
+주요 경쟁자인 플랑크톤과 슈퍼컴퓨터이자 플랑크톤의 아내인 카렌이 운영하는 첨 버켓의 끊임없는 도전을 받고 있다.               
+                       </pre>
 
                            
                         </div>
@@ -196,7 +190,17 @@
                      <!-- 가게 예약 버튼-->
                      <div class="storedetail-reservationbuttonbox">
                         <!-- 클릭하면 예약하기 페이지로 이동 -->
-                        <button id="storereservationbutton">예약하기</button>
+                        <th:block th:if="${session.loginMember?.memberCode==1 || session.loginMember==null}">
+                            <a href="/reservation/reservationDetail" id="storereservationbutton">예약하기</a>
+                        </th:block>
+
+                        <th:block th:unless="${session.loginMember?.memberCode==1|| session.loginMember==null}">
+                            <a href="/" id="storereservationbutton">예약하기</a>
+                        </th:block>
+
+                        <!-- <th:block th:unless="${session.loginMember}">
+                            <a href="/reservation/reservationDetail" id="storereservationbutton">예약하기</a>
+                        </th:block> -->
                      </div>
                     
 
@@ -652,7 +656,14 @@
             <div class="storedetail-box">
 
 
+               
+
             <div class="storereview-container">
+
+
+                <a href="/review/reviewPage">리뷰쓰기</a>
+
+    
                 <h3 class="review-title">방문자 리뷰</h3>
                 
                 <div class="review-avgScore">
@@ -720,14 +731,67 @@
                         </p>
 
                     </div>
+                    <div class="storereview-top">
+
+
+                        <div class="storereview-top-left">
+                            <img class="review-member-profile" src="/images/storeDetail/hotdog.jpg" alt="회원 프로필 이미지">
+                            <div class="review-info">
+                                <span>닉네임</span>
+                                
+                                <div class="review-memberScore">
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <i class="rating__star far fa-star"></i>
+                                    <span> 점수</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="storereview-top-right">
+                            <button type="button" id="reviewReport">🚨신고하기</button>
+                            <span>2024-05-17</span>
+                        </div>
+
+                    </div>
+
+                    
+                    <div class="storereview-mid">
+                        <p>리뷰 내용</p>
+                    </div>
+
+                    <div class="storereview-bottom">
+                        <p>주문 내역</p>
+                        <div class="storereview-image">
+                            <img class="store-look" src="/images/storeDetail/counter2.jpg">
+                            <img class="store-look" src="/images/storeDetail/counter3.jpg">
+                            <img class="store-look" src="/images/storeDetail/counter.jpg">
+                        </div>
+                        <p>해시태그</p>
+                        <div class="review-hashtag">
+                            <span>#해시태그</span>
+                            <span>#해시태그</span>
+                            <span>#해시태그</span>
+                        </div>
+                    </div>
+
+                    <div class="store-reply">
+                        <img class="review-store-profile" src="/images/storeDetail/store.jpg" alt="가게 프로필 이미지">
+
+                        <p class="reply-content-bubble">
+                            사장님 답글
+                        </p>
+
+                    </div>
                     
                     <div class="review-more-button">
                         <button id="reviewMoreButton">리뷰 더보기</button>
                     </div>
 
-                    <a href="/review/reviewPage">리뷰쓰기</a>
-
-
+                  
 
                 </div>
             </div>
@@ -781,14 +845,25 @@
        <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 
 
+    <script th:inline="javascript">
+        const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원";
+        const memberCode = /*[[${session.loginMember?.memberCode}]]*/ "회원코드";
+    </script>
+
    <script src="/js/reservation/reservation.js"></script>
    <script src="/js/store/storeDetail.js"></script>
 
 
     <aside>
-        <div class="top-button">
-         <a href="#bodyTop"><i class="fa-solid fa-arrow-up"></i></a>
-        </div>
+        
+         <a href="#bodyTop"><i class="fa-solid fa-angles-up"></i></a>
+       
+         <a href="#bodyBottom"><i class="fa-solid fa-angles-down"></i></a>        
+        
+         <a href="#"><i class="fa-regular fa-comment"></i></a>
+         
+         <a href="#"><i class="fa-regular fa-circle-user"></i></a>
+        
     </aside>
 
 </body>

@@ -4,17 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const notificationBellBtn = document.querySelector(".notification-bell-btn");
 
     notificationBellBtn.addEventListener("click", () => {
-
-        if(loginMember==null){
-            alert("로그인 후 이용 가능한 서비스입니다.");
-            return;
-        }
         const notificationList = document.querySelector(".box-content");
         
         notificationList.classList.toggle("notification-show");
         notificationBellBtn.classList.toggle("action");
 
     })
+
+    // 아림 카테고리 클릭 시 색상 변환
+    const category = document.querySelectorAll(".category");
+    category[0].classList.add("click");
+    for(let li of category){
+        
+        li.addEventListener("click", () => {
+            for(let item of category) {
+                item.classList.remove("click");
+            }
+            li.classList.add("click");
+        });
+    };
 });
 
 
@@ -54,7 +62,7 @@ let selectnNotificationFn; // 비동기 알림조회 함수
 //         selectnNotificationFn();
 //     })
 
-
+        /* ******** 알림 조회 할 때 파라미터 전달을 다르게.... ********* */
 //     /* 비동기 알림조회 */
 //     selectnNotificationFn = () =>{
 
@@ -131,9 +139,35 @@ let selectnNotificationFn; // 비동기 알림조회 함수
 //                 const messageContent = document.createElement("span");
 //                 messageContent.className("message-content");
 
-//                 const xmark = document.createElement("i");
-//                 xmark.className("fa-circle-xmark");
+                // const xmark = document.createElement("i");
+                // xmark.className("fa-circle-xmark");
 
+                // xmark.addEventListener("click", e => {
+
+                //     fetch("/notification", {
+                //         method : "DELETE",
+                //         headers : {"Content-Type" : "application/json"},
+                //         body : data.notificationNo
+                //     })
+                //     .then(resp=>resp.text())
+                //     .then(result=>{
+                //         xmark.parentElement.remove();
+
+                //         notReadCheckFn().then(notReadCount => {
+
+                //             const notificationBtn = document.querySelector(".notification-bell-btn");
+
+                //             if(notReadCount>0){
+                //                 notificationBtn.classList.remove("fa-regular");
+                //                 notificationBtn.classList.add("fa-solid");
+                //             } else {
+                //                 notificationBtn.classList.add("fa-regular");
+                //                 notificationBtn.classList.remove("fa-solid");
+                //             }
+                //         })
+
+                //     })
+                // })
 
 
 //                 /* 조립 */
@@ -156,3 +190,30 @@ let selectnNotificationFn; // 비동기 알림조회 함수
 //         })
 //     }
 // }
+
+// document.addEventListener("DOMContentLoaded", () =>{
+//     const notificationBtn = document.querySelector(".notification-bell-btn");
+
+//     notReadCheckFn().then(notReadCount => {
+        
+//         if(notReadCount>0){
+//             notificationBtn.classList.remove("fa-regular");
+//             notificationBtn.classList.add("fa-solid");
+//         }
+//     })
+
+
+//     notificationBtn.addEventListener("click", e => {
+//         const notiList = document.querySelector(".notification-list");
+
+//         if(notiList.classList.contains("notification-show")){
+//             notiList.classList.remove("notification-show");
+//             return;
+//         }
+
+//         selectnNotificationFn();
+//         notiList.classList.add("notification-show");
+
+//     })
+// })
+

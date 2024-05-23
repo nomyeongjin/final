@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.project.foodpin.myPage.model.mapper.StoreMyPageMapper">
 
-	<!-- 회원번호로 사업자번호 조회 -->
-	<select id="selectStoreNo">
-		SELECT STORE_NO
-		FROM "STORE"
-		JOIN MEMBER USING(MEMBER_NO)
-		WHERE MEMBER_NO = #{memberNo}
+	<!-- *** 가게 정보 *** -->
+	
+	<!-- 가게 정보 수정 화면 이동 -->
+	<select id="selectstoreInfo">
+	
 	</select>
+	
 	
 	
 	<!-- *** 예약 *** -->
@@ -41,5 +41,21 @@
 		AND RESERV_STATUS_FL = 'Y'
 		ORDER BY RESERV_DATE
 	</select>
+	
+	
+	<!-- *** 사장님 정보 *** -->
+	
+	<!-- 사장님 정보 변경 화면으로 전환 + 기존 정보 조회 -->
+	<select id="selectCeoInfo">
+		SELECT MEMBER_EMAIL, MEMBER_TEL FROM "MEMBER" WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 사장님 정보 변경 -->
+	<update id="ceoInfoUpdate">
+		UPDATE "MEMBER" SET
+		MEMBER_EMAIL = #{memberEmail}, MEMBER_TEL = #{memberTel}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
 	
 </mapper>
