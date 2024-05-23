@@ -6,7 +6,16 @@ if(storereservationbutton != null) {
     storereservationbutton.addEventListener("click", e => {
 
         if(memberCode !== 1){
-            alert("현재 로그인한 정보로 접근할 수 없는 서비스 입니다.");
+            // alert("현재 로그인한 정보로 접근할 수 없는 서비스 입니다.");
+            Swal.fire({
+                title: "",
+                text: "현재 로그인한 정보로 접근할 수 없는 서비스 입니다.",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "확인"
+            })
             e.preventDefault();
             return;
         }
