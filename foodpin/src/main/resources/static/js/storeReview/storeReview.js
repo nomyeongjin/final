@@ -115,7 +115,7 @@ function executeRating(stars, result) {
 }
 
 function printRatingResult(result, num = 0) {
-  result.textContent = num;
+  result.value = num;
 }
 
 executeRating(ratingStars, ratingResult);

@@ -44,14 +44,13 @@ public class ReveiwController {
 	public String insertReview(
 		@SessionAttribute("loginMember") Member loginMember,
 		@RequestParam("images") List<MultipartFile> images,
+		@RequestParam("reviewRating") int reviewRating,
 		Review inputReview) throws IllegalStateException, IOException {
-		
 		
 		inputReview.setMemberNo(loginMember.getMemberNo());
 		
 		// 추후 수정 예정
 		inputReview.setStoreNo(1);
-		
 		
 		int result = service.insertReview(inputReview, images);
 		
@@ -62,7 +61,6 @@ public class ReveiwController {
 		}else {
 			path = "storeReview/storeReview";
 		}
-
 		
 		return path;
 	}
