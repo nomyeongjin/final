@@ -40,7 +40,8 @@
                                 <div th:object="${store}">
                                         <span class="likeStoreName" th:text="*{storeName}"><a href="/store/storeDetail">대박고깃집  ></a></span>
                                         <span class="likeStoreAddress" th:text="*{storeLocation}">서울시 중구 마조로 56길</span>
-                                        <i class="fa-solid fa-bookmark like"></i>
+                                        <i class="fa-solid fa-bookmark like"
+                                            th:classappend="*{likeCheck == 1} ? fa-solid : fa-regular"></i>
                                 </div>
                                 </li>
                                 
