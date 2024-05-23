@@ -52,7 +52,7 @@
 
                <div class="ceoInfo-input-area">
                   <label for="memberTel">전화번호</label>
-                  <input id="memberTel" name="memberTel" th:value="*{memberTel}"></input>
+                  <input id="memberTel" type="number" name="memberTel" th:value="*{memberTel}"></input>
                </div>
 
                <button class="update-btn" id="updateBtn">정보 수정</button>
@@ -68,6 +68,9 @@
    </div>  
    </main>
 
+   <script th:inline="javascript">
+      const memberNo = /*[[${session.loginMember.memberNo}]]*/ "회원 번호";
+  </script>
 
    <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 
