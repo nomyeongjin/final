@@ -45,20 +45,36 @@
                     </button>
                 </li>
                 
-                <li>
-                    <button type="button" class="navbar-button">
-                       <!-- 텍스트 없이 마이페이지로 이동하는 이미지 -->
-                       <span class="navbar-text">마이페이지</span>
-                    </button>
-                </li>
-             
+              
             </ul>
 
             <ul>
                 <li>
                     <!-- 나중에 기본 이미지 넣고, 로그인 시 회원 이미지 -->
                     <button type="button" class="navbar-button">
-                        <i class="fa-regular fa-circle-user"></i>
+                        <div class="profileArea">
+
+                            <!-- 일반 회원 -->
+                            <th:block th:if="${session.loginMember?.memberCode == 1}">
+                                <a href="/myPage/member/memberInfo">
+                            </th:block>
+        
+                            <!-- 사업자 회원 -->
+                            <th:block th:if="${session.loginMember?.memberCode == 2}">
+                                <a href="/myPage/store/storeInfo">
+                            </th:block>
+        
+                            <!-- 관리자 회원 -->
+                            <th:block th:if="${session.loginMember?.memberCode == 3}">
+                                <a href="/myPage/manager/storeEnroll"> 
+                            </th:block>
+                            
+                            <img th:with="user=#{user.default.image}" 
+                            th:src="${session.loginMember.profileImg ?:user}"  
+                                id="memberProfile">
+                           
+                             </a>
+                        </div>
                     </button>
                 </li>
 
