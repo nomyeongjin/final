@@ -42,7 +42,7 @@
                         <div class="content">예약이 확정 되면 푸드핀 알림과 문자로 알려드릴게요!</div>
                         <div class="content">내 예약은 마이페이지에서도 찾을 수 있어요
                             <th:block th:if="${session.loginMember?.memberCode==1}">
-                                <a href="/myPage/member/memberReservation">더보기<i class="fa-solid fa-chevron-down fa-rotate-270"></i></a>
+                                <a href="/myPage/member/reservation/fix">더보기<i class="fa-solid fa-chevron-down fa-rotate-270"></i></a>
                             </th:block>
 
                             <th:block th:if="${session.loginMember?.memberCode==2}">
