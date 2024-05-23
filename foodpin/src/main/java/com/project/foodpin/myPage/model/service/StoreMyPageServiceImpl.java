@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.mapper.StoreMyPageMapper;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,11 +17,10 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	
 	private final StoreMyPageMapper mapper;
 
-	
-	// 회원번호로 사업자번호 조회
+	// 가게 정보 수정 화면 이동
 	@Override
-	public int selectStoreNo(int memberNo) {
-		return mapper.selectStoreNo(memberNo);
+	public Store selectstoreInfo(int memberNo) {
+		return mapper.selectstoreInfo(memberNo);
 	}
 	
 	
@@ -50,6 +50,9 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int ceoInfoUpdate(Member inputMember) {
 		return mapper.ceoInfoUpdate(inputMember);
 	}
+
+
+
 
 
 

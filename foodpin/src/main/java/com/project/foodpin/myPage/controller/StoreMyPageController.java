@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.service.StoreMyPageService;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,10 +41,35 @@ public class StoreMyPageController {
 //		return "redirect:/";
 //	}
 	
+
+	/** 가게 정보 수정 화면 이동 + 가게 기본 정보 조회
+	 * @param loginMember
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("storeInfo")
-	public String storeInfo() {
+	public String storeInfo(@SessionAttribute("logiinMember") Member loginMember, Model model) {
+		
+		Store store = service.selectstoreInfo(loginMember.getMemberNo());
+		model.addAttribute("store", store);
+		
 		return "myPage/store/storeInfo";
 	}
+	
+	
+	
+	
+	
+//	@GetMapping("storeInfo")
+//	public String storeInfo() {
+//		return "myPage/store/storeInfo";
+//	}
+	
+	
+	
+	
+	
+	
 	
 	// -----------------------------
 	
@@ -53,12 +79,10 @@ public class StoreMyPageController {
 	 * @return
 	 */
 	@GetMapping("reservation")
-	public String reservation(@SessionAttribute("loginMember") Member loginMember, Model model, Model m) {
+	public String reservation(@SessionAttribute("loginMember") Member loginMember, Model model) {
 		
-		int memberNo = loginMember.getMemberNo();
-//		int storeNo  = service.selectStoreNo(memberNo); // 세션에서 얻어온 회원번호로 사업자 번호 조회
-//		
-		List<Reservation> reservList = service.reservAll(memberNo);
+		List<Reservation> reservList = service.reservAll(loginMember.getMemberNo());
+		
 		model.addAttribute("reservList", reservList);
 		
 		return "myPage/store/reservation";
@@ -129,8 +153,6 @@ public class StoreMyPageController {
 	@ResponseBody
 	public Member ceoInfo(@RequestBody int memberNo) {
 		
-		System.out.println(memberNo);
-		
 		return service.selectCeoInfo(memberNo);
 	}
 	
@@ -166,8 +188,6 @@ public class StoreMyPageController {
 	@PostMapping("ceoInfoUpdateJs")
 	public int ceoInfoUpdateJs(@RequestBody Member member) {
 
-		System.out.println(member);
-		
 		return service.ceoInfoUpdate(member);
 	}
 	
