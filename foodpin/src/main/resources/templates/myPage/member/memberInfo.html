@@ -31,7 +31,9 @@
                         <button class="sub-title-btn" id="infoBtn">기본 정보</button>
                         <button class="sub-title-btn" id="changePwBtn">비밀번호 변경</button>
                     </section>
-         
+
+                    
+                    
                     <section id="infoContainer">
                         <form action="memberInfo" method="POST" name="member-myPageFrm" id="updateInfo" enctype="multipart/form-data">
                             <div class="profile-img-area">
@@ -41,20 +43,19 @@
                             </div>
                                     
                             <span id="deleteImage">&times;</span>
-                            <div class="memberNoshow">누적 노쇼 1회</div>
                             
                             <div class="profile-input-area">
                                 <div class="member-myPage-row">
                                     <label>닉네임</label> 
                                     <input type="text" name="memberNickname" 
-                                     id="memberNickname" maxlength="10"
-                                     th:value="${session.loginMember.memberNickname}">
+                                    id="memberNickname" maxlength="10"
+                                    th:value="${session.loginMember.memberNickname}">
                                 </div>
                                 <div class="member-myPage-row">
                                     <label>전화번호</label> 
                                     <input type="text" name="memberTel" 
-                                     id="memberTel" maxlength="11"
-                                     th:value="${session.loginMember.memberTel}">
+                                    id="memberTel" maxlength="11"
+                                    th:value="${session.loginMember.memberTel}">
                                 </div>
                                 
                             </div>
