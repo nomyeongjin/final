@@ -2,7 +2,6 @@ package com.project.foodpin.myPage.controller;
 
 import java.util.List;
 
-import org.eclipse.angus.mail.handlers.message_rfc822;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,6 +76,8 @@ public class StoreMyPageController {
 		System.out.println(statusFl);
 		if(statusFl == null) {
 			List<Reservation> reservList = service.reservAll(memberNo);
+			
+			return reservList;
 		}
 		
 		return null;
@@ -119,6 +120,20 @@ public class StoreMyPageController {
 		return "myPage/store/ceoInfo";
 	}
 	
+	/** 사장님 정보 변경 화면으로 전환 (비동기)
+	 * @param loginMember
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("ceoInfo")
+	@ResponseBody
+	public Member ceoInfo(@RequestBody int memberNo) {
+		
+		System.out.println(memberNo);
+		
+		return service.selectCeoInfo(memberNo);
+	}
+	
 	/** 사장님 정보 변경
 	 * @param loginMember
 	 * @param inputMember
@@ -144,29 +159,22 @@ public class StoreMyPageController {
 		return "redirect:/myPage/store/ceoInfo";
 	}
 	
+	/** 사장님 정보 변경 (비동기)
+	 * @param member
+	 * @return result
+	 */
+	@PostMapping("ceoInfoUpdateJs")
+	public int ceoInfoUpdateJs(@RequestBody Member member) {
+
+		System.out.println(member);
+		
+		return service.ceoInfoUpdate(member);
+	}
 	
 	
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
