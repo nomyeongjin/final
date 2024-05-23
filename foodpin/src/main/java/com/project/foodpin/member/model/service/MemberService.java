@@ -1,5 +1,6 @@
 package com.project.foodpin.member.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.project.foodpin.member.model.dto.Member;
@@ -60,5 +61,11 @@ public interface MemberService {
 	 * @return
 	 */
 	int checkStoreNo(String storeNo);
+
+	/** 아이디 목록
+	 * @param inputMember
+	 * @return
+	 */
+	List<Member> findIdList(Member inputMember);
 
 }

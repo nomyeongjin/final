@@ -144,15 +144,28 @@
 
 
   .text-area {
+    display: flex;
+    width: 410px;
     margin-top: 10px;
     text-align: center;
+    justify-content: space-evenly;
   }
   
-  .text-area * {
+  .text-area-element {
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  
+  .text-area-element>*{
     text-decoration: none;
-    color: #919191;
+    color: #3d3d3d;
     margin: 0 10px;
     font-size: 0.9em;
-    border-bottom: 1px solid #919191;
   }
-  
+
+  .text-area-element>span>*{
+    text-decoration: none;
+    color: #868686;
+    font-size: 0.9em;
+  }

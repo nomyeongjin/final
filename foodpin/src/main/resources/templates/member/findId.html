@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기</title>
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/member/findId.css">
+</head>
+<body>
+
+    <main>
+        <!-- templetes/common/header.html  조각 추가 -->
+        <th:block th:replace="~{common/header}"></th:block>
+
+
+        <section class="member-box">
+            <div class="member-title">
+                <h3>아이디 찾기</h3>
+                <p>가입 시 작성했던 정보를 입력해주세요.</p>
+            </div>
+
+            <form action="/member/findIdResult" method="POST" name="findIdForm" id="findIdForm">
+
+                
+                <div class="form-section">
+                    <!-- 이름 입력 -->
+                    <label for="memberName">
+                        <span class="required">*</span> 
+                        <span class="required">이름</span> 
+                    </label>
+        
+                    <div class="signUp-input-area">
+                        <input type="text" name="memberName" id="memberName" placeholder="이름" maxlength="10" >
+                    </div>
+                    <span class="signUp-message" id="nameMessage"></span>
+    
+                    <!-- 전화번호 입력 -->
+                    <label for="memberTel">
+                        <span class="required">*</span> 
+                        <span class="required"> 전화번호</span> 
+                    </label>
+        
+    
+                    <div class="signUp-input-area">
+                        <input type="text" name="memberTel" id="memberTel" placeholder="(- 없이 숫자만 입력)" maxlength="11">
+                        <button id="sendAuthKeyBtn" type="button">인증번호 받기</button>
+                    </div>
+                    <span class="signUp-message tel-div" id="telMessage">전화번호를 입력해주세요.(- 제외)</span>
+        
+                    <!-- 인증번호 입력 -->
+                    <label for="telCheck">
+                        <span class="required">*</span> 
+                        <span class="required">인증번호</span>
+                    </label>
+                    <div class="signUp-input-area">
+                        <input type="text" name="authKey" id="authKey" placeholder="인증번호 입력" maxlength="6" autocomplete="off" >
+                        <button id="checkAuthKeyBtn" type="button">인증하기</button>
+                    </div>
+                    <span class="signUp-message" id="authKeyMessage"></span>
+    
+                </div>
+
+                <div>
+                    <button id="findIdBtn">아이디 찾기</button>
+                </div>
+
+
+            </form>
+                    
+        </section>
+
+
+    </main>
+
+    <th:block th:replace="~{common/footer}"></th:block> 
+
+    <script src="/js/member/findId.js"></script>
+    
+</body>
+</html>

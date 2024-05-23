@@ -7,8 +7,9 @@
     padding: 100px;
     margin: 50px;
     margin-bottom: 100px;
-
+    
     border-radius: 10px;
+    min-width: 800px;
     
 }
 .member-container{

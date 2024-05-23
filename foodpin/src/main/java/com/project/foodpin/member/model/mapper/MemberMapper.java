@@ -1,5 +1,6 @@
 package com.project.foodpin.member.model.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -68,5 +69,11 @@ public interface MemberMapper {
 	 * @return
 	 */
 	int checkStoreNo(String storeNo);
+
+	/** 아이디 목록
+	 * @param inputMember
+	 * @return
+	 */
+	List<Member> findIdList(Member inputMember);
 
 }

@@ -1,5 +1,6 @@
 package com.project.foodpin.member.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -153,5 +154,16 @@ public class MemberServiceImpl implements MemberService{
 		
 		return result;
 	}
+	
+	
+	/**
+	 * 아이디 목록
+	 */
+	@Override
+	public List<Member> findIdList(Member inputMember) {
+		
+		return mapper.findIdList(inputMember);
+	}
+	
 	
 }

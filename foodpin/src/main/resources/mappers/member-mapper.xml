@@ -121,4 +121,14 @@
 		WHERE TEL_NUMBER = #{telNumber}
 		AND AUTH_KEY = #{authKey}
 	  </select>
+	  
+	  <!-- 아이디 목록 -->
+	  <select id="findIdList">
+	  SELECT MEMBER_ID
+	  FROM "MEMBER"
+	  WHERE MEMBER_TEL=#{memberTel}
+	  AND MEMBER_NAME = #{memberName}
+	  </select>
+	  
+	  
 </mapper>
