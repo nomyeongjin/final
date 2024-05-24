@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.review.model.service.ReviewService;
 
 import lombok.RequiredArgsConstructor;
@@ -44,6 +44,7 @@ public class ReveiwController {
 	public String insertReview(
 		@SessionAttribute("loginMember") Member loginMember,
 		@RequestParam("images") List<MultipartFile> images,
+		@RequestParam("hashNo") List<Integer> hashNo,
 		@RequestParam("reviewRating") int reviewRating,
 		Review inputReview) throws IllegalStateException, IOException {
 		
@@ -52,7 +53,7 @@ public class ReveiwController {
 		// 추후 수정 예정
 		inputReview.setStoreNo(1);
 		
-		int result = service.insertReview(inputReview, images);
+		int result = service.insertReview(inputReview, hashNo, images);
 		
 		String path = null;
 		

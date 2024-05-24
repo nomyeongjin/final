@@ -19,12 +19,23 @@
 	                1, 1
 	    )
 	</insert>
+	
+	
+	
+	<insert id="insertHashList" parameterType="list">
+        INSERT INTO "REVIEW_HASH"
+        
+        <foreach collection="list" item="tag" open="(" close=")" separator=" UNION ">
+            SELECT #{tag.reviewNo}, #{tag.hashNo} FROM DUAL
+        </foreach>
+    </insert>
+	
     
     <insert id="insertUploadList" parameterType="list">
-        INSERT INTO "UPLOAD_IMAGE" 
+        INSERT INTO "UPLOAD_IMAGE"
         
         <foreach collection="list" item="img" open="(" close=")" separator=" UNION ">
-            SELECT NEXT_IMAGE_NO(), #{img.imagePath}, #{img.imgRename}, DEFAULT, #{img.imageOrder}, 1, #{img.reviewNo}, #{img.imgOriginalName} FROM DUAL
+            SELECT NEXT_IMAGE_NO(), #{img.imagePath}, #{img.imgRename}, SYSDATE, #{img.imageOrder}, 1, #{img.reviewNo}, #{img.imgOriginalName} FROM DUAL
         </foreach>
     </insert>
 

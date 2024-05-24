@@ -40,5 +40,8 @@
   
   <th:block th:replace="~{common/footer}"></th:block>
   
+  <script th:inline="javascript">
+    const loginMember = /*[[${session.loginMember}]]*/ "로그인 회원 정보";
+  </script>
 </body>
 </html>

@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.foodpin.common.util.Utility;
 import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.review.model.dto.UploadImage;
 import com.project.foodpin.review.model.exception.ReviewInsertException;
 import com.project.foodpin.review.model.mapper.ReviewMapper;
@@ -36,13 +37,32 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	// 리뷰 작성
 	@Override
-	public int insertReview(Review inputReview, List<MultipartFile> images) throws IllegalStateException, IOException {
+	public int insertReview(Review inputReview, List<Integer> hashNo, List<MultipartFile> images) throws IllegalStateException, IOException {
 		
 		int result = mapper.reviewInsert(inputReview);
+		
 		
 		if(result == 0) return 0;
 		
 		int reviewNo = inputReview.getReviewNo();
+		
+		List<ReviewHash> hashList = new ArrayList<>();
+		for(int i =0 ; i<hashNo.size(); i ++) {
+			if(!hashNo.isEmpty()) {
+				
+				ReviewHash tag = ReviewHash.builder()
+								.reviewNo(reviewNo)
+								.hashNo(hashNo.get(i))
+								.build();
+				hashList.add(tag);
+			}
+		}
+		
+		if(hashList.isEmpty()) return reviewNo;
+		
+		result = mapper.insertHashList(hashList);
+		
+		
 
 		List<UploadImage> uploadList = new ArrayList<>();
 		
@@ -84,7 +104,7 @@ public class ReviewServiceImpl implements ReviewService {
 			
 		}
 		
-		return 0;
+		return reviewNo;
 	}
 	
 }

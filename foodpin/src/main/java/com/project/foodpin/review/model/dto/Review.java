@@ -20,8 +20,6 @@ public class Review {
 	private int memberNo;
 	private int storeNo;
 	private int menuNo;
-	
-	
 	private int hashNo;
 	private String hashTitle;
 	
