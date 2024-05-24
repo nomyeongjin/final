@@ -31,8 +31,6 @@
                         <button class="sub-title-btn" id="infoBtn">기본 정보</button>
                         <button class="sub-title-btn" id="changePwBtn">비밀번호 변경</button>
                     </section>
-
-                    
                     
                     <section id="infoContainer">
                         <form action="memberInfo" method="POST" name="member-myPageFrm" id="updateInfo" enctype="multipart/form-data">
@@ -51,12 +49,21 @@
                                     id="memberNickname" maxlength="10"
                                     th:value="${session.loginMember.memberNickname}">
                                 </div>
+
+                                <div class="member-myPage-row">
+                                    <label>이메일</label> 
+                                    <input type="text" name="memberEmail" 
+                                    id="memberEmail" maxlength="11"
+                                    th:value="${session.loginMember.memberEmail}">
+                                </div>
+
                                 <div class="member-myPage-row">
                                     <label>전화번호</label> 
                                     <input type="text" name="memberTel" 
                                     id="memberTel" maxlength="11"
                                     th:value="${session.loginMember.memberTel}">
                                 </div>
+                                
                                 
                             </div>
 
@@ -100,6 +107,6 @@
     <th:block th:replace="~{common/footer}"></th:block> 
 
     <script src="/js/main.js"></script>
-    <script src="/js/myPage/memberMyPage.js"></script>
+    <script src="/js/myPage/member/info.js"></script>
 </body>
 </html>

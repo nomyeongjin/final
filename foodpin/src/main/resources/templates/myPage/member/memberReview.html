@@ -22,12 +22,12 @@
                 <div class="myPage-title-container">
                     <section class="myPage-title">
                         내가 쓴 리뷰
-
+                        <!-- <span>5개</span> -->
+                        
                         <!-- 아무 내역 없을 때 -->
                         <th:block th:if="${#lists.isEmpty(review)}">
-                            <div class="emptyList">찜한 가게가 없습니다</div>
+                            <div class="emptyList">리뷰 내역이 없습니다</div>
                         </th:block>
-                        <span>5개</span>
                     </section>
 
 
@@ -90,5 +90,6 @@
     <th:block th:replace="~{common/footer}"></th:block> 
 
     <script src="/js/main.js"></script>
+    <script src="/js/myPage/member/review.js"></script>
 </body>
 </html>

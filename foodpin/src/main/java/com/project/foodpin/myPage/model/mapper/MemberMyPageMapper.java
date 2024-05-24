@@ -16,8 +16,6 @@ public interface MemberMyPageMapper {
 	// 회원 정보 수정
 	int updateInfo(Member inputMember);
 
-	// 입력받은 현재 비번과 DB에서 조회한 비번 비교
-	String selectPw(int memberNo);
 
 	// 회원 비밀번호 변경
 	int memberChangePw(Map<String, Object> paramMap);
@@ -39,6 +37,12 @@ public interface MemberMyPageMapper {
 
 	// 리뷰 목록 조회
 	List<Review> selectReviewList(int memberNo);
+
+	// 입력받은 현재 비번과 DB에서 조회한 비번 비교
+	String selectPw(int memberNo);
+	
+	// 회원 탈퇴하기
+	int secession(int memberNo);
 
 
 

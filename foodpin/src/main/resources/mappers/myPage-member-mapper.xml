@@ -6,6 +6,7 @@
 	<update id="updateInfo">
 		UPDATE "MEMBER" SET
 		MEMBER_NICKNAME = #{memberNickname},
+		MEMBER_EMAIL = #{memberEmail},
 		MEMBER_TEL = #{memberTel}
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
@@ -17,6 +18,12 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
+	<update id="secession">
+		UPDATE MEMBER SET
+		MEMBER_STATUS = 'Y'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
 	<!-- 회원 비밀번호 변경 -->
 	<update id="memberChangePw">
 		UPDATE "MEMBER" SET
@@ -26,7 +33,7 @@
 	
 	<!-- 예약 확정 조회 -->
 	<select id="reservationFix">
-		SELECT <![CDATA[ TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE]]>,
+		SELECT MEMBER_NO, <![CDATA[ TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE]]>,
 			R.RESERV_TIME, 
 		    S.STORE_NAME, R.RESERV_COUNT, S.STORE_LOCATION
 		FROM RESERVATION R
