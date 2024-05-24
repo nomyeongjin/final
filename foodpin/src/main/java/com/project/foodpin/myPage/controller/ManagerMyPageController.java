@@ -51,6 +51,17 @@ public class ManagerMyPageController {
 		return ResponseEntity.ok(response);
 	}
 	
+	// 가게 승인
+	@PostMapping("refuseMember/{memberNo}")
+	public ResponseEntity<Map<String, Object>> refuseMember(
+			@PathVariable("memberNo") int memberNo) {
+		
+		boolean refuse = service.refuseMember(memberNo);
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", refuse);
+		return ResponseEntity.ok(response);
+	}
+	
 	
 	@GetMapping("reportReview")
 	public String storeInfo() {

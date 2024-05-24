@@ -26,5 +26,11 @@ public class ManagerMyPageServiceImpl implements ManagerMyPageService{
 	public boolean approveMember(int memberNo) {
 		return mapper.approveMember(memberNo);
 	}
+	
+	// 가게 거부
+	@Override
+	public boolean refuseMember(int memberNo) {
+		return mapper.refuseMember(memberNo);
+	}
 
 }

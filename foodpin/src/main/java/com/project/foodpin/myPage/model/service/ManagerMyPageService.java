@@ -12,4 +12,7 @@ public interface ManagerMyPageService {
 	// 가게 승인
 	boolean approveMember(int memberNo);
 
+	// 가게 거부
+	boolean refuseMember(int memberNo);
+
 }

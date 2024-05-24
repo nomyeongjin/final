@@ -17,4 +17,7 @@ public interface ManagerMyPageMapper {
 	// 가게 승인
 	boolean approveMember(@Param("memberNo") int memberNo);
 
+	// 가게 거부
+	boolean refuseMember(@Param("memberNo") int memberNo);
+
 }
