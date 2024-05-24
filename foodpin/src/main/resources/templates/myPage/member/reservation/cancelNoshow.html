@@ -21,10 +21,10 @@
             <section class="content-container">
                 <div class="myPage-title-container">
                     <section class="myPage-title">예약 현황
-                        <span class="memberNoshow">
+                        <span class="memberNoshow" th:text="|누적 노쇼 *{noshowCount}회|">
                             누적 노쇼 1회
-                            <i class="fa-solid fa-circle-exclamation" title="경고는 3회 이상이면 3일정지입니다"></i>
                         </span>
+                        <i class="fa-solid fa-circle-exclamation" title="경고는 3회 이상이면 3일정지입니다"></i>
                     </section>
 
                     <section class="myPage-sub-title">
@@ -82,6 +82,6 @@
     <th:block th:replace="~{common/footer}"></th:block> 
 
     <script src="/js/main.js"></script>
-    <script src="/js/myPage/memberMyPage.js"></script>
+    <script src="/js/myPage/member/reservation.js"></script>
 </body>
 </html>

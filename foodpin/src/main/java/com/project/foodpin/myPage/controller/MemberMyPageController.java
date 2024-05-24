@@ -1,8 +1,10 @@
 package com.project.foodpin.myPage.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
@@ -53,6 +56,7 @@ public class MemberMyPageController {
 			message = "회원 정보가 수정되었습니다.";
 			
 			loginMember.setMemberNickname(inputMember.getMemberNickname());
+			loginMember.setMemberEmail(inputMember.getMemberEmail());
 			loginMember.setMemberTel(inputMember.getMemberTel());
 		} else {
 			message = "회원 정보 수정에 실패하였습니다.";
@@ -142,6 +146,19 @@ public class MemberMyPageController {
 		return "myPage/member/reservation/cancelNoshow";
 	}
 	
+	// 예약 취소하기
+	@PostMapping("cancelReservation")
+	public ResponseEntity<Map<String, Object>> cancelReservation(
+		@SessionAttribute("loginMember") Member loginMember,
+		RedirectAttributes ra) {
+		
+		int memberNo = loginMember.getMemberNo();
+		boolean cancel = service.cancelReservation(memberNo);
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", cancel);
+		return ResponseEntity.ok(response);
+	}
+	
 	
 	
 	// 북마크 목록 조회
@@ -173,6 +190,35 @@ public class MemberMyPageController {
 	@GetMapping("memberSecession")
 	public String memberSecession() {
 		return "myPage/member/memberSecession";
+	}
+	
+	// 회원 탈퇴
+	@PostMapping("secession")
+	public String secession(
+		@SessionAttribute("loginMember") Member loginMember,
+		@RequestParam("memberPw") String memberPw,
+		SessionStatus status,
+		RedirectAttributes ra) {
+		
+		int memberNo = loginMember.getMemberNo();
+		
+		int result = service.secession(memberPw, loginMember);
+		
+		String path = null;
+		String message = null;
+		
+		if(result > 0) {
+			message = "탈퇴 처리가 되었습니다";
+			status.setComplete();
+			path = "/";
+		} else {
+			message = "비밀번호가 일치하지 않습니다";
+			path = "myPage/member/memberSecession";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
 	}
 	
 	

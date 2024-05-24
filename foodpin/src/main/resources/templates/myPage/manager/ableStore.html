@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가게 입점/거절 관리</title>
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/myPage/myPage-style.css">
+    <link rel="stylesheet" href="/css/myPage/manager-myPage.css">
+</head>
+<body>
+    <main>
+        <th:block th:replace="~{common/header}"></th:block>
+
+        <div class="myPage-container">
+            <th:block th:replace="~{myPage/manager/managerSide}"></th:block>
+
+            <hr>
+
+            <section class="content-container">
+                <div class="myPage-title-container">
+                    <section class="myPage-title">입점 신청 내역</section>
+
+                    <section class="myPage-sub-title">
+                        <button class="sub-title-btn" id="ableStoreBtn">
+                            <a href="/myPage/manager/ableStore">입점 가게</a>
+                        </button>
+                        <button class="sub-title-btn" id="unableStoreBtn">
+                            <a href="/myPage/manager/unableStore">거절 가게</a>
+                        </button>
+                    </section>
+
+                </div>
+
+                <section id="ableContainer">
+                    <table class="enrollTable">
+                        <thead>
+                            <tr>
+                                <th>신청인</th>
+                                <th>가게 상호명</th>
+                                <th>신청일</th>
+                                <th>관리</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <th:block th:if="${#lists.isEmpty(storeMember)}">
+                                <tr>
+                                    <th colspan="4">입점 가게가 존재하지 않습니다</th>
+                                </tr>
+                            </th:block> 
+
+                            <th:block th:unless="${#lists.isEmpty(storeMember)}">
+                                <tr th:each="member : ${storeMember}">
+                                    <td th:text="*{member.memberName}">김사장</td>
+                                    <td th:text="*{member.storeName}">대박고깃집</td>
+                                    <td th:text="*{member.enrollDate}">24.05.22</td>
+                                    <td>
+                                        <button class="refuse" th:data-member-no="${member.memberNo}">폐점등록</button>
+                                    </td>
+                                </tr>
+
+                            </th:block>
+                        </tbody>
+
+                    </table>
+                </section>
+
+            </section>
+
+        </div>
+    </main>
+
+    <script th:inline="javascript">
+        const loginMember = /*[[${session.loginMember}]]*/ "로그인 회원 정보";
+    </script>
+
+        <th:block th:replace="~{common/footer}"></th:block>
+
+        <script src="/js/main.js"></script>
+        <script src="/js/myPage/manager/enroll.js"></script>
+    
+</body>
+</html>

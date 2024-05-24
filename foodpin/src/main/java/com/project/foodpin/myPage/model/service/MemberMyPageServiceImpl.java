@@ -72,6 +72,12 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 	public List<Reservation> reservationCancelNoshow(int memberNo) {
 		return mapper.reservationCancelNoshow(memberNo);
 	}
+	
+//	****************************************
+	@Override
+	public boolean cancelReservation(int memberNo) {
+		return false;
+	}
 
 	// 찜 목록 조회
 	@Override
@@ -83,6 +89,18 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 	@Override
 	public List<Review> selectReviewList(int memberNo) {
 		return mapper.selectReviewList(memberNo);
+	}
+	
+	// 회원 탈퇴
+	@Override
+	public int secession(String memberPw, Member loginMember) {
+		
+		int memberNo = loginMember.getMemberNo();
+		String pw = mapper.selectPw(memberNo);
+		
+		if(!bcrypt.matches(memberPw, pw)) return 0;
+		
+		return mapper.secession(memberNo);
 	}
 
 	

@@ -16,9 +16,6 @@ public interface MemberMyPageService {
 	// 회원 비밀번호 변경
 	int memberChangePw(Map<String, Object> paramMap, int memberNo);
 
-	// 예약 목록 조회
-//	List<Reservation> selectReservation(int memberNo);
-
 	// 예약 확정 조회
 	List<Reservation> reservationFix(int memberNo);
 	
@@ -36,6 +33,11 @@ public interface MemberMyPageService {
 
 	// 리뷰 목록 조회
 	List<Review> selectReviewList(int memberNo);
+
+	// 회원 탈퇴
+	int secession(String memberPw, Member loginMember);
+
+	boolean cancelReservation(int memberNo);
 
 
 
