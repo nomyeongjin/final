@@ -15,32 +15,32 @@
             <ul>
             
                 
-                <li>
-                    <button type="button" class="navbar-button">
+                <li class="first-nav-li">
+                    <button type="button" class="navbar-button" id="mapHome">
                        <!-- ::before – 실제 내용 바로 앞에서 생성되는 자식요소
                             ::after – 실제 내용 바로 뒤에서 생성되는 자식요소​ -->
                     
-                            <a href="/store/storeSearch">
+                           
                             <span class="navbar-text">지도 홈</span>
-                            </a>
+                           
                         
                     </button>
                 </li>
                 
-                <li>
-                    <button type="button" class="navbar-button">
+                <li class="first-nav-li">
+                    <button type="button" class="navbar-button" id="remS">
                         <span class="navbar-text">저장</span>
                     </button>
                 </li>
                 
-                <li>
-                    <button type="button" class="navbar-button">
+                <li class="first-nav-li">
+                    <button type="button" class="navbar-button" id="resS">
                         <span class="navbar-text">예약</span>
                     </button>
                 </li>
                
-                <li>
-                    <button type="button" class="navbar-button">
+                <li class="first-nav-li">
+                    <button type="button" class="navbar-button" id="chatS">
                         <span class="navbar-text">채팅</span>
                     </button>
                 </li>
@@ -52,6 +52,8 @@
                 <li>
                     <!-- 나중에 기본 이미지 넣고, 로그인 시 회원 이미지 -->
                     <button type="button" class="navbar-button">
+    
+
                         <div class="profileArea">
 
                             <!-- 일반 회원 -->
@@ -68,13 +70,23 @@
                             <th:block th:if="${session.loginMember?.memberCode == 3}">
                                 <a href="/myPage/manager/storeEnroll"> 
                             </th:block>
+
+                            <th:block th:if="${session.loginMember == null}">
+                                <a href="/member/login"> 
+                            </th:block>
                             
                             <img th:with="user=#{user.default.image}" 
-                            th:src="${session.loginMember.profileImg ?:user}"  
+                            th:src="${profileImg ?:user}"  
                                 id="memberProfile">
-                           
+                            
                              </a>
+
                         </div>
+                          
+
+                        
+                          
+
                     </button>
                 </li>
 
