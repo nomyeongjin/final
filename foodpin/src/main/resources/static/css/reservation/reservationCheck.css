@@ -17,6 +17,7 @@
     justify-content: center;
     border-bottom: 1px solid #cecece;
     width: 800px;
+
 }
 
 .check-container {
@@ -88,8 +89,8 @@
     /* border: 1px solid #cecece; */
     flex-direction: column;
     width: 800px;
-    height: 320px;
     border-bottom: 1px solid #cecece;
+    padding-bottom: 20px;
 }
 
 .span{
@@ -97,6 +98,7 @@
     font-size: 13px;
     color: red;
 }
+
 .reserv-form{
     margin-top: 20px;
     display: flex;
@@ -132,6 +134,47 @@
     border: 1px solid #cecece;
     border-radius: 10px;
     padding: 10px;
+    margin-bottom: 20px;
+}
+
+.visitInfoBtn{
+    display: flex;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    margin-left: 70px;
+
+    font-size: 15px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    /* display: none; */
+    cursor: pointer;
+}
+
+.visitInfoBtnUp{
+    display: flex;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    margin-left: 70px;
+
+    font-size: 15px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: none;
+    cursor: pointer;
+}
+
+.visit-form{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+}
+
+.visit{
+    display: block;
 }
 
 /* 예약시 주의 사항 section */
