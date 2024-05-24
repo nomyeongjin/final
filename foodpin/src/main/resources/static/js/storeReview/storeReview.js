@@ -2,10 +2,15 @@ const popupClose = document.querySelector("#popupClose");
 const popupLayer = document.querySelector("#popupLayer");
 const selectMenu = document.querySelector("#selectMenu");
 const menuSection = document.querySelector("#menuSection");
+const selectMenuButton = document.querySelector("#selectMenuButton");
 
 popupClose.addEventListener("click", () => {
   menuSection.classList.add("popup-hidden");
 });
+
+selectMenuButton.addEventListener("click", () => {
+  menuSection.classList.add("popup-hidden");
+})
 
 selectMenu.addEventListener("click", ()=>{
   menuSection.classList.remove("popup-hidden");
@@ -137,10 +142,10 @@ keywords.forEach((keyword) => {
 /* ***************************************************************************** */
 
 const menuCheckbox = document.querySelectorAll(".menu-checkbox");
-const selectMenuButton = document.querySelector("selectMenuButton");
 const reviewForm = document.querySelector("#reviewForm");
 const reviewContent = document.querySelector("#reviewContent");
-const ul = document.querySelector("#keywords");
+const reviewRating = document.querySelector("#reviewRating");
+const reviewKeyword = document.querySelector(".review-keyword");
 
 reviewForm.addEventListener("submit", e => {
   
@@ -151,11 +156,19 @@ reviewForm.addEventListener("submit", e => {
     e.preventDefault();
     return;
   }
+
+  if(reviewRating.value === '0'){
+    alert("별점을 입력해주세요");
+    selectMenu.focus();
+    e.preventDefault();
+    return;
+  }
+
   
   const hashChecked = document.querySelectorAll(".keyword-checkbox:checked");
   if(hashChecked.length == 0) {
     alert("해시태그를 선택해주세요.");
-    ul.focus();
+    reviewKeyword.focus();
     e.preventDefault();
     return;
   }
