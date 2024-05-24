@@ -1,24 +1,27 @@
 /* 입점 승인/거절 */
-const approval = document.querySelectorAll(".approval");
-const refuse = document.querySelectorAll(".refuse");
+document.addEventListener('DOMContentLoaded', () => {
+    const approval = document.querySelectorAll(".approval");
+    const refuse = document.querySelectorAll(".refuse");
 
-approval.forEach(button => {
-    button.addEventListener('click', e => {
-        const memberNo = e.target.getAttribute('data-memberNo');
-        approveMember(memberNo);
+
+    approval.forEach(button => {
+        button.addEventListener('click', e => {
+            const memberNo = e.target.dataset.memberNo;
+            approveMember(memberNo);
+        });
+    });
+
+    refuse.forEach(button => {
+        button.addEventListener('click', e => {
+            const memberNo = e.target.dataset.memberNo;
+            refuseMember(memberNo);
+        });
     });
 });
 
-refuse.forEach(button => {
-    button.addEventListener('click', e => {
-        const memberNo = e.target.getAttribute('data-memberNo');
-        refuseMember(memberNo);
-    });
-});
-
-
+// 승인 처리
 function approveMember(memberNo) {
-    fetch(`/myPage/manager/approveMember/${member.memberNo}`, {
+    fetch(`/myPage/manager/approveMember/${memberNo}`, {
         method: 'POST',
         headers: {'Content-Type' : 'application/json'},
         body: JSON.stringify({memberNo : memberNo})
@@ -34,6 +37,7 @@ function approveMember(memberNo) {
     });
 }
 
+// 거절 처리
 function refuseMember(memberNo) {
     fetch(`/myPage/manager/refuseMember/${memberNo}`, {
         method: 'POST',
@@ -51,6 +55,7 @@ function refuseMember(memberNo) {
         }
     })
 }
+
 
 
 
