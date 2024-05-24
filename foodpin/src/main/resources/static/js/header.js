@@ -3,26 +3,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const notificationBellBtn = document.querySelector(".notification-bell-btn");
 
-    notificationBellBtn.addEventListener("click", () => {
-        const notificationList = document.querySelector(".box-content");
+    if(notificationBellBtn != null) {
         
-        notificationList.classList.toggle("notification-show");
-        notificationBellBtn.classList.toggle("action");
+        notificationBellBtn.addEventListener("click", () => {
+            const notificationList = document.querySelector(".box-content");
+            
+            notificationList.classList.toggle("notification-show");
+            notificationBellBtn.classList.toggle("action");
 
-    })
+        });
+    };
 
     // 아림 카테고리 클릭 시 색상 변환
     const category = document.querySelectorAll(".category");
-    category[0].classList.add("click");
-    for(let li of category){
-        
-        li.addEventListener("click", () => {
-            for(let item of category) {
-                item.classList.remove("click");
-            }
-            li.classList.add("click");
-        });
-    };
+    if(category != null && category.length>0){
+        category[0].classList.add("click");
+        for(let li of category){
+            
+            li.addEventListener("click", () => {
+                for(let item of category) {
+                    item.classList.remove("click");
+                }
+                li.classList.add("click");
+            });
+        };
+    }
 });
 
 

@@ -37,7 +37,7 @@
                                         <div class="item-title">일정</div>
 
                                         <!-- 회원이 예약한 날짜 출력 -->
-                                        <div class="reserv-date-count" id="reservDate" name="reservDate">5. 23(목) 오후 6:00</div>
+                                        <div class="reserv-date-count" id="reservDate" name="reservDate" th:text="|${param.reservDate} ${param.reservTime}|">5. 23(목) 오후 6:00</div>
 
                                     </li>
 
@@ -46,7 +46,7 @@
                                         <div class="item-title">인원</div>
 
                                         <!-- 회원이 예약한 인원 출력-->
-                                        <div class="reserv-date-count" id="reservCount" name="reservCount">2명</div>
+                                        <div class="reserv-date-count" id="reservCount" name="reservCount" th:text="${param.reservCount}">2명</div>
 
                                     </li>
                                 </ul>
@@ -72,7 +72,7 @@
                         </span>
                     </div>
 
-                    <form class="reserv-form" method="POST" name="reservForm">
+                    <form class="reserv-form" name="reservForm">
 
                         <!-- 예약자 이름 -->
                         <div class="reserv-item">
@@ -110,7 +110,7 @@
 
                             <div class="input-box">
                                 <th:block th:if="${session.loginMember?.memberCode==1}">
-                                    <input type="text" name="memberEmail" id="memberEmail " class="input-name" th:value="${session.loginMember?.memberEmail}">
+                                    <input type="text" name="memberEmail" id="memberEmail " class="input-name" readonly th:value="${session.loginMember?.memberEmail}">
                                 </th:block>
                                 <th:block th:unless="${session.loginMember?.memberCode==1}">
                                     <input type="text" name="memberName" id="memberName" class="input-name" readonly placeholder="현재 로그인 상태로 예약할 수 없습니다.">
@@ -124,12 +124,33 @@
 
                             <div class="input-box">
                                 <th:block th:if="${session.loginMember?.memberCode==1}">
-                                    <textarea name="reservReqeust" id="reservReqeust" placeholder="업체에 요청하실 내용을 적어주세요"></textarea>
+                                    <textarea name="reservReqeust" id="reservReqeust" placeholder="업체에 요청하실 내용을 작성해 주세요"></textarea>
                                 </th:block>
 
                                 <th:block th:unless="${session.loginMember?.memberCode==1}">
                                     <textarea name="reservReqeust" id="reservReqeust" readonly placeholder="현재 로그인 상태로 예약할 수 없습니다."></textarea>
                                 </th:block>
+                            </div>
+                        </div>
+                    </form>
+
+                    <button type="button" class="visitInfoBtn">실제 방문자가 다르다면 정보를 추가해주세요 &nbsp;<i class="fa-solid fa-chevron-down"></i></button>
+                    <!-- <button type="button" class="visitInfoBtnUp">방문자 정보 접기<i class="fa-solid fa-chevron-down fa-rotate-180"></i></button> -->
+
+                    <form class="visit-form">
+                        <div class="reserv-item">
+                            <label for="visitName" class="name">방문자</label>
+
+                            <div class="input-box">
+                                <input type="text" name="visitName" id="visitName" class="input-name" placeholder="방문자 성함을 작성해 주세요">
+                            </div>
+                        </div>
+
+                        <div class="reserv-item">
+                            <label for="visitTel" class="name">연락처</label>
+
+                            <div class="input-box">
+                                <input type="text" name="visitTel" id="visitTel" class="input-name" placeholder="방문자 연락처를 작성해 주세요">
                             </div>
                         </div>
 

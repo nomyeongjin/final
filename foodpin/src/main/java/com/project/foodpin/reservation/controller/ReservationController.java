@@ -3,6 +3,7 @@ package com.project.foodpin.reservation.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -38,9 +39,6 @@ public class ReservationController {
 //		return service.selectStoreList(store.getStoreNo());
 	}
 	
-	
-	
-	
 	@GetMapping("reservationCheck")
 	public String reservationCheck(
 			Reservation reservation, 
@@ -62,4 +60,14 @@ public class ReservationController {
 		return "reservation/detail";
 	}
 
+	
+	/****** form 태그 제출를 위한 ******/
+	@PostMapping("nextPage")
+	public String nextPage(
+			@RequestParam("reservDate") String reservDate
+			) {
+		
+		return "reservation/reservationCheck";
+	}
+	
 }

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
         initialView: 'dayGridMonth',
         selectable : false, // 드래그 방지
         dateClick : function(info){
-            console.log(info);
+            // console.log(info);
             // console.log(info.dateStr);
             // console.log(dayArr[info.date.getDay()]);
             

@@ -91,7 +91,7 @@
     
                 <div class="buttons">
                     <a href="/reservation/reservationCheck" class="cancel-btn" >이전</a>
-                    <a th:if="${session.loginMember?.memberCode==1}" href="/myPage/member/memberReservation" class="next-btn" id="nextBtn">내 예약 확인하러 가기</a>
+                    <a th:if="${session.loginMember?.memberCode==1}" href="/myPage/member/reservation/fix" class="next-btn" id="nextBtn">내 예약 확인하러 가기</a>
                     <a th:unless="${session.loginMember?.memberCode==1}"href="/" class="next-btn">메인페이지로 이동</a>
                 </div>
     
