@@ -165,5 +165,19 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.findIdList(inputMember);
 	}
 	
+	/**
+	 * 비밀번호 변경
+	 */
+	@Override
+	public int resetPw(Member inputPw) {
+		
+		// 비밀번호를 암호화 하여 inputMember에 세팅
+		String encPw = bcrypt.encode(inputPw.getMemberPw());
+		inputPw.setMemberPw(encPw);
+		
+		
+		return mapper.resetPw(inputPw);
+	}
+	
 	
 }

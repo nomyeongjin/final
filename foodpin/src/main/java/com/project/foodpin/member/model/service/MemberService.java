@@ -68,4 +68,10 @@ public interface MemberService {
 	 */
 	List<Member> findIdList(Member inputMember);
 
+	/** 비밀번호 변경
+	 * @param inputPw
+	 * @return
+	 */
+	int resetPw(Member inputPw);
+
 }

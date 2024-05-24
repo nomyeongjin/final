@@ -169,3 +169,7 @@
     color: #868686;
     font-size: 0.9em;
   }
+
+  .text-area-element>span>*:hover{
+    border-bottom: 1px solid #868686;
+  }

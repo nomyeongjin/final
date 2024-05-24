@@ -76,4 +76,10 @@ public interface MemberMapper {
 	 */
 	List<Member> findIdList(Member inputMember);
 
+	/** 새 비밀번호 변경
+	 * @param inputPw
+	 * @return
+	 */
+	int resetPw(Member inputPw);
+
 }

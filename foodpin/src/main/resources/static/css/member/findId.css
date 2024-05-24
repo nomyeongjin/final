@@ -121,3 +121,85 @@
   #findIdBtn:active{
     transform: scale(0.95);
   }
+
+  
+  #resetPwForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+  tr{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    width: 600px;
+  }
+
+  
+  tr>*{
+    display: flex;
+    list-style-type: none;
+    margin: 10px 0;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  th{
+    width: 200px;
+  }
+  
+  .id-list{
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    align-items: center;
+  }
+
+  .member-code{
+    border-radius: 20px;
+    background-color: rgb(255, 181, 181);
+    color: rgb(90, 70, 70);
+    padding: 0 10px;
+  }
+
+  .btn-div{
+    margin-top: 30px;
+  }
+
+  .btn-div>button{
+    background-color: rgb(56, 48, 48);
+    color: #fff;
+    width: 120px;
+    height: 40px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+
+  }
+
+
+  [type="radio"] {
+    vertical-align: middle;
+    appearance: none;
+    border: max(2px, 0.1em) solid rgb(56, 48, 48);
+    border-radius: 50%;
+    width: 1.25em;
+    height: 1.25em;
+    cursor: pointer;
+  }
+
+
+  [type="radio"]:checked {
+    border: 0.4em solid rgb(56, 48, 48);
+  }
+  
+  .radio-btn+label {
+    display: flex;
+    cursor: pointer;
+  }
+  
