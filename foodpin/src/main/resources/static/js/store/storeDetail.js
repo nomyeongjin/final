@@ -1,4 +1,4 @@
-// 마이 페이지 -> 개인 정보 수정 페이지로 보내는 동작
+// 누르면 상세 검색 페이지로 이동 해당 가게의 위치가 상세 페이지에서 검색됨
 const storedetailmapbutton = document.querySelector("#storedetailmapbutton");
 
 storedetailmapbutton.addEventListener("click", () => {

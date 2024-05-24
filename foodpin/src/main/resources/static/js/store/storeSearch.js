@@ -1,6 +1,16 @@
+/* ************************************* 헤더 ******************************************* */
+// 지도 홈 버튼 (검색된게 리셋 현재 위치 기준으로 나옴)
+const mapHome = document.querySelector("#mapHome");
+
+mapHome.addEventListener("click", () => {
+  location.href = "storeSearch";
+  currentlocation();
+  
+
+});
+
  
- 
- 
+/* ************************************* 지도 ******************************************* */
 function storelocation() {
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = { 
@@ -118,6 +128,8 @@ function storelocation() {
    
 
 }
+
+/* ************************************* 지도 ******************************************* */
 
 
 /* 화면 생성 시 자동 실행 */
