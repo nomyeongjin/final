@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,20 +14,34 @@
 
 
         <section class="member-box">
-            <div class="member-title">
-                <h3>아이디 목록</h3>
-            </div>
-
-            <div>
-                <input type="radio" 
-                th:each="id : ${idList}"
-                th:object="${id}"
-                th:text="${memberId}">
-            </div>        
-            <div>
-                <button>로그인 하기</button>
-                <button>비밀번호 찾기</button>
-            </div>
+           <form action="/member/resetPw" method="POST" name="resetPwForm" id="resetPwForm">
+                <div class="member-title">
+                    <h3>아이디 목록</h3>
+                </div>
+    
+    
+    
+                <table class="id-list">
+                    <tbody>
+                        <th:block th:if="!${session.idList}" th:text="'조회되는 아이디가 없습니다.'"></th:block>
+                        <tr th:each="id, i : ${session.idList}" >
+                            <th class="radio-th">
+                                <input class="radio-btn" type="radio" name="memberId" th:id="'idRadio' + ${i.index}" th:value="${id.memberId}">&nbsp;
+                                <label th:for="'idRadio' + ${i.index}" th:text="${id.memberId}"></label>&nbsp;&nbsp;
+                                <div>
+                                    <span class="member-code" th:if="${id.memberCode} == 1" th:text="'일반'"></span>
+                                    <span class="member-code" th:if="${id.memberCode} == 2" th:text="'사장'"></span>
+                               </div>
+                                <td><span th:text="${id.enrollDate}"></span></td>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>    
+                <div class="btn-div">
+                    <button type="button" id="loginPage">로그인 하기</button>
+                    <button id="findPw">비밀번호 찾기</button>
+                </div>
+           </form>
 
         </section>
 

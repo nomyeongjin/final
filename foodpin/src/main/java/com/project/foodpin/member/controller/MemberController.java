@@ -28,7 +28,7 @@ import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember","inputMember","idList"})
 @Controller
 @RequestMapping("member")
 @RequiredArgsConstructor
@@ -359,7 +359,8 @@ public class MemberController {
     @PostMapping("findIdResult")
     	public String findId(
     			Member inputMember,
-    			RedirectAttributes ra
+    			RedirectAttributes ra,
+    			Model model
     			) {
     	
     	List<Member> idList = service.findIdList(inputMember);
@@ -371,14 +372,70 @@ public class MemberController {
     		path = "/member/findIdResult";
     		message = "아이디 조회에 성공했습니다.";
     		
+    		model.addAttribute("inputMember",inputMember);
+    		
+    		model.addAttribute("idList",idList);
+    		
     	}else {
     		
     		path = "/member/findId";
-    		message = "아이디 조회에 실패하였습니다...";
+    		message = "조회되는 아이디가 존재하지 않습니다.";
     		
     	}
+    	
+    	log.info("inputMember",inputMember);
+    	
+    		ra.addFlashAttribute("message",message);
     		return "redirect:"+path;
+    		
     	}
+    
+    /** 비밀번호 찾기 페이지로 이동
+     * @return
+     */
+    @GetMapping("findPw")
+    public String findPwPage() {
+    	return "member/findPw";
+    }
+    
+    
+    /** 새 비밀번호 변경 페이지 이동
+     * @param inputPw
+     * @return
+     */
+    @PostMapping("resetPw")
+    public String resetPw() {
+    	return "member/resetPw";
+	}
+    
+    /** 새 비밀번호 변경
+     * @param inputPw
+     * @param ra
+     * @return
+     */
+    @PostMapping("resetPwResult")
+    public String resetPwResult(
+    		Member inputPw,
+    		RedirectAttributes ra) {
+		int result = service.resetPw(inputPw);
+		    	
+		    	String path = null;
+				String message = null;
+				
+				if(result>0) {
+					message = "비밀번호를 변경하였습니다.";
+					path = "/member/login";
+				}
+				else {
+					message = "비밀번호 변경에 실패했습니다.";
+					path = "member/resetPw";
+				}
+				
+				ra.addFlashAttribute("message",message);
+				
+				return "redirect:"+path;
+    }
+
 	
 	
 	

@@ -123,12 +123,17 @@
 	  </select>
 	  
 	  <!-- 아이디 목록 -->
-	  <select id="findIdList">
-	  SELECT MEMBER_ID
+	  <select id="findIdList"> 
+	  SELECT MEMBER_ID,MEMBER_CODE,TO_CHAR(ENROLL_DATE,'YYYY-MM-DD') ENROLL_DATE
 	  FROM "MEMBER"
 	  WHERE MEMBER_TEL=#{memberTel}
 	  AND MEMBER_NAME = #{memberName}
 	  </select>
 	  
+	  <!-- 새 비밀번호 변경 -->
+	  <update id="resetPw">
+	  UPDATE MEMBER SET MEMBER_PW = #{memberPw}
+	  WHERE MEMBER_ID = #{memberId}
+	  </update>
 	  
 </mapper>

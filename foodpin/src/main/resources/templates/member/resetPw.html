@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>새 비밀번호 변경</title>
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/member/findId.css">
+</head>
+<body>
+
+    <main>
+        <!-- templetes/common/header.html  조각 추가 -->
+        <th:block th:replace="~{common/header}"></th:block>
+
+
+        <section class="member-box">
+            <div class="member-title">
+                <h3>새 비밀번호 변경</h3>
+                <p>비밀번호를 새로 작성해주세요.</p>
+            </div>
+
+            <form action="/member/resetPwResult" method="POST" name="findIdForm" id="findIdForm">
+
+               <input type="hidden" name="memberId" th:value="${param.memberId}"> 
+                <div class="form-section">
+                    
+                     
+                   <!-- 비밀번호/비밀번호 확인 입력 -->
+                   <label for="memberPw">
+                    <span class="required">*</span> 
+                    <span class="required">새 비밀번호</span>
+                </label>
+        
+                <div class="signUp-input-area">
+                    <input type="password" name="memberPw" id="memberPw" 
+                    placeholder="비밀번호" maxlength="20" >
+                </div>
+                <div class="signUp-input-area">
+                    <input type="password" name="memberPwConfirm" id="memberPwConfirm" 
+                    placeholder="비밀번호 확인" maxlength="20" >
+                </div>
+        
+                <!-- 정규 표현식 -->
+                <span class="signUp-message" id="pwMessage">영어,숫자,특수문자(!,@,#,-,_) 6~20글자 사이로 입력해주세요.</span>
+        
+
+
+                </div>
+
+                <div>
+                    <button id="findIdBtn">변경하기</button>
+                </div>
+
+
+            </form>
+                    
+        </section>
+
+
+    </main>
+
+    <th:block th:replace="~{common/footer}"></th:block> 
+
+    <script src="/js/member/findId.js"></script>
+    
+</body>
+</html>
