@@ -144,7 +144,7 @@
                                 <!-- 가게 정보 해시태그 -->
                                 <div id="storedetail-row">
                                     <!-- 클릭 시 상세 검색 페이지로 이동(카테고리 선택됨) -->
-                                <p>#패스트푸드</p>
+                                <span id="storeCat">패스트푸드</span>
                                 </div>
 
                                 <a href="#" id="toChatting">문의하기</a>
@@ -328,15 +328,19 @@
                                         [오늘] 05.21 (화)
                                       </Strong>
                                     </p>
+
+                                  
                                     <p class="l-txt">
-                                        영업시간: 11:00 - 21:30                      
+                                        영업시간 : <span th:text="${store.openHour}"></span>               
+                                                  - <span th:text="${store.closeHour}"></span>               
                                     </p>
                                 </li>
        
                                 <li>
                                     <p class="t-txt"></p>
                                     <p class="l-txt">
-                                        브레이크타임: 14:30 - 17:00                                           
+                                        브레이크타임 : <span th:text="${store.breaktimeStart}"></span>               
+                                        - <span th:text="${store.breaktimeEnd}"></span>                                           
                                     </p>
                                 </li>
                              
