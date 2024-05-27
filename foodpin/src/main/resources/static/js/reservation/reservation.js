@@ -26,10 +26,7 @@ if(storereservationbutton != null) {
 // -------------------------------------------------------------
 
 // 선택 항목 검사용
-const checkObj = {
-    "reservTime" : false
-};
-
+const checkObj = {"reservTime" : false};
 
 // -------------------------------------------------------------
 
@@ -209,7 +206,7 @@ if(nextBtn != null){
         // body에 form 태그
         document.body.append(form);
 
-         form.submit(); // 다음 버튼 클릭 시 form 태그 제출
+        form.submit(); // 다음 버튼 클릭 시 form 태그 제출
 
     });
 }
@@ -277,6 +274,17 @@ getTimeSplit(startTime, endTime, interval);
 
 /*  ************  reservationCheck ************ */
 
+/* 예약자 정보와 실제 방문자 정보가 다를 경우 폼 */
+const visitInfoBtn = document.querySelector(".visitInfoBtn");
+const visitForm = document.querySelector(".visit-form");
+const visitInfoBtnUp = document.querySelector(".visitInfoBtnUp");
+
+if(visitInfoBtn != null) {
+    visitInfoBtn.addEventListener("click", () => {
+        visitForm.classList.toggle("visit");
+    })
+}
+
 /* 다음 페이지 클릭 할 때 체크박스 검사 */
 const confirmBtn = document.querySelector("#confirmBtn");
 
@@ -304,44 +312,89 @@ if(confirmBtn != null) {
             }
         }
 
-        /* form 태그 생성... */
-        
+        /* 예약 확정 하기 전 예약 정보 페이지이기 때문에 별도의 검사 진행XX */
+
+        /* 예약 정보를 담은  form 생성... */
+
+        // form 태그 생성
         const insertForm = document.createElement("form");
         insertForm.action="/reservation/insertPage"; //제출될 주소
         insertForm.method="POST";
 
         // 예약 날짜
         const input1 = document.createElement("input");
+
+        /* 날짜, 시간 둘 다 사용해야 할 값 */
         const finalDate = document.querySelector(".reserv-date-count").innerText;
         // console.log(finalDate);
         input1.type="hidden";
         input1.name="reservDate";
-        input1.value=finalDate;
+        
+        const datePart = finalDate.slice(0,4); // 0.00 날짜만 가져옴
+        const [month, day] = datePart.split(".").map(Number); // .을 기준으로 month와 day 분리
+        const year = new Date().getFullYear(); // 현재 년도를 가져옴
+        const dateObj = new Date(year, month-1, day);
+        const dateString = dateObj.toISOString.split("T")[0]; // "YYYYY-MM-DD" 형식으로 저장
 
-        /* 고민해봐야할듯 시간 분리해야하는데 */
+        // 최종적으로 form 태그에 담겨 DB에 저장될 값
+        input1.value=dateString;
+
+        // thymeleaf에서 이용할 값
         const input2 = document.createElement("input");
         input2.type="hidden";
-        input2.name="reservTime";
+        input2.name="originalReservDate";
+        input2.value = finalDate;
+
+
+        /* 고민해봐야할듯 시간 분리해야하는데 */
+        const input3 = document.createElement("input");
+        input3.type="hidden";
+        input3.name="reservTime";
+
+        const timePart = finalDate.slice(8); // 8번째 인덱스 이후부터 잘라냄 (시간만 분리)
+        input3.value = timePart;
 
         // 예약 인원
-        const input3 = document.createElement("input");
+        const input4 = document.createElement("input");
         const finalCount = document.querySelector(".reserv-date-count").innerText;
-        input3.type="hidden";
-        input3.name="reservCount";
-        input2.value=finalCount;
+        input4.type="hidden";
+        input4.name="reservCount";
+        // input4.value=finalCount;'
+        
+        const countPart = finalCount.substr(0,1); // "2명" 에서 "2" 만 추출
+        const countNumber = Number(countPart); // 문자를 숫자로 변환
+        input4.value=countNumber; // DB 저장용 
 
+        // 요청사항
+        const input5 = document.createElement("input");
+        const reservRequest = document.querySelector("#reservRequest").innerText;
+        input5.type="hidden";
+        input5.name="reservRequest";
+        input5.value=reservRequest;
+
+        // 방문자 이름
+        const input6 = document.createElement("input");
+        const visitName = document.querySelector("#visitName").innerText;
+        input6.type="hidden";
+        input6.name="visitName";
+        input6.value=visitName;
+
+        // 방문자 전화번호
+        const input7 = document.createElement("input");
+        const visitTel = document.querySelector("#visitTel").innerText;
+        input7.type="hidden";
+        input7.name="visitTel";
+        input7.value=visitTel;
+
+        insertForm.append(input1, input2, input3, input4, input5,  input6, input7);
+
+        // body에 form 태그
+        document.body.append(insertForm);
+
+        insertForm.submit(); // 다음 버튼 클릭 시 form 태그 제출
 
     });
 }
 
 
-/* 예약자 정보와 실제 방문자 정보가 다를 경우 폼 */
-const visitInfoBtn = document.querySelector(".visitInfoBtn");
-const visitForm = document.querySelector(".visit-form");
-const visitInfoBtnUp = document.querySelector(".visitInfoBtnUp");
 
-if(visitInfoBtn != null) {
-    visitInfoBtn.addEventListener("click", () => {
-        visitForm.classList.toggle("visit");
-    })
-}

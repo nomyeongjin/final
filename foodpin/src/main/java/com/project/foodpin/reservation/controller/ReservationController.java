@@ -32,19 +32,12 @@ public class ReservationController {
 			//@RequestParam int storeNo
 			) {
 		
-		
-		
-		
 		return "reservation/reservationDetail";
 //		return service.selectStoreList(store.getStoreNo());
 	}
 	
 	@GetMapping("reservationCheck")
-	public String reservationCheck(
-			Reservation reservation, 
-			Store store,
-			Member member,
-			Model model) {
+	public String reservationCheck() {
 		
 //		return service.selectChekcList();
 		return "reservation/reservationCheck";
@@ -64,10 +57,15 @@ public class ReservationController {
 	/****** form 태그 제출를 위한 ******/
 	@PostMapping("nextPage")
 	public String nextPage(
-			@RequestParam("reservDate") String reservDate
-			) {
+			@RequestParam("reservDate") String reservDate) {
 		
 		return "reservation/reservationCheck";
+	}
+	
+	// 예약하기 눌렀을 때 form 제출 DB 저장 필요
+	@PostMapping("insertPage")
+	public String insertPage() {
+		return  "reservation/reservationConfirm";
 	}
 	
 }
