@@ -18,6 +18,16 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
+	<!-- 예약 확정/대기 조회 -->
+	<select id="checkReserv">
+		SELECT COUNT(*)
+		FROM RESERVATION
+		WHERE MEMBER_NO = #{memberNo}
+		AND ((RESERV_DATE > SYSDATE AND RESERV_STATUS_FL = 'Y')
+	  	OR RESERV_STATUS_FL = 'N')
+	</select>
+	
+	<!-- 회원 탈퇴 -->
 	<update id="secession">
 		UPDATE MEMBER SET
 		MEMBER_STATUS = 'Y'
@@ -33,20 +43,26 @@
 	
 	<!-- 예약 확정 조회 -->
 	<select id="reservationFix">
-		SELECT S.MEMBER_NO, <![CDATA[ TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE]]>,
+		SELECT (SELECT COUNT(*) FROM RESERVATION 
+				WHERE R.MEMBER_NO = #{memberNo} 
+				AND RESERV_STATUS_FL = 'Y'
+				AND TO_TIMESTAMP(TO_CHAR(R.RESERV_DATE, 'YYYY-MM-DD') || ' ' || R.RESERV_TIME, 'YYYY-MM-DD HH24:MI') > SYSDATE) FIX_COUNT,
+			RESERV_NO, <![CDATA[ TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE]]>,
 			R.RESERV_TIME, 
 		    S.STORE_NAME, R.RESERV_COUNT, S.STORE_LOCATION
+		    
 		FROM RESERVATION R
 		JOIN STORE S 
 		ON R.STORE_NO = S.STORE_NO
 		WHERE R.MEMBER_NO = #{memberNo}
 		AND RESERV_STATUS_FL = 'Y'
+		AND TO_TIMESTAMP(TO_CHAR(R.RESERV_DATE, 'YYYY-MM-DD') || ' ' || R.RESERV_TIME, 'YYYY-MM-DD HH24:MI') > SYSDATE 
 		ORDER BY RESERV_DATE, RESERV_TIME
 	</select>
 	
 	<!-- 예약 대기 조회 -->
 	<select id="reservationWait">
-		SELECT <![CDATA[ TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE]]>,
+		SELECT RESERV_NO, <![CDATA[ TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE]]>,
 			R.RESERV_TIME, 
 		    S.STORE_NAME, R.RESERV_COUNT, S.STORE_LOCATION
 		FROM RESERVATION R
@@ -75,7 +91,10 @@
 	
 	<!-- 예약 취소/노쇼 조회 -->
 	<select id="reservationCancelNoshow">
-		SELECT <![CDATA[ TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE]]>,
+		SELECT (SELECT COUNT(*) FROM RESERVATION 
+				WHERE RESERV_STATUS_FL = 'X'
+				OR RESERV_STATUS_FL = 'C') CANCEL_NOSHOW_COUNT,
+			<![CDATA[ TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE]]>,
 			R.RESERV_TIME, 
 		    S.STORE_NAME, R.RESERV_COUNT, S.STORE_LOCATION
 		FROM RESERVATION R
@@ -86,6 +105,12 @@
 		ORDER BY RESERV_DATE, RESERV_TIME
 	</select>
 	
+	<!-- 예약 취소 기능 -->
+	<update id="cancelReservation">
+		UPDATE RESERVATION SET RESERV_STATUS_FL = 'C'
+		WHERE MEMBER_NO = #{memberNo}
+		AND RESERV_NO = #{reservNo}
+	</update>
 	
 	<!-- 북마크 목록 조회 -->
 	<select id="memberLikeList">

@@ -50,7 +50,7 @@
 
                     <th:block th:unless="${#lists.isEmpty(reservation)}">
                         <section id="reservation">
-                            총 3건
+                            <span th:text="|총 ${reservation[0].fixCount}건|"></span>
                             <table>
                                 <ul>
                                     <li class="reservationList" th:each="reservation : ${reservation}">
@@ -62,7 +62,7 @@
                                             <span class="storeAddress" th:text="*{storeLocation}"></span>
                                         </div>
                                         <span>
-                                            <button id="cancelReservation">예약 취소</button>
+                                            <button class="cancelReservation" th:data-reserv-no="${reservation.reservNo}">예약 취소</button>
                                         </span>
                                     </li>
                                 </ul>

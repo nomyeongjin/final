@@ -8,9 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -147,16 +150,22 @@ public class MemberMyPageController {
 	}
 	
 	// 예약 취소하기
+	@ResponseBody
 	@PostMapping("cancelReservation")
-	public ResponseEntity<Map<String, Object>> cancelReservation(
-		@SessionAttribute("loginMember") Member loginMember,
-		RedirectAttributes ra) {
+	public boolean cancelReservation(
+		@RequestBody int reservNo,
+		@SessionAttribute("loginMember") Member loginMember) {
 		
 		int memberNo = loginMember.getMemberNo();
-		boolean cancel = service.cancelReservation(memberNo);
-		Map<String, Object> response = new HashMap<>();
-		response.put("success", cancel);
-		return ResponseEntity.ok(response);
+		int result = service.cancelReservation(memberNo, reservNo);
+		
+		
+		if(result > 0) {
+			return true;
+		} else {
+			return false;
+			
+		}
 	}
 	
 	
@@ -204,16 +213,24 @@ public class MemberMyPageController {
 		
 		int result = service.secession(memberPw, loginMember);
 		
+		int reserv = service.selectReserv(memberNo);
+		
 		String path = null;
 		String message = null;
 		
-		if(result > 0) {
+		if(reserv == 0) {
+			message = "예약 확정/대기 상태가 있을 경우 취소해 주세요";
+			path = "reservation/fix";
+		}
+		
+		else if(result == 0) {
+			message = "비밀번호가 일치하지 않습니다";
+			path = "memberSecession";
+			
+		} else {
 			message = "탈퇴 처리가 되었습니다";
 			status.setComplete();
 			path = "/";
-		} else {
-			message = "비밀번호가 일치하지 않습니다";
-			path = "myPage/member/memberSecession";
 		}
 		
 		ra.addFlashAttribute("message", message);
