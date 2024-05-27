@@ -89,7 +89,7 @@ public class StoreMyPageController {
 		
 		else message = "가게 정보 변경을 실패했습니다.";
 		
-//		ra.addFlashAttribute("message", message);
+		ra.addFlashAttribute("message", message);
 		
 		return "redirect:/myPage/store/storeInfo";
 	}

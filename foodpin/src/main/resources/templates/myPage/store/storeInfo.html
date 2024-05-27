@@ -84,10 +84,20 @@
 
                <!-- 예약 오픈 여부 -->
                <div class="edit-area-row">
-                  <label for="storeStatus">예약 오픈 여부 : </label>
+                  <label>예약 오픈 여부 : </label>
                   <div class="input-row">
-                     <button id="storeStatusY" th:txt="*{storeStatus}">신청 허용</button>
-                     <button class="checked" id="storeStatusN" th:txt="*{storeStatus}">신청 미허용</button>
+
+                     <!-- 선택시 허용/미허용으로 변경 -->
+
+                     <!-- 허용 -->
+                     <th:block th:if="*{storeStatus == 'Y'}">
+                        <input type="checkbox" id="storeStatus" name="storeStatus" checked><label for="storeStatus">신청 허용</label>
+                     </th:block>
+
+                     <!-- 미허용 -->
+                     <th:block th:if="*{storeStatus == 'N'}">
+                        <input type="checkbox" id="storeStatus" name="storeStatus"><label for="storeStatus">신청 미허용</label>
+                     </th:block>
                   </div>
                </div>              
 
@@ -105,12 +115,15 @@
                   <label for="openHour">영업시간 : </label>
                   <div class="input-row">
 
-                     <!-- 00:00 00:00 -->
-                     <label for="openClose">종일</label><input type="checkbox" id="openClose" value="00:00">
+                     <div id="openCloseArea">
+                        <input type="time" name="openHour" id="openHour" th:value="*{openHour}">
+                        <span>~</span>
+                        <input type="time" name="closeHour" id="closeHour" th:value="*{closeHour}">
+                     </div>
 
-                     <input type="time" name="openHour" id="openHour" th:value="*{openHour}">
-                     <span>~</span>
-                     <input type="time" name="closeHour" id="closeHour" th:value="*{closeHour}">
+                     <!-- 종일 선택시 각 값 변경 ~> 00:00 00:00 -->
+                     <input type="checkbox" id="openClose"><label for="openClose">종일</label>
+
                   </div>
                </div>
 
@@ -119,23 +132,14 @@
                   <label for="breacktimeStart">브레이크 타임 : </label>
                   <div class="input-row">
 
-                     <!-- 브레이크 타임 없음에 체크된 경우 -->
-                     <th:block th:if="*{breaktimeStart == null}">
-                        <label for="breaktime">없음</label><input type="checkbox" id="breaktime" value="">
-
-                        <input type="time" name="breaktimeStart" id="breaktimeStart" disabled>
-                        <span>~</span>
-                        <input type="time" name="breaktimeEnd" id="breaktimeEnd" disabled>
-                     </th:block>
-
-                     <!-- 브레이크 타임 지정된 경우 -->
-                     <th:block th:unless="*{breaktimeStart == null}">
-                        <label for="breaktime">없음</label><input type="checkbox" id="breaktime" value="">
-
+                     <div id="breaktimeArea">
                         <input type="time" name="breaktimeStart" id="breaktimeStart" th:value="*{breaktimeStart}">
                         <span>~</span>
                         <input type="time" name="breaktimeEnd" id="breaktimeEnd" th:value="*{breaktimeEnd}">
-                     </th:block>
+                     </div>
+
+                     <!-- 없음 선택시 각 값 변경 ~> null -->
+                     <input type="checkbox" id="breaktime"><label for="breaktime">없음</label>
                   </div>
                </div>
                
@@ -148,9 +152,6 @@
 
             <a id="withdraw">서비스 탈퇴</a>
          </div>
-
-
-
 
 
          <!-- 본문 (기본 정보) -->
@@ -188,6 +189,8 @@
    <!-- <script src="/js/myPage/store/storeMyPage.js"></script> -->
 
    <!-- 마이페이지 JS 추가 -->
+   <script src="/js/myPage/store/storeInfo.js"></script>
+
    <script src="/js/myPage/store/storeOff.js"></script>
 
 </body>

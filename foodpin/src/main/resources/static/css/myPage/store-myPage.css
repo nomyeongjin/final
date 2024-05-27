@@ -9,7 +9,9 @@
 }
 /* 마이페이지 본문 */
 .content-container{
-   width: 80%;
+   /* width: 80%; */
+   width: 100%;
+
    padding: 50px;
 }
 
@@ -109,7 +111,7 @@
    border-radius: 10px;
    cursor: pointer;
 }
-.input-row > button{
+.input-row > button, #storeStatusY, #storeStatusN{
    width: 80px;
    height: 26px;
    background: lightgray;
@@ -117,6 +119,10 @@
    border-radius: 10px;
    cursor: pointer;
    margin: 0 5px;
+   font-size: 14px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 #storeInfoEditBtn{
@@ -198,7 +204,8 @@
    padding: 10px;
    font-weight: bold;
 }
-.off-container, .calendar-container{
+#off-container, #calendar-container{
+   width: 100%;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -241,8 +248,7 @@
 
 /* full calendar */
 #calendar{
-   width: 100%;
-   /* height: 410px; */
+   width: 600px;
    margin-bottom: 20px;
    padding: 15px;
 
