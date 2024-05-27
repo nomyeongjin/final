@@ -29,11 +29,11 @@ public class ReservationController {
 	public String reservationDetail(
 			Model model,
 			Store store
-			//@RequestParam int storeNo
+//			@RequestParam("storeNo") int storeNo
 			) {
 		
 		return "reservation/reservationDetail";
-//		return service.selectStoreList(store.getStoreNo());
+//		return service.selectStoreList(storeNo);
 	}
 	
 	@GetMapping("reservationCheck")

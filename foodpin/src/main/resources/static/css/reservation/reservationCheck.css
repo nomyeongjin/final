@@ -108,6 +108,7 @@
 
 .reserv-item {
     display: flex;
+    justify-content: center;
 }
 
 .name{
@@ -128,7 +129,7 @@
 
 .input-name:focus {outline:none;}
 
-#reservReqeust{
+#reservRequest{
     height: 70px;
     width: 300px;
     border: 1px solid #cecece;
