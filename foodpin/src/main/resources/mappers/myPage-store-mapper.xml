@@ -6,7 +6,7 @@
 	
 	<!-- 가게 정보 수정 화면 이동 -->
 	<select id="selectstoreInfo">
-		SELECT STORE_NAME, STORE_TEL, STORE_LOCATION, OPEN_HOUR, CLOSE_HOUR, 
+		SELECT STORE_IMG, STORE_NAME, STORE_TEL, STORE_LOCATION, OPEN_HOUR, CLOSE_HOUR, 
 			BREAKTIME_START, BREAKTIME_END, STORE_STATUS, STORE_MAX_NUMBER, 
 			STORE_MAX_TABLE, STORE_INFO 
 		FROM "STORE"
@@ -18,7 +18,17 @@
 		)
 	</select>
 	
-	
+	<!-- 가게 정보 수정 -->
+	<update id="storeInfoUpdate">
+		UPDATE "STORE" SET STORE_IMG = #{storeImg}, STORE_STATUS = 'Y', STORE_MAX_NUMBER = #{storeMaxNumber}, STORE_MAX_TABLE = #{storeMaxTable}, 
+			OPEN_HOUR = #{openHour}, CLOSE_HOUR = #{closeHour}, BREAKTIME_START = #{breaktimeStart}, BREAKTIME_END = #{breaktimeEnd}, 
+			STORE_INFO = #{storeInfo}
+		WHERE STORE_NO =(
+			SELECT STORE_NO FROM "STORE"
+			JOIN MEMBER USING(MEMBER_NO)
+			WHERE MEMBER_NO = #{memberNo}
+		)
+	</update>
 	
 	<!-- *** 예약 *** -->
 	

@@ -19,7 +19,12 @@ public interface StoreMyPageMapper {
 	 */
 	Store selectstoreInfo(int memberNo);
 	
-
+	/** 가게 정보 수정
+	 * @param inputStore
+	 * @return result
+	 */
+	int storeInfoUpdate(Store inputStore);
+	
 	// ----- 예약 
 	
 	
@@ -46,6 +51,9 @@ public interface StoreMyPageMapper {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+
+
+
 
 
 
