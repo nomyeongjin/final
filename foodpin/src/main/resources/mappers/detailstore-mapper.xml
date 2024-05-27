@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.foodpin.store.model.mapper.DetailStoreMapper">
+
+	   <!-- 가게 상세 조회 -->
+   <select id="storeDetail" resultType="store">
+     SELECT S.STORE_NAME, S.STORE_INFO, S.STORE_LOCATION, S.STORE_STATUS,
+       S.STORE_TEL, S.OPEN_HOUR, S.CLOSE_HOUR, S.BREAKTIME_START, S.BREAKTIME_END,
+       S.STORE_CLOSED, S.STORE_IMG, S.TOTAL_RATING, S.MEMBER_NO
+		FROM "STORE" S
+		LEFT JOIN STORE_CATEGORY SC ON S.STORE_NO = SC.STORE_NO
+		LEFT JOIN WEEK_OFF W ON S.STORE_NO = W.STORE_NO
+		LEFT JOIN DAY_OFF D ON S.STORE_NO = D.STORE_NO
+		LEFT JOIN MENU M ON S.STORE_NO = M.STORE_NO
+		WHERE S.STORE_NO = #{storeNo}
+   </select>
+  
+</mapper>

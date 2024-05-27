@@ -26,7 +26,7 @@
      <!-- 가게 사진 , 식당 이름, 북마크, 지역, 카테고리, 별점, 지도, 가게 정보,  -->
 
        <!-- 공간 나누는 칸 ex) 가게 정보랑 지도 나눔 -->
-       <section class="store-detail">   
+       <section class="store-detail" th:object="${store}">   
          
 
             <!--회색 실선 박스 -->
@@ -68,7 +68,7 @@
                                 <!-- 안에 이름이랑 북마크 만들고 
                                     양 옆으로 보내기 -->
                                 <div class="storedetail-name">
-                                    <span id="storeName">집게리아</span> 
+                                    <span id="storeName" th:text="*{storeName}">가게 이름</span> 
                                 </div>
                                 
                                 <div class="bookmark">
@@ -103,7 +103,7 @@
                                     <i class="rating__star far fa-star"></i>
                                    
                                     &nbsp;
-                                    <span> 점수 </span>
+                                    <span th:text="*{totalRating}"> 점수 </span>
                                 </div>
 
                                   
@@ -121,8 +121,8 @@
                             
                                 <!-- 가게 주소 / 지역 -->
                                 <div class="storedetail-two">
-                                    <span>
-                                        가게 주소 : 비키니시티 닻도로 3051
+                                    <span th:text="*{storeLocation}">
+                                        가게 주소
                                     </span>
 
                                     <!-- 누르면 상세 페이지로 이동
@@ -134,8 +134,8 @@
                                 <!-- 가게 전화번호 -->
                                 <div class="storedetail-row">
                                     
-                                    <span type="text" id="memberTel">
-                                    가게 전화번호 : 031-369-3690
+                                    <span type="text" id="memberTel" th:text="*{storeTel}">
+                                    가게 전화번호
                                     </span>
                                 </div>
 
@@ -165,7 +165,7 @@
                         // 이거도 더보기로 할까... 화면 안 이쁜데 뺄 수도-->
                         <div class="store-detail-content">
 
-                            <pre class="store-detail-text">
+                            <pre class="store-detail-text" th:text="*{storeInfo}">
 집게리아(영어: Krusty Krab)는 즉석식 레스토랑으로 시그니처 버거인 게살버거(영어: Krabby Patty)로 유명하며, 그 요리법은 영업 비밀로 엄격히 보호되고 있다.
 
 이 레스토랑은 소유자이자 매니저인 집게사장이 설립하였다. 
