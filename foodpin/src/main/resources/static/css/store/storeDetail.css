@@ -216,6 +216,14 @@ aside>a:hover{
     color: var(--main-color);
 }
 
+#storeCat::before{
+
+    font-family:FontAwesome;
+    content:"\f02c";
+    font-size: 15px;
+    margin-right: 5px;
+    color: var(--main-color);
+}
 /* 문의하기 */
 #toChatting{
 
