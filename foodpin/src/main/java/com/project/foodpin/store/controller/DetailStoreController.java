@@ -40,6 +40,17 @@ public class DetailStoreController {
 			) {
 		
 		Store store = service.storeDetail(storeNo);
+		/* Store offday = service.storeOff(storeNo); */
+		
+		// 불러온 store 정보에서 주소 쪼개기
+		String storeLocation = store.getStoreLocation();
+		String[] arr = storeLocation.split("\\^\\^\\^");
+		
+		model.addAttribute("store", store);
+		
+		model.addAttribute("postcode", arr[0]);
+		model.addAttribute("address", arr[1]);
+		model.addAttribute("detailAddress", arr[2]);
 		
 		String path = null;
 		
@@ -50,10 +61,6 @@ public class DetailStoreController {
 			// request scope 값 세팅
 			model.addAttribute("store",store) ;
 			
-		}else {
-			path = "redirect:/";  
-			
-			ra.addFlashAttribute("message", "해당 가게가 존재하지 않습니다");
 		}
 		
 		return path;

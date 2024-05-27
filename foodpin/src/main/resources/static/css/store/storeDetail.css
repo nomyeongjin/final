@@ -197,6 +197,25 @@ aside>a:hover{
     color: rgb(120, 120, 120);
 }
 
+/* 주소 */
+#detailLoc::before{
+
+    font-family:FontAwesome;
+    content:"\f3c5";
+    font-size: 15px;
+    margin-right: 5px;
+    color: var(--main-color);
+}
+
+#memberTel::before{
+
+    font-family:FontAwesome;
+    content:"\f095";
+    font-size: 15px;
+    margin-right: 5px;
+    color: var(--main-color);
+}
+
 /* 문의하기 */
 #toChatting{
 
