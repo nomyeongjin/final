@@ -2,6 +2,8 @@ package com.project.foodpin.myPage.model.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.store.model.dto.Store;
@@ -13,6 +15,15 @@ public interface StoreMyPageService {
 	 * @return store
 	 */
 	Store selectstoreInfo(int memberNo);
+	
+	/** 가게 정보 수정
+	 * @param inputStore
+	 * @param storeImg 
+	 * @return
+	 */
+	int storeInfoUpdate(Store inputStore, MultipartFile image);
+	
+	
 	
 	
 	/** 전체 예약 조회
@@ -38,6 +49,8 @@ public interface StoreMyPageService {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+
+
 
 
 

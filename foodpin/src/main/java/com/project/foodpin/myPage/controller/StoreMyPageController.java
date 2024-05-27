@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
@@ -24,7 +24,6 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("myPage/store")
-@SessionAttributes({"storeNo"})
 public class StoreMyPageController {
 
 	private final StoreMyPageService service;
@@ -42,39 +41,61 @@ public class StoreMyPageController {
 //	}
 	
 
-	/** 가게 정보 수정 화면 이동 + 가게 기본 정보 조회
+	/** 가게 정보 수정 화면 이동 (+ 가게 기본 정보 조회)
 	 * @param loginMember
 	 * @param model
 	 * @return
 	 */
 	@GetMapping("storeInfo")
 	public String storeInfo(@SessionAttribute("loginMember") Member loginMember, Model model) {
-		
 
 		Store store = service.selectstoreInfo(loginMember.getMemberNo());
+		
+		// 불러온 store 정보에서 주소 쪼개기
+		String storeLocation = store.getStoreLocation();
+		String[] arr = storeLocation.split("\\^\\^\\^");
+		
 		model.addAttribute("store", store);
+		
+		model.addAttribute("postcode", arr[0]);
+		model.addAttribute("address", arr[1]);
+		model.addAttribute("detailAddress", arr[2]);
 		
 		return "myPage/store/storeInfo";
 	}
 	
 	
+	/** 가게 정보 수정
+	 * @param loginMember
+	 * @param storeImg
+	 * @param inputStore
+	 * @param model
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("storeInfoUpdate")
+	public String storeInfoUpdate(@SessionAttribute("loginMember") Member loginMember, 
+			@RequestParam("image") MultipartFile image, 
+			Store inputStore, 
+			Model model, RedirectAttributes ra) {
+		
+		inputStore.setMemberNo(loginMember.getMemberNo());
+		
+		int result = service.storeInfoUpdate(inputStore, image);
+		
+		String message = "";
+		
+		if(result > 0)	message = "가게 정보가 변경되었습니다.";
+		
+		else message = "가게 정보 변경을 실패했습니다.";
+		
+//		ra.addFlashAttribute("message", message);
+		
+		return "redirect:/myPage/store/storeInfo";
+	}
 	
 	
-	
-//	@GetMapping("storeInfo")
-//	public String storeInfo() {
-//		return "myPage/store/storeInfo";
-//	}
-	
-	
-	
-	
-	
-	
-	
-	// -----------------------------
-	
-	/** 예약 관리 화면 이동 (+ 예약 전체 조회)
+	/** 예약 관리 화면 이동 (+예약 전체 조회)
 	 * @param loginMember
 	 * @param model
 	 * @return
