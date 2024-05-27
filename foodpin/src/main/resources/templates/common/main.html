@@ -69,16 +69,16 @@
           <div class="main-store-img" >
             
             
-              <a class="store-img" th:each="store : ${storeList}" th:object="${store}" th:if="${storeStat.index} lt 4"
+              <a class="store-img" th:each="store : ${storeList}"  th:if="${storeStat.index} lt 4"
               th:href="'/store/storeDetail/' + ${store.storeNo}"> 
-               <img
-               th:src="${store.storeImg != null ? store.storeImg : store.default.image}"
+               <img 
+               th:src="${store.storeImg}"
                class="store-thumbnail">
-                <span class="store-name" th:text="*{storeName}">집게리아</span>
+                <span class="store-name" th:text="${store.storeName}">가게 이름</span>
               </a>
             
               
-           
+
               
             </div>
            

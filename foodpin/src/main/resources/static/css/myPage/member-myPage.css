@@ -339,6 +339,10 @@ label[for='agree']{
  
  
 /* MEMBER RESERVATION */
+
+#reservation {
+    margin-top: 15px;
+}
  
 .reservationTable {
     margin: 20px;
@@ -403,7 +407,7 @@ label[for='agree']{
     flex-grow: 1;
 }
  
-#cancelReservation {
+.cancelReservation {
     font-size: 15px;
     background-color: var(--main-color);
     border: none;

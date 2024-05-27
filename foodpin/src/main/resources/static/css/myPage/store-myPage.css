@@ -9,7 +9,9 @@
 }
 /* 마이페이지 본문 */
 .content-container{
-   width: 80%;
+   /* width: 80%; */
+   width: 100%;
+
    padding: 50px;
 }
 
@@ -19,6 +21,7 @@
    display: flex;
    flex-direction: column;
    justify-content: center;
+   align-items: center;
    padding-top: 30px;
    margin: 15px;
 }
@@ -26,62 +29,71 @@
 /* ----- 기본 정보 ----- */
 /* -----           ----- */
 /* 프로필 수정 폼 */
-#profileEditFrm{
+#storeEditFrm{
+   width: 60%;
    display: flex;
    flex-direction: column;
    align-items: center;
    padding: 20px;
 }
-.address-input-area, .time-input-area, .profile-input-area{
-   width: 60%;
+.edit-area-row, #storeInfo{
+   width: 100%;
    margin: 10px;
    display: flex;
+   flex-direction: row;
+   justify-content: space-between;
    align-items: center;
-   justify-content: space-evenly;
 }
-.align-right{
+.input-area-cols{
    display: flex;
-   flex-direction: row-reverse;
+   flex-direction: column;
+   margin: 5px 0;
+}
+.input-row{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: flex-end;
 }
 
-/* 프로필 이미지 */
-.profile-img {
-   width: 150px;
+/* 가게 이미지 */
+.store-img{
+   width: 100%;
    height: 150px;
-   border: 1px solid grey;
-   border-radius: 75px;
+   /* border: 1px solid grey; */
    margin: 40px auto;
 
 }
-.profile-img > img {
-   width: 149px;
-   height: 149px;
+.store-img > img {
+   width: 100%;
+   height: 150px;
+   object-fit: cover;
    border: 1px solid grey;
-   border-radius: 75px;
-   margin: auto;
 }
 
 /* label */
 #profileEditFrm label{
-   width: 25%;
+   width: 20%;
    font-size: 16px;
+}
+#storeMaxLabel{
+   width: 30%;
 }
 
 /* input */
-.profile-input-area > input, .align-right > input{
-   width: 50%;
+.profile-input-area > input, .align-right > input{ /* ? */
    height: 26px;
    outline: none;
    padding-left: 5px;
 }
-#postcode{
-   width: 28%;
+.edit-area-row input, .input-area-cols input{
    height: 26px;
    outline: none;
    padding-left: 5px;
+   margin: 5px;
 }
-.time-input-area > span{
-   padding: 0 15px;
+.s-input{
+   width: 30%;
 }
 
 /* 가게 소개 */
@@ -91,15 +103,30 @@
 }
 
 /* 버튼 */
-#searchAddress{
-   width: 15%;
+.row-input-area > button{
+   width: 20%;
    height: 26px;
    background: lightgray;
    border: 1px solid lightgray;
    border-radius: 10px;
    cursor: pointer;
 }
+.input-row > button, #storeStatusY, #storeStatusN{
+   width: 80px;
+   height: 26px;
+   background: lightgray;
+   border: 1px solid lightgray;
+   border-radius: 10px;
+   cursor: pointer;
+   margin: 0 5px;
+   font-size: 14px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
 #storeInfoEditBtn{
+   width: 100px;
    margin: 10px;
    height: 26px;
    background: lightgray;
@@ -177,7 +204,8 @@
    padding: 10px;
    font-weight: bold;
 }
-.off-container, .calendar-container{
+#off-container, #calendar-container{
+   width: 100%;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -220,8 +248,7 @@
 
 /* full calendar */
 #calendar{
-   width: 100%;
-   /* height: 410px; */
+   width: 600px;
    margin-bottom: 20px;
    padding: 15px;
 

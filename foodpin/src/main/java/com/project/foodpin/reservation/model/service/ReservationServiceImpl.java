@@ -16,8 +16,14 @@ public class ReservationServiceImpl implements ReservationService{
 	private final ReservationMapper mapper;
 	
 	@Override
-	public String selectStoreList(int storeNo) {
-		return mapper.selectStoreList(storeNo);
-	}	
+	public Store storeDetail(String storeNo) {
+		return mapper.storeDetail(storeNo);
+	}
+	
+	@Override
+	public String selectStoreNo(String storeNo) {
+		return mapper.selectStoreNo(storeNo);
+	}
+		
 }
 

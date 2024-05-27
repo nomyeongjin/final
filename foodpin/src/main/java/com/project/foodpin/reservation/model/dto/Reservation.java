@@ -24,4 +24,7 @@ public class Reservation {
 	
 	private String storeName;
 	private String storeLocation;
+	
+	private int fixCount;
+	private int cancelNoshowCount;
 }
