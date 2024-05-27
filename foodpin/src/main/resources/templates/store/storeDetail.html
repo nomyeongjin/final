@@ -46,7 +46,7 @@
                         <button>좌</button>
 
                         <img class="storedetail-thumbnail" 
-                        src="/images/storeDetail/store.jpg" alt="가게 기본 이미지">
+                        th:src="*{storeImg}" alt="가게 기본 이미지">
                     
 
                         <button>우</button>
@@ -103,7 +103,7 @@
                                     <i class="rating__star far fa-star"></i>
                                    
                                     &nbsp;
-                                    <span th:text="*{totalRating}"> 점수 </span>
+                                    <span th:text="*{totalRating}"> 점수 </span> 점
                                 </div>
 
                                   
@@ -119,9 +119,9 @@
                             <div class="storedetail-mid">
 
                             
-                                <!-- 가게 주소 / 지역 -->
+                                <!-- 가게 주소 / 지역 --> <!-- 토글로 가게 우편 번호와 상세 주소 넣기 -->
                                 <div class="storedetail-two">
-                                    <span th:text="*{storeLocation}">
+                                    <span id="detailLoc" th:text="${address}">
                                         가게 주소
                                     </span>
 
@@ -166,14 +166,7 @@
                         <div class="store-detail-content">
 
                             <pre class="store-detail-text" th:text="*{storeInfo}">
-집게리아(영어: Krusty Krab)는 즉석식 레스토랑으로 시그니처 버거인 게살버거(영어: Krabby Patty)로 유명하며, 그 요리법은 영업 비밀로 엄격히 보호되고 있다.
-
-이 레스토랑은 소유자이자 매니저인 집게사장이 설립하였다. 
-소문에 따르면 집게사장의 딸 진주가 커서 집게리아를 물려받을 예정이라고 한다. 
-
-스폰지밥과 징징이가 유일한 정규직 직원인 이 레스토랑은 비키니시티에서 "식사를 위해 설립된 최고의 식당"으로 간주하며, 
-주요 경쟁자인 플랑크톤과 슈퍼컴퓨터이자 플랑크톤의 아내인 카렌이 운영하는 첨 버켓의 끊임없는 도전을 받고 있다.               
-                       </pre>
+                            </pre>
 
                            
                         </div>
@@ -324,7 +317,7 @@
                                 <span>영업시간</span>
                           
                                 <!-- 가게 상태 조회(휴무일/ 브레이크타임/라스트오더) -->
-                             <span id="storeStatusText">영업 중</span>
+                             <span id="storeStatusText" >영업 중</span>
                             </div>
 
 
@@ -506,71 +499,15 @@
                         </div>
 
                         <div class="menu-info">
-                            <span id="menuName">게살버거</span>
-                            <span id="menuPrice">4000 원</span>
+                            <span id="menuName" th:text="${store.menuTitle}">메뉴 이름</span>
+                            <span id="menuPrice" th:text="${store.menuAmount}">4000 원</span>
                         </div>
                     </div>
                     
-                    <div class="menu-image-container">
-                        <div>
-                            <img src="/images/storeDetail/burger.jpg" class="storedetail-menuimage" 
-                             alt="메뉴 사진">
-                        </div>
-
-                        <div class="menu-info">
-                            <span id="menuName">스페셜버거</span>
-                            <span id="menuPrice">22000 원</span>
-                        </div>
-                    </div>
+            
                     
-                    <div class="menu-image-container">
-                        <div>
-                            <img src="/images/storeDetail/pizza.jpg" class="storedetail-menuimage" 
-                             alt="메뉴 사진">
-                        </div>
-
-                        <div class="menu-info">
-                            <span id="menuName">피자</span>
-                            <span id="menuPrice">9000 원</span>
-                        </div>
-                    </div>
-                    <div class="menu-image-container">
-                        <div>
-                            <img src="/images/storeDetail/burger4.jpg" class="storedetail-menuimage" 
-                             alt="메뉴 사진">
-                        </div>
-
-                        <div class="menu-info">
-                            <span id="menuName">게살버거</span>
-                            <span id="menuPrice">4000 원</span>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-image-container">
-                        <div>
-                            <img src="/images/storeDetail/burger.jpg" class="storedetail-menuimage" 
-                             alt="메뉴 사진">
-                        </div>
-
-                        <div class="menu-info">
-                            <span id="menuName">스페셜버거</span>
-                            <span id="menuPrice">22000 원</span>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-image-container">
-                        <div>
-                            <img src="/images/storeDetail/pizza.jpg" class="storedetail-menuimage" 
-                             alt="메뉴 사진">
-                        </div>
-
-                        <div class="menu-info">
-                            <span id="menuName">피자</span>
-                            <span id="menuPrice">9000 원</span>
-                        </div>
-                    </div>
-
-                 </div>
+             
+                   </div>
 
                     <div class="moreMenuImageBtnBox">
                         <button id="moreMenuImageBtn">더보기</button>
