@@ -64,7 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 화면 로드 시 현재 날짜 출력
     const temp = new Date();
-    const now = `${temp.getMonth()+1}.${temp.getDate()}(${dayArr[temp.getDay()]})`;
+    const currentMonth = temp.getMonth()+1 < 10 ? '0' + (temp.getMonth()+1) : temp.getMonth()+1;
+    const now = `${currentMonth}.${temp.getDate()}(${dayArr[temp.getDay()]})`;
     // console.log(now);
     document.querySelector(".select-date").innerText = now;
 });

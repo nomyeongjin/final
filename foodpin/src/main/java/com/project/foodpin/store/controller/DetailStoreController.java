@@ -58,4 +58,7 @@ public class DetailStoreController {
 		
 		return path;
 	}
+	
+
+	
 }

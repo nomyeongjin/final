@@ -46,22 +46,6 @@ if(noticeTitle !=null) {
 /* **************  reservationDetail ************** */
 
 
-const max = 11;
-for(let i = 1; i<=max; i++){
-    
-    /* li 태그 생성하기 */
-    
-    // ul 태그 
-    const buttonList = document.querySelector(".button-list");
-    
-    // li 태그
-    const countList = document.createElement("li");
-    countList.className="button-item";
-    countList.innerText = `${i}명`;
-    
-    buttonList.append(countList); // ui>li
-    
-}
 
 
 // 예약 인원 수 체크
@@ -175,7 +159,7 @@ if(nextBtn != null){
 
         /* ****** 버튼 클릭 될 때 form 태그 생성 ******  */
         const form = document.createElement("form");
-        form.action="/reservation/nextPage"; //제출될 주소
+        form.action="/store/storeDetail/reservation/nextPage"; //제출될 주소
         form.method="POST";
 
         // 인원 선택한 값 저장 input
@@ -324,7 +308,7 @@ if(confirmBtn != null) {
 
         // form 태그 생성
         const insertForm = document.createElement("form");
-        insertForm.action="/reservation/insertPage"; //제출될 주소
+        insertForm.action="/store/storeDetail/insertPage"; //제출될 주소
         insertForm.method="POST";
 
         // 예약 날짜
@@ -336,13 +320,13 @@ if(confirmBtn != null) {
         input1.type="hidden";
         input1.name="reservDate";
         
-        const datePart = finalDate.slice(0,5); // 00.00 날짜만 가져옴
+        const datePart = finalDate.slice(0,4); // 00.00 날짜만 가져옴
         console.log(datePart);
         const [month, day] = datePart.split(".").map(Number); // .을 기준으로 month와 day 분리
         const year = new Date().getFullYear(); // 현재 년도를 가져옴
         const dateObj = new Date(year, month-1, day);
         const dateString = dateObj.toISOString().split("T")[0];   // ex) 2024-05-23T14:48:00.000Z을
-                                                                // "YYYYY-MM-DD" 형식으로 저장
+                                                                //"YYYYY-MM-DD" 형식으로 저장
 
         console.log(dateString);
 
@@ -409,4 +393,20 @@ if(confirmBtn != null) {
 
 
 
+// const max = 11;
+// for(let i = 1; i<=max; i++){
+    
+//     /* li 태그 생성하기 */
+    
+//     // ul 태그 
+//     const buttonList = document.querySelector(".button-list");
+    
+//     // li 태그
+//     const countList = document.createElement("li");
+//     countList.className="button-item";
+//     countList.innerText = `${i}명`;
+    
+//     buttonList.append(countList); // ui>li
+    
+// }
 
