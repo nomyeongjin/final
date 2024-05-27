@@ -6,6 +6,10 @@ calendarEl.id = "calendar";
 
 let calendar;
 
+/* 일정 불러오기 */
+
+
+
 /**
  * full Calendar 생성하는 함수
  */
@@ -15,23 +19,16 @@ function calendar_rendering() {
       locale: 'kr',
       timeZone: 'UTC',
       initialView: 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
-      editable: true, // false로 변경 시 draggable 작동 x 
-      
+      editable: true, // false로 변경 시 draggable 작동 x
 
 
       // 화면 구현용 샘플 데이터
-      events:[ // 일정 데이터 추가 , DB의 event를 가져오려면 JSON 형식으로 변환해 events에 넣어주면된다.
-         {
-            title:'개인 사정',
-            start:'2024-05-16',
-            end:'2024-05-16'
-         },
-         {
-            title:'개인 사정2',
-            start:'2024-05-20',
-            end:'2024-05-20'
+      events:
+         function(){
+            selectOff();
          }
-      ],
+
+      ,
       
       // 헤더에 일정 추가 버튼 추가
       headerToolbar: {
@@ -44,22 +41,19 @@ function calendar_rendering() {
       customButtons: {
          addEventButton: { // 추가한 버튼 설정
                text : "일정 추가",  // 버튼 내용
+
                click : function(){ // 버튼 클릭 시 이벤트 추가
                
-                  console.log("일정 추가 버튼 클릭됨");
-
                   createPopup();
             }
          }
       } 
-
-
-
-
       // ^^^ 설정 추가 마지막 ^^^
    });
    calendar.render();
 }
+
+
 
 /**
  * 
@@ -78,7 +72,7 @@ const createLi = (tagName, week) => {
 // --------------------------------------
 
 /* 본문 영역, 서브메뉴 버튼 변수 선언 */
-const container = document.querySelector(".myPage-content-container"); // 본문 div 영역
+const StoreOffContainer = document.querySelector(".myPage-content-container"); // 본문 div 영역
 
 const infoBtn = document.querySelector("#infoBtn");
 const menuBtn = document.querySelector("#menuBtn");
@@ -90,10 +84,7 @@ const dayoffBtn = document.querySelector("#dayoffBtn");
  */
 dayoffBtn.addEventListener("click", () => {
 
-   console.log("dayoffBtn 클릭됨");
-
-   container.innerText = ""; // 기존 내용 지우기
-
+   StoreOffContainer.innerText = ""; // 기존 내용 지우기
 
    // 고정 휴무일
    const offWeekSection = document.createElement("section");
@@ -101,7 +92,7 @@ dayoffBtn.addEventListener("click", () => {
    offWeekSection.innerHTML = "고정 휴무일";
 
    const weekOffContainer = document.createElement("form"); // div 생성
-   weekOffContainer.classList.add("off-container");
+   weekOffContainer.id = "off-container";
 
    const menu = document.createElement("menu"); // ul 생성
    menu.classList.add("week-row");
@@ -167,7 +158,7 @@ dayoffBtn.addEventListener("click", () => {
    offDayEditFrm.append(dayOffContainer);
    
    // 마이페이지 본문 컨테이너에 각 휴무일 section, form 추가
-   container.append(offWeekSection, weekOffContainer, offDaySection, offDayEditFrm);
+   StoreOffContainer.append(offWeekSection, weekOffContainer, offDaySection, offDayEditFrm);
    calendar_rendering() // 달력 생성 함수 호출(calendarEl 내부에 생성)
 });
 
@@ -199,13 +190,17 @@ const testBtn = document.querySelector("#testBtn");
 const popupLayer = document.querySelector("#popupLayer");
 const testArea = document.querySelector("#testArea");
 
-testBtn.addEventListener("click", () => {
+// testBtn.addEventListener("click", () => {
 
 
-   console.log(testBtn);
-});
+//    console.log(testBtn);
+// });
 
+let addBtn = document.querySelector("#addBtn"); //  팝업창 - 일정 등록 버튼
 
+/**
+ * 일정 등록하는 팝업창 생성 
+ */
 const createPopup = () => {
 
    const popupFrm = document.createElement("form");
@@ -241,8 +236,9 @@ const createPopup = () => {
    const btnRow = document.createElement("div"); // 버튼 영역
    btnRow.classList.add("popup-row");
 
-   const addBtn = document.createElement("button");
+   addBtn = document.createElement("button");
    addBtn.classList.add("popup-row");
+   addBtn.id = "addBtn";
    addBtn.innerText = "휴무 등록";
 
    const cancelBtn = document.createElement("button");
@@ -252,5 +248,50 @@ const createPopup = () => {
    btnRow.append(addBtn, cancelBtn);
    popupFrm.append(titleRow, startRow, endRow, btnRow);
    testArea.append(popupFrm);
+
+
+   /**
+    * 팝업창 - 일정 등록 버튼
+    */
+   addBtn.addEventListener("click", () => {
+      
+
+      const off = {
+         "storeNo" : storeNo,
+         "offDayTitle" : title.value,
+         "offWeekStart" : start.value,
+         "offWeekEnd" : end.value
+      };
+
+      fetch("/myPage/store/calendarOffInsert", {
+         method : "POST",
+         headers : {"content-Type" : "application/json"},
+         body : JSON.stringify(off)
+      })
+      .then(resp => resp.json())
+      .then(result => {
+
+         console.log(result);
+      })
+
+   });
+
+
 };
 
+const selectOff = () => {
+
+   console.log(storeNo);
+
+   fetch("/myPage/store/calendarOffSelect", {
+      method : "POST",
+      headers : {"content-Type" : "application/json"},
+      body : JSON.stringify(storeNo)
+   })
+   .then(resp => resp.json())
+   .then(event => {
+
+      console.log(event);
+      
+   })
+}

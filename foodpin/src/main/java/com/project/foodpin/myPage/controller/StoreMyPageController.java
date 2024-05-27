@@ -1,6 +1,8 @@
 package com.project.foodpin.myPage.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
+import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.myPage.model.service.StoreMyPageService;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.store.model.dto.Store;
 
+import kotlin.reflect.jvm.internal.pcollections.HashPMap;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -27,18 +31,6 @@ import lombok.RequiredArgsConstructor;
 public class StoreMyPageController {
 
 	private final StoreMyPageService service;
-	
-	
-//	@GetMapping("selectStoreNo")
-//	public String selectStoreNo(@SessionAttribute("loginMember") Member loginMember, Model model) {
-//		
-//		int memberNo = loginMember.getMemberNo();
-//		int storeNo  = service.selectStoreNo(memberNo); // 세션에서 얻어온 회원번호로 사업자 번호 조회
-//		
-//		model.addAttribute("storeNo", storeNo); // 사업자 번호
-//		
-//		return "redirect:/";
-//	}
 	
 
 	/** 가게 정보 수정 화면 이동 (+ 가게 기본 정보 조회)
@@ -74,6 +66,7 @@ public class StoreMyPageController {
 	 * @return
 	 */
 	@PostMapping("storeInfoUpdate")
+	@ResponseBody
 	public String storeInfoUpdate(@SessionAttribute("loginMember") Member loginMember, 
 			@RequestParam("image") MultipartFile image, 
 			Store inputStore, 
@@ -93,6 +86,47 @@ public class StoreMyPageController {
 		
 		return "redirect:/myPage/store/storeInfo";
 	}
+	
+	/** 휴무일 조회
+	 * @param storeNo
+	 * @return
+	 */
+	@PostMapping("calendarOffSelect")
+	@ResponseBody
+	public Map<String, Object> calendarOffSelect(@RequestBody int storeNo) {
+		
+		
+		List<Off> offList = service.calendarOffSelect(storeNo); // 일정 조회
+		
+		
+		// Map 생성 + 조회한 데이터 객체 이름에 맞게 담아주기 
+		Map<String, Object> offMap = new HashMap<>();
+		
+		for (Off off : offList) {
+			
+			offMap.put("title", off.getOffDayTitle());
+			offMap.put("start", off.getOffWeekStart());
+			offMap.put("end", off.getOffWeekEnd());
+		}
+		
+		System.out.println(offMap);
+		return offMap;
+	}
+	
+	
+	/** 팝업창에서 지정 휴무일 등록
+	 * @param inputOff
+	 * @return
+	 */
+	@PostMapping("calendarOffInsert")
+	@ResponseBody
+	public int calendarOffInsert(@RequestBody Off inputOff) {
+		
+		return service.calendarOffInsert(inputOff);
+	}
+	
+	
+	
 	
 	
 	/** 예약 관리 화면 이동 (+예약 전체 조회)

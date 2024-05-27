@@ -11,9 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.foodpin.common.util.Utility;
 import com.project.foodpin.member.model.dto.Member;
+import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.myPage.model.mapper.StoreMyPageMapper;
 import com.project.foodpin.reservation.model.dto.Reservation;
-import com.project.foodpin.review.model.exception.ReviewInsertException;
 import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
@@ -70,6 +70,24 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return result;
 	}
 	
+	
+	// 지정 휴무일 조회
+	@Override
+	public List<Off> calendarOffSelect(int storeNo) {
+		
+		return mapper.calendarOffSelect(storeNo);
+	}
+
+	
+	// 지정 휴무일 등록
+	@Override
+	public int calendarOffInsert(Off inputOff) {
+		
+		return mapper.calendarOffInsert(inputOff);
+	}
+	
+	
+	
 	// 전체 예약 조회
 	@Override
 	public List<Reservation> reservAll(int memberNo) {
@@ -96,6 +114,8 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int ceoInfoUpdate(Member inputMember) {
 		return mapper.ceoInfoUpdate(inputMember);
 	}
+
+
 
 
 

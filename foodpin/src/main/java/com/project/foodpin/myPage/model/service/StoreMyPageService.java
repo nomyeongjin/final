@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.foodpin.member.model.dto.Member;
+import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.store.model.dto.Store;
 
@@ -23,7 +24,17 @@ public interface StoreMyPageService {
 	 */
 	int storeInfoUpdate(Store inputStore, MultipartFile image);
 	
+	/** 지정 휴무일 조회
+	 * @param storeNo
+	 * @return offList
+	 */
+	List<Off> calendarOffSelect(int storeNo);
 	
+	/** 지정 휴무일 등록
+	 * @param inputOff
+	 * @return result
+	 */
+	int calendarOffInsert(Off inputOff);
 	
 	
 	/** 전체 예약 조회
@@ -49,6 +60,10 @@ public interface StoreMyPageService {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+
+
+
+
 
 
 
