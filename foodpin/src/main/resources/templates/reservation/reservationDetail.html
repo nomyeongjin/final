@@ -95,7 +95,7 @@
             
                            <ul class="button-list">
                            
-                                <!-- <li class="button-item" id="reservCount" name="reservCount">1명</li>
+                                <li class="button-item" id="reservCount" name="reservCount">1명</li>
                                 
                                 <li class="button-item" id="reservCount" name="reservCount">2명</li>
                                 
@@ -105,7 +105,7 @@
                                 
                                 <li class="button-item" id="reservCount" name="reservCount">5명</li>
                                 
-                                <li class="button-item" id="reservCount" name="reservCount">6명</li> -->
+                                <li class="button-item" id="reservCount" name="reservCount">6명</li>
                                 
                            </ul>
             
@@ -224,7 +224,7 @@
             <section class="button-area">
     
                 <div class="buttons">
-                    <a href="/store/storeDetail"  class="cancel-btn" id="cancelBtn">취소</a>
+                    <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation'"  class="cancel-btn" id="cancelBtn">취소</a>
                     <a href="#" class="next-btn" id="nextCheckBtn">다음</a>
                 </div>
     
@@ -240,6 +240,8 @@
         const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원"
 
         const memberCode = /*[[session.loginMember?.memberCode]]*/ "회원코드"
+        
+        const storeNo = /*[[store.storeNo]]*/ "사업자등록번호"
     </script>
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
