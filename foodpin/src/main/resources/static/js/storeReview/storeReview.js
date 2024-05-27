@@ -10,11 +10,25 @@ popupClose.addEventListener("click", () => {
 
 selectMenuButton.addEventListener("click", () => {
   menuSection.classList.add("popup-hidden");
+
+  const menuBody = document.querySelector("#menuBody");
+
+
+
 })
+
+
 
 selectMenu.addEventListener("click", ()=>{
   menuSection.classList.remove("popup-hidden");
 });
+
+
+
+
+
+
+
 
 /* ************************************************************* */
 const previewList = document.getElementsByClassName("preview");

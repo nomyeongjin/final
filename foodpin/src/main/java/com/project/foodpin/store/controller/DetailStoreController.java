@@ -59,7 +59,7 @@ public class DetailStoreController {
 			path ="store/storeDetail"; 
 			
 			// request scope 값 세팅
-			model.addAttribute("store",store) ;
+			model.addAttribute("store", store);
 			
 		}
 		

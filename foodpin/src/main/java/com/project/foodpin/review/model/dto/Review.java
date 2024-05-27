@@ -18,7 +18,7 @@ public class Review {
 	private String reviewDelFl;
 	
 	private int memberNo;
-	private int storeNo;
+	private String storeNo;
 	private int menuNo;
 	private int hashNo;
 	private String hashTitle;

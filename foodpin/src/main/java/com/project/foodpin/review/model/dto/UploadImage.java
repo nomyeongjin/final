@@ -22,7 +22,7 @@ public class UploadImage {
 	private String imgRename;
 	private String imgUploadDate;
 	private int imageOrder;
-	private int storeNo;
+	private String storeNo;
 	private int reviewNo;
 	private String imgOriginalName;
 	

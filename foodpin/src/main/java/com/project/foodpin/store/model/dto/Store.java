@@ -43,4 +43,12 @@ public class Store {
 	private int bookmark;
 
 	
+	// 메뉴
+	private int menuNo;
+	private String menuTitle;
+	private int menuAmount;
+	private String menuContent;
+	private String menuImgUrl;
+	
+	
 }
