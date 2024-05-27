@@ -661,7 +661,7 @@
             <div class="storereview-container">
 
 
-                <a href="/review/reviewPage">리뷰쓰기</a>
+                <a th:object="${store}" th:href="'/review/reviewPage/' + *{storeNo}">리뷰쓰기</a>
 
     
                 <h3 class="review-title">방문자 리뷰</h3>
