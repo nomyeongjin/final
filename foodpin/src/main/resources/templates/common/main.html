@@ -58,7 +58,7 @@
      </section>
 
 
-     <!-- section 3 내 근처 맛집 사진 4개 -->
+     <!-- section 3 내 근처 가게 리스트 -->
       <section class="main-store-image-container">
         <div class="main-store-image-content">
 
@@ -66,25 +66,19 @@
             <p>내 근처 맛집</p>
           </div>
           
-          <div class="main-store-img">
+          <div class="main-store-img" >
             
-              <a href="/store/storeDetail" class="store-img" > 
-                <img class="store-thumbnail" src="images/20240405165305_00002.gif" alt="가게 기본 이미지">
-                <span class="store-name">집게리아</span>
+            
+              <a class="store-img" th:each="store : ${storeList}" th:object="${store}" th:if="${storeStat.index} lt 4"
+              th:href="'/store/storeDetail/' + ${store.storeNo}"> 
+               <img
+               th:src="${store.storeImg != null ? store.storeImg : store.default.image}"
+               class="store-thumbnail">
+                <span class="store-name" th:text="*{storeName}">집게리아</span>
               </a>
-              <a  href="/store/storeDetail" class="store-img"> 
-                <img class="store-thumbnail" src="images/20240405165305_00002.gif" alt="가게 기본 이미지">
-                <span class="store-name">집게리아</span>
-              </a>
-              <a  href="/store/storeDetail" class="store-img"> 
-                <img class="store-thumbnail" src="images/20240405165305_00002.gif" alt="가게 기본 이미지">
-                <span class="store-name">집게리아</span>
-              </a>
+            
               
-              <a  href="/store/storeDetail" class="store-img"> 
-                <img class="store-thumbnail" src="images/20240405165305_00002.gif" alt="가게 기본 이미지">
-                <span class="store-name">집게리아</span>
-              </a>
+           
               
             </div>
            
