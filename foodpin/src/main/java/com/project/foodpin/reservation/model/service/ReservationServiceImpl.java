@@ -19,6 +19,11 @@ public class ReservationServiceImpl implements ReservationService{
 	public Store storeDetail(String storeNo) {
 		return mapper.storeDetail(storeNo);
 	}
+	
+	@Override
+	public String selectStoreNo(String storeNo) {
+		return mapper.selectStoreNo(storeNo);
+	}
 		
 }
 

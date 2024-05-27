@@ -29,12 +29,17 @@ public class ReservationController {
 	
 	@GetMapping("storeDetail/{storeNo}/reservation")
 	public String reservation(
-			@PathVariable("storeNo") String storeNo) {
+			@PathVariable("storeNo") String storeNo,
+			Model model) {
 		
 		Store store = service.storeDetail(storeNo);
 		
+		model.addAttribute("store", store);
+		
 		return "reservation/reservationDetail";
 	}
+	
+	
 	
 	@GetMapping("storeDetail/{storeNo}/reservation/reservationCheck")
 	public String reservationCheck(
@@ -58,17 +63,18 @@ public class ReservationController {
 
 	
 	/****** form 태그 제출를 위한 ******/
-	@PostMapping("storeDetail/reservation/nextPage")
+	@PostMapping("storeDetail/{storeNo}/reservation/nextPage")
 	public String nextPage(
-//			@PathVariable("storeNo") String storeNo
-			) {
+			@PathVariable("storeNo") String storeNo) {
 		
+//		return "reservation/reservationCheck";
 		return "reservation/reservationCheck";
 	}
 	
 	// 예약하기 눌렀을 때 form 제출 DB 저장 필요
-	@PostMapping("storeDetail/insertPage")
-	public String insertPage() {
+	@PostMapping("storeDetail/{storeNo}/reservation/insertPage")
+	public String insertPage(
+			@PathVariable("storeNo") String storeNo) {
 		return  "reservation/reservationConfirm";
 	}
 	
