@@ -72,7 +72,7 @@
                         </span>
                     </div>
 
-                    <form class="reserv-form" name="reservForm">
+                    <div class="reserv-form" name="reservForm">
 
                         <!-- 예약자 이름 -->
                         <div class="reserv-item">
@@ -124,11 +124,11 @@
 
                             <div class="input-box">
                                 <th:block th:if="${session.loginMember?.memberCode==1}">
-                                    <textarea name="reservReqeust" id="reservReqeust" placeholder="업체에 요청하실 내용을 작성해 주세요"></textarea>
+                                    <textarea name="reservRequest" id="reservRequest" placeholder="업체에 요청하실 내용을 작성해 주세요"></textarea>
                                 </th:block>
 
                                 <th:block th:unless="${session.loginMember?.memberCode==1}">
-                                    <textarea name="reservReqeust" id="reservReqeust" readonly placeholder="현재 로그인 상태로 예약할 수 없습니다."></textarea>
+                                    <textarea name="reservRequest" id="reservRequest" readonly placeholder="현재 로그인 상태로 예약할 수 없습니다."></textarea>
                                 </th:block>
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                     <button type="button" class="visitInfoBtn">실제 방문자가 다르다면 정보를 추가해주세요 &nbsp;<i class="fa-solid fa-chevron-down"></i></button>
                     <!-- <button type="button" class="visitInfoBtnUp">방문자 정보 접기<i class="fa-solid fa-chevron-down fa-rotate-180"></i></button> -->
 
-                    <form class="visit-form">
+                    <div class="visit-form">
                         <div class="reserv-item">
                             <label for="visitName" class="name">방문자</label>
 
@@ -154,7 +154,7 @@
                             </div>
                         </div>
 
-                    </form>
+                    </div>
 
                 </div>
                 

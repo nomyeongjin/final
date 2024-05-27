@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             
             const selectDate = document.querySelector(".select-date");
 
-            const month = info.dateStr.slice(6,7);
+            const month = info.dateStr.slice(5,7);
             const day = info.dateStr.slice(8, 10);
 
             // const getDay(className)=>{
@@ -40,7 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
         },
 
         validRange: {
-            start: new Date()
+            start: new Date(),
+            end: new Date(new Date().setMonth(new Date().getMonth() + 2))
         }
 
         // select : (selectInfo) => { 
@@ -66,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const now = `${temp.getMonth()+1}.${temp.getDate()}(${dayArr[temp.getDay()]})`;
     // console.log(now);
     document.querySelector(".select-date").innerText = now;
-
 });
 
 

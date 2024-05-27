@@ -45,7 +45,24 @@ if(noticeTitle !=null) {
 
 /* **************  reservationDetail ************** */
 
-// 예약 시 인원/날짜 체크 함수
+
+const max = 11;
+for(let i = 1; i<=max; i++){
+    
+    /* li 태그 생성하기 */
+    
+    // ul 태그 
+    const buttonList = document.querySelector(".button-list");
+    
+    // li 태그
+    const countList = document.createElement("li");
+    countList.className="button-item";
+    countList.innerText = `${i}명`;
+    
+    buttonList.append(countList); // ui>li
+    
+}
+
 
 // 예약 인원 수 체크
 const buttonItem = document.querySelectorAll(".button-item");
@@ -164,7 +181,7 @@ if(nextBtn != null){
         // 인원 선택한 값 저장 input
         const input1 = document.createElement("input");
         const selectCount = document.querySelector(".button-item.select").innerText
-        console.log(selectCount);
+        // console.log(selectCount);
 
         input1.type="hidden";
         input1.name="reservCount";
@@ -181,15 +198,7 @@ if(nextBtn != null){
         input2.className="select-date";
         input2.value = selectDate;
         
-        console.log("input2" , input2);
-
-        // 달력에서 선택된 날짜 (아마도..?)
-        // if (selectDate) {
-        //     input2.value = selectDate.innerText || selectDate.value || "";
-        // } else {
-        //     input2.value = "";
-        // } // 선택된 날짜가 없을 경우 빈 값으로 설정
-        
+        // console.log("input2" , input2);
 
         // 시간 선택
         const input3 = document.createElement("input");
@@ -213,17 +222,14 @@ if(nextBtn != null){
 
 
 
-/* *** 예약 인원, 날짜 체크 *** */
-// const detailObj = {
-//     "reservCount": reservCount,
-
-// }
 
 // 30분 간격으로 시간 쪼개기 예시
 const startTime = "11:00";
 const endTime = "19:00";
 const interval = 30;
 
+
+/* 시간 30분 단위로 출력하는 함수 설정 */
 const getTimeSplit = (startTime, endTime, interval) => {
 
     const times = []; // 쪼갠 시간 저장 할 빈 배열
@@ -330,11 +336,15 @@ if(confirmBtn != null) {
         input1.type="hidden";
         input1.name="reservDate";
         
-        const datePart = finalDate.slice(0,4); // 0.00 날짜만 가져옴
+        const datePart = finalDate.slice(0,5); // 00.00 날짜만 가져옴
+        console.log(datePart);
         const [month, day] = datePart.split(".").map(Number); // .을 기준으로 month와 day 분리
         const year = new Date().getFullYear(); // 현재 년도를 가져옴
         const dateObj = new Date(year, month-1, day);
-        const dateString = dateObj.toISOString.split("T")[0]; // "YYYYY-MM-DD" 형식으로 저장
+        const dateString = dateObj.toISOString().split("T")[0];   // ex) 2024-05-23T14:48:00.000Z을
+                                                                // "YYYYY-MM-DD" 형식으로 저장
+
+        console.log(dateString);
 
         // 최종적으로 form 태그에 담겨 DB에 저장될 값
         input1.value=dateString;
@@ -395,6 +405,8 @@ if(confirmBtn != null) {
 
     });
 }
+
+
 
 
 
