@@ -61,7 +61,7 @@
                                             <span class="storeAddress" th:text="*{storeLocation}"></span>
                                         </div>
                                         <span>
-                                            <button id="cancelReservation">예약 취소</button>
+                                            <button class="cancelReservation" th:data-reserv-no="${reservation.reservNo}">예약 취소</button>
                                         </span>
                                     </li>
                                 </ul>

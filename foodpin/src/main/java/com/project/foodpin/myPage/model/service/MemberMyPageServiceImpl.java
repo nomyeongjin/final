@@ -73,10 +73,11 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		return mapper.reservationCancelNoshow(memberNo);
 	}
 	
-//	****************************************
+	// 예약 취소
 	@Override
-	public boolean cancelReservation(int memberNo) {
-		return false;
+	public int cancelReservation(int memberNo, int reservNo) {
+		Map<String, Integer> map = Map.of("memberNo", memberNo, "reservNo", reservNo);
+		return mapper.cancelReservation(map);
 	}
 
 	// 찜 목록 조회
@@ -98,9 +99,19 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		int memberNo = loginMember.getMemberNo();
 		String pw = mapper.selectPw(memberNo);
 		
+		
 		if(!bcrypt.matches(memberPw, pw)) return 0;
 		
 		return mapper.secession(memberNo);
+	}
+	
+	// 회원 탈퇴 전 예약 확정/대기 조회
+	@Override
+	public int selectReserv(int memberNo) {
+		int checkReserv = mapper.checkReserv(memberNo);
+		if(checkReserv != 0) return 0;
+		return mapper.secession(memberNo);
+		
 	}
 
 	

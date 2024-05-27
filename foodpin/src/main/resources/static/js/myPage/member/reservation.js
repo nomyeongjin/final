@@ -13,22 +13,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* 예약 취소 */
-const cancelBtn = document.querySelectorAll("#cancelReservation");
-   
-function cancelReservation(memberNo) {
-    fetch(`/cancelReservation/${memberNo}`, {
-        method: 'POST',
-        headers: {'Content-Type' : 'application/json'},
-        body: JSON.stringify({memberNo : memberNo})
-    })
-    .then(resp => resp.json())
-    .then(result => {
+const cancelBtn = document.querySelectorAll(".cancelReservation");
+
+cancelBtn.forEach(btn => {
+    btn.addEventListener("click", e => {
         if(!confirm("예약을 취소하시겠습니까?")) {
-            this.preventDefault();
+            e.preventDefault();
             return;
         }
+        const reservNo = e.target.dataset.reservNo;
+        cancelReservation(reservNo);
+    });
+});
+   
+function cancelReservation(reservNo) {
 
-        if(result.success) {
+    fetch(`/myPage/member/cancelReservation`, {
+        method: "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : reservNo
+    })
+    .then(resp => resp.text())
+    .then(result => {
+        if(Boolean(result)) {
             alert("예약이 취소되었습니다");
             location.reload();
         } else {
