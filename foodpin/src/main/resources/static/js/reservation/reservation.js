@@ -45,7 +45,27 @@ if(noticeTitle !=null) {
 
 /* **************  reservationDetail ************** */
 
+const storeMaxNumber = document.querySelector("#reservCount").value;
+console.log(storeMaxNumber);
 
+if(storeMaxNumber != null) {
+    
+    for(let i = 1; i<=storeMaxNumber; i++){
+        
+        /* li 태그 생성하기 */
+        
+        // ul 태그 
+        const buttonList = document.querySelector(".button-list");
+        
+        // li 태그
+        const countList = document.createElement("li");
+        countList.className="button-item";
+        countList.innerText = `${i}명`;
+        
+        buttonList.append(countList); // ui>li
+        
+    }
+}
 
 
 // 예약 인원 수 체크
@@ -159,7 +179,7 @@ if(nextBtn != null){
 
         /* ****** 버튼 클릭 될 때 form 태그 생성 ******  */
         const form = document.createElement("form");
-        form.action="/store/storeDetail/reservation/nextPage"; //제출될 주소
+        form.action=`/store/storeDetail/${storeNo}/reservation/nextPage`; //제출될 주소
         form.method="POST";
 
         // 인원 선택한 값 저장 input
@@ -308,7 +328,8 @@ if(confirmBtn != null) {
 
         // form 태그 생성
         const insertForm = document.createElement("form");
-        insertForm.action="/store/storeDetail/insertPage"; //제출될 주소
+        insertForm.action=`/store/storeDetail/${storeNo}/reservation/insertPage`; //제출될 주소
+        //`/store/storeDetail/${storeNo}/reservation/nextPage`
         insertForm.method="POST";
 
         // 예약 날짜
@@ -389,8 +410,6 @@ if(confirmBtn != null) {
 
     });
 }
-
-
 
 
 // const max = 11;

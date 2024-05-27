@@ -7,6 +7,8 @@ public interface ReservationService {
 
 	Store storeDetail(String storeNo);
 
+	String selectStoreNo(String storeNo);
+
 
 
 }

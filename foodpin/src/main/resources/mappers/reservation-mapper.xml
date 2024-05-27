@@ -8,5 +8,11 @@
 		FROM "STORE"
 		WHERE STORE_NO=#{storeNo}
 	</select>
+	
+	<!-- <select id="selectStoreNo">
+		SELECT STORE_NO 
+		FROM "STORE"
+		WHERE STORE_NAME =#{storeName}
+	</select> -->
 
 </mapper>

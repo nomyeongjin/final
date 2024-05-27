@@ -9,5 +9,7 @@ public interface ReservationMapper {
 
 	Store storeDetail(String storeNo);
 
+	String selectStoreNo(String storeNo);
+
 
 }
