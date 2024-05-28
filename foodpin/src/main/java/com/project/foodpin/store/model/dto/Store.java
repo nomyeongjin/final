@@ -32,11 +32,6 @@ public class Store {
 	private int memberNo;
 	
 	
-	// menu  
-	private int menuNo;
-	private String menuTitle;
-	private String menuAmount;
-	private String menuImgUrl;
 	
 	// 찜
 	private String bookmarkCheck;
