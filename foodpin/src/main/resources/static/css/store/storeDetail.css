@@ -225,11 +225,20 @@ aside>a:hover{
     color: var(--main-color);
 }
 /* 문의하기 */
+
+#toChatting::before{
+    font-family:FontAwesome;
+    content:"\f4ad";
+    font-size: 15px;
+    margin-right: 5px;
+    color: var(--main-color);
+}
 #toChatting{
 
     font-size: 14px;
-    color: rgb(120, 120, 120);
+    color: rgb(39, 39, 39);
 }
+
 
 /* 해당 가게 위치 검색된 상세 페이지로 이동하는 지도 버튼 */
 #storedetailmapbutton{

@@ -1,5 +1,7 @@
 package com.project.foodpin.store.model.service;
 
+import java.util.Map;
+
 import com.project.foodpin.store.model.dto.Store;
 
 public interface DetailStoreService {
@@ -9,5 +11,19 @@ public interface DetailStoreService {
 	 * @return
 	 */
 	Store storeDetail(String storeNo);
+	
+	/** 가게 메뉴 상세 조회
+	 * @param storeNo
+	 * @return
+	 */
+	Store menuDetail(String storeNo);
+
+	/** 가게 찜
+	 * @param map
+	 * @return count
+	 */
+	int storeLike(Map<String, Integer> map);
+
+
 
 }
