@@ -33,10 +33,10 @@
     
                     <div class="content-container">
                         <i class="fa-solid fa-message"></i>
-                        <span class="content">
-                            <th:block th:text="${storeInfo}">가게 정보 어쩌구 저쩌구 </th:block>
+                        <span class="content" name="storeInfo" id="storeId">
+                            <th:block th:text="${store.storeInfo}">가게 정보 어쩌구 저쩌구 </th:block>
         
-                            <a class="more" href="#">더보기<i class="fa-solid fa-chevron-down fa-rotate-270"></i></a> <!-- 상세 정보로 넘어감 -->
+                            <a class="more" th:href="'/store/storeDetail/' + ${storeNo} + '/reservation/detail'">더보기<i class="fa-solid fa-chevron-down fa-rotate-270"></i></a> <!-- 상세 정보로 넘어감 -->
                         </span>
                     </div>
     
