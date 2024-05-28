@@ -280,7 +280,7 @@ bookmarkCheck.addEventListener("click", e=>{
     };
 
     //4. 좋아요 INSERT / DELETE 비동기 요청
-    fetch("/store/like", {
+    fetch("like", {
 
     method  : "POST",
     headers : {"Content-Type" : "application/json"},

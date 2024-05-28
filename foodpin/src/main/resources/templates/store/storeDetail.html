@@ -500,17 +500,19 @@
  
                     </div>
                    
-                    <div class="store-menu-list">
+                    <div class="store-menu-list" >
                     <!-- 메뉴 이미지 div 3개 추가 -->
-                    <div class="menu-image-container">
-                        <div>
-                            <img src="/images/storeDetail/burger4.jpg" class="storedetail-menuimage" 
+                    <div class="menu-image-container" th:each="menu:${menuList}" >
+                        <div >
+                            <img 
+                            th:if="${menu.menuImgUrl!=null}"
+                            th:src="${menu.menuImgUrl}" class="storedetail-menuimage" 
                              alt="메뉴 사진">
                         </div>
 
                         <div class="menu-info">
                             <span id="menuName" th:text="${menu.menuTitle}">메뉴 이름</span>
-                            <span id="menuPrice" th:text="${menu.menuAmount}">4000 원</span>
+                            <span id="menuPrice" th:text="${menu.menuAmount}+'원'">가격</span>
                         </div>
                     </div>
                     

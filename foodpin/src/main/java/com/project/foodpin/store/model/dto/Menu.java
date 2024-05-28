@@ -13,9 +13,9 @@ public class Menu {
 
 	private int menuNo;
 	private String menuTitle;
-	private int menuAmount;
+	private String menuAmount;
 	private String menuContent;
-	private String menuImgUrl;
-	private int storeNo;
+	private String menuImgUrl; 
+	private String storeNo;
 	
 }
