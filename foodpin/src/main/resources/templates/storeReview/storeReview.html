@@ -52,7 +52,7 @@
                           <p th:text="|${menu.menuAmount} 원|">가격</p>
                         </td>
                         <td>
-                          <input type="checkbox"  class="menu-checkbox" name="menuNo">
+                          <input type="checkbox" class="menu-checkbox" name="menuNo">
                         </td>
                       </tr>
                     </tbody>
@@ -72,7 +72,7 @@
             
             <div class="review-pay">
               <span>총 금액</span>
-              <span id="totalAmount">10000</span>
+              <span id="totalAmount" th:text="${menuList.menuAmount}">10000</span>
               <span>원</span>
             </div>
 

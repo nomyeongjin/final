@@ -30,7 +30,7 @@
 	                SYSDATE,
 	                DEFAULT,
 	                #{memberNo},
-	                #{storeNo}, 1
+	                #{storeNo}, #{menuNo}
 	    )
 	</insert>
 	

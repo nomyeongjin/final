@@ -54,7 +54,6 @@ public class ReveiwController {
 		@PathVariable("storeNo") String storeNo,
 		@SessionAttribute("loginMember") Member loginMember,
 		@RequestParam("images") List<MultipartFile> images,
-		@RequestParam("menuNo") List<String> menuNo,
 		@RequestParam("hashNo") List<Integer> hashNo,
 		@RequestParam("reviewRating") int reviewRating,
 		Model model,
@@ -64,7 +63,7 @@ public class ReveiwController {
 		
 		inputReview.setStoreNo(storeNo);
 		
-		int result = service.insertReview(inputReview, menuNo, hashNo, images);
+		int result = service.insertReview(inputReview, hashNo, images);
 		
 		String path = null;
 		int memberNo = loginMember.getMemberNo();
