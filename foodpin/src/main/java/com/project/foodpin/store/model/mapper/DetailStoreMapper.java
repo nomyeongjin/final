@@ -1,9 +1,11 @@
 package com.project.foodpin.store.model.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
 @Mapper
@@ -21,7 +23,7 @@ public interface DetailStoreMapper {
 	 * @param storeNo
 	 * @return
 	 */
-	Store menuDetail(String storeNo);
+	List<Menu> menuDetail(String storeNo);
 
 	
 	/** 가게 찜 해제 

@@ -1,11 +1,13 @@
 package com.project.foodpin.store.model.service;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.mapper.DetailStoreMapper;
 
@@ -28,9 +30,14 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 	
 	// 가게 메뉴 상세 조회
 	@Override
-	public Store menuDetail(String storeNo) {
+	public List<Menu> menuDetail(String storeNo) {
 		
-		return mapper.menuDetail(storeNo);
+	  List<Menu> menuList = mapper.menuDetail(storeNo);
+		
+
+		
+		
+		return menuList;
 	}
 
 	// 가게 찜 

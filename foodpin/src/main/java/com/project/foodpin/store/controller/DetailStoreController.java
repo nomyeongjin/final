@@ -1,5 +1,6 @@
 package com.project.foodpin.store.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.service.DetailStoreService;
 
@@ -41,7 +43,7 @@ public class DetailStoreController {
 			) {
 		
 		Store store = service.storeDetail(storeNo);
-		Store menu = service.menuDetail(storeNo);
+		List<Menu> menuList = service.menuDetail(storeNo);
 		
 		/* Store offday = service.storeOff(storeNo); */
 		
@@ -50,7 +52,7 @@ public class DetailStoreController {
 		String[] arr = storeLocation.split("\\^\\^\\^");
 		
 		model.addAttribute("store", store);
-		model.addAttribute("menu", menu);
+		model.addAttribute("menuList", menuList);
 		
 		model.addAttribute("postcode", arr[0]);
 		model.addAttribute("address", arr[1]);
