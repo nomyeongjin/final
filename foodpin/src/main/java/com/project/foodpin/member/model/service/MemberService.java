@@ -74,4 +74,10 @@ public interface MemberService {
 	 */
 	int resetPw(Member inputPw);
 
+	/** 아이디 있는지 확인
+	 * @param map
+	 * @return
+	 */
+	int idConfirm(Map<String, Object> map);
+
 }

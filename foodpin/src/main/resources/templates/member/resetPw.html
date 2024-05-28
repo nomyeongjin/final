@@ -20,7 +20,7 @@
                 <p>비밀번호를 새로 작성해주세요.</p>
             </div>
 
-            <form action="/member/resetPwResult" method="POST" name="findIdForm" id="findIdForm">
+            <form action="/member/resetPwResult" method="POST" name="restPwResultForm" id="restPwResultForm">
 
                <input type="hidden" name="memberId" th:value="${param.memberId}"> 
                 <div class="form-section">
@@ -62,7 +62,7 @@
 
     <th:block th:replace="~{common/footer}"></th:block> 
 
-    <script src="/js/member/findId.js"></script>
+    <script src="/js/member/resetPw.js"></script>
     
 </body>
 </html>

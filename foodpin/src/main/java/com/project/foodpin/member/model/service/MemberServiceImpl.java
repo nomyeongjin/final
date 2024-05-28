@@ -179,5 +179,13 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.resetPw(inputPw);
 	}
 	
+	/** 아이디 확인
+	 *
+	 */
+	@Override
+	public int idConfirm(Map<String, Object> map) {
+		return mapper.idConfirm(map);
+	}
+	
 	
 }

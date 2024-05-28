@@ -82,4 +82,10 @@ public interface MemberMapper {
 	 */
 	int resetPw(Member inputPw);
 
+	/** 아이디 확인
+	 * @param map
+	 * @return
+	 */
+	int idConfirm(Map<String, Object> map);
+
 }

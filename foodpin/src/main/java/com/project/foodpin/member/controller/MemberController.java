@@ -397,6 +397,13 @@ public class MemberController {
     public String findPwPage() {
     	return "member/findPw";
     }
+    /** 비밀번호 변경 페이지로 이동
+     * @return
+     */
+    @GetMapping("resetPw")
+    public String resetPwPage() {
+    	return "member/findPw";
+    }
     
     
     /** 새 비밀번호 변경 페이지 이동
@@ -405,8 +412,21 @@ public class MemberController {
      */
     @PostMapping("resetPw")
     public String resetPw() {
+    	
     	return "member/resetPw";
 	}
+    
+    /** 비동기로 아이디 존재 여부 확인
+     * @param inputPw
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("idConfirm")
+    public int idConfirm(@RequestBody Map<String, Object> map) {
+
+    	return service.idConfirm(map);
+    }
+    
     
     /** 새 비밀번호 변경
      * @param inputPw
@@ -428,7 +448,7 @@ public class MemberController {
 				}
 				else {
 					message = "비밀번호 변경에 실패했습니다.";
-					path = "member/resetPw";
+					path = "/member/resetPw";
 				}
 				
 				ra.addFlashAttribute("message",message);
