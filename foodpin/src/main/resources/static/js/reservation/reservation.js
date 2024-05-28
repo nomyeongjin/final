@@ -45,8 +45,21 @@ if(noticeTitle !=null) {
 
 /* **************  reservationDetail ************** */
 
-const storeMaxNumber = document.querySelector("#reservCount").value;
-console.log(storeMaxNumber);
+const storeMaxNumber = document.querySelector("#reservCount").dataset.storeMaxNumber;
+
+if(storeMaxNumber == 0) {
+    for(let i = 1; i<=20; i++){
+        const buttonList = document.querySelector(".button-list");
+        
+        // li 태그
+        const countList = document.createElement("li");
+        countList.className="button-item";
+        countList.innerText = `${i}명`;
+        
+        buttonList.append(countList); 
+
+    }
+}
 
 if(storeMaxNumber != null) {
     
@@ -67,11 +80,11 @@ if(storeMaxNumber != null) {
     }
 }
 
-
 // 예약 인원 수 체크
-const buttonItem = document.querySelectorAll(".button-item");
 
 // 기본으로 0번째 인덱스는 체크 상태에서 시작
+const buttonItem = document.querySelectorAll(".button-item");
+
 if(buttonItem != null && buttonItem.length > 0) {
     buttonItem[0].classList.add("select");
 
@@ -89,48 +102,6 @@ if(buttonItem != null && buttonItem.length > 0) {
             return;
         });
     };
-    // console.log(checkObj);
-}
-
-
-// 예약 시간 체크
-const timeItem = document.querySelectorAll(".time-item");
-
-// fetch("/reservation/reservationDetail", {
-//     method : "POST",
-//     headers : {"Content-Type" : "application/json"},
-//     body : {}
-// })
-// .then(resp => resp.text())
-// .then(result => {
-
-// })
-if(timeItem != null) {
-
-    for(let time of timeItem){
-
-        time.addEventListener("click", () => {
-
-            for(let item of timeItem){
-                item.classList.remove("select");
-            }
-            time.classList.add("select");
-            checkObj.reservTime = true;
-            return;
-        });
-    }
-
-    // 초기 상태에도 선택된 항목이 있는지 확인
-
-    for(let item of timeItem) {
-        if(item.classList.contains("select")){
-            checkObj.reservTime = true;
-        }
-        else{ 
-            checkObj.reservTime = false;
-        }
-    }
-    // console.log(checkObj);
 }
 
 // ----------------------------------------------------------------------------------------
@@ -224,14 +195,10 @@ if(nextBtn != null){
     });
 }
 
-
-
-
 // 30분 간격으로 시간 쪼개기 예시
-const startTime = "11:00";
-const endTime = "19:00";
-const interval = 30;
-
+let startTime;
+let endTime;
+let interval;
 
 /* 시간 30분 단위로 출력하는 함수 설정 */
 const getTimeSplit = (startTime, endTime, interval) => {
@@ -261,23 +228,8 @@ const getTimeSplit = (startTime, endTime, interval) => {
 
         times.push(`${hours}:${mins}`);
     }
-
-    // li 태그 얻어오기
-    const timeItme = document.querySelectorAll(".time-item");
-    
-    // li 태그 text 지우고 날짜로 출력하기
-    for(let li of timeItem){
-        
-        // li.innerHTML="";
-
-        // for(let detailTime of times){ 
-        //     console.log(detailTime);
-        //     // li.innerText=detailTime;
-        // }
-    }
-
-    console.log(times);
-    return;
+    // console.log(times);
+    return times;
 }
 getTimeSplit(startTime, endTime, interval);
 
@@ -341,20 +293,20 @@ if(confirmBtn != null) {
         input1.type="hidden";
         input1.name="reservDate";
         
-        const datePart = finalDate.slice(0,4); // 00.00 날짜만 가져옴
+        const datePart = finalDate.slice(0,5); // 00.00 날짜만 가져옴
         console.log(datePart);
         const [month, day] = datePart.split(".").map(Number); // .을 기준으로 month와 day 분리
         const year = new Date().getFullYear(); // 현재 년도를 가져옴
         const dateObj = new Date(year, month-1, day);
         const dateString = dateObj.toISOString().split("T")[0];   // ex) 2024-05-23T14:48:00.000Z을
-                                                                //"YYYYY-MM-DD" 형식으로 저장
+                                                                //"YYYY-MM-DD" 형식으로 저장
 
         console.log(dateString);
 
         // 최종적으로 form 태그에 담겨 DB에 저장될 값
         input1.value=dateString;
 
-        // thymeleaf에서 이용할 값
+        // thymeleaf에서 이용할 값 DB 저장 X
         const input2 = document.createElement("input");
         input2.type="hidden";
         input2.name="originalReservDate";
@@ -366,8 +318,9 @@ if(confirmBtn != null) {
         input3.type="hidden";
         input3.name="reservTime";
 
-        const timePart = finalDate.slice(8); // 8번째 인덱스 이후부터 잘라냄 (시간만 분리)
-        input3.value = timePart;
+        const reservTime = finalDate.slice(9); // 8번째 인덱스 이후부터 잘라냄 (시간만 분리)
+        console.log(reservTime);
+        input3.value = reservTime;
 
         // 예약 인원
         const input4 = document.createElement("input");
@@ -377,8 +330,8 @@ if(confirmBtn != null) {
         // input4.value=finalCount;'
         
         const countPart = finalCount.substr(0,1); // "2명" 에서 "2" 만 추출
-        const countNumber = Number(countPart); // 문자를 숫자로 변환
-        input4.value=countNumber; // DB 저장용 
+        const reservCount = Number(countPart); // 문자를 숫자로 변환
+        input4.value=reservCount; // DB 저장용 
 
         // 요청사항
         const input5 = document.createElement("input");
@@ -402,30 +355,12 @@ if(confirmBtn != null) {
         input7.value=visitTel;
 
         insertForm.append(input1, input2, input3, input4, input5,  input6, input7);
-
+        
         // body에 form 태그
         document.body.append(insertForm);
-
+        
         insertForm.submit(); // 다음 버튼 클릭 시 form 태그 제출
 
     });
 }
-
-
-// const max = 11;
-// for(let i = 1; i<=max; i++){
-    
-//     /* li 태그 생성하기 */
-    
-//     // ul 태그 
-//     const buttonList = document.querySelector(".button-list");
-    
-//     // li 태그
-//     const countList = document.createElement("li");
-//     countList.className="button-item";
-//     countList.innerText = `${i}명`;
-    
-//     buttonList.append(countList); // ui>li
-    
-// }
 

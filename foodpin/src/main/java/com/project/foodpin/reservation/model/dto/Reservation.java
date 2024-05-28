@@ -29,5 +29,11 @@ public class Reservation {
 	private int waitCount;
 	private int lastCount;
 	private int cancelNoshowCount;
+
+	
+	private String visitName;
+	private String visitTel;
+
 	private int noshowCount;
+
 }
