@@ -35,9 +35,12 @@
                     <section id="infoContainer">
                         <form action="memberInfo" method="POST" name="member-myPageFrm" id="updateInfo" enctype="multipart/form-data">
                             <div class="profile-img-area">
-                                <input type="file" id="profileInput" style="display: none;" accept="image/*">
-                                <img src="https://flexible.img.hani.co.kr/flexible/normal/970/739/imgdb/original/2020/0507/20200507502335.jpg"
+                                <label for="profileInput">
+                                <img th:with="user=#{user.default.image}"
+                                     th:src="${session.loginMember.profileImg ?: user}" 
                                      id="profileImg">
+                                </label>
+                                <input type="file" id="profileInput" name="profileImg" style="display: none;" accept="image/*">
                             </div>
                                     
                             <span id="deleteImage">&times;</span>
@@ -53,7 +56,7 @@
                                 <div class="member-myPage-row">
                                     <label>이메일</label> 
                                     <input type="text" name="memberEmail" 
-                                    id="memberEmail" maxlength="11"
+                                    id="memberEmail"
                                     th:value="${session.loginMember.memberEmail}">
                                 </div>
 

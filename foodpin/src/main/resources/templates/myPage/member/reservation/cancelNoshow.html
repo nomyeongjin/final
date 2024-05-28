@@ -20,10 +20,8 @@
 
             <section class="content-container">
                 <div class="myPage-title-container">
-                    <section class="myPage-title">예약 현황
-                        <span class="memberNoshow" th:text="|누적 노쇼 *{noshowCount}회|">
-                            누적 노쇼 1회
-                        </span>
+                    <section class="myPage-title">취소 / 노쇼
+                        <span class="memberNoshow" th:text="|누적 노쇼 ${noshowCount}회|"></span>
                         <i class="fa-solid fa-circle-exclamation" title="경고는 3회 이상이면 3일정지입니다"></i>
                     </section>
 

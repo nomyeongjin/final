@@ -20,8 +20,9 @@
 
             <section class="content-container">
                 <div class="myPage-title-container">
-                    <section class="myPage-title">예약 현황
-                        <span class="memberNoshow">누적 노쇼 1회
+                    <section class="myPage-title">지난 예약
+                        <span th:text="|누적 노쇼 ${noshowCount}회|"></span>
+
                             <i class="fa-solid fa-circle-exclamation"></i>
                         </span>
                     </section>
@@ -49,7 +50,7 @@
 
                     <th:block th:unless="${#lists.isEmpty(reservation)}">
                         <section id="reservation">
-                            총 3건
+                            <span th:text="|총 ${reservation[0].lastCount}건|"></span>
                             <table>
                                 <ul>
                                     <li class="reservationList" th:each="reservation : ${reservation}">

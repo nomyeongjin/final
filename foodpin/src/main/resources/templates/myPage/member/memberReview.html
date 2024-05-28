@@ -37,9 +37,11 @@
                                 <div class="storeName" th:text="|*{storeName} >|">
                                     <a href="/store/storeDetail">대박 고깃집  ></a>
                                 </div>
-                                <span class="reviewScore" th:text="*{reviewRating}">★ ★ ★ ★ ☆</span>
+                                <span class="score-container">
+                                    <span class="reviewScore" th:attr="data-rating=*{reviewRating}"></span>
+                                    <span class="reviewDate" th:text="*{reviewRegDate}">5개월 전</span>
+                                </span>
                                 
-                                <span class="reviewDate" th:text="*{reviewRegDate}">5개월 전</span>
                                 <div class="review">
                                     <!-- <div class="reviewPhoto">
                                         <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDAyMjJfMjgg%2FMDAxNzA4NTg2NTAwNDgy.kcEWp-6taz-owgm71kI4HC5e-VLxlPGSp4DHIjFasvsg.gO78YMsaI-54CleGKxrjPs8SUYNRJ9kCC34dXCwNJDQg.JPEG%2FIMG_2620.JPG&type=sc960_832" alt="">
