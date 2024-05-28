@@ -28,12 +28,21 @@ public interface StoreMyPageMapper {
 	int storeInfoUpdate(Store inputStore);
 	
 	
+	
+	
+	
+
+	/** 고정 휴무일 조회
+	 * @param storeNo
+	 * @return offList
+	 */
+	List<Off> selectWeekOff(int storeNo);
+
 	/** 지정 휴무일 조회
 	 * @param storeNo
 	 * @return offList
 	 */
 	List<Off> calendarOffSelect(int storeNo);
-	
 	
 	/** 지정 휴무일 등록
 	 * @param inputOff
@@ -68,6 +77,7 @@ public interface StoreMyPageMapper {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+
 
 
 

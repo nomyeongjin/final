@@ -77,12 +77,33 @@ const menuBtn = document.querySelector("#menuBtn");
 const dayoffBtn = document.querySelector("#dayoffBtn");
 
 
+// /**
+//  * 고정 휴무일 정보 DB 조회
+//  */
+// const selectWeekOff = () => {
+
+//    fetch("/myPage/store/selectWeekOff", {
+//       method : "POST",
+//       headers : {"content-Type" : "application/json"},
+//       body : JSON.stringify(storeNo)
+//    })
+//    .then(resp => resp.json())
+//    .then(offList => {
+
+//       console.log(offList);
+//    })
+// }
+
+
 /**
  * (메뉴) 휴무일 버튼 클릭시 화면 구성
  */
 dayoffBtn.addEventListener("click", () => {
 
    StoreOffContainer.innerText = ""; // 기존 내용 지우기
+   
+   // selectWeekOff(); // 기존 고정 휴무 정보 조회
+
 
    // 고정 휴무일
    const offWeekSection = document.createElement("section");
@@ -92,49 +113,54 @@ dayoffBtn.addEventListener("click", () => {
    const weekOffFrm = document.createElement("form"); // div 생성
    weekOffFrm.id = "off-container";
 
-   const menu = document.createElement("menu"); // ul 생성
-   menu.classList.add("week-row");
+   const ul = document.createElement("ul"); // ul 생성
+   ul.classList.add("week-row");
 
-   const weekList = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+   const weekList = ['일', '월', '화', '수', '목', '금', '토'];
+   const dayWeek = ['sun', 'mon', 'tue ', 'wed ', 'thu ', 'fri ', 'sat'];
 
-   // 나중에 줄일것... + db에서 불러와서 checked 속성 추가
-   const week0 = document.createElement("li");
-   week0.classList.add("week-li");
-   week0.innerText = weekList[0];
+   // 각 요일 li 생성 
+   for(const week of weekList) {
 
-   const week1 = document.createElement("li");
-   week1.classList.add("week-li");
-   week1.innerText = weekList[1];
+      const li = document.createElement("li");
+      li.classList.add("week-li");
+      li.innerText = week + "요일";
+      ul.append(li);
+   }
 
-   const week2 = document.createElement("li");
-   week2.classList.add("week-li");
-   week2.innerText = weekList[2];
+   // 고정 휴무일 DB값 조회된 경우 checked 값 추가 (.fc-day-mon)
+   fetch("/myPage/store/selectWeekOff", {
+      method : "POST",
+      headers : {"content-Type" : "application/json"},
+      body : JSON.stringify(storeNo)
+   })
+   .then(resp => resp.json())
+   .then(offList => {
 
-   const week3 = document.createElement("li");
-   week3.classList.add("week-li");
-   week3.innerText = weekList[3];
+      for(let off of offList){
 
-   const week4 = document.createElement("li");
-   week4.classList.add("week-li");
-   week4.innerText = weekList[4];
+         document.querySelectorAll(".week-li").forEach( (item, index) => {
 
-   const week5 = document.createElement("li");
-   week5.classList.add("week-li");
-   week5.innerText = weekList[5];
+            if(off.offWeek === index) {
+               item.classList.add('checked');
+               // (.fc-day-mon)
+               // item.classList.add('checked');
+               
+            }
+         })
+      }
+   })
 
-   const week6 = document.createElement("li");
-   week6.classList.add("week-li", "checked");
-   week6.innerText = weekList[6];
-   //
 
    const weekBtn = document.createElement("button");
    weekBtn.classList.add("update-btn");
    weekBtn.id = "offUpdateBtn";
    weekBtn.innerText = "고정 휴무일 수정";
-   
-   menu.append(week0, week1, week2, week3, week4, week5, week6);
-   weekOffFrm.append(menu, weekBtn);
 
+   weekOffFrm.append(ul, weekBtn);
+
+
+   
    // --------------------------------
 
    // 지정 휴무일
@@ -160,20 +186,28 @@ dayoffBtn.addEventListener("click", () => {
 
 
 
-/**
- * 고정 휴무일 클릭시 체크
- */
-const weekList = document.querySelectorAll(".week-li"); // 휴무 요일 각 li 태그
+// /**
+//  * 고정 휴무일 체크
+//  */
+// const weekList = document.querySelectorAll(".week-li"); // 휴무 요일 각 li 태그
 
-for(let li of weekList) {
+// weekList.forEach( (item, index) => {
 
-   li.addEventListener("click", () => {
+//    selectWeekOff();
+   
+//    if(index === offList) item.classList.add('checked');
+// })
 
-      li.classList.toggle('checked');
-      console.log("checked");
 
-   })
-}
+// for(let li of weekList) {
+
+//    li.addEventListener("click", () => {
+
+//       li.classList.toggle('checked');
+//       console.log("checked");
+
+//    })
+// }
 
 /**
  * 일정 등록하는 팝업창 생성 

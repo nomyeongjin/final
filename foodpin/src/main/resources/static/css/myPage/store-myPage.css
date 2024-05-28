@@ -236,6 +236,10 @@
    background: white;
    border: 1px solid lightgray;
 }
+.week-checked{
+   background: rgb(223, 154, 154);
+   border: 1px solid lightgray;
+}
 .update-btn{
    width: 140px;
    margin: 20px;

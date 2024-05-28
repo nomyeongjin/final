@@ -22,7 +22,6 @@ import com.project.foodpin.myPage.model.service.StoreMyPageService;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.store.model.dto.Store;
 
-import kotlin.reflect.jvm.internal.pcollections.HashPMap;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -87,7 +86,23 @@ public class StoreMyPageController {
 		return "redirect:/myPage/store/storeInfo";
 	}
 	
-	/** 휴무일 조회 (비동기)
+	
+	/** 고정 휴무일 조회 (비동기)
+	 * @param storeNo
+	 * @return offList
+	 */
+	@PostMapping("selectWeekOff")
+	@ResponseBody
+	public List<Off> selectWeekOff(@RequestBody int storeNo) {
+		
+		List<Off> list = service.selectWeekOff(storeNo);
+	
+		return list;
+	}
+	
+	
+	
+	/** 지정 휴무일 조회 (비동기)
 	 * @param storeNo
 	 * @return map
 	 */
@@ -126,7 +141,7 @@ public class StoreMyPageController {
 		
 		return service.calendarOffInsert(inputOff);
 	}
-	
+
 	
 	
 	
