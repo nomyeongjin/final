@@ -34,9 +34,9 @@
                     <div class="content-container">
                         <i class="fa-solid fa-message"></i>
                         <span class="content" name="storeInfo" id="storeId">
-                            <th:block th:text="${storeInfo}">가게 정보 어쩌구 저쩌구 </th:block>
+                            <th:block th:text="${store.storeInfo}">가게 정보 어쩌구 저쩌구 </th:block>
         
-                            <a class="more" href="/reservation/detail">더보기<i class="fa-solid fa-chevron-down fa-rotate-270"></i></a> <!-- 상세 정보로 넘어감 -->
+                            <a class="more" th:href="'/store/storeDetail/' + ${storeNo} + '/reservation/detail'">더보기<i class="fa-solid fa-chevron-down fa-rotate-270"></i></a> <!-- 상세 정보로 넘어감 -->
                         </span>
                     </div>
     
@@ -93,13 +93,11 @@
 
                         <div class="checkbox-area">
             
-                           <ul class="button-list">
-                                <li class="button-item" id="reservCount" name="reservCount" th:value="${store.storeMaxNumber}"></li>
+                           <ul class="button-list" id="reservCount" th:data-store-max-number="${store.storeMaxNumber}">
                            </ul>
-            
-                        </div>
                         
-                        <span class="content">* n명 이상 인원의 예약을 원하시는 경우 별도 문의 부탁드립니다.</span>
+                        <span class="content" th:if="${store.storeMaxNumber}" th:text="|* ${store.storeMaxNumber}명 이상 인원의 예약을 원하시는 경우 별도 문의 부탁드립니다.|">* n명 이상 인원의 예약을 원하시는 경우 별도 문의 부탁드립니다.</span>
+                        <span class="content" th:unless="${store.storeMaxNumber}">* 20명 이상 인원의 예약을 원하시는 경우 별도 문의 부탁드립니다.</span>
                     </div>
         
                 </div>
@@ -130,16 +128,7 @@
                         <div class="time-title">오후</div>
     
                         <ul class="time-list">
-                            <li class="time-item" id="reservTime" name="reservTime">12:00</li>
-                            <li class="time-item" id="reservTime" name="reservTime">12:30</li>
-                            <li class="time-item" id="reservTime" name="reservTime">13:00</li>
-                            <li class="time-item" id="reservTime" name="reservTime">13:30</li>
-                            <li class="time-item" id="reservTime" name="reservTime">14:00</li>
-                            <li class="time-item" id="reservTime" name="reservTime">14:30</li>
-                            <li class="time-item" id="reservTime" name="reservTime">15:00</li>
-       
-
-                            <!-- <li class="time-item">16:00</li> -->
+                            <!-- <li class="time-item" id="reservTime" name="reservTime">12:00</li> -->
                         </ul>
     
                     </div>

@@ -7,6 +7,7 @@
 				BREAKTIME_START, BREAKTIME_END, STORE_CLOSED, STORE_IMG, TOTAL_RATING, MEMBER_NO, STORE_MAX_TABLE
 		FROM "STORE"
 		WHERE STORE_NO=#{storeNo}
+		AND STORE_CLOSED = 'N'
 	</select>
 	
 	<!-- <select id="selectStoreNo">
@@ -15,4 +16,28 @@
 		WHERE STORE_NAME =#{storeName}
 	</select> -->
 
+	<!-- 이용시간 조회 -->
+	<select id="selectUseTime">
+		SELECT OPEN_HOUR , CLOSE_HOUR, BREAKTIME_START , BREAKTIME_END
+		FROM "STORE"
+		WHERE STORE_NO = #{storeNo}
+		AND STORE_CLOSED = 'N'
+	</select>
+	
+	<!-- 예약 저장 -->
+	<insert id="insertReservation">
+		INSERT INTO "RESERVATION" VALUES(
+			SEQ_RESERV_NO.NEXTVAL,
+			TO_DATE(#{reservDate}, 'YYYY-MM-DD'),
+			#{reservTime},
+			#{reservCount}, 
+			DEFAULT,
+			#{reservRequest},
+			#{memberNo},
+			#{storeNo},
+			#{visitName},
+			#{visitTel}
+	)
+	</insert>
+	
 </mapper>
