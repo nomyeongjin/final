@@ -15,5 +15,23 @@
 		WHERE S.STORE_NO = #{storeNo}
 		
    </select>
+   
+   <!-- 가게 메뉴 상세 조회 -->
+    <select id="menuDetail" resultType="store">
+       SELECT MEMBER_NO, MENU_IMG_URL, MENU_NO, MENU_TITLE, MENU_AMOUNT 
+		FROM STORE 
+		JOIN MENU USING (STORE_NO)
+		WHERE STORE_NO=#{storeNo}
+    </select>
+  
+   
+   
+   <!-- 가게 찜 해제 -->
+   
+   
+   <!-- 가게 찜 체크 -->
+   
+   
+   <!-- 가게 찜 개수 -->
   
 </mapper>

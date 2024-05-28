@@ -71,27 +71,33 @@
                                     <span id="storeName" th:text="*{storeName}">가게 이름</span> 
                                 </div>
                                 
-                                <div class="bookmark">
+                                <div class="bookmark-box">
 
-                                    <i class="fa-regular fa-heart" id="bookmarkCheck"
-                                    th:classappend="*{bookmark == 1} ? fa-solid : fa-regular"></i>
-                                    
+                                    <th:block th:if="${session.loginMember?.memberCode == 1}">
+                                        <i class="fa-regular fa-heart" id="bookmarkCheck"
+                                        th:classappend="*{bookmark == 1} ? fa-solid : fa-regular"></i>
+    
+                                           <!-- 좋아요 개수 -->
+                                           <!-- <span th:text="*{likeCount}">0</span> -->
+                                    </th:block>
+                                   
+                                
                                 </div>
                             
                             </div>
 
 
 
-                            <!-- 지역 / 카테고리 -->
+                        
                             <div class="storedetail-row">
-                                <!-- 회원 정보 조회
-                                    클릭하면 검색 페이지로 이동 -->
-                            <span>비키니시티 | 패스트푸드</span>
+
+                                    <!-- 클릭하면 카테고리 검색된 상태로 상세 페이지로 이동 -->
+                              <span id="storeCat">패스트푸드</span>
                             </div>
 
 
 
-                            <!-- 별점 / 클릭시 아래 리뷰 페이지로 내려가는 버튼 -->
+                            <!-- 별점 -->
                             <div class="storedetail-row">
 
 
@@ -102,13 +108,13 @@
                                     <i class="rating__star far fa-star"></i>
                                     <i class="rating__star far fa-star"></i>
                                    
-                                    &nbsp;
-                                    <span th:text="*{totalRating}"> 점수 </span> 점
+                                    
+                                    <span th:text="*{totalRating}"> 점수 </span> 
                                 </div>
 
                                   
                                     
-                                <span id="showReview">리뷰></span>
+                               
 
                             </div>
 
@@ -121,9 +127,9 @@
                             
                                 <!-- 가게 주소 / 지역 --> <!-- 토글로 가게 우편 번호와 상세 주소 넣기 -->
                                 <div class="storedetail-two">
-                                    <span id="detailLoc" th:text="${address}">
-                                        가게 주소
-                                    </span>
+
+                                    <span id="detailLoc" th:text="${address}"></span>
+                                    
 
                                     <!-- 누르면 상세 페이지로 이동
                                         해당 가게의 위치가 상세 페이지에서 검색됨 -->
@@ -144,11 +150,11 @@
                                 <!-- 가게 정보 해시태그 -->
                                 <div id="storedetail-row">
                                     <!-- 클릭 시 상세 검색 페이지로 이동(카테고리 선택됨) -->
-                                <span id="storeCat">패스트푸드</span>
+                                    <a href="#" id="toChatting">문의하기</a>
                                 </div>
 
-                                <a href="#" id="toChatting">문의하기</a>
-         
+                                
+                                <span id="showReview">리뷰></span>
 
                                
 
@@ -503,8 +509,8 @@
                         </div>
 
                         <div class="menu-info">
-                            <span id="menuName" th:text="${store.menuTitle}">메뉴 이름</span>
-                            <span id="menuPrice" th:text="${store.menuAmount}">4000 원</span>
+                            <span id="menuName" th:text="${menu.menuTitle}">메뉴 이름</span>
+                            <span id="menuPrice" th:text="${menu.menuAmount}">4000 원</span>
                         </div>
                     </div>
                     
