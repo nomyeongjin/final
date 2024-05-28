@@ -87,30 +87,32 @@ public class StoreMyPageController {
 		return "redirect:/myPage/store/storeInfo";
 	}
 	
-	/** 휴무일 조회
+	/** 휴무일 조회 (비동기)
 	 * @param storeNo
-	 * @return
+	 * @return map
 	 */
 	@PostMapping("calendarOffSelect")
 	@ResponseBody
-	public Map<String, Object> calendarOffSelect(@RequestBody int storeNo) {
+	public Map<String, String> calendarOffSelect(@RequestBody int storeNo) {
 		
 		
-		List<Off> offList = service.calendarOffSelect(storeNo); // 일정 조회
+		List<Off> offList = service.calendarOffSelect(storeNo);
 		
 		
-		// Map 생성 + 조회한 데이터 객체 이름에 맞게 담아주기 
-		Map<String, Object> offMap = new HashMap<>();
-		
-		for (Off off : offList) {
+		if(!offList.isEmpty()) { // 조회된 일정이 존재하는 경우
 			
-			offMap.put("title", off.getOffDayTitle());
-			offMap.put("start", off.getOffWeekStart());
-			offMap.put("end", off.getOffWeekEnd());
+			Map<String, String> map = new HashMap<>();
+			
+			for (Off off : offList) {
+				
+				map.put("title", off.getOffDayTitle());
+				map.put("start", off.getOffWeekStart());
+				map.put("end", off.getOffWeekEnd());
+			}
+			return map;
 		}
 		
-		System.out.println(offMap);
-		return offMap;
+		return null;
 	}
 	
 	

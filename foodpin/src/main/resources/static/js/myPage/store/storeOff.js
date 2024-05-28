@@ -1,56 +1,54 @@
 /* 가게 정보 수정 (휴무일) */
 
-/* full Calendar */
+/* full Calendar 변수 생성 */
 const calendarEl = document.createElement("div"); // 달력 넣어줄 div 생성
 calendarEl.id = "calendar";
 
 let calendar;
 
-/* 일정 불러오기 */
-
-
-
 /**
  * full Calendar 생성하는 함수
  */
 function calendar_rendering() {
-   calendar = new FullCalendar.Calendar(calendarEl, {
 
-      locale: 'kr',
-      timeZone: 'UTC',
-      initialView: 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
-      editable: true, // false로 변경 시 draggable 작동 x
+   /*  DB에서 휴무일 목록 조회 */
+   fetch("/myPage/store/calendarOffSelect", {
+      method : "POST",
+      headers : {"content-Type" : "application/json"},
+      body : JSON.stringify(storeNo)
+   })
+   .then(resp => resp.json())
+   .then(map => {
 
+      const arr = []; // 개별의 일정 map을 배열로 묶은 형태로 추가해야함
+      arr.push(map);
 
-      // 화면 구현용 샘플 데이터
-      events:
-         function(){
-            selectOff();
-         }
+      // 캘린더 생성
+      calendar = new FullCalendar.Calendar(calendarEl, {
+   
+         locale: 'kr',
+         timeZone: 'UTC',
+         initialView: 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
+         editable: false, // false로 변경 시 draggable 작동 x
+         //eventColor : '#5c6a96' // 이벤트 색상,
+         // eventClick : fn_calEventClick, // 이벤트 클릭 시
 
-      ,
-      
-      // 헤더에 일정 추가 버튼 추가
-      headerToolbar: {
-         left: 'addEventButton',
-         center: 'title'
-
-      },
-
-      // 커스텀 버튼 설정에서 일정 추가 버튼 추가
-      customButtons: {
-         addEventButton: { // 추가한 버튼 설정
-               text : "일정 추가",  // 버튼 내용
-
-               click : function(){ // 버튼 클릭 시 이벤트 추가
-               
-                  createPopup();
+         // 화면 구현용 샘플 데이터
+         events: arr,
+         
+         // 헤더
+         headerToolbar: { left: 'addEventButton', center: 'title' },
+         
+         // 커스텀 버튼 설정에서 일정 추가 버튼 추가
+         customButtons: {
+            addEventButton: { // 추가한 버튼 설정
+                  text : "일정 추가",  // 버튼 내용
+                  click : function(){ createPopup(); }
             }
-         }
-      } 
-      // ^^^ 설정 추가 마지막 ^^^
-   });
-   calendar.render();
+         } 
+      });
+      calendar.render();
+   })
 }
 
 
@@ -91,18 +89,15 @@ dayoffBtn.addEventListener("click", () => {
    offWeekSection.classList.add("section-title");
    offWeekSection.innerHTML = "고정 휴무일";
 
-   const weekOffContainer = document.createElement("form"); // div 생성
-   weekOffContainer.id = "off-container";
+   const weekOffFrm = document.createElement("form"); // div 생성
+   weekOffFrm.id = "off-container";
 
    const menu = document.createElement("menu"); // ul 생성
    menu.classList.add("week-row");
 
-   const weekList = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'];
+   const weekList = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 
-
-
-
-   // 나중에 줄일것...
+   // 나중에 줄일것... + db에서 불러와서 checked 속성 추가
    const week0 = document.createElement("li");
    week0.classList.add("week-li");
    week0.innerText = weekList[0];
@@ -128,7 +123,7 @@ dayoffBtn.addEventListener("click", () => {
    week5.innerText = weekList[5];
 
    const week6 = document.createElement("li");
-   week6.classList.add("week-li");
+   week6.classList.add("week-li", "checked");
    week6.innerText = weekList[6];
    //
 
@@ -138,7 +133,7 @@ dayoffBtn.addEventListener("click", () => {
    weekBtn.innerText = "고정 휴무일 수정";
    
    menu.append(week0, week1, week2, week3, week4, week5, week6);
-   weekOffContainer.append(menu, weekBtn);
+   weekOffFrm.append(menu, weekBtn);
 
    // --------------------------------
 
@@ -158,49 +153,33 @@ dayoffBtn.addEventListener("click", () => {
    offDayEditFrm.append(dayOffContainer);
    
    // 마이페이지 본문 컨테이너에 각 휴무일 section, form 추가
-   StoreOffContainer.append(offWeekSection, weekOffContainer, offDaySection, offDayEditFrm);
+   StoreOffContainer.append(offWeekSection, weekOffFrm, offDaySection, offDayEditFrm);
    calendar_rendering() // 달력 생성 함수 호출(calendarEl 내부에 생성)
 });
 
-// 고정 휴무일 체크
+
+
+
+/**
+ * 고정 휴무일 클릭시 체크
+ */
 const weekList = document.querySelectorAll(".week-li"); // 휴무 요일 각 li 태그
 
 for(let li of weekList) {
 
    li.addEventListener("click", () => {
 
-      li.classList.add("checked");
+      li.classList.toggle('checked');
+      console.log("checked");
+
    })
 }
-
-
-
-
-
-// /**
-//  * 고정 휴무일 수정
-//  */
-// offUpdateBtn.addEventListener("click", () => {
-
-//    const weekRow = document.querySelector("week")
-   
-// });
-
-const testBtn = document.querySelector("#testBtn");
-const popupLayer = document.querySelector("#popupLayer");
-const testArea = document.querySelector("#testArea");
-
-// testBtn.addEventListener("click", () => {
-
-
-//    console.log(testBtn);
-// });
-
-let addBtn = document.querySelector("#addBtn"); //  팝업창 - 일정 등록 버튼
 
 /**
  * 일정 등록하는 팝업창 생성 
  */
+let addBtn = document.querySelector("#addBtn"); //  팝업창 - 일정 등록 버튼
+
 const createPopup = () => {
 
    const popupFrm = document.createElement("form");
@@ -251,10 +230,9 @@ const createPopup = () => {
 
 
    /**
-    * 팝업창 - 일정 등록 버튼
+    *  (버튼) 휴무 일정 등록 - 팝업창
     */
    addBtn.addEventListener("click", () => {
-      
 
       const off = {
          "storeNo" : storeNo,
@@ -271,27 +249,12 @@ const createPopup = () => {
       .then(resp => resp.json())
       .then(result => {
 
-         console.log(result);
+         if(result > 0) {
+            console.log("휴무 일정 등록 성공");
+         }
       })
 
    });
 
 
 };
-
-const selectOff = () => {
-
-   console.log(storeNo);
-
-   fetch("/myPage/store/calendarOffSelect", {
-      method : "POST",
-      headers : {"content-Type" : "application/json"},
-      body : JSON.stringify(storeNo)
-   })
-   .then(resp => resp.json())
-   .then(event => {
-
-      console.log(event);
-      
-   })
-}
