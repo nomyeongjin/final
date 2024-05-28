@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.review.model.dto.UploadImage;
+import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
 @Mapper
@@ -27,6 +28,9 @@ public interface ReviewMapper {
 
 	// 리뷰 개수 조회
 	int reviewCount(int memberNo);
+
+	// 메뉴 리스트 조회
+	List<Menu> selectMenu(String storeNo);
 
 
 

@@ -42,12 +42,16 @@ public class ReviewServiceImpl implements ReviewService {
 		return mapper.selectStore(storeNo);
 	}
 	
+	@Override
+	public List<Menu> selectMenu(String storeNo) {
+		return mapper.selectMenu(storeNo);
+	}
 	
 	
 	
 	// 리뷰 작성
 	@Override
-	public int insertReview(Review inputReview, List<Integer> hashNo, List<MultipartFile> images) throws IllegalStateException, IOException {
+	public int insertReview(Review inputReview, List<String> menuNo, List<Integer> hashNo, List<MultipartFile> images) throws IllegalStateException, IOException {
 		
 		int result = mapper.reviewInsert(inputReview);
 		
@@ -55,6 +59,16 @@ public class ReviewServiceImpl implements ReviewService {
 		if(result == 0) return 0;
 		
 		int reviewNo = inputReview.getReviewNo();
+		
+		List<Menu> menuList = new ArrayList<>();
+		for(int i=0 ; i<menuNo.size(); i++) {
+			if(!menuNo.isEmpty()) {
+				
+				
+				
+			}
+		}
+		
 		
 		
 		List<ReviewHash> hashList = new ArrayList<>();

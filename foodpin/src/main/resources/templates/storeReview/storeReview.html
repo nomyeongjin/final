@@ -43,52 +43,16 @@
                     </thead>
               
                     <tbody id="menuBody">
-                      <tr>
+                      <tr th:each=" menu : ${menuList}">
                         <td>
                           <img src="/images/storeDetail/hotdog.jpg">
                         </td>
                         <td>
-                          <p>메뉴</p>
-                          <p>가격</p>
+                          <p th:text="${menu.menuTitle}">메뉴</p>
+                          <p th:text="|${menu.menuAmount} 원|">가격</p>
                         </td>
                         <td>
-                          <input type="checkbox"  class="menu-checkbox">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <img src="/images/storeDetail/cooking.jpg">
-                        </td>
-                        <td>
-                          <p>메뉴</p>
-                          <p>가격</p>
-                        </td>
-                        <td>
-                          <input type="checkbox" class="menu-checkbox">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <img src="/images/storeDetail/counter2.jpg">
-                        </td>
-                        <td>
-                          <p>메뉴</p>
-                          <p>가격</p>
-                        </td>
-                        <td>
-                          <input type="checkbox" class="menu-checkbox">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <img src="/images/storeDetail/counter2.jpg">
-                        </td>
-                        <td>
-                          <p>메뉴</p>
-                          <p>가격</p>
-                        </td>
-                        <td>
-                          <input type="checkbox" class="menu-checkbox">
+                          <input type="checkbox"  class="menu-checkbox" name="menuNo">
                         </td>
                       </tr>
                     </tbody>
