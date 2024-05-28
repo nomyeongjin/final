@@ -20,11 +20,91 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-/* 회원정보 수정 */
-const updateInfo = document.querySelector("#updateInfo");
 
-if(updateInfo != null) {
-    updateInfo.addEventListener("submit", e => {
+/* 프로필 사진 변경 / 삭제 */
+
+/* 회원정보 수정 */
+const memberInfo = document.querySelector("#updateInfo");
+
+let statusCheck = -1;
+
+let backupInput;
+
+if(memberInfo != null) {
+
+    const profileImg = document.querySelector("#profileImg");
+    const profileInput = document.querySelector("#profileInput");
+    const deleteImage = document.querySelector("#deleteImage");
+
+    const changeImageFn = e => {
+        const maxSize = 1024 * 1024 * 5;
+
+        const file = e.target.files[0];
+
+        if(file == undefined) {
+            const temp = backupInput.cloneNode(true);
+            profileInput.after(backupInput);
+            profileInput.remove();
+            profileInput = backupInput;
+            profileInput.addEventListener("change", changeImageFn);
+            backupInput = temp;
+            return;
+        }
+
+        if(file.size > maxSize) {
+            alert("5MB 이하의 이미지 파일을 선택해 주세요");
+
+            if(statusCheck == -1) {
+                profileInput.value = '';
+            } else {
+                const temp = backupInput.cloneNode(true);
+                profileInput.after(backupInput);
+                profileInput.remove();
+                profileInput = backupInput;
+                profileInput.addEventListener("change", changeImageFn);
+                backupInput = temp;
+            }
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.readAsDataURL(file);
+        reader.addEventListener("load", e => {
+            const url = e.target.result;
+            profileImg.setAttribute("src", url);
+            statusCheck = 1;
+            backupInput = profileInput.cloneNode(true);
+        });
+    }
+
+    profileInput.addEventListener("change", changeImageFn);
+
+    deleteImage.addEventListener("click", () => {
+        profileImg.src = "/images/user.png";
+        profileInput.value = '';
+        backupInput = undefined;
+        statusCheck = 0;
+    });
+
+    memberInfo.addEventListener("submit", e => {
+
+        let flag = true; 
+
+        // 기존 프로필 이미지가 없다가 새 이미지가 선택된 경우
+        if(loginMemberProfileImg == null && statusCheck == 1) flag = false;
+
+        // 기존 프로필 이미지가 있다가 삭제한 경우
+        if(loginMemberProfileImg != null && statusCheck == 0) flag = false;
+
+        // 기존 프로필 이미지가 있다가 새 이미지가 선택된 경우
+        if(loginMemberProfileImg != null && statusCheck == 1) flag = false;
+        
+        if(flag) {
+            e.preventDefault();
+            alert("이미지 변경 후 클릭하세요")
+        }
+
         const memberNickname = document.querySelector("#memberNickname");
         const memberEmail = document.querySelector("#memberEmail");
         const memberTel = document.querySelector("#memberTel");

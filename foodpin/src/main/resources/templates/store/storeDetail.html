@@ -71,27 +71,40 @@
                                     <span id="storeName" th:text="*{storeName}">가게 이름</span> 
                                 </div>
                                 
-                                <div class="bookmark">
-
-                                    <i class="fa-regular fa-heart" id="bookmarkCheck"
-                                    th:classappend="*{bookmark == 1} ? fa-solid : fa-regular"></i>
+                                <div class="bookmark-box">
+                                  
+                                    <th:block th:if="${session.loginMember?.memberCode == 1}">
+                                        <i class="fa-heart" id="bookmarkCheck"
+                                        
+                                        th:classappend="*{bookMark == 1} ? fa-solid : fa-regular"></i>
+    
+                                    </th:block>
+                                
+                                           <!-- 좋아요 개수 -->
+                                           <th:block th:if="${session.loginMember==null}">
+                                            <i class="fa-solid fa-heart"> </i>
+                                           </th:block>
+                                           
+                                           <span th:text="*{likeCount}">0</span>
                                     
+                                   
+                                
                                 </div>
                             
                             </div>
 
 
 
-                            <!-- 지역 / 카테고리 -->
+                        
                             <div class="storedetail-row">
-                                <!-- 회원 정보 조회
-                                    클릭하면 검색 페이지로 이동 -->
-                            <span>비키니시티 | 패스트푸드</span>
+
+                                    <!-- 클릭하면 카테고리 검색된 상태로 상세 페이지로 이동 -->
+                              <span id="storeCat">패스트푸드</span>
                             </div>
 
 
 
-                            <!-- 별점 / 클릭시 아래 리뷰 페이지로 내려가는 버튼 -->
+                            <!-- 별점 -->
                             <div class="storedetail-row">
 
 
@@ -102,13 +115,13 @@
                                     <i class="rating__star far fa-star"></i>
                                     <i class="rating__star far fa-star"></i>
                                    
-                                    &nbsp;
-                                    <span th:text="*{totalRating}"> 점수 </span> 점
+                                    
+                                    <span th:text="*{totalRating}"> 점수 </span> 
                                 </div>
 
                                   
                                     
-                                <span id="showReview">리뷰></span>
+                               
 
                             </div>
 
@@ -121,9 +134,9 @@
                             
                                 <!-- 가게 주소 / 지역 --> <!-- 토글로 가게 우편 번호와 상세 주소 넣기 -->
                                 <div class="storedetail-two">
-                                    <span id="detailLoc" th:text="${address}">
-                                        가게 주소
-                                    </span>
+
+                                    <span id="detailLoc" th:text="${address}"></span>
+                                    
 
                                     <!-- 누르면 상세 페이지로 이동
                                         해당 가게의 위치가 상세 페이지에서 검색됨 -->
@@ -144,11 +157,11 @@
                                 <!-- 가게 정보 해시태그 -->
                                 <div id="storedetail-row">
                                     <!-- 클릭 시 상세 검색 페이지로 이동(카테고리 선택됨) -->
-                                <span id="storeCat">패스트푸드</span>
+                                    <a href="#" id="toChatting">문의하기</a>
                                 </div>
 
-                                <a href="#" id="toChatting">문의하기</a>
-         
+                                
+                                <span id="showReview">리뷰></span>
 
                                
 
@@ -494,17 +507,23 @@
  
                     </div>
                    
-                    <div class="store-menu-list">
+                    <div class="store-menu-list" >
                     <!-- 메뉴 이미지 div 3개 추가 -->
-                    <div class="menu-image-container">
-                        <div>
-                            <img src="/images/storeDetail/burger4.jpg" class="storedetail-menuimage" 
+                    <div class="menu-image-container" th:each="menu:${menuList}" >
+                        <div >
+                            <img 
+                            th:if="${menu.menuImgUrl!=null}"
+                            th:src="${menu.menuImgUrl}" class="storedetail-menuimage" 
                              alt="메뉴 사진">
                         </div>
 
                         <div class="menu-info">
-                            <span id="menuName" th:text="${store.menuTitle}">메뉴 이름</span>
-                            <span id="menuPrice" th:text="${store.menuAmount}">4000 원</span>
+                            <span id="menuName" th:text="${menu.menuTitle}">메뉴 이름</span>
+                            <span id="menuPrice" th:text="${menu.menuAmount}+'원'">가격</span>
+                        </div>
+
+                        <div class="menu-info-content">
+                             <span id="menuDetail" th:text="${menu.menuContent}"></span>
                         </div>
                     </div>
                     
@@ -748,26 +767,7 @@
                
                 <div class="review-reason">
                     <p>리뷰를 신고하려는 이유를 알려주세요!</p>
-                    <p>타당한 근거 없이신고된 내용은 관리자 확인 후 반영되지 않을 수 있습니다.</p>
-                </div>
-    
-                <div class="select-report">
-
-                    <div>
-                        <input type="radio" name="reportRadio" id="report1"> 주문과 관련없는 내용
-                    </div>
-                    <div>
-                        <input type="radio" name="reportRadio" id="report1"> 욕설/비방 표현입니다.
-                    </div>
-                    <div>
-                        <input type="radio" name="reportRadio" id="report1"> 불쾌한 사진, 영상을 포함하고 있습니다.
-                    </div>
-                    <div>
-                        <input type="radio" name="reportRadio" id="report1"> 개인정보 노출 게시물입니다.
-                    </div>
-                    <div>
-                        <input type="radio" name="reportRadio" id="report1"> 기타 (하단 내용 작성)
-                    </div>
+                    <p>타당한 근거 없이 신고된 내용은 관리자 확인 후 반영되지 않을 수 있습니다.</p>
                 </div>
                    
                 <div class="report-button-area">
@@ -781,6 +781,8 @@
 
 
 
+        
+
     
     </main>
        <!-- templetes/common/footer.html  조각 추가 -->
@@ -790,6 +792,7 @@
         const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원";
         const memberCode = /*[[${session.loginMember?.memberCode}]]*/ "회원코드";
         const storeNo = /*[[${storeNo}]]*/ "사업자등록번호"
+        let bookMark =/*[[${booMark}]]*/ "좋아요 여부";
     </script>
 
    <script src="/js/reservation/reservation.js"></script>

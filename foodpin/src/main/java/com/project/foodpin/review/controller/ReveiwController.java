@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.review.model.dto.Review;
@@ -39,8 +37,11 @@ public class ReveiwController {
 		,Model model) {
 		
 		Store store = service.selectStore(storeNo);
+		
+		List<Menu> menuList = service.selectMenu(storeNo);
 
 		model.addAttribute("store", store);
+		model.addAttribute("menuList", menuList);
 		
 		return "storeReview/storeReview";
 	}
@@ -52,15 +53,15 @@ public class ReveiwController {
 		@SessionAttribute("loginMember") Member loginMember,
 		@RequestParam("images") List<MultipartFile> images,
 		@RequestParam("hashNo") List<Integer> hashNo,
+		@RequestParam("menuNo") List<Integer> menuNo,
 		@RequestParam("reviewRating") int reviewRating,
 		Model model,
 		Review inputReview) throws IllegalStateException, IOException {
 		
 		inputReview.setMemberNo(loginMember.getMemberNo());
-		
 		inputReview.setStoreNo(storeNo);
 		
-		int result = service.insertReview(inputReview, hashNo, images);
+		int result = service.insertReview(inputReview, menuNo, hashNo, images);
 		
 		String path = null;
 		int memberNo = loginMember.getMemberNo();

@@ -1,10 +1,52 @@
 /* ******************************************************************* */
 
 const checkObj = {
+    "memberId"        : false,
     "memberName"      : false,
     "memberTel"       : false,
     "authKey"         : false
   };
+
+/* ******************************************************************* */
+
+/* 아이디유효성 검사 */
+  
+const memberId = document.querySelector("#memberId");
+const idMessage = document.querySelector("#idMessage");
+
+memberId.addEventListener("input", e => {
+
+  inputId = e.target.value;
+
+  // 1) 입력 안한 경우
+  if(inputId.trim().length === 0){
+    idMessage.innerText = "가입시 사용했던 아이디를 작성해주세요.";
+    idMessage.classList.remove("confirm", "error");
+    checkObj.memberId = false;
+    memberId.value = "";
+    return;
+  }
+
+
+  // 2) 정규식 검사
+  const regExp = /^[a-z\d]{5,20}$/;
+
+  if( !regExp.test(inputId) ){ // 유효 X
+    idMessage.innerText = "유효하지 않은 아이디 형식입니다.";
+    idMessage.classList.add("error");
+    idMessage.classList.remove("confirm");
+    checkObj.memberId = false;
+    return;
+  }
+
+  idMessage.innerText = "";
+  idMessage.classList.add("confirm");
+  idMessage.classList.remove("error");
+  checkObj.memberId = true;
+
+
+})
+
 
 /* ******************************************************************* */
 const memberName = document.querySelector("#memberName")
@@ -207,94 +249,138 @@ function addZero(number){
 
 
 
-// // 인증하기 버튼을 눌렀을때
-// checkAuthKeyBtn.addEventListener("click", () => {
+// 인증하기 버튼을 눌렀을때
+checkAuthKeyBtn.addEventListener("click", () => {
 
-//   if( min === 0 && sec === 0){ // 타이머가 00:00 인 경우
-//     alert("인증번호 입력 제한시간을 초과하였습니다.");
-//     return;
-//   }
+  if( min === 0 && sec === 0){ // 타이머가 00:00 인 경우
+    alert("인증번호 입력 제한시간을 초과하였습니다.");
+    return;
+  }
 
-//   if(authKey.value.length < 6){ // 인증번호가 제대로 입력 안된 경우
-//     alert("인증번호를 정확히 입력해 주세요");
-//     return;
-//   }
+  if(authKey.value.length < 6){ // 인증번호가 제대로 입력 안된 경우
+    alert("인증번호를 정확히 입력해 주세요");
+    return;
+  }
 
-//   // 입력 받은 이메일, 인증번호로 객체 생성
-//   const obj = {
-//     "telNumber"   : memberTel.value,
-//     "authKey" : authKey.value
-//   };
+  // 입력 받은 이메일, 인증번호로 객체 생성
+  const obj = {
+    "telNumber"   : memberTel.value,
+    "authKey" : authKey.value
+  };
 
-//   fetch("/member/checkAuthKey", {
-//     method : "POST",
-//     headers : {"Content-Type" : "application/json"},
-//     body : JSON.stringify(obj) // obj를 JSON 변경
-//   })
-//   .then(resp => resp.text())
-//   .then(result => {
+  fetch("/member/checkAuthKey", {
+    method : "POST",
+    headers : {"Content-Type" : "application/json"},
+    body : JSON.stringify(obj) // obj를 JSON 변경
+  })
+  .then(resp => resp.text())
+  .then(result => {
 
-//     // ==   : 값만 비교
-//     // ===  : 값 + 타입 비교
+    // ==   : 값만 비교
+    // ===  : 값 + 타입 비교
 
-//     if(result == 0){
-//       alert("인증번호가 일치하지 않습니다");
-//       checkObj.authKey = false;
-//       return;
-//     }
+    if(result == 0){
+      alert("인증번호가 일치하지 않습니다");
+      checkObj.authKey = false;
+      return;
+    }
 
-//     clearInterval(authTimer); // 타이머 멈춤
+    clearInterval(authTimer); // 타이머 멈춤
 
-//     authKeyMessage.innerText = "인증 되었습니다";
-//     authKeyMessage.classList.remove("error");
-//     authKeyMessage.classList.add("confirm");
+    authKeyMessage.innerText = "인증 되었습니다";
+    authKeyMessage.classList.remove("error");
+    authKeyMessage.classList.add("confirm");
 
-//     checkObj.authKey = true; // 인증번호 검사여부 true
+    checkObj.authKey = true; // 인증번호 검사여부 true
 
-//   })
+  })
 
 
-// });
+});
 
 
 /* 회원 가입 버튼 클릭 시 전체 유효성 검사 여부 확인 */
 
-// const findIdForm = document.querySelector("#findIdForm");
+const resetPw = document.querySelector("#resetPw");
 
-// // 회원 가입 폼 제출 시
-// findIdForm.addEventListener("submit", e => {
+// 회원 가입 폼 제출 시
+resetPw.addEventListener("submit", e => {
 
-//   // checkObj의 저장된 값(value)중 
-//   // 하나라도 false가 있으면 제출 X
+  // checkObj의 저장된 값(value)중 
+  // 하나라도 false가 있으면 제출 X
 
-//   // for ~ in (객체 전용 향상된 for문)
+  // for ~ in (객체 전용 향상된 for문)
 
-//   for(let key in checkObj){ // checkObj 요소의 key 값을 순서대로 꺼내옴
+  for(let key in checkObj){ // checkObj 요소의 key 값을 순서대로 꺼내옴
 
-//     if( !checkObj[key] ) { // false인 경우 (유효하지 않음)
+    if( !checkObj[key] ) { // false인 경우 (유효하지 않음)
 
-//       let str; // 출력할 메시지를 저장할 변수
+      let str; // 출력할 메시지를 저장할 변수
 
-//       switch(key){
-
-//       case "memberTel": 
-//       str = "전화번호가 유효하지 않습니다"; break;
-
-//       case "authKey" :
-//       str = "휴대폰 인증이 되지 않았습니다"; break;
+      switch(key){
       
-//       case "memberName": 
-//       str = "이름이 유효하지 않습니다"; break;
+      case "memberId": 
+      str = "아이디가 유효하지 않습니다"; break;
+
+      case "memberTel": 
+      str = "전화번호가 유효하지 않습니다"; break;
+
+      case "authKey" :
+      str = "휴대폰 인증이 되지 않았습니다"; break;
+      
+      case "memberName": 
+      str = "이름이 유효하지 않습니다"; break;
           
-//       }
+      }
       
-//       alert(str); // 경고창 출력
+      alert(str); // 경고창 출력
 
-//       document.getElementById(key).focus(); // 초점 이동
+      document.getElementById(key).focus(); // 초점 이동
 
-//       e.preventDefault(); // form 태그 기본 이벤트(제출) 막기
-//       return;
-//     }
-//   }
+      e.preventDefault(); // form 태그 기본 이벤트(제출) 막기
+      return;
+    }
+  }
 
-// });
+  /* 아이디 존재 여부 확인 */
+
+  const memberId = document.querySelector("#memberId");
+  const memberTel = document.querySelector("#memberTel");
+  const memberName = document.querySelector("#memberName");
+
+  const obj = {
+    "memberId"   : memberId.value,
+    "memberTel" : memberTel.value,
+    "memberName" : memberName.value,
+  };
+
+
+  const result = idConfirmFn(obj);
+
+  result.then(count => {
+    console.log(count);
+
+    if(count > 0){ // 정보 있음
+      alert("아이디 확인이 완료되었습니다.")
+      return;
+    }
+      
+    alert("기입된 정보와 일치하는 아이디가 없습니다.")
+    e.preventDefault();
+    return;
+
+  })
+});
+
+
+const idConfirmFn = async (obj) => {
+  const resp =  await fetch("/member/idConfirm",{
+    method:"POST",
+    headers:{"Content-Type" : "application/json"},
+    body:JSON.stringify(obj)
+  }
+  );
+
+  const count = await resp.text();
+  return count;
+}

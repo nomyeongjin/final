@@ -32,9 +32,15 @@
 	</update>
 	
 	
+	
+	<!-- 고정 휴무일 조회 -->
+	<select id="selectWeekOff">
+		SELECT OFF_WEEK FROM "WEEK_OFF" WHERE STORE_NO = #{storeNo}
+	</select>
+	
 	<!-- 지정 휴무일 조회 -->
 	<select id="calendarOffSelect">
-		SELECT *
+		SELECT OFF_DAY_TITLE , TO_CHAR(OFF_WEEK_START, 'YYYY-MM-DD') OFF_WEEK_START, TO_CHAR(OFF_WEEK_END, 'YYYY-MM-DD') OFF_WEEK_END
 		FROM "DAY_OFF"
 		WHERE STORE_NO = #{storeNo}
 	</select>

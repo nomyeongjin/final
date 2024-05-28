@@ -136,4 +136,14 @@
 	  WHERE MEMBER_ID = #{memberId}
 	  </update>
 	  
+	  <!-- 새 비밀번호 변경 전 컨펌  -->
+	  <select id="idConfirm">
+	  	SELECT COUNT(*)
+	  	FROM "MEMBER"
+		WHERE MEMBER_TEL=#{memberTel}
+		AND MEMBER_NAME = #{memberName}
+		AND MEMBER_ID = #{memberId}
+	
+	  </select>
+	  
 </mapper>

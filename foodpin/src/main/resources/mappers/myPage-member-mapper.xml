@@ -5,6 +5,7 @@
 	<!-- 회원 정보 수정 -->
 	<update id="updateInfo">
 		UPDATE "MEMBER" SET
+		PROFILE_IMG = #{profileImg},
 		MEMBER_NICKNAME = #{memberNickname},
 		MEMBER_EMAIL = #{memberEmail},
 		MEMBER_TEL = #{memberTel}
@@ -41,10 +42,18 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<!-- 노쇼횟수 -->
+	<select id="noshowCount">
+		SELECT COUNT(*)
+		FROM RESERVATION
+		WHERE MEMBER_NO = #{memberNo}
+		AND RESERV_STATUS_FL = 'X'
+	</select>
+	
 	<!-- 예약 확정 조회 -->
 	<select id="reservationFix">
-		SELECT (SELECT COUNT(*) FROM RESERVATION 
-				WHERE R.MEMBER_NO = #{memberNo} 
+		SELECT (SELECT COUNT(*) FROM MEMBER M
+				WHERE MEMBER_NO = #{memberNo} 
 				AND RESERV_STATUS_FL = 'Y'
 				AND TO_TIMESTAMP(TO_CHAR(R.RESERV_DATE, 'YYYY-MM-DD') || ' ' || R.RESERV_TIME, 'YYYY-MM-DD HH24:MI') > SYSDATE) FIX_COUNT,
 			RESERV_NO, <![CDATA[ TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE]]>,
@@ -62,7 +71,11 @@
 	
 	<!-- 예약 대기 조회 -->
 	<select id="reservationWait">
-		SELECT RESERV_NO, <![CDATA[ TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE]]>,
+		SELECT (SELECT COUNT(*) FROM RESERVATION 
+			WHERE RESERV_STATUS_FL = 'N'
+			AND MEMBER_NO = #{memberNo}
+			) WAIT_COUNT, 
+			RESERV_NO, <![CDATA[ TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE]]>,
 			R.RESERV_TIME, 
 		    S.STORE_NAME, R.RESERV_COUNT, S.STORE_LOCATION
 		FROM RESERVATION R
@@ -76,7 +89,12 @@
 	<!-- 지난 예약 조회 -->
 	<select id="reservationLast">
 		<![CDATA[ 
-		SELECT TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE,
+		SELECT (SELECT COUNT(*) FROM RESERVATION 
+			    WHERE RESERV_STATUS_FL = 'Y'
+			    AND MEMBER_NO = #{MEMBER_NO}
+			    AND SYSDATE > RESERV_DATE
+			    ) LAST_COUNT, 
+			TO_CHAR(RESERV_DATE, 'YYYY. MM. DD') RESERV_DATE,
 			R.RESERV_TIME, 
 		    S.STORE_NAME, R.RESERV_COUNT, S.STORE_LOCATION
 		FROM RESERVATION R
@@ -122,7 +140,9 @@
 	
 	<!-- 리뷰 조회 -->
 	<select id="selectReviewList">
-		SELECT STORE_NAME, REVIEW_RATING, REVIEW__REG_DATE, REVIEW_CONTENT 
+		SELECT STORE_NAME, REVIEW_RATING, 
+			   <![CDATA[ TO_CHAR(REVIEW__REG_DATE, 'YYYY. MM. DD') REVIEW__REG_DATE]]>, 
+			   REVIEW_CONTENT 
 		FROM REVIEW R
 		JOIN STORE S ON R.STORE_NO = S.STORE_NO
 		WHERE REVIEW_DEL_FL = 'N'

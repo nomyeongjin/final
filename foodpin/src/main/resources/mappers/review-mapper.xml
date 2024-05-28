@@ -2,14 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.project.foodpin.review.model.mapper.ReviewMapper">
 
+	<!-- 특정가게 조회 -->
 	<select id="selectStore" resultType="store">
-		SELECT * 
-		FROM "STORE"
+		SELECT *
+		FROM "STORE" S
+		WHERE S.STORE_NO = #{storeNo}
+	</select>
+	
+	<!-- 특정가게 메뉴 조회 -->
+	<select id="selectMenu">
+		SELECT *
+		FROM MENU
 		WHERE STORE_NO = #{storeNo}
 	</select>
 	
 	
-	
+	<!-- 리뷰 작성 -->
 	<insert id="reviewInsert" useGeneratedKeys="true" parameterType="Review">
 	
 	  <selectKey order="BEFORE" resultType="_int" keyProperty="reviewNo">
@@ -24,11 +32,21 @@
 	                SYSDATE,
 	                DEFAULT,
 	                #{memberNo},
-	                #{storeNo}, 1
+	                #{storeNo}
 	    )
 	</insert>
 	
+	<!-- 메뉴 삽입 -->
+	<insert id="insertMenu" parameterType="list">
+        INSERT INTO "REVIEW_MENU"
+        
+        <foreach collection="list" item="menu" open="(" close=")" separator=" UNION ">
+            SELECT #{menu.reviewNo}, #{menu.menuNo} FROM DUAL
+        </foreach>
+    </insert>
 	
+	
+	<!-- 해시태그 삽입 -->
 	<insert id="insertHashList" parameterType="list">
         INSERT INTO "REVIEW_HASH"
         
@@ -37,7 +55,7 @@
         </foreach>
     </insert>
 	
-    
+    <!-- 이미지 삽입 -->
     <insert id="insertUploadList" parameterType="list">
         INSERT INTO "UPLOAD_IMAGE"
         
@@ -46,6 +64,7 @@
         </foreach>
     </insert>
     
+    <!-- 리뷰 개수 조회 -->
 	<select id="reviewCount">
 		SELECT COUNT(*) FROM "REVIEW"
 		WHERE MEMBER_NO = #{memberNo}

@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.foodpin.common.util.Utility;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewHash;
+import com.project.foodpin.review.model.dto.ReviewMenu;
 import com.project.foodpin.review.model.dto.UploadImage;
 import com.project.foodpin.review.model.exception.ReviewInsertException;
 import com.project.foodpin.review.model.mapper.ReviewMapper;
@@ -42,12 +43,16 @@ public class ReviewServiceImpl implements ReviewService {
 		return mapper.selectStore(storeNo);
 	}
 	
+	@Override
+	public List<Menu> selectMenu(String storeNo) {
+		return mapper.selectMenu(storeNo);
+	}
 	
 	
 	
 	// 리뷰 작성
 	@Override
-	public int insertReview(Review inputReview, List<Integer> hashNo, List<MultipartFile> images) throws IllegalStateException, IOException {
+	public int insertReview(Review inputReview, List<Integer> hashNo, List<Integer> menuNo, List<MultipartFile> images) throws IllegalStateException, IOException {
 		
 		int result = mapper.reviewInsert(inputReview);
 		
@@ -55,6 +60,24 @@ public class ReviewServiceImpl implements ReviewService {
 		if(result == 0) return 0;
 		
 		int reviewNo = inputReview.getReviewNo();
+		
+		
+		List<ReviewMenu> menuList = new ArrayList<>();
+		for(int i = 0 ; i < menuNo.size(); i++) {
+			if(!menuNo.isEmpty()) {
+				
+				ReviewMenu menu = ReviewMenu.builder()
+								.reviewNo(reviewNo)
+								.menuNo(menuNo.get(i))
+								.build();
+				
+				menuList.add(menu);
+			}
+		}
+		
+		if(menuList.isEmpty()) return reviewNo;
+		
+		result = mapper.insertMenu(menuList);
 		
 		
 		List<ReviewHash> hashList = new ArrayList<>();

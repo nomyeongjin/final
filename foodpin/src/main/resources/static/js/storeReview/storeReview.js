@@ -10,11 +10,7 @@ popupClose.addEventListener("click", () => {
 
 selectMenuButton.addEventListener("click", () => {
   menuSection.classList.add("popup-hidden");
-
   const menuBody = document.querySelector("#menuBody");
-
-
-
 })
 
 

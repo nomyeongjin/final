@@ -1,12 +1,19 @@
 package com.project.foodpin.store.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.service.DetailStoreService;
 
@@ -25,11 +32,7 @@ public class DetailStoreController {
 	
 	
 	
-	/*
-	 * @GetMapping("storeDetail") public String detailPage() {
-	 * 
-	 * return"store/storeDetail"; }
-	 */
+	
 	
 	
 	@GetMapping("storeDetail/{storeNo}")
@@ -40,6 +43,8 @@ public class DetailStoreController {
 			) {
 		
 		Store store = service.storeDetail(storeNo);
+		List<Menu> menuList = service.menuDetail(storeNo);
+		
 		/* Store offday = service.storeOff(storeNo); */
 		
 		// 불러온 store 정보에서 주소 쪼개기
@@ -47,6 +52,7 @@ public class DetailStoreController {
 		String[] arr = storeLocation.split("\\^\\^\\^");
 		
 		model.addAttribute("store", store);
+		model.addAttribute("menuList", menuList);
 		
 		model.addAttribute("postcode", arr[0]);
 		model.addAttribute("address", arr[1]);
@@ -64,6 +70,21 @@ public class DetailStoreController {
 		}
 		
 		return path;
+	}
+	
+	/** 가게 찜
+	 * @param map
+	 * @return count
+	 */
+	@ResponseBody
+	@PostMapping("like")
+	public int storeLike(
+		@RequestBody Map<String, Integer> map
+			) {
+		
+		
+		return service.storeLike(map);
+		
 	}
 	
 

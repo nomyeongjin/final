@@ -1,4 +1,4 @@
-package com.project.foodpin.store.model.dto;
+package com.project.foodpin.review.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,13 +11,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Menu {
+public class ReviewMenu {
 
+	private int reviewNo;
 	private int menuNo;
-	private String menuTitle;
-	private String menuAmount;
-	private String menuContent;
-	private String menuImgUrl; 
-	private String storeNo;
 	
 }
