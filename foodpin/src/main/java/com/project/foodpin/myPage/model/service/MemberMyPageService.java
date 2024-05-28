@@ -1,7 +1,10 @@
 package com.project.foodpin.myPage.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.reservation.model.dto.Reservation;
@@ -11,11 +14,14 @@ import com.project.foodpin.store.model.dto.Store;
 public interface MemberMyPageService {
 
 	// 회원 정보 수정
-	int updateInfo(Member inputMember);
+	int updateInfo(MultipartFile profileImg, Member inputMember) throws IllegalStateException, IOException;
 
 	// 회원 비밀번호 변경
 	int memberChangePw(Map<String, Object> paramMap, int memberNo);
 
+	// 노쇼 횟수 조회
+	int noshowCount(int memberNo);
+	
 	// 예약 확정 조회
 	List<Reservation> reservationFix(int memberNo);
 	
@@ -42,6 +48,7 @@ public interface MemberMyPageService {
 
 	// 탈퇴 전 예약 확정/대기 조회
 	int selectReserv(int memberNo);
+
 	
 
 

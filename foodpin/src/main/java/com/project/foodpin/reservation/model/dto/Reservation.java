@@ -26,5 +26,8 @@ public class Reservation {
 	private String storeLocation;
 	
 	private int fixCount;
+	private int waitCount;
+	private int lastCount;
 	private int cancelNoshowCount;
+	private int noshowCount;
 }

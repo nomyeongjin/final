@@ -1,5 +1,6 @@
 package com.project.foodpin.myPage.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
@@ -44,14 +46,15 @@ public class MemberMyPageController {
 	// 회원 정보 수정
 	@PostMapping("memberInfo")
 	public String updateInfo(
+		@RequestParam("profileImg") MultipartFile profileImg,
 		Member inputMember,
 		@SessionAttribute("loginMember") Member loginMember,
-		RedirectAttributes ra) {
+		RedirectAttributes ra) throws IllegalStateException, IOException {
 		
 		int memberNo = loginMember.getMemberNo();
 		inputMember.setMemberNo(memberNo);
 		
-		int result = service.updateInfo(inputMember);
+		int result = service.updateInfo(profileImg, inputMember);
 		
 		String message = null;
 		
@@ -61,6 +64,7 @@ public class MemberMyPageController {
 			loginMember.setMemberNickname(inputMember.getMemberNickname());
 			loginMember.setMemberEmail(inputMember.getMemberEmail());
 			loginMember.setMemberTel(inputMember.getMemberTel());
+			loginMember.setProfileImg(inputMember.getProfileImg());
 		} else {
 			message = "회원 정보 수정에 실패하였습니다.";
 		}
@@ -105,7 +109,9 @@ public class MemberMyPageController {
 		
 		int memberNo = loginMember.getMemberNo();
 		List<Reservation> reservation = service.reservationFix(memberNo);
+		int noshowCount = service.noshowCount(memberNo);
 		model.addAttribute("reservation", reservation);
+		model.addAttribute("noshowCount", noshowCount);
 		
 		return "myPage/member/reservation/fix";
 	}
@@ -118,7 +124,9 @@ public class MemberMyPageController {
 		
 		int memberNo = loginMember.getMemberNo();
 		List<Reservation> reservation = service.reservationWait(memberNo);
+		int noshowCount = service.noshowCount(memberNo);
 		model.addAttribute("reservation", reservation);
+		model.addAttribute("noshowCount", noshowCount);
 		
 		return "myPage/member/reservation/wait";
 	}
@@ -131,8 +139,11 @@ public class MemberMyPageController {
 		
 		int memberNo = loginMember.getMemberNo();
 		List<Reservation> reservation = service.reservationLast(memberNo);
+		int noshowCount = service.noshowCount(memberNo);
+
 		model.addAttribute("reservation", reservation);
-		
+		model.addAttribute("noshowCount", noshowCount);
+
 		return "myPage/member/reservation/last";
 	}
 	
@@ -144,8 +155,11 @@ public class MemberMyPageController {
 		
 		int memberNo = loginMember.getMemberNo();
 		List<Reservation> reservation = service.reservationCancelNoshow(memberNo);
+		int noshowCount = service.noshowCount(memberNo);
+
 		model.addAttribute("reservation", reservation);
-		
+		model.addAttribute("noshowCount", noshowCount);
+
 		return "myPage/member/reservation/cancelNoshow";
 	}
 	
