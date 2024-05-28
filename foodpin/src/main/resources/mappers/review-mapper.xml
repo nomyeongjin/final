@@ -3,8 +3,14 @@
 <mapper namespace="com.project.foodpin.review.model.mapper.ReviewMapper">
 
 	<select id="selectStore" resultType="store">
-		SELECT * 
-		FROM "STORE"
+		SELECT *
+		FROM "STORE" S
+		WHERE S.STORE_NO = #{storeNo}
+	</select>
+	
+	<select id="selectMenu">
+		SELECT *
+		FROM MENU
 		WHERE STORE_NO = #{storeNo}
 	</select>
 	
@@ -24,7 +30,7 @@
 	                SYSDATE,
 	                DEFAULT,
 	                #{memberNo},
-	                #{storeNo}, 1
+	                #{storeNo}, #{menuNo}
 	    )
 	</insert>
 	

@@ -42,6 +42,10 @@ public class ReviewServiceImpl implements ReviewService {
 		return mapper.selectStore(storeNo);
 	}
 	
+	@Override
+	public List<Menu> selectMenu(String storeNo) {
+		return mapper.selectMenu(storeNo);
+	}
 	
 	
 	

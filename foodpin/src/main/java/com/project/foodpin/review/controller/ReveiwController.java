@@ -39,8 +39,11 @@ public class ReveiwController {
 		,Model model) {
 		
 		Store store = service.selectStore(storeNo);
+		
+		List<Menu> menuList = service.selectMenu(storeNo);
 
 		model.addAttribute("store", store);
+		model.addAttribute("menuList", menuList);
 		
 		return "storeReview/storeReview";
 	}

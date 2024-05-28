@@ -21,6 +21,9 @@ public interface ReviewService {
 	// 리뷰 개수 조회
 	int reviewCount(int memberNo);
 
+	// 메뉴 조회
+	List<Menu> selectMenu(String storeNo);
+
 
 
 
