@@ -13,7 +13,7 @@ import com.project.foodpin.store.model.dto.Store;
 public interface ReviewService {
 
 	// 리뷰 작성
-	int insertReview(Review inputReview, List<Integer> hashNo, List<MultipartFile> images) throws IllegalStateException, IOException ;
+	int insertReview(Review inputReview, List<Integer> hashNo, List<Integer> menuNo, List<MultipartFile> images) throws IllegalStateException, IOException ;
 
 	// 리뷰 작성 화면 넘어가기
 	Store selectStore(String storeNo);
