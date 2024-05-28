@@ -33,10 +33,7 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 	public List<Menu> menuDetail(String storeNo) {
 		
 	  List<Menu> menuList = mapper.menuDetail(storeNo);
-		
-
-		
-		
+	
 		return menuList;
 	}
 

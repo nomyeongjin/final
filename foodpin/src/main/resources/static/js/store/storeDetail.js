@@ -34,6 +34,8 @@ lessText.addEventListener("click", ()=>{
 
 
 
+
+
 /* ****************지도******************* */
 
 
@@ -120,6 +122,8 @@ window.onload = function() {
   currentlocation();
 };
 /* ****************지도******************* */
+
+
 
 /* 폐점/ 정보 정정 신고 팝업 */
 
@@ -261,26 +265,19 @@ showReview.addEventListener("click", ()=>{
 /**************** 가게 찜, 좋아요 개수 ******************/
 
 // 1. #bookmarkCheck 클릭 되었을 때
-const storeLike = document.querySelector("#bookmarkCheck");
+const bookmarkCheck = document.querySelector("#bookmarkCheck");
 bookmarkCheck.addEventListener("click", e=>{
 
-    //2. 로그인 상태가 아닌 경우 동작 X
-
-    if(loginMemberNo == null){
-        alert("로그인 후 이용해 주세요");
-        return;
-    }
-
-
+  
     // 3. 준비된 3개의 변수를 객체로 저장 -> (Json 변환 예정)
     const obj = {
-        "memberNo" : loginMemberNo,
+        "memberNo" : loginMember,
         "storeNo"  : storeNo,
-        "bookmark": bookmark
+        "bookMark": bookMark
     };
 
     //4. 좋아요 INSERT / DELETE 비동기 요청
-    fetch("like", {
+    fetch("/store/like", {
 
     method  : "POST",
     headers : {"Content-Type" : "application/json"},
@@ -300,9 +297,9 @@ bookmarkCheck.addEventListener("click", e=>{
             return;
         }
 
-        // 5. likeCheck 값 0<->1 변환
+        // 5. bookmark 값 0<->1 변환
         // (왜? 클릭 될 때 마다 INSERT/DELETE 동작을 번갈아 가면서 할 수 있음)
-        bookmark = bookmark == 0? 1: 0;
+         bookMark = bookMark == 0? 1: 0;
 
         // 6. 하트를 채웠다/비웠다 바꾸기
         e.target.classList.toggle("fa-regular");

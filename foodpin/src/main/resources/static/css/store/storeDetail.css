@@ -174,11 +174,17 @@ aside>a:hover{
 }
 
 /* 북마크바 check시 색 변환 */
-#bookmarkCheck{
+/* #bookmarkCheck{
     cursor: pointer;
         font-size: 20px;
     background-color: white;
     color: rgb(252, 57, 57);
+} */
+
+.fa-heart{
+    font-size: 20px;
+    background-color: white;
+    color: rgb(252, 57, 57); 
 }
   
 /* 평균 별점 */
@@ -641,6 +647,18 @@ hr{
 
 #menuPrice{
     color: rgb(127, 127, 127);
+}
+
+.menu-info-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#menuDetail{
+  color: #383838;
+  font-size: 15px;
+
 }
 .moreMenuImageBtnBox{
     display: flex;

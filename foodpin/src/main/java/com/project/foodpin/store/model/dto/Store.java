@@ -34,8 +34,8 @@ public class Store {
 	
 	
 	// 찜
-	private String bookmarkCheck;
-	private int bookmark;
+	private int likeCount;
+	private int bookMark;
 
 	
 	// 메뉴
