@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 탈퇴</title>
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/myPage/myPage-style.css">
+    <link rel="stylesheet" href="/css/myPage/member-myPage.css">
+
+</head>
+<body>
+    <main>
+        <th:block th:replace="~{common/header}"></th:block>
+
+        <div class="myPage-container">
+            <th:block th:replace="~{myPage/member/memberSide}"></th:block>
+
+            <hr>
+
+            <section class="content-container">
+                <div class="myPage-title-container">
+                    <section class="myPage-title">탈퇴하기</section>
+
+                    <form action="secession" method="POST" name="myPageFrm" id="secession">
+                        <div class="myPage-row">
+                            비밀번호
+                            <input type="password" name="memberPw" id="memberPw" maxlength="30" placeholder="비밀번호를 입력해주세요">
+                        </div>
+
+
+                        <div class="secession-terms">
+                            비밀번호를 입력하면 즉시 회원 탈퇴가 완료됩니다 <br>
+                            <br> 
+                            * 탈퇴 시 작성한 리뷰는 삭제되지 않습니다. <br>
+                            * 탈퇴 후 찜 목록은 복구가 불가합니다. <br>
+
+                            <div class="agree">
+                                <input type="checkbox" name="agree" id="agree">
+                                <label for="agree">위 상기 기재사항을 숙지하였습니다.</label>
+                            </div>
+
+                            <button class="member-secession-submit">탈퇴하기</button>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <script th:inline="javascript">
+        const loginMember = /*[[${session.loginMember}]]*/ "로그인 회원 정보";
+    </script>
+
+    <th:block th:replace="~{common/footer}"></th:block> 
+
+    <script src="/js/main.js"></script>
+    <script src="/js/myPage/member/secession.js"></script>
+</body>
+</html>

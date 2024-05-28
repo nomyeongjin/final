@@ -1,0 +1,295 @@
+/* .map_wrap {position:relative;width:100%;height:350px;} */
+:root {
+   --main-color : rgb(204, 204, 204);
+   
+   /* --hover-color : #e9ae2f; */
+}
+* {
+   
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   font-family: 'Pretendard-Regular';
+}
+
+body{
+    overflow: hidden;
+    height: 100vh;
+    user-select: none;
+}
+
+.store-search{
+   display: flex;
+
+}
+
+
+.storesearch-container{
+   flex: 1 1 auto;
+}
+
+.search-sidebarbox{
+
+   transform: translateX(0%);
+   position: absolute;
+   z-index: 200;
+   height: 100vh;
+   min-width: 390px;
+   background-color: white;
+   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2),
+               5px 0px 15px 0px rgba(0, 0, 0, 0.1);
+   /* 그림자 효과 */
+
+}
+
+.map_wrap{
+  
+}
+
+#map{
+   
+   
+    user-select: none;
+  
+    width: 100%;
+    height: 100vh;
+   
+}
+
+.store-search{
+   display: flex;
+   flex-direction: row;
+   
+}
+
+/* storeHeader */
+
+
+.storeSearch-header{
+ 
+   background-color: white; 
+   position: relative;
+   border-right: 1px solid var(--main-color);
+   display: flex;
+   flex-direction: column;
+   z-index: 300;
+  
+   
+}
+
+#searchHeader{
+
+   width: 5%;
+   height: 100vh;
+
+}
+.search-logobox{
+   width: 63px;
+   height: 10%;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   /* border-bottom: 1px solid var(--main-color); */
+  
+}
+#searchLogo{
+   width: 41px;
+   height: 41px;
+ 
+}
+
+/* *************************************************************** */
+/* nav bar */
+
+.search-navbar{
+   
+   width: 63px;
+   height: 90%;
+   align-items: center;
+   justify-content: space-between;
+   display: flex;
+   flex-direction: column;
+}
+
+.search-navbar ul{
+ border-top: 1px solid var(--main-color);
+}
+
+.search-navbar li{
+   list-style: none;
+  
+}
+
+.first-nav-li{
+   width: 63px;
+   color: rgb(68, 68, 68);
+}
+
+.navbar-button{
+   justify-content: center;
+   display: flex;
+   flex-direction: column;
+   cursor: pointer;
+   align-items: center;
+   padding: 13px 0px;
+   text-align: center;
+   background-color: white;
+   color: rgb(77, 77, 77);
+   border: none;
+   width: 63px;
+   height: 60px;
+
+}
+
+.first-nav-li .navbar-button:hover {
+   color: #ffffff;
+  /*  background-color:#d1dd68; */
+   background-color:#f1e75b;
+   
+}
+
+.first-nav-li .navbar-button:focus{
+   background-color:#779be7;
+   color: #f1e75b;
+}
+#mapHome{
+   background-color: #779be7;                     
+   color: #f1e75b;
+}
+
+#mapHome::before{
+
+  font-family:FontAwesome;
+  content:"\f3c5";
+  font-size: 15px;
+  
+}
+
+
+#remS::before{
+   font-family:FontAwesome;
+  content:"\f005";
+  font-size: 15px;
+  
+}
+
+#resS::before{
+   font-family:FontAwesome;
+  content:"\f543";
+  font-size: 15px;
+
+}
+
+#chatS::before{
+   font-family:FontAwesome;
+  content:"\f075";
+  font-size: 15px;
+  
+}
+
+
+.navbar-button span{
+   display: block;
+   min-height: 13px;
+   margin-top: 3px;
+   font-size: 12px;
+   line-height: 15px;
+   letter-spacing: -0.44px;
+}
+
+i{
+   font-size: 20px;
+   color: rgb(76, 76, 76);
+}
+
+
+
+#memberProfile{
+
+   width: 25px;
+   height: 25px;
+}
+   
+
+
+
+
+
+.sidebar-menu{
+   display: flex;  
+   position: relative;   
+   flex-direction: column;
+   height: 100%;
+
+}
+
+.search-container{
+   
+   z-index: 100;
+   padding: 15px 25px;
+   height: 10%;
+   /* border-bottom: 1px solid var(--main-color); */
+}
+
+.search-container .search-wrap{
+   position: relative;
+   border-radius: 20px;
+}
+
+
+
+.search-container .search-box{
+
+   position: relative;
+   z-index: 110;
+   width: 340px;
+   border-radius: 20px;
+   background-color: rgba(200, 200, 200, 0.2);
+
+}
+
+.search-panelContent{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 90%;
+}
+
+#searchButton{
+   border: none;
+   background-color: white;
+   cursor: pointer;
+   margin-left: 15px;
+   background-color: rgba(200, 200, 200, 0);
+}
+
+.fa-magnifying-glass{
+   font-size: 20px;
+   color: rgb(48, 48, 48);
+ 
+  
+}
+
+.input-box{
+   position: relative;
+   border: 0px;
+   height: 46px;
+   width: 250px;
+   padding: 10px;
+   font-size: 16px;
+   background-color: rgba(200, 200, 200, 0);
+   outline: none;
+
+}
+
+
+
+.search-box:hover{
+   background-color: rgba(200, 200, 200, 0.3);
+   
+   transition-duration: 0.5s;
+
+}

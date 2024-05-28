@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>찜 목록</title>
+    <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/myPage/myPage-style.css">
+    <link rel="stylesheet" href="/css/myPage/member-myPage.css">
+
+</head>
+<body>
+    <main>
+        <th:block th:replace="~{common/header}"></th:block>
+
+        <div class="myPage-container">
+
+            <!-- templetes/myPage/store/storeSide.html  조각 추가 -->
+            <th:block th:replace="~{myPage/member/memberSide}"></th:block>
+            
+            <hr>
+      
+            <!-- 마이페이지 본문 -->
+            <section class="content-container">
+      
+               <!-- 타이틀 영역 -->
+               <div class="myPage-title-container">
+                  <section class="myPage-title">찜 목록</section>
+
+                    <!-- 아무 내역 없을 때 -->
+                    <th:block th:if="${#lists.isEmpty(store)}">
+                        <div class="emptyList">찜한 가게가 없습니다</div>
+                    </th:block>
+         
+                    <th:block th:unless="${#lists.isEmpty(store)}">
+                        <table class="likeTable">
+                            <ul>
+                                <li class="likeList" th:each="store : ${store}">
+
+                                <div th:object="${store}">
+                                        <span class="likeStoreName" th:text="*{storeName}"><a href="/store/storeDetail">대박고깃집  ></a></span>
+                                        <span class="likeStoreAddress" th:text="*{storeLocation}">서울시 중구 마조로 56길</span>
+                                        <i class="fa-solid fa-bookmark like"></i>
+                                            <!-- th:classappend="*{likeCheck == 1} ? fa-solid : fa-regular"></i> -->
+                                </div>
+                                </li>
+                                
+                            </ul>
+                        </table>
+                    </th:block>
+         
+               </div>
+      
+            </section>
+      
+        </div>
+
+    </main>
+
+    <script th:inline="javascript">
+        const loginMember = /*[[${session.loginMember}]]*/ "로그인 회원 정보";
+    </script>
+
+    <th:block th:replace="~{common/footer}"></th:block> 
+
+    <script src="/js/main.js"></script>
+    <script src="/js/myPage/member/like.js"></script>
+</body>
+</html>

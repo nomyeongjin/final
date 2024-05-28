@@ -1,0 +1,112 @@
+<div class="storeSearch-header">
+
+    <div id="searchHeader">
+        <!-- 클릭하면 메인으로 가는 로고 -->
+        <div class="search-logobox">
+            
+            <a href="/">
+                <img src="/images/storeDetail/pizza.jpg" id="searchLogo" alt="메인로고">
+            </a>
+        </div>
+
+
+        <!-- 내 찜 목록 비동기로 가게이름, 카테고리, 주소, 사진 -->
+        <nav class="search-navbar">
+            <ul>
+            
+                
+                <li class="first-nav-li">
+                    <button type="button" class="navbar-button" id="mapHome">
+                       <!-- ::before – 실제 내용 바로 앞에서 생성되는 자식요소
+                            ::after – 실제 내용 바로 뒤에서 생성되는 자식요소​ -->
+                    
+                           
+                            <span class="navbar-text">지도 홈</span>
+                           
+                        
+                    </button>
+                </li>
+                
+                <li class="first-nav-li">
+                    <button type="button" class="navbar-button" id="remS">
+                        <span class="navbar-text">저장</span>
+                    </button>
+                </li>
+                
+                <li class="first-nav-li">
+                    <button type="button" class="navbar-button" id="resS">
+                        <span class="navbar-text">예약</span>
+                    </button>
+                </li>
+               
+                <li class="first-nav-li">
+                    <button type="button" class="navbar-button" id="chatS">
+                        <span class="navbar-text">채팅</span>
+                    </button>
+                </li>
+                
+              
+            </ul>
+
+            <ul>
+                <li>
+                    <!-- 나중에 기본 이미지 넣고, 로그인 시 회원 이미지 -->
+                    <button type="button" class="navbar-button">
+    
+
+                        <div class="profileArea">
+
+                            <!-- 일반 회원 -->
+                            <th:block th:if="${session.loginMember?.memberCode == 1}">
+                                <a href="/myPage/member/memberInfo">
+                            </th:block>
+        
+                            <!-- 사업자 회원 -->
+                            <th:block th:if="${session.loginMember?.memberCode == 2}">
+                                <a href="/myPage/store/storeInfo">
+                            </th:block>
+        
+                            <!-- 관리자 회원 -->
+                            <th:block th:if="${session.loginMember?.memberCode == 3}">
+                                <a href="/myPage/manager/storeEnroll"> 
+                            </th:block>
+
+                            <th:block th:if="${session.loginMember == null}">
+                                <a href="/member/login"> 
+                            </th:block>
+                            
+                            <img th:with="user=#{user.default.image}" 
+                            th:src="${profileImg ?:user}"  
+                                id="memberProfile">
+                            
+                             </a>
+
+                        </div>
+                          
+
+                        
+                          
+
+                    </button>
+                </li>
+
+                   <li>
+                    <button type="button" class="navbar-button">
+                     
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+      
+    </div>
+
+     
+
+    <!-- 여기는 나중에 -->
+    
+ <div class="storeSearch-sidebar">
+
+ </div>
+
+ </div>

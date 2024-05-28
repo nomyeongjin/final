@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 화면</title>
+
+    <!-- font awesome 라이브라리 추가 + key 등록 -->
+    <script src="https://kit.fontawesome.com/8affe1c744.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/member/login-style.css">
+
+</head>
+<body>
+
+    <main>
+        
+        <!-- 로고 / 클릭하면 메인으로 -->
+        <section class="logo-area">  
+    
+           <div>
+            <a href="/" id="logoTitle">FOODPIN</a>
+           </div>
+            
+        </section>
+        
+      
+
+        <form action="/member/login" method="post" id="loginForm">
+            <section class="input-box">
+                <input type="text" name="memberId" placeholder="Id" value="" required />
+            </section>
+
+            <section class="input-box">
+                <input type="password" name="memberPw" placeholder="Password" required />
+            </section>
+
+            <div class="saveId-area">
+                <input type="checkbox" name="saveId" id="saveId">
+                <label for="saveId"><i class="fa-solid fa-check"></i>아이디 저장</label>
+            </div>
+
+          
+            <div>
+                <button class="login-btn">Login</button>
+            </div>
+                
+
+          
+           
+            <div class="text-area">
+               <div class="text-area-element">
+                  <span><a href="/member/signupBtn">회원가입</a></span>
+                </div>
+                
+                <div class="text-area-element">
+                    <span>
+                        <a href="/member/findId">아이디</a>
+                            /
+                        <a href="/member/findPw">비밀번호 찾기</a>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </main>
+    
+    <script src="/js/member/memberLogin.js"></script>
+
+    <script th:inline="javascript">
+        const message =  /*[[${message}]]*/ "전달 받은 message";
+      
+        if(message != null) alert(message);
+    </script>
+
+</body>
+</html>
