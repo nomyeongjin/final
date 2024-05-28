@@ -14,6 +14,7 @@ import lombok.ToString;
 public class Off {
 	
 	private int offWeekNo; // 고정 휴무일 번호
+	private int offWeek; // 고정 휴무일 번호
 
 
 	private int offDayNo; // 지정 휴무일 번호

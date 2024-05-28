@@ -71,6 +71,13 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	}
 	
 	
+	// 고정 휴무일 조회
+	@Override
+	public List<Off> selectWeekOff(int storeNo) {
+
+		return mapper.selectWeekOff(storeNo);
+	}
+	
 	// 지정 휴무일 조회
 	@Override
 	public List<Off> calendarOffSelect(int storeNo) {
@@ -114,6 +121,9 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int ceoInfoUpdate(Member inputMember) {
 		return mapper.ceoInfoUpdate(inputMember);
 	}
+
+
+
 
 
 

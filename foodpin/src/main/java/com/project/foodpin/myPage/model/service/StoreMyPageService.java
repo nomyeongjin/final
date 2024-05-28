@@ -24,6 +24,16 @@ public interface StoreMyPageService {
 	 */
 	int storeInfoUpdate(Store inputStore, MultipartFile image);
 	
+	
+	
+	
+	/** 고정 휴무일 조회
+	 * @param storeNo
+	 * @return offList
+	 */
+	List<Off> selectWeekOff(int storeNo);
+
+	
 	/** 지정 휴무일 조회
 	 * @param storeNo
 	 * @return offList
@@ -60,6 +70,9 @@ public interface StoreMyPageService {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+
+
+
 
 
 
