@@ -74,7 +74,12 @@ public class ReservationController {
 	// 예약하기 상세정보 페이지
 	@GetMapping("storeDetail/{storeNo}/reservation/detail")
 	public String detail(
-			@PathVariable("storeNo") String storeNo) {
+			@PathVariable("storeNo") String storeNo,
+			Model model) {
+		
+		Store store = service.storeDetail(storeNo);
+		
+		model.addAttribute("store", store);
 		return "reservation/detail";
 	}
 

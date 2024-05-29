@@ -38,14 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll(".select-bg").forEach(item => item.classList.remove("select-bg"));
             info.dayEl.classList.add("select-bg"); // info.dayEl => 달력 한 칸
 
-            // const obj = {
-            //     // "storeNo" : storeNo,
-            //     "openHour" : openHour,
-            //     "closeHour" : closeHour,
-            //     "breaktimeStart" : breaktimeStart,
-            //     "breaktimeEnd" : breaktimeEnd
-            // };
-
             const selectTimeFn = () => {
 
                 fetch("/store/useTime", {
@@ -138,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     calendar.render();
+    selectTimeFn();
 
     // 화면 로드 시 현재 날짜 출력
     const temp = new Date();

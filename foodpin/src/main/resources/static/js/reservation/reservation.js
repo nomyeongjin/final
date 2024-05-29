@@ -47,8 +47,10 @@ if(noticeTitle !=null) {
 
 const storeMaxNumber = document.querySelector("#reservCount").dataset.storeMaxNumber;
 
+const temp = 10;
+
 if(storeMaxNumber == 0) {
-    for(let i = 1; i<=20; i++){
+    for(let i = 1; i<=temp; i++){
         const buttonList = document.querySelector(".button-list");
         
         // li 태그
