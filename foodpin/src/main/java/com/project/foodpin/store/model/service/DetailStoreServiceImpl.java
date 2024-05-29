@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.mapper.DetailStoreMapper;
@@ -36,6 +37,19 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 	
 		return menuList;
 	}
+	
+	
+	// 가게 리뷰 상세 조회
+	@Override
+	public List<Review> reviewDetail(String storeNo) {
+		
+		List<Review> reviewList = mapper.reviewDetail(storeNo);
+		
+		return reviewList;
+	}
+	
+	
+	
 
 	// 가게 찜 
 	@Override

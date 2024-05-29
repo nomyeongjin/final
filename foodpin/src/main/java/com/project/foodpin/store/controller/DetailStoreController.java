@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.service.DetailStoreService;
@@ -44,6 +46,8 @@ public class DetailStoreController {
 		
 		Store store = service.storeDetail(storeNo);
 		List<Menu> menuList = service.menuDetail(storeNo);
+		List<Review> reviewList = service.reviewDetail(storeNo);
+		
 		
 		/* Store offday = service.storeOff(storeNo); */
 		
@@ -53,6 +57,8 @@ public class DetailStoreController {
 		
 		model.addAttribute("store", store);
 		model.addAttribute("menuList", menuList);
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("start" , 0);
 		
 		model.addAttribute("postcode", arr[0]);
 		model.addAttribute("address", arr[1]);
@@ -86,7 +92,7 @@ public class DetailStoreController {
 		return service.storeLike(map);
 		
 	}
-	
 
+	
 	
 }
