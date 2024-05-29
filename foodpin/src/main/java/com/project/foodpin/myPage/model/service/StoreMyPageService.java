@@ -9,6 +9,9 @@ import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.store.model.dto.Store;
 
+/**
+ * 
+ */
 public interface StoreMyPageService {
 
 	/** 가게 기본 정보 조회
@@ -24,15 +27,21 @@ public interface StoreMyPageService {
 	 */
 	int storeInfoUpdate(Store inputStore, MultipartFile image);
 	
-	
-	
-	
+	/** 고정 휴무일 변경
+	 * @param offList
+	 * @return
+	 */
+	int updateOffWeek(List<Off> offList);
+
 	/** 고정 휴무일 조회
 	 * @param storeNo
 	 * @return offList
 	 */
 	List<Off> selectWeekOff(int storeNo);
 
+	
+	
+	
 	
 	/** 지정 휴무일 조회
 	 * @param storeNo
@@ -72,6 +81,8 @@ public interface StoreMyPageService {
 	int ceoInfoUpdate(Member inputMember);
 
 
+
+	
 
 
 

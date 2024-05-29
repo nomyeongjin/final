@@ -70,6 +70,29 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return result;
 	}
 	
+	// 고정 휴무일 변경
+	@Override
+	public int updateOffWeek(List<Off> offList) {
+		
+		int result = 0;
+		String StoreNo = offList.get(0).getStoreNo(); // StoreNo 꺼내오기
+		
+		int count = mapper.countOffWeek(StoreNo); // 기존 저장된 데이터 있는지 조회
+		
+		// 존재하는 경우 기존 데이터 삭제
+		if(count > 0)  result = mapper.deleteOffWeek(StoreNo);
+		
+		// 고정 휴무일이 변경되는 경우 (완전 삭제되는 경우에는 수행X)
+		if( !offList.get(0).getOffWeek().isEmpty()) {
+			
+			for(Off off : offList) {
+				result = mapper.insertOffWeek(off);
+			}
+		}
+		
+		return result;
+	}
+
 	
 	// 고정 휴무일 조회
 	@Override
@@ -121,6 +144,9 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int ceoInfoUpdate(Member inputMember) {
 		return mapper.ceoInfoUpdate(inputMember);
 	}
+
+
+
 
 
 
