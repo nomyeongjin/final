@@ -84,8 +84,8 @@
                                            <th:block th:if="${session.loginMember==null}">
                                             <i class="fa-solid fa-heart"> </i>
                                            </th:block>
-                                           
-                                           <span th:text="*{likeCount}">0</span>
+                                           <!-- &nbsp; -->
+                                           <span id="storeLikeCount" th:text="*{likeCount}">0</span>
                                     
                                    
                                 
@@ -157,7 +157,7 @@
                                 <!-- 가게 정보 해시태그 -->
                                 <div id="storedetail-row">
                                     <!-- 클릭 시 상세 검색 페이지로 이동(카테고리 선택됨) -->
-                                    <a href="#" id="toChatting">문의하기</a>
+                                    <a href="/chatting/chat" id="toChatting">문의하기</a>
                                 </div>
 
                                 
@@ -174,8 +174,7 @@
                         </div>
 
 
-                     <!-- 가게 소개 조회
-                        // 이거도 더보기로 할까... 화면 안 이쁜데 뺄 수도-->
+                    
                         <div class="store-detail-content">
 
                             <pre class="store-detail-text" th:text="*{storeInfo}">
@@ -509,7 +508,9 @@
                    
                     <div class="store-menu-list" >
                     <!-- 메뉴 이미지 div 3개 추가 -->
-                    <div class="menu-image-container" th:each="menu:${menuList}" >
+                    <div class="menu-image-container" th:each="menu:${store.menuList}" >
+                        
+            
                         <div >
                             <img 
                             th:if="${menu.menuImgUrl!=null}"
@@ -581,15 +582,15 @@
             </div>
               
         
-        <div class="detail-images">
+        <div class="detail-images" th:if="${#lists.size(imageList)>0}">
 
+            <th:block th:each="i:${#numbers.sequence(0, #lists.size(store.imageList)-1)}">
+           
+             <img class="store-look" th:src="|${imageList[i].imagePath}${imageList[i].imgRename}|">
+
+            </th:block>
          
-            <img class="store-look" src="/images/storeDetail/hotdog.jpg">
-            <img class="store-look" src="/images/storeDetail/cooking.jpg">
-            <img class="store-look" src="/images/storeDetail/counter2.jpg">
-            <img class="store-look" src="/images/storeDetail/counter3.jpg">
-            <img class="store-look" src="/images/storeDetail/counter.jpg">
-            <img class="store-look" src="/images/storeDetail/burger2.jpg" >
+      
            
         </div>
 
@@ -733,8 +734,10 @@
     <script th:inline="javascript">
         const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원";
         const memberCode = /*[[${session.loginMember?.memberCode}]]*/ "회원코드";
-        const storeNo = /*[[${storeNo}]]*/ "사업자등록번호"
-        let bookMark =/*[[${booMark}]]*/ "좋아요 여부";
+        const storeNo = /*[[${store.storeNo}]]*/ "사업자등록번호"
+
+        let bookMark =/*[[${store.bookMark}]]*/ "좋아요 여부";
+        
     </script>
 
    <script src="/js/reservation/reservation.js"></script>

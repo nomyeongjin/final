@@ -149,7 +149,7 @@
 
 .reservation-count {
     margin-bottom: 20px;
-    width: 500px;
+    width: 460px;
 }
 
 .checkbox-area{
@@ -159,6 +159,10 @@
 .button-list {
     display: flex;
     flex-wrap: wrap;
+    height: 100px;
+    overflow-x: auto; /* 가로 오버플로우 설정 */
+    white-space: nowrap;
+    margin-bottom: 20px;
 }
 
 .button-item {

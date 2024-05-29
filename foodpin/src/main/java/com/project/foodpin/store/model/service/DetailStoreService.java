@@ -7,6 +7,7 @@ import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
+
 public interface DetailStoreService {
 
 	/** 가게 상세 조회
@@ -15,11 +16,6 @@ public interface DetailStoreService {
 	 */
 	Store storeDetail(String storeNo);
 	
-	/** 가게 메뉴 상세 조회
-	 * @param storeNo
-	 * @return
-	 */
-	List<Menu> menuDetail(String storeNo);
 
 	/** 가게 찜
 	 * @param map
@@ -32,6 +28,7 @@ public interface DetailStoreService {
 	 * @return
 	 */
 	List<Review> reviewDetail(String storeNo);
+
 
 
 

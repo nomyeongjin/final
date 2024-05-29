@@ -18,10 +18,8 @@ function calendar_rendering() {
       body : JSON.stringify(storeNo)
    })
    .then(resp => resp.json())
-   .then(map => {
-
-      const arr = []; // 개별의 일정 map을 배열로 묶은 형태로 추가해야함
-      arr.push(map);
+   .then(listMap => {
+      // console.log(listMap);
 
       // 캘린더 생성
       calendar = new FullCalendar.Calendar(calendarEl, {
@@ -34,7 +32,7 @@ function calendar_rendering() {
          // eventClick : fn_calEventClick, // 이벤트 클릭 시
 
          // 화면 구현용 샘플 데이터
-         events: arr,
+         events: listMap,
          
          // 헤더
          headerToolbar: { left: 'addEventButton', center: 'title' },
@@ -73,7 +71,6 @@ const createLi = (tagName, week) => {
 const StoreOffContainer = document.querySelector(".myPage-content-container"); // 본문 div 영역
 
 const infoBtn = document.querySelector("#infoBtn");
-const menuBtn = document.querySelector("#menuBtn");
 const dayoffBtn = document.querySelector("#dayoffBtn");
 
 
@@ -105,7 +102,7 @@ dayoffBtn.addEventListener("click", () => {
    // selectWeekOff(); // 기존 고정 휴무 정보 조회
 
 
-   // 고정 휴무일
+   // 고정 휴무일 타이틀 생성
    const offWeekSection = document.createElement("section");
    offWeekSection.classList.add("section-title");
    offWeekSection.innerHTML = "고정 휴무일";
@@ -115,20 +112,22 @@ dayoffBtn.addEventListener("click", () => {
 
    const ul = document.createElement("ul"); // ul 생성
    ul.classList.add("week-row");
+   // 
 
-   const weekList = ['일', '월', '화', '수', '목', '금', '토'];
-   const dayWeek = ['sun', 'mon', 'tue ', 'wed ', 'thu ', 'fri ', 'sat'];
 
    // 각 요일 li 생성 
-   for(const week of weekList) {
+   const weekList = ['일', '월', '화', '수', '목', '금', '토'];
+
+   weekList.forEach( (week, index) => {
 
       const li = document.createElement("li");
       li.classList.add("week-li");
       li.innerText = week + "요일";
+      li.setAttribute('value', index);
       ul.append(li);
-   }
+   })
 
-   // 고정 휴무일 DB값 조회된 경우 checked 값 추가 (.fc-day-mon)
+   // 고정 휴무일 DB값 조회 
    fetch("/myPage/store/selectWeekOff", {
       method : "POST",
       headers : {"content-Type" : "application/json"},
@@ -136,22 +135,64 @@ dayoffBtn.addEventListener("click", () => {
    })
    .then(resp => resp.json())
    .then(offList => {
+      console.log(offList);
 
       for(let off of offList){
-
+         
+         // 기존 고정 휴무일 값과 li중 index 값이 일치시 -> 해당하는 li에 'checked' 클래스 추가
          document.querySelectorAll(".week-li").forEach( (item, index) => {
 
-            if(off.offWeek === index) {
+            if(parseInt(off.offWeek) === index) {
                item.classList.add('checked');
-               // (.fc-day-mon)
-               // item.classList.add('checked');
-               
             }
          })
+
+         // 고정 휴무일 값 - 요일과 일치하는 경우 'week-off' 클래스 추가
+         switch(parseInt(off.offWeek)) {
+
+            case 0 : document.querySelectorAll(".fc-day-sun").forEach( (item) => {
+               item.style.backgroundColor = 'lightblue';
+            }); break;
+
+            case 1 : document.querySelectorAll(".fc-day-mon").forEach( (item) => {
+               item.style.backgroundColor = 'lightblue';
+            }); break;
+
+            case 2 : document.querySelectorAll(".fc-day-tue").forEach( (item) => {
+               item.style.backgroundColor = 'lightblue';
+            }); break;
+
+            case 3 : document.querySelectorAll(".fc-day-wed").forEach( (item) => {
+               item.style.backgroundColor = 'lightblue';
+            }); break;
+
+            case 4 : document.querySelectorAll(".fc-day-thu").forEach( (item) => {
+               item.style.backgroundColor = 'lightblue';
+            }); break;
+
+            case 5 : document.querySelectorAll(".fc-day-fri").forEach( (item) => {
+               item.style.backgroundColor = 'lightblue';
+            }); break;
+
+            case 6 : document.querySelectorAll(".fc-day-sat").forEach( (item) => {
+               item.style.backgroundColor = 'lightblue';
+            }); break;
+         }
       }
+      
+      // li 체크시 checked 클래스 toggle
+      const weekList = document.querySelectorAll(".week-li");
+      for(const li of weekList) {
+
+         li.addEventListener("click", () => {
+
+            li.classList.toggle("checked");
+         })
+      }
+
    })
 
-
+   // 버튼 생성
    const weekBtn = document.createElement("button");
    weekBtn.classList.add("update-btn");
    weekBtn.id = "offUpdateBtn";
@@ -181,15 +222,54 @@ dayoffBtn.addEventListener("click", () => {
    // 마이페이지 본문 컨테이너에 각 휴무일 section, form 추가
    StoreOffContainer.append(offWeekSection, weekOffFrm, offDaySection, offDayEditFrm);
    calendar_rendering() // 달력 생성 함수 호출(calendarEl 내부에 생성)
+
+
+
+   
+   /**
+    * (버튼) 고정 휴무일 폼 제출
+    */
+   const offUpdateBtn = document.querySelector("#offUpdateBtn");
+
+   offUpdateBtn.addEventListener("click", () => {
+
+      const weekList = document.querySelectorAll(".checked"); // 선택된 li 요소 얻어오기
+      const dataList = []; // 값 하나로 묶을 배열 생성
+
+      for(const li of weekList) {
+
+         data = {
+            "offWeek" : li.value,
+            "storeNo" : storeNo
+         };
+
+         dataList.push(data);
+      }
+      // console.log(dataList);
+
+      fetch("/myPage/store/insertOffWeek", {
+         method : "POST",
+         headers : {"content-Type" : "application/json"},
+         body : JSON.stringify(dataList)
+      })
+      .then(resp => resp.json())
+      .then(result => {
+         
+         
+
+      })
+      .catch( err => console.log(err));
+   });
+   
 });
 
 
 
 
-// /**
-//  * 고정 휴무일 체크
-//  */
-// const weekList = document.querySelectorAll(".week-li"); // 휴무 요일 각 li 태그
+/**
+ * 고정 휴무일 체크
+ */
+//const weekList = document.querySelectorAll(".week-li"); // 휴무 요일 각 li 태그
 
 // weekList.forEach( (item, index) => {
 
@@ -198,16 +278,34 @@ dayoffBtn.addEventListener("click", () => {
 //    if(index === offList) item.classList.add('checked');
 // })
 
-
 // for(let li of weekList) {
 
 //    li.addEventListener("click", () => {
 
-//       li.classList.toggle('checked');
+//       li.classList.toggle("checked");
+
 //       console.log("checked");
 
 //    })
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * 일정 등록하는 팝업창 생성 

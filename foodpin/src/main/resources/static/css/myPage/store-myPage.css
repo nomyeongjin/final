@@ -140,59 +140,6 @@
    cursor: pointer;
 }
 
-/* -----          ----- */
-/* ----- 메뉴 정보 ----- */
-/* -----          ----- */
-
-/* 영역 */
-.menu-container{
-   width: 80%;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   border-radius: 20px;
-   background: lightgoldenrodyellow;
-   padding: 50px 20px;
-}
-
-/* 메뉴 */
-.menu-row{
-   width: 100%;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-}
-.menu-img{
-   width: 50px;
-   height: 50px;
-   border: 1px solid grey;
-}
-.menu-img, .menu-row > input{
-   margin: 10px;
-}
-.menu-row > input{
-   width: 20%;
-   height: 26px;
-   outline: none;
-   padding: 5px;
-}
-
-/* 버튼 */
-.btn-area{
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-}
-#addMenuRow, #menuUpdateBtn{
-   width: 100px;
-   margin: 10px;
-   height: 26px;
-   background: lightgray;
-   border: 1px solid lightgray;
-   border-radius: 10px;
-   cursor: pointer;
-}
 
 /* -----        ----- */
 /* ----- 휴무일 ----- */
@@ -274,6 +221,11 @@
 .fc .fc-button {
 font-size: 14px;
 }
+/* 휴무일일때 배경색 변경 */
+.week-off{
+   background: lightblue;
+}
+
 
 /* -----           ----- */
 /* ----- 예약 관리 ----- */
@@ -569,3 +521,73 @@ font-size: 14px;
 
 
 
+/* -----          ----- */
+/* ----- 메뉴 정보 ----- */
+/* -----          ----- */
+
+/* 영역 */
+#menuEditFrm{
+   width: 80%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   border-radius: 20px;
+   background: lightgoldenrodyellow;
+   padding: 50px 20px;
+}
+
+/* 메뉴 */
+.menu_row{
+   width: 90%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+}
+.menu-img{
+   width: 80px;
+   height: 80px;
+   border: 1px solid grey;
+   border-radius: 5px;
+}
+.menu-img, .menu-row > input{
+   margin: 10px;
+}
+.menu-input-area {
+   display: flex;
+   width: 80%;
+   justify-content: space-evenly;
+}
+
+/* .menu-row > input{
+   width: 100px;
+   height: 26px;
+   outline: none;
+   padding: 5px;
+} */
+#menuTitle, #menuAmount, #menuContent{
+   width: 20%;
+   height: 26px;
+   outline: none;
+   padding: 5px;
+   background: lightgoldenrodyellow;
+   border: 1px solid lightgoldenrodyellow;
+   border-bottom: 1px solid grey;
+}
+}
+
+/* 버튼 */
+.btn-area{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+#addMenuRow, #menuUpdateBtn{
+   width: 100px;
+   margin: 10px;
+   height: 26px;
+   background: lightgray;
+   border: 1px solid lightgray;
+   border-radius: 10px;
+   cursor: pointer;
+}
