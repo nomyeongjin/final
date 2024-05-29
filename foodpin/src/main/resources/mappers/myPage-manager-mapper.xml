@@ -10,7 +10,7 @@
 		JOIN "STORE" S ON M.MEMBER_NO = S.MEMBER_NO
 		WHERE MEMBER_CODE = #{memberCode}
 		AND MEMBER_STATUS = #{memberStatus}
-		ORDER BY ENROLL_DATE
+		ORDER BY ENROLL_DATE DESC
 	</select>
 	
 	<update id="approveMember">

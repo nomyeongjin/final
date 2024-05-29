@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,8 +47,8 @@ public class MemberMyPageController {
 	// 회원 정보 수정
 	@PostMapping("memberInfo")
 	public String updateInfo(
-		@RequestParam("profileImg") MultipartFile profileImg,
 		Member inputMember,
+		@RequestParam("uploadImg") MultipartFile profileImg,
 		@SessionAttribute("loginMember") Member loginMember,
 		RedirectAttributes ra) throws IllegalStateException, IOException {
 		
@@ -183,7 +184,6 @@ public class MemberMyPageController {
 	}
 	
 	
-	
 	// 북마크 목록 조회
 	@GetMapping("memberLike")
 	public String memberLikeList(
@@ -193,6 +193,7 @@ public class MemberMyPageController {
 		int memberNo = loginMember.getMemberNo();
 		List<Store> store = service.memberLikeList(memberNo);
 		model.addAttribute("store", store);
+
 		
 		return "myPage/member/memberLike";
 	}

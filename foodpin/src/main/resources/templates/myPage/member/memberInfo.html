@@ -39,8 +39,8 @@
                                 <img th:with="user=#{user.default.image}"
                                      th:src="${session.loginMember.profileImg ?: user}" 
                                      id="profileImg">
-                                </label>
-                                <input type="file" id="profileInput" name="profileImg" style="display: none;" accept="image/*">
+                                </label> 
+                                <input type="file" id="profileInput" name="uploadImg" style="display: none;" accept="image/*"> 
                             </div>
                                     
                             <span id="deleteImage">&times;</span>
@@ -74,6 +74,8 @@
                         </form>
                     </section>
 
+
+                    <!-- 비밀번호 변경 -->
                     <section id="changePwContainer">
                         <form action="memberChangePw" method="POST" name="member-myPageFrm" id="memberChangePw">
                             <div class="member-changePw-row">
@@ -105,6 +107,7 @@
 
     <script th:inline="javascript">
         const loginMember = /*[[${session.loginMember}]]*/ "로그인 회원 정보";
+        const loginMemberProfileImg = /*[[${session.loginMember.profileImg}]]*/ "회원 프로필 이미지";
     </script>
 
     <th:block th:replace="~{common/footer}"></th:block> 

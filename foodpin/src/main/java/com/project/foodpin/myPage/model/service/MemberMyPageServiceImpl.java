@@ -23,7 +23,7 @@ import com.project.foodpin.store.model.dto.Store;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 @RequiredArgsConstructor
 @PropertySource("classpath:/config.properties")
 public class MemberMyPageServiceImpl implements MemberMyPageService{
@@ -39,7 +39,8 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 	private String profileFolderPath;
 	
 
-	// 회원 정보 수정
+
+	// 회원 정보 변경
 	@Override
 	public int updateInfo(MultipartFile profileImg, Member inputMember) throws IllegalStateException, IOException {
 		
@@ -70,6 +71,7 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		}
 		return result;
 	}
+
 
 	// 회원 비밀번호 변경
 	@Override
@@ -145,7 +147,6 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		int memberNo = loginMember.getMemberNo();
 		String pw = mapper.selectPw(memberNo);
 		
-		
 		if(!bcrypt.matches(memberPw, pw)) return 0;
 		
 		return mapper.secession(memberNo);
@@ -159,6 +160,10 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		return mapper.secession(memberNo);
 		
 	}
+
+
+
+
 
 	
 	

@@ -26,8 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
 /* 회원정보 수정 */
 const memberInfo = document.querySelector("#updateInfo");
 
-let statusCheck = -1;
-
 let backupInput;
 
 if(memberInfo != null) {
@@ -54,18 +52,15 @@ if(memberInfo != null) {
         if(file.size > maxSize) {
             alert("5MB 이하의 이미지 파일을 선택해 주세요");
 
-            if(statusCheck == -1) {
-                profileInput.value = '';
-            } else {
                 const temp = backupInput.cloneNode(true);
                 profileInput.after(backupInput);
                 profileInput.remove();
                 profileInput = backupInput;
                 profileInput.addEventListener("change", changeImageFn);
                 backupInput = temp;
-            }
-            return;
+                return;
         }
+        
 
         const reader = new FileReader();
 
@@ -73,7 +68,6 @@ if(memberInfo != null) {
         reader.addEventListener("load", e => {
             const url = e.target.result;
             profileImg.setAttribute("src", url);
-            statusCheck = 1;
             backupInput = profileInput.cloneNode(true);
         });
     }
@@ -84,33 +78,38 @@ if(memberInfo != null) {
         profileImg.src = "/images/user.png";
         profileInput.value = '';
         backupInput = undefined;
-        statusCheck = 0;
     });
 
+         
     memberInfo.addEventListener("submit", e => {
-
-        let flag = true; 
-
-        // 기존 프로필 이미지가 없다가 새 이미지가 선택된 경우
-        if(loginMemberProfileImg == null && statusCheck == 1) flag = false;
-
-        // 기존 프로필 이미지가 있다가 삭제한 경우
-        if(loginMemberProfileImg != null && statusCheck == 0) flag = false;
-
-        // 기존 프로필 이미지가 있다가 새 이미지가 선택된 경우
-        if(loginMemberProfileImg != null && statusCheck == 1) flag = false;
-        
-        if(flag) {
-            e.preventDefault();
-            alert("이미지 변경 후 클릭하세요")
-        }
 
         const memberNickname = document.querySelector("#memberNickname");
         const memberEmail = document.querySelector("#memberEmail");
         const memberTel = document.querySelector("#memberTel");
         
+        let regExp = /^[가-힣\w\d]{2,10}$/;
+        if(!regExp.test(memberNickname.value)) {
+            alert("닉네임이 유효하지 않습니다");
+            e.preventDefault();
+            return;
+        }
+
+        regExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if(!regExp.test(memberEmail.value)) {
+            alert("이메일이 유효하지 않습니다");
+            e.preventDefault();
+            return;
+        }
+
+        regExp = /^01[0-9]{1}[0-9]{3,4}[0-9]{4}$/;
+        if(!regExp.test(memberTel.value)) {
+            alert("전화번호가 유효하지 않습니다");
+            e.preventDefault();
+            return;
+        }
+
         let str;
-        
+
         if(memberNickname.value.trim().length == 0) str = "닉네임을 입력해 주세요";
         else if(memberEmail.value.trim().length == 0) str = "이메일을 입력해 주세요";
         else if(memberTel.value.trim().length == 0) str = "전화번호를 입력해 주세요";
@@ -120,11 +119,7 @@ if(memberInfo != null) {
             e.preventDefault();
             return;
         }
-        
-        // 닉네임, 이멜, 전번 유효성 추가하세요
-        
-        
-    })
+    });
 }
 
 /* 회원 비밀번호 변경 */
