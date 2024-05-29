@@ -1,5 +1,6 @@
 package com.project.foodpin.reservation.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,23 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	// 이용시간 조회
 	@Override
-	public Map<String, Object> selectUseTime(Store storeNo) {
-		return mapper.selectUseTime(storeNo);
+	public Map<String, Object> selectUseTime(Reservation reservation) {
+		
+		// 오픈, 마감, 브레이크 시간 조회
+		Store reservTimes = mapper.selectUseTime(reservation);
+		
+		// 예약한 날짜의 예약 건수 조회 
+
+		List<Reservation> confirmReservDate = mapper.confirmReservDate(reservation);
+		
+		
+		// mapper 두개 호출한 걸 map에 담아서 전달
+		Map<String, Object> selectDateMap = new HashMap<>();
+		
+		selectDateMap.put("reservTimes", reservTimes);
+		selectDateMap.put("confirmReservDate", confirmReservDate);
+		
+		return selectDateMap;
 	}
 	
 	

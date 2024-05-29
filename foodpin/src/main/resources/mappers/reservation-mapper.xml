@@ -40,4 +40,22 @@
 	)
 	</insert>
 	
+	
+	<!-- 예약하려는 날짜의 예약 건수 조회 -->
+	<select id="confirmReservDate">
+		SELECT RESERV_TIME , COUNT(*) "COUNTS"
+		FROM "RESERVATION"
+		JOIN "STORE" USING (STORE_NO)
+		WHERE TO_CHAR(RESERV_DATE, 'MM.DD') IN (
+		    SELECT TO_CHAR(TO_DATE(RESERV_DATE, 'YYYY-MM-DD'), 'MM.DD') "RESERV_DATE"
+		    FROM "RESERVATION"
+		    WHERE TO_CHAR(RESERV_DATE, 'YYYY-MM-DD') = #{reservDate}
+		)
+		AND STORE_NO = #{storeNo}
+		AND STORE_CLOSED = 'N'
+		AND RESERV_STATUS_FL IN ('Y', 'N')
+		GROUP BY RESERV_DATE, RESERV_TIME
+
+	</select>
+	
 </mapper>

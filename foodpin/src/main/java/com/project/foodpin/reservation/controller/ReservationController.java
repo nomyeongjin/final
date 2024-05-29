@@ -50,9 +50,9 @@ public class ReservationController {
 	@ResponseBody
 	@PostMapping("useTime")
 	public Map<String, Object> useTime(
-			@RequestBody Store storeNo) {
+			@RequestBody Reservation reservation) {
 		
-		return service.selectUseTime(storeNo);
+		return service.selectUseTime(reservation);
 	}
 	
 	// 예약 확정 하기 전 동의 페이지

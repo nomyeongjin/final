@@ -106,6 +106,8 @@ if(buttonItem != null && buttonItem.length > 0) {
     };
 }
 
+
+
 // ----------------------------------------------------------------------------------------
 
 // 처음 예약 페이지에서 '다음' 버튼 클릭 시 로그인 여부 확인 
@@ -235,7 +237,6 @@ const getTimeSplit = (startTime, endTime, interval) => {
 }
 getTimeSplit(startTime, endTime, interval);
 
-
 /*  ************  reservationCheck ************ */
 
 /* 예약자 정보와 실제 방문자 정보가 다를 경우 폼 */
@@ -299,7 +300,7 @@ if(confirmBtn != null) {
         console.log(datePart);
         const [month, day] = datePart.split(".").map(Number); // .을 기준으로 month와 day 분리
         const year = new Date().getFullYear(); // 현재 년도를 가져옴
-        const dateObj = new Date(year, month-1, day);
+        const dateObj = new Date(year, month-1, day+1);
         const dateString = dateObj.toISOString().split("T")[0];   // ex) 2024-05-23T14:48:00.000Z을
                                                                 //"YYYY-MM-DD" 형식으로 저장
 
