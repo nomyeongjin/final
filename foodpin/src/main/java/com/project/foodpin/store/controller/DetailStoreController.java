@@ -43,7 +43,7 @@ public class DetailStoreController {
 			) {
 		
 		Store store = service.storeDetail(storeNo);
-		List<Menu> menuList = service.menuDetail(storeNo);
+
 		
 		/* Store offday = service.storeOff(storeNo); */
 		
@@ -52,7 +52,8 @@ public class DetailStoreController {
 		String[] arr = storeLocation.split("\\^\\^\\^");
 		
 		model.addAttribute("store", store);
-		model.addAttribute("menuList", menuList);
+	
+		
 		
 		model.addAttribute("postcode", arr[0]);
 		model.addAttribute("address", arr[1]);
@@ -62,13 +63,18 @@ public class DetailStoreController {
 		
 
 		if(store !=null) { 
-			path ="store/storeDetail"; 
 			
+
 			// request scope 값 세팅
 			model.addAttribute("store", store);
+
+           model.addAttribute("menuList",store.getMenuList());
+	
+			model.addAttribute("imageList",store.getImageList());
+		      
+			path="/store/storeDetail";
 			
-		}
-		
+		}		
 		return path;
 	}
 	
@@ -81,6 +87,8 @@ public class DetailStoreController {
 	public int storeLike(
 		@RequestBody Map<String, Integer> map
 			) {
+		
+		
 		
 		
 		return service.storeLike(map);

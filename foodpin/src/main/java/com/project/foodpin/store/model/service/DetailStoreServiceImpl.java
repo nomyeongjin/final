@@ -28,14 +28,7 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 	}
 	
 	
-	// 가게 메뉴 상세 조회
-	@Override
-	public List<Menu> menuDetail(String storeNo) {
-		
-	  List<Menu> menuList = mapper.menuDetail(storeNo);
-	
-		return menuList;
-	}
+
 
 	// 가게 찜 
 	@Override
@@ -45,7 +38,7 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 		
 		//1. 좋아요가 체크된 상태인 경우 (bookmark ==1)
 		// -> Bookmark 테이블에 DELETE
-		if(map.get("bookmark") == 1) {
+		if(map.get("bookMark") == 1) {
 			
 			result = mapper.deleteStoreLike(map);
 			
