@@ -173,18 +173,16 @@ aside>a:hover{
     color: rgb(43, 38, 38);
 }
 
-/* 북마크바 check시 색 변환 */
-/* #bookmarkCheck{
-    cursor: pointer;
-        font-size: 20px;
-    background-color: white;
-    color: rgb(252, 57, 57);
-} */
 
 .fa-heart{
     font-size: 20px;
     background-color: white;
     color: rgb(252, 57, 57); 
+}
+
+#storeLikeCount{
+  font-size: 14px;
+  color: #6e6e6e;
 }
   
 /* 평균 별점 */
