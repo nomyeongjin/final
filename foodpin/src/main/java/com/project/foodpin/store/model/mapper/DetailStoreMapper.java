@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
@@ -45,6 +46,13 @@ public interface DetailStoreMapper {
 	 * @return
 	 */
 	int selectLikeCount(Integer integer);
+
+
+	/** 가게 리뷰 상세 조회
+	 * @param storeNo
+	 * @return
+	 */
+	List<Review> reviewDetail(String storeNo);
 
 
 }

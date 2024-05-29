@@ -52,7 +52,7 @@
                           <p th:text="|${menu.menuAmount} 원|">가격</p>
                         </td>
                         <td>
-                          <input type="checkbox" class="menu-checkbox" th:value="${menu.menuNo}" name="menuNo">
+                          <input type="checkbox" class="menu-checkbox" th:value="${menu.menuNo}" th:attr="data-amount=${menu.menuAmount}" name="menuNo">
                         </td>
                       </tr>
                     </tbody>
@@ -72,7 +72,7 @@
             
             <div class="review-pay">
               <span>총 금액</span>
-              <span id="totalAmount" th:each=" menu : ${menuList}" th:text="${menu.menuAmount}">0</span>
+              <span id="totalAmount">0</span>
               <span>원</span>
             </div>
 
@@ -224,6 +224,7 @@
   <script th:inline="javascript">
     const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원";
     const storeNo = /*[[${store.storeNo}]]*/ '가게 번호';
+    const menuList= /*[[${menuList}]]*/ "메뉴 리스트";
   </script>
 
 

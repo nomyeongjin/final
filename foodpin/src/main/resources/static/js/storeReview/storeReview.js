@@ -191,6 +191,29 @@ reviewForm.addEventListener("submit", e => {
 
 });
 
+/****************  메뉴 가격 합계  ****************/
+
+document.addEventListener('DOMContentLoaded', function() {
+  const checkboxes = document.querySelectorAll('.menu-checkbox');
+  const totalAmount = document.getElementById('totalAmount');
+
+  function updateTotalAmount() {
+    let total = 0;
+    checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        const menuAmount = parseInt(checkbox.dataset.amount);
+        total += menuAmount;
+      }
+    });
+    totalAmount.textContent = total;
+  }
+
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', updateTotalAmount);
+  });
+
+  document.getElementById('selectMenuButton').addEventListener('click', updateTotalAmount);
+});
 
 
 

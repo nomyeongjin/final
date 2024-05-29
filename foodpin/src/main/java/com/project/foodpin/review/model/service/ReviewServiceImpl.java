@@ -31,10 +31,10 @@ public class ReviewServiceImpl implements ReviewService {
 
 	private final ReviewMapper mapper;
 
-	@Value("${my.board.web-path}")
+	@Value("${my.review.web-path}")
 	private String webPath; 
 	
-	@Value("${my.board.folder-path}")
+	@Value("${my.review.folder-path}")
 	private String folderPath; 
 	
 	
@@ -52,15 +52,14 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	// 리뷰 작성
 	@Override
-	public int insertReview(Review inputReview, List<Integer> hashNo, List<Integer> menuNo, List<MultipartFile> images) throws IllegalStateException, IOException {
+	public int insertReview(Review inputReview,  List<Integer> menuNo, List<Integer> hashNo, List<MultipartFile> images) throws IllegalStateException, IOException {
 		
 		int result = mapper.reviewInsert(inputReview);
 		
-		
 		if(result == 0) return 0;
 		
-		int reviewNo = inputReview.getReviewNo();
 		
+		int reviewNo = inputReview.getReviewNo();
 		
 		List<ReviewMenu> menuList = new ArrayList<>();
 		for(int i = 0 ; i < menuNo.size(); i++) {

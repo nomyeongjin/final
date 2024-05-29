@@ -66,8 +66,10 @@
     
     <!-- 리뷰 개수 조회 -->
 	<select id="reviewCount">
-		SELECT COUNT(*) FROM "REVIEW"
+		SELECT COUNT(*)
+		FROM REVIEW 
 		WHERE MEMBER_NO = #{memberNo}
+		AND REVIEW_DEL_FL = 'N'
 	</select>
 	
 	
