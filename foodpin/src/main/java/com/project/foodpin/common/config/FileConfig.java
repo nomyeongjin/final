@@ -35,11 +35,11 @@ public class FileConfig implements WebMvcConfigurer {
 	//---------
 	// 프로필 이미지
 	
-//	@Value("${my.profile.resource-handler}")
-//	private String profileResourceHandler; // 프로필 이미지 요청 주소 
-//	
-//	@Value("${my.profile.resource-location}")
-//	private String profileResourceLocation; // 프로필 이미지 요청 시 연결할 서버 폴더 경로
+	@Value("${my.profile.resource-handler}")
+	private String profileResourceHandler; // 프로필 이미지 요청 주소 
+	
+	@Value("${my.profile.resource-location}")
+	private String profileResourceLocation; // 프로필 이미지 요청 시 연결할 서버 폴더 경로
 	
 	//---------
 	// 리뷰
@@ -71,8 +71,9 @@ public class FileConfig implements WebMvcConfigurer {
 		.addResourceLocations("file:///C:\\uploadFiles\\test\\"); // 아래 주로로 다운로드 (자원 요청 지정)
 		
 		// 프로필 이미지 요청 - 서버 폴더 연결 추가
-//		registry
-//		.addResourceHandler(profileResourceHandler).addResourceLocations(profileResourceLocation);
+		registry
+		.addResourceHandler(profileResourceHandler)
+		.addResourceLocations(profileResourceLocation);
 		
 		// -----
 		// 리뷰 이미지 요청 - 서버 폴더 연결 추가

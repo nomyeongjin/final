@@ -87,10 +87,11 @@ header {
    align-content: center;
    justify-content: flex-end;
 }
-#memberProfile{
 
-width: 25px;
-height: 25px;
+#memberProfile{
+   width: 25px;
+   height: 25px;
+   object-fit: cover;
 }
 
 #nickname{
