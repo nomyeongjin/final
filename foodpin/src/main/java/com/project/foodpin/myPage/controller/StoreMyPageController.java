@@ -1,5 +1,6 @@
 package com.project.foodpin.myPage.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,7 +88,19 @@ public class StoreMyPageController {
 	}
 	
 	
-	/** 고정 휴무일 조회 (비동기)
+	/** 고정 휴무일 등록 / 수정 (비동기)
+	 * @param off
+	 * @return result
+	 */
+	@PostMapping("insertOffWeek")
+	@ResponseBody
+	public int insertOffWeek(@RequestBody List<Off> offList) {
+
+		return service.updateOffWeek(offList);
+	}
+	
+	
+	/** 고정 휴무일 조회 (비동기, li로 불러오기)
 	 * @param storeNo
 	 * @return offList
 	 */
@@ -101,33 +114,32 @@ public class StoreMyPageController {
 	}
 	
 	
-	
-	/** 지정 휴무일 조회 (비동기)
+	/** 지정 휴무일 조회 (비동기, 캘린더로 불러오기)
 	 * @param storeNo
 	 * @return map
 	 */
 	@PostMapping("calendarOffSelect")
 	@ResponseBody
-	public Map<String, String> calendarOffSelect(@RequestBody int storeNo) {
+	public List<Map<String, String>> calendarOffSelect(@RequestBody int storeNo) {
 		
 		
 		List<Off> offList = service.calendarOffSelect(storeNo);
 		
+		if(offList.isEmpty()) return null; // 지정 휴무일 조회 결과 없는 경우
+			
+		List<Map<String, String>> mapList = new ArrayList<>();
 		
-		if(!offList.isEmpty()) { // 조회된 일정이 존재하는 경우
+		for (Off off : offList) {
 			
 			Map<String, String> map = new HashMap<>();
+			map.put("title", off.getOffDayTitle());
+			map.put("start", off.getOffDayStart());
+			map.put("end", off.getOffDayEnd());
 			
-			for (Off off : offList) {
-				
-				map.put("title", off.getOffDayTitle());
-				map.put("start", off.getOffWeekStart());
-				map.put("end", off.getOffWeekEnd());
-			}
-			return map;
+			mapList.add(map);
 		}
 		
-		return null;
+		return mapList;
 	}
 	
 	
@@ -142,9 +154,6 @@ public class StoreMyPageController {
 		return service.calendarOffInsert(inputOff);
 	}
 
-	
-	
-	
 	
 	/** 예약 관리 화면 이동 (+예약 전체 조회)
 	 * @param loginMember

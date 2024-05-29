@@ -274,6 +274,11 @@
 .fc .fc-button {
 font-size: 14px;
 }
+/* 휴무일일때 배경색 변경 */
+.week-off{
+   background: lightblue;
+}
+
 
 /* -----           ----- */
 /* ----- 예약 관리 ----- */
