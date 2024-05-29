@@ -71,7 +71,6 @@ const createLi = (tagName, week) => {
 const StoreOffContainer = document.querySelector(".myPage-content-container"); // 본문 div 영역
 
 const infoBtn = document.querySelector("#infoBtn");
-const menuBtn = document.querySelector("#menuBtn");
 const dayoffBtn = document.querySelector("#dayoffBtn");
 
 
