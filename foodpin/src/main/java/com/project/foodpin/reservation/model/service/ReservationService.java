@@ -11,7 +11,7 @@ public interface ReservationService {
 	Store storeDetail(String storeNo);
 
 	// 이용시간 조회
-	Map<String, Object> selectUseTime(Store storeNo);
+	Map<String, Object> selectUseTime(Reservation reservation);
 
 	// 예약 저장
 	int insertReservation(Map<String, Object> map);

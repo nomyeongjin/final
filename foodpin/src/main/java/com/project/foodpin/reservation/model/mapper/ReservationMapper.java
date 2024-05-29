@@ -15,9 +15,13 @@ public interface ReservationMapper {
 
 	
 	// 이용시간 조회
-	Map<String, Object> selectUseTime(Store storeNo);
+	Store selectUseTime(Reservation reservation);
 
 	// 예약 저장
 	int insertReservation(Map<String, Object> map);
+
+	// 예약하려는 날짜의 예약 건수 조회
+	List<Reservation> confirmReservDate(Reservation reservation);
+
 
 }
