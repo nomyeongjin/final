@@ -31,25 +31,45 @@
 		)
 	</update>
 	
+	<!-- *** 메뉴 정보 *** -->
 	
+	
+	
+	
+	<!-- *** 휴무일 정보 *** -->
+	
+	<!-- 고정 휴무일 개수 조회 -->
+	<select id="countOffWeek">
+		SELECT COUNT(*) FROM "OFF_WEEK" WHERE STORE_NO = #{storeNo}
+	</select>
+	
+	<!-- 기존 고정 휴무일 삭제 -->
+	<delete id="deleteOffWeek">
+		DELETE FROM "OFF_WEEK" WHERE STORE_NO = #{storeNo}
+	</delete>
+	
+	<!-- 해당하는 결과가 없을 경우 등록 -->
+	<insert id="insertOffWeek">
+		INSERT INTO "OFF_WEEK" VALUES(SEQ_WEEK_OFF_NO.NEXTVAL, #{storeNo}, #{offWeek})
+	</insert>
 	
 	<!-- 고정 휴무일 조회 -->
 	<select id="selectWeekOff">
-		SELECT OFF_WEEK FROM "WEEK_OFF" WHERE STORE_NO = #{storeNo}
+		SELECT OFF_WEEK FROM "OFF_WEEK" WHERE STORE_NO = #{storeNo}
 	</select>
 	
 	<!-- 지정 휴무일 조회 -->
 	<select id="calendarOffSelect">
-		SELECT OFF_DAY_TITLE , TO_CHAR(OFF_WEEK_START, 'YYYY-MM-DD') OFF_WEEK_START, TO_CHAR(OFF_WEEK_END, 'YYYY-MM-DD') OFF_WEEK_END
-		FROM "DAY_OFF"
+		SELECT OFF_DAY_TITLE , TO_CHAR(OFF_DAY_START, 'YYYY-MM-DD') OFF_DAY_START, TO_CHAR(OFF_DAY_END, 'YYYY-MM-DD') OFF_DAY_END
+		FROM "OFF_DAY"
 		WHERE STORE_NO = #{storeNo}
 	</select>
 	
 	
 	<!-- 지정 휴무일 등록 -->
 	<insert id="calendarOffInsert">
-		INSERT INTO "DAY_OFF" VALUES(SEQ_DAY_OFF_NO.NEXTVAL, #{offDayTitle}, 
-		#{offWeekStart}, #{offWeekEnd}, #{storeNo})
+		INSERT INTO "OFF_DAY" VALUES(SEQ_DAY_OFF_NO.NEXTVAL, #{offDayTitle}, 
+		#{offDayStart}, #{offDayEnd}, #{storeNo})
 	</insert>
 	
 	

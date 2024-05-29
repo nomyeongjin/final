@@ -116,14 +116,37 @@ function displayMarker(locPosition, message) {
 
 }
 
+
+
 /* 화면 생성 시 자동 실행 */
 window.onload = function() {
   // currentlocation 함수 실행
   currentlocation();
+ 
 };
+
+
 /* ****************지도******************* */
 
 
+/* 별점  */
+
+
+
+
+
+/* 전화번호 - 넣기 */
+
+/* 
+function phoneFomatter(storeTel,type){
+
+  var formatNum = '';
+  formatNum = storeTel.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+  
+  return formatNum;
+ }
+  
+ */
 
 /* 폐점/ 정보 정정 신고 팝업 */
 
@@ -314,3 +337,4 @@ bookmarkCheck.addEventListener("click", e=>{
     });
 
 });
+
