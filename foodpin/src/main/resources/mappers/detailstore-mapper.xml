@@ -3,6 +3,7 @@
 <mapper namespace="com.project.foodpin.store.model.mapper.DetailStoreMapper">
 
 
+
 	
 	<resultMap type="Review" id="review_rm">
 	
@@ -24,6 +25,7 @@
 			ofType = "ReviewHash"
 		/>
 	</resultMap>
+
 
 
 
@@ -92,6 +94,7 @@
    </select>
    
    
+
    <!-- 가게 리뷰 상세 조회 -->
    <select id="reviewDetail" resultMap="review_rm">
    		SELECT DISTINCT MEMBER_NAME, PROFILE_IMG, REVIEW_NO, REVIEW_RATING, REVIEW_CONTENT,
@@ -125,6 +128,7 @@
    
    
    
+
    
    
    <!-- 가게 찜 해제 -->
