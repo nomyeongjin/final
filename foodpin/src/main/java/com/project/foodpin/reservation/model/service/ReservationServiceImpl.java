@@ -52,7 +52,13 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public int insertReservation(Map<String, Object> map){
 		return mapper.insertReservation(map);
-		
+	}
+	
+	
+	// 예약 가능 상태 변경
+	@Override
+	public int updateStoreStatus(Store store) {
+		return mapper.updateStoreStatus(store);
 	}
 }
 

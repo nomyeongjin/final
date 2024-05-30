@@ -181,7 +181,7 @@ if(nextBtn != null){
 
         // 시간 선택
         const input3 = document.createElement("input");
-        const time = document.querySelector(".time-item.select").innerText
+        const time = document.querySelector(".time-item.select").innerText;
         
         input3.type="hidden";
         input3.name="reservTime";
@@ -189,7 +189,6 @@ if(nextBtn != null){
         // form 태그에 input 태그 추가
         
         form.append(input1, input2, input3);
-        
 
         // body에 form 태그
         document.body.append(form);

@@ -124,4 +124,13 @@ public class ReservationController {
 		
 	}
 	
+	
+	// 예약 가능 상태 변경
+	@ResponseBody
+	@PostMapping("updateStoreStatus")
+	public int updateStoreStatus(
+			@RequestBody Store store) {
+		return service.updateStoreStatus(store);
+	}
+	
 }
