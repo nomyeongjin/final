@@ -131,22 +131,41 @@ window.onload = function() {
 
 /* 별점  */
 
+document.addEventListener('DOMContentLoaded', function () {
+  
+  
+  function averageStar(totalRating){
+    
+    const AvgStar = document.getElementById('.realAvg-star');
+    
+ 
+   
+    AvgStar.style.width = 'totalRating/5*100' + '%'; 
+   
+  }
 
+});
 
 
 
 /* 전화번호 - 넣기 */
 
-/* 
-function phoneFomatter(storeTel,type){
+document.addEventListener('DOMContentLoaded', function () {
+  // phoneFormatter 함수 정의
+  function phoneFormatter(storeTel) {
+      var formatNum = '';
+      formatNum = storeTel.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, '$1-$2-$3');
+      return formatNum;
+  }
 
-  var formatNum = '';
-  formatNum = storeTel.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
-  
-  return formatNum;
- }
-  
- */
+  // storeTel 값을 가져옴
+  var storeTelElement = document.getElementById('memberTel');
+  var storeTel = storeTelElement.textContent.trim();
+
+  // 포맷팅된 전화번호로 업데이트
+  var formattedTel = phoneFormatter(storeTel);
+  storeTelElement.textContent = formattedTel;
+});
 
 /* 폐점/ 정보 정정 신고 팝업 */
 
