@@ -28,6 +28,7 @@ public class Review {
 	private String storeImg;
 	
 	private String memberName;
+	private String memberNickname;
 	private String profileImg;
 	
 	private List<UploadImage> uploadList;

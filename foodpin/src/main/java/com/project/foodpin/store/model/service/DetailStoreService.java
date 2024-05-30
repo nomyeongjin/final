@@ -30,6 +30,15 @@ public interface DetailStoreService {
 	List<Review> reviewDetail(String storeNo);
 
 
+	/** 리뷰 신고
+	 * @param map
+	 * @return
+	 */
+	int reviewReport(Map<String, String> map);
+
+
+
+
 
 
 
