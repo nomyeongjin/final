@@ -86,5 +86,23 @@ public class DetailStoreController {
 		return service.storeLike(map);
 
 	}
+	
+	
+	/** 리뷰 신고
+	 * @param map
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("reviewReport")
+	public int reviewReport(@RequestBody Map<String, String> map) {
+		
+		return service.reviewReport(map);
+	}
+	
+	
+	
+	
+	
+	
 
 }

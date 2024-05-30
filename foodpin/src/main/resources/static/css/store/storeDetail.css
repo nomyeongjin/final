@@ -845,6 +845,7 @@ hr{
 
 .storereview-top{
     padding: 20px 0;
+    padding-top: 10px;
     border-bottom: 1px solid var(--main-color);
     display: flex;
     justify-content: space-between;
@@ -873,6 +874,7 @@ hr{
     display: flex;
     font-size: 0.8em;
     flex-direction: column;
+    justify-content: inherit;
 }
 
 .storereview-top-right > button {

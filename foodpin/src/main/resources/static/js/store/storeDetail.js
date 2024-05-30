@@ -272,19 +272,69 @@ const shutStoreImageBtn = document.querySelector("#shutStoreImageBtn");
 
 
 
-/* ***************** 팝업 ****************** */
+/* ***************** 리뷰 신고 팝업 ****************** */
 const popupClose = document.querySelector("#popupClose");
 const popupLayer = document.querySelector("#popupLayer");
 const reviewReportForm = document.querySelector("#reviewReportForm");
-const reviewReport = document.querySelector("#reviewReport");
+const reviewReport = document.querySelectorAll("#reviewReport");
+const reivewComplete = document.querySelector("#reviewComplete");
+const reportContent = document.querySelector("#reportContent");
 
 popupClose.addEventListener("click", () => {
   reviewReportForm.classList.add("popup-hidden");
 });
+reviewReport.forEach((report) => {
+  report.addEventListener("click", ()=>{
+    reviewReportForm.classList.remove("popup-hidden");
+    
+    const reviewNo = reviewReport.getAttribute("data-review-no");
+    const memberNo = reviewReport.getAttribute("data-member-no");
 
-reviewReport.addEventListener("click", ()=>{
-  reviewReportForm.classList.remove("popup-hidden");
-});
+    reivewComplete.addEventListener("click" , (e) => {
+    
+      if(reportContent.value.trim().length == 0){
+        alert("신고 내용을 입력해주세요");
+        reportContent.focus();
+        e.preventDefault();
+        return;
+      }
+
+      const obj = {
+        "reviewNo" : reviewNo,
+        "reportContent" : reportContent.value,
+        "memberNo" : memberNo
+      };
+
+      fetch("/store/reviewReport", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(obj)
+      })
+      .then(resp => resp.json())
+      .then(result => {
+
+        if(result > 0){
+          alert("리뷰 신고가 접수 되었습니다.");
+          reportContent.innerText = '';
+          reviewReportForm.classList.add("popup-hidden");
+        }
+        else{
+          alert("신고 내용을 입력해주세요").
+          reportContent.focus();
+          e.preventDefault();
+        }
+
+        
+      })
+      
+    })
+    
+
+
+
+  })
+})
+
 
 /* ******************************************************** */
 
@@ -349,8 +399,6 @@ bookmarkCheck.addEventListener("click", e=>{
 
         // 7. 게시글 좋아요 수 수정
         e.target.nextElementSibling.innerText = count;
-
-
        
 
     });

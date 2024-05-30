@@ -111,7 +111,7 @@
    
       <!-- 가게 리뷰 상세 조회 -->
    <select id="reviewDetail" resultMap="review_rm">
-   		SELECT DISTINCT MEMBER_NAME, PROFILE_IMG, REVIEW_NO, REVIEW_RATING, REVIEW_CONTENT,
+   		SELECT DISTINCT MEMBER_NICKNAME, PROFILE_IMG, REVIEW_NO, REVIEW_RATING, REVIEW_CONTENT,
 			TO_CHAR(REVIEW__REG_DATE, 'YYYY-MM-DD') REVIEW__REG_DATE, REVIEW_DEL_FL,
 			STORE_NO, MEMBER_NO
 		FROM REVIEW
@@ -149,10 +149,6 @@
 	</select>
    
    
-
-   
- 
-   
    
    <!-- 가게 찜 해제 -->
    <delete id="deleteStoreLike">
@@ -173,6 +169,29 @@
     SELECT COUNT(*) FROM "BOOKMARK"
      WHERE STORE_NO = #{storeNo}
    </select>
+   
+   
+   <!-- 리뷰 신고 -->
+	<insert id="reviewReport" useGeneratedKeys="true" parameterType="Report">
+		
+		<selectKey order="BEFORE" resultType="_int" keyProperty="reportNo">
+	      SELECT SEQ_REPORT_NO.NEXTVAL FROM DUAL
+	  	</selectKey>
+		
+		INSERT INTO "REPORT" VALUES(#{reportNo}, #{reportContet}, #{reportNo}, #{memberNo})
+	</insert>   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
    
   
 </mapper>
