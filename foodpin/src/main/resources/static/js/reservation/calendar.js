@@ -21,15 +21,9 @@ const selectTimeFn = (reservDate) => {
         const confirmReservDate = result.confirmReservDate; // 시간병 예약 개수를 List로 조회한 결과
         console.log(confirmReservDate);
         
-        const selectReservTime = confirmReservDate[0].reservTime; // 클릭한 날짜에 예약된 시간 조회
-        
+        const selectReservTime = confirmReservDate.length > 0 ? confirmReservDate[0].reservTime : null;
 
-        if (selectReservTime == undefined || selectReservTime == null) {
-            console.log("RESERV_TIME 객체의 reservTime 속성이 없거나 null입니다.");
-            return;
-        }
-
-        const counts = confirmReservDate[0].counts; // 시간에 예약된 개수
+        // const counts = confirmReservDate[0].counts; // 시간에 예약된 개수
         // console.log(counts);
 
         
@@ -43,20 +37,34 @@ const selectTimeFn = (reservDate) => {
             }
         });
 
-        let openHour = reservTimes.OPEN_HOUR; // 오픈시간
-        let closeHour = reservTimes.CLOSE_HOUR; // 마감시간
+        let openHour = reservTimes.openHour; // 오픈시간
+        let closeHour = reservTimes.closeHour; // 마감시간
         // console.log("opeenHour : ", openHour, "closeHour : ", closeHour);
+
+
+        /* ************************************************************* */
+        // closeHour가 00:00 이라면 22:00까지만 예약 시간 출력
+        // closeHour 보다 1시간 이전까지만 출력해야 함
+        /* ************************************************************* */
+
+        // 만약 closeHour가 00:00이라면 다음 날로 처리
+        if (closeHour == "00:00") {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1); // 다음날로 설정
+            reservTimes.closeHour = tomorrow; // 마감 시간을 00:00으로 설정
+            closeHour = tomorrow;
+        }
 
         
         // 24 시간 운영일 경우 10:00 - 22:00시까지만 예약 시간 표시
-        if(openHour == closeHour){
+        if (openHour == closeHour) {
             let start = "10:00";
             let end = "22:00";
             openHour = start; // 임시 변수에 저장
             closeHour = end; // 임시 변수에 저장
             getTimeSplit(start, end, 60);
-        };
-
+        } 
+        
         const times = getTimeSplit(openHour, closeHour, 60);
         const breakTimes = getTimeSplit(reservTimes.breaktimeStart, reservTimes.breaktimeEnd, 60);
         // console.log(breakTimes);
@@ -73,6 +81,8 @@ const selectTimeFn = (reservDate) => {
 
         console.log("filteredArray", filteredArray);
         console.log("fullTimeList", fullTimeList);
+
+        
         // 브레이크 타임을 뺀 예약 가능 시간
         for (let i of filteredArray) {
 
@@ -82,15 +92,57 @@ const selectTimeFn = (reservDate) => {
             timeItem.innerText = `${i}`;
             // console.log(timeItem);
 
-            if (fullTimeList.includes(i)) {
+
+            const currentTime = new Date();
+            // const currentHours = currentTime.getHours();
+            // const currentMinutes = currentTime.getMinutes();
+        
+            // 선택한 날짜
+            const selectedDate = document.querySelector(".select-date").innerText.split('(')[0];
+            const selectedMonth = selectedDate.split('.')[0];
+            const selectedDay = selectedDate.split('.')[1];
+            const currentYear = currentTime.getFullYear();
+        
+            const selectedDateTime = new Date(`${currentYear}-${selectedMonth}-${selectedDay}T${i}`);
+        
+            // 날짜가 오늘인지 확인
+            const isToday = currentTime.toDateString() === selectedDateTime.toDateString();
+        
+            // 시간 비교
+            const selectedHours = parseInt(i.split(':')[0], 10);
+            const selectedMinutes = parseInt(i.split(':')[1], 10);
+
+
+            // 11:59 까지는 오전, 12:00 - 22:00 까지는 오후
+            // 오전/오후 구분
+            const isAM = selectedHours < 12 || (selectedHours === 12 && selectedMinutes === 0);
+            const selectedTimeIsPast = selectedDateTime <= currentTime; // true = 오전, false = 오후
+
+            console.log(selectedTimeIsPast);
+
+            
+        
+            if (isToday && selectedTimeIsPast || fullTimeList.includes(i)) {
                 timeItem.classList.add("disabled");
                 timeItem.classList.remove("select");
             }
-
+        
             timeList.append(timeItem);
+
+            if(timeItem.innerText === '11:00' || timeItem.innerText === '00:00'){
+                const hr = document.createElement("div");
+                hr.style.width = "100%";
+                hr.style.margin = "10px 10px";
+                timeList.append(hr);
+                
+                // const timeTitle = document.querySelector("time-title");
+                // timeTitle.innerText="";
+                // timeTitle.innerText = "오전"
+            }
         }
 
         const timeItem = document.querySelectorAll(".time-item");
+
         if (timeItem != null) {
             for (let time of timeItem) {
                 time.addEventListener("click", e => {

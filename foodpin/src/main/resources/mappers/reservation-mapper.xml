@@ -65,6 +65,11 @@
 	</update>	 -->
 	
 	
+	<select id="storeName">
+		SELECT STORE_NAME
+		FROM "STORE"
+		WHERE STORE_NO = #{storeNo}
+	</select>
 	
 </mapper>
 

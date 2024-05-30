@@ -51,6 +51,11 @@ public class ReservationServiceImpl implements ReservationService{
 	// 예약 저장
 	@Override
 	public int insertReservation(Map<String, Object> map){
+		
+		Map<String, Object> storeName = mapper.storeName(map);
+		
+		map.put("storeName", storeName);
+		
 		return mapper.insertReservation(map);
 	}
 	
