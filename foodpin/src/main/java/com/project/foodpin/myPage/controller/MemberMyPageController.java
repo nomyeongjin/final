@@ -1,15 +1,14 @@
 package com.project.foodpin.myPage.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -177,7 +176,6 @@ public class MemberMyPageController {
 	        reservations.setStoreLocation(addressWithoutPostcode);
 	        
 	    }	
-
 		return "myPage/member/reservation/last";
 	}
 	
@@ -202,9 +200,7 @@ public class MemberMyPageController {
 	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
 	        
 	        reservations.setStoreLocation(addressWithoutPostcode);
-	        
 	    }	
-
 		return "myPage/member/reservation/cancelNoshow";
 	}
 	
@@ -218,7 +214,6 @@ public class MemberMyPageController {
 		int memberNo = loginMember.getMemberNo();
 		int result = service.cancelReservation(memberNo, reservNo);
 		
-		
 		if(result > 0) {
 			return true;
 		} else {
@@ -228,13 +223,14 @@ public class MemberMyPageController {
 	}
 	
 	
-	// 북마크 목록 조회
+	// 찜 목록 조회
 	@GetMapping("memberLike")
 	public String memberLikeList(
 		Model model,
 		@SessionAttribute("loginMember") Member loginMember) {
 		
 		int memberNo = loginMember.getMemberNo();
+				
 		List<Store> store = service.memberLikeList(memberNo);
 		model.addAttribute("store", store);
 		
@@ -251,6 +247,23 @@ public class MemberMyPageController {
 		return "myPage/member/memberLike";
 	}
 	
+	// 찜 취소
+	@DeleteMapping("cancelLike")
+	public boolean cancelLike(
+		@RequestBody int storeNo,
+		@SessionAttribute("loginMember") Member loginMember) {
+		
+		int memberNo = loginMember.getMemberNo();
+		int result = service.cancelLike(memberNo, storeNo);
+		
+		if (result > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
+		
 	// 리뷰 목록 조회
 	@GetMapping("memberReview")
 	public String memberReview(

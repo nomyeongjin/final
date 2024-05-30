@@ -46,7 +46,7 @@ public class Store {
 	// 찜
 	private int likeCount;
 	private int bookMark;
-
+	
 	
 	// 메뉴
 	private int menuNo;

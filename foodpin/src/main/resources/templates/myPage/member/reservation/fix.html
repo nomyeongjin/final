@@ -61,7 +61,7 @@
                                     <li class="reservationList" th:each="reservation : ${reservation}">
                                         <div class="reservationStore" th:object="${reservation}">
                                             <div class="reservationDate" th:text="*{reservDate}"></div>
-                                            <span class="storeName" th:text="*{storeName}"></span>
+                                            <a class="storeName" th:text="|*{storeName}  >|" th:href="'/store/storeDetail/' + *{storeNo}"></a>
                                             <span class="reservationPeople" th:text="|*{reservCount}명|"></span> <br>
                                             <i class="fa-solid fa-clock"><span class="reservationTime" th:text="| *{reservTime}|"></span></i>
                                             <div class="storeAddress" th:text="*{storeLocation}"></div>
