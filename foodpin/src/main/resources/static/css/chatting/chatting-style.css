@@ -6,25 +6,81 @@
 
 .chatting-container{
     width: 80%;
-    height: 100%;
+    height: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    margin: auto;
-
-    min-width: 500px;
+    margin: 50px auto;
+    min-width: 900px;
     border: 1px solid #cecece;
 }
 
-.chatting-list{
-    width: 200px;
+.room-list-container{
+    width: 300px;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.room-list{
+    width: 300px;
+    height: 95%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
     list-style: none;
+    overflow: auto;
+    margin-top: 10px;
+}
+
+.chatting-item{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px;
+}
+
+.target-name{
+    font-weight: bold;
+}
+
+.recent-message{
+    font-size: 0.95em;
+    margin-top: 5px;
+}
+
+.item-body{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-body>p{
+    display: flex;
+    justify-content: space-between;
+}
+
+.recent-send-time{
+    color: #8f8f8f;
+    font-size: 0.9em;
+
+    /* 여러 줄 말줄임 처리 */
+	white-space: normal;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+	/*  줄바꿈 처리 */
+	word-break: break-all;
+}
+
+.target-chat{
+    display: flex;
 }
 
 .chatting-area{
@@ -35,31 +91,50 @@
     align-items: center;
     flex-direction: column;
     border-left: 1px solid #cecece;
+    min-width: 500px;
 }
 
 .display-chatting{
     width: 100%;
-    height: 100%;
+    height: 90%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow: auto;
+
     flex-direction: column;
     list-style: none;
+    min-width: 500px;
+    padding: 0 10px;
+}
+
+.display-chatting>li{
+    margin-bottom: 10px;
 }
 
 .chatDate{
     color: #8f8f8f;
-    font-size: 0.9em;
+    font-size: 0.8em;
 }
     
 li>img{
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    margin-right: 10px; 
+    margin-right: 5px; 
+}
+.my-chat {
+	text-align: right;
+}
+
+.my-chat>.chat{
+    background-color: #dee6ff;
 }
 
 .chat{
+    display: inline-block;
+	text-align: left;
+	max-width: 500px;
+	word-break: break-all;
+	white-space: pre-wrap;
     background-color: #ffdede;   
     padding: 10px;
     border-radius: 15px;
@@ -67,24 +142,62 @@ li>img{
 }
 
 .list-profile{
-    width: 25px;
-    height: 25px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     margin-right: 10px;
 }
 
 #inputChatting{
-    width: 100%;
-    height: 50px;
-    border: 1px solid #cecece;
+    width: 90%;
+    height: 45px;
+    border: none;
     padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
     resize: none;
+    outline: none;
+}
+
+.chatting-item * {
+	pointer-events: none;
+}
+
+#send{
+    width: 10%;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    border-left: 1px solid #cecece;
 }
 
 .search-chat-container{
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    height: 5%;
+    border-bottom: 1px solid #cecece;
+    
+}
 
+#inputSearch{
+    width: 80%;
+    height: 100%;
+    border: none;
+    padding: 10px;
+    outline: none;
+
+}
+
+#searchBtn{
+    width: 20%;
+    height: 100%;
+    border: none;
+    border-left: 1px solid #cecece;
+}
+.input-area{
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    border-top: 1px solid #cecece;
 }
