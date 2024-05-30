@@ -30,15 +30,7 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 	
 	
 
-	// 가게 메뉴 상세 조회
-	@Override
-	public List<Menu> menuDetail(String storeNo) {
-		
-	  List<Menu> menuList = mapper.menuDetail(storeNo);
-	
-		return menuList;
-	}
-	
+
 	
 	// 가게 리뷰 상세 조회
 	@Override

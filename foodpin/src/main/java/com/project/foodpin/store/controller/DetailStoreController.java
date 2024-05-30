@@ -28,86 +28,63 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("store")
 public class DetailStoreController {
-	
+
 	private final DetailStoreService service;
 
-	
-	
-	
-	
-	
-	
 	@GetMapping("storeDetail/{storeNo}")
-	public String storeDetail(
-			@PathVariable("storeNo") String storeNo,
-			Model model,
-			RedirectAttributes ra
-			) {
-		
+	public String storeDetail(@PathVariable("storeNo") String storeNo, Model model, RedirectAttributes ra) {
+
 		Store store = service.storeDetail(storeNo);
 
-		/* List<Menu> menuList = service.menuDetail(storeNo); */
-		/*
-		 * List<Review> reviewList = service.reviewDetail(storeNo);
-		 * 
-		 */
-		
+		List<Review> reviewList = service.reviewDetail(storeNo);
+
 		/* Store offday = service.storeOff(storeNo); */
-		
+
 		// 불러온 store 정보에서 주소 쪼개기
 		String storeLocation = store.getStoreLocation();
 		String[] arr = storeLocation.split("\\^\\^\\^");
-		
+
 		model.addAttribute("store", store);
 
-		/*
-		 * model.addAttribute("menuList", menuList); model.addAttribute("reviewList",
-		 * reviewList); model.addAttribute("start" , 0);
-		 * 
-		 * 
-		 * 
-		 */
-		
+
+		   model.addAttribute("reviewList",
+ reviewList); model.addAttribute("start" , 0);
+
+
 		model.addAttribute("postcode", arr[0]);
 		model.addAttribute("address", arr[1]);
 		model.addAttribute("detailAddress", arr[2]);
-		
-		String path = null;
-		
 
-		if(store !=null) { 
-			
+		String path = null;
+
+		if (store != null) {
 
 			// request scope 값 세팅
 			model.addAttribute("store", store);
 
-           model.addAttribute("menuList",store.getMenuList());
 	
-			model.addAttribute("imageList",store.getImageList());
-		      
-			path="/store/storeDetail";
-			
-		}		
+           
+			model.addAttribute("menuList", store.getMenuList());
+			model.addAttribute("imageList", store.getImageList());
+
+			path = "/store/storeDetail";
+
+		}
 		return path;
 	}
-	
-	/** 가게 찜
+
+	/**
+	 * 가게 찜
+	 * 
 	 * @param map
 	 * @return count
 	 */
 	@ResponseBody
 	@PostMapping("like")
-	public int storeLike(
-		@RequestBody Map<String, Integer> map
-			) {
-		
-		
-		
-		
+	public int storeLike(@RequestBody Map<String, Integer> map) {
+
 		return service.storeLike(map);
-		
+
 	}
 
-	
-	
 }
