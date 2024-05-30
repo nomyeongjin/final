@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -97,6 +96,11 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		return mapper.noshowCount(memberNo);
 	}
 	
+	@Override
+	public Store getStoreLocation(String storeNo) {
+		return mapper.getStoreLocation(storeNo);
+	}
+
 	// 예약 확정 조회
 	@Override
 	public List<Reservation> reservationFix(int memberNo) {

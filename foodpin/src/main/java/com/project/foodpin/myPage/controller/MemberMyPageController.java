@@ -109,11 +109,23 @@ public class MemberMyPageController {
 		Model model) {
 		
 		int memberNo = loginMember.getMemberNo();
+		
 		List<Reservation> reservation = service.reservationFix(memberNo);
+		
 		int noshowCount = service.noshowCount(memberNo);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("noshowCount", noshowCount);
-		
+
+	    for (Reservation reservations : reservation) {
+	        String storeLocation = reservations.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        
+	        reservations.setStoreLocation(addressWithoutPostcode);
+	    }	
+
 		return "myPage/member/reservation/fix";
 	}
 	
@@ -128,6 +140,16 @@ public class MemberMyPageController {
 		int noshowCount = service.noshowCount(memberNo);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("noshowCount", noshowCount);
+		
+	    for (Reservation reservations : reservation) {
+	        String storeLocation = reservations.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        
+	        reservations.setStoreLocation(addressWithoutPostcode);
+	    }	
 		
 		return "myPage/member/reservation/wait";
 	}
@@ -144,6 +166,17 @@ public class MemberMyPageController {
 
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("noshowCount", noshowCount);
+		
+	    for (Reservation reservations : reservation) {
+	        String storeLocation = reservations.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        
+	        reservations.setStoreLocation(addressWithoutPostcode);
+	        
+	    }	
 
 		return "myPage/member/reservation/last";
 	}
@@ -160,6 +193,17 @@ public class MemberMyPageController {
 
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("noshowCount", noshowCount);
+		
+	    for (Reservation reservations : reservation) {
+	        String storeLocation = reservations.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        
+	        reservations.setStoreLocation(addressWithoutPostcode);
+	        
+	    }	
 
 		return "myPage/member/reservation/cancelNoshow";
 	}
@@ -193,7 +237,16 @@ public class MemberMyPageController {
 		int memberNo = loginMember.getMemberNo();
 		List<Store> store = service.memberLikeList(memberNo);
 		model.addAttribute("store", store);
-
+		
+	    for (Store stores : store) {
+	        String storeLocation = stores.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        
+	        stores.setStoreLocation(addressWithoutPostcode);
+	    }	
 		
 		return "myPage/member/memberLike";
 	}

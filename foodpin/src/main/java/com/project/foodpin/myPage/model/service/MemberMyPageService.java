@@ -49,6 +49,9 @@ public interface MemberMyPageService {
 	// 탈퇴 전 예약 확정/대기 조회
 	int selectReserv(int memberNo);
 
+	Store getStoreLocation(String storeNo);
+
+
 	
 
 

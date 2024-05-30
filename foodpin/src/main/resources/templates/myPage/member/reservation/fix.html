@@ -64,7 +64,7 @@
                                             <span class="storeName" th:text="*{storeName}"></span>
                                             <span class="reservationPeople" th:text="|*{reservCount}명|"></span> <br>
                                             <i class="fa-solid fa-clock"><span class="reservationTime" th:text="| *{reservTime}|"></span></i>
-                                            <span class="storeAddress" th:text="*{storeLocation}"></span>
+                                            <div class="storeAddress" th:text="*{storeLocation}"></div>
                                         </div>
                                         <span>
                                             <button class="cancelReservation" th:data-reserv-no="${reservation.reservNo}">예약 취소</button>
