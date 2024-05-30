@@ -14,23 +14,21 @@
         <th:block th:replace="~{common/header}">header.html</th:block>
 
         <div class="chatting-container">
-
-            <div class="search-chat-container">
-                <input type="text">
-            </div>
-            <!-- 채팅방 리스트 -->
-            <div>
-                <ul class="chatting-list">
+            
+            <div class="room-list-container">
+                <div class="search-chat-container">
+                    <input type="text" name="inputSearch" id="inputSearch" placeholder="가게 이름">
+                    <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                
+                <!-- 채팅방 리스트 -->  
+                <ul class="room-list">
 
                     <!-- <th:block th:each="room : ${roomList}"> -->
 
                         <li class="chatting-item">
                             <div class="item-header">
-
                                 <img class="list-profile" src="/images/user.png">
-
-                                <img class="list-profile" src="/images/user.png">
-
                             </div>
                             <div class="item-body">
                                 <p>
@@ -55,18 +53,60 @@
                 <div class="chatting-area">
                     <ul class="display-chatting">
                         <li class="my-chat">
-                            <p class="chat">안녕하세요?</p>
                             <span class="chatDate">14:01</span>
+                            <p class="chat">안녕하세요?</p>
                         </li>
-
+                        <li class="my-chat">
+                            <span class="chatDate">14:01</span>
+                            <p class="chat">안녕하세요?</p>
+                        </li>
+                        <li class="my-chat">
+                            <span class="chatDate">14:01</span>
+                            <p class="chat">안녕하세요?</p>
+                        </li>
+                        <li class="my-chat">
+                            <span class="chatDate">14:01</span>
+                            <p class="chat">안녕하세요?</p>
+                        </li>
+                        <li class="my-chat">
+                            <span class="chatDate">14:01</span>
+                            <p class="chat">안녕하세요?</p>
+                        </li>
+                        
+                        <li class="target-chat">
+                            <img src="/images/user.png">
+                            
+                            <div>
+                                <b>상대방</b>	<br>
+                                <p class="chat">
+안녕하세요?? 반갑습니다.
+ㅎㅎㅎㅎㅎ
+                                </p>
+                                <span class="chatDate">14:05</span>
+                            </div>
+                        </li>
+                        <li class="my-chat">
+                            <span class="chatDate">14:01</span>
+                            <p class="chat">안녕하세요?</p>
+                        </li>
+                        <li class="target-chat">
+                            <img src="/images/user.png">
+                            
+                            <div>
+                                <b>상대방</b>	<br>
+                                <p class="chat">안녕하세요?? 반갑습니다.
+ㅎㅎㅎㅎㅎ</p>
+                                <span class="chatDate">14:05</span>
+                            </div>
+                        </li>
                         <li class="target-chat">
                             <img src="/images/user.png">
 
                             <div>
                                 <b>상대방</b>	<br>
                                 <p class="chat">
-                                    안녕하세요?? 반갑습니다.<br>
-                                    ㅎㅎㅎㅎㅎ
+안녕하세요?? 반갑습니다.
+ㅎㅎㅎㅎㅎ
                                 </p>
                                 <span class="chatDate">14:05</span>
                             </div>
@@ -78,7 +118,7 @@
                     <!-- 채팅 입력 부분 -->
                     <div class="input-area">
                         <textarea id="inputChatting" rows="3"></textarea>
-                        <button id="send">보내기</button>
+                        <button id="send">전송</button>
                     </div>
                 </div>
         </div>
