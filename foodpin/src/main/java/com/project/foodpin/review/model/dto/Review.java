@@ -25,11 +25,13 @@ public class Review {
 	private String hashTitle;
 	
 	private String storeName;
+	private String storeImg;
 	
 	private String memberName;
 	private String profileImg;
 	
-	private List<UploadImage> imageList;
+	private List<UploadImage> uploadList;
 	private List<ReviewHash> hashList;
+	private List<ReviewReply> replyList;
 	
 }

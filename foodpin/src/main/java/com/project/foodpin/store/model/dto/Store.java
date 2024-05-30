@@ -30,7 +30,8 @@ public class Store {
 	private String breaktimeEnd;
 	private String storeClosed; // 폐업여부
 	private String storeImg;
-	private String totalRating;
+	private double totalRating;
+
 	private int storeMaxTable;
 	
 	private int memberNo;
