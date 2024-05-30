@@ -33,7 +33,12 @@
 	
 	<!-- *** 메뉴 정보 *** -->
 	
-	
+	<!-- 메뉴 조회 -->
+	<select id="menuSelect">
+		SELECT MENU_NO, MENU_IMG_URL, MENU_TITLE, MENU_AMOUNT, MENU_CONTENT  
+		FROM "MENU"
+		WHERE STORE_NO = #{storeNo}
+	</select>
 	
 	
 	<!-- *** 휴무일 정보 *** -->

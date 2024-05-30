@@ -21,6 +21,7 @@ import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.myPage.model.service.StoreMyPageService;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
@@ -87,6 +88,22 @@ public class StoreMyPageController {
 		return "redirect:/myPage/store/storeInfo";
 	}
 	
+	// ------ 메뉴 ------
+	
+	/** 메뉴 조회 (비동기)
+	 * @param loginMember
+	 * @return menuList
+	 */
+	@GetMapping(value="menuSelect", produces = "application/json")
+	@ResponseBody
+	public List<Menu> menuSelect(@RequestParam("storeNo") int storeNo) {
+		
+		return service.menuSelect(storeNo);
+	}
+	
+	
+	
+	// ------ 휴무일 ------
 	
 	/** 고정 휴무일 등록 / 수정 (비동기)
 	 * @param off

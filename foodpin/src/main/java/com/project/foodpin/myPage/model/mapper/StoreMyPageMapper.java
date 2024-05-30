@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
 @Mapper
@@ -27,6 +28,21 @@ public interface StoreMyPageMapper {
 	 */
 	int storeInfoUpdate(Store inputStore);
 	
+	// ------ 메뉴 ------
+
+	/** 메뉴 조회
+	 * @param memberNo
+	 * @return menuList
+	 */
+	List<Menu> menuSelect(int storeNo);
+	
+	
+	
+	
+	
+	
+	
+	// ------ 휴무일 ------
 	
 	/** 고정 휴무일 개수 조회 (있는지)
 	 * @param storeNo
@@ -92,6 +108,8 @@ public interface StoreMyPageMapper {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+
+
 
 
 
