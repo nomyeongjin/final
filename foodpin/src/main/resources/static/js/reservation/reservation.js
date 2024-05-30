@@ -315,7 +315,7 @@ if(confirmBtn != null) {
         input2.value = finalDate;
 
 
-        /* 고민해봐야할듯 시간 분리해야하는데 */
+        /* 예약 시간 */
         const input3 = document.createElement("input");
         input3.type="hidden";
         input3.name="reservTime";
@@ -337,21 +337,21 @@ if(confirmBtn != null) {
 
         // 요청사항
         const input5 = document.createElement("input");
-        const reservRequest = document.querySelector("#reservRequest").innerText;
+        const reservRequest = document.querySelector("#reservRequest").value;
         input5.type="hidden";
         input5.name="reservRequest";
         input5.value=reservRequest;
 
         // 방문자 이름
         const input6 = document.createElement("input");
-        const visitName = document.querySelector("#visitName").innerText;
+        const visitName = document.querySelector("#visitName").value;
         input6.type="hidden";
         input6.name="visitName";
         input6.value=visitName;
 
         // 방문자 전화번호
         const input7 = document.createElement("input");
-        const visitTel = document.querySelector("#visitTel").innerText;
+        const visitTel = document.querySelector("#visitTel").value;
         input7.type="hidden";
         input7.name="visitTel";
         input7.value=visitTel;

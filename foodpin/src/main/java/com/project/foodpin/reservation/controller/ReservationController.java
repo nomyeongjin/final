@@ -67,7 +67,13 @@ public class ReservationController {
 	// 예약 확정 후 예약 확인 페이지
 	@GetMapping("storeDetail/{storeNo}/reservation/reservationConfirm")
 	public String reservationConfirm(
-			@PathVariable("storeNo") String storeNo) {
+			@PathVariable("storeNo") String storeNo,
+			Model model) {
+		
+		Store store = service.storeDetail(storeNo);
+		
+		model.addAttribute("store", store);
+		
 		return "reservation/reservationConfirm";
 	}
 	
@@ -111,10 +117,10 @@ public class ReservationController {
 		
 		map.put("visitName", reservation.getVisitName());
 		map.put("visitTel", reservation.getVisitTel());
+//		map.put("storeName", store.getStoreName());
 		
 		int insert = service.insertReservation(map);
 		
-		String path = null;
 		
 		if(insert > 0)  {
 			

@@ -28,4 +28,7 @@ public interface ReservationMapper {
 	int updateStoreStatus(Store store);
 
 
+	Map<String, Object> storeName(Map<String, Object> map);
+
+
 }
