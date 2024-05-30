@@ -4,6 +4,27 @@
 
 
 
+<resultMap type="Review" id="review_rm">
+	
+		<id property="reviewNo" column="REVIEW_NO"/>
+		
+		<collection 
+			property="imageList"
+			select = "uploadImageList"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "UploadImage"
+		/>
+		
+		<collection 
+			property="hashList"
+			select = "selectHashList"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "ReviewHash"
+		/>
+	</resultMap>
+
 
 
 <!-- resultMap
@@ -67,6 +88,37 @@
      WHERE STORE_NO = #{storeNo}
      ORDER BY MENU_NO
    </select>
+   
+   
+      <!-- 가게 리뷰 상세 조회 -->
+   <select id="reviewDetail" resultMap="review_rm">
+   		SELECT DISTINCT MEMBER_NAME, PROFILE_IMG, REVIEW_NO, REVIEW_RATING, REVIEW_CONTENT,
+			TO_CHAR(REVIEW__REG_DATE, 'YYYY-MM-DD') REVIEW__REG_DATE, REVIEW_DEL_FL,
+			STORE_NO, MEMBER_NO
+		FROM REVIEW
+		JOIN "MEMBER" USING (MEMBER_NO)
+		JOIN "REVIEW_HASH" USING (REVIEW_NO)
+		JOIN "HASH" USING (HASH_NO)
+		WHERE STORE_NO = #{storeNo}
+		AND REVIEW_DEL_FL = 'N'
+		ORDER BY REVIEW_NO DESC
+   </select>
+   
+   <!-- 리뷰 이미지 조회 -->
+   <select id="uploadImageList" resultType="UploadImage">
+		SELECT * 
+		FROM UPLOAD_IMAGE
+		WHERE REVIEW_NO = #{reviewNo}
+		ORDER BY IMAGE_ORDER
+	</select> 
+	
+	<!-- 리뷰 해시태그 조회 -->
+	 <select id="selectHashList" resultType="ReviewHash">
+		SELECT HASH_NO, REVIEW_NO, HASH_TITLE 
+		FROM REVIEW_HASH
+		JOIN HASH USING (HASH_NO)
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
    
    
 
