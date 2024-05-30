@@ -196,9 +196,7 @@ aside>a:hover{
 
 .store-avgScore{
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+ 
     position: relative;
    
     
@@ -207,24 +205,27 @@ aside>a:hover{
     position: absolute;
     overflow: hidden;
     width: 107px;
-    color: #9c9c9c;
+    color: var(--main-color);
     
 }
 
 
 .realAvg-star  {
- 
+    position: absolute;
     overflow: hidden;
     white-space: nowrap;
+    width: 107px;
     color: #ff2a00;
 
 }
 
 #totalScoreR{
     width: 25px;
-    display: flex;
-    align-items: center;
-    margin-left:  5px;
+    position: absolute;
+    right: 513px;
+    top: 574px;
+    z-index: 1000;
+  
 }
 
 /* 리뷰로 이동 */

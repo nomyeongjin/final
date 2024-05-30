@@ -132,19 +132,24 @@ window.onload = function() {
 /* 별점  */
 
 document.addEventListener('DOMContentLoaded', function () {
-  
-  
-  function averageStar(totalRating){
-    
-    const AvgStar = document.getElementById('.realAvg-star');
-    
  
-   
-    AvgStar.style.width = 'totalRating/5*100' + '%'; 
-   
-  }
 
+  var totalRatingELement = document.getElementById('totalScoreR');
+  var totalRating = Number(totalRatingELement.textContent);
+
+  function averageStar(totalRating) {
+    var AvgStar = document.querySelector('.realAvg-star');
+     
+     AvgStar.style.width = (totalRating*105/5)+'px';
+    
+   }
+
+ 
+
+   averageStar(totalRating);
 });
+
+
 
 
 

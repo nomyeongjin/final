@@ -81,7 +81,7 @@
                                     </th:block>
                                 
                                            <!-- 좋아요 개수 -->
-                                           <th:block th:if="${session.loginMember==null}">
+                                           <th:block th:if="${session.loginMember?.memberCode !=1}">
                                             <i class="fa-solid fa-heart"> </i>
                                            </th:block>
                                            <!-- &nbsp; -->
@@ -111,28 +111,29 @@
                                 <div class="store-avgScore">
 
                                     <div class="background-star">
-                                        <i class="back_star fas fa-star"></i>
-                                        <i class="back_star fas fa-star"></i>
-                                        <i class="back_star fas fa-star"></i>
-                                        <i class="back_star fas fa-star"></i>
-                                        <i class="back_star fas fa-star"></i>
-                                        
-                                    
+                                        <i class="total_star  fas fa-star"></i>
+                                        <i class="total_star  fas fa-star"></i>
+                                        <i class="total_star  fas fa-star"></i>
+                                        <i class="total_star  fas fa-star"></i>
+                                        <i class="total_star  fas fa-star"></i>
+                                       
+                                 
                                     </div>
                                  
-                                    <div class="realAvg-star" >
-                                        <i class="real_star fas fa-star"></i>
-                                        <i class="real_star  fas fa-star"></i>
-                                        <i class="real_star  fas fa-star"></i>
-                                        <i class="real_star  fas fa-star"></i>
-                                        <i class="real_star  fas fa-star"></i>
-                                    
-                                    </div>
-                                 
-                                    
-                                    <span id="totalScoreR" th:text="*{totalRating}"> 점수 </span> 
-                                </div>
+                                    <div class="realAvg-star" >    
+                                     
+                                        <i class="total_star  fas fa-star"></i>
+                                        <i class="total_star  fas fa-star"></i>
+                                        <i class="total_star  fas fa-star"></i>
+                                        <i class="total_star  fas fa-star"></i>
+                                        <i class="total_star  fas fa-star"></i>
 
+                                    </div>
+                                 
+                                    
+                                </div>
+                                
+                                <span id="totalScoreR" th:text="*{totalRating}"> 점수 </span> 
                                   
                                     
                                
@@ -758,7 +759,7 @@
         const storeMaxTable = /*[[${store.storeMaxTable}]]*/ "최대 예약 팀 수(테이블)"
         const storeNo = /*[[${store.storeNo}]]*/ "사업자등록번호"
         const storeStatus = /*[[${store.storeStatus}]]*/ "예약 가능 여부"
-
+       
         let bookMark =/*[[${store.bookMark}]]*/ "좋아요 여부";
         
 
