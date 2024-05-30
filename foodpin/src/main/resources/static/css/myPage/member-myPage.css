@@ -390,11 +390,10 @@ label[for='agree']{
     visibility: hidden;
     padding: 15px;
     border-radius: 6px;
-    justify-content: center;
     display: block;
     line-height: 20px;
     width: 200px;
-    height: 80px;
+    height: auto;
     background-color: rgba(0, 0, 0, 0.6);
     color: white !important;
     font-size: 13px !important;
@@ -404,7 +403,9 @@ label[for='agree']{
     top: -40px;
 }
 
-.tooltip:hover .tooltip-text { visibility: visible; }
+.tooltip:hover .tooltip-text { 
+    visibility: visible; 
+}
 
 .reservationList {
     list-style: none;
@@ -461,7 +462,7 @@ label[for='agree']{
 }
 
 .storeAddress {
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .sub-title-btn a {

@@ -189,8 +189,42 @@ aside>a:hover{
 .storedetail-row >*{
 
     margin-bottom: 5px;
-    align-items: center;
+  
     
+    
+}
+
+.store-avgScore{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+   
+    
+}
+.background-star{
+    position: absolute;
+    overflow: hidden;
+    width: 107px;
+    color: #9c9c9c;
+    
+}
+
+
+.realAvg-star  {
+ 
+    overflow: hidden;
+    white-space: nowrap;
+    color: #ff2a00;
+
+}
+
+#totalScoreR{
+    width: 25px;
+    display: flex;
+    align-items: center;
+    margin-left:  5px;
 }
 
 /* 리뷰로 이동 */

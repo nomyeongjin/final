@@ -43,7 +43,7 @@
 	
 	<!-- 예약하려는 날짜의 예약 건수 조회 -->
 	<select id="confirmReservDate">
-		SELECT RESERV_TIME , COUNT(*) "COUNTS"
+		SELECT RESERV_TIME , COUNT(RESERV_TIME) "COUNTS"
 		FROM "RESERVATION"
 		JOIN "STORE" USING (STORE_NO)
 		WHERE TO_CHAR(RESERV_DATE, 'MM.DD') IN (
@@ -55,7 +55,25 @@
 		AND STORE_CLOSED = 'N'
 		AND RESERV_STATUS_FL IN ('Y', 'N')
 		GROUP BY RESERV_DATE, RESERV_TIME
-
 	</select>
 	
+	
+	<!-- 예약 가능 상태 변경 -->
+	<!-- <update id="updateStoreStatus">
+		UPDATE "STORE" SET
+		STORE_STATUS = 'N'
+	</update>	 -->
+	
+	
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+

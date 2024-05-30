@@ -24,4 +24,8 @@ public interface ReservationMapper {
 	List<Reservation> confirmReservDate(Reservation reservation);
 
 
+	// 예약 가능 상태 변경
+	int updateStoreStatus(Store store);
+
+
 }

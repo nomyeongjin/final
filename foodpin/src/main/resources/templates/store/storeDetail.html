@@ -43,13 +43,13 @@
 
                     <div class="storedetail-thumbnailbox" >
 
-                        <button>좌</button>
+                      
 
                         <img class="storedetail-thumbnail" 
                         th:src="*{storeImg}" alt="가게 기본 이미지">
                     
 
-                        <button>우</button>
+                       
 
                     </div>
                   
@@ -109,14 +109,28 @@
 
 
                                 <div class="store-avgScore">
-                                    <i class="rating__star far fa-star"></i>
-                                    <i class="rating__star far fa-star"></i>
-                                    <i class="rating__star far fa-star"></i>
-                                    <i class="rating__star far fa-star"></i>
-                                    <i class="rating__star far fa-star"></i>
-                                   
+
+                                    <div class="background-star">
+                                        <i class="back_star fas fa-star"></i>
+                                        <i class="back_star fas fa-star"></i>
+                                        <i class="back_star fas fa-star"></i>
+                                        <i class="back_star fas fa-star"></i>
+                                        <i class="back_star fas fa-star"></i>
+                                        
                                     
-                                    <span th:text="*{totalRating}"> 점수 </span> 
+                                    </div>
+                                 
+                                    <div class="realAvg-star" >
+                                        <i class="real_star fas fa-star"></i>
+                                        <i class="real_star  fas fa-star"></i>
+                                        <i class="real_star  fas fa-star"></i>
+                                        <i class="real_star  fas fa-star"></i>
+                                        <i class="real_star  fas fa-star"></i>
+                                    
+                                    </div>
+                                 
+                                    
+                                    <span id="totalScoreR" th:text="*{totalRating}"> 점수 </span> 
                                 </div>
 
                                   
@@ -738,13 +752,12 @@
    <th:block th:replace="~{common/footer}"></th:block> 
 
     <script th:inline="javascript">
-        const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원";
+        const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원";
         const memberCode = /*[[${session.loginMember?.memberCode}]]*/ "회원코드";
 
-
         const storeMaxTable = /*[[${store.storeMaxTable}]]*/ "최대 예약 팀 수(테이블)"
-
         const storeNo = /*[[${store.storeNo}]]*/ "사업자등록번호"
+        const storeStatus = /*[[${store.storeStatus}]]*/ "예약 가능 여부"
 
         let bookMark =/*[[${store.bookMark}]]*/ "좋아요 여부";
         

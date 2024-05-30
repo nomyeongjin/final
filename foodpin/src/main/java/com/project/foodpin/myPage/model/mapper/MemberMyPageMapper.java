@@ -53,6 +53,9 @@ public interface MemberMyPageMapper {
 	// 회원 탈퇴 전 예약 확정/대기 조회
 	int checkReserv(int memberNo);
 
+	Store getStoreLocation(String storeNo);
+
+
 
 
 

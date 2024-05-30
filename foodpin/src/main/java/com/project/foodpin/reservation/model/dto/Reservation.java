@@ -39,5 +39,7 @@ public class Reservation {
 	private String visitTel;
 
 	private int noshowCount;
+	
+	private int counts;
 
 }
