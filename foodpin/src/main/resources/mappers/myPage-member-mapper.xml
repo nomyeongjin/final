@@ -147,6 +147,7 @@
 		JOIN STORE S ON R.STORE_NO = S.STORE_NO
 		WHERE REVIEW_DEL_FL = 'N'
 		AND R.MEMBER_NO = #{memberNo}
+		ORDER BY REVIEW__REG_DATE DESC
 	</select>
 
 </mapper>
