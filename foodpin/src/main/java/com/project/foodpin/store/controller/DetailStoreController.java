@@ -46,10 +46,11 @@ public class DetailStoreController {
 		
 		Store store = service.storeDetail(storeNo);
 
-		List<Menu> menuList = service.menuDetail(storeNo);
-		List<Review> reviewList = service.reviewDetail(storeNo);
-		
-
+		/* List<Menu> menuList = service.menuDetail(storeNo); */
+		/*
+		 * List<Review> reviewList = service.reviewDetail(storeNo);
+		 * 
+		 */
 		
 		/* Store offday = service.storeOff(storeNo); */
 		
@@ -59,13 +60,13 @@ public class DetailStoreController {
 		
 		model.addAttribute("store", store);
 
-		model.addAttribute("menuList", menuList);
-		model.addAttribute("reviewList", reviewList);
-		model.addAttribute("start" , 0);
-
-	
-		
-
+		/*
+		 * model.addAttribute("menuList", menuList); model.addAttribute("reviewList",
+		 * reviewList); model.addAttribute("start" , 0);
+		 * 
+		 * 
+		 * 
+		 */
 		
 		model.addAttribute("postcode", arr[0]);
 		model.addAttribute("address", arr[1]);
