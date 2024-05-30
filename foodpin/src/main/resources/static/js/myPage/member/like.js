@@ -1,28 +1,29 @@
 /* 가게 찜 */
-const like = document.querySelector(".like");
-like.addEventListener("click", e => {
-    const obj = {
-        "memberNo" : loginMemberNo,
-        "storeNo" : storeNo,
-        "likeCheck" : likeCheck
-    };
+const like = document.querySelectorAll(".like");
 
-    fetch("/myPage/member/memberLike", {
-        method : "POST",
+like.forEach(btn => {
+    btn.addEventListener("click", e => {
+        
+        if(!confirm("찜을 해제하시겠습니까?")) {
+            e.preventDefault();
+            return;
+        } 
+        const storeNo = e.target.dataset.storeNo;
+        cancelLike(storeNo);
+    });
+});
+function cancelLike(storeNo) {
+    fetch(`/myPage/member/cancelLike`, {
+        method : "DELETE",
         headers : {"Content-Type" : "application/json"},
-        body : JSON.stringify(obj)
+        body : storeNo
     })
     .then(resp => resp.text())
-    .then(count => {
-        if(count == -1) {
-            return;
+    .then(result => {
+        if(Boolean(result)) {
+            location.reload();
+        } else {
+            alert("취소에 실패했습니다");
         }
-
-        likeCheck = likeCheck == 0 ? 1 : 0;
-
-        e.target.classList.toggle("fa-regular");
-        e.target.classList.toggle("fa-solid");
-
-        
-    })
-})
+    });
+}

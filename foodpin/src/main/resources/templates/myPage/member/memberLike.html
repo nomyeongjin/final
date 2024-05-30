@@ -38,10 +38,11 @@
                                 <li class="likeList" th:each="store : ${store}">
 
                                 <div th:object="${store}">
-                                        <span class="likeStoreName" th:text="*{storeName}"><a href="/store/storeDetail">대박고깃집  ></a></span>
+                                        <a class="likeStoreName" th:text="|*{storeName} >|" th:href="'/store/storeDetail/' + *{storeNo}"></a>
                                         <span class="likeStoreAddress" th:text="*{storeLocation}">서울시 중구 마조로 56길</span>
-                                        <i class="fa-solid fa-bookmark like"></i>
-                                            <!-- th:classappend="*{likeCheck == 1} ? fa-solid : fa-regular"></i> -->
+                                        <th:block th:if="${session.loginMember?.memberCode == 1}">
+                                            <i class="fa-heart fa-solid like" th:data-store-no="*{storeNo}"></i>
+                                        </th:block>
                                 </div>
                                 </li>
                                 

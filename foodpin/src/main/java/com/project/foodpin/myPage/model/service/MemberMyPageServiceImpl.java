@@ -95,11 +95,6 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 	public int noshowCount(int memberNo) {
 		return mapper.noshowCount(memberNo);
 	}
-	
-	@Override
-	public Store getStoreLocation(String storeNo) {
-		return mapper.getStoreLocation(storeNo);
-	}
 
 	// 예약 확정 조회
 	@Override
@@ -138,6 +133,13 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		return mapper.memberLikeList(memberNo);
 	}
 
+	// 찜 취소
+	@Override
+	public int cancelLike(int memberNo, int storeNo) {
+		Map<String, Integer> map = Map.of("memberNo", memberNo, "storeNo", storeNo);
+		return mapper.cancelLike(map);
+	}
+	
 	// 리뷰 목록 조회
 	@Override
 	public List<Review> selectReviewList(int memberNo) {
