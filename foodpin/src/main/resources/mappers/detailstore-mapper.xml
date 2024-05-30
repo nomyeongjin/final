@@ -82,7 +82,7 @@
      FROM "UPLOAD_IMAGE"
      WHERE STORE_NO = #{storeNo}
      ORDER BY REVIEW_NO DESC
-   </select>
+   </select> 
    
    <select id="selectMenuList" resultType="Menu">
      SELECT *
@@ -107,12 +107,12 @@
    </select>
    
    <!-- 리뷰 이미지 조회 -->
-   <select id="selectImageList" resultType="UploadImage">
+<!--    <select id="selectImageList" resultType="UploadImage">
 		SELECT * 
 		FROM UPLOAD_IMAGE
 		WHERE REVIEW_NO = #{reviewNo}
 		ORDER BY IMAGE_ORDER
-	</select>
+	</select> -->
 	
 	<!-- 리뷰 해시태그 조회 -->
 	<select id="selectHashList" resultType="ReviewHash">
