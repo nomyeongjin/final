@@ -47,8 +47,8 @@ public class DetailStoreController {
 		model.addAttribute("store", store);
 
 
-		   model.addAttribute("reviewList",
- reviewList); model.addAttribute("start" , 0);
+		model.addAttribute("reviewList",reviewList); 
+		model.addAttribute("start" , 0);
 
 
 		model.addAttribute("postcode", arr[0]);

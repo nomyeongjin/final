@@ -11,7 +11,7 @@
 		<id property="reviewNo" column="REVIEW_NO"/>
 		
 		<collection 
-			property="imageList"
+			property="uploadList"
 			select = "uploadImageList"
 			column = "REVIEW_NO"
 			javaType = "java.util.ArrayList"
@@ -25,6 +25,15 @@
 			javaType = "java.util.ArrayList"
 			ofType = "ReviewHash"
 		/>
+		
+		<collection 
+			property="replyList"
+			select = "selectReplyList"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "ReviewReply"
+		/>
+		
 	</resultMap>
 
 
@@ -60,20 +69,22 @@
 
 	   <!-- 가게 상세 조회 -->
    <select id="storeDetail" resultMap="store_rm">
-   SELECT STORE_NAME, STORE_INFO, STORE_LOCATION, STORE_STATUS,
+   	SELECT STORE_NAME, STORE_INFO, STORE_LOCATION, STORE_STATUS,
        STORE_TEL, OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END,
-       STORE_CLOSED, STORE_IMG, TOTAL_RATING, MEMBER_NO, STORE_NO,
+       STORE_CLOSED, STORE_IMG, MEMBER_NO, STORE_NO,
        	(SELECT COUNT(*) 
 		 FROM "BOOKMARK"
 		 WHERE STORE_NO = #{storeNo}) LIKE_COUNT,
 		 (SELECT COUNT(*)FROM "BOOKMARK"
 	    WHERE MEMBER_NO = #{memberNo}
-	    AND STORE_NO =#{storeNo}) BOOK_MARK
-		 
+	    AND STORE_NO =#{storeNo}) BOOK_MARK ,
+	     (SELECT ROUND(AVG(REVIEW_RATING), 1)
+		  FROM REVIEW
+		  WHERE STORE_NO =#{storeNo}
+		  AND REVIEW_DEL_FL = 'N') TOTAL_RATING 
 		FROM "STORE" 
 		WHERE STORE_NO = #{storeNo}
 		AND STORE_CLOSED ='N'
-		
    </select>
    
    
@@ -120,6 +131,15 @@
 		FROM REVIEW_HASH
 		JOIN HASH USING (HASH_NO)
 		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<!-- 리뷰 사장님 댓글 조회 -->
+	 <select id="selectReplyList" resultType="ReviewReply">
+		SELECT R.*, S.STORE_IMG
+		FROM REVIEW_REPLY R
+		JOIN STORE S ON (R.STORE_NO = S.STORE_NO)
+		WHERE REVIEW_NO = #{reviewNo}
+		AND REPLY_DEL_FL = 'N'
 	</select>
    
    

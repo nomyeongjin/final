@@ -612,91 +612,97 @@
 
         <section class="store-detail">
 
-        <div class="store-container">
+        <div class="review-container">
 
-            <div class="storedetail-box">
+            <div class="storedetail-reivew-box">
 
 
-               
-                
-                <div class="storereview-container" th:each=" review : ${reviewList}" th:object="${review}">
-                    
+                <div class="storereview-container" th:if="${reviewList}">
+
                     <a th:object="${store}" th:href="'/review/reviewPage/' + *{storeNo}">리뷰쓰기</a>
 
-
-    
-                    <h3 class="review-title">방문자 리뷰</h3>
-                
-                <div class="review-avgScore">
-                    <i class="rating__star far fa-star"></i>
-                    <i class="rating__star far fa-star"></i>
-                    <i class="rating__star far fa-star"></i>
-                    <i class="rating__star far fa-star"></i>
-                    <i class="rating__star far fa-star"></i>
-                    <span> 평균 점수</span>
-                    </div>
-
-
-                    <div class="storereview-top">
-
-                        <div class="storereview-top-left">
-                            <img class="review-member-profile"
-                                th:src="*{profileImg}">
-                            <div class="review-info">
-                                <span th:text="*{memberName}">닉네임</span>
-                                
-                                <div class="review-memberScore">
-                                    <i class="rating__star far fa-star"></i>
-                                    <i class="rating__star far fa-star"></i>
-                                    <i class="rating__star far fa-star"></i>
-                                    <i class="rating__star far fa-star"></i>
-                                    <i class="rating__star far fa-star"></i>
-                                    <span th:text="|*{reviewRating} 점|"> 점수</span>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="storereview-top-right">
-                            <button type="button" id="reviewReport"  th:if="${session.loginMember}">🚨신고하기</button>
-                            <span th:text="*{reviewRegDate}">2024-05-17</span>
-                        </div>
-
-                    </div>
-
-                    
-                    <div class="storereview-mid">
-                        <p th:text="*{reviewContent}">리뷰 내용</p>
-                    </div>
-
-                    <th:block>
-                        <div class="storereview-bottom">
-                            <p th:if="*{imageList}">주문 내역</p>
-                            <div class="storereview-image" th:if="*{imageList}">
-                                <th:block th:each=" image : *{imageList}">
-                                    <img class="review-look" th:src="|${image.imagePath}${image.imgRename}|">
-                                </th:block>
-                            </div>
-                            <p>해시태그</p>
-                            <div class="review-hashtag">
-
-                                <th:block th:each=" hash : *{hashList}">
-                                    <span th:text="|${hash.hashTitle} |">#해시태그</span>
-                                </th:block>
-                            </div>
-                        </div>
+                    <th:block th:unless= "${!#lists.isEmpty(reviewList)}">
+                        <h3>아직 리뷰가 없습니다.</h3>
                     </th:block>
 
-                    <div class="store-reply">
-                        <img class="review-store-profile" src="/images/storeDetail/store.jpg" alt="가게 프로필 이미지">
-
-                        <p class="reply-content-bubble">
-                            사장님 답글
-                        </p>
-                    </div>
                     
+                    <th:block th:if="${ !#lists.isEmpty(reviewList)}">
+                        <h3 class="review-title">방문자 리뷰</h3>
+                    </th:block>
 
+
+                    <th:block  th:each=" review : ${reviewList}" th:object="${review}">
+                        <div class="review">
+                            <div class="storereview-top">
+        
+                                <div class="storereview-top-left">
+                                    <img class="review-member-profile"
+                                        th:src="*{profileImg}">
+                                    <div class="review-info">
+                                        <span th:text="*{memberName}">닉네임</span>
+                                        
+                                        <div class="review-memberScore">
+                                            <span class="reviewScore" th:attr="data-rating=*{reviewRating}"></span>
+                                            <span th:text="|*{reviewRating} 점|"> 점수</span>
+                                        </div>
+        
+                                    </div>
+                                </div>
+        
+                                <div class="storereview-top-right">
+                                    <button type="button" id="reviewReport"  th:if="${session.loginMember}">🚨신고하기</button>
+                                    <span th:text="*{reviewRegDate}">2024-05-17</span>
+                                </div>
+        
+                            </div>
+        
+                            
+                            <div class="storereview-mid">
+                                <p th:text="*{reviewContent}">리뷰 내용</p>
+                            </div>
+        
+                            <th:block>
+                                <div class="storereview-bottom">
+                                    
+                                    <th:block th:if="${!#lists.isEmpty(uploadList)}">
+                                        <p th:if="*{uploadList}">주문 내역</p>
+                                    </th:block>
+    
+                                    <div class="storereview-image" th:if="*{uploadList}">
+                                        <th:block th:each=" upload : *{uploadList}">
+                                            <img class="review-look" th:src="|${upload.imagePath}${upload.imgRename}|">
+                                        </th:block>
+                                    </div>
+    
+                                    <p>해시태그</p>
+                                    <div class="review-hashtag">
+        
+                                        <th:block th:each=" hash : *{hashList}">
+                                            <span th:text="|${hash.hashTitle} |" class="review-hash">#해시태그</span>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </th:block>
+        
+                            <th:block th:if="${!#lists.isEmpty(replyList)}" th:each=" reply : *{replyList}">
+                                <div class="store-reply">
+                                    <img class="review-store-profile" th:src="${reply.storeImg}" alt="가게 프로필 이미지">
+            
+                                    <p class="reply-content-bubble" th:text="${reply.replyContent}">
+                                        사장님 답글
+                                    </p>
+                                </div>
+                            </th:block>
+
+                        </div>
+                    </th:block>
+                    
                 </div>
+                    
+                <div class="review-more-button">
+                    <button type="button">리뷰 더보기</button>
+                </div>
+
             </div>
         </div>
         </section>
