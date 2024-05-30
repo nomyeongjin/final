@@ -14,6 +14,7 @@ import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.myPage.model.mapper.StoreMyPageMapper;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,9 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	// 매퍼
 	private final StoreMyPageMapper mapper;
 
+	
+	
+	
 	// 가게 정보 수정 화면 이동
 	@Override
 	public Store selectstoreInfo(int memberNo) {
@@ -69,6 +73,18 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		}
 		return result;
 	}
+	
+	// ------ 메뉴 ------
+
+	// 메뉴 조회
+	@Override
+	public List<Menu> menuSelect(int storeNo) {
+		
+		return mapper.menuSelect(storeNo);
+	}
+
+
+	// ------ 휴무일 ------
 	
 	// 고정 휴무일 변경
 	@Override
@@ -144,7 +160,6 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int ceoInfoUpdate(Member inputMember) {
 		return mapper.ceoInfoUpdate(inputMember);
 	}
-
 
 
 
