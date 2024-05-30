@@ -20,11 +20,6 @@ public interface DetailStoreMapper {
 
 	
 
-	/** 가게 메뉴 상세 조회
-	 * @param storeNo
-	 * @return
-	 */
-	List<Menu> menuDetail(String storeNo);
 
 	
 	/** 가게 찜 해제 
