@@ -113,7 +113,7 @@ const selectTimeFn = (reservDate) => {
             const selectedMinutes = parseInt(i.split(':')[1], 10);
 
 
-            // 11:59 까지는 오전, 12:00 - 22:00 까지는 오후
+            // 11::00 까지는 오전, 12:00 - 22:00 까지는 오후
             // 오전/오후 구분
             const isAM = selectedHours < 12 || (selectedHours === 12 && selectedMinutes === 0);
             const selectedTimeIsPast = selectedDateTime <= currentTime; // true = 오전, false = 오후
