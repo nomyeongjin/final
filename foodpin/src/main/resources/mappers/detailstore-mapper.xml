@@ -10,7 +10,7 @@
 		
 		<collection 
 			property="imageList"
-			select = "selectImageList"
+			select = "uploadImageList"
 			column = "REVIEW_NO"
 			javaType = "java.util.ArrayList"
 			ofType = "UploadImage"
@@ -107,7 +107,7 @@
    </select>
    
    <!-- 리뷰 이미지 조회 -->
-   <select id="selectImageList" resultType="UploadImage">
+   <select id="uploadImageList" resultType="UploadImage">
 		SELECT * 
 		FROM UPLOAD_IMAGE
 		WHERE REVIEW_NO = #{reviewNo}
