@@ -536,7 +536,12 @@ font-size: 14px;
    background: lightgoldenrodyellow;
    padding: 50px 20px;
 }
-
+#menuRowContainer{
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
 /* 메뉴 */
 .menu_row{
    width: 90%;
@@ -567,7 +572,7 @@ font-size: 14px;
    outline: none;
    padding: 5px;
 } */
-#menuTitle, #menuAmount, #menuContent{
+.menuTitle, .menuAmount, .menuContent{
    height: 26px;
    outline: none;
    padding: 5px;
@@ -575,7 +580,7 @@ font-size: 14px;
    border: 1px solid lightgoldenrodyellow;
    border-bottom: 1px solid grey;
 }
-#menuTitle{
+.menuTitle{
    width: 20%;
 }
 .amount-area {
@@ -583,14 +588,14 @@ font-size: 14px;
    display: flex;
    align-items: center;
 }
-#menuAmount{
+.menuAmount{
    width: 90%;
 }
 .span-won{
    margin: 0 5px;
    font-size: 14px;
 }
-#menuContent{
+.menuContent{
    width: 45%;
 }
 .fa-circle-plus{
