@@ -16,5 +16,8 @@ public interface ReservationService {
 	// 예약 저장
 	int insertReservation(Map<String, Object> map);
 
+	// 예약 가능 상태 변경
+	int updateStoreStatus(Store store);
+
 
 }

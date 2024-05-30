@@ -437,3 +437,7 @@
 .fc-daygrid-day-top{
     visibility: visible;
 }
+
+.disabled{
+    color:#cecece;
+}
