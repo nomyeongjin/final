@@ -1,7 +1,7 @@
 /* 본문 영역, 서브 메뉴 버튼 변수 선언 */
 const menuContainer = document.querySelector(".myPage-content-container"); // 본문 div 영역
 const menuBtn = document.querySelector("#menuBtn"); // 메뉴 정보 버튼
-
+const menuRowAdd = document.createElement("i");
 
 
 
@@ -11,13 +11,13 @@ const menuBtn = document.querySelector("#menuBtn"); // 메뉴 정보 버튼
 menuBtn.addEventListener("click", () => {
 
    menuContainer.innerHTML = "";
-   console.log(storeNo);
+   // console.log(storeNo);
 
    // DB에서 메뉴 정보 받아오기
    fetch("/myPage/store/menuSelect?storeNo=" + storeNo)
    .then(resp => resp.json())
    .then(menuList => {
-      console.log(menuList);
+      // console.log(menuList);
 
       const menuEditFrm = document.createElement("form"); // form
       menuEditFrm.id = "menuEditFrm";
@@ -111,7 +111,7 @@ menuBtn.addEventListener("click", () => {
       }) // forEach
 
       // 추가 버튼
-      const menuRowAdd = document.createElement("i");
+      
       menuRowAdd.classList.add('fa-solid', 'fa-circle-plus');
       menuRowAdd.id = "menuRowAdd";
 
@@ -168,7 +168,16 @@ const createMenuRow = () => {
 /**
  * (버튼) 행 추가
  */
-document.querySelector("#menuRowAdd").addEventListener("click", () => {
+menuRowAdd.addEventListener("click", () => {
 
    createMenuRow();
 });
+
+document.querySelectorAll(".menu_row").forEach(del => {
+   
+   del.addEventListener("click", e => {
+      console.log(del);
+   })
+});
+
+
