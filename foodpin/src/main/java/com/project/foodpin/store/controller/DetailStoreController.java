@@ -63,7 +63,8 @@ public class DetailStoreController {
 			model.addAttribute("store", store);
 
 	
-           
+          
+			model.addAttribute("storeHashList", store.getStoreHashList());
 			model.addAttribute("menuList", store.getMenuList());
 			model.addAttribute("imageList", store.getImageList());
 
