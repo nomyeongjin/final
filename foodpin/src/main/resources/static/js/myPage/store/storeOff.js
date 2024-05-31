@@ -122,7 +122,7 @@ dayoffBtn.addEventListener("click", () => {
 
       const li = document.createElement("li");
       li.classList.add("week-li");
-      li.innerText = week + "요일";
+      li.innerText = week;
       li.setAttribute('value', index);
       ul.append(li);
    })
@@ -263,7 +263,8 @@ dayoffBtn.addEventListener("click", () => {
    
 });
 
-
+const testBtn = document.querySelector("#testBtn");
+const popupLayer = document.querySelector("#popupLayer");
 /**
  * 일정 등록하는 팝업창 생성 
  */
@@ -315,7 +316,7 @@ const createPopup = () => {
 
    btnRow.append(addBtn, cancelBtn);
    popupFrm.append(titleRow, startRow, endRow, btnRow);
-   testArea.append(popupFrm);
+   StoreOffContainer.append(popupFrm);
 
 
    /**
