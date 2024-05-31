@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -101,6 +102,16 @@ public class StoreMyPageController {
 		return service.menuSelect(storeNo);
 	}
 	
+	/** 메뉴 수정
+	 * @param menuList
+	 * @return
+	 */
+	@PutMapping(value="menuUpdate", produces = "application/json")
+	@ResponseBody
+	public int menuUpdate(@RequestBody List<Menu> inputMenuList) {
+		
+		return service.menuUpdate(inputMenuList);
+	}
 	
 	
 	// ------ 휴무일 ------

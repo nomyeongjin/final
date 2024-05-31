@@ -1,5 +1,7 @@
 package com.project.foodpin.store.model.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,5 +21,9 @@ public class Menu {
 	private String menuContent;
 	private String menuImgUrl; 
 	private String storeNo;
+	
+	public MultipartFile menuImg;
+	
+	
 	
 }
