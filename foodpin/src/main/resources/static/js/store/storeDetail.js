@@ -416,9 +416,9 @@ popupClose.addEventListener("click", () => {
 reviewReport.forEach((report) => {
   report.addEventListener("click", ()=>{
     reviewReportForm.classList.remove("popup-hidden");
-    
+   
     const reviewNo = report.dataset.reviewNo;
-
+   
     reportComplete.addEventListener("click" , e => {
     
       if(reportContent.value.trim().length == 0){
@@ -426,13 +426,12 @@ reviewReport.forEach((report) => {
         reportContent.focus();
         e.preventDefault();
         return;
-
       }else{
         const obj = {
           "reviewNo" : reviewNo,
           "reportContent" : reportContent.value,
         };
-  
+    
         fetch("/store/reviewReport", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
@@ -440,36 +439,24 @@ reviewReport.forEach((report) => {
         })
         .then(resp => resp.json())
         .then(result => {
-  
+    
           if(result == 0){
             alert("신고 접수가 되지 않았습니다.");
             reportContent.focus();
             e.preventDefault();
-            
           }
           else{
             alert("리뷰 신고가 접수 되었습니다.");
             reviewReportForm.classList.add("popup-hidden");
             reportContent.value = '';
-
-            
-
-
           }
-  
-          
         })
-
       }
-
-      
     })
-    
-
-
-
   })
 })
+
+
 
 
 /* ******************************************************** */

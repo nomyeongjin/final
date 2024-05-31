@@ -30,7 +30,7 @@ public class ReveiwController {
 	private final ReviewService service;
 	
 	
-	
+	// 리뷰 페이지 
 	@GetMapping("reviewPage/{storeNo}")
 	public String reviewPage(
 		@PathVariable("storeNo") String storeNo
@@ -47,6 +47,7 @@ public class ReveiwController {
 	}
 	
 	
+	// 리뷰 작성
 	@PostMapping("insertReview/{storeNo}")
 	public String insertReview(
 		@PathVariable("storeNo") String storeNo,
