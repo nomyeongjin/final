@@ -164,15 +164,15 @@
    justify-content: center;
    padding: 10px 20px;
    width: 60%;
-   flex-wrap: wrap;
+   /* flex-wrap: wrap; */
 }
 .week-li{
-   width: 20%;
+   width: 40px;
    margin: 10px;
-   height: 26px;
-   background: lightgray;
-   border: 1px solid lightgray;
-   border-radius: 15px;
+   height: 40px;
+   /* background: #w; */
+   border: 1px solid #2B3151;
+   border-radius: 20px;
    cursor: pointer;
    list-style: none;
    display: flex;
@@ -180,8 +180,9 @@
    justify-content: center;
 }
 .checked{
-   background: white;
-   border: 1px solid lightgray;
+   background: #363f75;
+   border: 1px solid #363f75;
+   color: white;
 }
 .week-checked{
    background: rgb(223, 154, 154);
@@ -190,11 +191,13 @@
 .update-btn{
    width: 140px;
    margin: 20px;
-   height: 26px;
-   background: lightgray;
-   border: 1px solid lightgray;
+   height: 30px;
+   font-size: 16px;
+   background: #E14C54;
+   border: 1px solid #E14C54;
    border-radius: 15px;
    cursor: pointer;
+   color: white;
 }
 
 /* full calendar */
@@ -537,14 +540,13 @@ font-size: 14px;
    padding: 50px 20px;
 }
 #menuRowContainer{
-   width: 100%;
    display: flex;
    flex-direction: column;
    align-items: center;
 }
-/* 메뉴 */
+/* 메뉴 - 영역 */
 .menu-row{
-   width: 90%;
+   width: 100%;
    display: flex;
    flex-direction: row;
    justify-content: space-between;
@@ -553,8 +555,7 @@ font-size: 14px;
 .menu-img-area, .menu-row > input{
    margin: 10px;
 }
-
-/* 이미지 */
+/* 메뉴 이미지 관련 */
 .menu-img-area{
    display: flex;
    align-items: center;
@@ -570,16 +571,23 @@ font-size: 14px;
    flex-direction: row;
    padding-left: 5px;
 }
+
+/* 사진 아이콘 */
 .menu-img-area .fa-image{
    font-size: 36px;
    margin: 0 5px;
 }
+
+/* + 아이콘 */
 .menu-img-area .fa-plus{
    font-size: 14px;
 }
+
+/* 파일 업로드 input 감추가 */
 .input-menu-img{
    display: none;
 }
+/* 메뉴 이미지 태그 */
 .menu-img{
    width: 80px;
    height: 80px;
@@ -593,7 +601,7 @@ font-size: 14px;
 .menu-input-area {
    display: flex;
    width: 80%;
-   justify-content: space-evenly;
+   justify-content: space-between;
    align-items: center;
 }
 .menu-title, .menu-amount, .menu-content{
@@ -605,10 +613,10 @@ font-size: 14px;
    border-bottom: 1px solid grey;
 }
 .menu-title{
-   width: 20%;
+   width: 23%;
 }
 .amount-area {
-   width: 17%;
+   width: 20%;
    display: flex;
    align-items: center;
 }
@@ -620,7 +628,11 @@ font-size: 14px;
    font-size: 14px;
 }
 .menu-content{
-   width: 45%;
+   width: 48%;
+}
+/* x 버튼 */
+.menu-row-del{
+   font-size: 14px;
 }
 .fa-circle-plus{
    font-size: 20px;
