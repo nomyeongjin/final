@@ -281,8 +281,8 @@ const shutStoreImageBtn = document.querySelector("#shutStoreImageBtn");
 const popupClose = document.querySelector("#popupClose");
 const popupLayer = document.querySelector("#popupLayer");
 const reviewReportForm = document.querySelector("#reviewReportForm");
-const reviewReport = document.querySelectorAll("#reviewReport");
-const reivewComplete = document.querySelector("#reviewComplete");
+const reviewReport = document.querySelectorAll(".reviewReport");
+const reportComplete = document.querySelector("#reportComplete");
 const reportContent = document.querySelector("#reportContent");
 
 popupClose.addEventListener("click", () => {
@@ -292,45 +292,51 @@ reviewReport.forEach((report) => {
   report.addEventListener("click", ()=>{
     reviewReportForm.classList.remove("popup-hidden");
     
-    const reviewNo = reviewReport.getAttribute("data-review-no");
-    const memberNo = reviewReport.getAttribute("data-member-no");
+    const reviewNo = report.dataset.reviewNo;
 
-    reivewComplete.addEventListener("click" , (e) => {
+    reportComplete.addEventListener("click" , e => {
     
       if(reportContent.value.trim().length == 0){
         alert("신고 내용을 입력해주세요");
         reportContent.focus();
         e.preventDefault();
         return;
+
+      }else{
+        const obj = {
+          "reviewNo" : reviewNo,
+          "reportContent" : reportContent.value,
+        };
+  
+        fetch("/store/reviewReport", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(obj)
+        })
+        .then(resp => resp.json())
+        .then(result => {
+  
+          if(result == 0){
+            alert("신고 접수가 되지 않았습니다.");
+            reportContent.focus();
+            e.preventDefault();
+            
+          }
+          else{
+            alert("리뷰 신고가 접수 되었습니다.");
+            reviewReportForm.classList.add("popup-hidden");
+            reportContent.value = '';
+
+            
+
+
+          }
+  
+          
+        })
+
       }
 
-      const obj = {
-        "reviewNo" : reviewNo,
-        "reportContent" : reportContent.value,
-        "memberNo" : memberNo
-      };
-
-      fetch("/store/reviewReport", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(obj)
-      })
-      .then(resp => resp.json())
-      .then(result => {
-
-        if(result > 0){
-          alert("리뷰 신고가 접수 되었습니다.");
-          reportContent.innerText = '';
-          reviewReportForm.classList.add("popup-hidden");
-        }
-        else{
-          alert("신고 내용을 입력해주세요").
-          reportContent.focus();
-          e.preventDefault();
-        }
-
-        
-      })
       
     })
     

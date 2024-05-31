@@ -54,7 +54,22 @@ public interface DetailStoreMapper {
 	 * @param map
 	 * @return
 	 */
-	int reviewReport(Map<String, String> map);
+	int reviewReport(Map<String, Object> map);
+
+
+	/** 리뷰 신고 회원번호 조회
+	 * @param string
+	 * @return
+	 */
+	int selectMemberNo(int reviewNo);
+
+
+
+
+
+
+
+
 
 
 

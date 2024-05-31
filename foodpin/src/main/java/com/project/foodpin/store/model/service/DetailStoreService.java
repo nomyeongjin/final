@@ -34,7 +34,7 @@ public interface DetailStoreService {
 	 * @param map
 	 * @return
 	 */
-	int reviewReport(Map<String, String> map);
+	int reviewReport(Map<String, Object> map);
 
 
 
