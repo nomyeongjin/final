@@ -68,7 +68,6 @@ public class StoreMyPageController {
 	 * @return
 	 */
 	@PostMapping("storeInfoUpdate")
-	@ResponseBody
 	public String storeInfoUpdate(@SessionAttribute("loginMember") Member loginMember, 
 			@RequestParam("image") MultipartFile image, 
 			Store inputStore, 
