@@ -45,42 +45,66 @@ if(noticeTitle !=null) {
 
 /* **************  reservationDetail ************** */
 
-const storeMaxNumber = document.querySelector("#reservCount").dataset.storeMaxNumber;
+// const reservInfo = document.querySelectorAll(".reserv-info");
 
-const temp = 10;
+// if (reservInfo != null) {
+//     reservInfo[0].classList.add("click-a");
 
-if(storeMaxNumber == 0) {
-    for(let i = 1; i<=temp; i++){
-        const buttonList = document.querySelector(".button-list");
-        
-        // li 태그
-        const countList = document.createElement("li");
-        countList.className="button-item";
-        countList.innerText = `${i}명`;
-        
-        buttonList.append(countList); 
+//     for (let a of reservInfo) {
 
-    }
-}
+//         reservInfo[0].classList.remove("click-a");
 
-if(storeMaxNumber != null) {
+//         a.addEventListener("click", () => {
+
+//             // for(let item of reservInfo) {
+//             //     item.classList.add("click-a");
+//             //     item.classList.remove("click-a");
+//             // }
+//             reservInfo.classList.add("click-a");
+//         })
+//     }
+// }
+
+
+if(document.querySelector("#reservCount") != null){
+    const storeMaxNumber = document.querySelector("#reservCount").dataset.storeMaxNumber;
     
-    for(let i = 1; i<=storeMaxNumber; i++){
+    const temp = 10;
+    
+    if(storeMaxNumber == 0) {
+        for(let i = 1; i<=temp; i++){
+            const buttonList = document.querySelector(".button-list");
+            
+            // li 태그
+            const countList = document.createElement("li");
+            countList.className="button-item";
+            countList.innerText = `${i}명`;
+            
+            buttonList.append(countList); 
+    
+        }
+    }
+    
+    if(storeMaxNumber != null) {
         
-        /* li 태그 생성하기 */
-        
-        // ul 태그 
-        const buttonList = document.querySelector(".button-list");
-        
-        // li 태그
-        const countList = document.createElement("li");
-        countList.className="button-item";
-        countList.innerText = `${i}명`;
-        
-        buttonList.append(countList); // ui>li
-        
+        for(let i = 1; i<=storeMaxNumber; i++){
+            
+            /* li 태그 생성하기 */
+            
+            // ul 태그 
+            const buttonList = document.querySelector(".button-list");
+            
+            // li 태그
+            const countList = document.createElement("li");
+            countList.className="button-item";
+            countList.innerText = `${i}명`;
+            
+            buttonList.append(countList); // ui>li
+            
+        }
     }
 }
+
 
 // 예약 인원 수 체크
 
@@ -365,4 +389,3 @@ if(confirmBtn != null) {
 
     });
 }
-

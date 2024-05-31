@@ -27,7 +27,7 @@ public class WebsocketConfig implements WebSocketConfigurer{
 		
 		// 알림 처리하는 핸들러와 주소 연결
 		registry
-			.addHandler(notificationWebsocketHandler, "/notification")
+			.addHandler(notificationWebsocketHandler, "/notification/send")
 			.addInterceptors(handshakeInterceptor)
 			.setAllowedOriginPatterns("http://localhost/", "http://127.0.0.1/", "http://192.168.10.31/")
 			.withSockJS();
@@ -42,7 +42,6 @@ public class WebsocketConfig implements WebSocketConfigurer{
 						"http://192.168.10.22/")
 				.withSockJS();
 		
-	}
-	
 
+	}
 }

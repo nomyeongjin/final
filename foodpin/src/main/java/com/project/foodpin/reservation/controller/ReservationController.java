@@ -105,7 +105,12 @@ public class ReservationController {
 			@SessionAttribute("loginMember") Member loginMember,
 			Reservation reservation,
 			Store store,
-			Member member) {
+			Member member,
+			Model model) {
+		
+		// 가게 이름 조회
+		String storeName = service.selectStoreName(store);
+		model.addAttribute("storeName", storeName);
 	
 		Map<String, Object> map = new HashMap<>();
 		map.put("storeNo", storeNo);
@@ -117,7 +122,6 @@ public class ReservationController {
 		
 		map.put("visitName", reservation.getVisitName());
 		map.put("visitTel", reservation.getVisitTel());
-//		map.put("storeName", store.getStoreName());
 		
 		int insert = service.insertReservation(map);
 		
@@ -138,5 +142,6 @@ public class ReservationController {
 			@RequestBody Store store) {
 		return service.updateStoreStatus(store);
 	}
+	
 	
 }

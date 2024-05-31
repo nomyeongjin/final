@@ -19,17 +19,20 @@
             <!-- section 지정 -->
     
             <!-- 안내 section -->
-            <section class="reservation-header-container">
+            <section class="reservation-header-container" th:object="${store}">
     
-                <img class="store-image" src="#" alt="600x300">
+                <img class="store-image" src="#" alt="600x300" th:src="*{storeImg}">
     
                 <div class="header-container">
     
-                    <div class="title-container">
+                    <div class="store-name-container">
+                        <div class="store" th:text="${store.storeName}">가게이름</div>
+                    </div>
+                    <!-- <div class="title-container">
                         <i class="fa-regular fa-clock"></i>
                         <h3 class="title">예약 안내</h3>
                     </div>
-    
+                     -->
     
                     <div class="content-container">
                         <i class="fa-solid fa-message"></i>
@@ -53,15 +56,15 @@
                 <div class="nav-div">
                     <nav>
                         <ul class="nav-list">
-                            <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation'">
+                            <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation'" class="reserv-info">
                                 <li class="nav-item">예약하기</li>
                             </a>
                             
-                            <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation/detail'">
+                            <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation/detail'" class="reserv-info">
                                 <li class="nav-item">상세정보</li>
                             </a>
 
-                            <a href="#">
+                            <a href="#"  class="reserv-info">
                                 <li class="nav-item">
                                     리뷰 <span class="review-count" name="reviewCount" id="reviewCount">20</span> <!-- count로 리뷰 댓글 수 조회 예정 -->
                                 </li>
@@ -71,7 +74,7 @@
     
                 </div>
 
-                <div class="info-container">
+                <div class="info-container" th:object="${store}">
                     <div class="title-border">
                         <h3 class="title">예약 안내</h3>
                     </div>
@@ -82,9 +85,9 @@
                     </div>
 
                     <div class="images">
-                        <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage">
-                        <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage">
-                        <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage">
+                        <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage" th:src="*{storeImg}">
+                        <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage" th:src="*{storeImg}">
+                        <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage" th:src="*{storeImg}">
                     </div>
                 </div>
     
@@ -139,7 +142,7 @@
             <section class="button-area">
     
                 <div class="buttons">
-                    <a href="/reservation/reservationDetail" class="next-btn" id="nextBtn">예약하기 &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+                    <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation'" class="next-btn" id="nextBtn">예약하기 &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
                 </div>
     
             </section>

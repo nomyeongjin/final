@@ -23,17 +23,20 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class NotificationWebsocketHandler extends TextWebSocketHandler{
+public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서버와 통신 되자마자 접속한 회원의 정보를 session에 저장함
 	
 	private final NotificationService service;
-	
-	 private Set<WebSocketSession> sessions  = Collections.synchronizedSet(new HashSet<WebSocketSession>());
-	 
-	 @Override
+
+	// 서버간 전이중 통신을 담당하는 객체
+	private Set<WebSocketSession> sessions = Collections.synchronizedSet(new HashSet<WebSocketSession>());
+
+	// 클라이언트와 연결이 완료되고 통신할 준비가 끝나면 실헹
+	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessions.add(session);
 	}
 	 
+	// JS에서 보낸 함수를 처리하는 메섣,
 	 @Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
@@ -41,6 +44,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{
 		 
 		 Notification notification = objectMapper.readValue(message.getPayload(), Notification.class);
 		 
+		 // 웹소켓 연결을 통해 요청 보낸 회원 정보 얻기
 		 HttpSession currentSession = (HttpSession)session.getAttributes().get("session");
 		 
 		 // 로그인한 회원 중 알림을 보내는 회원
