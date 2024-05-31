@@ -220,10 +220,9 @@
                                 
                              
                                 <span id="showReview">
-                                    <th:block th:if="${store.reviewCount != 0}"
-                                    th:text="|리뷰 ${store.reviewCount}|">리뷰 개수</th:block>
-
-                                    ></span>
+                                    <th:block th:text="|리뷰 ${store.reviewCount}|">리뷰 개수</th:block>
+                                    >
+                                </span>
 
                                
 
@@ -240,6 +239,7 @@
                         <div class="store-detail-content">
 
                             <pre class="store-detail-text" th:text="*{storeInfo}">
+                                
                             </pre>
 
                            
@@ -580,16 +580,28 @@
              <!-- 메뉴 ( 사진 확대 팝업/ 더보기) -->
                 <div class="storedetail-menucontainer">
 
+                    
+                   
+
                     <div class="menu-info-title">
                         <span>메뉴 정보</span>
- 
+                        
                     </div>
+
+                    <th:block th:if="${store.menuList==null}">
+                    <span class="menuN">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        메뉴가 아직 준비 중입니다
+                    </span>
+                   </th:block>
+                 </th:block>
                    
                     <div class="store-menu-list" >
                         <!-- 메뉴 이미지 div 3개 추가 -->
                         <div class="menu-image-container" th:each="menu:${store.menuList}" >
                             
-                            <div class="menu">
+
+                            <div class="menu-basic-list">
                               
                                 <div >
                                     <img 
