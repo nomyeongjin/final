@@ -27,11 +27,12 @@
 
         <form action="/member/login" method="post" id="loginForm">
             <section class="input-box">
-                <input type="text" name="memberId" placeholder="Id" value="" required />
+                <input type="text" name="memberId" placeholder="Id" required />
             </section>
 
             <section class="input-box">
-                <input type="password" name="memberPw" placeholder="Password" required />
+                <input type="password" name="memberPw" id="memberPw" placeholder="Password"  required />
+                <span class="signUp-message error" id="pwMessage"></span>
             </section>
 
             <div class="saveId-area">

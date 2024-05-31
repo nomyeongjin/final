@@ -2,6 +2,7 @@ package com.project.foodpin.store.model.dto;
 
 import java.util.List;
 
+import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.review.model.dto.UploadImage;
 
 import lombok.AllArgsConstructor;
@@ -42,11 +43,16 @@ public class Store {
 
 	// 가게 메뉴 목록
 	private List<Menu> menuList;
+	
+	//가게 해시태그 목록
+	private List<ReviewHash>storeHashList;
 
 	// 찜
 	private int likeCount;
 	private int bookMark;
 	
+	// 리뷰 개수
+	private int reviewCount;
 	
 	// 메뉴
 	private int menuNo;

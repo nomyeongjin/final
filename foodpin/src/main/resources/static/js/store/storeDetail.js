@@ -9,29 +9,6 @@ storedetailmapbutton.addEventListener("click", () => {
 
 
 
-/* 가게 상세 설명 더보기 */
-const storeDetailContent =document.querySelector('.store-detail-content');
-const storeDetailText =document.querySelector('.store-detail-text');
-const moreText =document.querySelector('.more-text');
-const lessText =document.querySelector('.less-text');
-
-moreText.addEventListener("click", () => {
-  
-  moreText.style.display = 'none'; 
-  lessText.style.display = 'block'; 
-  storeDetailText.style.display = 'inline';
-});
-
-
-lessText.addEventListener("click", ()=>{
- 
- 
-  
-  lessText.style.display = 'none'; 
-  moreText.style.display = 'flex';
-  storeDetailText.style.display = '-webkit-box'; 
-});
-
 
 
 
@@ -129,6 +106,31 @@ window.onload = function() {
 /* ****************지도******************* */
 
 
+/* 가게 상세 설명 더보기 */
+const storeDetailContent =document.querySelector('.store-detail-content');
+const storeDetailText =document.querySelector('.store-detail-text');
+const moreText =document.querySelector('.more-text');
+const lessText =document.querySelector('.less-text');
+
+moreText.addEventListener("click", () => {
+  
+  moreText.style.display = 'none'; 
+  lessText.style.display = 'block'; 
+  storeDetailText.style.display = 'inline';
+});
+
+
+lessText.addEventListener("click", ()=>{
+ 
+ 
+  
+  lessText.style.display = 'none'; 
+  moreText.style.display = 'flex';
+  storeDetailText.style.display = '-webkit-box'; 
+});
+
+
+
 /* 별점  */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -140,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function averageStar(totalRating) {
     var AvgStar = document.querySelector('.realAvg-star');
      
-     AvgStar.style.width = (totalRating*105/5)+'px';
+     AvgStar.style.width = (totalRating*107/5)+'px';
     
    }
 
@@ -150,6 +152,29 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+/* 가게 주소 더보기 */
+
+const detailStoreLocContent =document.querySelector('.detailstoreloc-content');
+const storelocboxTwo =document.querySelector('.storelocbox-two');
+const moreAddress =document.querySelector('.more-address');
+const lessAddress =document.querySelector('.less-address');
+
+moreAddress.addEventListener("click", () => {
+  
+  moreAddress.style.display = 'none'; 
+  lessAddress.style.display = 'block'; 
+  storelocboxTwo.style.display = 'inline';
+});
+
+
+lessAddress.addEventListener("click", ()=>{
+ 
+ 
+  
+  lessAddress.style.display = 'none'; 
+  moreAddress.style.display = 'flex';
+  storelocboxTwo.style.display ='none'; 
+});
 
 
 
@@ -172,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
   storeTelElement.textContent = formattedTel;
 });
 
-/* 폐점/ 정보 정정 신고 팝업 */
+/*********************** 폐점/ 정보 정정 신고 팝업 ******************/
 
 
 const popupShut = document.querySelector("#popupShut");
@@ -192,6 +217,14 @@ storeReport.addEventListener("click", ()=>{
   storeReportForm.classList.remove("popup-storereport");
 });
 
+/* if(storeReportForm !=null){
+  storeReportForm.addEventListener("submit", e=>{
+
+    const reportStoreContent = document.createElement('#reportStoreContent');
+
+
+  })
+} */
 
 /* ****************** 가게 영업 시간 더보기 *********************  */
 
@@ -223,59 +256,151 @@ shutScheduleInfoBtn.addEventListener("click",()=>{
 
 /* 메뉴 이미지 더보기 */
 
-// 3개씩 불러오기
 
-
-
-
-const storeMenuList = document.querySelector(".store-menu-list");
-const menuImageContainer = document.querySelector(".menu-image-container");
-
+const storeMenuList = document.querySelector(".menu-image-container");
+const menus = storeMenuList.querySelectorAll(".menu");
 const moreMenuImageBtn = document.querySelector("#moreMenuImageBtn");
 const shutMenuImageBtn = document.querySelector("#shutMenuImageBtn");
 
+// 처음에 3개의 메뉴를 표시
+let visibleMenus = 3;
+const totalMenus = menus.length;
 
+showMenus();
 
-moreMenuImageBtn.addEventListener('click',()=>{
+moreMenuImageBtn.addEventListener('click', () => {
+  visibleMenus += 3;
+  showMenus();
+});
 
+shutMenuImageBtn.addEventListener("click", () => {
+  visibleMenus = 3;
+  showMenus();
+});
 
-  
+// 메뉴를 표시/숨김 처리하는 함수
+function showMenus() {
+  for (let i = 0; i < totalMenus; i++) {
+    if (i < visibleMenus) {
+      menus[i].style.display = "flex";
+    } /* else {
+      menus[i].style.display = "none";
+    } */
+  }
 
-  moreMenuImageBtn.style.display = 'none'; 
-  shutMenuImageBtn.style.display = 'inline'; 
-  
-  storeMenuList.style.display = 'inline';
- 
- 
-})
-
-shutMenuImageBtn.addEventListener("click",()=>{
-
-  
-  shutMenuImageBtn.style.display = 'none'; 
-  moreMenuImageBtn.style.display = 'inline';
-
-  storeMenuList.style.display = 'flex';
-
-  storeMenuList.style.overflow = 'hidden';
-
- 
-
-})
-
+  // 더보기/접기 버튼 토글
+  if (totalMenus <= 3) {
+    moreMenuImageBtn.style.display = "none";
+    shutMenuImageBtn.style.display = "none";
+  } else if (visibleMenus >= totalMenus) {
+    moreMenuImageBtn.style.display = "none";
+    shutMenuImageBtn.style.display = "block";
+  } else {
+    moreMenuImageBtn.style.display = "block";
+    shutMenuImageBtn.style.display = "none";
+  }
+}
 
 /* ****************************식당 사진 더보기*********************************** */
 
 const detailImages = document.querySelector(".detail-images");
 const storeLook = document.querySelector(".store-look");
-
 const moreStoreImageBtn = document.querySelector("#moreStoreImageBtn");
 const shutStoreImageBtn = document.querySelector("#shutStoreImageBtn");
 
+// 처음 이미지 6개 
+let visibleImages = 6;
+const totalImages = detailImages.querySelectorAll("img").length;
+
+// 초기에 보여줄 이미지 
+showImages();
+
+// 더보기 버튼 클릭 시
+moreStoreImageBtn.addEventListener("click", () => {
+    visibleImages += 6;
+    showImages();
+});
+
+// 접기 버튼 클릭 시
+shutStoreImageBtn.addEventListener("click", () => {
+    visibleImages = 6;
+    showImages();
+});
+
+// 이미지 보이기 함수
+function showImages() {
+    const images = detailImages.querySelectorAll("img");
+    images.forEach((image, index) => {
+        if (index < visibleImages) {
+            image.style.display = "inline-block";
+        } else {
+            image.style.display = "none";
+        }
+    });
+
+    // 더보기/접기 버튼 토글
+    if (totalImages <= 6) {
+      moreStoreImageBtn.style.display = "none";
+      shutStoreImageBtn.style.display = "none";
+  } else if (visibleImages >= totalImages) {
+      moreStoreImageBtn.style.display = "none";
+      shutStoreImageBtn.style.display = "inline-block";
+  } else {
+      moreStoreImageBtn.style.display = "inline-block";
+      shutStoreImageBtn.style.display = "none";
+  }
+
+  }
 
 
 
+/*********************************** 리뷰 더보기 ***********************************************/
 
+const reviewContainer = document.querySelector(".review-container");
+const reviews = reviewContainer.querySelectorAll(".review");
+const moreReviewBtn = document.querySelector("#moreReviewBtn");
+const hideReviewBtn = document.querySelector("#hideReviewBtn");
+
+let visibleReviews = 5;
+const totalReviews = reviews.length;
+
+// 초기 상태 설정
+showReviews();
+
+// 더보기 버튼 클릭 시
+moreReviewBtn.addEventListener("click", () => {
+    visibleReviews += 5;
+    showReviews();
+});
+
+// 접기 버튼 클릭 시
+hideReviewBtn.addEventListener("click", () => {
+    visibleReviews = 5;
+    showReviews();
+});
+
+// 리뷰 보기 함수
+function showReviews() {
+    reviews.forEach((review, index) => {
+        if (index < visibleReviews) {
+            review.style.display = "block";
+        } else {
+            review.style.display = "none";
+        }
+    });
+
+    // 더보기/접기 버튼 토글
+    if (totalReviews <= 5) {
+        moreReviewBtn.style.display = "none";
+        hideReviewBtn.style.display = "none";
+    } else if (visibleReviews >= totalReviews) {
+        moreReviewBtn.style.display = "none";
+        hideReviewBtn.style.display = "block";
+    } else {
+        moreReviewBtn.style.display = "block";
+        hideReviewBtn.style.display = "none";
+    }
+}
 
 /* ***************** 리뷰 신고 팝업 ****************** */
 const popupClose = document.querySelector("#popupClose");
@@ -361,6 +486,7 @@ showReview.addEventListener("click", ()=>{
 
 /**************** 가게 찜, 좋아요 개수 ******************/
 
+
 // 1. #bookmarkCheck 클릭 되었을 때
 const bookmarkCheck = document.querySelector("#bookmarkCheck");
 bookmarkCheck.addEventListener("click", e=>{
@@ -399,14 +525,25 @@ bookmarkCheck.addEventListener("click", e=>{
          bookMark = bookMark == 0? 1: 0;
 
         // 6. 하트를 채웠다/비웠다 바꾸기
+        
         e.target.classList.toggle("fa-regular");
         e.target.classList.toggle("fa-solid");
+        
+
 
         // 7. 게시글 좋아요 수 수정
         e.target.nextElementSibling.innerText = count;
+
+        bookmarkCheck.classList.add('fa-bounce');
+
+        // 1초 후에 fa-shake 클래스를 제거
+        setTimeout(function () {
+          bookmarkCheck.classList.remove('fa-bounce');
+        }, 500);
        
 
     });
 
 });
+
 
