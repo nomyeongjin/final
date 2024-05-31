@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <th:block th:replace="~{common/common}"></th:block>
+  <link rel="stylesheet" href="/css/storeReview/storeReview.css">
+
+  <title>리뷰 작성</title>
+</head>
+<body>
+  
+  <main>
+    
+    <th:block th:replace="~{common/header}"></th:block>
+    <section class="review-section">
+      
+      <form th:action="'/review/updateReview/' + *{store.storeNo}" method="POST" id="reviewForm" enctype="multipart/form-data">
+        <div class="review-container"> 
+          <h2 th:text="|${store.storeName} 장소의 방문 리뷰쓰기|"></h2>
+          <div class="review-selectBox">
+  
+            <div class="review-menu">
+              <span>메뉴선택</span>
+              <button type="button" id="selectMenu">메뉴 선택하기 ></button>
+            </div>
+
+            <section id="menuSection" class="popup-hidden">
+              <section class="popupLayer">
+            
+                <p id="p">메뉴 선택</p>
+                <span id="popupClose" class="fa-solid fa-xmark"></span>
+                
+                <div class="menu-list">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>메뉴</th>
+                        <th>선택</th>
+                      </tr>
+                    </thead>
+              
+                    <tbody id="menuBody">
+                      <tr th:each=" menu : ${menuList}">
+                        <td>
+                          <img src="/images/storeDetail/hotdog.jpg">
+                        </td>
+                        <td>
+                          <p th:text="${menu.menuTitle}">메뉴</p>
+                          <p th:text="|${menu.menuAmount} 원|">가격</p>
+                        </td>
+                        <td>
+                          <input type="checkbox" class="menu-checkbox" th:value="${menu.menuNo}" th:attr="data-amount=${menu.menuAmount}" name="menuNo">
+                        </td>
+                      </tr>
+                    </tbody>
+                    
+            
+                  </table>
+                </div>
+              
+                <div class="button-area">
+                  <button id="selectMenuButton" class="select-button" type="button">선택</button>
+                </div>
+              </section>
+            </section>
+
+
+
+            
+            <div class="review-pay">
+              <span>총 금액</span>
+              <span id="totalAmount">0</span>
+              <span>원</span>
+            </div>
+
+          </div>
+          <div class="review-score">
+
+            <i class="rating__star far fa-star"></i>
+            <i class="rating__star far fa-star"></i>
+            <i class="rating__star far fa-star"></i>
+            <i class="rating__star far fa-star"></i>
+            <i class="rating__star far fa-star"></i>
+            
+            <input type="text" class="rating__result" id="reviewRating" name="reviewRating" hidden readonly>
+            <span>점</span>
+  
+          </div>
+    
+          <div class="review-keyword"  tabindex="0">
+            <h3>어떤 점이 좋았나요?</h3>
+            <span>이 가게에 어울리는 해시태그를 골라주세요(1 ~ 5개)</span>
+            <div class="keyword-box">
+              <ul id="keywords">
+                <li>
+                  <input type="checkbox" id="goodFood" class="keyword-checkbox" value="1" name="hashNo" hidden>
+                  <label for="goodFood">#음식이 맛있어요!</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="fast" class="keyword-checkbox" value="2" name="hashNo" hidden>
+                  <label for="fast">#음식이 빨리 나와요!</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="many" class="keyword-checkbox" value="3" name="hashNo" hidden>
+                  <label for="many">#양이 많아요!</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="fresh" class="keyword-checkbox" value="4" name="hashNo" hidden>
+                  <label for="fresh">#재료가 신선해요!</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="goodMenu" class="keyword-checkbox" value="5" name="hashNo" hidden>
+                  <label for="goodMenu">#메뉴 구성이 알차요!</label>
+                </li>
+              </ul>
+              <ul id="keywords">
+                <li>
+                  <input type="checkbox" id="kind" class="keyword-checkbox" value="6" name="hashNo" hidden>
+                  <label for="kind">#사장님이 친절해요!</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="clean" class="keyword-checkbox" value="7" name="hashNo" hidden>
+                  <label for="clean">#매장이 청결해요!</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="toilet" class="keyword-checkbox" value="8" name="hashNo" hidden>
+                  <label for="toilet">#화장실이 깨끗해요!</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="parking" class="keyword-checkbox" value="9" name="hashNo" hidden>
+                  <label for="parking">#주차하기 편해요!</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="view" class="keyword-checkbox" value="10" name="hashNo" hidden>
+                  <label for="view">#뷰가 좋아요!</label>
+                </li>
+              </ul>
+              <ul id="keywords">
+                <li>
+                  <input type="checkbox" id="group" class="keyword-checkbox" value="11" name="hashNo" hidden>
+                  <label for="group">#단체 모임하기 좋아요!</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="solo" class="keyword-checkbox" value="12" name="hashNo" hidden>
+                  <label for="solo">#혼밥하기 좋아요!</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="interior" class="keyword-checkbox" value="13" name="hashNo" hidden>
+                  <label for="interior">#인테리어가 멋져요!</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="mood" class="keyword-checkbox" value="14" name="hashNo" hidden>
+                  <label for="mood">#분위기가 좋아요!</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="wide" class="keyword-checkbox" value="15" name="hashNo" hidden>
+                  <label for="wide">#매장이 넓어요!</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <h3>리뷰 사진</h3>
+          <div class="review-image-box">
+          
+            <div class="reviewImg">
+              <label for="img1">
+                <img class="preview" src="">
+              </label>
+              <input type="file" name="images" class="inputImage" id="img1" accept="image/*">
+              <span class="delete-image">&times;</span>
+            </div>
+  
+            <div class="reviewImg">
+              <label for="img2">
+                <img class="preview" src="">
+              </label>
+              <input type="file" name="images" class="inputImage" id="img2" accept="image/*">
+              <span class="delete-image">&times;</span>
+            </div>
+    
+  
+            <div class="reviewImg">
+              <label for="img3">
+                <img class="preview" src="">
+              </label>
+              <input type="file" name="images" class="inputImage" id="img3" accept="image/*">
+              <span class="delete-image">&times;</span>
+            </div>
+  
+            <div class="reviewImg">
+              <label for="img4">
+                <img class="preview" src="">
+              </label>
+              <input type="file" name="images" class="inputImage" id="img4" accept="image/*">
+              <span class="delete-image">&times;</span>
+            </div>
+            
+      
+          </div>
+  
+          <div class="review-content">
+            <textarea name="reviewContent" id="reviewContent" placeholder=" 리뷰를 작성해 주세요."></textarea>
+          </div>
+    
+    
+          <button class="review-button">리뷰 등록</button>
+          
+        </div>
+  
+      </section>
+    </form> 
+
+
+
+  </main> 
+  
+
+  <th:block th:replace="~{common/footer}"></th:block>
+
+  <script th:inline="javascript">
+    const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원";
+    const storeNo = /*[[${store.storeNo}]]*/ '가게 번호';
+    const menuList= /*[[${menuList}]]*/ "메뉴 리스트";
+  </script>
+
+
+  <script src="/js/storeReview/storeReview.js"></script>  
+</body>
+</html>

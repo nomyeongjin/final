@@ -699,8 +699,6 @@
                 
                 <div class="storereview-container" th:if="${reviewList}">
                     
-                    <a th:object="${store}" th:href="'/review/reviewPage/' + *{storeNo}">리뷰쓰기</a>
-                    
                     <th:block th:unless= "${!#lists.isEmpty(reviewList)}">
                         <h3>작성된 리뷰가 없습니다.</h3>
                     </th:block>
@@ -818,7 +816,7 @@
                 </div>
                     
 
-                <div class="review-more-button" th:if="${!#lists.isEmpty(reviewList)}">
+                <div class="review-more-button" th:if="${#lists.size(reviewList) > 5}">
                     <button type="button" id="moreReviewBtn">리뷰 더보기</button>
                     <button type="button" id="hideReviewBtn" style="display:none;">리뷰 접기</button>
                 </div>

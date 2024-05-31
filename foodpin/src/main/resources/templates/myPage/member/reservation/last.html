@@ -66,6 +66,9 @@
                                             <i class="fa-solid fa-clock"><span class="reservationTime" th:text="| *{reservTime}|"></span></i>
                                             <div class="storeAddress" th:text="*{storeLocation}"></div>
                                         </div>
+                                        <span th:object="${reservation}">
+                                            <a class="insertReviewBtn" th:href="'/review/reviewPage/' + *{storeNo}">리뷰작성</a>
+                                        </span>
                                     </li>
                                 </ul>
                             </table>
