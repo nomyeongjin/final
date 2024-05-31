@@ -543,7 +543,7 @@ font-size: 14px;
    align-items: center;
 }
 /* 메뉴 */
-.menu_row{
+.menu-row{
    width: 90%;
    display: flex;
    flex-direction: row;

@@ -30,7 +30,7 @@ menuBtn.addEventListener("click", () => {
       const createMenuRow = () => {
 
          const menuRow = document.createElement("section"); // menu_row
-         menuRow.classList.add("menu_row");
+         menuRow.classList.add("menu-row");
 
          const menuImg = document.createElement("img"); // menu-img
          menuImg.classList.add("menu-img");
@@ -102,7 +102,7 @@ menuBtn.addEventListener("click", () => {
       menuList.forEach( (menu, index) => { 
 
          const menuRow = document.createElement("section"); // menu_row
-         menuRow.classList.add("menu_row");
+         menuRow.classList.add("menu-row");
 
          const menuImg = document.createElement("img"); // menu-img
          menuImg.classList.add("menu-img");
@@ -137,7 +137,7 @@ menuBtn.addEventListener("click", () => {
          const menuRowDel = document.createElement("i"); // .menu-row-del (행 삭제)
          menuRowDel.classList.add('fa-solid', 'fa-xmark', 'menu-row-del');
 
-         if(index == 0) menuRowDel.classList.add('blind');
+         if(index == 0) menuRowDel.classList.add('blind'); // 첫번쨰 행인 경우 삭제 버튼 숨기기
 
          menuInputArea.append(menuTitle, amountArea, menuContent, menuRowDel);
          menuRow.append(menuImg, menuInputArea);
@@ -160,6 +160,7 @@ menuBtn.addEventListener("click", () => {
       menuRowContainer.append(menuRowAdd);
       
       const menuSubmitBtn = document.createElement("button"); // menuSubmitBtn
+      menuSubmitBtn.id = "menuSubmitBtn";
       menuSubmitBtn.classList.add("update-btn");
       menuSubmitBtn.innerText = "메뉴 수정";
 
@@ -202,13 +203,54 @@ menuBtn.addEventListener("click", () => {
       }); // forEach(del)
 
 
+      /**
+       * (버튼) 메뉴 수정
+       */
+      menuSubmitBtn.addEventListener("click", () => {
+
+         const dataList = [];
+
+         document.querySelectorAll(".menu-row").forEach(menu => {
+
+            console.log(document.querySelector(".input"));
+            // data = {
+            //    "menuImgUrl" : menu.menuImgUrl.value,
+            //    "menuTitle" : menu.menuTitle.value,
+            //    "menuContent" : menu.menuContent.value
+            // };
+         });
+
+
+         dataList.push(data);
+
+         console.log(dataList);
+
+         // fetch("/myPage/store/menu", {
+         //    method : "PUT",
+         //    headers : {"content-Type" : "application/json"},
+         //    body : JSON.stringify(dataList)
+         // })
+         // .then(resp => resp.json())
+         // .then(menuList => {});
+
+      });
+
+
+
+
+
 
    })
    .catch( err => console.log(err));
-   
+
+
+
+
 
 
 }); // menuBtn.addEventListener
+
+
 
 
 
