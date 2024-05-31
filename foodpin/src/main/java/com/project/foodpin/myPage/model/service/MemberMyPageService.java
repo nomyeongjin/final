@@ -46,11 +46,15 @@ public interface MemberMyPageService {
 	// 리뷰 목록 조회
 	List<Review> selectReviewList(int memberNo);
 
+	// 리뷰 개수
+	int reviewCount(int memberNo);
+	
 	// 회원 탈퇴
 	int secession(String memberPw, Member loginMember);
 
 	// 탈퇴 전 예약 확정/대기 조회
 	int selectReserv(int memberNo);
+
 
 
 
