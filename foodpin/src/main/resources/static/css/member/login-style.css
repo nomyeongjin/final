@@ -19,6 +19,15 @@
     padding: 20px 40px;
     border-radius: 5px;
   }
+
+
+  /* 입력 관련 메세지 */
+  .signUp-message{
+    font-size: 13px;
+    letter-spacing: -1px;
+  }
+
+  .error{ color : red; }
   
 
   /* 로고 영역 */
