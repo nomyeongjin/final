@@ -25,8 +25,9 @@
       
                <!-- 타이틀 영역 -->
                <div class="myPage-title-container">
-                  <section class="myPage-title">찜 목록</section>
-
+                    <section class="myPage-title">찜 목록
+                        <span th:text="|*{likeCount}개|">개수</span>
+                    </section>
                     <!-- 아무 내역 없을 때 -->
                     <th:block th:if="${#lists.isEmpty(store)}">
                         <div class="emptyList">찜한 가게가 없습니다</div>

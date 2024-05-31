@@ -133,6 +133,12 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 	public List<Store> memberLikeList(int memberNo) {
 		return mapper.memberLikeList(memberNo);
 	}
+	
+	// 찜 개수
+	@Override
+	public int likeCount(int memberNo) {
+		return mapper.likeCount(memberNo);
+	}
 
 	// 찜 취소
 	@Override
