@@ -136,7 +136,7 @@
 		WHERE R.MEMBER_NO = #{memberNo}
 		AND RESERV_STATUS_FL = 'Y'
 		AND SYSDATE > TO_TIMESTAMP(TO_CHAR(R.RESERV_DATE, 'YYYY-MM-DD') || ' ' || R.RESERV_TIME, 'YYYY-MM-DD HH24:MI')
-		ORDER BY RESERV_DATE, RESERV_TIME
+		ORDER BY RESERV_DATE DESC, RESERV_TIME
 		]]>
 	</select>
 	
@@ -155,7 +155,7 @@
 		ON R.STORE_NO = S.STORE_NO
 		WHERE R.MEMBER_NO = #{memberNo}
 		AND (RESERV_STATUS_FL = 'C' OR RESERV_STATUS_FL = 'X')
-		ORDER BY RESERV_DATE, RESERV_TIME
+		ORDER BY RESERV_DATE DESC, RESERV_TIME 
 	</select>
 	
 	<!-- 예약 취소 기능 -->
@@ -173,6 +173,13 @@
 		WHERE B.MEMBER_NO = #{memberNo}
 	</select>
 	
+	<!-- 찜 개수 -->
+	<select id="likeCount">
+		SELECT COUNT(*)
+		FROM BOOKMARK
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
 	<!-- 찜 취소 -->
 	<delete id="cancelLike" parameterType = "map">
 		DELETE FROM BOOKMARK
@@ -183,8 +190,7 @@
 	<!-- 리뷰 조회 -->
 	<select id="selectReviewList" resultMap = "review_rm">
 		SELECT DISTINCT STORE_NO, STORE_NAME, REVIEW_RATING, 
-			   <![CDATA[ TO_CHAR(REVIEW__REG_DATE, 'YYYY-MM-DD') REVIEW__REG_DATE]]>, 
-			   REVIEW_CONTENT 
+			   <![CDATA[ TO_CHAR(REVIEW__REG_DATE, 'YYYY-MM-DD') REVIEW__REG_DATE]]>, REVIEW_CONTENT 
 		FROM REVIEW R
 		JOIN STORE USING(STORE_NO)
 		JOIN "REVIEW_HASH" USING(REVIEW_NO)

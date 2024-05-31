@@ -40,6 +40,9 @@ public interface MemberMyPageService {
 	// 찜 목록 조회
 	List<Store> memberLikeList(int memberNo);
 	
+	// 찜 개수
+	int likeCount(int memberNo);
+	
 	// 찜 취소
 	int cancelLike(int memberNo, int storeNo);
 
@@ -54,6 +57,7 @@ public interface MemberMyPageService {
 
 	// 탈퇴 전 예약 확정/대기 조회
 	int selectReserv(int memberNo);
+
 
 
 
