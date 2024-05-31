@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
   storeTelElement.textContent = formattedTel;
 });
 
-/* 폐점/ 정보 정정 신고 팝업 */
+/*********************** 폐점/ 정보 정정 신고 팝업 ******************/
 
 
 const popupShut = document.querySelector("#popupShut");
@@ -217,6 +217,14 @@ storeReport.addEventListener("click", ()=>{
   storeReportForm.classList.remove("popup-storereport");
 });
 
+/* if(storeReportForm !=null){
+  storeReportForm.addEventListener("submit", e=>{
+
+    const reportStoreContent = document.createElement('#reportStoreContent');
+
+
+  })
+} */
 
 /* ****************** 가게 영업 시간 더보기 *********************  */
 
@@ -248,46 +256,50 @@ shutScheduleInfoBtn.addEventListener("click",()=>{
 
 /* 메뉴 이미지 더보기 */
 
-// 3개씩 불러오기
 
-
-
-
-const storeMenuList = document.querySelector(".store-menu-list");
-const menuImageContainer = document.querySelector(".menu-image-container");
-
+const storeMenuList = document.querySelector(".menu-image-container");
+const menus = storeMenuList.querySelectorAll(".menu");
 const moreMenuImageBtn = document.querySelector("#moreMenuImageBtn");
 const shutMenuImageBtn = document.querySelector("#shutMenuImageBtn");
 
+// 처음에 3개의 메뉴를 표시
+let visibleMenus = 3;
+const totalMenus = menus.length;
 
+showMenus();
 
-moreMenuImageBtn.addEventListener('click',()=>{
+moreMenuImageBtn.addEventListener('click', () => {
+  visibleMenus += 3;
+  showMenus();
+});
 
+shutMenuImageBtn.addEventListener("click", () => {
+  visibleMenus = 3;
+  showMenus();
+});
 
-  
+// 메뉴를 표시/숨김 처리하는 함수
+function showMenus() {
+  for (let i = 0; i < totalMenus; i++) {
+    if (i < visibleMenus) {
+      menus[i].style.display = "flex";
+    } /* else {
+      menus[i].style.display = "none";
+    } */
+  }
 
-  moreMenuImageBtn.style.display = 'none'; 
-  shutMenuImageBtn.style.display = 'inline'; 
-  
-  storeMenuList.style.display = 'inline';
- 
- 
-})
-
-shutMenuImageBtn.addEventListener("click",()=>{
-
-  
-  shutMenuImageBtn.style.display = 'none'; 
-  moreMenuImageBtn.style.display = 'inline';
-
-  storeMenuList.style.display = 'flex';
-
-  storeMenuList.style.overflow = 'hidden';
-
- 
-
-})
-
+  // 더보기/접기 버튼 토글
+  if (totalMenus <= 3) {
+    moreMenuImageBtn.style.display = "none";
+    shutMenuImageBtn.style.display = "none";
+  } else if (visibleMenus >= totalMenus) {
+    moreMenuImageBtn.style.display = "none";
+    shutMenuImageBtn.style.display = "block";
+  } else {
+    moreMenuImageBtn.style.display = "block";
+    shutMenuImageBtn.style.display = "none";
+  }
+}
 
 /* ****************************식당 사진 더보기*********************************** */
 
@@ -296,11 +308,11 @@ const storeLook = document.querySelector(".store-look");
 const moreStoreImageBtn = document.querySelector("#moreStoreImageBtn");
 const shutStoreImageBtn = document.querySelector("#shutStoreImageBtn");
 
-// 초기 상태 설정
+// 처음 이미지 6개 
 let visibleImages = 6;
 const totalImages = detailImages.querySelectorAll("img").length;
 
-// 초기에 보여줄 이미지 설정
+// 초기에 보여줄 이미지 
 showImages();
 
 // 더보기 버튼 클릭 시
@@ -367,7 +379,7 @@ hideReviewBtn.addEventListener("click", () => {
     showReviews();
 });
 
-// 리뷰 보이기 함수
+// 리뷰 보기 함수
 function showReviews() {
     reviews.forEach((review, index) => {
         if (index < visibleReviews) {

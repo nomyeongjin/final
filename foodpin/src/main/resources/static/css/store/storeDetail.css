@@ -488,9 +488,8 @@ color: rgb(66, 66, 66);
 }
 
 #popupShut:hover{
-    color: rgb(87, 214, 41);
+    color: #ff002b;
 }
-
 
 
 #storeReportForm {
@@ -726,20 +725,17 @@ hr{
     border-radius: 5px;
 }
 
-.store-menu-list{
-   
-    flex-direction: column;
-    height: 370px;
-    overflow: hidden;
-    
-    
+
+.menu{
+   display: flex;
+   flex-direction: row; 
 }
 
-
-
-.store-menu-list >*{
+.menu >*{
     margin-top: 10px;
 }
+
+
 .menu-image-container{
     display: flex;
   
@@ -780,9 +776,7 @@ hr{
     margin-bottom: 15px;
     justify-content: end;
 }
-
-
-#moreMenuImageBtn{
+.moreMenuImageBtnBox >*{
     cursor: pointer;
     width: 50px;
     border: 1px solid var(--main-color);
@@ -791,15 +785,6 @@ hr{
     background-color: white; 
 }
 
-#shutMenuImageBtn{
-    cursor: pointer;
-    width: 50px;
-    border: 1px solid var(--main-color);
-    border-radius: 10px;
-    color: rgb(46, 41, 41);  
-    background-color: white; 
-    display: none;
-}
 
 
 
@@ -815,6 +800,7 @@ hr{
 }
 
 #storeHashT{
+    cursor: pointer;
     color: #383838;
 }
 
