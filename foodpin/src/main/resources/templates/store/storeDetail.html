@@ -150,7 +150,49 @@
                                 <!-- 가게 주소 / 지역 --> <!-- 토글로 가게 우편 번호와 상세 주소 넣기 -->
                                 <div class="storedetail-two">
 
-                                    <span id="detailLoc" th:text="${address}"></span>
+                                    <div class="detailstoreloc-content">
+
+                                        <div class="storelocbox-one">
+                                            <span id="detailLoc" th:text="${address}"></span>
+                                       
+
+                                            <div>
+                                                <span  class="more-address">
+                                                    <i class="fa-solid fa-chevron-down"></i>
+                                                </span>
+                                                <span  class="less-address">
+                                                    <i class="fa-solid fa-chevron-up"></i>
+                                                </span>
+                        
+                                            </div>
+                                          
+                                        
+                                        </div>
+                                        
+                                       
+                                          <div class="storelocbox-two">
+
+                                            <div class="detailLocHide">
+                                                <div class="detailLoc-m">
+
+                                                    <span class="storeloc-detail">도로명</span>
+                                                    <span th:text="${address}"></span>
+                                                </div>
+                                                <div class="detailLoc-m">
+                                                    <span class="storeloc-detail">지번</span>
+                                                    <span th:text="${detailAddress}"></span>
+                                                </div>
+                                               
+                                                <div class="detailLoc-m">
+                                                    <span class="storeloc-detail">우</span>
+                                                    <span th:text="${postcode}"></span>
+                                                </div>
+                                            </div>
+                                           
+                                          </div>          
+                                      
+                                    </div>
+                        
                                     
 
                                     <!-- 누르면 상세 페이지로 이동
@@ -176,7 +218,12 @@
                                 </div>
 
                                 
-                                <span id="showReview">리뷰></span>
+                             
+                                <span id="showReview">
+                                    <th:block th:if="${store.reviewCount != 0}"
+                                    th:text="|리뷰 ${store.reviewCount}|">리뷰 개수</th:block>
+
+                                    ></span>
 
                                
 
@@ -563,12 +610,13 @@
 
                 <!-- 해시태그(댓글에 달린 해시들) -->
 
-                <div class="storedetail-hashtagcontainer">
-                    <span>#음식이 맛있어요!</span>
-                    <span>#사장님이 친절해요!</span>
-                    <span>#재료가 신선해요!</span>
-                    <span>#매장이 청결해요!</span>
-                    <span>#분위기가 좋아요!</span>
+                <div class="storedetail-hashtagcontainer" >
+
+                    <th:block th:each="hash:${store.storeHashList}">
+                        <span id="storeHashT" th:text="${hash.hashTitle}">가게 해시태그</span>
+                    </th:block>
+                   
+                    
                 </div>
 
                 
@@ -717,7 +765,8 @@
                 </div>
                     
                 <div class="review-more-button">
-                    <button type="button">리뷰 더보기</button>
+                    <button type="button" id="moreReviewBtn">리뷰 더보기</button>
+                    <button type="button" id="hideReviewBtn" style="display:none;">리뷰 접기</button>
                 </div>
 
             </div>

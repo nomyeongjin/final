@@ -57,25 +57,6 @@ aside p{
     color: #9c9c9c;
 }
 
-/* 위로 이동 */
-/* .top-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    user-select: none;
-    
-    font-weight: bold;
-}
-.bottom-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    user-select: none;
- 
-    font-weight: bold;
-} */
 aside>a:hover{
     background-color: rgb(148, 148, 148);
     color: #fff;
@@ -175,10 +156,16 @@ aside>a:hover{
 
 
 .fa-heart{
+   
     font-size: 20px;
     background-color: white;
     color: rgb(252, 57, 57); 
 }
+
+#bookmarkCheck{
+ cursor: pointer;
+}
+
 
 #storeLikeCount{
   font-size: 14px;
@@ -227,6 +214,85 @@ aside>a:hover{
     z-index: 1000;
   
 }
+
+
+
+.detailstoreloc-content{
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+}
+
+
+.storelocbox-one{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.storelocbox-two{
+    
+    display: none;
+}
+
+
+.detailLoc{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    color: rgb(66, 66, 66);
+}
+
+.detailLocHide{
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+}
+.detailLocHide > *{
+    margin-bottom: 5px;
+}
+
+.detailLoc-m{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 20px;
+
+}
+
+.detailLoc-m > *{
+  margin-right: 5px;
+}
+
+.storeloc-detail{
+    border-radius: 2px;
+    color: var(--main-color);
+    font-size: 13px;
+    border: 1px solid var(--main-color);
+    padding: 1px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+.more-address{
+
+    display: flex;
+    color: var(--main-color);
+    margin-left: 10px;
+    cursor: pointer;
+  
+   
+}
+.less-address{
+
+    display: none;
+     margin-left: 10px;
+     cursor: pointer;
+    color: var(--main-color);
+}
+
 
 /* 리뷰로 이동 */
 #showReview{
@@ -279,15 +345,29 @@ aside>a:hover{
 }
 
 
+
 /* 해당 가게 위치 검색된 상세 페이지로 이동하는 지도 버튼 */
 #storedetailmapbutton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    width: 50px;
-    height: 20px;
+    width: 45px;
+    height: 19px;
     border: 1px solid var(--main-color);
     border-radius: 10px;
     background-color: white;
     color: rgb(120, 120, 120);
+}
+
+#storedetailmapbutton:hover{
+display: flex;
+align-items: center;
+justify-content: center;
+ transform: scale(1.1);
+ background-color: white;
+ color: rgb(120, 120, 120);
+ transition: 0.3s;
 }
 
 /* 가게 상세 설명 */
@@ -316,6 +396,7 @@ color: rgb(66, 66, 66);
 
 .more-text{
     
+    cursor: pointer;
     width: 490px;
     height: 30px;
     border-bottom: 1px solid;
@@ -731,6 +812,32 @@ hr{
 
 .storedetail-hashtagcontainer >*{
     margin: 5px;
+}
+
+#storeHashT{
+    color: #383838;
+}
+
+#storeHashT:hover{
+
+    transition: 0.5s;
+    background: linear-gradient(
+        307deg, #ff5252 0%, #7700ff 100%
+      );
+      background: -webkit-linear-gradient(
+        307deg, #ff5252 0%, #7700ff 100%
+      );
+      background: -moz-linear-gradient(
+        307deg, #ff5252 0%, #7700ff 100%
+      );
+      background: -o-linear-gradient(
+        307deg, #ff5252 0%, #7700ff 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+   
+      clip-path: inset(1px);
 }
 
 /********** 가게 내용 2 ************/
