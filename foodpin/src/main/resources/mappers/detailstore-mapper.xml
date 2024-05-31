@@ -78,11 +78,12 @@
    	SELECT STORE_NAME, STORE_INFO, STORE_LOCATION, STORE_STATUS,
        STORE_TEL, OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END,
        STORE_CLOSED, STORE_IMG, MEMBER_NO, STORE_NO,
-       
+
        (SELECT COUNT(*) 
        FROM "REVIEW"
        WHERE STORE_NO = #{storeNo}
       AND REVIEW_DEL_FL = 'N') REVIEW_COUNT,
+
 
        	(SELECT COUNT(*) 
 		 FROM "BOOKMARK"
@@ -191,17 +192,22 @@
    
    
    <!-- 리뷰 신고 -->
-	<insert id="reviewReport" useGeneratedKeys="true" parameterType="Report">
+	<insert id="reviewReport" useGeneratedKeys="true">
 		
 		<selectKey order="BEFORE" resultType="_int" keyProperty="reportNo">
 	      SELECT SEQ_REPORT_NO.NEXTVAL FROM DUAL
 	  	</selectKey>
 		
-		INSERT INTO "REPORT" VALUES(#{reportNo}, #{reportContet}, #{reportNo}, #{memberNo})
+		INSERT INTO "REPORT" VALUES(#{reportNo}, #{reportContent}, #{reviewNo}, #{memberNo})
 	</insert>   
    
    
-   
+   <!-- 리뷰 신고 회원번호 조회 -->
+   <select id="selectMemberNo">
+   		SELECT MEMBER_NO
+   		FROM REVIEW
+		WHERE REVIEW_NO= #{reviewNo}
+   </select>
    
    
    

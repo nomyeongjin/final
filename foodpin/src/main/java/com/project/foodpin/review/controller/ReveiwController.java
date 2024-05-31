@@ -69,6 +69,7 @@ public class ReveiwController {
 		
 		if(result > 0) {
 			path = "storeReview/storeReviewComplete";
+			model.addAttribute("storeNo", storeNo);
 			model.addAttribute("reviewCount", reviewCount);
 		}else {
 			path = "storeReview/storeReview";

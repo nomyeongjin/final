@@ -93,7 +93,7 @@ public class DetailStoreController {
 	 */
 	@ResponseBody
 	@PostMapping("reviewReport")
-	public int reviewReport(@RequestBody Map<String, String> map) {
+	public int reviewReport(@RequestBody Map<String, Object> map) {
 		
 		return service.reviewReport(map);
 	}
