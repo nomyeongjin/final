@@ -21,7 +21,14 @@
             <!-- 안내 section -->
             <section class="reservation-header-container" th:object="${store}"> 
     
-                <img class="store-image" alt="600x300" th:src="*{storeImg}">
+                <th:block th:if="*{storeImg}">
+                    <img class="store-image" alt="600x300"  th:src="*{storeImg}">
+                </th:block>
+
+                <!-- 가게 이미지 없는 경우 -->
+                <th:block th:unless="*{storeImg}">
+                    <img class="store-image" alt="600x300"  src="/images/reservation/storeDefaultImage.png">
+                </th:block>
     
                 <div class="header-container">
 
