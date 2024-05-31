@@ -36,7 +36,11 @@ public interface StoreMyPageService {
 	 */
 	List<Menu> menuSelect(int storeNo);
 
-	
+	/** 메뉴 수정
+	 * @param menuList
+	 * @return result
+	 */
+	int menuUpdate(List<Menu> inputMenuList);
 	
 	// ------ 휴무일 ------
 	
@@ -88,6 +92,8 @@ public interface StoreMyPageService {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+
+
 
 	
 

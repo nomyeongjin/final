@@ -36,8 +36,17 @@ public interface StoreMyPageMapper {
 	 */
 	List<Menu> menuSelect(int storeNo);
 	
+	/** 기존 메뉴 삭제
+	 * @param storeNo
+	 * @return
+	 */
+	int deleteMenu(String storeNo);
 	
-	
+	/** 메뉴 수정
+	 * @param menu
+	 * @return
+	 */
+	int updateMenu(Menu menu);
 	
 	
 	
@@ -108,6 +117,12 @@ public interface StoreMyPageMapper {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+
+
+	
+
+
+
 
 
 

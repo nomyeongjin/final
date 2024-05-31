@@ -25,14 +25,20 @@ import lombok.RequiredArgsConstructor;
 @PropertySource("classpath:/config.properties")
 public class StoreMyPageServiceImpl implements StoreMyPageService{
 	
-	// 이미지 패스
-	@Value("${my.store.web-path}")
+	/* 이미지 패스 */
+	@Value("${my.store.web-path}") // 가게 썸네일
 	private String storeWebPath;
 	
 	@Value("${my.store.folder-path}")
 	private String storeFolderPath;
+	
+	@Value("${my.menu.web-path}") // 메뉴
+	private String menuWebPath;
+	
+	@Value("${my.menu.folder-path}")
+	private String menuFolderPath;
 
-	// 매퍼
+	/* 매퍼 */
 	private final StoreMyPageMapper mapper;
 
 	
@@ -51,7 +57,7 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		String updatePath = "";
 		String rename = "";
 		
-		if(!image.isEmpty()) { // input에서 이미지를 업로드 힌 경우
+		if( !image.isEmpty()) { // input에서 이미지를 업로드 힌 경우
 			
 			rename = Utility.fileRename(image.getOriginalFilename());
 			
@@ -81,6 +87,48 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public List<Menu> menuSelect(int storeNo) {
 		
 		return mapper.menuSelect(storeNo);
+	}
+
+	// 메뉴 수정 (삭제, 추가)
+	@Override
+	public int menuUpdate(List<Menu> inputMenuList) {
+		
+		int result = 0;
+		String updatePath = "";
+		String rename = "";
+		
+		// 기존 저장된 데이터 삭제
+		result = mapper.deleteMenu(inputMenuList.get(0).getStoreNo());
+		
+		if( inputMenuList.isEmpty()) return 0; // 입력된 메뉴 정보가 없는 경우
+		
+		else {
+			
+			for(Menu menu : inputMenuList) {
+				
+				if( !menu.getMenuImg().isEmpty()) { // 업로드 한 메뉴 이미지가 있는 경우
+					
+					rename = Utility.fileRename(menu.getMenuImg().getOriginalFilename());
+					updatePath = menuWebPath + rename;
+					menu.setMenuImgUrl(menuWebPath + rename);
+				}
+				
+				result = mapper.updateMenu(menu);
+				
+				if(result > 0) { // db등록 성공시 파일 업로드 폴더에 이미지 저장
+					
+					try {
+						menu.getMenuImg().transferTo(new File(menuFolderPath + rename)); // db등록 성공시 파일 업로드()
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
+				} // if
+			}
+		} // 이미지 있는 경우	
+		
+
+		
+		return result;
 	}
 
 
