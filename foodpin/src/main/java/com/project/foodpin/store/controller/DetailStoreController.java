@@ -39,6 +39,13 @@ public class DetailStoreController {
 		List<Review> reviewList = service.reviewDetail(storeNo);
 
 		/* Store offday = service.storeOff(storeNo); */
+		// request scope 값 세팅
+		
+		
+
+
+		model.addAttribute("reviewList",reviewList); 
+		model.addAttribute("start" , 0);
 
 		// 불러온 store 정보에서 주소 쪼개기
 		String storeLocation = store.getStoreLocation();
@@ -46,21 +53,17 @@ public class DetailStoreController {
 
 
 
+		model.addAttribute("postcode", arr[0]);
+		model.addAttribute("address", arr[1]);
+		model.addAttribute("detailAddress", arr[2]);
+
+		
+
 		String path = null;
 
 		if (store != null) {
 
-			// request scope 값 세팅
 			model.addAttribute("store", store);
-
-
-			model.addAttribute("reviewList",reviewList); 
-			model.addAttribute("start" , 0);
-
-
-			model.addAttribute("postcode", arr[0]);
-			model.addAttribute("address", arr[1]);
-			model.addAttribute("detailAddress", arr[2]);
 	
 			model.addAttribute("storeHashList", store.getStoreHashList());
 			model.addAttribute("menuList", store.getMenuList());

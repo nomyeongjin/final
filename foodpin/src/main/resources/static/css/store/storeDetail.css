@@ -737,12 +737,12 @@ hr{
 }
 
 
-.menu{
+.menu-basic-list{
    display: flex;
    flex-direction: row; 
 }
 
-.menu >*{
+.menu-basic-list >*{
     margin-top: 10px;
 }
 
@@ -796,7 +796,11 @@ hr{
     background-color: white; 
 }
 
-
+.menuN{
+  font-size: 14px;
+  color: var(--main-color);
+  border-bottom: 1px solid var(--main-color);
+}
 
 
 /* 해시태그 컨테이너 */
