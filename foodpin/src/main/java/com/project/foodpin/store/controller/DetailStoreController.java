@@ -44,16 +44,7 @@ public class DetailStoreController {
 		String storeLocation = store.getStoreLocation();
 		String[] arr = storeLocation.split("\\^\\^\\^");
 
-		model.addAttribute("store", store);
 
-
-		model.addAttribute("reviewList",reviewList); 
-		model.addAttribute("start" , 0);
-
-
-		model.addAttribute("postcode", arr[0]);
-		model.addAttribute("address", arr[1]);
-		model.addAttribute("detailAddress", arr[2]);
 
 		String path = null;
 
@@ -62,8 +53,16 @@ public class DetailStoreController {
 			// request scope 값 세팅
 			model.addAttribute("store", store);
 
+
+			model.addAttribute("reviewList",reviewList); 
+			model.addAttribute("start" , 0);
+
+
+			model.addAttribute("postcode", arr[0]);
+			model.addAttribute("address", arr[1]);
+			model.addAttribute("detailAddress", arr[2]);
 	
-           
+			model.addAttribute("storeHashList", store.getStoreHashList());
 			model.addAttribute("menuList", store.getMenuList());
 			model.addAttribute("imageList", store.getImageList());
 

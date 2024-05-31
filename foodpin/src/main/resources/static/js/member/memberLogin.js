@@ -47,3 +47,21 @@ if(loginId != null){// 로그인창의 이메일 입력 부분이 있을 때
     }
 
 }
+
+const inputPw = document.querySelector("#loginForm input[name='memberPw']");
+const pwMessage = document.querySelector("#pwMessage");
+
+inputPw.addEventListener("onkeyup", event => {
+
+    checkCapsLock(event)
+
+})
+
+function checkCapsLock(event)  {
+    if (event.getModifierState("CapsLock")) {
+      pwMessage.innerText = "Caps Lock이 켜져 있습니다."
+
+    }else {
+      pwMessage.innerText = ""
+    }
+  }

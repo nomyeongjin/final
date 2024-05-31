@@ -150,7 +150,49 @@
                                 <!-- 가게 주소 / 지역 --> <!-- 토글로 가게 우편 번호와 상세 주소 넣기 -->
                                 <div class="storedetail-two">
 
-                                    <span id="detailLoc" th:text="${address}"></span>
+                                    <div class="detailstoreloc-content">
+
+                                        <div class="storelocbox-one">
+                                            <span id="detailLoc" th:text="${address}"></span>
+                                       
+
+                                            <div>
+                                                <span  class="more-address">
+                                                    <i class="fa-solid fa-chevron-down"></i>
+                                                </span>
+                                                <span  class="less-address">
+                                                    <i class="fa-solid fa-chevron-up"></i>
+                                                </span>
+                        
+                                            </div>
+                                          
+                                        
+                                        </div>
+                                        
+                                       
+                                          <div class="storelocbox-two">
+
+                                            <div class="detailLocHide">
+                                                <div class="detailLoc-m">
+
+                                                    <span class="storeloc-detail">도로명</span>
+                                                    <span th:text="${address}"></span>
+                                                </div>
+                                                <div class="detailLoc-m">
+                                                    <span class="storeloc-detail">지번</span>
+                                                    <span th:text="${detailAddress}"></span>
+                                                </div>
+                                               
+                                                <div class="detailLoc-m">
+                                                    <span class="storeloc-detail">우</span>
+                                                    <span th:text="${postcode}"></span>
+                                                </div>
+                                            </div>
+                                           
+                                          </div>          
+                                      
+                                    </div>
+                        
                                     
 
                                     <!-- 누르면 상세 페이지로 이동
@@ -172,11 +214,16 @@
                                 <!-- 가게 정보 해시태그 -->
                                 <div id="storedetail-row">
                                     <!-- 클릭 시 상세 검색 페이지로 이동(카테고리 선택됨) -->
-                                    <a href="/chatting/chat" id="toChatting">문의하기</a>
+                                    <a href="#" id="toChatting">문의하기</a>
                                 </div>
 
                                 
-                                <span id="showReview">리뷰></span>
+                             
+                                <span id="showReview">
+                                    <th:block th:if="${store.reviewCount != 0}"
+                                    th:text="|리뷰 ${store.reviewCount}|">리뷰 개수</th:block>
+
+                                    ></span>
 
                                
 
@@ -290,7 +337,7 @@
 
 
 
-                        <form action="#" id="storeReportForm" class="popup-storereport">
+                        <form action="store/storeReport" id="storeReportForm" class="popup-storereport">
                             <section class="popupbox">
                             
                                <div class="store-report-info">
@@ -301,7 +348,8 @@
                                         <span id="popupShut" class="fa-solid fa-xmark"></span>     
                                         
                                         <textarea id="reportStoreContent"
-                                        placeholder="수정이 필요한 내용을 적어주세요. &#13; 예) 맛집 이름, 주소, 전화번호 등"></textarea>
+                                        name="reportStoreContent"
+                                        placeholder="수정이 필요한 내용을 적어주세요. &#13; 예) 맛집 이름, 주소, 전화번호 등" required></textarea>
                                         
                                     </div>
 
@@ -522,35 +570,35 @@
                     </div>
                    
                     <div class="store-menu-list" >
-                    <!-- 메뉴 이미지 div 3개 추가 -->
-                    <div class="menu-image-container" th:each="menu:${store.menuList}" >
-                        
-            
-                        <div >
-                            <img 
-                            th:if="${menu.menuImgUrl!=null}"
-                            th:src="${menu.menuImgUrl}" class="storedetail-menuimage" 
-                             alt="메뉴 사진">
+                        <!-- 메뉴 이미지 div 3개 추가 -->
+                        <div class="menu-image-container" th:each="menu:${store.menuList}" >
+                            
+                            <div class="menu">
+                              
+                                <div >
+                                    <img 
+                                    th:if="${menu.menuImgUrl!=null}"
+                                    th:src="${menu.menuImgUrl}" class="storedetail-menuimage" 
+                                    alt="메뉴 사진">
+                                </div>
+
+                                <div class="menu-info">
+                                    <span id="menuName" th:text="${menu.menuTitle}">메뉴 이름</span>
+                                    <span id="menuPrice" th:text="${menu.menuAmount}+'원'">가격</span>
+                                </div>
+
+                                <div class="menu-info-content">
+                                    <span id="menuDetail" th:text="${menu.menuContent}"></span>
+                                </div>
+                            </div>
+                
                         </div>
 
-                        <div class="menu-info">
-                            <span id="menuName" th:text="${menu.menuTitle}">메뉴 이름</span>
-                            <span id="menuPrice" th:text="${menu.menuAmount}+'원'">가격</span>
-                        </div>
-
-                        <div class="menu-info-content">
-                             <span id="menuDetail" th:text="${menu.menuContent}"></span>
-                        </div>
-                    </div>
-                    
-            
-                    
-             
                    </div>
 
                     <div class="moreMenuImageBtnBox">
                         <button id="moreMenuImageBtn">더보기</button>
-                        <button id="shutMenuImageBtn">접기</button>
+                        <button id="shutMenuImageBtn" style="display: none;">접기</button>
                     </div>
     
     
@@ -563,12 +611,13 @@
 
                 <!-- 해시태그(댓글에 달린 해시들) -->
 
-                <div class="storedetail-hashtagcontainer">
-                    <span>#음식이 맛있어요!</span>
-                    <span>#사장님이 친절해요!</span>
-                    <span>#재료가 신선해요!</span>
-                    <span>#매장이 청결해요!</span>
-                    <span>#분위기가 좋아요!</span>
+                <div class="storedetail-hashtagcontainer" >
+
+                    <th:block th:each="hash:${store.storeHashList}">
+                        <span id="storeHashT" th:text="${hash.hashTitle}">가게 해시태그</span>
+                    </th:block>
+                   
+                    
                 </div>
 
                 
@@ -752,8 +801,10 @@
                     
                 </div>
                     
+
                 <div class="review-more-button" th:if="${!#lists.isEmpty(reviewList)}">
-                    <button type="button">리뷰 더보기</button>
+                    <button type="button" id="moreReviewBtn">리뷰 더보기</button>
+                    <button type="button" id="hideReviewBtn" style="display:none;">리뷰 접기</button>
                 </div>
 
             </div>
@@ -806,15 +857,17 @@
 
     <aside>
         
-        <a href="#bodyTop"><i class="fa-solid fa-angles-up"></i></a>
-        
-        
-        <a href="#"><i class="fa-regular fa-comment"></i></a>
-        
-        <a href="/store/storeSearch"><i class="fa-solid fa-location-dot"></i></a>
-        
-        <a href="#bodyBottom"><i class="fa-solid fa-angles-down"></i></a>        
-    </aside>    
+
+         <a href="#bodyTop"><i class="fa-solid fa-angles-up"></i></a>
+       
+         
+         <a href="/chatting/chat"><i class="fa-regular fa-comment"></i></a>
+         
+         <a href="/store/storeSearch"><i class="fa-solid fa-location-dot"></i></a>
+         
+         <a href="#bodyBottom"><i class="fa-solid fa-angles-down"></i></a>        
+    </aside>
+
 
     <script src="/js/reservation/reservation.js"></script>
     <script src="/js/reservation/calendar.js"></script>
