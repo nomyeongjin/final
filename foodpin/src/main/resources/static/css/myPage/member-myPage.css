@@ -192,6 +192,7 @@ form[name='member-myPageFrm']{
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 3px;
+    letter-spacing: 1px;
 }
 
 .likeStoreAddress {
@@ -211,9 +212,182 @@ form[name='member-myPageFrm']{
  
 
 /* MEMBER REVIEW */
-.reviewContainer {
+
+.myReview {
+    margin-top: 20px;
+}
+
+.review{
+    width: 600px;
+    border: 1px solid var(--main-color);
+    border-radius: 15px;
+    padding: 24px;
+    margin-bottom: 35px;
+}
+
+.storereview-image{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.storereview-top{
+    padding: 20px 0;
+    padding-top: 10px;
+    border-bottom: 1px solid var(--main-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.reviewScore {
+    font-size: 18px;
+    color: #ff2a00;;
+}
+
+.reviewScore[data-rating="0"]::before {
+    content: '☆☆☆☆☆';}
+
+.reviewScore[data-rating="1"]::before {
+    content: '★☆☆☆☆';}
+
+.reviewScore[data-rating="2"]::before {
+    content: '★★☆☆☆';}
+
+.reviewScore[data-rating="3"]::before {
+    content: '★★★☆☆';}
+
+.reviewScore[data-rating="4"]::before {
+    content: '★★★★☆';}
+
+.reviewScore[data-rating="5"]::before {
+     content: '★★★★★';}
+
+.storereview-top-left{
+    display: flex;
+    align-items: center;
+}
+
+.review-info{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.review-storeName{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.storereview-top-right{
+    display: flex;
+    font-size: 0.8em;
+    flex-direction: column;
+    justify-content: inherit;
+}
+
+#reviewDeleteBtn {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.storereview-mid{
+    width: 100%;
+    overflow: auto;
+    padding: 25px;
+}
+
+.storereview-bottom{
+    padding: 0 25px;
+    margin-bottom: 15px;
+}
+
+.storereview-bottom > p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100px;
+    height: 25px;
+    
+    text-align: center;
+    border: 1px solid var(--main-color);
+    border-radius:24px;
+    margin: 10px 0;
+}
+
+.review-look{
+    margin: 8px;
+    width: 205px;
+    height: 205px;
+    border-radius: 5px;
+}
+
+.review-hashtag{
+    margin: 18px 0;
+}
+
+.store-reply{
+    padding: 0 25px;
+    display: flex;
+    margin: 30px 0;
+    border-bottom: 3px solid var(--main-color);
+}
+
+
+.review-store-profile{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.reply-content-bubble {
+    position:relative;
+    margin: 20px 0px;
+    margin-left: 10px;
+    padding: 20px;
+    width: 480px;
+    background:#666;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.reply-content-bubble:after {
+    border-top:15px solid #666;
+    border-left: 16px solid transparent;
+    border-right: 0px solid transparent;
+    border-bottom: 0px solid transparent;
+    content:"";
+    position:absolute;
+    top:17px;
+    left:-15px;
+}
+
+.review-more-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-more-button > button{
+    cursor: pointer;
+    border: 1px solid var(--main-color);
+    width: 300px;
+    height: 35px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: rgb(46, 41, 41);
+    background-color: white;
+}
+
+/* .reviewContainer {
     padding: 0 20px;
-    margin-bottom: 30px;
+    margin: 25px 0;
 }
 
 .reviewScore {
@@ -245,10 +419,14 @@ form[name='member-myPageFrm']{
     font-size: 18px;
 }
  
-.storeName {
-    font-size: 17px;
+.reviewStore {
+    font-size: 18px;
     font-weight: bold;
-    margin: 20px 0 10px 0;
+    margin-bottom: 10px;
+}
+
+.score-container {
+    margin-top: 5px;
 }
  
 .reviewDate {
@@ -298,7 +476,7 @@ form[name='member-myPageFrm']{
     padding: 10px;
     margin: 15px 0 0 10px;
 }
- 
+  */
  
 /* MEMBER SECESSION */
 .secession-terms{
@@ -419,6 +597,7 @@ label[for='agree']{
 .reservationStore {
     float: left;
     flex-grow: 1;
+    line-height: 1.3em;
 }
  
 .cancelReservation {
@@ -434,6 +613,22 @@ label[for='agree']{
     cursor: pointer;
 }
 
+.statusCancel, .statusNoshow {
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    color: gray;
+    width: 70px;
+    height: 30px;
+    margin-right: 50px;
+    margin-left: auto;
+}
+
+.statusNoshow {
+    color: red;
+}
+
 .emptyList {
     width: 400px;
     margin-top: 150px;
@@ -442,8 +637,14 @@ label[for='agree']{
     font-weight: bold;
 }
 
+.reservationDate {
+    font-size: 16px;
+}
+
 .storeName {
     font-size: 19px;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
  
 .reservationPeople {

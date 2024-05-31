@@ -10,6 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.foodpin.common.util.Utility;
@@ -136,14 +137,20 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 	// 찜 취소
 	@Override
 	public int cancelLike(int memberNo, int storeNo) {
-		Map<String, Integer> map = Map.of("memberNo", memberNo, "storeNo", storeNo);
-		return mapper.cancelLike(map);
+		Map<String, Integer> cancelLike = Map.of("memberNo", memberNo, "storeNo", storeNo);
+		return mapper.cancelLike(cancelLike);
 	}
 	
 	// 리뷰 목록 조회
 	@Override
 	public List<Review> selectReviewList(int memberNo) {
 		return mapper.selectReviewList(memberNo);
+	}
+
+	// 리뷰 개수
+	@Override
+	public int reviewCount(int memberNo) {
+		return mapper.reviewCount(memberNo);
 	}
 	
 	// 회원 탈퇴

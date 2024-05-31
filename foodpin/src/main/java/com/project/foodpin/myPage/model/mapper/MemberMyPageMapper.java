@@ -42,10 +42,13 @@ public interface MemberMyPageMapper {
 	List<Store> memberLikeList(int memberNo);
 
 	// 찜 취소
-	int cancelLike(Map<String, Integer> map);
+	int cancelLike(Map<String, Integer> cancelLike);
 
 	// 리뷰 목록 조회
 	List<Review> selectReviewList(int memberNo);
+	
+	// 리뷰 개수
+	int reviewCount(int memberNo);
 
 	// 입력받은 현재 비번과 DB에서 조회한 비번 비교
 	String selectPw(int memberNo);
@@ -55,6 +58,7 @@ public interface MemberMyPageMapper {
 
 	// 회원 탈퇴 전 예약 확정/대기 조회
 	int checkReserv(int memberNo);
+
 
 
 

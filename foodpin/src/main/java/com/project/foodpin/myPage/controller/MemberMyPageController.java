@@ -256,7 +256,7 @@ public class MemberMyPageController {
 		int memberNo = loginMember.getMemberNo();
 		int result = service.cancelLike(memberNo, storeNo);
 		
-		if (result > 0) {
+		if (result > 1) {
 			return true;
 		} else {
 			return false;
@@ -272,9 +272,14 @@ public class MemberMyPageController {
 		
 		int memberNo = loginMember.getMemberNo();
 		List<Review> review = service.selectReviewList(memberNo);
+		int reviewCount = service.reviewCount(memberNo);
+		
 		model.addAttribute("review", review);
+		model.addAttribute("reviewCount", reviewCount);
+		
 		return "myPage/member/memberReview";
 	}
+	
 	
 	// 회원 탈퇴 페이지로
 	@GetMapping("memberSecession")
