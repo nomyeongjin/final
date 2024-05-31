@@ -42,12 +42,13 @@
     width: 100%;
     margin-left: 10px;  
 }
-
+/* 
 .title{
     display: flex;
     padding-left: 10px;
     font-size: 20px;
-}
+    padding-bottom: 3px;
+} */
 
 .content {
     padding-left: 10px;
@@ -59,18 +60,17 @@
     color: #4A4848;
 }
 
-.title-container {
-    display: flex;
-    align-items: center;
-    
+.store{
+    font-weight: bold;
+    font-size: 26px;
+    padding: 3px 0 5px 0;
 }
 
-.content-container {
+.content-container, .store-name-container{ 
+    width: 600px;
     display: flex;
     align-items: center;
 }
-
-.content-container, .title-container{ width: 600px;}
 
 /* 예약 인원, 날짜 section */
 .reservation-body-container{
@@ -99,8 +99,7 @@
     justify-content: center;
     width:600px;
 }
-
-.nav-list>a{
+.reserv-info{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,7 +113,12 @@
 
 }   
 
-.nav-list>a:hover{
+.reserv-info:hover{
+    background-color: #afafaf;
+    color: white !important;
+}
+
+.click-a {
     background-color: #afafaf;
     color: white !important;
 }

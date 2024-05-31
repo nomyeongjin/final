@@ -39,22 +39,13 @@ const selectTimeFn = (reservDate) => {
 
         let openHour = reservTimes.openHour; // 오픈시간
         let closeHour = reservTimes.closeHour; // 마감시간
-        // console.log("opeenHour : ", openHour, "closeHour : ", closeHour);
-
+        console.log("opeenHour : ", openHour, "closeHour : ", closeHour);
+        
 
         /* ************************************************************* */
         // closeHour가 00:00 이라면 22:00까지만 예약 시간 출력
         // closeHour 보다 1시간 이전까지만 출력해야 함
         /* ************************************************************* */
-
-        // 만약 closeHour가 00:00이라면 다음 날로 처리
-        if (closeHour == "00:00") {
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1); // 다음날로 설정
-            reservTimes.closeHour = tomorrow; // 마감 시간을 00:00으로 설정
-            closeHour = tomorrow;
-        }
-
         
         // 24 시간 운영일 경우 10:00 - 22:00시까지만 예약 시간 표시
         if (openHour == closeHour) {
@@ -64,8 +55,27 @@ const selectTimeFn = (reservDate) => {
             closeHour = end; // 임시 변수에 저장
             getTimeSplit(start, end, 60);
         } 
+
+        // 만약 closeHour가 00:00이라면
+        if (closeHour == "00:00") {
+            let end = "22:00";
+            closeHour = end;
+            console.log(closeHour);
+            getTimeSplit(openHour, end, 60);
+
+            // const tomorrow = new Date();
+            // tomorrow.setDate(tomorrow.getDate() + 1); // 다음날로 설정
+            // reservTimes.closeHour = tomorrow; // 마감 시간을 00:00으로 설정
+            // closeHour = tomorrow;
+        }
+
+        // closeHour 보다 1시간 이전까지만 출력해야 함
+        const hour = closeHour.split(":")[0]-1;
+        console.log(`${hour}:00`);
+
+        const tempHour = `${hour}:00`;
         
-        const times = getTimeSplit(openHour, closeHour, 60);
+        const times = getTimeSplit(openHour, tempHour, 60);
         const breakTimes = getTimeSplit(reservTimes.breaktimeStart, reservTimes.breaktimeEnd, 60);
         // console.log(breakTimes);
 
@@ -195,6 +205,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const dayArr = ['일','월','화','수','목','금','토'];
 
     let calendarEl = document.getElementById('calendar');
+    
+    if(calendarEl == null) return;
     calendar = new FullCalendar.Calendar(calendarEl, {
 
         locale: 'kr',

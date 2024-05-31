@@ -9,12 +9,6 @@
 		WHERE STORE_NO=#{storeNo}
 		AND STORE_CLOSED = 'N'
 	</select>
-	
-	<!-- <select id="selectStoreNo">
-		SELECT STORE_NO 
-		FROM "STORE"
-		WHERE STORE_NAME =#{storeName}
-	</select> -->
 
 	<!-- 이용시간 조회 -->
 	<select id="selectUseTime">
@@ -56,16 +50,9 @@
 		AND RESERV_STATUS_FL IN ('Y', 'N')
 		GROUP BY RESERV_DATE, RESERV_TIME
 	</select>
-	
-	
-	<!-- 예약 가능 상태 변경 -->
-	<!-- <update id="updateStoreStatus">
-		UPDATE "STORE" SET
-		STORE_STATUS = 'N'
-	</update>	 -->
-	
-	
-	<select id="storeName">
+
+
+	<select id="selectStoreName">
 		SELECT STORE_NAME
 		FROM "STORE"
 		WHERE STORE_NO = #{storeNo}

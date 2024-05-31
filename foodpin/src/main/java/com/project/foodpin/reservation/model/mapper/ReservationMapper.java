@@ -13,7 +13,6 @@ public interface ReservationMapper {
 
 	Store storeDetail(String storeNo);
 
-	
 	// 이용시간 조회
 	Store selectUseTime(Reservation reservation);
 
@@ -23,12 +22,11 @@ public interface ReservationMapper {
 	// 예약하려는 날짜의 예약 건수 조회
 	List<Reservation> confirmReservDate(Reservation reservation);
 
-
 	// 예약 가능 상태 변경
 	int updateStoreStatus(Store store);
 
-
 	Map<String, Object> storeName(Map<String, Object> map);
 
+	String selectStoreName(Store store);
 
 }

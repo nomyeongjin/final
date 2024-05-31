@@ -19,5 +19,7 @@ public interface ReservationService {
 	// 예약 가능 상태 변경
 	int updateStoreStatus(Store store);
 
+	String selectStoreName(Store store);
 
+	
 }
