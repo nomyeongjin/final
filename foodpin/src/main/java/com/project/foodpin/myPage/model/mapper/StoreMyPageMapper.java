@@ -36,19 +36,29 @@ public interface StoreMyPageMapper {
 	 */
 	List<Menu> menuSelect(int storeNo);
 	
-	/** 기존 메뉴 삭제
-	 * @param storeNo
+	/** 메뉴 삭제 ('N' -> 'Y' 변경)
+	 * @param menu
 	 * @return
 	 */
-	int deleteMenu(String storeNo);
+	int deleteMenu(Menu menu);
+
+	/** 메뉴 번호 조회
+	 * @param inputMenuList
+	 * @return
+	 */
+	int selectMenuNo(Menu menu);
+
+	/** 완전히 동일한 메뉴인지 조회
+	 * @param menu
+	 * @return
+	 */
+	int selectSameMenuNo(Menu menu);
 	
-	/** 메뉴 수정
+	/** 메뉴명 제외 변경
 	 * @param menu
 	 * @return
 	 */
 	int updateMenu(Menu menu);
-	
-	
 	
 	
 	// ------ 휴무일 ------
@@ -117,6 +127,27 @@ public interface StoreMyPageMapper {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+
+
+	/** 메뉴 삭제
+	 * @param storeNo
+	 * @return
+	 */
+	int deleteAllMenu(String storeNo);
+
+
+	/** 메뉴 등록
+	 * @param inputMenuList
+	 * @return
+	 */
+	int insertMenu(Menu menu);
+
+
+
+
+
+
+
 
 
 	

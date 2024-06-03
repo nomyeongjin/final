@@ -7,6 +7,13 @@ const pwEdit =  document.querySelector("#pwEdit") // 비밀번호 변경 메뉴 
 const updateBtn = document.querySelector("#updateBtn"); // 정보 수정 메뉴 버튼
 
 const infoUpdateBtn = document.createElement("button"); // 정보 수정 메뉴 버튼
+const pwUpdateBtn = document.createElement("button"); // 정보 수정 메뉴 버튼
+
+/* 로드시 포커스 */
+document.addEventListener("DOMContentLoaded", () => {
+
+   document.querySelector("#memberEmail").focus();
+});
 
 /** 
  * 사장님 정보 변경 폼 제출 (동기식)
@@ -17,7 +24,6 @@ updateBtn.addEventListener("click", () => {
    
 });
 
-console.log(memberNo);
 
 /**
  * (메뉴) 사장님 정보 변경 화면 전환
@@ -69,6 +75,8 @@ ceoInfoEdit.addEventListener("click", () => {
    
       updateFrm.append(emailArea, telArea, infoUpdateBtn);
       container.append(updateFrm);
+
+      inputEmail.focus(); // 이메일란에 초점
    })
 });
 
@@ -77,7 +85,57 @@ ceoInfoEdit.addEventListener("click", () => {
  * (메뉴) 비밀번호 변경 화면 전환
  */
 pwEdit.addEventListener("click", () => {
+   
+   container.innerHTML = "";
 
+   const updateFrm = document.createElement("form");
+   updateFrm.classList.add("ceo-info-container");
+
+   const pwArea = document.createElement("div"); // 기존 비밀번호
+   pwArea.classList.add("ceoInfo-input-area");
+
+   const labelPw = document.createElement("label");
+   labelPw.setAttribute("for", "memberPw");
+   labelPw.innerText = "비밀번호";
+   
+   const inputPw = document.createElement("input");
+   inputPw.setAttribute("name", "memberPw");
+   inputPw.setAttribute("type", "password");
+
+   const NewPwArea = document.createElement("div"); // 새 비밀번호
+   NewPwArea.classList.add("ceoInfo-input-area");
+
+   const labelNewPw = document.createElement("label");
+   labelNewPw.setAttribute("for", "memberNewPw");
+   labelNewPw.innerText = "새 비밀번호";
+   
+   const inputNewPw = document.createElement("input");
+   inputNewPw.setAttribute("name", "memberNewPw");
+   inputNewPw.setAttribute("type", "password");
+
+   const NewPwCheckArea = document.createElement("div"); // 새 비밀번호 확인
+   NewPwCheckArea.classList.add("ceoInfo-input-area");
+
+   const labelNewPwCheck = document.createElement("label");
+   labelNewPwCheck.setAttribute("for", "memberNewPwCheck");
+   labelNewPwCheck.innerText = "새 비밀번호 확인";
+   
+   const inputNewPwCheck = document.createElement("input");
+   inputNewPwCheck.setAttribute("name", "memberNewPwCheck");
+   inputNewPwCheck.setAttribute("type", "password");
+
+   pwArea.append(labelPw, inputPw); 
+   NewPwArea.append(labelNewPw, inputNewPw);
+   NewPwCheckArea.append(labelNewPwCheck, inputNewPwCheck);
+
+   pwUpdateBtn.classList.add("update-btn"); // 제출 버튼
+   pwUpdateBtn.id = pwUpdateBtn;
+   pwUpdateBtn.innerText = "비밀번호 변경";
+
+   updateFrm.append(pwArea, NewPwArea, NewPwCheckArea, );
+   container.append(updateFrm);
+
+   inputPw.focus(); // 기존비밀번호란에 초점
 });
 
 infoUpdateBtn.addEventListener("click", () => {
@@ -103,3 +161,14 @@ infoUpdateBtn.addEventListener("click", () => {
    })
 
 });
+
+pwUpdateBtn.addEventListener("click", () => {
+
+   const pw = {
+      "memberNo" : memberNo,
+      "memberPw" : document.querySelector("input[name='memberPw']").value,
+      "memberNewPw" : document.querySelector("input[name='memberNewPws']").value,
+      "memberNewPwCheck" : document.querySelector("input[name='memberNewPwCheck']").value
+   }
+
+})

@@ -21,6 +21,8 @@ public class Menu {
 	private String menuContent;
 	private String menuImgUrl; 
 	private String storeNo;
+	private String menuFl;
+	
 	
 	public MultipartFile menuImg;
 	

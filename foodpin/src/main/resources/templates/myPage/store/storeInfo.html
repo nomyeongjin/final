@@ -49,9 +49,10 @@
 
                <!-- 가게 이미지 -->
                <div class="store-img">
-                  <img th:src="*{storeImg}" alt="">
+                  <img th:src="*{storeImg}" id="storeImg" alt="">
                </div>
-               <input type="file" name="image" id="image" accept="image/*">
+               
+               <input type="file" name="image" id="imageInput" accept="image/*">
                
                <div class="edit-area-row">
                   <label for="storeName">상호명 : </label>

@@ -1,6 +1,58 @@
 /* 본문 영역, 서브 메뉴 버튼 변수 선언 */
 const StoreInfoContainer = document.querySelector(".myPage-content-container"); // 본문 div 영역
 
+const storeEditFrm = document.querySelector("#storeEditFrm"); // form
+
+
+
+/* 가게 이미지 */
+
+const storeImg = document.querySelector("#storeImg");
+let imageInput = document.querySelector("#imageInput"); 
+
+let imgStatus = -1; // 이미지 기록 상태 변수
+let backupInput; // 
+
+
+/**
+ * 가게 이미지 변경
+ * @param {*} e 
+ */
+const changeImageFn = e => {
+
+   const maxSize =  1024 * 1024 * 5; // 이미지 최대 업로드 사이즈 지정
+   const file = e.target.files[0]; // 업로드 된 파일 정보
+
+   console.log(file);
+
+
+   // 파일 업로드 취소 + 백업본 (추가예정)
+
+
+   /* 선택된 이미지 미리보기 */
+   const reader = new FileReader();
+   reader.readAsDataURL(file);
+   
+   /**
+    * 업로드 이미지 파일 읽기 완료시 미리보기
+    */
+   reader.addEventListener("load", e => {
+   
+      const url = e.target.result;
+      storeImg.setAttribute("src", url);
+   
+      imgStatus = 1; // 이미지 업로드 상태 기록
+   
+      backupInput = imageInput.cloneNode(true);
+   })
+   
+}
+
+imageInput.addEventListener("change", changeImageFn);
+
+
+
+
 
 /* -------------------------- */
 /* 예약 신청 허용/미허용 선택 */
@@ -101,3 +153,5 @@ breaktime.addEventListener("change", () => {
       breaktimeArea.classList.remove('blind');
    }
 })
+
+
