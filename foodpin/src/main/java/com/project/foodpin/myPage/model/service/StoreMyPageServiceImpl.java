@@ -126,8 +126,6 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 			}
 		} // 이미지 있는 경우	
 		
-
-		
 		return result;
 	}
 
