@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.review.model.dto.Review;
@@ -109,8 +110,42 @@ public class ReveiwController {
 	}
 	
 	
-	
-	
+	// 리뷰 수정
+	@PostMapping("updateReview/{storeNo}/{reviewNo}")
+	public String updateReview(
+		@PathVariable("storeNo") String storeNo,
+		@PathVariable("reviewNo") int reviewNo,
+		Review inputReview,
+		@RequestParam("images") List<MultipartFile> images,
+		@RequestParam("hashNo") List<Integer> hashNo,
+		@RequestParam("menuNo") List<Integer> menuNo,
+		@RequestParam(value="deleteOrder", required=false) String deleteOrder,
+		@SessionAttribute("loginMember") Member loginMember,
+		RedirectAttributes ra
+		) throws IllegalStateException, IOException {
+		
+		inputReview.setStoreNo(storeNo);
+		inputReview.setReviewNo(reviewNo);
+		inputReview.setMemberNo(loginMember.getMemberNo());
+		
+		int result = service.updateReview(inputReview, menuNo, hashNo, deleteOrder, images);
+		
+		
+		String path = null;
+		String message = null;
+		
+		if(result > 0) {
+			path = "myPage/member/memberReview";
+			message = "리뷰가 수정되었습니다.";
+		} else {
+			path = "storeReview/storeReviewUpdate";
+			message = "수정 실패";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return path;
+	}
 	
 	
 	

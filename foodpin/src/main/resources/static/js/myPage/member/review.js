@@ -1,4 +1,4 @@
-const reviewDeleteBtns = document.querySelectorAll("#reviewDeleteBtn");
+const reviewDeleteBtns = document.querySelectorAll(".reviewDeleteBtn");
 
 reviewDeleteBtns.forEach((btn) => {
   

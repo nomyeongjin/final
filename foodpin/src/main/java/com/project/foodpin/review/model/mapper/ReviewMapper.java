@@ -1,6 +1,7 @@
 package com.project.foodpin.review.model.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -41,6 +42,19 @@ public interface ReviewMapper {
 
 	// 리뷰 수정시 기존 리뷰 조회
 	Review selectReview(int reviewNo);
+
+	// 리뷰 수정(리뷰 내용, 리뷰 별점)
+	int updateReview(Review inputReview);
+
+	// 리뷰 이미지 삭제
+	int deleteImage(Map<String, Object> map);
+
+	// 리뷰 이미지 수정
+	int updateImage(UploadImage img);
+
+	// 리뷰 이미지 삽입
+	int insertImage(UploadImage img);
+
 
 
 

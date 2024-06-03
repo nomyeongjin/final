@@ -3,7 +3,9 @@ package com.project.foodpin.review.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -16,6 +18,8 @@ import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.review.model.dto.ReviewMenu;
 import com.project.foodpin.review.model.dto.UploadImage;
+import com.project.foodpin.review.model.exception.ImageDeleteException;
+import com.project.foodpin.review.model.exception.ImageUpdateException;
 import com.project.foodpin.review.model.exception.ReviewInsertException;
 import com.project.foodpin.review.model.mapper.ReviewMapper;
 import com.project.foodpin.store.model.dto.Menu;
@@ -162,7 +166,78 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	
 	
-	
+	// 리뷰 수정
+	@Override
+	public int updateReview(Review inputReview, List<Integer> menuNo, List<Integer> hashNo, String deleteOrder,
+			List<MultipartFile> images) throws IllegalStateException, IOException {
+		
+		int result = mapper.updateReview(inputReview);
+		
+		if(result == 0) return 0;
+		
+		if(deleteOrder != null && !deleteOrder.equals("")) {
+			
+			Map<String, Object> map = new HashMap<>();
+			
+			map.put("reviewNo", inputReview.getReviewNo());
+			map.put("deleteOrder", deleteOrder);
+			
+			result = mapper.deleteImage(map);
+			
+			if(result == 0) {
+				throw new ImageDeleteException();
+			}
+		}
+			
+		List<UploadImage> uploadList = new ArrayList<>();
+		
+		for(int i=0; i<images.size(); i++) {
+			
+			if(!images.get(i).isEmpty()) {
+				
+				String originalName = images.get(i).getOriginalFilename();
+				String rename = Utility.fileRename(originalName);
+				
+				UploadImage img = UploadImage.builder().
+						imagePath(webPath)
+						.imgRename(rename)
+						.imageOrder(i)
+						.storeNo(inputReview.getStoreNo())
+						.reviewNo(inputReview.getReviewNo())
+						.imgOriginalName(originalName)
+						.uploadFile(images.get(i))
+						.build();
+				
+				uploadList.add(img);
+				
+				result = mapper.updateImage(img);
+				
+				if(result == 0) {
+					result = mapper.insertImage(img);
+				}
+				
+			}
+			
+			if(result == 0) {
+				throw new ImageUpdateException();
+			}
+			
+		}
+		
+		if(uploadList.isEmpty()) {
+			return result;
+		}
+		
+			
+		for(UploadImage img : uploadList) {
+			img.getUploadFile().transferTo(new File(folderPath + img.getImgRename()));
+		}
+		
+		
+		
+		
+		return result;
+	}
 	
 	
 	
