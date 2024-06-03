@@ -25,7 +25,7 @@
     display: flex;
       flex-direction: column;
       margin-bottom: 50px;
-      background-color: #eeeeee;
+      background-color: #f7f7ea;
       padding: 40px;
       padding-bottom: 60px;
       border-radius: 20px;
@@ -98,14 +98,19 @@
       width: 30%;
       height: 70%;
       background-color: white;
-      border: 1px solid var(--main-color);
+      border: 1px solid #E14C54;
       cursor: pointer;
       border-radius: 10px;
+    }
+    .signUp-input-area > button:hover{
+      background-color: #E14C54;
+      border: 1px solid #E14C54;
+      color: white;
     }
     
     /* :focus-within : 내부 input 요소에 포커스가 맞춰졌을 때 */
     .signUp-input-area:focus-within{
-      border-bottom-color: black;
+      border-bottom-color: #DF8B4E;
     }
     
     
@@ -122,10 +127,10 @@
     
     /* 회원가입 버튼 */
     #signUpBtn{
+      margin: 0 auto;
       width: 400px;
       height: 45px;
       padding: 10px;
-      margin: 50px;
       margin-bottom: 150px;
       border: none;
     
@@ -133,11 +138,17 @@
       font-weight: bold;
       border-collapse: 10px;
   
-      border: 1px solid black;
-      background-color: black;
+      border: 1px solid #2B3151;
+      background-color: #2B3151;
       color : white;
       cursor: pointer;
       border-radius: 20px;
+    }
+    #signUpBtn:hover{
+  
+      border: 1px solid #2B3151;
+      background-color: white;
+      color : #2B3151;
     }
     
     #signUpBtn:active{

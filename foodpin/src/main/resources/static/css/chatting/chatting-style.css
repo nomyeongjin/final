@@ -126,7 +126,7 @@ li>img{
 }
 
 .my-chat>.chat{
-    background-color: #dee6ff;
+    background-color: #FDDFB6;
 }
 
 .chat{
@@ -135,7 +135,7 @@ li>img{
 	max-width: 500px;
 	word-break: break-all;
 	white-space: pre-wrap;
-    background-color: #ffdede;   
+    background-color: #EFEFCB;   
     padding: 10px;
     border-radius: 15px;
     margin: 5px 0;
