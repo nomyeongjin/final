@@ -25,17 +25,137 @@
                    
                   </div>
 
-                       <!-- 검색창 아래 내용 -->
-                    <div class="search-panelContent">
-                        <span>내용</span>
+                       <!-- 검색창 카테고리 -->
+                      
+                    <div class="search-categoryContaier">
+
+                        <div class="search-categoryContaier-hide">
+                            <span >
+                                <i class="fa-solid fa-plus"></i>
+                            </span>
+                            <span >
+                                <i class="fa-solid fa-minus"></i>
+                            </span>
+    
+                        </div>
+
+                        <div class="searchcategory-Btnbox">
+                            <button>전체</button>
+                            <button>한식</button>
+                            <button>중식</button>
+                            <button>일식</button>
+                            <button>양식</button>
+                            <button>분식</button>
+                            <button>고기.구이</button>
+                            <button>뷔페</button>
+                            <button>카페.디저트</button>
+                            <button>패스트푸드</button>
+                            <button>찜.탕.찌개</button>
+                            <button>맛집랭킹</button>
+                        </div>
+                       
                     </div>
                 
               
-                    <!-- 사이드바 넣는 버튼 -->
+                    <!-- 검색창 아래 내용 -->
                     <div class="search-panelContent">
-                        <span>내용</span>
+
+                        <div class="rotate-container">
+                            <i class="fa-solid fa-arrow-rotate-left"></i>
+                        </div>
+
+                        <div class="search-storelist-type">
+
+                            <div class="storelist-typecontainer">
+
+                                <div>
+                                    <span>주변</span>
+                                </div>
+    
+                                <div>
+                                    
+                                    <div>
+                                        <span >
+                                            <i class="fa-solid fa-angle-down"></i>
+                                        </span>
+                                        <span >
+                                            <i class="fa-solid fa-angle-up"></i>
+                                        </span>
+                
+                                    </div>
+                                   
+                                </div>
+
+                            </div>
+                           
+
+                            <div>
+                                <span>내 위치에서(북마크 많은 순 , 리뷰개수 순 , 가까운 순, 평점 순)
+                                    <button></button>
+                                </span>
+                            </div>
+
+                            
+                        </div>
+                    
+                        <div>
+                           
+                            <div>
+                                <div>
+                                    <img src="/images/storeDetail/store.jpg" id="searchStoreImg">
+                                    
+                                     
+                                </div>
+
+                                <div>
+                                    <div>
+
+                                        <span>
+                                            가게 이름(클락하면 상세 페이지로 이동)
+                                        </span>
+                                        <span>
+                                            가게 카테고리
+                                        </span>
+
+                                        <a href="store/storeDetail/${store.storeNo}/reservation">예약 페이지로 이동</a>
+                                    </div>
+
+                                    <div class="storesearch-heartcontainer">
+                                        <i class="fa-solid fa-heart"> </i>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    가게 정보 한 줄만 보이게
+                                </div>
+
+                                <div>
+                                    가게 정보 들어갈 곳
+                                    <div>
+                                      가게 주소
+                                    </div>
+
+                                    <div>
+                                        가게 별점 / 리뷰 개수 / 영업 중인지 아닌지
+                                    </div>
+                                </div>
+                        
+                            </div>
+                        </div>
+                        
+
+
                     </div>
 
                 </div>
             </div>
+
+            <button id="hideSideBar">
+                <span class="blind">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </span>
+                <span class="show">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </span>
+            </button>
 

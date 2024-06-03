@@ -9,6 +9,16 @@ mapHome.addEventListener("click", () => {
 
 });
 
+// 누르면 채팅 페이지로 이동 해당 가게의 위치가 상세 페이지에서 검색됨
+const storedetailmapbutton = document.querySelector("#chatS");
+
+storedetailmapbutton.addEventListener("click", () => {
+  location.href = "/chatting/chat";
+
+});
+
+
+
  
 /* ************************************* 지도 ******************************************* */
 function storelocation() {
@@ -129,8 +139,6 @@ function storelocation() {
 
 }
 
-/* ************************************* 지도 ******************************************* */
-
 
 /* 화면 생성 시 자동 실행 */
 window.onload = function() {
@@ -140,4 +148,55 @@ window.onload = function() {
    
 };
 
+
+/* ************************************* 지도 ******************************************* */
+
+
+
+/* nav 바 접기 */
+
+/* 가게 상세 설명 더보기 */
+const storeDetailContent =document.querySelector('.store-detail-content');
+const storeDetailText =document.querySelector('.store-detail-text');
+const moreText =document.querySelector('.more-text');
+const lessText =document.querySelector('.less-text');
+
+moreText.addEventListener("click", () => {
+  
+  moreText.style.display = 'none'; 
+  lessText.style.display = 'block'; 
+  storeDetailText.style.display = 'inline';
+});
+
+
+lessText.addEventListener("click", ()=>{
  
+ 
+  
+  lessText.style.display = 'none'; 
+  moreText.style.display = 'flex';
+  storeDetailText.style.display = '-webkit-box'; 
+});
+
+
+// 비동기로 내용 불러올 공간
+const sidebarMenu = document.querySelector(".sidebar-menu");
+
+
+
+const remS = document.querySelector("#remS");
+
+storedetailmapbutton.addEventListener("click", () => {
+
+    sidebarMenu.innerHTML = "";
+
+   
+});
+const resS = document.querySelector("#resS");
+
+storedetailmapbutton.addEventListener("click", () => {
+    sidebarMenu.innerHTML = "";
+
+
+});
+

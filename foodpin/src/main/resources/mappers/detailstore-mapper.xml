@@ -76,8 +76,8 @@
 	   <!-- 가게 상세 조회 -->
    <select id="storeDetail" resultMap="store_rm">
    	SELECT STORE_NAME, STORE_INFO, STORE_LOCATION, STORE_STATUS,
-       STORE_TEL, OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END,
-       STORE_CLOSED, STORE_IMG, MEMBER_NO, STORE_NO,
+       STORE_TEL, OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END, 
+       STORE_CLOSED, STORE_IMG, STORE_NO, 
 
        (SELECT COUNT(*) 
        FROM "REVIEW"
@@ -89,16 +89,21 @@
 		 FROM "BOOKMARK"
 		 WHERE STORE_NO = #{storeNo}) LIKE_COUNT,
 		 
-		 (SELECT COUNT(*)FROM "BOOKMARK"
-	    WHERE MEMBER_NO = #{memberNo}
-	    AND STORE_NO =#{storeNo}) BOOK_MARK ,
-	    
+
 	     (SELECT ROUND(AVG(REVIEW_RATING), 1)
 		  FROM REVIEW
 		  WHERE STORE_NO =#{storeNo}
-		  AND REVIEW_DEL_FL = 'N') TOTAL_RATING 
+		  AND REVIEW_DEL_FL = 'N') TOTAL_RATING
+		 
+		 <if test="memberNo!=null">
+		 
+		 , (SELECT COUNT(*)FROM "BOOKMARK"
+	    WHERE MEMBER_NO = #{memberNo}
+	    AND STORE_NO =#{storeNo}) BOOKMARK
+	    </if>
 		  
 		FROM "STORE" 
+		JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE STORE_NO = #{storeNo}
 		AND STORE_CLOSED ='N'
    </select>
@@ -209,14 +214,39 @@
 		WHERE REVIEW_NO= #{reviewNo}
    </select>
    
+   <!-- 가게 정보 정정 신고 -->
+<insert id="storeReport" useGeneratedKeys="true">
+    <selectKey order="BEFORE" resultType="_int" keyProperty="requestNo">
+        SELECT SEQ_REQUEST_NO.NEXTVAL FROM DUAL
+    </selectKey>
+    INSERT INTO "REQUEST_EDIT" (REQUEST_NO, REQUEST_CONTENT, STORE_NO, MEMBER_NO, REQUEST_CATEGORY_CODE)
+    VALUES (
+        #{requestNo}, 
+        #{requestContent}, 
+        #{storeNo}, 
+        #{memberNo},
+        CASE 
+            WHEN '${requestCategoryTitle}' = 'changeBasicinfo' THEN '1'
+            WHEN '${requestCategoryTitle}' = 'changeMenu' THEN '2'
+            WHEN '${requestCategoryTitle}' = 'chageStoreTime' THEN '6'
+            WHEN '${requestCategoryTitle}' = 'storeClosed' THEN '7'
+            ELSE '0' 
+        END
+    )
+</insert>
+   
+   <!-- 가게 정보 정정 신고 회원번호 조회 -->
+   <select id="selectReportMemberNo">
+   		SELECT MEMBER_NO
+   		FROM STORE
+		WHERE STORE_NO= #{storeNo}
+   </select>
+
    
    
    
    
-   
-   
-   
-   
+
    
   
 </mapper>

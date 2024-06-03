@@ -17,7 +17,7 @@ public interface DetailStoreMapper {
 	 * @param storeNo
 	 * @return store
 	 */
-	Store storeDetail(String storeNo);
+	Store storeDetail(Map<String, Object> map);
 
 	
 
@@ -27,21 +27,21 @@ public interface DetailStoreMapper {
 	 * @param map
 	 * @return
 	 */
-	int deleteStoreLike(Map<String, Integer> map);
+	int deleteStoreLike(Map<String, Object> map);
 
 
 	/** 가게 찜 체크
 	 * @param map
 	 * @return
 	 */
-	int insertStoreLike(Map<String, Integer> map);
+	int insertStoreLike(Map<String, Object> map);
 
 
 	/** 가게 찜 개수 조회
-	 * @param integer
+	 * @param object
 	 * @return
 	 */
-	int selectLikeCount(Integer integer);
+	int selectLikeCount(Object object);
 
 
 	/** 가게 리뷰 상세 조회
@@ -62,6 +62,28 @@ public interface DetailStoreMapper {
 	 * @return
 	 */
 	int selectMemberNo(int reviewNo);
+
+
+
+	/** 가게 정보 정정 신고 회원번호 조회
+	 * @param storeNo
+	 * @return
+	 */
+	int selectReportMemberNo(String storeNo);
+
+
+
+	/** 가게 정보 정정 신고 
+	 * @param map
+	 * @return
+	 */
+	int storeReport(Map<String, Object> map);
+
+
+
+
+
+
 
 
 

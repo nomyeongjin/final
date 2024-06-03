@@ -49,7 +49,7 @@ public class Store {
 
 	// 찜
 	private int likeCount;
-	private int bookMark;
+	private int bookmark;
 	
 	// 리뷰 개수
 	private int reviewCount;
