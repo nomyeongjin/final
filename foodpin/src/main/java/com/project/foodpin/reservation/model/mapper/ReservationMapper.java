@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.store.model.dto.Store;
 
@@ -23,10 +24,12 @@ public interface ReservationMapper {
 	List<Reservation> confirmReservDate(Reservation reservation);
 
 	// 예약 가능 상태 변경
-	int updateStoreStatus(Store store);
+//	int updateStoreStatus(Store store);
 
-	Map<String, Object> storeName(Map<String, Object> map);
-
+	// 가게 이름 조회
 	String selectStoreName(Store store);
+
+	// 고정 휴무일, 지정 휴무일 조회
+	List<Off> selecetOffDay(String storeNo);
 
 }

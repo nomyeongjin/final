@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
+import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.reservation.model.service.ReservationService;
 import com.project.foodpin.store.model.dto.Store;
@@ -58,7 +59,7 @@ public class ReservationController {
 	// 예약 확정 하기 전 동의 페이지
 	@GetMapping("storeDetail/{storeNo}/reservation/reservationCheck")
 	public String reservationCheck(
-			@PathVariable("storeNo") String storeNo) {
+			@PathVariable("storeNo") String storeNo) {		
 		
 //		return service.selectChekcList();
 		return "reservation/reservationCheck";
@@ -93,7 +94,12 @@ public class ReservationController {
 	/****** form 태그 제출를 위한 ******/
 	@PostMapping("storeDetail/{storeNo}/reservation/nextPage")
 	public String nextPage(
-			@PathVariable("storeNo") String storeNo) {
+			@PathVariable("storeNo") String storeNo,
+			Store store,
+			Model model) {
+		
+		String storeName = service.selectStoreName(store);
+		model.addAttribute("storeName", storeName);
 		
 		return "reservation/reservationCheck";
 	}
@@ -104,7 +110,7 @@ public class ReservationController {
 			@PathVariable("storeNo") String storeNo,
 			@SessionAttribute("loginMember") Member loginMember,
 			Reservation reservation,
-			Store store,
+			Store store,	
 			Member member,
 			Model model) {
 		
@@ -135,13 +141,22 @@ public class ReservationController {
 	}
 	
 	
-	// 예약 가능 상태 변경
+	// 고정 휴무일, 지정 휴무일 조회
 	@ResponseBody
-	@PostMapping("updateStoreStatus")
-	public int updateStoreStatus(
-			@RequestBody Store store) {
-		return service.updateStoreStatus(store);
+	@PostMapping("selectOffDay")
+	public List<Off> dayList(
+			@RequestBody String storeNo){
+		return service.selectOffDay(storeNo);
 	}
 	
+
+//	// 예약 가능 상태 변경
+//	@ResponseBody
+//	@PostMapping("updateStoreStatus")
+//	public int updateStoreStatus(
+//			@RequestBody Store store) {
+//		return service.updateStoreStatus(store);
+//	}
+
 	
 }

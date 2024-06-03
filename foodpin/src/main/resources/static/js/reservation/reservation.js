@@ -69,6 +69,7 @@ if(noticeTitle !=null) {
 if(document.querySelector("#reservCount") != null){
     const storeMaxNumber = document.querySelector("#reservCount").dataset.storeMaxNumber;
     
+    // 예약 가능 인원을 지정하지 않은 경우 10명까지로 지정
     const temp = 10;
     
     if(storeMaxNumber == 0) {
