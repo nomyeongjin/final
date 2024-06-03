@@ -29,7 +29,7 @@
     align-items: center;
     height: 300px; /* 사진 크기 확인 필요 */
     width: 600px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: auto;
 }
 
@@ -107,7 +107,7 @@
     width: 150px;
     height: 100px;
     border-radius: 5px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .nav-div {

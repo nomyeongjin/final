@@ -3,6 +3,7 @@ package com.project.foodpin.reservation.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.store.model.dto.Store;
 
@@ -17,9 +18,14 @@ public interface ReservationService {
 	int insertReservation(Map<String, Object> map);
 
 	// 예약 가능 상태 변경
-	int updateStoreStatus(Store store);
+//	int updateStoreStatus(Store store);
 
+	// 가게 이름 조회
 	String selectStoreName(Store store);
+
+	// 고정 휴무일, 지정 휴무일 지정
+	List<Off> selectOffDay(String storeNo);
+
 
 	
 }

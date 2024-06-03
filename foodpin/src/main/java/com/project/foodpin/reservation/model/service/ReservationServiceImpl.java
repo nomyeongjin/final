@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.reservation.model.mapper.ReservationMapper;
 import com.project.foodpin.store.model.dto.Store;
@@ -56,14 +57,21 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 	
 	// 예약 가능 상태 변경
-	@Override
-	public int updateStoreStatus(Store store) {
-		return mapper.updateStoreStatus(store);
-	}
+//	@Override
+//	public int updateStoreStatus(Store store) {
+//		return mapper.updateStoreStatus(store);
+//	}
 	
+	// 가게 이름 조회
 	@Override
 	public String selectStoreName(Store store) {
 		return mapper.selectStoreName(store);
+	}
+	
+	// 고정 휴무일, 지정 휴무일
+	@Override
+	public List<Off> selectOffDay(String storeNo) {
+		return mapper.selecetOffDay(storeNo);
 	}
 }
 

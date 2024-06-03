@@ -18,7 +18,7 @@ const selectTimeFn = (reservDate) => {
         console.log(result);
 
         const reservTimes = result.reservTimes;
-        const confirmReservDate = result.confirmReservDate; // 시간병 예약 개수를 List로 조회한 결과
+        const confirmReservDate = result.confirmReservDate; // 시간별 예약 개수를 List로 조회한 결과
         console.log(confirmReservDate);
         
         const selectReservTime = confirmReservDate.length > 0 ? confirmReservDate[0].reservTime : null;
@@ -200,6 +200,107 @@ const selectTimeFn = (reservDate) => {
 
 }
 
+
+// 휴무일 계산용 배열
+// const arr = ['일','월','화','수','목','금','토'];
+
+// 고정 휴무일, 지정 휴무일 조회
+fetch("/store/selectOffDay", {
+    method : "POST",
+    headers : {"Content-Type" : "application/json"},
+    body : storeNo
+})
+.then(resp => resp.json())
+.then(offDayList=> {
+    
+    console.log(offDayList);
+
+    offDayList.forEach(item => {
+
+        console.log(item);
+
+        // const offDayNo = item.offDayNo;
+        // console.log(offDayNo);
+
+        // 휴무 시작일('YYYY-MM-DD' 형식)
+        const offDayStart = item.offDayStart;
+
+        // 휴무 종료일('YYYY-MM-DD' 형식)
+        const offDayEnd = item.offDayEnd;
+        console.log(offDayEnd);
+
+        // 일주일을 인덱스 순서대로 표현
+        const offWeek = item.offWeek;
+
+        console.log("offDayStart : " + offDayStart, "offDayEnd : " + offDayEnd, "offWeek : " + offWeek);
+
+        // 시작일과 종료일 사이의 모든 날짜를 처리
+        let currentDate = new Date(offDayStart);
+        let endDate = new Date(offDayEnd);
+
+        date = (endDate.getDate() + 1) < 10 ? '0' + (endDate.getDate() + 1) : endDate.getDate() + 1;
+        month = endDate.getMonth()+1 < 10 ? '0' + (endDate.getMonth()+1) : endDate.getMonth()+1;
+        year = endDate.getFullYear();
+
+        // console.log(offDayEnd,year, month, date);
+        endDate = `${year}-${month}-${date}`;
+        // console.log(endDate);
+
+
+        while(currentDate <= endDate){
+
+            // 해당 날짜의 요일 인덱스를 얻음
+            const dayIndex = currentDate.getDay();
+            // console.log(dayIndex);
+
+            // offWeek에 해당 요일 인덱스가 포함되어 있는지 확인
+            if(offWeek.includes(dayIndex)){
+
+                calendar.addEvent({
+                    // title: '휴무일',
+                    start: currentDate.toISOString().split('T')[0], // 'YYYY-MM-DD' 형식
+                    end : endDate, 
+                    allDay: true,
+                    // display: 'background',
+                    extendedProps: {
+                        isOffDay: true
+                    }
+
+                });
+            }
+            
+             // 다음 날짜로 이동
+             currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        // arr 배열의 인덱스와 offWeek 숫자와 동일할 경우 == 휴무일
+        // arr.forEach((dayItem, index) => {
+        //     // console.log("dayItem " + index);
+        // })
+    })
+    
+    // // 요일, 인덱스
+    // arr.forEach((dayItem, index) => {
+    //     const isOffDay = offDayList.includes(index); // true = 휴무일, false = 영업일
+    //     console.log(isOffDay);
+
+    //     // true (= 휴무일)일 경우
+    //     if(isOffDay){
+    //         document.querySelector(`.fc-day-${dayItem}`).classList.remove("select-bg");
+    //         document.querySelector(`.fc-day-${dayItem}`).classList.add("disabled");
+    //     }
+
+    //     // console.log(isOffDay);
+    //     // console.log(`${index}: ${dayItem} - ${isOffDay}`);
+    //     const temp = `${index}: ${dayItem}`;
+    //     console.log(temp);
+
+        
+    // }) 
+        
+
+})
+
 document.addEventListener('DOMContentLoaded', function () {
 
     const dayArr = ['일','월','화','수','목','금','토'];
@@ -213,7 +314,21 @@ document.addEventListener('DOMContentLoaded', function () {
         timeZone: 'UTC',
         initialView: 'dayGridMonth',
         selectable : false, // 드래그 방지
+        events: [],
+        eventDidMount: function(info) {
+
+            // FullCalendar에서 이벤트 객체에 추가적인 속성을 설정하고 해당 속성을 확인하기 위한 코드
+            // 이벤트가 렌더링된 후 실행
+            if(info.event.extendedProps.isOffDay){
+                info.el.classList.add("disabled");
+            }
+                
+        },
         dateClick : function(info){
+
+            if(info.dayEl.classList.contains("disabled")){
+                info.jsEvent.preventDefault();
+            }
             // console.log(info);
             console.log(info.dateStr);
             // console.log(dayArr[info.date.getDay()]);
@@ -223,12 +338,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const month = info.dateStr.slice(5,7);
             const day = info.dateStr.slice(8, 10);
-
-            // const getDay(className)=>{
-            //     switch(true){
-
-            //     }
-            // }
 
             // const date = month + "." + day + "(" + ")";
             const date = `${month}.${day}(${dayArr[info.date.getDay()]})`;
@@ -249,15 +358,6 @@ document.addEventListener('DOMContentLoaded', function () {
             end: new Date(new Date().setMonth(new Date().getMonth() + 2))
         }
 
-        // events: [ // 일정 데이터 추가 , DB의 event를 가져오려면 JSON 형식으로 변환해 events에 넣어주면된다.
-        //     {
-        //         // title: '단체예약 (예약자명: 김예약)',
-        //         start: '2024-05-16',
-        //         // end: '2024-05-16'
-        //     }
-
-        // ],
-
     });
 
     calendar.render();
@@ -265,9 +365,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 화면 로드 시 현재 날짜 출력
     const temp = new Date();
+
+    // 한 자릿수 월 앞에 0 붙이기
     const currentMonth = temp.getMonth()+1 < 10 ? '0' + (temp.getMonth()+1) : temp.getMonth()+1;
-    const now = `${currentMonth}.${temp.getDate()}(${dayArr[temp.getDay()]})`;
-    const nowDate = `${temp.getFullYear()}-${currentMonth}-${temp.getDate()}`;
+
+    // 한 자릿수 일 앞에 0 붙이기
+    const currentDay = temp.getDate() < 10 ? '0' + (temp.getDate()) : temp.getDate();
+
+    // 오늘 날짜(화면에 보여주는 용)(MM.DD(요일))
+    const now = `${currentMonth}.${currentDay}(${dayArr[temp.getDay()]})`;
+
+    // 날짜 형식으로 수정한 오늘 날짜('YYYY-MM-DD')
+    const nowDate = `${temp.getFullYear()}-${currentMonth}-${currentDay}`;
     // console.log(nowDate);
     // console.log(now);
     document.querySelector(".select-date").innerText = now;

@@ -34,5 +34,6 @@ public class Review {
 	private List<UploadImage> uploadList;
 	private List<ReviewHash> hashList;
 	private List<ReviewReply> replyList;
+	private List<ReviewMenu> reviewMenuList;
 	
 }
