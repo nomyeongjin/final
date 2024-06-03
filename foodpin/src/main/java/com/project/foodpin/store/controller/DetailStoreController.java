@@ -1,5 +1,6 @@
 package com.project.foodpin.store.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.store.model.dto.Menu;
@@ -32,9 +35,21 @@ public class DetailStoreController {
 	private final DetailStoreService service;
 
 	@GetMapping("storeDetail/{storeNo}")
-	public String storeDetail(@PathVariable("storeNo") String storeNo, Model model, RedirectAttributes ra) {
+	public String storeDetail(@PathVariable("storeNo") String storeNo, 
+			@SessionAttribute(value="loginMember", required = false) Member loginMember,
+			Model model, RedirectAttributes ra) {
+		
 
-		Store store = service.storeDetail(storeNo);
+		Map<String, Object> map = new HashMap<>();
+		
+		if(loginMember != null) {
+			int memberNo = loginMember.getMemberNo();
+			map.put("memberNo", memberNo);
+		}
+	
+		map.put("storeNo", storeNo);
+
+		Store store = service.storeDetail(map);
 
 		List<Review> reviewList = service.reviewDetail(storeNo);
 
@@ -61,7 +76,7 @@ public class DetailStoreController {
 
 		String path = null;
 
-		if (store != null) {
+	
 
 			model.addAttribute("store", store);
 	
@@ -71,9 +86,22 @@ public class DetailStoreController {
 
 			path = "/store/storeDetail";
 
-		}
+		
 		return path;
 	}
+	
+	
+	/** 가게 신고
+	 * @param map
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("storeReport")
+	public int storeReport(@RequestBody Map<String, Object> map) {
+		
+		return service.storeReport(map);
+	}
+	
 
 	/**
 	 * 가게 찜
@@ -83,11 +111,13 @@ public class DetailStoreController {
 	 */
 	@ResponseBody
 	@PostMapping("like")
-	public int storeLike(@RequestBody Map<String, Integer> map) {
+	public int storeLike(@RequestBody Map<String, Object> map) {
 
 		return service.storeLike(map);
 
 	}
+	
+	
 	
 	
 	/** 리뷰 신고

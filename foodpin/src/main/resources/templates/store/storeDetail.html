@@ -76,7 +76,9 @@
                                     <th:block th:if="${session.loginMember?.memberCode == 1}">
                                         <i class="fa-heart" id="bookmarkCheck"
                                         
-                                        th:classappend="*{bookMark == 1} ? fa-solid : fa-regular"></i>
+                                        th:classappend="*{bookmark == 1} ? fa-solid : fa-regular"></i
+                                        
+                                        >
     
                                     </th:block>
                                 
@@ -238,10 +240,12 @@
                     
                         <div class="store-detail-content">
 
+                           
                             <pre class="store-detail-text" th:text="*{storeInfo}">
-                                
+                            
                             </pre>
 
+                        
                            
                         </div>
                         <span  class="more-text">
@@ -337,7 +341,7 @@
 
 
 
-                        <form action="#" id="storeReportForm" class="popup-storereport">
+                        <div id="storeReportForm" class="popup-storereport">
                             <section class="popupbox">
                             
                                <div class="store-report-info">
@@ -348,8 +352,8 @@
                                         <h4 id="storeReportTitle">폐업신고 / 정보수정 제안</h4>
                                         <span id="popupShut" class="fa-solid fa-xmark"></span>     
                                         
-                                        <textarea id="reportStoreContent"
-                                        name="reportStoreContent"
+                                        <textarea id="requestStoreContent"
+                                        name="requestStoreContent"
                                         placeholder="가게 기본 정보 수정이 필요한 경우 상세 내용을 적어주세요. &#13; 예) 맛집 이름, 주소, 전화번호 등" required></textarea>
                                         
                                     </div>
@@ -357,9 +361,9 @@
                                     
                                     <div class="check-store-div">
                                         
-                                        <label for="pet-select">신고 내용</label>
+                                        <label for="requestSelect">신고 내용</label>
                                         
-                                        <select name="pets" id="pet-select">
+                                        <select name="requestCategoryTitle" id="requestSelect">
                                             <option value="">가게 신고 </option>
                                             <option value="changeBasicinfo">가게 기본 정보 수정</option>
                                             <option value="changeMenu">가게 메뉴 수정</option>
@@ -383,12 +387,12 @@
                                </div>
                                
                                 
-                                <button>보내기</button>
+                                <button id="storeReportBtn">보내기</button>
                                 
                             </section>
 
                             
-                        </form>
+                        </div>
 
 
                      
@@ -398,176 +402,32 @@
                                         
 
                    <!-- ************************************************************** -->
-                    <div class="store-statuscontainer"> <!-- 영업 시간 리스트 만들 곳 -->
-
-
-                        <div class="busi-hours-today">
-                            
-                            <div class="store-statusbox">
-
-                                <span>영업시간</span>
-                          
-                                <!-- 가게 상태 조회(휴무일/ 브레이크타임/라스트오더) -->
-                             <span id="storeStatusText" >영업 중</span>
-                            </div>
-
-
-                            <ul class="store-hours-list">
-                                <li>
-                                    <p class="t-txt">
-                                      <Strong>
-                                        [오늘] 05.21 (화)
-                                      </Strong>
-                                    </p>
-
-                                  
-                                    <p class="l-txt">
-                                        영업시간 : <span th:text="${store.openHour}"></span>               
-                                                  - <span th:text="${store.closeHour}"></span>               
-                                    </p>
-                                </li>
-       
-                                <li>
-                                    <p class="t-txt"></p>
-                                    <p class="l-txt">
-                                        브레이크타임 : <span th:text="${store.breaktimeStart}"></span>               
-                                        - <span th:text="${store.breaktimeEnd}"></span>                                           
-                                    </p>
-                                </li>
-                             
-                            </ul>
-
+                   <div class="store-statuscontainer">
+                    <!-- 영업 시간 리스트 -->
+                    <div class="busi-hours-today">
+                        <div class="store-statusbox">
+                            <span>영업시간</span>
+                            <span id="storeStatusText">영업 중</span>
                         </div>
-                    
-
-             
-                      <!--  반복하는 구간 -->
-
-                        <div class="busi-hours-short">
-
-                            
-                            <ul class="store-hours-list">
-
-                                <hr>
-
-                                <li>
-                                    <p class="t-txt">   
-                                         05.22 (수)  
-                                    </p>
-                                    <p class="l-txt">
-                                        영업시간: 11:00 - 21:30                      
-                                    </p>
-                                </li>  
-
-                                <li>
-                                    <p class="t-txt"></p>
-                                    <p class="l-txt">
-                                        브레이크타임: 14:30 - 17:00                                           
-                                    </p>
-                                </li>
-                                <hr>
-
-                                <li>
-                                    <p class="t-txt">   
-                                         05.23 (목)  
-                                    </p>
-                                    <p class="l-txt">
-                                        영업시간: 11:00 - 21:30                      
-                                    </p>
-                                </li>  
-
-                                <li>
-                                    <p class="t-txt"></p>
-                                    <p class="l-txt">
-                                        브레이크타임: 14:30 - 17:00                                           
-                                    </p>
-                                </li>
-                                <hr>
-
-                                <li>
-                                    <p class="t-txt">   
-                                         05.24 (금)  
-                                    </p>
-                                    <p class="l-txt">
-                                        영업시간: 11:00 - 21:30                      
-                                    </p>
-                                </li>  
-
-                                <li>
-                                    <p class="t-txt"></p>
-                                    <p class="l-txt">
-                                        브레이크타임: 14:30 - 17:00                                           
-                                    </p>
-                                </li>
-                                <hr>
-
-                                <li>
-                                    <p class="t-txt">   
-                                         05.25 (토)  
-                                    </p>
-                                    <p class="l-txt">
-                                        영업시간: 11:00 - 21:30                      
-                                    </p>
-                                </li>  
-
-                                <li>
-                                    <p class="t-txt"></p>
-                                    <p class="l-txt">
-                                        브레이크타임: 14:30 - 17:00                                           
-                                    </p>
-                                </li>
-                                <hr>
-
-                                <li>
-                                    <p class="t-txt">   
-                                         05.26 (일)  
-                                    </p>
-                                    <p class="l-txt">
-                                        영업시간: 11:00 - 21:30                      
-                                    </p>
-                                </li>  
-
-                                <li>
-                                    <p class="t-txt"></p>
-                                    <p class="l-txt">
-                                        브레이크타임: 14:30 - 17:00                                           
-                                    </p>
-                                </li>
-                                <hr>
-
-                                <li>
-                                    <p class="t-txt">   
-                                         05.27 (월)  
-                                    </p>
-                                    <p class="l-txt">
-                                        영업시간: 11:00 - 21:30                      
-                                    </p>
-                                </li>  
-
-                                <li>
-                                    <p class="t-txt"></p>
-                                    <p class="l-txt">
-                                        브레이크타임: 14:30 - 17:00                                           
-                                    </p>
-                                </li>
-                             
-                            </ul>
-  
-                          
-                        </div>
-
-                        <div class="more-schedule-info-box">
-                            <button id="moreScheduleInfoBtn">더보기</button>
-                            <button id="shutScheduleInfoBtn">접기</button>
-                        </div>
-            
-                       
-                       
-
+                        <ul class="store-hours-list" id="currentDaySchedule">
+                            <!-- 현재 요일 정보를 JavaScript로 동적으로 채웁니다. -->
+                        </ul>
                     </div>
+                
+                    <!-- 반복되는 구간 -->
+                    <div class="busi-hours-short">
+                        <ul class="store-hours-list" id="weeklySchedule">
+                            <!-- 반복되는 일정 정보를 JavaScript로 동적으로 채웁니다. -->
+                        </ul>
+                    </div>
+                
+                    <div class="more-schedule-info-box">
+                        <button id="moreScheduleInfoBtn">더보기</button>
+                        <button id="shutScheduleInfoBtn">접기</button>
+                    </div>
+                </div>
 
-
-                 </div>
+            </div>
 
 
                     
@@ -579,63 +439,46 @@
                 
              <!-- 메뉴 ( 사진 확대 팝업/ 더보기) -->
                 <div class="storedetail-menucontainer">
-
-                    
-                   
-
                     <div class="menu-info-title">
-                        <span>메뉴 정보</span>
-                        
+                    <span>메뉴 정보</span>
                     </div>
-
+                
                     <th:block th:if="${store.menuList==null}">
                     <span class="menuN">
                         <i class="fa-solid fa-circle-exclamation"></i>
                         메뉴가 아직 준비 중입니다
                     </span>
-                   </th:block>
-                 </th:block>
-                   
-                    <div class="store-menu-list" >
-                        <!-- 메뉴 이미지 div 3개 추가 -->
-                        <div class="menu-image-container" th:each="menu:${store.menuList}" >
-                            
-
-                            <div class="menu-basic-list">
-                              
-                                <div >
-                                    <img 
-                                    th:if="${menu.menuImgUrl!=null}"
-                                    th:src="${menu.menuImgUrl}" class="storedetail-menuimage" 
-                                    alt="메뉴 사진">
-                                </div>
-
-                                <div class="menu-info">
-                                    <span id="menuName" th:text="${menu.menuTitle}">메뉴 이름</span>
-                                    <span id="menuPrice" th:text="${menu.menuAmount}+'원'">가격</span>
-                                </div>
-
-                                <div class="menu-info-content">
-                                    <span id="menuDetail" th:text="${menu.menuContent}"></span>
-                                </div>
-                            </div>
+                    </th:block>
                 
+                    <div class="store-menu-list">
+                    <div class="menu-image-container" th:each="menu:${store.menuList}">
+                        <div class="menu-basiclist">
+                        <div>
+                            <img th:if="${menu.menuImgUrl!=null}"
+                                th:src="${menu.menuImgUrl}"
+                                class="storedetail-menuimage"
+                                alt="메뉴 사진">
                         </div>
-
-                   </div>
-
-                    <div class="moreMenuImageBtnBox">
-                        <button id="moreMenuImageBtn">더보기</button>
-                        <button id="shutMenuImageBtn" style="display: none;">접기</button>
-                    </div>
-    
-    
-    
-                  
-                </div>
-
-                  
                 
+                        <div class="menu-info">
+                            <span id="menuName" th:text="${menu.menuTitle}">메뉴 이름</span>
+                            <span id="menuPrice" th:text="${menu.menuAmount}+'원'">가격</span>
+                        </div>
+                
+                        <div class="menu-info-content">
+                            <span id="menuDetail" th:text="${menu.menuContent}"></span>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                
+                    <div class="moreMenuImageBtnBox">
+                    <button id="moreMenuImageBtn">더보기</button>
+                    <button id="shutMenuImageBtn" style="display: none;">접기</button>
+                    </div>
+                </div>
+                    
+                    
 
                 <!-- 해시태그(댓글에 달린 해시들) -->
 
@@ -873,30 +716,37 @@
 
         const storeMaxTable = /*[[${store.storeMaxTable}]]*/ "최대 예약 팀 수(테이블)"
         const storeNo = /*[[${store.storeNo}]]*/ "사업자등록번호"
-       
-        let bookMark =/*[[${store.bookMark}]]*/ "좋아요 여부";
+    
+        let bookmark =/*[[${store.bookmark}]]*/ "좋아요 여부";
         
 
     </script>
 
-
+    <!-- templetes/store/storeAside.html  조각 추가 -->
     <aside>
         
 
-         <a href="#bodyTop"><i class="fa-solid fa-angles-up"></i></a>
-       
-         
-         <a href="/chatting/chat"><i class="fa-regular fa-comment"></i></a>
-         
-         <a href="/store/storeSearch"><i class="fa-solid fa-location-dot"></i></a>
-         
-         <a href="#bodyBottom"><i class="fa-solid fa-angles-down"></i></a>        
+        <a href="#bodyTop"><i class="fa-solid fa-angles-up"></i></a>
+      
+        
+        <a href="/chatting/chat"><i class="fa-regular fa-comment"></i></a>
+        
+        <a href="/store/storeSearch"><i class="fa-solid fa-location-dot"></i></a>
+        
+        <a href="#bodyBottom"><i class="fa-solid fa-angles-down"></i></a>        
     </aside>
+    
+
+
+    <script src="/js/store/storeDetail.js"></script>
+    <script src="/js/store/storeLike.js"></script>
+    <script src="/js/store/storeOpen.js"></script>
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
+
     <script src="/js/reservation/reservation.js"></script>
     <script src="/js/reservation/calendar.js"></script>
-    <script src="/js/store/storeDetail.js"></script>
+   
 </body>
 </html>

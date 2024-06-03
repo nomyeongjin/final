@@ -106,68 +106,6 @@ window.onload = function() {
 /* ****************지도******************* */
 
 
-/**************** 가게 찜, 좋아요 개수 ******************/
-
-
-// 1. #bookmarkCheck 클릭 되었을 때
-const bookmarkCheck = document.querySelector("#bookmarkCheck");
-bookmarkCheck.addEventListener("click", e=>{
-
-  
-    // 3. 준비된 3개의 변수를 객체로 저장 -> (Json 변환 예정)
-    const obj = {
-        "memberNo" : loginMember,
-        "storeNo"  : storeNo,
-        "bookMark": bookMark
-    };
-
-    //4. 좋아요 INSERT / DELETE 비동기 요청
-    fetch("/store/like", {
-
-    method  : "POST",
-    headers : {"Content-Type" : "application/json"},
-    body    : JSON.stringify(obj) // 객체를 Json으로 문자화 
-
-    })
-
-    .then(resp =>resp.text()) // 반환 결과 text(글자) 형태로 변환
-    .then(count =>{
-
-        // count == 첫 번째 then의 파싱되어 반환된 값('-1' 또는 게시글 좋아요 수)
-        //console.log("result :", result);
-
-
-        if(count == -1){
-            console.log("좋아요 처리 실패");
-            return;
-        }
-
-        // 5. bookmark 값 0<->1 변환
-        // (왜? 클릭 될 때 마다 INSERT/DELETE 동작을 번갈아 가면서 할 수 있음)
-         bookMark = bookMark == 0? 1: 0;
-
-        // 6. 하트를 채웠다/비웠다 바꾸기
-        
-        e.target.classList.toggle("fa-regular");
-        e.target.classList.toggle("fa-solid");
-        
-
-
-        // 7. 게시글 좋아요 수 수정
-        e.target.nextElementSibling.innerText = count;
-
-        bookmarkCheck.classList.add('fa-bounce');
-
-        // 1초 후에 fa-shake 클래스를 제거
-        setTimeout(function () {
-          bookmarkCheck.classList.remove('fa-bounce');
-        }, 500);
-       
-
-    });
-
-});
-
 
 
 
@@ -262,6 +200,29 @@ document.addEventListener('DOMContentLoaded', function () {
   storeTelElement.textContent = formattedTel;
 });
 
+/* ******************************************************** */
+
+/* 리뷰> 클릭 시 아래 리뷰 페이지로 이동 */
+
+document.addEventListener('DOMContentLoaded', function() {
+  const showReview = document.querySelector("#showReview");
+  const reviewBox = document.getElementsByClassName(".review-container"); // 스크롤할 대상 요소
+
+  if (showReview && reviewBox) {
+    showReview.addEventListener("click", () => {
+      const scrollPosition = reviewBox.offsetTop;
+      window.scrollTo({
+        left: 0,
+        top: scrollPosition,
+        behavior: 'smooth'
+      });
+    });
+  }
+});
+
+
+
+
 /*********************** 폐점/ 정보 정정 신고 팝업 ******************/
 
 
@@ -269,7 +230,7 @@ const popupShut = document.querySelector("#popupShut");
 const popupbox = document.querySelector("#popupbox");
 const storeReportForm = document.querySelector("#storeReportForm");
 const storeReport = document.querySelector("#storeReport");
-
+const storeReportBtn = document.querySelector('#storeReportBtn');
 
 popupShut.addEventListener("click", () => {
   
@@ -282,39 +243,58 @@ storeReport.addEventListener("click", ()=>{
   storeReportForm.classList.remove("popup-storereport");
 });
 
-/* if(storeReportForm !=null){
-  storeReportForm.addEventListener("submit", e=>{
 
-    const reportStoreContent = document.createElement('#reportStoreContent');
+  const requestContent = document.getElementById('requestStoreContent');
+  const requestCategoryTitle = document.getElementById('requestSelect');
+
+  storeReportBtn.addEventListener("click",e =>{
+      e.preventDefault(); // 기본 폼 제출 동작을 방지합니다.
+
+      // 유효성 검사를 수행합니다.
+      if (requestContent.value.trim() === '') {
+          alert('상세 내용을 입력해주세요.');
+          requestContent.focus();
+          return;
+      }
+
+      if (requestCategoryTitle.value === '') {
+          alert('신고 내용을 선택해주세요.');
+          requestType.focus();
+          return;
+      }
+
+      
+        // 선택된 신고 내용을 포함하여 객체 생성
+    const obj = {
+      "storeNo": storeNo,
+      "memberNo": loginMember,
+      "requestCategoryTitle": requestCategoryTitle.value, 
+      "requestContent": requestStoreContent.value,
+    };
+
+    fetch("/store/storeReport", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(obj)
+    })
+    .then(resp => resp.json())
+    .then(result => {
+      if (result == 0) {
+        alert("신고 접수가 되지 않았습니다.");
+        requestContent.focus();
+      } else {
+        alert("가게 신고가 접수 되었습니다.");
+        storeReportForm.classList.add("popup-hidden");
+        requestContent.value = '';
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('신고 중 오류가 발생했습니다. 다시 시도해주세요.');
+    });
+  });
 
 
-  })
-} */
-
-/* ****************** 가게 영업 시간 더보기 *********************  */
-
-const openContainer = document.querySelector(".storedetail-opencontainer");
-const busiHoursShort = document.querySelector(".busi-hours-short");
-
-const moreScheduleInfoBtn = document.querySelector("#moreScheduleInfoBtn");
-const shutScheduleInfoBtn = document.querySelector("#shutScheduleInfoBtn");
-
-moreScheduleInfoBtn.addEventListener('click',()=>{
-
-
-  // 더보기 버튼을 숨기고 줄이기 버튼 보이게 하기
-  moreScheduleInfoBtn.style.display = 'none'; 
-  shutScheduleInfoBtn.style.display = 'inline-block'; 
-  busiHoursShort.style.display = 'inline';
-})
-
-shutScheduleInfoBtn.addEventListener("click",()=>{
-
-  
-  shutScheduleInfoBtn.style.display = 'none'; 
-  moreScheduleInfoBtn.style.display = 'inline-block';
-  busiHoursShort.style.display = 'none'; 
-})
 
 
 /* ************************************************************* */
@@ -323,7 +303,7 @@ shutScheduleInfoBtn.addEventListener("click",()=>{
 
 
 const storeMenuList = document.querySelector(".menu-image-container");
-const menuB = storeMenuList.querySelectorAll(".menu-basic-list");
+const menuB = storeMenuList.querySelector(".menu-basiclist");
 const moreMenuImageBtn = document.querySelector("#moreMenuImageBtn");
 const shutMenuImageBtn = document.querySelector("#shutMenuImageBtn");
 
@@ -365,6 +345,9 @@ function showMenus() {
     shutMenuImageBtn.style.display = "none";
   }
 }
+
+
+
 
 /* ****************************식당 사진 더보기*********************************** */
 
@@ -467,6 +450,8 @@ function showReviews() {
     }
 }
 
+
+
 /* ***************** 리뷰 신고 팝업 ****************** */
 const popupClose = document.querySelector("#popupClose");
 const popupLayer = document.querySelector("#popupLayer");
@@ -531,23 +516,5 @@ reviewReport.forEach((report) => {
 
 
 
-
-/* ******************************************************** */
-
-/* 리뷰> 클릭 시 아래 리뷰 페이지로 이동 */
-
-const showReview = document.querySelector("#showReview");
-/* const scrollPosition = targetElement.offsetTop; */
-
-showReview.addEventListener("click", ()=>{
-
- 
-  window.scrollTo({
-    
-    left:0,
-    top:3000,
-    behavior:'smooth'
-  })
-})
 
 

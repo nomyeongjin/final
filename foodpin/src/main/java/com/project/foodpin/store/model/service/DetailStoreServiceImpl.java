@@ -4,12 +4,11 @@ package com.project.foodpin.store.model.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.RowBounds;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.foodpin.review.model.dto.Review;
-import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.mapper.DetailStoreMapper;
 
@@ -24,9 +23,9 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 
 	// 가게 상세 조회
 	@Override
-	public Store storeDetail(String storeNo) {
+	public Store storeDetail(Map<String, Object> map) {
 	
-		return mapper.storeDetail(storeNo);
+		return mapper.storeDetail(map);
 	}
 	
 	
@@ -47,13 +46,13 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 
 	// 가게 찜 
 	@Override
-	public int storeLike(Map<String, Integer> map) {
+	public int storeLike(Map<String, Object> map) {
 		
       int result = 0;
 		
 		//1. 좋아요가 체크된 상태인 경우 (bookmark ==1)
 		// -> Bookmark 테이블에 DELETE
-		if(map.get("bookMark") == 1) {
+		if(Integer.parseInt(String.valueOf(map.get("bookmark")) )== 1) {
 			
 			result = mapper.deleteStoreLike(map);
 			
@@ -94,6 +93,45 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 		return mapper.reviewReport(map);
 	}
 
+
+
+
+	// 가게 정보 정정 신고
+	@Override
+	public int storeReport(Map<String, Object> map) {
+	    // Map에서 데이터를 추출합니다.
+	    String storeNo = (String) map.get("storeNo");
+	    String requestContent = (String) map.get("requestContent");
+	    String requestCategoryTitle = (String) map.get("requestCategoryTitle");
+
+	    // storeNo와 연관된 memberNo를 조회합니다.
+	    int memberNo = mapper.selectReportMemberNo(storeNo);
+
+	    // Map에 memberNo를 추가합니다.
+	    map.put("memberNo", memberNo);
+
+	    // Map에 requestCategoryCode를 추가합니다.
+	    switch (requestCategoryTitle) {
+	        case "changeBasicinfo":
+	            map.put("requestCategoryCode", "1");
+	            break;
+	        case "changeMenu":
+	            map.put("requestCategoryCode", "2");
+	            break;
+	        case "chageStoreTime":
+	            map.put("requestCategoryCode", "6");
+	            break;
+	        case "storeClosed":
+	            map.put("requestCategoryCode", "7");
+	            break;
+	        default:
+	            map.put("requestCategoryCode", "0"); // 기본값
+	            break;
+	    }
+
+	    // 신고 내용을 데이터베이스에 저장합니다.
+	    return mapper.storeReport(map);
+	}
 
 
 	

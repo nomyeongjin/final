@@ -136,7 +136,7 @@ body{
    padding: 13px 0px;
    text-align: center;
    background-color: white;
-   color: rgb(77, 77, 77);
+   color: #363f75;
    border: none;
    width: 63px;
    height: 60px;
@@ -144,19 +144,19 @@ body{
 }
 
 .first-nav-li .navbar-button:hover {
-   color: #ffffff;
+   color: #363f75;
   /*  background-color:#d1dd68; */
-   background-color:#f1e75b;
+   background-color:#EFEFCB;
    
 }
 
 .first-nav-li .navbar-button:focus{
-   background-color:#779be7;
-   color: #f1e75b;
+   background-color:#363f75;
+   color: #EFEFCB;
 }
 #mapHome{
-   background-color: #779be7;                     
-   color: #f1e75b;
+   background-color: #363f75;                     
+   color: #EFEFCB;
 }
 
 #mapHome::before{
@@ -201,7 +201,7 @@ body{
 
 i{
    font-size: 20px;
-   color: rgb(76, 76, 76);
+   color: #363f75;
 }
 
 
@@ -222,6 +222,8 @@ i{
    position: relative;   
    flex-direction: column;
    height: 100%;
+   min-width: 390px;
+    max-width: 390px;
 
 }
 
@@ -292,4 +294,140 @@ i{
    
    transition-duration: 0.5s;
 
+}
+
+.blind{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   
+
+}
+.blind > i{
+   font-size: 14px;
+   color: var(--main-color);
+}
+
+/* sidebar 접기 버튼 */
+#hideSideBar {
+   cursor: pointer;
+   position: absolute;
+   top: 50%;
+   left: 453px;
+   transform: translateY(-50%);
+   z-index: 200;
+   overflow: hidden;
+   display: inline-block;
+   font-size: 1px;
+   line-height: 1px;
+   background-color: white;
+   width: 25px;
+   height: 49px;
+   border: none;
+   border-right: 1px solid var(--main-color);
+   border-bottom: 1px solid var(--main-color);
+   border-top: 1px solid var(--main-color);
+   border-bottom-right-radius: 5px;
+   border-top-right-radius: 5px;
+ 
+}
+
+/* 사이드바 내부 카테고리 */
+.search-categoryContaier{
+   display: flex;
+   flex-direction: column;
+   height: 30%;
+   padding: 20px;
+   border-bottom: 1px dotted var(--main-color);
+
+
+}
+
+.search-categoryContaier-hide{
+   display: flex;
+    justify-content: flex-end;
+}
+.searchcategory-Btnbox{
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+    
+}
+
+.searchcategory-Btnbox > button{
+   margin: 5px;
+   cursor: pointer;
+   width: 70px;
+   height: 25px;
+   border-radius: 15px;
+   font-size: 10px;
+   border: 1px solid var(--main-color);
+
+}
+
+.search-panelContent{
+   display: flex;
+    flex-direction: column;
+    width: 390px;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: center;
+}
+
+
+/* 새로고침 버튼 */
+
+.rotate-container{
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   width: 370px;
+   height: 30px;
+   padding-right: 10px;
+   margin: 10px;
+}
+.fa-arrow-rotate-left{
+ cursor: pointer;
+ font-size: 22px;
+ color: var(--main-color);
+ 
+}
+
+/* 가게 사진 */
+#searchStoreImg{
+   width: 350px;
+   height: 200px;
+   border-radius: 5px;
+}
+
+/* 가게 리스트 순서 */
+.search-storelist-type{
+ display: flex;
+ flex-direction: column;
+}
+
+.storelist-typecontainer{
+   display: flex;
+   justify-content: space-between;
+}
+
+.storesearch-heartcontainer{
+   cursor: pointer;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+  border: 1px solid var(--main-color);
+  border-radius: 50%; 
+  height: 40px;
+  width: 40px;
+}
+
+.fa-heart{
+   
+   font-size: 20px;
+   background-color: white;
+   color: rgb(252, 57, 57); 
+ /*  color: #E14C54; */
 }
