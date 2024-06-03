@@ -4,6 +4,18 @@ let selectTargetName; // 대상의 이름
 let selectTargetProfile; // 대상의 프로필
 
 // -----------------------------------------------------------------------------------------
+/* 팝업 채팅창 */
+const toChatting = document.getElementById("toChatting");
+
+toChatting.addEventListener("click", () => {
+  showPopup();
+})
+
+/* Get 방식 */
+function showPopup() { 
+  window.open("/chatting/chatPopup", "chatting", "채팅창", "width=500, height=600, left=100, top=50"); 
+}
+
 
 // 채팅에 사용될 SockJS 객체를 저장할 변수
 let chattingSock; 

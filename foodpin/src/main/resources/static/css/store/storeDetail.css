@@ -49,6 +49,15 @@ aside >a{
 
 }
 
+#toChatting{
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+#toChatting:hover{
+    border-bottom: 1px solid rgb(66, 66, 66);
+}
+
 
 aside p{
     padding: 5px 0;

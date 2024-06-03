@@ -33,6 +33,19 @@ public class ChattingController {
 	
 	
 	
+	/** 팝업 채팅 화면 이동
+	 * @return
+	 */
+	@GetMapping("chatPopup")
+	public String chatPopup(
+//			@SessionAttribute("loginMember") Member loginMember,
+			Model model
+			) {
+//		List<ChattingRoom> roomList = service.selectRoomList(loginMember.getMemberNo());
+//        model.addAttribute("roomList", roomList);                        
+		
+		return "chatting/chatPopup";
+	}
 	/** 채팅 화면 이동
 	 * @return
 	 */

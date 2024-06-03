@@ -94,8 +94,10 @@
 	<script th:inline="javascript">
 		const userDefaultImage = /*[[#{user.default.image}]]*/ '기본 이미지';
 
-        const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ '로그인 회원번호';
-	</script>
+        const loginMember = /*[[${session.loginMember}]]*/ '로그인';
+        
+    </script>
+
 
     <script src="/js/chatting/chat.js"></script>
 
