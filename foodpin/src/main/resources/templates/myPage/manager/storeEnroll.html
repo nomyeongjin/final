@@ -44,7 +44,9 @@
                         <th:block th:unless="${#lists.isEmpty(storeMember)}">
                             <tr th:each="member : ${storeMember}">
                                 <td th:text="*{member.memberName}">김사장</td>
-                                <td th:text="*{member.storeName}">대박고깃집</td>
+                                <td th:text="*{member.storeName}" class="open-storeDetail">
+                                    대박고깃집
+                                </td>
                                 <td th:text="*{member.enrollDate}">24.05.22</td>
                                 <td>
                                     <button class="approval" th:data-member-no="${member.memberNo}">승인</button>
@@ -54,25 +56,23 @@
 
                         </th:block>
                     </tbody>
-
+                        
                 </table>
-
-                <div id="popup" class="popup">
+                
+                <div id="popup" class="popup" th:unless="${#lists.isEmpty(storeMember)}">
                     <div class="popup-content">
                         <span class="close-popup">&times;</span>
-                        <h2>대박고깃집</h2>
-                        <div class="ceoName">대표자 : 김박사</div>
-                        <div class="ceoTel">대표자 전화번호 : 01045678945</div>
-                        <div class="storeName">가게 상호명 : 대박고깃집</div>
-                        <div class="storeAddress">가게 주소 : 서울시 어디구 어디동 12-24번지</div>
-                        <div class="storeTel">가게 전화번호 : 02-212-4567</div>
-                        <div class="businessLicense">
-                            <span>사업자 등록증</span>
-                            <img src="https://lh6.googleusercontent.com/proxy/P1Rz1-8eiMLjaeO88MnTqffrpy0nkWAoPxw2J2wUxyJapiRQ93n5FAb23zzLBDLnBYniOlHF3I9QsmDj7dRg99cXIpdzKSMs5CSp5lQeMJaoauR_tARZSfP-fXZdI9Y3FPPMJ-9-kqKHpZc8EoW7GHnMgrjDPHZ6xc6sV5U6zjMFU_X22D0vr4YT8XiWU9gfv79C2Pk20frlX9cMP8DyKQ">
-                        </div>
+                        <p class="storeInfo" th:text="*{storeMember[0].storeInfo}"></p>
+                        <h2 th:text="*{storeMember[0].storeName}"></h2>
+                        <div class="ceoName" th:text="|대표자 : *{storeMember[0].memberName}|"></div>
+                        <div class="ceoTel" th:text="|대표자 전화번호 : *{storeMember[0].memberTel}|"></div>
+                        <div class="storeName" th:text="|가게 상호명 : *{storeMember[0].storeName}|"></div>
+                        <div class="storeAddress" th:text="|가게 주소 : *{storeMember[0].storeLocation}|"></div>
+                        <div class="storeTel" th:text="|가게 전화번호 : *{storeMember[0].storeTel}|"></div>
+                        <div class="storeNo" th:text="|사업자 등록증 : *{storeMember[0].storeNo}|"></div>
                         <div class="popupBtn-container">
-                            <button class="approvalBtn popupBtn">승인</button>
-                            <button class="refuseBtn popupBtn">거절</button>
+                            <button class="approvalBtn approval popupBtn" th:data-member-no="${storeMember[0].memberNo}">승인</button>
+                            <button class="refuseBtn refuse popupBtn" th:data-member-no="${storeMember[0].memberNo}">거절</button>
                         </div>
                     </div>
                 </div>

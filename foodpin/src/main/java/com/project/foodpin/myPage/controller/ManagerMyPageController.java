@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.service.ManagerMyPageService;
+import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +38,22 @@ public class ManagerMyPageController {
 		String memberStatus = "W";
 		List<Member> storeMember = service.storeRequestList(memberCode, memberStatus);
 		model.addAttribute("storeMember", storeMember);
+		
+		for (Member stores : storeMember) {
+	        String storeLocation = stores.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        stores.setStoreLocation(addressWithoutPostcode);
+	        
+	        String memberTel = stores.getMemberTel();
+	        String formattedTel = memberTel.substring(0, 3) + "-" + memberTel.substring(3, 7) + "-" + memberTel.substring(7);
+	        stores.setMemberTel(formattedTel);
+	        
+	        String storeNo = stores.getStoreNo();
+	        String formattedStoreNo = storeNo.substring(0, 3) + "-" + storeNo.substring(3, 5) + "-" + storeNo.substring(5);
+	        stores.setStoreNo(formattedStoreNo);
+	    }	
 		
 		return "myPage/manager/storeEnroll";
 	}

@@ -39,6 +39,6 @@ public class Member {
 	private String storeTel;
 	private String openHour;
 	private String closeHour;
-
+	private String storeInfo;
 	
 }
