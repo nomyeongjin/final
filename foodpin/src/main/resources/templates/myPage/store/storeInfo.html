@@ -155,6 +155,7 @@
         </div>
          
          <script th:inline="javascript">
+            const memberNo = /*[[${session.loginMember.memberNo}]]*/ "가게 번호";
             const storeNo = /*[[${store.storeNo}]]*/ "가게 번호";
 
                     // 프로필 기본 이미지 전역변수로 저장

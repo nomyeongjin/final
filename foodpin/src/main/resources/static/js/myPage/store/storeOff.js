@@ -11,6 +11,7 @@ let calendar;
  */
 function calendar_rendering() {
 
+   console.log(storeNo);
    /*  DB에서 휴무일 목록 조회 */
    fetch("/myPage/store/calendarOffSelect", {
       method : "POST",
@@ -19,7 +20,7 @@ function calendar_rendering() {
    })
    .then(resp => resp.json())
    .then(listMap => {
-      // console.log(listMap);
+      console.log(listMap);
 
       // 캘린더 생성
       calendar = new FullCalendar.Calendar(calendarEl, {
@@ -135,7 +136,7 @@ dayoffBtn.addEventListener("click", () => {
    })
    .then(resp => resp.json())
    .then(offList => {
-      console.log(offList);
+      // console.log(offList);
 
       for(let off of offList){
          
