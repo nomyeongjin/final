@@ -3,7 +3,6 @@
 <mapper namespace="com.project.foodpin.myPage.model.mapper.MemberMyPageMapper">
 
 	<resultMap type="Review" id="review_rm">
-	
 		<id property="reviewNo" column="REVIEW_NO"/>
 		
 		<collection 
@@ -189,8 +188,9 @@
 	
 	<!-- 리뷰 조회 -->
 	<select id="selectReviewList" resultMap = "review_rm">
-		SELECT DISTINCT STORE_NO, STORE_NAME, REVIEW_RATING, 
-			   <![CDATA[ TO_CHAR(REVIEW__REG_DATE, 'YYYY-MM-DD') REVIEW__REG_DATE]]>, REVIEW_CONTENT 
+		SELECT DISTINCT STORE_NO, STORE_NAME, REVIEW_RATING, REVIEW_NO,
+			   <![CDATA[ TO_CHAR(REVIEW__REG_DATE, 'YYYY-MM-DD') REVIEW__REG_DATE]]>, REVIEW_CONTENT,
+			   R.MEMBER_NO, REVIEW_DEL_FL 
 		FROM REVIEW R
 		JOIN STORE USING(STORE_NO)
 		JOIN "REVIEW_HASH" USING(REVIEW_NO)
@@ -207,6 +207,7 @@
 		WHERE MEMBER_NO = #{memberNo}
 		AND REVIEW_DEL_FL = 'N'
 	</select>
+
 	
 	<!-- 리뷰 이미지 조회 -->
 	<select id="uploadImageList" resultType="UploadImage">

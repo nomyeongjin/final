@@ -218,7 +218,6 @@ public class MemberMyPageController {
 			return true;
 		} else {
 			return false;
-			
 		}
 	}
 	
@@ -272,6 +271,7 @@ public class MemberMyPageController {
 		@SessionAttribute("loginMember") Member loginMember) {
 		
 		int memberNo = loginMember.getMemberNo();
+		
 		List<Review> review = service.selectReviewList(memberNo);
 		int reviewCount = service.reviewCount(memberNo);
 		

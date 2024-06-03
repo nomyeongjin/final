@@ -1,7 +1,7 @@
 /* 입점 승인/거절 */
 document.addEventListener('DOMContentLoaded', () => {
     const approval = document.querySelectorAll(".approval");
-    const refuse = document.querySelectorAll(".refuse");
+    const close = document.querySelectorAll(".close");
 
 
     approval.forEach(button => {
@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    refuse.forEach(button => {
+    close.forEach(button => {
         button.addEventListener('click', e => {
             const memberNo = e.target.dataset.memberNo;
-            refuseMember(memberNo);
+            closeMember(memberNo);
         });
     });
 });
@@ -45,8 +45,8 @@ function approveMember(memberNo) {
 }
 
 // 폐업 처리
-function refuseMember(memberNo) {
-    fetch(`/myPage/manager/refuseMember/${memberNo}`, {
+function closeMember(memberNo) {
+    fetch(`/myPage/manager/closeStore/${memberNo}`, {
         method: 'POST',
         headers: {'Content-Type' : 'application/json'},
         body: JSON.stringify({memberNo : memberNo})
