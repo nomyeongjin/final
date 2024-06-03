@@ -1,7 +1,9 @@
 package com.project.foodpin.myPage.model.service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -57,7 +59,7 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		String updatePath = "";
 		String rename = "";
 		
-		if( !image.isEmpty()) { // input에서 이미지를 업로드 힌 경우
+		if( !image.isEmpty()) { // input에서 이미지를 업로드 한 경우
 			
 			rename = Utility.fileRename(image.getOriginalFilename());
 			
@@ -77,6 +79,7 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 				e.printStackTrace();
 			} 
 		}
+		
 		return result;
 	}
 	
@@ -94,37 +97,89 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int menuUpdate(List<Menu> inputMenuList) {
 		
 		int result = 0;
-		String updatePath = "";
-		String rename = "";
+//		String updatePath = "";
+//		String rename = "";
+
+		result = mapper.deleteAllMenu(inputMenuList.get(0).getStoreNo());
 		
-		// 기존 저장된 데이터 삭제
-		result = mapper.deleteMenu(inputMenuList.get(0).getStoreNo());
-		
-		if( inputMenuList.isEmpty()) return 0; // 입력된 메뉴 정보가 없는 경우
-		
-		else {
+		if( !inputMenuList.get(0).getMenuTitle().isEmpty()) {
 			
 			for(Menu menu : inputMenuList) {
-				
-				if( !menu.getMenuImg().isEmpty()) { // 업로드 한 메뉴 이미지가 있는 경우
-					
-					rename = Utility.fileRename(menu.getMenuImg().getOriginalFilename());
-					updatePath = menuWebPath + rename;
-					menu.setMenuImgUrl(menuWebPath + rename);
-				}
-				
-				result = mapper.updateMenu(menu);
-				
-				if(result > 0) { // db등록 성공시 파일 업로드 폴더에 이미지 저장
-					
-					try {
-						menu.getMenuImg().transferTo(new File(menuFolderPath + rename)); // db등록 성공시 파일 업로드()
-					}catch (Exception e) {
-						e.printStackTrace();
-					}
-				} // if
+				result = mapper.insertMenu(menu);
 			}
-		} // 이미지 있는 경우	
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+//        for (Menu menu : inputMenuList) {
+//        	
+//        	// 1. 기존 MENU_FL 값을 'Y'로 변경 (삭제)
+//        	result = mapper.deleteMenu(menu);
+//        	
+//            // 2. 메뉴 번호 조회
+//            int menuNo = mapper.selectMenuNo(menu);
+//            
+//            menu.setMenuNo(menuNo); // 조회한 메뉴 번호 세팅
+//            
+//            if (menuNo != 0) { // 데이터가 조회된 경우
+//            	
+//    			// 3. 기존 데이터와 완전히 동일한 메뉴 조회
+//    			result = mapper.selectSameMenuNo(menu);
+//    			
+//    			if(result == 1) return result; // 2번 결과가 1인경우 -> 수정 사항 없음
+//    			
+//    			// 4. 메뉴이름은 그대로인데 나머지 내용이 바뀐 경우 내용 수정
+//    			result = mapper.updateMenu(menu);
+//    			
+//    			// 추후 이미지 추가 예정
+//    			
+//    			
+//    			if(result == 1) return result; // 수정됨
+//    			
+//            }
+//
+//            
+//		}
+	
+		
+		
+		
+		
+		
+		
+//		// 기존 저장된 데이터 삭제
+//		result = mapper.deleteMenu(inputMenuList.get(0).getStoreNo());
+//		
+//		if( inputMenuList.isEmpty()) return 1; // 입력된 메뉴 정보가 없는 경우
+//		
+//		else {
+//			
+//			for(Menu menu : inputMenuList) {
+//				
+//				if( !menu.getMenuImg().isEmpty()) { // 업로드 한 메뉴 이미지가 있는 경우
+//					
+//					rename = Utility.fileRename(menu.getMenuImg().getOriginalFilename());
+//					updatePath = menuWebPath + rename;
+//					menu.setMenuImgUrl(menuWebPath + rename);
+//				}
+//				
+//				result = mapper.updateMenu(menu);
+//				
+//				if(result > 0) { // db등록 성공시 파일 업로드 폴더에 이미지 저장
+//					
+//					try {
+//						menu.getMenuImg().transferTo(new File(menuFolderPath + rename)); // db등록 성공시 파일 업로드()
+//					}catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				} // if
+//			}
+//		} // 이미지 있는 경우	
 		
 		return result;
 	}

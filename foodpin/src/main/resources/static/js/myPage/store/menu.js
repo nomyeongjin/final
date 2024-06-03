@@ -232,6 +232,96 @@ menuBtn.addEventListener("click", () => {
       }); // forEach(del)
 
 
+      // /* 메뉴 이미지 변경 */
+      
+      // const inputMenuImg = document.querySelectorAll(".input-menu-img");
+      // const menuImgArea = document.querySelectorAll(".menu-img-area");
+
+      // let imgStatus = -1; // 이미지 기록 상태 변수
+      // let backupInput; // 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // document.querySelectorAll(".input-menu-img").forEach(input => {
+      
+      // /**
+      //  * 이미지 변경
+      //  * @param {*} e 
+      //  */
+      // const changeImageFn = e => {
+
+      //    const maxSize =  1024 * 1024 * 5; // 이미지 최대 업로드 사이즈 지정
+      //    const file = e.target.files[0]; // 업로드 된 파일 정보
+
+      //    console.log(file);
+
+
+      //    // 파일 업로드 취소 + 백업본 (추가예정)
+
+
+      //    /* 선택된 이미지 미리보기 */
+      //    const reader = new FileReader();
+      //    reader.readAsDataURL(file);
+         
+      //    /**
+      //     * 업로드 이미지 파일 읽기 완료시 미리보기
+      //     */
+      //    reader.addEventListener("load", e => {
+         
+      //       const url = e.target.result;
+      //       input.setAttribute("src", url);
+         
+      //       imgStatus = 1; // 이미지 업로드 상태 기록
+      //       backupInput = input.cloneNode(true);
+      //    })
+         
+      // }
+
+      // // input 이미지 변경시 changeImageFn 호출
+      // input.addEventListener("change", changeImageFn);
+
+
+
+      // });
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       /**
        * (버튼) 메뉴 수정
        */
@@ -245,37 +335,47 @@ menuBtn.addEventListener("click", () => {
          document.querySelectorAll(".menu-row").forEach( row => {
 
             const input = row.querySelector("#inputMenuImg"); // 이미지 input
-            reader.readAsDataURL(input); // 읽어옴
-
-            reader.addEventListener("load", e=> {
-               url = e.target.result;
-               console.log(url);
-            })
             
-            console.log(img);
-            // data = {
-            //    "menuImg" : row.querySelector(".input-menu-img").value,
-            //    "menuTitle" : row.querySelector(".menu-title").value,
-            //    "menuAmount" : row.querySelector(".menu-amount").value,
-            //    "menuContent" : row.querySelector(".menu-content").value,
-            //    "storeNo" : storeNo
-            // };
+            console.log(input);
+            const file = input.files[0];
+            console.log(file);
 
-            // dataList.push(data);
+            // reader.readAsDataURL(input); // 읽어옴
+            // url = input.result;
+
+
+            // console.log(input.files[0]);
+
+
+            // reader.addEventListener("load", e=> {
+            //    url = e.target.result;
+            //    console.log(url);
+            // })
+            
+            // console.log(img);
+
+            data = {
+               "menuTitle" : row.querySelector(".menu-title").value,
+               "menuAmount" : row.querySelector(".menu-amount").value,
+               "menuContent" : row.querySelector(".menu-content").value,
+               "storeNo" : storeNo
+            };
+
+            dataList.push(data);
          });
 
-         // console.log(dataList);
+         console.log(dataList);
 
-         // fetch("/myPage/store/menuUpdate", {
-         //    method : "PUT",
-         //    headers : {"content-Type" : "application/json"},
-         //    body : JSON.stringify(dataList)
-         // })
-         // .then(resp => resp.json())
-         // .then(menuList => {
+         fetch("/myPage/store/menuUpdate", {
+            method : "PUT",
+            headers : {"content-Type" : "application/json"},
+            body : JSON.stringify(dataList)
+         })
+         .then(resp => resp.json())
+         .then(menuList => {
+            
 
-
-         // });
+         });
 
       });
 

@@ -94,8 +94,7 @@ public class StoreMyPageController {
 	 * @param loginMember
 	 * @return menuList
 	 */
-//	@GetMapping(value="menuSelect", produces = "application/json")
-	@GetMapping("menuSelect")
+	@GetMapping(value="menuSelect", produces = "application/json")
 	@ResponseBody
 	public List<Menu> menuSelect(@RequestParam("storeNo") int storeNo) {
 		
@@ -106,8 +105,7 @@ public class StoreMyPageController {
 	 * @param menuList
 	 * @return
 	 */
-//	@PutMapping(value="menuUpdate", produces = "application/json")
-	@PostMapping("menuUpdate")
+	@PutMapping(value="menuUpdate", produces = "application/json")
 	@ResponseBody
 	public int menuUpdate(@RequestBody List<Menu> inputMenuList) {
 		
@@ -231,11 +229,6 @@ public class StoreMyPageController {
 	}
 	
 	
-	//----
-	@GetMapping("review")
-	public String review() {
-		return "myPage/store/review";
-	}
 	
 	
 	// -----
