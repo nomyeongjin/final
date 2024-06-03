@@ -16,7 +16,7 @@ if( notificationLoginCheck ){
 }
 
 
-/* 채팅 메시지를 보내는 함수 */
+/* 채팅 메시지를 보내는 함수 */ 
 const sendMessage = () => {
 
   // 채팅 입력 textarea

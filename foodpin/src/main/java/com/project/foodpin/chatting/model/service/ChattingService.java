@@ -1,5 +1,25 @@
 package com.project.foodpin.chatting.model.service;
 
-public interface ChattingService {
+import java.util.List;
+import java.util.Map;
 
+import com.project.foodpin.chatting.model.dto.ChattingRoom;
+import com.project.foodpin.chatting.model.dto.Message;
+import com.project.foodpin.member.model.dto.Member;
+
+public interface ChattingService {
+	List<ChattingRoom> selectRoomList(int memberNo);
+
+    int checkChattingNo(Map<String, Integer> map);
+
+    int createChattingRoom(Map<String, Integer> map);
+
+
+    int insertMessage(Message msg);
+
+    int updateReadFlag(Map<String, Object> paramMap);
+
+    List<Message> selectMessageList( Map<String, Object> paramMap);
+
+	List<Member> selectTarget(Map<String, Object> map);
 }
