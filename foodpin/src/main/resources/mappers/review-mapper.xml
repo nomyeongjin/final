@@ -143,7 +143,40 @@
 		WHERE REVIEW_NO = #{reviewNo}
 	</select>
 	
+
+	<!-- 리뷰 수정(별점, 리뷰 내용) -->
+	<update id="updateReview">
+		UPDATE "REVIEW" SET
+		REVIEW_RATING = #{reviewRating},		
+		REVIEW_CONTENT = #{reviewContent}
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
 	
+	
+	<!-- 리뷰 이미지 삭제 -->
+	<delete id="deleteImage">
+		DELETE FROM UPLOAD_IMAGE
+		WHERE IMAGE_ORDER IN (${deleteOrder}) 
+		AND REVIEW_NO = #{reviewNo}
+	</delete>
+	
+	<!-- 리뷰 이미지 수정 -->
+	<update id="updateImage">
+		UPDATE UPLOAD_IMAGE SET
+		IMG_ORIGINAL_NAME = #{imgOriginalName},
+		IMG_RENAME = #{imgRename}
+		WHERE REVIEW_NO = #{reviewNo}
+		AND IMAGE_ORDER = #{imageOrder}
+	</update>
+	
+	
+	<!-- 리뷰 이미지 삽입(1행) -->
+	<insert id="insertImage">
+		INSERT INTO UPLOAD_IMAGE
+		VALUES(NEXT_IMAGE_NO() , #{imagePath},
+			 #{imgRename}, SYSDATE, #{imageOrder},
+			 #{storeNo}, #{reviewNo}, #{imgOriginalName})
+	</insert>
 	
 	
 	

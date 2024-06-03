@@ -30,6 +30,10 @@ public interface ReviewService {
 	// 리뷰 수정시 기존 리뷰 조회
 	Review selectReview(int reviewNo);
 
+	// 리뷰 수정
+	int updateReview(Review inputReview, List<Integer> menuNo, List<Integer> hashNo, String deleteOrder,
+			List<MultipartFile> images)  throws IllegalStateException, IOException;
+
 
 
 
