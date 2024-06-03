@@ -49,14 +49,14 @@
                                         <div class="storereview-top-right">
                                             <button type="button" id="reviewDeleteBtn"  
                                                 th:if="${session.loginMember}" 
-                                                th:attr="data-review-no=*{reviewNo}, data-member-no=*{memberNo}">
+                                                th:attr="data-review-no=*{reviewNo}">
                                                 삭제하기
                                             </button>
-                                            <button type="button" id="reviewUpdateBtn"  
+                                            <a th:href="'/review/reviewUpdate/' + *{storeNo} +'/' + *{reviewNo}" id="reviewUpdateBtn"  
                                                 th:if="${session.loginMember}" 
-                                                th:attr="data-review-no=*{reviewNo}, data-member-no=*{memberNo}">
+                                                th:attr="data-review-no=*{reviewNo}">
                                                 수정하기
-                                            </button>
+                                            </a>
                                             <span th:text="*{reviewRegDate}">2024-05-17</span>
                                         </div>
                 

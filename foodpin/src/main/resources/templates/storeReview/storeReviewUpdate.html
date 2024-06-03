@@ -16,7 +16,7 @@
     <th:block th:replace="~{common/header}"></th:block>
     <section class="review-section">
       
-      <form th:action="'/review/updateReview/' + *{store.storeNo}" method="POST" id="reviewForm" enctype="multipart/form-data">
+      <form th:action="'/review/updateReview/' + *{store.storeNo} + '/' + *{review.reviewNo}" method="POST" id="reviewForm" enctype="multipart/form-data">
         <div class="review-container"> 
           <h2 th:text="|${store.storeName} 장소의 방문 리뷰쓰기|"></h2>
           <div class="review-selectBox">
@@ -45,7 +45,7 @@
                     <tbody id="menuBody">
                       <tr th:each=" menu : ${menuList}">
                         <td>
-                          <img src="/images/storeDetail/hotdog.jpg">
+                          <img th:src="${menu.menuImgUrl}">
                         </td>
                         <td>
                           <p th:text="${menu.menuTitle}">메뉴</p>
@@ -85,7 +85,7 @@
             <i class="rating__star far fa-star"></i>
             <i class="rating__star far fa-star"></i>
             
-            <input type="text" class="rating__result" id="reviewRating" name="reviewRating" hidden readonly>
+            <input type="text" class="rating__result" id="reviewRating" name="reviewRating" th:value="${review.reviewRating}" hidden readonly>
             <span>점</span>
   
           </div>
@@ -199,11 +199,11 @@
               <span class="delete-image">&times;</span>
             </div>
             
-      
+            <input type="hidden" name="deleteOrder" value="">
           </div>
   
           <div class="review-content">
-            <textarea name="reviewContent" id="reviewContent" placeholder=" 리뷰를 작성해 주세요."></textarea>
+            <textarea name="reviewContent" id="reviewContent" placeholder=" 리뷰를 작성해 주세요." th:text="${review.reviewContent}"></textarea>
           </div>
     
     
@@ -221,13 +221,32 @@
 
   <th:block th:replace="~{common/footer}"></th:block>
 
+  
+
   <script th:inline="javascript">
+
     const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원";
     const storeNo = /*[[${store.storeNo}]]*/ '가게 번호';
-    const menuList= /*[[${menuList}]]*/ "메뉴 리스트";
+    const menuList= /*[[${review.reviewMenuList}]]*/ "메뉴 리스트";
+    const OriginReviewRating = /*[[${review.reviewRating}]]*/ "점수";
+
+  
+    const imageList = /*[[${review.uploadList}]]*/ [];
+    const previewLists = document.querySelectorAll('img.preview');
+
+    const orderList = []; //기존에 존재하던 이미지 순서를 기록
+
+    for(let img of imageList){
+        previewLists[img.imageOrder].src = img.imagePath + img.imgRename;
+        
+        orderList.push(img.imageOrder);
+    }
+
+    const hashList = /*[[${review.hashList}]]*/ [];
+    console.log(hashList);
+    console.log(menuList);
   </script>
 
-
-  <script src="/js/storeReview/storeReview.js"></script>  
+  <script src="/js/storeReview/storeReviewUpdate.js"></script>  
 </body>
 </html>

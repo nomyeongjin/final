@@ -148,6 +148,29 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	
+	// 리뷰 삭제
+	@Override
+	public int deleteReview(int reviewNo) {
+		return mapper.deleteReview(reviewNo);
+	}
+	
+	// 리뷰 수정 시 기존 리뷰 조회
+	@Override
+	public Review selectReview(int reviewNo) {
+		return mapper.selectReview(reviewNo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
