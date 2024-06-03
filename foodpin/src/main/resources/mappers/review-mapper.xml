@@ -2,6 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.project.foodpin.review.model.mapper.ReviewMapper">
 
+	<resultMap type="Review" id="review_rm">
+	
+		<id property="reviewNo" column="REVIEW_NO"/>
+		
+		<collection 
+			property="uploadList"
+			select = "reviewUpdateUploadImage"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "UploadImage"
+		/>
+		
+		<collection 
+			property="hashList"
+			select = "reviewUpdateHash"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "ReviewHash"
+		/>
+		
+		<collection 
+			property="reviewMenuList"
+			select = "reviewUpdateMenu"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "ReviewMenu"
+		/>
+	</resultMap>
+
+
+
+
+
+
 	<!-- 특정가게 조회 -->
 	<select id="selectStore" resultType="store">
 		SELECT *
@@ -71,6 +105,55 @@
 		WHERE MEMBER_NO = #{memberNo}
 		AND REVIEW_DEL_FL = 'N'
 	</select>
+	
+	
+	<!-- 리뷰 삭제 -->
+	<update id="deleteReview">
+		UPDATE REVIEW
+		SET REVIEW_DEL_FL = 'Y'
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
+	
+	
+	<select id="selectReview" resultMap="review_rm">
+		SELECT DISTINCT *
+		FROM REVIEW
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<!-- 리뷰 이미지 조회 -->
+   <select id="reviewUpdateUploadImage" resultType="UploadImage">
+		SELECT * 
+		FROM UPLOAD_IMAGE
+		WHERE REVIEW_NO = #{reviewNo}
+		ORDER BY IMAGE_ORDER
+	</select> 
+	
+	<!-- 리뷰 해시태그 조회 -->
+	 <select id="reviewUpdateHash" resultType="ReviewHash">
+		SELECT HASH_NO, REVIEW_NO, HASH_TITLE
+		FROM REVIEW_HASH
+		JOIN HASH USING (HASH_NO)
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<!-- 리뷰 선택된 메뉴 조회 -->
+	<select id="reviewUpdateMenu" resultType="ReviewMenu">
+		SELECT * FROM REVIEW_MENU
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

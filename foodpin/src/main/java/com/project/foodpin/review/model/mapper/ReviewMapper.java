@@ -35,6 +35,13 @@ public interface ReviewMapper {
 
 	// 메뉴 삽입
 	int insertMenu(List<ReviewMenu> menuList);
+	
+	// 리뷰 삭제
+	int deleteReview(int reviewNo);
+
+	// 리뷰 수정시 기존 리뷰 조회
+	Review selectReview(int reviewNo);
+
 
 
 
