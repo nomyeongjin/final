@@ -130,8 +130,6 @@ const selectTimeFn = (reservDate) => {
 
             console.log(selectedTimeIsPast);
 
-            
-        
             if (isToday && selectedTimeIsPast || fullTimeList.includes(i)) {
                 timeItem.classList.add("disabled");
                 timeItem.classList.remove("select");
@@ -139,6 +137,7 @@ const selectTimeFn = (reservDate) => {
         
             timeList.append(timeItem);
 
+            // 오전 오후 구분용 margin 설정
             if(timeItem.innerText === '11:00' || timeItem.innerText === '00:00'){
                 const hr = document.createElement("div");
                 hr.style.width = "100%";

@@ -17,6 +17,7 @@ public class Notification {
 	private String sendMemberProfileImg;
 	private int sendMemberNo;
 	private int receiveMemberNo;
+	private String notificationType;
 	
 	private String notifiactionType;
 	private String title;
