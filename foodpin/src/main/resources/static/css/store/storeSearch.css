@@ -86,7 +86,7 @@ body{
 .search-logobox{
    width: 63px;
    height: 10%;
-
+   min-height: 81px;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -95,8 +95,8 @@ body{
   
 }
 #searchLogo{
-   width: 41px;
-   height: 41px;
+  width: 41px;
+  height: 41px;
  
 }
 
@@ -232,7 +232,8 @@ i{
    z-index: 100;
    padding: 15px 25px;
    height: 10%;
-   /* border-bottom: 1px solid var(--main-color); */
+   min-height: 75px;
+   
 }
 
 .search-container .search-wrap{
@@ -336,7 +337,7 @@ i{
 .search-categoryContaier{
    display: flex;
    flex-direction: column;
-   height: 30%;
+   min-height: 176px;
    padding: 20px;
    border-bottom: 1px dotted var(--main-color);
 
@@ -367,15 +368,36 @@ i{
 
 }
 
+/* 가게 상세 내용 창 + 스크롤바 */
 .search-panelContent{
    display: flex;
-    flex-direction: column;
-    width: 390px;
-    align-items: center;
-    padding: 0 20px;
-    justify-content: center;
+   flex-direction: column;
+   width: 390px;
+   max-height: 520px;
+   height: 70%;
+   align-items: center;
+   padding: 0 20px;
+   justify-content: center;
+
 }
 
+.searchstore-detailcontainer::-webkit-scrollbar {
+   display: none;
+}
+
+.searchstore-detailcontainer{
+   display: flex;
+   flex-direction: column;
+   width: 390px;
+   max-height: 520px;
+   height: 70%;
+   align-items: center;
+   padding: 0 20px;
+   justify-content: center;
+   overflow: none;
+   overflow-y: scroll;
+   overflow-x: hidden;
+}
 
 /* 새로고침 버튼 */
 
