@@ -385,8 +385,7 @@ if(confirmBtn != null) {
         
         // body에 form 태그
         document.body.append(insertForm);
-        
-        insertForm.submit(); // 다음 버튼 클릭 시 form 태그 제출
 
+        insertForm.submit(); // 다음 버튼 클릭 시 form 태그 제출
     });
 }

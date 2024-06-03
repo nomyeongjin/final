@@ -129,11 +129,11 @@
 }
 
 .review-count{
-    color: rgb(47, 113, 235);
+    color: #df8b4e;
 }
 
 .bold {
-    color: rgb(47, 113, 235);
+    color: #df8b4e;
     font-weight: bold;
 }
 
@@ -288,7 +288,7 @@
 }
 
 .select{
-    background-color: #4a484a;
+    background-color: #2b3151;
     color: white;
 }
 
@@ -390,7 +390,7 @@
 }
 
 .next-btn:hover{
-    border: 1px solid black;
+    border: 1px solid #df8b4e;
 }
 
 .next-btn{
@@ -402,7 +402,7 @@
 
     border: none;
     font-size: 15px;
-    background-color: #4A4848;
+    background-color: #df8b4e;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -443,7 +443,7 @@
 }
 
 .select-bg{
-    background-color: rgb(233, 255, 226);
+    background-color: #f3c186;
 }
 
 /* .fc .fc-day-disabled{

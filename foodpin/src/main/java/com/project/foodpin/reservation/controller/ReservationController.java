@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.dto.Off;
@@ -131,12 +132,11 @@ public class ReservationController {
 		
 		int insert = service.insertReservation(map);
 		
-		
 		if(insert > 0)  {
-			
 			return "reservation/reservationConfirm";
 		} 
-		return "reservation/reservationCheck";
+		
+		return "reservation/reservationDetail";
 		
 	}
 	
@@ -148,15 +148,5 @@ public class ReservationController {
 			@RequestBody String storeNo){
 		return service.selectOffDay(storeNo);
 	}
-	
-
-//	// 예약 가능 상태 변경
-//	@ResponseBody
-//	@PostMapping("updateStoreStatus")
-//	public int updateStoreStatus(
-//			@RequestBody Store store) {
-//		return service.updateStoreStatus(store);
-//	}
-
 	
 }

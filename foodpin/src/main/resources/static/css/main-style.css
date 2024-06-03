@@ -491,7 +491,7 @@ header>section:nth-child(3) {
 
 .notification-bell-btn.fa-solid{
    color: rgb(255, 187, 0);
-   text-shadow: 1px 1px 3px gray, 2px 2px 5px black;
+   /* text-shadow: 1px 1px 3px gray, 2px 2px 5px black; */
 }
 
 .box-content{
@@ -575,9 +575,9 @@ header>section:nth-child(3) {
    cursor: pointer;
 } */
 .click{
-   color: #4173f5;
-   border: 1px solid #4173f5;
-   background-color:  rgba(114, 154, 255, 0.041);
+   color: #e14c54;
+   border: 1px solid #e14c54;
+   background-color:  #ffedef4b;
 }
 
 .notification-list{
