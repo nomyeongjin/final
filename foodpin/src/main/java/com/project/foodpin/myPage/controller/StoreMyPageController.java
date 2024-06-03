@@ -94,7 +94,8 @@ public class StoreMyPageController {
 	 * @param loginMember
 	 * @return menuList
 	 */
-	@GetMapping(value="menuSelect", produces = "application/json")
+//	@GetMapping(value="menuSelect", produces = "application/json")
+	@GetMapping("menuSelect")
 	@ResponseBody
 	public List<Menu> menuSelect(@RequestParam("storeNo") int storeNo) {
 		
@@ -105,7 +106,8 @@ public class StoreMyPageController {
 	 * @param menuList
 	 * @return
 	 */
-	@PutMapping(value="menuUpdate", produces = "application/json")
+//	@PutMapping(value="menuUpdate", produces = "application/json")
+	@PostMapping("menuUpdate")
 	@ResponseBody
 	public int menuUpdate(@RequestBody List<Menu> inputMenuList) {
 		
@@ -140,7 +142,6 @@ public class StoreMyPageController {
 		return list;
 	}
 	
-	
 	/** 지정 휴무일 조회 (비동기, 캘린더로 불러오기)
 	 * @param storeNo
 	 * @return map
@@ -149,27 +150,29 @@ public class StoreMyPageController {
 	@ResponseBody
 	public List<Map<String, String>> calendarOffSelect(@RequestBody int storeNo) {
 		
-		
 		List<Off> offList = service.calendarOffSelect(storeNo);
 		
-		if(offList.isEmpty()) return null; // 지정 휴무일 조회 결과 없는 경우
+//		if(offList.isEmpty()) return null; // 지정 휴무일 조회 결과 없는 경우
 			
-		List<Map<String, String>> mapList = new ArrayList<>();
+		List<Map<String, String>> listMap = new ArrayList<>();
 		
 		for (Off off : offList) {
 			
 			Map<String, String> map = new HashMap<>();
+			
 			map.put("title", off.getOffDayTitle());
 			map.put("start", off.getOffDayStart());
 			map.put("end", off.getOffDayEnd());
 			
-			mapList.add(map);
+			listMap.add(map);
 		}
 		
-		return mapList;
+		return listMap;
 	}
 	
 	
+
+
 	/** 팝업창에서 지정 휴무일 등록
 	 * @param inputOff
 	 * @return

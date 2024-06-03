@@ -56,6 +56,10 @@ public interface StoreMyPageService {
 	 */
 	List<Off> selectWeekOff(int storeNo);
 
+	
+	
+	
+	
 	/** 지정 휴무일 조회
 	 * @param storeNo
 	 * @return offList

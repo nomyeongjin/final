@@ -1,3 +1,10 @@
+:root{
+   --logo-color : #363f75  ;
+   --main-color : #b1ab9a ;
+   --hover-color : #e9ae2f;
+}
+
+
 
 /* 사이드 메뉴 */
 .left-side{

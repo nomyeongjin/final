@@ -158,7 +158,7 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 	public int reviewCount(int memberNo) {
 		return mapper.reviewCount(memberNo);
 	}
-	
+
 	// 회원 탈퇴
 	@Override
 	public int secession(String memberPw, Member loginMember) {

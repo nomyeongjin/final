@@ -15,4 +15,7 @@ public interface ManagerMyPageService {
 	// 가게 거부
 	boolean refuseMember(int memberNo);
 
+	// 가게 폐점
+	boolean closeStore(int memberNo);
+
 }

@@ -491,12 +491,20 @@ reviewReport.forEach((report) => {
         .then(result => {
     
           if(result == 0){
-            alert("신고 접수가 되지 않았습니다.");
+            Swal.fire({
+              icon: "error",
+              title: "신고 접수 실패",
+              text: "신고 접수가 실패했습니다. 다시 한 번 확인해주세요.",
+            });
             reportContent.focus();
             e.preventDefault();
           }
           else{
-            alert("리뷰 신고가 접수 되었습니다.");
+            Swal.fire({
+              title: "신고 접수 완료",
+              text: "신고 접수가 정상적으로 처리 되었습니다.",
+              icon: "success"
+            });
             reviewReportForm.classList.add("popup-hidden");
             reportContent.value = '';
           }

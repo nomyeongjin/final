@@ -20,4 +20,7 @@ public interface ManagerMyPageMapper {
 	// 가게 거부
 	boolean refuseMember(@Param("memberNo") int memberNo);
 
+	// 가게 폐점
+	boolean closeStore(@Param("memberNo") int memberNo);
+
 }
