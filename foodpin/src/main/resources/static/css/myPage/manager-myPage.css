@@ -13,7 +13,7 @@
 .enrollTable > thead {
     width: 100%;
     height: 40px;
-    background-color: var(--main-color) !important;
+    background-color: #E14C54 !important;
     color: white;
     font-size: 15px;
 }

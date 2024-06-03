@@ -5,23 +5,33 @@
 	<!-- 가게 입점 내역 목록 -->
 	<select id="storeRequestList">
 		SELECT M.MEMBER_NO, MEMBER_NAME, STORE_NAME, 
-		<![CDATA[ TO_CHAR(ENROLL_DATE, 'YYYY. MM. DD') ENROLL_DATE]]>
+		<![CDATA[ TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') ENROLL_DATE]]>
 		FROM "MEMBER" M
 		JOIN "STORE" S ON M.MEMBER_NO = S.MEMBER_NO
 		WHERE MEMBER_CODE = #{memberCode}
 		AND MEMBER_STATUS = #{memberStatus}
+		AND STORE_CLOSED = 'N'
 		ORDER BY ENROLL_DATE DESC
 	</select>
 	
+	<!-- 승인버튼 -->
 	<update id="approveMember">
 		UPDATE MEMBER SET
 		MEMBER_STATUS = 'N'
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<!-- 거절버튼 -->
 	<update id="refuseMember">
 		UPDATE MEMBER SET
 		MEMBER_STATUS = 'Y'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 폐점버튼 -->
+	<update id="closeStore">
+		UPDATE STORE SET 
+		STORE_CLOSED = 'Y'
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 

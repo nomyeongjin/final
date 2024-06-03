@@ -32,5 +32,11 @@ public class ManagerMyPageServiceImpl implements ManagerMyPageService{
 	public boolean refuseMember(int memberNo) {
 		return mapper.refuseMember(memberNo);
 	}
+	
+	// 가게 폐점
+	@Override
+	public boolean closeStore(int memberNo) {
+		return mapper.closeStore(memberNo);
+	}
 
 }

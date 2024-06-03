@@ -39,15 +39,50 @@
                                                 <a class="review-storeName" th:text="|*{storeName} >|" th:href="'/store/storeDetail/' + *{storeNo}"></a>
         
                                                 <div class="review-memberScore">
-                                                    <span class="reviewScore" th:attr="data-rating=*{reviewRating}"></span>
-                                                    <span th:text="|*{reviewRating} 점|">점수</span>
+                                                    <span th:switch="*{reviewRating}">
+                                                        <span th:case="1">
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                        </span>
+                                                        <span th:case="2">
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                        </span>
+                                                        <span th:case="3">
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                        </span>
+                                                        <span th:case="4">
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                        </span>
+                                                        <span th:case="5">
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span th:text="|*{reviewRating} 점|"> 점수</span>
                                                 </div>
-                
                                             </div>
                                         </div>
                 
                                         <div class="storereview-top-right">
-                                            <button type="button" id="reviewDeleteBtn"  
+                                            <button type="button" class="reviewDeleteBtn"  
                                                 th:if="${session.loginMember}" 
                                                 th:attr="data-review-no=*{reviewNo}">
                                                 삭제하기
@@ -88,7 +123,7 @@
                                         </div>
                                     </th:block>
                 
-                                    <th:block th:if="${!#lists.isEmpty(replyList)}" th:each=" reply : *{replyList}">
+                                    <th:block th:if="${!#lists.isEmpty(replyList)}" th:each="reply : *{replyList}">
                                         <div class="store-reply">
                                             <img class="review-store-profile" th:src="${reply.storeImg}" alt="가게 프로필 이미지">
                                             <p class="reply-content-bubble" th:text="${reply.replyContent}">

@@ -58,8 +58,6 @@ function refuseMember(memberNo) {
 
 
 
-
-
 /* 입점 내역 상세 팝업 */
 const popup = document.querySelector("#popup");
 const openStoreDetail = document.querySelectorAll(".open-storeDetail");

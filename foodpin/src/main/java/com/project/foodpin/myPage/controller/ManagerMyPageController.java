@@ -99,21 +99,23 @@ public class ManagerMyPageController {
 	}
 	
 	// 가게 폐점
-	@PostMapping("ableStore/{memberNo}")
-	public ResponseEntity<Map<String, Object>> unableStore(
+	@PostMapping("closeStore/{memberNo}")
+	public ResponseEntity<Map<String, Object>> closeStore(
 			@PathVariable("memberNo") int memberNo) {
 		
-		boolean refuse = service.refuseMember(memberNo);
+		boolean closeStore = service.closeStore(memberNo);
 		Map<String, Object> response = new HashMap<>();
-		response.put("success", refuse);
+		response.put("success", closeStore);
 		return ResponseEntity.ok(response);
 	}
 	
+	// 리뷰 신고
 	@GetMapping("reportReview")
 	public String storeInfo() {
 		return "myPage/manager/reportReview";
 	}
 	
+	// 정보 정정 신청
 	@GetMapping("managerStoreInfo")
 	public String memberReportReview() {
 		return "myPage/manager/managerStoreInfo";
