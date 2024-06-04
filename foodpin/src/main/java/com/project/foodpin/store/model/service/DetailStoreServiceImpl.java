@@ -99,18 +99,13 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 	// 가게 정보 정정 신고
 	@Override
 	public int storeReport(Map<String, Object> map) {
-	    // Map에서 데이터를 추출합니다.
+	    // Map에서 데이터를 추출
 	    String storeNo = (String) map.get("storeNo");
 	    String requestContent = (String) map.get("requestContent");
 	    String requestCategoryTitle = (String) map.get("requestCategoryTitle");
 
-	    // storeNo와 연관된 memberNo를 조회합니다.
-	    int memberNo = mapper.selectReportMemberNo(storeNo);
 
-	    // Map에 memberNo를 추가합니다.
-	    map.put("memberNo", memberNo);
-
-	    // Map에 requestCategoryCode를 추가합니다.
+	    // Map에 requestCategoryCode를 추가
 	    switch (requestCategoryTitle) {
 	        case "changeBasicinfo":
 	            map.put("requestCategoryCode", "1");
@@ -129,7 +124,7 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 	            break;
 	    }
 
-	    // 신고 내용을 데이터베이스에 저장합니다.
+	   
 	    return mapper.storeReport(map);
 	}
 
