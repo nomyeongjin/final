@@ -149,14 +149,19 @@ tbody tr td {
 
 /* 정보 수정 신고 */
 .requestList {
+    display: flex;
+    align-items: center;
+    text-align: left;
     margin: 20px 0;
+    border: 1px solid var(--hotpink);
+    border-radius: 20px;
 }
 
 .request {
-    border: 1px solid var(--hotpink);
+    float: left;
+    flex-grow: 1;
     margin: 5px 0;
     padding: 20px;
-    border-radius: 20px;
 }
 
 .request-category {
@@ -174,7 +179,11 @@ tbody tr td {
     margin: 10px;
 }
 
-.cancelReservation {
+.requestMember, .requestStoreName {
+    font-size: 15px;
+}
+
+.completeBtn {
     font-size: 15px;
     background-color: var(--hotpink);
     border: none;
@@ -182,7 +191,11 @@ tbody tr td {
     color: white;
     width: 70px;
     height: 30px;
-    margin-right: 50px;
-    margin-left: auto;
+    margin-right: 30px;
     cursor: pointer;
+}
+
+.completeBtn:hover {
+    background-color: #f39da1;
+    color: white;
 }

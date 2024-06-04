@@ -202,7 +202,18 @@
 		<selectKey order="BEFORE" resultType="_int" keyProperty="reportNo">
 	      SELECT SEQ_REPORT_NO.NEXTVAL FROM DUAL
 	  	</selectKey>
-		
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
 		INSERT INTO "REPORT" VALUES(#{reportNo}, #{reportContent}, #{reviewNo}, #{memberNo})
 	</insert>   
    
@@ -222,7 +233,8 @@
         STORE_NO, 
         MEMBER_NO, 
         REQUEST_CATEGORY_CODE, 
-        REQUEST_DATE
+        REQUEST_DATE,
+        REQUEST_DEL_FL
     ) VALUES (
         SEQ_REQUEST_NO.NEXTVAL, 
         #{requestContent}, 
@@ -235,7 +247,8 @@
             WHEN #{requestCategoryTitle} = 'storeClosed' THEN '7'
             ELSE '0' 
         END,
-        DEFAULT
+        DEFAULT,
+        'N'
     )
 </insert>
    
