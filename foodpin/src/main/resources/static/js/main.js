@@ -26,13 +26,4 @@ quickLoginBtn.forEach((item) =>{
    
 })
 
-console.log(loginMember);
-
-const myChat = document.getElementById("myChat");
-
-myChat.addEventListener("click", () => {
-
-    location.href = "/chatting/chat?memberId=" + loginMember.memberId;
-
-})
 

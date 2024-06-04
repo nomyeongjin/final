@@ -1,5 +1,18 @@
+
 /* 알림 */
 document.addEventListener('DOMContentLoaded', () => {
+
+    // 개인 채팅 페이지 이동
+    const myChat = document.getElementById("myChat");
+
+    if(myChat != null){
+    
+        myChat.addEventListener("click", () => {
+        
+            location.href = "/chatting/chat?memberId=" + loginMember.memberId;
+        
+        })
+    }
 
     const notificationBellBtn = document.querySelector(".notification-bell-btn");
 
