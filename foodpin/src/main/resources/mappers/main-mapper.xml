@@ -3,9 +3,11 @@
 <mapper namespace="com.project.foodpin.main.model.mapper.MainMapper">
 
  <select id="selectStoreList"  resultType="store">
-   SELECT STORE_IMG, STORE_NAME, STORE_NO
+    SELECT STORE_IMG, STORE_NAME, STORE_NO
    FROM "STORE"
+   JOIN "MEMBER" USING (MEMBER_NO)
    WHERE STORE_CLOSED='N'
+   AND MEMBER_STATUS='N'
    ORDER BY STORE_NO DESC
  
  </select>
