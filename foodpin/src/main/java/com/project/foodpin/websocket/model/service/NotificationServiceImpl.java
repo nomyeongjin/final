@@ -26,7 +26,7 @@ public class NotificationServiceImpl implements NotificationService{
 	
 	// 알림 보낼 때 필요한 데이터 목록 조회
 	@Override
-	public Store selectStoreData(int pkNo) {
+	public Store selectStoreData(String pkNo) {
 		return mapper.selectStoreData(pkNo);
 	}
 	

@@ -545,7 +545,12 @@ header>section:nth-child(3) {
    height: 50px;
 }
 
-.title {
+.notification-header>.title {
+   font-size: 20px;
+   font-weight: bold;
+}
+
+.pre-notification>.title {
    font-size: 20px;
    font-weight: bold;
 }
@@ -602,18 +607,22 @@ header>section:nth-child(3) {
 }
 
 .notification-list{
-   display: flex;
+   /* display: flex; */
    height: 400px;
    position: absolute;
    list-style: none;
    z-index: 2000;
+   position: relative;
+   top: 20px;
+   overflow: auto;
 }
 
 /* 안 읽은 알림 */
 .not-read {
    background-color: rgba(176, 208, 238, 0.7);
+   border-radius: 10px;
    color: black;
-   font-weight: bold;
+   /* font-weight: bold; */
 }
 
 .notification-item{
@@ -629,9 +638,9 @@ header>section:nth-child(3) {
    display: flex;
    align-items: center;
    flex-direction: column;
-   position: relative;
+   /* position: relative;
    top: 100px;
-   overflow: auto;
+   overflow: auto; */
 }
 
 .notification-content-container{
@@ -689,4 +698,12 @@ header>section:nth-child(3) {
 .fa-circle-xmark:hover{
    color: red;  
    user-select: none;
+}
+
+.notification-message>.fa-circle-xmark{
+   display: flex;
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   /* margin: 10px; */
 }

@@ -19,9 +19,13 @@
 	</select>
 	
 	<!-- 예약 저장 -->
-	<insert id="insertReservation">
+	<insert id="insertReservation" useGeneratedKeys="true">
+		<selectKey order="BEFORE" resultType="_int" keyProperty="reservNo">
+			SELECT SEQ_RESERV_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
 		INSERT INTO "RESERVATION" VALUES(
-			SEQ_RESERV_NO.NEXTVAL,
+			#{reservNo},
 			TO_DATE(#{reservDate}, 'YYYY-MM-DD'),
 			#{reservTime},
 			#{reservCount}, 

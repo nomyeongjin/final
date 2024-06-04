@@ -80,6 +80,12 @@ if (notificationLoginCheck) {
         selectnNotificationFn();
     })
 
+    notReadCheckFn = async () => {
+        const resp = await fetch("/notification/notReadCheck")
+        const notReadCount = await resp.text();
+        return notReadCount;
+    }
+
     /* ******** 알림 조회 할 때 파라미터 전달을 다르게.... ********* */
     /* 비동기 알림조회 */
     selectnNotificationFn = () => {
@@ -88,21 +94,22 @@ if (notificationLoginCheck) {
         .then(resp => resp.json())
         .then(selectList => {
 
+            console.log(selectList);
             const notiList = document.querySelector(".notification-list");
             notiList.innerHTML = "";
 
             for (let data of selectList) {
-                const notiItem = document.createElement("li");
-                notiItem.className = "notification-item";
+                // console.log(data);
+                
+                //알림 내용 
+                const border = document.createElement("div");
+                border.classList.add("border");
 
-                if (data.notificationCheck == 'N') {
-                    notiItem.classList.add("not-read");
-                }
+                // if (data.notificationCheck == 'N') {
+                //     border.classList.add("not-read");
+                // }
 
-                const notiText = document.createElement("div");
-                notiText.className = "notification-text";
-
-                notiText.addEventListener("click", e => {
+                border.addEventListener("click", e => {
 
                     // 읽지 않은 알림인 경우
                     if (data.notificationCheck == 'N') {
@@ -117,49 +124,55 @@ if (notificationLoginCheck) {
                 })
 
                 //알림 보낸 회원의 프로필 이미지
-                const senderProfile = document.createElement(img);
-                if (data.senderProfile == null) senderProfile.src = notificationDefaultImage;   //기본 이미지
-                else senderProfile.src = data.sendMemberProfileImg; // 프로필 이미지
+                // const senderProfile = document.createElement(img);
+                // if (data.senderProfile == null) senderProfile.src = notificationDefaultImage;   //기본 이미지
+                // else senderProfile.src = data.sendMemberProfileImg; // 프로필 이미지
 
-                //알림 내용 
+                // const notiItem = document.createElement("div");
+                // notiItem.classList.add("notification-item");
 
-                const border = document.createElement("div");
-                border.className("border");
+                // const notiText = document.createElement("div");
+                // notiText.classList.add("notification-text");
+
+                const temp = document.createElement("div");
+                temp.classList.add("temp");
 
                 //class="notification-content-container"
                 const contentContainer = document.createElement("div");
-                contentContainer.className("notification-contnet-container");
-
+                contentContainer.classList.add("notification-content-container");
+               
                 // class="reservation-info"
                 const reservationInfo = document.createElement("div");
-                reservationInfo.className("reservation-info");
+                reservationInfo.classList.add("reservation-info");
 
                 //사진
                 const img = document.createElement("img");
-                img.className("profile");
+                img.classList.add("image");
 
                 const notiTitle = document.createElement("span");
-                notiTitle.className("notification-store");
+                notiTitle.classList.add("notification-store");
 
                 // 알림을 보낸 시간
                 const notiDate = document.createElement("span");
-                notiDate.className("notification-date");
+                notiDate.classList.add("notification-date");
                 notiDate.innerText = data.notificationDate;
+                console.log(data.notificationDate);
 
                 //class="notification-content"
                 const notiContent = document.createElement("div");
-                notiContent.className("notification-content");
+                notiContent.classList.add("notification-content");
 
                 //알림내용
                 const notiMessage = document.createElement("div");
-                notiContent.className("notification-content");
-                notiContent.innerHTML = data.notificationContent;
+                notiMessage.classList.add("notification-message");
+                notiMessage.innerHTML = data.notificationContent;
+                console.log(data.notificationContent);
 
-                const messageContent = document.createElement("span");
-                messageContent.className("message-content");
+                // const messageContent = document.createElement("span");
+                // messageContent.className("notification-message");
 
                 const xmark = document.createElement("i");
-                xmark.className("fa-circle-xmark");
+                xmark.classList.add('fa-regular',"fa-circle-xmark");
 
                 // 알림 삭제
                 xmark.addEventListener("click", e => {
@@ -191,20 +204,17 @@ if (notificationLoginCheck) {
 
 
                 /* 조립 */
-                notiList.append(notiItem);
-                notiTitle.append(notiText);
-                notiText.append(border);
+
+                // notiList.append(notiItem);
+                // notiList.append(notiText);
+                notiList.append(border);
+                // border.append(temp);
                 border.append(contentContainer);
-
                 contentContainer.append(reservationInfo, notiContent);
-
-                reservationInfo.append(img);
-                img.append(notiTitle);
-                notiTitle.append(notiDate);
-
+                reservationInfo.append(img, notiTitle, notiDate);
                 notiContent.append(notiMessage);
-                notiMessage.append(messageContent);
-                messageContent.append(xmark);
+                notiMessage.append(xmark);
+
             }
 
         })

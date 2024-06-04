@@ -130,9 +130,10 @@ public class ReservationController {
 		map.put("visitName", reservation.getVisitName());
 		map.put("visitTel", reservation.getVisitTel());
 		
-		int insert = service.insertReservation(map);
+		int reservNo = service.insertReservation(map);
 		
-		if(insert > 0)  {
+		if(reservNo > 0)  {
+			model.addAttribute("reservNo", reservNo);
 			return "reservation/reservationConfirm";
 		} 
 		

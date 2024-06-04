@@ -11,7 +11,7 @@ import com.project.foodpin.websocket.model.dto.Notification;
 public interface NotificationMapper {
 	
 	// 알림 보낼 때 필요한 데이터 목록 조회
-	Store selectStoreData(int pkNo);
+	Store selectStoreData(String pkNo);
 
 	// 알림 삽입
 	int insertNotification(Notification notification);
