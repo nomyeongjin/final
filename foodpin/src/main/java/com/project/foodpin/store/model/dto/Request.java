@@ -19,9 +19,10 @@ public class Request {
 	private int requestCategoryCode;
 	private String requestContent;
 	private String requestCategoryTitle;
-	private String requestDate;
+
 	private int storeNo;
 	private int memberNo;
+  private String requestDate;
 	
 	private String memberName;
 	private String storeName;

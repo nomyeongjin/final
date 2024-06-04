@@ -9,6 +9,13 @@ const menuBtn = document.querySelector("#menuBtn"); // 메뉴 정보 버튼
  */
 menuBtn.addEventListener("click", () => {
 
+   // 서브 메뉴에 버튼 기존 체크 클래스 제거 + 해당 메뉴 체크
+   document.querySelectorAll(".sub-title-btn").forEach(btn => { 
+
+      btn.classList.remove('title-btn-checked');
+   });
+   menuBtn.classList.add('title-btn-checked'); // 선택된 요소 체크 클래스 추가
+
    menuContainer.innerHTML = "";
    // console.log(storeNo);
 
