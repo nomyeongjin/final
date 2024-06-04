@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채팅</title>
+    <th:block th:replace="~{chatting/chatCommon}"></th:block>
+</head>
+<body>
+    <!-- 채팅 영역-->
+
+    <maina th:data-chatting-no="${chattingNo}">
+        <div class="chatting-area">
+            <ul class="display-chatting">
+
+                <th:block th:each="msg : ${messageList}" th:if="${msg.chattingNo} == ${chattingNo}" th:object="${msg}">
+                    <li  class="target-chat">
+                        <span class="chatDate" th:text="*{sendDate}">14:01</span>
+                        <p class="chat" th:text="*{message}"></p>
+                    </li>
+                    <li class="my-chat">
+                        <span class="chatDate" th:text="*{sendDate}">14:01</span>
+                        <p class="chat" th:text="*{message}"></p>
+                    </li>
+
+                </th:block>
+
+                <!-- <li class="my-chat">
+                    <span class="chatDate">14:01</span>
+                    <p class="chat">안녕하세요?</p>
+                </li>
+                
+                <li class="target-chat">
+                    <img src="/images/user.png">
+                    
+                    <div>
+                        <b>상대방</b>	<br>
+                        <p class="chat">
+    안녕하세요?? 반갑습니다.
+    ㅎㅎㅎㅎㅎ
+                        </p>
+                        <span class="chatDate">14:05</span>
+                    </div>
+                </li> -->
+               
+            </ul>
+    </main>
+
+
+
+        <!-- 채팅 입력 부분 -->
+        <div class="input-area">
+            <textarea id="inputChatting" rows="3"></textarea>
+            <button id="send">전송</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	<script th:inline="javascript">
+		const userDefaultImage = /*[[#{user.default.image}]]*/ '기본 이미지';
+
+        const loginMember = /*[[${session.loginMember}]]*/ '로그인';
+
+        
+	</script>
+
+    <script src="/js/chatting/chatPopup.js"></script>
+
+</body>
+</html>

@@ -1,13 +1,13 @@
 package com.project.foodpin.myPage.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,8 +46,8 @@ public class MemberMyPageController {
 	// 회원 정보 수정
 	@PostMapping("memberInfo")
 	public String updateInfo(
-		@RequestParam("profileImg") MultipartFile profileImg,
 		Member inputMember,
+		@RequestParam("uploadImg") MultipartFile profileImg,
 		@SessionAttribute("loginMember") Member loginMember,
 		RedirectAttributes ra) throws IllegalStateException, IOException {
 		
@@ -108,11 +108,23 @@ public class MemberMyPageController {
 		Model model) {
 		
 		int memberNo = loginMember.getMemberNo();
+		
 		List<Reservation> reservation = service.reservationFix(memberNo);
+		
 		int noshowCount = service.noshowCount(memberNo);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("noshowCount", noshowCount);
-		
+
+	    for (Reservation reservations : reservation) {
+	        String storeLocation = reservations.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        
+	        reservations.setStoreLocation(addressWithoutPostcode);
+	    }	
+
 		return "myPage/member/reservation/fix";
 	}
 	
@@ -127,6 +139,16 @@ public class MemberMyPageController {
 		int noshowCount = service.noshowCount(memberNo);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("noshowCount", noshowCount);
+		
+	    for (Reservation reservations : reservation) {
+	        String storeLocation = reservations.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        
+	        reservations.setStoreLocation(addressWithoutPostcode);
+	    }	
 		
 		return "myPage/member/reservation/wait";
 	}
@@ -143,7 +165,17 @@ public class MemberMyPageController {
 
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("noshowCount", noshowCount);
-
+		
+	    for (Reservation reservations : reservation) {
+	        String storeLocation = reservations.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        
+	        reservations.setStoreLocation(addressWithoutPostcode);
+	        
+	    }	
 		return "myPage/member/reservation/last";
 	}
 	
@@ -159,7 +191,16 @@ public class MemberMyPageController {
 
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("noshowCount", noshowCount);
-
+		
+	    for (Reservation reservations : reservation) {
+	        String storeLocation = reservations.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        
+	        reservations.setStoreLocation(addressWithoutPostcode);
+	    }	
 		return "myPage/member/reservation/cancelNoshow";
 	}
 	
@@ -173,18 +214,15 @@ public class MemberMyPageController {
 		int memberNo = loginMember.getMemberNo();
 		int result = service.cancelReservation(memberNo, reservNo);
 		
-		
 		if(result > 0) {
 			return true;
 		} else {
 			return false;
-			
 		}
 	}
 	
 	
-	
-	// 북마크 목록 조회
+	// 찜 목록 조회
 	@GetMapping("memberLike")
 	public String memberLikeList(
 		Model model,
@@ -192,11 +230,40 @@ public class MemberMyPageController {
 		
 		int memberNo = loginMember.getMemberNo();
 		List<Store> store = service.memberLikeList(memberNo);
+		int likeCount = service.likeCount(memberNo);
+		
+		model.addAttribute("likeCount", likeCount);
 		model.addAttribute("store", store);
 		
+	    for (Store stores : store) {
+	        String storeLocation = stores.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        
+	        stores.setStoreLocation(addressWithoutPostcode);
+	    }	
 		return "myPage/member/memberLike";
 	}
 	
+	// 찜 취소
+	@DeleteMapping("cancelLike")
+	public boolean cancelLike(
+		@RequestBody int storeNo,
+		@SessionAttribute("loginMember") Member loginMember) {
+		
+		int memberNo = loginMember.getMemberNo();
+		int result = service.cancelLike(memberNo, storeNo);
+		
+		if (result > 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
+		
 	// 리뷰 목록 조회
 	@GetMapping("memberReview")
 	public String memberReview(
@@ -204,10 +271,16 @@ public class MemberMyPageController {
 		@SessionAttribute("loginMember") Member loginMember) {
 		
 		int memberNo = loginMember.getMemberNo();
+		
 		List<Review> review = service.selectReviewList(memberNo);
+		int reviewCount = service.reviewCount(memberNo);
+		
 		model.addAttribute("review", review);
+		model.addAttribute("reviewCount", reviewCount);
+		
 		return "myPage/member/memberReview";
 	}
+	
 	
 	// 회원 탈퇴 페이지로
 	@GetMapping("memberSecession")

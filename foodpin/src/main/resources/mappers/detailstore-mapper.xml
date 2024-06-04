@@ -2,30 +2,177 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.project.foodpin.store.model.mapper.DetailStoreMapper">
 
+
+
+
+	<resultMap type="Review" id="review_rm">
+
+	
+		<id property="reviewNo" column="REVIEW_NO"/>
+		
+		<collection 
+			property="uploadList"
+			select = "uploadImageList"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "UploadImage"
+		/>
+		
+		<collection 
+			property="hashList"
+			select = "selectHashList"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "ReviewHash"
+		/>
+		
+		<collection 
+			property="replyList"
+			select = "selectReplyList"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "ReviewReply"
+		/>
+		
+	</resultMap>
+
+
+
+<!-- resultMap
+   조회된 컬럼명과 DTO 필드명이 일치하지 않을 때 매핑 시켜줌
+ -->
+<resultMap type="Store" id="store_rm">
+
+  <id property="storeNo" column="STORE_NO"/>
+  
+  <!-- id(PK역할하는 컬럼, 필드를 작성하는 태그)
+       resultMap의 PK로 storeNo를 하겠다고 지정
+   -->
+   
+   
+   <collection property="imageList"
+               select = "selectImageList"
+               column = "STORE_NO"
+               javaType = "java.util.ArrayList"
+               ofType = "UploadImage"
+   />
+   <collection property="menuList"
+               select = "selectMenuList"
+               column = "STORE_NO"
+               javaType = "java.util.ArrayList"
+               ofType = "Menu"
+   />
+   <collection property="storeHashList"
+               select = "selectStoreHashList"
+               column = "STORE_NO"
+               javaType = "java.util.ArrayList"
+               ofType = "ReviewHash"
+   />
+
+</resultMap>
+
+
+
 	   <!-- 가게 상세 조회 -->
-   <select id="storeDetail" resultType="store">
-   SELECT S.STORE_NAME, S.STORE_INFO, S.STORE_LOCATION, S.STORE_STATUS,
-       S.STORE_TEL, S.OPEN_HOUR, S.CLOSE_HOUR, S.BREAKTIME_START, S.BREAKTIME_END,
-       S.STORE_CLOSED, S.STORE_IMG, S.TOTAL_RATING, S.MEMBER_NO, S.STORE_NO,
+   <select id="storeDetail" resultMap="store_rm">
+   	SELECT STORE_NAME, STORE_INFO, STORE_LOCATION, STORE_STATUS,
+       STORE_TEL, OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END, 
+       STORE_CLOSED, STORE_IMG, STORE_NO, 
+
+       (SELECT COUNT(*) 
+       FROM "REVIEW"
+       WHERE STORE_NO = #{storeNo}
+      AND REVIEW_DEL_FL = 'N') REVIEW_COUNT,
+
+
        	(SELECT COUNT(*) 
 		 FROM "BOOKMARK"
 		 WHERE STORE_NO = #{storeNo}) LIKE_COUNT,
-		 (SELECT COUNT(*)FROM "BOOKMARK"
+		 
+
+	     (SELECT ROUND(AVG(REVIEW_RATING), 1)
+		  FROM REVIEW
+		  WHERE STORE_NO =#{storeNo}
+		  AND REVIEW_DEL_FL = 'N') TOTAL_RATING
+		 
+		 <if test="memberNo!=null">
+		 
+		 , (SELECT COUNT(*)FROM "BOOKMARK"
 	    WHERE MEMBER_NO = #{memberNo}
 	    AND STORE_NO =#{storeNo}) BOOKMARK
-		 
-		FROM "STORE" S
+	    </if>
+		  
+		FROM "STORE" 
+		JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE STORE_NO = #{storeNo}
-		
+		AND STORE_CLOSED ='N'
    </select>
    
-   <!-- 가게 메뉴 상세 조회 -->
-    <select id="menuDetail" resultType="menu">
-       SELECT STORE_NO, MENU_IMG_URL, MENU_NO, MENU_TITLE, MENU_AMOUNT,MENU_CONTENT  
-		FROM MENU
-		WHERE STORE_NO=#{storeNo}
-    </select>
-  
+   
+   <select id="selectImageList" resultType="UploadImage">
+     SELECT *
+     FROM "UPLOAD_IMAGE"
+     WHERE STORE_NO = #{storeNo}
+     ORDER BY REVIEW_NO DESC
+   </select> 
+   
+   <select id="selectMenuList" resultType="Menu">
+     SELECT *
+     FROM "MENU"
+     WHERE STORE_NO = #{storeNo}
+     ORDER BY MENU_NO
+   </select>
+   
+   <select id="selectStoreHashList" resultType="ReviewHash">
+     
+		SELECT DISTINCT H.HASH_TITLE
+		FROM REVIEW R
+		JOIN REVIEW_HASH RH ON R.REVIEW_NO = RH.REVIEW_NO
+		JOIN HASH H ON RH.HASH_NO = H.HASH_NO
+		WHERE R.STORE_NO =  #{storeNo} 
+   </select>
+
+   
+   
+      <!-- 가게 리뷰 상세 조회 -->
+   <select id="reviewDetail" resultMap="review_rm">
+   		SELECT DISTINCT MEMBER_NICKNAME, PROFILE_IMG, REVIEW_NO, REVIEW_RATING, REVIEW_CONTENT,
+			TO_CHAR(REVIEW__REG_DATE, 'YYYY-MM-DD') REVIEW__REG_DATE, REVIEW_DEL_FL,
+			STORE_NO, MEMBER_NO
+		FROM REVIEW
+		JOIN "MEMBER" USING (MEMBER_NO)
+		JOIN "REVIEW_HASH" USING (REVIEW_NO)
+		JOIN "HASH" USING (HASH_NO)
+		WHERE STORE_NO = #{storeNo}
+		AND REVIEW_DEL_FL = 'N'
+		ORDER BY REVIEW_NO DESC
+   </select>
+   
+   <!-- 리뷰 이미지 조회 -->
+   <select id="uploadImageList" resultType="UploadImage">
+		SELECT * 
+		FROM UPLOAD_IMAGE
+		WHERE REVIEW_NO = #{reviewNo}
+		ORDER BY IMAGE_ORDER
+	</select> 
+	
+	<!-- 리뷰 해시태그 조회 -->
+	 <select id="selectHashList" resultType="ReviewHash">
+		SELECT HASH_NO, REVIEW_NO, HASH_TITLE 
+		FROM REVIEW_HASH
+		JOIN HASH USING (HASH_NO)
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<!-- 리뷰 사장님 댓글 조회 -->
+	 <select id="selectReplyList" resultType="ReviewReply">
+		SELECT R.*, S.STORE_IMG
+		FROM REVIEW_REPLY R
+		JOIN STORE S ON (R.STORE_NO = S.STORE_NO)
+		WHERE REVIEW_NO = #{reviewNo}
+		AND REPLY_DEL_FL = 'N'
+	</select>
+   
    
    
    <!-- 가게 찜 해제 -->
@@ -47,6 +194,66 @@
     SELECT COUNT(*) FROM "BOOKMARK"
      WHERE STORE_NO = #{storeNo}
    </select>
+   
+   
+   <!-- 리뷰 신고 -->
+	<insert id="reviewReport" useGeneratedKeys="true">
+		
+		<selectKey order="BEFORE" resultType="_int" keyProperty="reportNo">
+	      SELECT SEQ_REPORT_NO.NEXTVAL FROM DUAL
+	  	</selectKey>
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		INSERT INTO "REPORT" VALUES(#{reportNo}, #{reportContent}, #{reviewNo}, #{memberNo})
+	</insert>   
+   
+   
+   <!-- 리뷰 신고 회원번호 조회 -->
+   <select id="selectMemberNo">
+   		SELECT MEMBER_NO
+   		FROM REVIEW
+		WHERE REVIEW_NO= #{reviewNo}
+   </select>
+   
+   <!-- 가게 정보 정정 신고 -->
+<insert id="storeReport">
+    INSERT INTO "REQUEST_EDIT" (
+        REQUEST_NO, 
+        REQUEST_CONTENT, 
+        STORE_NO, 
+        MEMBER_NO, 
+        REQUEST_CATEGORY_CODE, 
+        REQUEST_DATE,
+        REQUEST_DEL_FL
+    ) VALUES (
+        SEQ_REQUEST_NO.NEXTVAL, 
+        #{requestContent}, 
+        #{storeNo}, 
+        #{memberNo},
+        CASE 
+            WHEN #{requestCategoryTitle} = 'changeBasicinfo' THEN '1'
+            WHEN #{requestCategoryTitle} = 'changeMenu' THEN '2'
+            WHEN #{requestCategoryTitle} = 'changeStoreTime' THEN '6'
+            WHEN #{requestCategoryTitle} = 'storeClosed' THEN '7'
+            ELSE '0' 
+        END,
+        DEFAULT,
+        'N'
+    )
+</insert>
+   
+
+
    
   
 </mapper>

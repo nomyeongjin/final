@@ -21,9 +21,14 @@
             <section class="content-container">
                 <div class="myPage-title-container">
                     <section class="myPage-title">지난 예약
-                        <span th:text="|누적 노쇼 ${noshowCount}회|"></span>
-
-                            <i class="fa-solid fa-circle-exclamation"></i>
+                        <span class="memberNoshow">
+                            <span th:text="|누적 노쇼 ${noshowCount}회|"></span>
+                                <i class="fa-solid fa-circle-exclamation tooltip">
+                                    <span class="tooltip-text">
+                                        노쇼 3회 이상 누적 시 3일 정지 <br>
+                                        노쇼 5회 이상 누적 시 계정 정지
+                                    </span>
+                                </i>
                         </span>
                     </section>
 
@@ -56,11 +61,14 @@
                                     <li class="reservationList" th:each="reservation : ${reservation}">
                                         <div class="reservationStore" th:object="${reservation}">
                                             <div class="reservationDate" th:text="*{reservDate}"></div>
-                                            <span class="storeName" th:text="*{storeName}"></span>
+                                            <a class="storeName" th:text="|*{storeName} >|" th:href="'/store/storeDetail/' + *{storeNo}"></a>
                                             <span class="reservationPeople" th:text="|*{reservCount}명|"></span> <br>
                                             <i class="fa-solid fa-clock"><span class="reservationTime" th:text="| *{reservTime}|"></span></i>
-                                            <span class="storeAddress" th:text="*{storeLocation}"></span>
+                                            <div class="storeAddress" th:text="*{storeLocation}"></div>
                                         </div>
+                                        <span th:object="${reservation}">
+                                            <a class="insertReviewBtn" th:href="'/review/reviewPage/' + *{storeNo}">리뷰작성</a>
+                                        </span>
                                     </li>
                                 </ul>
                             </table>

@@ -86,7 +86,7 @@ body{
 .search-logobox{
    width: 63px;
    height: 10%;
-
+   min-height: 81px;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -95,8 +95,8 @@ body{
   
 }
 #searchLogo{
-   width: 41px;
-   height: 41px;
+  width: 41px;
+  height: 41px;
  
 }
 
@@ -136,7 +136,7 @@ body{
    padding: 13px 0px;
    text-align: center;
    background-color: white;
-   color: rgb(77, 77, 77);
+   color: #363f75;
    border: none;
    width: 63px;
    height: 60px;
@@ -144,19 +144,19 @@ body{
 }
 
 .first-nav-li .navbar-button:hover {
-   color: #ffffff;
+   color: #363f75;
   /*  background-color:#d1dd68; */
-   background-color:#f1e75b;
+   background-color:#EFEFCB;
    
 }
 
 .first-nav-li .navbar-button:focus{
-   background-color:#779be7;
-   color: #f1e75b;
+   background-color:#363f75;
+   color: #EFEFCB;
 }
 #mapHome{
-   background-color: #779be7;                     
-   color: #f1e75b;
+   background-color: #363f75;                     
+   color: #EFEFCB;
 }
 
 #mapHome::before{
@@ -201,7 +201,7 @@ body{
 
 i{
    font-size: 20px;
-   color: rgb(76, 76, 76);
+   color: #363f75;
 }
 
 
@@ -222,15 +222,20 @@ i{
    position: relative;   
    flex-direction: column;
    height: 100%;
+   min-width: 390px;
+    max-width: 390px;
 
 }
 
 .search-container{
    
-   z-index: 100;
-   padding: 15px 25px;
-   height: 10%;
-   /* border-bottom: 1px solid var(--main-color); */
+   position: relative;
+    z-index: 100;
+    padding: 15px 25px;
+    height: 10%;
+    min-height: 75px;
+    background-color: white;
+   
 }
 
 .search-container .search-wrap{
@@ -256,6 +261,8 @@ i{
    justify-content: center;
    align-items: center;
    height: 90%;
+   transform: translate(0%);
+  
 }
 
 #searchButton{
@@ -292,4 +299,220 @@ i{
    
    transition-duration: 0.5s;
 
+}
+
+.blind{
+   border: none;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 25px;
+   height: 49px;
+
+}
+.blind > i{
+   font-size: 14px;
+   color: var(--main-color);
+}
+.show{
+   border: none;
+   display: none;
+   align-items: center;
+   justify-content: center;
+   width: 25px;
+   height: 49px;
+
+}
+.show > i{
+
+   font-size: 14px;
+   color: var(--main-color);
+}
+
+/* sidebar 접기 버튼 */
+#hideSideBar {
+  
+   cursor: pointer;
+   position: absolute;
+   top: 50%;
+   left: 453px;
+   transform: translateY(-50%);
+   z-index: 200;
+   overflow: hidden;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 1px;
+   line-height: 1px;
+   background-color: white;
+   width: 25px;
+   height: 49px;
+   border: none;
+   border-top: 1px solid var(--main-color);
+   border-bottom: 1px solid var(--main-color);
+   border-right: 1px solid var(--main-color);
+   border-bottom-right-radius: 5px;
+   border-top-right-radius: 5px;
+ 
+}
+
+/* 사이드바 내부 카테고리 */
+.search-categoryContaier{
+   display: flex;
+   flex-direction: column;
+   padding: 5px 20px 20px 20px;
+   transform: translateY(0%);
+   z-index : -100;
+
+}
+
+.search-categoryContaier-hide{
+   display: flex;
+   justify-content: flex-end;
+   padding-right: 20px;
+   background-color: white;
+}
+
+.searchcategory-Btnbox{
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+
+}
+
+.searchbar-line{
+   border-top: 1px dotted var(--main-color);
+   border-bottom: 1px dotted var(--main-color);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.searchcategory-Btnbox > button{
+   margin: 5px;
+   cursor: pointer;
+   width: 70px;
+   height: 25px;
+   border-radius: 15px;
+   font-size: 10px;
+   border: 1px solid var(--main-color);
+
+}
+
+/* 카테고리 박스 더보기 */
+
+.bars{
+  display: none;
+}
+.fa-bars{
+   cursor: pointer;
+   color: var(--main-color);
+   
+}
+.short-bar{
+   display: flex;
+}
+.fa-minus{
+   cursor: pointer;
+   color: var(--main-color);
+
+   
+}
+
+/* 가게 상세 내용 창  */
+.search-panelContent{
+   display: flex;
+   flex-direction: column;
+   width: 390px;
+   align-items: center;
+   padding: 0 20px;
+   justify-content: center;
+
+}
+
+.searchstore-detailcontainer::-webkit-scrollbar {
+   display: none;
+}
+
+.searchstore-detailcontainer{
+   width: 390px;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* 새로고침 버튼 */
+
+.rotate-container{
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   width: 370px;
+   height: 30px;
+   padding-right: 10px;
+   margin: 10px;
+}
+.fa-arrow-rotate-left{
+ cursor: pointer;
+ font-size: 22px;
+ color: var(--main-color);
+ 
+}
+
+/* 가게 조회 순서 */
+.storelist-typeBtnbox{
+   height: 30px;
+   margin: 0px 20px 10px 10px;
+}
+
+.storelist-typeBtnbox > button{
+   cursor: pointer;
+   border: none;
+   background-color: white;
+   font-size: 13px;
+   margin-right: 10px;
+   
+}
+
+/* 가게 사진 */
+#searchStoreImg{
+   width: 350px;
+   height: 200px;
+   border-radius: 5px;
+}
+
+/* 가게 리스트 순서 */
+.search-storelist-type{
+ display: flex;
+ flex-direction: column;
+ width: 370px;
+}
+
+.storelist-typecontainer{
+   display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.storesearch-heartcontainer{
+   cursor: pointer;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+  border: 1px solid var(--main-color);
+  border-radius: 50%; 
+  height: 40px;
+  width: 40px;
+}
+
+.fa-heart{
+   
+   font-size: 20px;
+   background-color: white;
+   color: rgb(252, 57, 57); 
+ /*  color: #E14C54; */
 }

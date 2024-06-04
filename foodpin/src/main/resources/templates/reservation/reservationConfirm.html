@@ -69,9 +69,9 @@
                <th:block th:if="${session.loginMember?.memberCode == 1}">
                     <div class="reserv-info-border">
                         <!-- 가게이름 자리에 실제 예약한 가게 이름 예정 --> 
-                        <div class="store-name" id="storeName" name="storeName" th:text="${storeName}">가게이름</div>
+                        <div class="store" id="store" th:text="${storeName}">가게이름</div>
                         <div class="reserv-date-count" id="reservDate" name="reservDate" th:text="${param.originalReservDate}">5. 23(목) 오후 6:00</div>
-                        <div class="reserv-store" id="storeName" name="storeName">가게이름 예약</div>
+                        <div class="reserv-store" id="reservStoreName" th:text="|${storeName} 예약|">가게이름 예약</div>
             
                     </div>
                </th:block>
@@ -90,8 +90,8 @@
             <section class="button-area">
     
                 <div class="buttons">
-                    <a href="/myPage/member/reservation/wait" class="cancel-btn" >예약 취소</a>
-                    <a th:if="${session.loginMember?.memberCode==1}" href="/myPage/member/reservation/fix" class="next-btn" id="nextBtn">내 예약 확인하러 가기</a>
+                    <!-- <a href="/myPage/member/reservation/wait" class="cancel-btn" >예약 취소</a> -->
+                    <a th:if="${session.loginMember?.memberCode==1}" href="/myPage/member/reservation/wait" class="next-btn" id="nextBtn">취소 및 내 예약 확인하러 가기</a>
                     <a th:unless="${session.loginMember?.memberCode==1}"href="/" class="next-btn">메인페이지로 이동</a>
                 </div>
     
@@ -105,7 +105,21 @@
     <script th:inline="javascript">
         const loginMember = /*[[session.loginMember]]*/ "로그인회원정보"
         const storeNo = /*[[${storeNo}]]*/ "사업자등록번호"
+        const reservNo = /*[[${reservNo}]]*/ "예약PK"
+
+        const reservDate = /*[[${param.originalReservDate[0]}]]*/ " 예약 날짜"
+        // console.log(reservDate);
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            setTimeout(() => {
+                sendNotificationFn("readyReservation", "/myPage/member/reservation/wait", reservNo, reservDate);
+                // alert("예약됨");
+            },500)
+        })
     </script>
     
+    <script src="/js/reservation/reservation.js"></script>
+
 </body>
 </html>

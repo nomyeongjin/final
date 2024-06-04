@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.service.ManagerMyPageService;
+import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.store.model.dto.Request;
+import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,8 +41,25 @@ public class ManagerMyPageController {
 		List<Member> storeMember = service.storeRequestList(memberCode, memberStatus);
 		model.addAttribute("storeMember", storeMember);
 		
+		for (Member stores : storeMember) {
+	        String storeLocation = stores.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        stores.setStoreLocation(addressWithoutPostcode);
+	        
+	        String memberTel = stores.getMemberTel();
+	        String formattedTel = memberTel.substring(0, 3) + "-" + memberTel.substring(3, 7) + "-" + memberTel.substring(7);
+	        stores.setMemberTel(formattedTel);
+	        
+	        String storeNo = stores.getStoreNo();
+	        String formattedStoreNo = storeNo.substring(0, 3) + "-" + storeNo.substring(3, 5) + "-" + storeNo.substring(5);
+	        stores.setStoreNo(formattedStoreNo);
+	    }	
+		
 		return "myPage/manager/storeEnroll";
 	}
+	
 	
 	// 가게 승인
 	@PostMapping("approveMember/{memberNo}")
@@ -99,26 +120,42 @@ public class ManagerMyPageController {
 	}
 	
 	// 가게 폐점
-	@PostMapping("ableStore/{memberNo}")
-	public ResponseEntity<Map<String, Object>> unableStore(
+	@PostMapping("closeStore/{memberNo}")
+	public ResponseEntity<Map<String, Object>> closeStore(
 			@PathVariable("memberNo") int memberNo) {
 		
-		boolean refuse = service.refuseMember(memberNo);
+		boolean closeStore = service.closeStore(memberNo);
 		Map<String, Object> response = new HashMap<>();
-		response.put("success", refuse);
+		response.put("success", closeStore);
 		return ResponseEntity.ok(response);
 	}
 	
+	// 리뷰 신고
 	@GetMapping("reportReview")
 	public String storeInfo() {
 		return "myPage/manager/reportReview";
 	}
 	
+	// 정보 정정 신청 조회
 	@GetMapping("managerStoreInfo")
-	public String memberReportReview() {
+	public String memberReportReview(Model model) {
+		
+		List<Request> infoRequest = service.infoRequestList();
+		model.addAttribute("infoRequest", infoRequest);
+		
 		return "myPage/manager/managerStoreInfo";
 	}
 	
+	// 정보 정정 처리 완료
+	@PostMapping("managerStoreInfo/{requestNo}")
+	public ResponseEntity<Map<String, Object>> completeRequest(
+		@PathVariable("requestNo") int requestNo) {
+		
+		boolean completeRequest = service.completeRequest(requestNo);
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", completeRequest);
+		return ResponseEntity.ok(response);
+	}
 	
 	
 	

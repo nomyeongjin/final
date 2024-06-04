@@ -1,16 +1,21 @@
 package com.project.foodpin.myPage.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +25,9 @@ import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.myPage.model.service.StoreMyPageService;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.store.model.dto.Menu;
+import com.project.foodpin.store.model.dto.MenuContainer;
 import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
@@ -65,7 +73,6 @@ public class StoreMyPageController {
 	 * @return
 	 */
 	@PostMapping("storeInfoUpdate")
-	@ResponseBody
 	public String storeInfoUpdate(@SessionAttribute("loginMember") Member loginMember, 
 			@RequestParam("image") MultipartFile image, 
 			Store inputStore, 
@@ -86,8 +93,54 @@ public class StoreMyPageController {
 		return "redirect:/myPage/store/storeInfo";
 	}
 	
+	// ------ 메뉴 ------
 	
-	/** 고정 휴무일 조회 (비동기)
+	/** 메뉴 조회 (비동기)
+	 * @param loginMember
+	 * @return menuList
+	 */
+	@GetMapping(value="menuSelect", produces = "application/json")
+	@ResponseBody
+	public List<Menu> menuSelect(@RequestParam("storeNo") int storeNo) {
+		
+		return service.menuSelect(storeNo);
+	}
+	
+	/** 메뉴 수정
+	 * @param menuList
+	 * @return
+	 */
+	@PostMapping("menuUpdate")
+	@ResponseBody
+	public int menuUpdate(@RequestBody @ModelAttribute MenuContainer menuContainer) {
+		
+		List<Menu> inputMenuList =  menuContainer.getMenuList();
+		
+		List<MultipartFile> imgUrlList = new ArrayList<>();
+		
+		for (Menu menu : inputMenuList) {
+			imgUrlList.add(menu.getMenuImg());
+		}
+		
+		return service.menuUpdate(inputMenuList, imgUrlList);
+	}
+	
+	
+	// ------ 휴무일 ------
+	
+	/** 고정 휴무일 등록 / 수정 (비동기)
+	 * @param off
+	 * @return result
+	 */
+	@PostMapping("insertOffWeek")
+	@ResponseBody
+	public int insertOffWeek(@RequestBody List<Off> offList) {
+
+		return service.updateOffWeek(offList);
+	}
+	
+	
+	/** 고정 휴무일 조회 (비동기, li로 불러오기)
 	 * @param storeNo
 	 * @return offList
 	 */
@@ -100,37 +153,37 @@ public class StoreMyPageController {
 		return list;
 	}
 	
-	
-	
-	/** 지정 휴무일 조회 (비동기)
+	/** 지정 휴무일 조회 (비동기, 캘린더로 불러오기)
 	 * @param storeNo
 	 * @return map
 	 */
 	@PostMapping("calendarOffSelect")
 	@ResponseBody
-	public Map<String, String> calendarOffSelect(@RequestBody int storeNo) {
-		
+	public List<Map<String, String>> calendarOffSelect(@RequestBody int storeNo) {
 		
 		List<Off> offList = service.calendarOffSelect(storeNo);
 		
+//		if(offList.isEmpty()) return null; // 지정 휴무일 조회 결과 없는 경우
+			
+		List<Map<String, String>> listMap = new ArrayList<>();
 		
-		if(!offList.isEmpty()) { // 조회된 일정이 존재하는 경우
+		for (Off off : offList) {
 			
 			Map<String, String> map = new HashMap<>();
 			
-			for (Off off : offList) {
-				
-				map.put("title", off.getOffDayTitle());
-				map.put("start", off.getOffWeekStart());
-				map.put("end", off.getOffWeekEnd());
-			}
-			return map;
+			map.put("title", off.getOffDayTitle());
+			map.put("start", off.getOffDayStart());
+			map.put("end", off.getOffDayEnd());
+			
+			listMap.add(map);
 		}
 		
-		return null;
+		return listMap;
 	}
 	
 	
+
+
 	/** 팝업창에서 지정 휴무일 등록
 	 * @param inputOff
 	 * @return
@@ -142,9 +195,6 @@ public class StoreMyPageController {
 		return service.calendarOffInsert(inputOff);
 	}
 
-	
-	
-	
 	
 	/** 예약 관리 화면 이동 (+예약 전체 조회)
 	 * @param loginMember
@@ -192,12 +242,26 @@ public class StoreMyPageController {
 	}
 	
 	
+	
 	//----
 	@GetMapping("review")
-	public String review() {
+	public String review(
+		@SessionAttribute("loginMember") Member loginMember,
+		Model model, RedirectAttributes ra
+		) {
+		
+		int memberNo = loginMember.getMemberNo();
+		
+		List<Review> reviewList = service.reviewAll(memberNo);
+		
+		model.addAttribute("reviewList", reviewList);
+		
+		
 		return "myPage/store/review";
 	}
 	
+	
+	// -----
 	
 	// -----
 	

@@ -1,12 +1,16 @@
 package com.project.foodpin.reservation.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Reservation {
 	
 	private int reservNo;
@@ -17,7 +21,7 @@ public class Reservation {
 	private String reservRequest;
 	
 	private int memberNo;
-	private int storeNo; // 음식점 번호
+	private String storeNo; // 음식점 번호
 	
 	private String memberName; // 예약 회원명
 	private String memberTel; // 예약 회원 연락처
@@ -35,5 +39,7 @@ public class Reservation {
 	private String visitTel;
 
 	private int noshowCount;
+	
+	private int counts;
 
 }

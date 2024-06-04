@@ -15,5 +15,7 @@ public class ReviewHash {
 	
 	private int reviewNo;
 	private int hashNo;
+	
+	private String hashTitle;
 
 }

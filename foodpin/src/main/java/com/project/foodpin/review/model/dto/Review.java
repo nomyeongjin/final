@@ -1,5 +1,7 @@
 package com.project.foodpin.review.model.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,4 +25,15 @@ public class Review {
 	private String hashTitle;
 	
 	private String storeName;
+	private String storeImg;
+	
+	private String memberName;
+	private String memberNickname;
+	private String profileImg;
+	
+	private List<UploadImage> uploadList;
+	private List<ReviewHash> hashList;
+	private List<ReviewReply> replyList;
+	private List<ReviewMenu> reviewMenuList;
+	
 }

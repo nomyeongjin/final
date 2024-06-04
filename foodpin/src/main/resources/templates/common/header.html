@@ -44,33 +44,12 @@
         </div>
 
 
-
-
-
-
-            <!-- <th:block th:if="${session.loginMember != null}">
-            <div class="login-box">
-                <a href="/myPage/first">
-                    <img th:with="user=#{user.default.image}" 
-                    th:src="${session.loginMember.profileImg ?:user}"  
-                      id="memberProfile">
-                </a>
-            </div>
-
-            </th:block>
-            <div class="login-acontainer">
-
-                <th:block th:if="${session.loginMember == null}">
-                    <a href="/member/login">로그인</a>|<a href="/member/signup">회원가입</a>
-                </th:block>
-                <th:block th:unless="${session.loginMember == null}">
-                    <a href="/member/logout" id="logoutBtn">로그아웃</a>
-                </th:block>
-
-            </div> -->
         </div>
 
        <th:block th:replace="~{reservation/notification}"></th:block>
+       <button type="button" id="myChat" class="chat-btn fa-regular fa-comments" th:if="${session.loginMember}"></button>
+
+    </th:block>
 
     </section>
 
@@ -80,15 +59,5 @@
         <a href="/" id="homeLogoTitle">FOODPIN</a>  
     </section>
 
-    <!-- 네비게이션 바 -->
-  <!--   <section>
-        <nav>
-            <ul>
-                <li><a href="/">홈</a></li>
-                <li><a href="/adoption/adoptionList">입양하기</a></li>
-                <li><a href="/review/reviewList">입양 후 이야기</a></li>
-                <li><a href="/myPage/first">마이페이지</a></li>
-            </ul>
-        </nav>
-    </section> -->
+
 </header>

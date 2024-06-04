@@ -1,7 +1,9 @@
 package com.project.foodpin.myPage.model.service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -14,6 +16,8 @@ import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.myPage.model.mapper.StoreMyPageMapper;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
@@ -24,16 +28,25 @@ import lombok.RequiredArgsConstructor;
 @PropertySource("classpath:/config.properties")
 public class StoreMyPageServiceImpl implements StoreMyPageService{
 	
-	// 이미지 패스
-	@Value("${my.store.web-path}")
+	/* 이미지 패스 */
+	@Value("${my.store.web-path}") // 가게 썸네일
 	private String storeWebPath;
 	
 	@Value("${my.store.folder-path}")
 	private String storeFolderPath;
+	
+	@Value("${my.menu.web-path}") // 메뉴
+	private String menuWebPath;
+	
+	@Value("${my.menu.folder-path}")
+	private String menuFolderPath;
 
-	// 매퍼
+	/* 매퍼 */
 	private final StoreMyPageMapper mapper;
 
+	
+	
+	
 	// 가게 정보 수정 화면 이동
 	@Override
 	public Store selectstoreInfo(int memberNo) {
@@ -47,7 +60,7 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		String updatePath = "";
 		String rename = "";
 		
-		if(!image.isEmpty()) { // input에서 이미지를 업로드 힌 경우
+		if( !image.isEmpty()) { // input에서 이미지를 업로드 한 경우
 			
 			rename = Utility.fileRename(image.getOriginalFilename());
 			
@@ -67,9 +80,124 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 				e.printStackTrace();
 			} 
 		}
+		
 		return result;
 	}
 	
+	// ------ 메뉴 ------
+
+	// 메뉴 조회
+	@Override
+	public List<Menu> menuSelect(int storeNo) {
+		
+		return mapper.menuSelect(storeNo);
+	}
+
+	// 메뉴 수정 (삭제, 추가)
+	@Override
+	public int menuUpdate(List<Menu> inputMenuList, List<MultipartFile> imgUrlList) {
+		
+		int result = 0;
+		String updatePath = "";
+		String rename = "";
+		
+		result = mapper.deleteAllMenu(inputMenuList.get(0).getStoreNo());
+		
+		if( !inputMenuList.get(0).getMenuTitle().isEmpty()) {
+			
+			for (Menu menu : inputMenuList) {
+				
+
+				for(MultipartFile imgUrl : imgUrlList) {
+					
+					if( !imgUrl.isEmpty()) { // 업로드 한 메뉴 이미지가 있는 경우
+						
+						rename = Utility.fileRename(imgUrl.getOriginalFilename());
+						updatePath = menuWebPath + rename;
+						menu.setMenuImgUrl(rename);
+					}
+					
+					result = mapper.insertMenu(menu);
+					
+					if(result > 0) { // db등록 성공시 파일 업로드 폴더에 이미지 저장
+						
+						try {
+							menu.getMenuImg().transferTo(new File(menuFolderPath + rename)); // db등록 성공시 파일 업로드()
+						}catch (Exception e) {
+							e.printStackTrace();
+						}
+					} // if
+				}
+			
+			}
+		} // 이미지 있는 경우	
+		
+		
+		
+		
+		
+		
+		
+		
+//        for (Menu menu : inputMenuList) {
+//        	
+//        	// 1. 기존 MENU_FL 값을 'Y'로 변경 (삭제)
+//        	result = mapper.deleteMenu(menu);
+//        	
+//            // 2. 메뉴 번호 조회
+//            int menuNo = mapper.selectMenuNo(menu);
+//            
+//            menu.setMenuNo(menuNo); // 조회한 메뉴 번호 세팅
+//            
+//            if (menuNo != 0) { // 데이터가 조회된 경우
+//            	
+//    			// 3. 기존 데이터와 완전히 동일한 메뉴 조회
+//    			result = mapper.selectSameMenuNo(menu);
+//    			
+//    			if(result == 1) return result; // 2번 결과가 1인경우 -> 수정 사항 없음
+//    			
+//    			// 4. 메뉴이름은 그대로인데 나머지 내용이 바뀐 경우 내용 수정
+//    			result = mapper.updateMenu(menu);
+//    			
+//    			// 추후 이미지 추가 예정
+//    			
+//    			
+//    			if(result == 1) return result; // 수정됨
+//    			
+//            }
+//
+//            
+//		}
+
+		return result;
+	}
+
+
+	// ------ 휴무일 ------
+	
+	// 고정 휴무일 변경
+	@Override
+	public int updateOffWeek(List<Off> offList) {
+		
+		int result = 0;
+		String StoreNo = offList.get(0).getStoreNo(); // StoreNo 꺼내오기
+		
+		int count = mapper.countOffWeek(StoreNo); // 기존 저장된 데이터 있는지 조회
+		
+		// 존재하는 경우 기존 데이터 삭제
+		if(count > 0)  result = mapper.deleteOffWeek(StoreNo);
+		
+		// 고정 휴무일이 변경되는 경우 (완전 삭제되는 경우에는 수행X)
+		if( !offList.get(0).getOffWeek().isEmpty()) {
+			
+			for(Off off : offList) {
+				result = mapper.insertOffWeek(off);
+			}
+		}
+		
+		return result;
+	}
+
 	
 	// 고정 휴무일 조회
 	@Override
@@ -122,6 +250,12 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return mapper.ceoInfoUpdate(inputMember);
 	}
 
+
+	// 사장님 리뷰 조회
+	@Override
+	public List<Review> reviewAll(int memberNo) {
+		return mapper.reviewAll(memberNo);
+	}
 
 
 

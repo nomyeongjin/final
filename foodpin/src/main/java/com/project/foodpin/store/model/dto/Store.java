@@ -1,5 +1,10 @@
 package com.project.foodpin.store.model.dto;
 
+import java.util.List;
+
+import com.project.foodpin.review.model.dto.ReviewHash;
+import com.project.foodpin.review.model.dto.UploadImage;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,17 +31,28 @@ public class Store {
 	private String breaktimeEnd;
 	private String storeClosed; // 폐업여부
 	private String storeImg;
-	private int totalRating;
+	private double totalRating;
+
 	private int storeMaxTable;
 	
 	private int memberNo;
 	
 	
+	//가게 이미지 목록
+	private List<UploadImage> imageList;
+
+	// 가게 메뉴 목록
+	private List<Menu> menuList;
 	
+	//가게 해시태그 목록
+	private List<ReviewHash>storeHashList;
+
 	// 찜
 	private int likeCount;
-	private int bookMark;
-
+	private int bookmark;
+	
+	// 리뷰 개수
+	private int reviewCount;
 	
 	// 메뉴
 	private int menuNo;

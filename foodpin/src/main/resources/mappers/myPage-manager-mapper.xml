@@ -4,25 +4,57 @@
 
 	<!-- 가게 입점 내역 목록 -->
 	<select id="storeRequestList">
-		SELECT M.MEMBER_NO, MEMBER_NAME, STORE_NAME, 
-		<![CDATA[ TO_CHAR(ENROLL_DATE, 'YYYY. MM. DD') ENROLL_DATE]]>
+		SELECT M.MEMBER_NO, MEMBER_NAME, STORE_NAME, STORE_INFO,
+		<![CDATA[ TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') ENROLL_DATE]]>,
+		MEMBER_TEL, STORE_LOCATION, STORE_TEL, STORE_NO
 		FROM "MEMBER" M
 		JOIN "STORE" S ON M.MEMBER_NO = S.MEMBER_NO
 		WHERE MEMBER_CODE = #{memberCode}
 		AND MEMBER_STATUS = #{memberStatus}
-		ORDER BY ENROLL_DATE
+		
+		AND STORE_CLOSED = 'N'
+		ORDER BY ENROLL_DATE DESC
 	</select>
 	
+	<!-- 승인버튼 -->
 	<update id="approveMember">
 		UPDATE MEMBER SET
 		MEMBER_STATUS = 'N'
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<!-- 거절버튼 -->
 	<update id="refuseMember">
 		UPDATE MEMBER SET
 		MEMBER_STATUS = 'Y'
 		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 폐점버튼 -->
+	<update id="closeStore">
+		UPDATE STORE SET 
+		STORE_CLOSED = 'Y'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 가게 정보 신고 조회 -->
+	<select id="infoRequestList">
+		SELECT REQUEST_CATEGORY_TITLE, 
+			<![CDATA[ TO_CHAR(REQUEST_DATE, 'YYYY-MM-DD') REQUEST_DATE]]>, 
+			REQUEST_CONTENT, MEMBER_NAME, STORE_NAME, REQUEST_NO
+		FROM REQUEST_EDIT
+		JOIN REQUEST_CATEGORY USING(REQUEST_CATEGORY_CODE)
+		JOIN MEMBER USING(MEMBER_NO)
+		JOIN STORE USING(STORE_NO)
+		WHERE REQUEST_DEL_FL = 'N'
+		ORDER BY REQUEST_DATE
+	</select>
+	
+	<!-- 가게 정보 정정 완료 -->
+	<update id="completeRequest">
+		UPDATE REQUEST_EDIT SET
+		REQUEST_DEL_FL = 'Y'
+		WHERE REQUEST_NO = #{requestNo}
 	</update>
 
 </mapper>

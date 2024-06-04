@@ -21,8 +21,15 @@
             <section class="content-container">
                 <div class="myPage-title-container">
                     <section class="myPage-title">취소 / 노쇼
-                        <span class="memberNoshow" th:text="|누적 노쇼 ${noshowCount}회|"></span>
-                        <i class="fa-solid fa-circle-exclamation" title="경고는 3회 이상이면 3일정지입니다"></i>
+                        <span class="memberNoshow">
+                            <span th:text="|누적 노쇼 ${noshowCount}회|"></span>
+                                <i class="fa-solid fa-circle-exclamation tooltip">
+                                    <span class="tooltip-text">
+                                        노쇼 3회 이상 누적 시 3일 정지 <br>
+                                        노쇼 5회 이상 누적 시 계정 정지
+                                    </span>
+                                </i>
+                            </span>
                     </section>
 
                     <section class="myPage-sub-title">
@@ -43,7 +50,6 @@
                     <!-- 아무 내역 없을 때 -->
                     <th:block th:if="${#lists.isEmpty(reservation)}">
                         <div class="emptyList">취소 / 노쇼 내역이 없습니다</div>
-
                     </th:block>
 
                     <th:block th:unless="${#lists.isEmpty(reservation)}">
@@ -54,12 +60,15 @@
                                     <li class="reservationList" th:each="reservation : ${reservation}">
                                         <div class="reservationStore" th:object="${reservation}">
                                             <div class="reservationDate" th:text="*{reservDate}"></div>
-                                            <span class="storeName" th:text="*{storeName}"></span>
+                                            <a class="storeName" th:text="|*{storeName} >|" th:href="'/store/storeDetail/' + *{storeNo}"></a>
                                             <span class="reservationPeople" th:text="|*{reservCount}명|"></span> <br>
                                             <i class="fa-solid fa-clock"><span class="reservationTime" th:text="| *{reservTime}|"></span></i>
-                                            <span class="storeAddress" th:text="*{storeLocation}"></span>
+                                            <div class="storeAddress" th:text="*{storeLocation}"></div>
                                         </div>
-
+                                        <span>
+                                            <span class="statusNoshow" th:if="*{reservation.reservStatusFl=='X'}">노쇼</span>
+                                            <span class="statusCancel" th:if="*{reservation.reservStatusFl=='C'}">취소</span>
+                                        </span>
                                     </li>
                                 </ul>
                             </table>

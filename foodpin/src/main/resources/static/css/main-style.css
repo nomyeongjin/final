@@ -62,7 +62,7 @@ header {
 
    position: sticky;
    top: 0;
-   z-index: 1000;
+   z-index: 1002;
    background-color: white;
 }
 
@@ -87,10 +87,11 @@ header {
    align-content: center;
    justify-content: flex-end;
 }
-#memberProfile{
 
-width: 25px;
-height: 25px;
+#memberProfile{
+   width: 25px;
+   height: 25px;
+   object-fit: cover;
 }
 
 #nickname{
@@ -140,7 +141,7 @@ height: 25px;
 #homeLogoTitle {
    font-size: 46px;
    font-weight: bold;
-   color: #35c0e7;
+   color: #363f75;
    font-family: 'SBAggroB';
 }
 
@@ -487,10 +488,31 @@ header>section:nth-child(3) {
    background-color: #ecececc2;
    transition: opacity 0.5s
 }
+.chat-btn{
+   font-size: 25px;
+   /* position: absolute; */
+   border: none;
+   background-color: rgba(255, 255, 255, 0);
+   cursor: pointer;
+   width: 40px;
+   height: 40px;
+   cursor: pointer;
+}
+
+.action, .chat-btn:hover{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   background-color: #ecececc2;
+   transition: opacity 0.5s
+}
 
 .notification-bell-btn.fa-solid{
    color: rgb(255, 187, 0);
-   text-shadow: 1px 1px 3px gray, 2px 2px 5px black;
+   /* text-shadow: 1px 1px 3px gray, 2px 2px 5px black; */
 }
 
 .box-content{
@@ -523,9 +545,19 @@ header>section:nth-child(3) {
    height: 50px;
 }
 
-.title {
+.notification-header>.title {
    font-size: 20px;
    font-weight: bold;
+}
+
+.pre-notification>.title {
+   font-size: 20px;
+   font-weight: bold;
+}
+.calendar-container>.title {
+   font-size: 20px;
+   font-weight: bold;
+   margin-left: 5px;
 }
 
 .notification-view{
@@ -569,24 +601,28 @@ header>section:nth-child(3) {
    cursor: pointer;
 } */
 .click{
-   color: #4173f5;
-   border: 1px solid #4173f5;
-   background-color:  rgba(114, 154, 255, 0.041);
+   color: #e14c54;
+   border: 1px solid #e14c54;
+   background-color:  #ffedef4b;
 }
 
 .notification-list{
-   display: flex;
+   /* display: flex; */
    height: 400px;
    position: absolute;
    list-style: none;
    z-index: 2000;
+   position: relative;
+   top: 20px;
+   overflow: auto;
 }
 
 /* 안 읽은 알림 */
 .not-read {
    background-color: rgba(176, 208, 238, 0.7);
+   border-radius: 10px;
    color: black;
-   font-weight: bold;
+   /* font-weight: bold; */
 }
 
 .notification-item{
@@ -602,9 +638,9 @@ header>section:nth-child(3) {
    display: flex;
    align-items: center;
    flex-direction: column;
-   position: relative;
+   /* position: relative;
    top: 100px;
-   overflow: auto;
+   overflow: auto; */
 }
 
 .notification-content-container{
@@ -662,4 +698,12 @@ header>section:nth-child(3) {
 .fa-circle-xmark:hover{
    color: red;  
    user-select: none;
+}
+
+.notification-message>.fa-circle-xmark{
+   display: flex;
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   /* margin: 10px; */
 }

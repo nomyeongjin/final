@@ -49,6 +49,15 @@ aside >a{
 
 }
 
+#toChatting{
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+#toChatting:hover{
+    border-bottom: 1px solid rgb(66, 66, 66);
+}
+
 
 aside p{
     padding: 5px 0;
@@ -57,25 +66,6 @@ aside p{
     color: #9c9c9c;
 }
 
-/* 위로 이동 */
-/* .top-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    user-select: none;
-    
-    font-weight: bold;
-}
-.bottom-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    user-select: none;
- 
-    font-weight: bold;
-} */
 aside>a:hover{
     background-color: rgb(148, 148, 148);
     color: #fff;
@@ -115,7 +105,7 @@ aside>a:hover{
     .store-container{ 
     border: 1px solid var(--main-color);
     border-radius: 15px;
-    width: 800px;
+    min-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -173,27 +163,143 @@ aside>a:hover{
     color: rgb(43, 38, 38);
 }
 
-/* 북마크바 check시 색 변환 */
-/* #bookmarkCheck{
-    cursor: pointer;
-        font-size: 20px;
-    background-color: white;
-    color: rgb(252, 57, 57);
-} */
 
 .fa-heart{
+   
     font-size: 20px;
     background-color: white;
     color: rgb(252, 57, 57); 
+  /*  color: #E14C54; */
+}
+
+#bookmarkCheck{
+ cursor: pointer;
+}
+
+
+#storeLikeCount{
+  font-size: 14px;
+  color: #6e6e6e;
 }
   
 /* 평균 별점 */
 .storedetail-row >*{
 
     margin-bottom: 5px;
-    align-items: center;
+  
+    
     
 }
+
+.store-avgScore{
+    position: relative;
+  
+}
+.background-star{
+    position: absolute;
+    overflow: hidden;
+    width: 107px;
+    color: var(--main-color);
+    
+}
+
+
+.realAvg-star  {
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 107px;
+    color: #ff2a00;
+
+}
+
+#totalScoreR{
+    width: 25px;
+    position: absolute;
+    right: 513px;
+    top: 574px;
+    z-index: 1000;
+  
+}
+
+
+
+.detailstoreloc-content{
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+}
+
+
+.storelocbox-one{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.storelocbox-two{
+    
+    display: none;
+}
+
+
+.detailLoc{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    color: rgb(66, 66, 66);
+}
+
+.detailLocHide{
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+}
+.detailLocHide > *{
+    margin-bottom: 5px;
+}
+
+.detailLoc-m{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 20px;
+
+}
+
+.detailLoc-m > *{
+  margin-right: 5px;
+}
+
+.storeloc-detail{
+    border-radius: 2px;
+    color: var(--main-color);
+    font-size: 13px;
+    border: 1px solid var(--main-color);
+    padding: 1px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+.more-address{
+
+    display: flex;
+    color: var(--main-color);
+    margin-left: 10px;
+    cursor: pointer;
+  
+   
+}
+.less-address{
+
+    display: none;
+     margin-left: 10px;
+     cursor: pointer;
+    color: var(--main-color);
+}
+
 
 /* 리뷰로 이동 */
 #showReview{
@@ -246,15 +352,29 @@ aside>a:hover{
 }
 
 
+
 /* 해당 가게 위치 검색된 상세 페이지로 이동하는 지도 버튼 */
 #storedetailmapbutton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    width: 50px;
-    height: 20px;
+    width: 45px;
+    height: 19px;
     border: 1px solid var(--main-color);
     border-radius: 10px;
     background-color: white;
     color: rgb(120, 120, 120);
+}
+
+#storedetailmapbutton:hover{
+display: flex;
+align-items: center;
+justify-content: center;
+ transform: scale(1.1);
+ background-color: white;
+ color: rgb(120, 120, 120);
+ transition: 0.3s;
 }
 
 /* 가게 상세 설명 */
@@ -283,6 +403,7 @@ color: rgb(66, 66, 66);
 
 .more-text{
     
+    cursor: pointer;
     width: 490px;
     height: 30px;
     border-bottom: 1px solid;
@@ -374,9 +495,8 @@ color: rgb(66, 66, 66);
 }
 
 #popupShut:hover{
-    color: rgb(87, 214, 41);
+    color: #ff002b;
 }
-
 
 
 #storeReportForm {
@@ -396,8 +516,8 @@ color: rgb(66, 66, 66);
 
 
 .popupbox{
-    width: 460px;
-    height: 371px;
+    width: 480px;
+    height: 380px;
     border-radius: 10px;
     background-color: #fff;
     text-align: center;
@@ -408,7 +528,7 @@ color: rgb(66, 66, 66);
 .popupbox button{
     cursor: pointer;
     border: none;
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 14px;
     background-color: white;
 
@@ -429,7 +549,9 @@ color: rgb(66, 66, 66);
     border-bottom: 1px solid var(--main-color);
 }
 
-
+#storeReportWarn{
+    margin-top: 10px;
+}
 #popupShut {
     display: flex;
     justify-content: center;
@@ -450,7 +572,7 @@ color: rgb(66, 66, 66);
 }
 
 
-#reportStoreContent{
+#requestStoreContent{
     resize:none;
     height: 130px;
     width: 100%;
@@ -461,16 +583,22 @@ color: rgb(66, 66, 66);
     font-size: 15px;
 }
 
-#reportStoreContent:focus{
+#requestStoreContent:focus{
     outline: none;
 }
 
 .check-store-div{
+ flex-wrap: nowrap;
  text-align: left;
 }
 
 .check-store-div label {
+    
   cursor: pointer;
+}
+
+#requestStoreCheckLi{
+ font-size: 14px;
 }
 
 /* ***************************************** */
@@ -511,6 +639,16 @@ hr{
   margin: 14px 0;
 }
 
+.store-hours-list li {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px; /* 아래 여백 조절 */
+}
+
+.time-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
 
 #storeStatusText{
     color: rgb(26, 180, 232);
@@ -610,22 +748,23 @@ hr{
     width: 100px;
     height: 110px;
     border-radius: 5px;
-}
-
-.store-menu-list{
-   
-    flex-direction: column;
-    height: 370px;
-    overflow: hidden;
-    
-    
+    margin-right: 20px;
 }
 
 
+.menu-basiclist{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 500PX;
+}
 
-.store-menu-list >*{
+.menu-basiclist >*{
     margin-top: 10px;
+  
 }
+
+
 .menu-image-container{
     display: flex;
   
@@ -666,9 +805,7 @@ hr{
     margin-bottom: 15px;
     justify-content: end;
 }
-
-
-#moreMenuImageBtn{
+.moreMenuImageBtnBox >*{
     cursor: pointer;
     width: 50px;
     border: 1px solid var(--main-color);
@@ -677,16 +814,11 @@ hr{
     background-color: white; 
 }
 
-#shutMenuImageBtn{
-    cursor: pointer;
-    width: 50px;
-    border: 1px solid var(--main-color);
-    border-radius: 10px;
-    color: rgb(46, 41, 41);  
-    background-color: white; 
-    display: none;
+.menuN{
+  font-size: 14px;
+  color: var(--main-color);
+  border-bottom: 1px solid var(--main-color);
 }
-
 
 
 /* 해시태그 컨테이너 */
@@ -698,6 +830,33 @@ hr{
 
 .storedetail-hashtagcontainer >*{
     margin: 5px;
+}
+
+#storeHashT{
+    cursor: pointer;
+    color: #383838;
+}
+
+#storeHashT:hover{
+
+    transition: 0.5s;
+    background: linear-gradient(
+        307deg, #ff5252 0%, #7700ff 100%
+      );
+      background: -webkit-linear-gradient(
+        307deg, #ff5252 0%, #7700ff 100%
+      );
+      background: -moz-linear-gradient(
+        307deg, #ff5252 0%, #7700ff 100%
+      );
+      background: -o-linear-gradient(
+        307deg, #ff5252 0%, #7700ff 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+   
+      clip-path: inset(1px);
 }
 
 /********** 가게 내용 2 ************/
@@ -764,32 +923,16 @@ hr{
 .storereview-container{
     position: relative;
 }
-/* 리뷰 쓰기 페이지로 가는 a 태그 */
-.storereview-container a {
-    position: absolute;
-    right: -90px;
-    z-index: 1000;
-    top: 20px;
 
-}
+
 
 .review-title{
     width: 100%;
     height: 50px;
-    border-bottom: 1px solid var(--main-color);
     display: flex;
     align-items: center;
     padding: 35px 0;
-}
-
-.review-avgScore{
-    width: 100%;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--main-color);
-    padding: 27px 0;
-
+    padding-top: 40px;
 }
 
 .rating__star{
@@ -812,8 +955,8 @@ hr{
 }
 
 .storereview-top{
-    padding: 20px 0;
-    border-bottom: 1px solid var(--main-color);
+    padding: 24px 0;
+    border-bottom: 1px solid #E14C54;
     display: flex;
     justify-content: space-between;
 }
@@ -835,20 +978,49 @@ hr{
     font-weight: bold;
 }
 
+.review-memberScore{
+    margin-top: 6px;
+}
+
+.review-memberScore > span:last-child{
+    margin-left: 10px;
+}
 
 
 .storereview-top-right{
-    display: flex;
-    font-size: 0.8em;
+    display: flex; /* 요소들을 가로로 배치 */
+    align-items: center; /* 세로축 가운데 정렬 */
     flex-direction: column;
+    height: 100%;
 }
 
-.storereview-top-right > button {
+.review-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 51px;
+    
+}
+
+.review-btn > button{
     border: none;
     background-color: white;
-    cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom: px;
 }
+
+.review-btn > a{
+    font-size: 13px;
+    margin: 10px 0;
+    color: #DF8B4E;
+}
+
+
+.review-date > span{
+    font-size: 13px
+}
+
 
 
 .storereview-mid{
@@ -871,7 +1043,7 @@ hr{
     height: 25px;
     
     text-align: center;
-    border: 1px solid var(--main-color);
+    border: 1px solid #E14C54;
     border-radius:24px;
     margin: 10px 0;
 }
@@ -890,8 +1062,8 @@ hr{
 .store-reply{
     padding: 0 25px;
     display: flex;
-    margin-top: 10px;
-
+    margin: 30px 0;
+    border-bottom: 3px solid var(--main-color);
 }
 
 
@@ -929,10 +1101,6 @@ hr{
     display: flex;
     justify-content: center;
     align-items: center;
-
-    margin-top: 25px;
-    border-top: 2px solid var(--main-color);
-
 }
 
 .review-more-button > button{
@@ -940,8 +1108,7 @@ hr{
     border: 1px solid var(--main-color);
     width: 300px;
     height: 35px;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-size: 15px;
     color: rgb(46, 41, 41);
     background-color: white;
@@ -953,7 +1120,7 @@ hr{
     width: 600px;
     height: 400px;
     border-radius: 15px;
-    background-color: #e4e4e4;
+    background-color: #fff;
     position: relative;
 }
 
@@ -1004,6 +1171,7 @@ hr{
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1100;
 }
 
 .popup-hidden{
@@ -1024,7 +1192,7 @@ hr{
 
 .review-reason > p:nth-child(2){
     font-size: 15px;
-    color: #6f6f6f;
+    color: #797979;
 }
 
 .select-report{
@@ -1076,6 +1244,57 @@ hr{
     width: 200px;
     height: 40px;
     border-radius: 10px;
-    background-color: #f7f7f7;
+    background-color: white;
     border: 1px solid #393939;
 }
+
+.report-button-area > button:hover{
+    background-color: #393939;
+    color: white;
+}
+
+.reviewScore {
+    font-size: 20px;
+    color: #ff2a00;;
+}
+
+.empty_star{
+    color: var(--main-color);
+}
+
+.review{
+    width: 600px;
+    border: 1px solid #E14C54;
+    border-radius: 15px;
+    padding: 24px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-bottom: 35px;
+}
+
+.review-container{
+    border: 1px solid var(--main-color);
+    border-radius: 15px;
+    width: 800px;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.report-area{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 17px;
+}
+
+.report-area > button{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    margin-right: 10px;
+    color: #696969
+}
+

@@ -68,7 +68,7 @@
                         <h3 class="title">예약자 정보</h3>
     
                         <span class="span"> 
-                            * 로그인한 회원의 정보로 자동 예약 됩니다.
+                            * 로그인 정보가 기본 예약 정보로 저장됩니다.
                         </span>
                     </div>
 
@@ -142,7 +142,13 @@
                             <label for="visitName" class="name">방문자</label>
 
                             <div class="input-box">
-                                <input type="text" name="visitName" id="visitName" class="input-name" placeholder="방문자 성함을 작성해 주세요">
+                                <th:block th:if="${session.loginMember?.memberCode==1}">
+                                    <input type="text" name="visitName" id="visitName" class="input-name" placeholder="방문자 성함을 작성해 주세요">
+                                </th:block>
+
+                                <th:block th:uless="${session.loginMember?.memberCode==1}">
+                                    <input type="text" name="visitName" id="visitName" class="input-name" placeholder="현재 로그인 상태로 예약할 수 없습니다." readonly>
+                                </th:block>
                             </div>
                         </div>
 
@@ -150,7 +156,13 @@
                             <label for="visitTel" class="name">연락처</label>
 
                             <div class="input-box">
-                                <input type="text" name="visitTel" id="visitTel" class="input-name" placeholder="방문자 연락처를 작성해 주세요">
+                                <th:block th:if="${session.loginMember?.memberCode==1}">
+                                    <input type="text" name="visitTel" id="visitTel" class="input-name" placeholder="방문자 연락처를 작성해 주세요('-' 제외)" maxlength="11">
+                                </th:block>
+
+                                <th:block th:uless="${session.loginMember?.memberCode==1}">
+                                    <input type="text" name="visitTel" id="visitTel" class="input-name" placeholder="현재 로그인 상태로 예약할 수 없습니다." readonly maxlength="11">
+                                </th:block>
                             </div>
                         </div>
 
@@ -216,7 +228,7 @@
     
                             <br><br>
     
-                            <span class="emphasis">1. 개인정보를 제공받는 자 : (가게상호명)</span>
+                            <span class="emphasis">1. 개인정보를 제공받는 자 : <th:block th:text="${storeName}"></th:block> </span>
     
                             <br><br>
     
@@ -265,7 +277,7 @@
             <section class="button-area">
                 
                 <div class="buttons">
-                    <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation'" class="cancel-btn">취소</a>
+                    <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation'" class="cancel-btn">이전</a>
                     <a href="#" class="next-btn" id="confirmBtn">예약하기</a>
                 </div>
                 

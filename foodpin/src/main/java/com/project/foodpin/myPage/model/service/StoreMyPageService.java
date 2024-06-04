@@ -7,8 +7,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
+/**
+ * 
+ */
 public interface StoreMyPageService {
 
 	/** 가게 기본 정보 조회
@@ -24,15 +29,38 @@ public interface StoreMyPageService {
 	 */
 	int storeInfoUpdate(Store inputStore, MultipartFile image);
 	
+	// ------ 메뉴 ------
 	
+	/** 메뉴 조회
+	 * @param memberNo
+	 * @return menuList
+	 */
+	List<Menu> menuSelect(int storeNo);
+
+	/** 메뉴 수정
+	 * @param imgUrlList 
+	 * @param menuList
+	 * @return result
+	 */
+	int menuUpdate(List<Menu> inputMenuList, List<MultipartFile> imgUrlList);
 	
+	// ------ 휴무일 ------
 	
+	/** 고정 휴무일 변경
+	 * @param offList
+	 * @return
+	 */
+	int updateOffWeek(List<Off> offList);
+
 	/** 고정 휴무일 조회
 	 * @param storeNo
 	 * @return offList
 	 */
 	List<Off> selectWeekOff(int storeNo);
 
+	
+	
+	
 	
 	/** 지정 휴무일 조회
 	 * @param storeNo
@@ -71,7 +99,17 @@ public interface StoreMyPageService {
 	 */
 	int ceoInfoUpdate(Member inputMember);
 
+	/** 사장님 리뷰 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<Review> reviewAll(int memberNo);
 
+	
+
+
+
+	
 
 
 

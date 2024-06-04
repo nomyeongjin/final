@@ -9,29 +9,6 @@ storedetailmapbutton.addEventListener("click", () => {
 
 
 
-/* 가게 상세 설명 더보기 */
-const storeDetailContent =document.querySelector('.store-detail-content');
-const storeDetailText =document.querySelector('.store-detail-text');
-const moreText =document.querySelector('.more-text');
-const lessText =document.querySelector('.less-text');
-
-moreText.addEventListener("click", () => {
-  
-  moreText.style.display = 'none'; 
-  lessText.style.display = 'block'; 
-  storeDetailText.style.display = 'inline';
-});
-
-
-lessText.addEventListener("click", ()=>{
- 
- 
-  
-  lessText.style.display = 'none'; 
-  moreText.style.display = 'flex';
-  storeDetailText.style.display = '-webkit-box'; 
-});
-
 
 
 
@@ -116,23 +93,144 @@ function displayMarker(locPosition, message) {
 
 }
 
+
+
 /* 화면 생성 시 자동 실행 */
 window.onload = function() {
   // currentlocation 함수 실행
   currentlocation();
+ 
 };
+
+
 /* ****************지도******************* */
 
 
 
-/* 폐점/ 정보 정정 신고 팝업 */
+
+
+/* 가게 상세 설명 더보기 */
+const storeDetailContent =document.querySelector('.store-detail-content');
+const storeDetailText =document.querySelector('.store-detail-text');
+const moreText =document.querySelector('.more-text');
+const lessText =document.querySelector('.less-text');
+
+moreText.addEventListener("click", () => {
+  
+  moreText.style.display = 'none'; 
+  lessText.style.display = 'block'; 
+  storeDetailText.style.display = 'inline';
+});
+
+
+lessText.addEventListener("click", ()=>{
+ 
+ 
+  
+  lessText.style.display = 'none'; 
+  moreText.style.display = 'flex';
+  storeDetailText.style.display = '-webkit-box'; 
+});
+
+
+
+/* 별점  */
+
+document.addEventListener('DOMContentLoaded', function () {
+ 
+
+  var totalRatingELement = document.getElementById('totalScoreR');
+  var totalRating = Number(totalRatingELement.textContent);
+
+  function averageStar(totalRating) {
+    var AvgStar = document.querySelector('.realAvg-star');
+     
+     AvgStar.style.width = (totalRating*107/5)+'px';
+    
+   }
+
+ 
+
+   averageStar(totalRating);
+});
+
+
+/* 가게 주소 더보기 */
+
+const detailStoreLocContent =document.querySelector('.detailstoreloc-content');
+const storelocboxTwo =document.querySelector('.storelocbox-two');
+const moreAddress =document.querySelector('.more-address');
+const lessAddress =document.querySelector('.less-address');
+
+moreAddress.addEventListener("click", () => {
+  
+  moreAddress.style.display = 'none'; 
+  lessAddress.style.display = 'block'; 
+  storelocboxTwo.style.display = 'inline';
+});
+
+
+lessAddress.addEventListener("click", ()=>{
+ 
+ 
+  
+  lessAddress.style.display = 'none'; 
+  moreAddress.style.display = 'flex';
+  storelocboxTwo.style.display ='none'; 
+});
+
+
+
+/* 전화번호 - 넣기 */
+
+document.addEventListener('DOMContentLoaded', function () {
+  // phoneFormatter 함수 정의
+  function phoneFormatter(storeTel) {
+      var formatNum = '';
+      formatNum = storeTel.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, '$1-$2-$3');
+      return formatNum;
+  }
+
+  // storeTel 값을 가져옴
+  var storeTelElement = document.getElementById('memberTel');
+  var storeTel = storeTelElement.textContent.trim();
+
+  // 포맷팅된 전화번호로 업데이트
+  var formattedTel = phoneFormatter(storeTel);
+  storeTelElement.textContent = formattedTel;
+});
+
+/* ******************************************************** */
+
+/* 리뷰> 클릭 시 아래 리뷰 페이지로 이동 */
+
+document.addEventListener('DOMContentLoaded', function() {
+  const showReview = document.querySelector("#showReview");
+  const reviewBox = document.getElementsByClassName(".review-container"); // 스크롤할 대상 요소
+
+  if (showReview && reviewBox) {
+    showReview.addEventListener("click", () => {
+      const scrollPosition = reviewBox.offsetTop;
+      window.scrollTo({
+        left: 0,
+        top: scrollPosition,
+        behavior: 'smooth'
+      });
+    });
+  }
+});
+
+
+
+
+/*********************** 폐점/ 정보 정정 신고 팝업 ******************/
 
 
 const popupShut = document.querySelector("#popupShut");
 const popupbox = document.querySelector("#popupbox");
 const storeReportForm = document.querySelector("#storeReportForm");
 const storeReport = document.querySelector("#storeReport");
-
+const storeReportBtn = document.querySelector('#storeReportBtn');
 
 popupShut.addEventListener("click", () => {
   
@@ -146,171 +244,310 @@ storeReport.addEventListener("click", ()=>{
 });
 
 
-/* ****************** 가게 영업 시간 더보기 *********************  */
+  const requestContent = document.getElementById('requestStoreContent');
+  const requestCategoryTitle = document.getElementById('requestSelect');
 
-const openContainer = document.querySelector(".storedetail-opencontainer");
-const busiHoursShort = document.querySelector(".busi-hours-short");
+  storeReportBtn.addEventListener("click",e =>{
+      e.preventDefault(); // 기본 폼 제출 동작을 방지
 
-const moreScheduleInfoBtn = document.querySelector("#moreScheduleInfoBtn");
-const shutScheduleInfoBtn = document.querySelector("#shutScheduleInfoBtn");
+      if(loginMember == null){
+        alert('로그인 후 신고해주십시오.');
+        return;
+      }
 
-moreScheduleInfoBtn.addEventListener('click',()=>{
+      // 유효성 검사
+      if (requestContent.value.trim() === '') {
+          alert('상세 내용을 입력해주세요.');
+          requestContent.focus();
+          return;
+      }
+
+      if (requestCategoryTitle.value === '') {
+          alert('신고 내용을 선택해주세요.');
+          requestType.focus();
+          return;
+      }
+
+      
+        // 선택된 신고 내용을 포함하여 객체 생성
+    const obj = {
+      "storeNo": storeNo,
+      "memberNo": loginMember,
+      "requestCategoryTitle": requestCategoryTitle.value, 
+      "requestContent": requestStoreContent.value,
+    };
+
+    fetch("/store/storeReport", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(obj)
+    })
+    .then(resp => resp.json())
+    .then(result => {
+      if (result == 0) {
+        alert("신고 접수가 되지 않았습니다.");
+        requestContent.focus();
+      } else {
+        alert("가게 신고가 접수 되었습니다.");
+        storeReportForm.classList.add("popup-hidden");
+        requestContent.value = '';
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('신고 중 오류가 발생했습니다. 다시 시도해주세요.');
+    });
+  });
 
 
-  // 더보기 버튼을 숨기고 줄이기 버튼 보이게 하기
-  moreScheduleInfoBtn.style.display = 'none'; 
-  shutScheduleInfoBtn.style.display = 'inline-block'; 
-  busiHoursShort.style.display = 'inline';
-})
-
-shutScheduleInfoBtn.addEventListener("click",()=>{
-
-  
-  shutScheduleInfoBtn.style.display = 'none'; 
-  moreScheduleInfoBtn.style.display = 'inline-block';
-  busiHoursShort.style.display = 'none'; 
-})
 
 
 /* ************************************************************* */
 
 /* 메뉴 이미지 더보기 */
 
-// 3개씩 불러오기
 
-
-
-
-const storeMenuList = document.querySelector(".store-menu-list");
-const menuImageContainer = document.querySelector(".menu-image-container");
-
+const storeMenuList = document.querySelector(".menu-image-container");
+const menuB = storeMenuList.querySelectorAll(".menu-basiclist");
 const moreMenuImageBtn = document.querySelector("#moreMenuImageBtn");
 const shutMenuImageBtn = document.querySelector("#shutMenuImageBtn");
 
+// 처음에 3개의 메뉴를 표시
+let visibleMenus = 3;
+const totalMenus = menuB.length;
+
+showMenus();
+
+moreMenuImageBtn.addEventListener('click', () => {
+  visibleMenus += 3;
+  showMenus();
+});
+
+shutMenuImageBtn.addEventListener("click", () => {
+  visibleMenus = 3;
+  showMenus();
+});
+
+// 메뉴를 표시/숨김 처리하는 함수
+function showMenus() {
+  for (let i = 0; i < totalMenus; i++) {
+    if (i < visibleMenus) {
+      menuB[i].style.display = "flex";
+    } else {
+      menuB[i].style.display = "none";
+    }
+  }
+
+  // 더보기/접기 버튼 토글
+  if (totalMenus <= 3) {
+    moreMenuImageBtn.style.display = "none";
+    shutMenuImageBtn.style.display = "none";
+  } else if (visibleMenus >= totalMenus) {
+    moreMenuImageBtn.style.display = "none";
+    shutMenuImageBtn.style.display = "block";
+  } else {
+    moreMenuImageBtn.style.display = "block";
+    shutMenuImageBtn.style.display = "none";
+  }
+}
 
 
-moreMenuImageBtn.addEventListener('click',()=>{
-
-
-  
-
-  moreMenuImageBtn.style.display = 'none'; 
-  shutMenuImageBtn.style.display = 'inline'; 
-  
-  storeMenuList.style.display = 'inline';
- 
- 
-})
-
-shutMenuImageBtn.addEventListener("click",()=>{
-
-  
-  shutMenuImageBtn.style.display = 'none'; 
-  moreMenuImageBtn.style.display = 'inline';
-
-  storeMenuList.style.display = 'flex';
-
-  storeMenuList.style.overflow = 'hidden';
-
- 
-
-})
 
 
 /* ****************************식당 사진 더보기*********************************** */
 
 const detailImages = document.querySelector(".detail-images");
 const storeLook = document.querySelector(".store-look");
-
 const moreStoreImageBtn = document.querySelector("#moreStoreImageBtn");
 const shutStoreImageBtn = document.querySelector("#shutStoreImageBtn");
 
+// 처음 이미지 6개 
+let visibleImages = 6;
+const totalImages = detailImages.querySelectorAll("img").length;
+
+// 초기에 보여줄 이미지 
+showImages();
+
+// 더보기 버튼 클릭 시
+moreStoreImageBtn.addEventListener("click", () => {
+    visibleImages += 6;
+    showImages();
+});
+
+// 접기 버튼 클릭 시
+shutStoreImageBtn.addEventListener("click", () => {
+    visibleImages = 6;
+    showImages();
+});
+
+// 이미지 보이기 함수
+function showImages() {
+    const images = detailImages.querySelectorAll("img");
+    images.forEach((image, index) => {
+        if (index < visibleImages) {
+            image.style.display = "inline-block";
+        } else {
+            image.style.display = "none";
+        }
+    });
+
+    // 더보기/접기 버튼 토글
+    if (totalImages <= 6) {
+      moreStoreImageBtn.style.display = "none";
+      shutStoreImageBtn.style.display = "none";
+  } else if (visibleImages >= totalImages) {
+      moreStoreImageBtn.style.display = "none";
+      shutStoreImageBtn.style.display = "inline-block";
+  } else {
+      moreStoreImageBtn.style.display = "inline-block";
+      shutStoreImageBtn.style.display = "none";
+  }
+
+  }
 
 
 
+/*********************************** 리뷰 더보기 ***********************************************/
+
+const reviewContainer = document.querySelector(".review-container");
+const reviews = reviewContainer.querySelectorAll(".review");
+const moreReviewBtn = document.querySelector("#moreReviewBtn");
+const hideReviewBtn = document.querySelector("#hideReviewBtn");
+
+let visibleReviews = 5;
+const totalReviews = reviews.length;
+
+// 초기 상태 설정
+showReviews();
+
+// 더보기 버튼 클릭 시
+moreReviewBtn.addEventListener("click", () => {
+    visibleReviews += 5;
+    showReviews();
+});
+
+// 접기 버튼 클릭 시
+hideReviewBtn.addEventListener("click", () => {
+    visibleReviews = 5;
+    showReviews();
+});
+
+// 리뷰 보기 함수
+function showReviews() {
+    reviews.forEach((review, index) => {
+        if (index < visibleReviews) {
+            review.style.display = "block";
+        } else {
+            review.style.display = "none";
+        }
+    });
+
+    // 더보기/접기 버튼 토글
+    if (totalReviews <= 5) {
+        moreReviewBtn.style.display = "none";
+        hideReviewBtn.style.display = "none";
+    } else if (visibleReviews >= totalReviews) {
+        moreReviewBtn.style.display = "none";
+        hideReviewBtn.style.display = "block";
+    } else {
+        moreReviewBtn.style.display = "block";
+        hideReviewBtn.style.display = "none";
+    }
+}
 
 
-/* ***************** 팝업 ****************** */
+
+/* ***************** 리뷰 신고 팝업 ****************** */
 const popupClose = document.querySelector("#popupClose");
 const popupLayer = document.querySelector("#popupLayer");
 const reviewReportForm = document.querySelector("#reviewReportForm");
-const reviewReport = document.querySelector("#reviewReport");
+const reviewReport = document.querySelectorAll(".reviewReport");
+const reportComplete = document.querySelector("#reportComplete");
+const reportContent = document.querySelector("#reportContent");
 
 popupClose.addEventListener("click", () => {
   reviewReportForm.classList.add("popup-hidden");
 });
-
-reviewReport.addEventListener("click", ()=>{
-  reviewReportForm.classList.remove("popup-hidden");
-});
-
-/* ******************************************************** */
-
-/* 리뷰> 클릭 시 아래 리뷰 페이지로 이동 */
-
-const showReview = document.querySelector("#showReview");
-/* const scrollPosition = targetElement.offsetTop; */
-
-showReview.addEventListener("click", ()=>{
-
- 
-  window.scrollTo({
+reviewReport.forEach((report) => {
+  report.addEventListener("click", ()=>{
+    reviewReportForm.classList.remove("popup-hidden");
+   
+    const reviewNo = report.dataset.reviewNo;
+   
+    reportComplete.addEventListener("click" , e => {
     
-    left:0,
-    top:3000,
-    behavior:'smooth'
+      if(reportContent.value.trim().length == 0){
+        alert("신고 내용을 입력해주세요");
+        reportContent.focus();
+        e.preventDefault();
+        return;
+      }else{
+        const obj = {
+          "reviewNo" : reviewNo,
+          "reportContent" : reportContent.value,
+        };
+    
+        fetch("/store/reviewReport", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(obj)
+        })
+        .then(resp => resp.json())
+        .then(result => {
+    
+          if(result == 0){
+            Swal.fire({
+              icon: "error",
+              title: "신고 접수 실패",
+              text: "신고 접수가 실패했습니다. 다시 한 번 확인해주세요.",
+            });
+            reportContent.focus();
+            e.preventDefault();
+          }
+          else{
+            Swal.fire({
+              title: "신고 접수 완료",
+              text: "신고 접수가 정상적으로 처리 되었습니다.",
+              icon: "success"
+            });
+            reviewReportForm.classList.add("popup-hidden");
+            reportContent.value = '';
+          }
+        })
+      }
+    })
   })
 })
 
-/**************** 가게 찜, 좋아요 개수 ******************/
 
-// 1. #bookmarkCheck 클릭 되었을 때
-const bookmarkCheck = document.querySelector("#bookmarkCheck");
-bookmarkCheck.addEventListener("click", e=>{
+const reviewDeleteBtns = document.querySelectorAll("#reviewDeleteBtn");
 
+reviewDeleteBtns.forEach((btn) => {
   
-    // 3. 준비된 3개의 변수를 객체로 저장 -> (Json 변환 예정)
-    const obj = {
-        "memberNo" : loginMember,
-        "storeNo"  : storeNo,
-        "bookMark": bookMark
-    };
+  btn.addEventListener("click", () => {
 
-    //4. 좋아요 INSERT / DELETE 비동기 요청
-    fetch("/store/like", {
+    const reviewNo = btn.dataset.reviewNo;
 
-    method  : "POST",
-    headers : {"Content-Type" : "application/json"},
-    body    : JSON.stringify(obj) // 객체를 Json으로 문자화 
-
-    })
-
-    .then(resp =>resp.text()) // 반환 결과 text(글자) 형태로 변환
-    .then(count =>{
-
-        // count == 첫 번째 then의 파싱되어 반환된 값('-1' 또는 게시글 좋아요 수)
-        //console.log("result :", result);
-
-
-        if(count == -1){
-            console.log("좋아요 처리 실패");
-            return;
+    if(confirm("리뷰을 삭제하십시겠습니까?")) {
+      
+      fetch("/review/deleteReview", {
+        method: "POST",
+        headers: {"Content-Type" : "application/json"},
+        body: JSON.stringify(reviewNo)
+      })
+      .then(resp => resp.json())
+      .then(result => {
+        
+        if(result > 0){
+          alert("리뷰가 삭제 되었습니다.");
+          location.reload();
         }
 
-        // 5. bookmark 값 0<->1 변환
-        // (왜? 클릭 될 때 마다 INSERT/DELETE 동작을 번갈아 가면서 할 수 있음)
-         bookMark = bookMark == 0? 1: 0;
-
-        // 6. 하트를 채웠다/비웠다 바꾸기
-        e.target.classList.toggle("fa-regular");
-        e.target.classList.toggle("fa-solid");
-
-        // 7. 게시글 좋아요 수 수정
-        e.target.nextElementSibling.innerText = count;
+      });
+    }else{
+      alert("취소 되었습니다.");
+    }
+  })
+})
 
 
-       
-
-    });
-
-});

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.mapper.ManagerMyPageMapper;
+import com.project.foodpin.store.model.dto.Request;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,5 +33,24 @@ public class ManagerMyPageServiceImpl implements ManagerMyPageService{
 	public boolean refuseMember(int memberNo) {
 		return mapper.refuseMember(memberNo);
 	}
+	
+	// 가게 폐점
+	@Override
+	public boolean closeStore(int memberNo) {
+		return mapper.closeStore(memberNo);
+	}
+
+	// 가게 정보 정정 신청 조회
+	@Override
+	public List<Request> infoRequestList() {
+		return mapper.infoRequestList();
+	}
+	
+	// 가게 정보 정정 처리 완료
+	@Override
+	public boolean completeRequest(int requestNo) {
+		return mapper.completeRequest(requestNo);
+	}
+	
 
 }

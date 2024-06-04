@@ -22,65 +22,121 @@
                 <div class="myPage-title-container">
                     <section class="myPage-title">
                         내가 쓴 리뷰
-                        <!-- <span>5개</span> -->
-                        
-                        <!-- 아무 내역 없을 때 -->
+                        <span th:text="|${reviewCount}개|">개수</span>
                         <th:block th:if="${#lists.isEmpty(review)}">
                             <div class="emptyList">리뷰 내역이 없습니다</div>
                         </th:block>
                     </section>
 
 
-                    <th:block th:unless="${#lists.isEmpty(review)}">
-                        <div th:each="review : ${review}">
-                            <div class="reviewContainer" th:object="${review}">
-                                <div class="storeName" th:text="|*{storeName} >|">
-                                    <a href="/store/storeDetail">대박 고깃집  ></a>
-                                </div>
-                                <span class="score-container">
-                                    <span class="reviewScore" th:attr="data-rating=*{reviewRating}"></span>
-                                    <span class="reviewDate" th:text="*{reviewRegDate}">5개월 전</span>
-                                </span>
-                                
-                                <div class="review">
-                                    <!-- <div class="reviewPhoto">
-                                        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDAyMjJfMjgg%2FMDAxNzA4NTg2NTAwNDgy.kcEWp-6taz-owgm71kI4HC5e-VLxlPGSp4DHIjFasvsg.gO78YMsaI-54CleGKxrjPs8SUYNRJ9kCC34dXCwNJDQg.JPEG%2FIMG_2620.JPG&type=sc960_832" alt="">
-                                    </div> -->
-                                    <div class="reviewContent" th:text="*{reviewContent}">
-                                        너무너무 맛있어요 하하하하 최고입니다
+                    <div class="myReview">
+                        <th:block th:unless="${#lists.isEmpty(review)}">
+                            <div th:each="review : ${review}">
+                                <div class="review" th:object="${review}">
+                                    <div class="storereview-top">
+                                        <div class="storereview-top-left">
+                                            <div class="review-info">
+                                                <a class="review-storeName" th:text="|*{storeName} >|" th:href="'/store/storeDetail/' + *{storeNo}"></a>
+        
+                                                <div class="review-memberScore">
+                                                    <span th:switch="*{reviewRating}">
+                                                        <span th:case="1">
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                        </span>
+                                                        <span th:case="2">
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                        </span>
+                                                        <span th:case="3">
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                        </span>
+                                                        <span th:case="4">
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="empty_star  fas fa-star"></i>
+                                                        </span>
+                                                        <span th:case="5">
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                            <i class="rating__star fas fa-star"></i>
+                                                        </span>
+                                                    </span>
+                                                    <span th:text="|*{reviewRating} 점|"> 점수</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                
+                                        <div class="storereview-top-right">
+                                            <button type="button" id="reviewDeleteBtn"  
+                                                th:if="${session.loginMember}" 
+                                                th:attr="data-review-no=*{reviewNo}">
+                                                삭제하기
+                                            </button>
+                                            <a th:href="'/review/reviewUpdate/' + *{storeNo} +'/' + *{reviewNo}" id="reviewUpdateBtn"  
+                                                th:if="${session.loginMember}" 
+                                                th:attr="data-review-no=*{reviewNo}">
+                                                수정하기
+                                            </a>
+                                            <span th:text="*{reviewRegDate}">2024-05-17</span>
+                                        </div>
+                
                                     </div>
+                
+                                    <div class="storereview-mid">
+                                        <p th:text="*{reviewContent}">리뷰 내용</p>
+                                    </div>
+                
+                                    <th:block>
+                                        <div class="storereview-bottom">
+                                            
+                                            <th:block th:if="${!#lists.isEmpty(uploadList)}">
+                                                <p th:if="*{uploadList}">주문 내역</p>
+                                            </th:block>
+            
+                                            <div class="storereview-image" th:if="*{uploadList}">
+                                                <th:block th:each=" upload : *{uploadList}">
+                                                    <img class="review-look" th:src="|${upload.imagePath}${upload.imgRename}|">
+                                                </th:block>
+                                            </div>
+            
+                                            <p>해시태그</p>
+                                            <div class="review-hashtag">
+                                                <th:block th:each=" hash : *{hashList}">
+                                                    <span th:text="|${hash.hashTitle} |" class="review-hash">#해시태그</span>
+                                                </th:block>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                
+                                    <th:block th:if="${!#lists.isEmpty(replyList)}" th:each="reply : *{replyList}">
+                                        <div class="store-reply">
+                                            <img class="review-store-profile" th:src="${reply.storeImg}" alt="가게 프로필 이미지">
+                                            <p class="reply-content-bubble" th:text="${reply.replyContent}">
+                                                사장님 답글
+                                            </p>
+                                        </div>
+                                    </th:block>
                                 </div>
                             </div>
-                        </div>
-
-<!-- 
-                        <div class="reviewContainer">
-                            <div class="storeName">
-                                <a href="/store/storeDetail">대박 고깃집  ></a>
-                            </div>
-                            <span class="reviewScore">★ ★ ★ ★ ☆</span>
-                            <span class="reviewDate">5개월 전</span>
-                            <div class="review">
-                                <div class="reviewPhoto">
-                                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA0MDhfMTc0%2FMDAxNzEyNTM2NDQ2ODU0.5cSYkfl1rPEdBZ38mATTL_be_fqUY7RE4ksS2Jip3g4g.WURNxArSf1xXPGuITI2aDNXbD924POKq5gK9hT0cvw0g.PNG%2Fimage.png&type=sc960_832" alt="">
-                                </div>
-                                <div class="reviewContent">
-                                    너무너무 맛있어요 하하하하 최고입니다
-                                </div>
-                            </div>
-                            <div class="replyContainer">
-                                <span class="ceo">사장님</span>
-                                <span class="replyDate">5개월 전</span>
-                                <div class="replyContent">
-                                    ㄳㄳ 합니다 손님~~~ ^^
-                                </div>
-                            </div>
-                        </div> -->
-
-                    </th:block>
+                        </th:block>
+                    </div>
                 </div>
             </section>
-
         </div>
 
     </main>

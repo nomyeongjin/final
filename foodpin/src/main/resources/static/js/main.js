@@ -26,4 +26,4 @@ quickLoginBtn.forEach((item) =>{
    
 })
 
-console.log(loginMember);
+

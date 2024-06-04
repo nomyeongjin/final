@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채팅 페이지</title>
+    <link rel="stylesheet" href="/css/chatting/chatting-style.css">
+
+    <th:block th:replace="~{common/common}"></th:block>
+
+</head>
+<body>
+    <main>
+        <th:block th:replace="~{common/header}">header.html</th:block>
+
+        <div class="chatting-container">
+            
+            <div class="room-list-container">
+                <div class="search-chat-container">
+                    <input type="text" name="inputSearch" id="inputSearch" placeholder="가게 이름">
+                    <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                
+                <!-- 채팅방 리스트 -->  
+                <ul class="room-list">
+
+                    <!-- <th:block th:each="room : ${roomList}"> -->
+
+                        <li class="chatting-item">
+                            <!-- <div class="item-header">
+                                <img class="list-profile" src="/images/user.png">
+                            </div>
+                            <div class="item-body">
+                                <p>
+                                    <span class="target-name" >상대방 이름</span>
+                                    <span class="recent-send-time" >12:46</span>
+                                </p>
+                                <div>
+                                    <p class="recent-message">안녕하세요?</p>
+
+                                    <p>1</p>
+                                </div>
+                            </div> -->
+                        </li>
+                        
+
+                    <!--</th:block> -->
+
+                </ul>
+            </div>
+
+            <!-- 채팅 영역-->
+
+                <div class="chatting-area">
+                    <ul class="display-chatting">
+                        <!-- <li class="my-chat">
+                            <span class="chatDate">14:01</span>
+                            <p class="chat">안녕하세요?</p>
+                        </li>
+                        
+                        <li class="target-chat">
+                            <img src="/images/user.png">
+                            
+                            <div>
+                                <b>상대방</b>	<br>
+                                <p class="chat">
+안녕하세요?? 반갑습니다.
+ㅎㅎㅎㅎㅎ
+                                </p>
+                                <span class="chatDate">14:05</span>
+                            </div>
+                        </li>-->
+                       
+                    </ul>
+
+
+
+                    <!-- 채팅 입력 부분 -->
+                    <div class="input-area">
+                        <textarea id="inputChatting" rows="1"></textarea>
+                        <button id="send">전송</button>
+                    </div>
+                </div>
+        </div>
+
+        
+    </main>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+
+
+    <!-- https://github.com/sockjs/sockjs-client -->
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	<script th:inline="javascript">
+		const userDefaultImage = /*[[#{user.default.image}]]*/ '기본 이미지';
+
+        const loginMember = /*[[${session.loginMember}]]*/ '로그인';
+        
+    </script>
+
+
+    <script src="/js/chatting/chat.js"></script>
+
+</body>
+</html>

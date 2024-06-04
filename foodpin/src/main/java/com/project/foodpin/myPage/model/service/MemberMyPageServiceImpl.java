@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.foodpin.common.util.Utility;
@@ -23,7 +23,7 @@ import com.project.foodpin.store.model.dto.Store;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 @RequiredArgsConstructor
 @PropertySource("classpath:/config.properties")
 public class MemberMyPageServiceImpl implements MemberMyPageService{
@@ -39,7 +39,8 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 	private String profileFolderPath;
 	
 
-	// 회원 정보 수정
+
+	// 회원 정보 변경
 	@Override
 	public int updateInfo(MultipartFile profileImg, Member inputMember) throws IllegalStateException, IOException {
 		
@@ -71,6 +72,7 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		return result;
 	}
 
+
 	// 회원 비밀번호 변경
 	@Override
 	public int memberChangePw(Map<String, Object> paramMap, int memberNo) {
@@ -94,7 +96,7 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 	public int noshowCount(int memberNo) {
 		return mapper.noshowCount(memberNo);
 	}
-	
+
 	// 예약 확정 조회
 	@Override
 	public List<Reservation> reservationFix(int memberNo) {
@@ -131,20 +133,38 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 	public List<Store> memberLikeList(int memberNo) {
 		return mapper.memberLikeList(memberNo);
 	}
+	
+	// 찜 개수
+	@Override
+	public int likeCount(int memberNo) {
+		return mapper.likeCount(memberNo);
+	}
 
+	// 찜 취소
+	@Override
+	public int cancelLike(int memberNo, int storeNo) {
+		Map<String, Integer> cancelLike = Map.of("memberNo", memberNo, "storeNo", storeNo);
+		return mapper.cancelLike(cancelLike);
+	}
+	
 	// 리뷰 목록 조회
 	@Override
 	public List<Review> selectReviewList(int memberNo) {
 		return mapper.selectReviewList(memberNo);
 	}
-	
+
+	// 리뷰 개수
+	@Override
+	public int reviewCount(int memberNo) {
+		return mapper.reviewCount(memberNo);
+	}
+
 	// 회원 탈퇴
 	@Override
 	public int secession(String memberPw, Member loginMember) {
 		
 		int memberNo = loginMember.getMemberNo();
 		String pw = mapper.selectPw(memberNo);
-		
 		
 		if(!bcrypt.matches(memberPw, pw)) return 0;
 		
@@ -159,6 +179,10 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		return mapper.secession(memberNo);
 		
 	}
+
+
+
+
 
 	
 	

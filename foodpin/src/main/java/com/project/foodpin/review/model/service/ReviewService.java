@@ -24,6 +24,17 @@ public interface ReviewService {
 	// 메뉴 조회
 	List<Menu> selectMenu(String storeNo);
 
+	// 리뷰 삭제
+	int deleteReview(int reviewNo);
+
+	// 리뷰 수정시 기존 리뷰 조회
+	Review selectReview(int reviewNo);
+
+	// 리뷰 수정
+	int updateReview(Review inputReview, List<Integer> menuNo, List<Integer> hashNo, String deleteOrder,
+			List<MultipartFile> images)  throws IllegalStateException, IOException;
+
+
 
 
 

@@ -2,6 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.project.foodpin.review.model.mapper.ReviewMapper">
 
+	<resultMap type="Review" id="review_rm">
+	
+		<id property="reviewNo" column="REVIEW_NO"/>
+		
+		<collection 
+			property="uploadList"
+			select = "reviewUpdateUploadImage"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "UploadImage"
+		/>
+		
+		<collection 
+			property="hashList"
+			select = "reviewUpdateHash"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "ReviewHash"
+		/>
+		
+		<collection 
+			property="reviewMenuList"
+			select = "reviewUpdateMenu"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "ReviewMenu"
+		/>
+	</resultMap>
+
+
+
+
+
+
 	<!-- 특정가게 조회 -->
 	<select id="selectStore" resultType="store">
 		SELECT *
@@ -14,6 +48,7 @@
 		SELECT *
 		FROM MENU
 		WHERE STORE_NO = #{storeNo}
+		ORDER BY MENU_NO
 	</select>
 	
 	
@@ -66,9 +101,101 @@
     
     <!-- 리뷰 개수 조회 -->
 	<select id="reviewCount">
-		SELECT COUNT(*) FROM "REVIEW"
+		SELECT COUNT(*)
+		FROM REVIEW 
 		WHERE MEMBER_NO = #{memberNo}
+		AND REVIEW_DEL_FL = 'N'
 	</select>
+	
+	
+	<!-- 리뷰 삭제 -->
+	<update id="deleteReview">
+		UPDATE REVIEW
+		SET REVIEW_DEL_FL = 'Y'
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
+	
+	
+	<select id="selectReview" resultMap="review_rm">
+		SELECT DISTINCT *
+		FROM REVIEW
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<!-- 리뷰 이미지 조회 -->
+   <select id="reviewUpdateUploadImage" resultType="UploadImage">
+		SELECT * 
+		FROM UPLOAD_IMAGE
+		WHERE REVIEW_NO = #{reviewNo}
+		ORDER BY IMAGE_ORDER
+	</select> 
+	
+	<!-- 리뷰 해시태그 조회 -->
+	 <select id="reviewUpdateHash" resultType="ReviewHash">
+		SELECT HASH_NO, REVIEW_NO, HASH_TITLE
+		FROM REVIEW_HASH
+		JOIN HASH USING (HASH_NO)
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<!-- 리뷰 선택된 메뉴 조회 -->
+	<select id="reviewUpdateMenu" resultType="ReviewMenu">
+		SELECT * FROM REVIEW_MENU
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
+
+	<!-- 리뷰 수정(별점, 리뷰 내용) -->
+	<update id="updateReview">
+		UPDATE "REVIEW" SET
+		REVIEW_RATING = #{reviewRating},		
+		REVIEW_CONTENT = #{reviewContent}
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
+	
+	
+	<!-- 리뷰 이미지 삭제 -->
+	<delete id="deleteImage">
+		DELETE FROM UPLOAD_IMAGE
+		WHERE IMAGE_ORDER IN (${deleteOrder}) 
+		AND REVIEW_NO = #{reviewNo}
+	</delete>
+	
+	<!-- 리뷰 이미지 수정 -->
+	<update id="updateImage">
+		UPDATE UPLOAD_IMAGE SET
+		IMG_ORIGINAL_NAME = #{imgOriginalName},
+		IMG_RENAME = #{imgRename}
+		WHERE REVIEW_NO = #{reviewNo}
+		AND IMAGE_ORDER = #{imageOrder}
+	</update>
+	
+	
+	<!-- 리뷰 이미지 삽입(1행) -->
+	<insert id="insertImage">
+		INSERT INTO UPLOAD_IMAGE
+		VALUES(NEXT_IMAGE_NO() , #{imagePath},
+			 #{imgRename}, SYSDATE, #{imageOrder},
+			 #{storeNo}, #{reviewNo}, #{imgOriginalName})
+	</insert>
+	
+	
+	<delete id="deleteMenu">
+		DELETE FROM REVIEW_MENU
+		WHERE REVIEW_NO = #{reviewNo}
+	</delete>
+	
+	
+	<delete id="deleteHashList">
+		DELETE FROM REVIEW_HASH
+		WHERE REVIEW_NO = #{reviewNo}
+	</delete>
+	
+	
+	
+	
+	
+	
 	
 	
 	

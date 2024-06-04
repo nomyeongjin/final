@@ -9,6 +9,90 @@ mapHome.addEventListener("click", () => {
 
 });
 
+// 누르면 채팅 페이지로 이동 해당 가게의 위치가 상세 페이지에서 검색됨
+const storedetailmapbutton = document.querySelector("#chatS");
+
+storedetailmapbutton.addEventListener("click", () => {
+  location.href = "/chatting/chat";
+
+});
+
+
+/* 사이드바 접기 */
+
+const hideSideBar = document.querySelector("#hideSideBar");
+const blind = document.querySelector(".blind");
+const show = document.querySelector(".show");
+const searchSidebarBox = document.querySelector(".search-sidebarbox");
+
+blind.addEventListener('click', ()=>{
+
+    blind.style.display= 'none';
+    show.style.display = 'flex';
+    searchSidebarBox.style.transform = 'translateX(-100%)';
+    searchSidebarBox.style.transition = 'transform 0.4s ease-out';
+    
+})
+show.addEventListener('click', ()=>{
+
+    show.style.display= 'none';
+    blind.style.display = 'flex';
+    searchSidebarBox.style.transform = 'translateX(0%)';
+    
+})
+
+
+// 비동기로 내용 불러올 공간
+const sidebarMenu = document.querySelector(".sidebar-menu");
+
+
+
+const remS = document.querySelector("#remS");
+
+storedetailmapbutton.addEventListener("click", () => {
+
+    sidebarMenu.innerHTML = "";
+
+   
+});
+const resS = document.querySelector("#resS");
+
+storedetailmapbutton.addEventListener("click", () => {
+    sidebarMenu.innerHTML = "";
+
+
+});
+
+
+/* 카테고리 박스 접기 */
+
+const searchCategoryCon = document.querySelector('.search-categoryContaier')
+const searchCategoryBtnBox = document.querySelector('.searchcategory-Btnbox')
+const bars = document.querySelector('.bars')
+const shortBar = document.querySelector('.short-bar')
+
+shortBar.addEventListener('click', ()=>{
+    shortBar.style.display = 'none';
+    bars.style.display = 'flex';
+
+    searchCategoryCon.style.transform = 'translateY(-100%)';
+    searchCategoryCon.style.transition = 'transform 0.4s ease-out';
+    searchCategoryCon.style.transition = 'transition:height 1s';
+    /* searchCategoryCon.style.height = '166px'; */
+ 
+})
+
+bars.addEventListener('click', ()=>{
+    bars.style.display = 'none';
+    shortBar.style.display = 'flex';
+    
+    searchCategoryCon.style.transform = 'translateY(0%)';
+    searchCategoryCon.style.transition = 'transform 0.4s ease-out';
+    
+    
+})
+
+
  
 /* ************************************* 지도 ******************************************* */
 function storelocation() {
@@ -129,8 +213,6 @@ function storelocation() {
 
 }
 
-/* ************************************* 지도 ******************************************* */
-
 
 /* 화면 생성 시 자동 실행 */
 window.onload = function() {
@@ -140,4 +222,8 @@ window.onload = function() {
    
 };
 
- 
+
+/* ************************************* 지도 ******************************************* */
+
+
+

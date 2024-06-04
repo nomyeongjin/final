@@ -4,6 +4,15 @@
 <!-- font awesome 라이브라리 추가 + key 등록 -->
 <script src="https://kit.fontawesome.com/8affe1c744.js" crossorigin="anonymous"></script>
 
+<!-- 알림 관련 전역 변수 -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script th:inline="javascript">
+  const notificationLoginCheck = /*[[${session.loginMember} ? true : false]]*/ '로그인 체크';
+  const notificationDefaultImage = /*[[#{user.default.image}]]*/ '유저 기본 이미지';
+  const memberNo = /*[[${memberNo}]]*/ "회원 번호"
+</script>
+
+
 <!-- <script src="/js/main.js"></script> -->
 <script src="/js/header.js"></script>
 

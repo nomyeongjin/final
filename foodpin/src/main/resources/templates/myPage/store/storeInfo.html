@@ -49,9 +49,10 @@
 
                <!-- 가게 이미지 -->
                <div class="store-img">
-                  <img th:src="*{storeImg}" alt="">
+                  <img th:src="*{storeImg}" id="storeImg" alt="">
                </div>
-               <input type="file" name="image" id="image" accept="image/*">
+               
+               <input type="file" name="image" id="imageInput" accept="image/*">
                
                <div class="edit-area-row">
                   <label for="storeName">상호명 : </label>
@@ -152,24 +153,14 @@
 
             <a id="withdraw">서비스 탈퇴</a>
          </div>
-
-
-         <!-- 본문 (기본 정보) -->
-         <div class="myPage-content-container" id="testArea">
-            <!-- 테스트 -->
-            <button id="testBtn">일정추가 테스트</button>
-
-
-
-
-         </div>
-
+        </div>
          
-         
-
-
          <script th:inline="javascript">
+            const memberNo = /*[[${session.loginMember.memberNo}]]*/ "가게 번호";
             const storeNo = /*[[${store.storeNo}]]*/ "가게 번호";
+
+                    // 프로필 기본 이미지 전역변수로 저장
+        const menuDefaultImage = /*[[#{menu.default.image}]]*/ "메뉴 기본 이미지";
         </script>
       
       </section>
@@ -193,7 +184,7 @@
 
    <!-- 마이페이지 JS 추가 -->
    <script src="/js/myPage/store/storeInfo.js"></script>
-
+   <script src="/js/myPage/store/menu.js"></script>
    <script src="/js/myPage/store/storeOff.js"></script>
 
 </body>

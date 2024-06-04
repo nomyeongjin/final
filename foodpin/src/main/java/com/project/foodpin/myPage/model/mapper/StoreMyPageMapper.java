@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
 @Mapper
@@ -27,18 +29,67 @@ public interface StoreMyPageMapper {
 	 */
 	int storeInfoUpdate(Store inputStore);
 	
-	
-	
-	
-	
+	// ------ 메뉴 ------
 
+	/** 메뉴 조회
+	 * @param memberNo
+	 * @return menuList
+	 */
+	List<Menu> menuSelect(int storeNo);
+	
+	/** 메뉴 삭제 ('N' -> 'Y' 변경)
+	 * @param menu
+	 * @return
+	 */
+	int deleteMenu(Menu menu);
+
+	/** 메뉴 번호 조회
+	 * @param inputMenuList
+	 * @return
+	 */
+	int selectMenuNo(Menu menu);
+
+	/** 완전히 동일한 메뉴인지 조회
+	 * @param menu
+	 * @return
+	 */
+	int selectSameMenuNo(Menu menu);
+	
+	/** 메뉴명 제외 변경
+	 * @param menu
+	 * @return
+	 */
+	int updateMenu(Menu menu);
+	
+	
+	// ------ 휴무일 ------
+	
+	/** 고정 휴무일 개수 조회 (있는지)
+	 * @param storeNo
+	 * @return count
+	 */
+	int countOffWeek(String storeNo);
+	
+	
+	/** 기존 고정 휴무일 삭제
+	 * @param off
+	 * @return offWeekNo
+	 */
+	int deleteOffWeek(String storeNo);
+
+	/** 고정 휴무일 등록 
+	 * @param off
+	 * @return result 
+	 */
+	int insertOffWeek(Off off);
+	
 	/** 고정 휴무일 조회
 	 * @param storeNo
 	 * @return offList
 	 */
 	List<Off> selectWeekOff(int storeNo);
 
-	/** 지정 휴무일 조회
+	/** 지정 휴무일 변경
 	 * @param storeNo
 	 * @return offList
 	 */
@@ -77,6 +128,50 @@ public interface StoreMyPageMapper {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+
+
+	/** 메뉴 삭제
+	 * @param storeNo
+	 * @return
+	 */
+	int deleteAllMenu(String storeNo);
+
+
+	/** 메뉴 등록
+	 * @param inputMenuList
+	 * @return
+	 */
+	int insertMenu(Menu menu);
+
+
+	/** 사장님 리뷰 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<Review> reviewAll(int memberNo);
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
