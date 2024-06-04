@@ -18,6 +18,73 @@ storedetailmapbutton.addEventListener("click", () => {
 });
 
 
+/* 사이드바 접기 */
+
+const hideSideBar = document.querySelector("#hideSideBar");
+const blind = document.querySelector(".blind");
+const show = document.querySelector(".show");
+const searchSidebarBox = document.querySelector(".search-sidebarbox");
+
+blind.addEventListener('click', ()=>{
+
+    blind.style.display= 'none';
+    show.style.display = 'flex';
+    searchSidebarBox.style.transform = 'translateX(-100%)';
+    searchSidebarBox.style.transition = 'transform 0.4s ease-out';
+    
+})
+show.addEventListener('click', ()=>{
+
+    show.style.display= 'none';
+    blind.style.display = 'flex';
+    searchSidebarBox.style.transform = 'translateX(0%)';
+    
+})
+
+
+// 비동기로 내용 불러올 공간
+const sidebarMenu = document.querySelector(".sidebar-menu");
+
+
+
+const remS = document.querySelector("#remS");
+
+storedetailmapbutton.addEventListener("click", () => {
+
+    sidebarMenu.innerHTML = "";
+
+   
+});
+const resS = document.querySelector("#resS");
+
+storedetailmapbutton.addEventListener("click", () => {
+    sidebarMenu.innerHTML = "";
+
+
+});
+
+
+/* 카테고리 박스 접기 */
+
+const searchCategoryCon = document.querySelector('.search-categoryContaier')
+const searchCategoryBtnBox = document.querySelector('.searchcategory-Btnbox')
+const bars = document.querySelector('.bars')
+const shortBar = document.querySelector('.short-bar')
+
+shortBar.addEventListener('click', ()=>{
+    shortBar.style.display = 'none';
+    bars.style.display = 'flex';
+
+    searchCategoryBtnBox.style.display='none';
+   
+})
+
+bars.addEventListener('click', ()=>{
+    bars.style.display = 'none';
+    shortBar.style.display = 'flex';
+    searchCategoryBtnBox.style.display='flex';
+})
+
 
  
 /* ************************************* 지도 ******************************************* */
@@ -152,51 +219,4 @@ window.onload = function() {
 /* ************************************* 지도 ******************************************* */
 
 
-
-/* nav 바 접기 */
-
-/* 가게 상세 설명 더보기 */
-const storeDetailContent =document.querySelector('.store-detail-content');
-const storeDetailText =document.querySelector('.store-detail-text');
-const moreText =document.querySelector('.more-text');
-const lessText =document.querySelector('.less-text');
-
-moreText.addEventListener("click", () => {
-  
-  moreText.style.display = 'none'; 
-  lessText.style.display = 'block'; 
-  storeDetailText.style.display = 'inline';
-});
-
-
-lessText.addEventListener("click", ()=>{
- 
- 
-  
-  lessText.style.display = 'none'; 
-  moreText.style.display = 'flex';
-  storeDetailText.style.display = '-webkit-box'; 
-});
-
-
-// 비동기로 내용 불러올 공간
-const sidebarMenu = document.querySelector(".sidebar-menu");
-
-
-
-const remS = document.querySelector("#remS");
-
-storedetailmapbutton.addEventListener("click", () => {
-
-    sidebarMenu.innerHTML = "";
-
-   
-});
-const resS = document.querySelector("#resS");
-
-storedetailmapbutton.addEventListener("click", () => {
-    sidebarMenu.innerHTML = "";
-
-
-});
 

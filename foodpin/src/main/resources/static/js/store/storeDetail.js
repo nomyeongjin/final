@@ -248,9 +248,14 @@ storeReport.addEventListener("click", ()=>{
   const requestCategoryTitle = document.getElementById('requestSelect');
 
   storeReportBtn.addEventListener("click",e =>{
-      e.preventDefault(); // 기본 폼 제출 동작을 방지합니다.
+      e.preventDefault(); // 기본 폼 제출 동작을 방지
 
-      // 유효성 검사를 수행합니다.
+      if(loginMember == null){
+        alert('로그인 후 신고해주십시오.');
+        return;
+      }
+
+      // 유효성 검사
       if (requestContent.value.trim() === '') {
           alert('상세 내용을 입력해주세요.');
           requestContent.focus();
@@ -303,7 +308,7 @@ storeReport.addEventListener("click", ()=>{
 
 
 const storeMenuList = document.querySelector(".menu-image-container");
-const menuB = storeMenuList.querySelector(".menu-basiclist");
+const menuB = storeMenuList.querySelectorAll(".menu-basiclist");
 const moreMenuImageBtn = document.querySelector("#moreMenuImageBtn");
 const shutMenuImageBtn = document.querySelector("#shutMenuImageBtn");
 
@@ -515,6 +520,34 @@ reviewReport.forEach((report) => {
 })
 
 
+const reviewDeleteBtns = document.querySelectorAll("#reviewDeleteBtn");
 
+reviewDeleteBtns.forEach((btn) => {
+  
+  btn.addEventListener("click", () => {
+
+    const reviewNo = btn.dataset.reviewNo;
+
+    if(confirm("리뷰을 삭제하십시겠습니까?")) {
+      
+      fetch("/review/deleteReview", {
+        method: "POST",
+        headers: {"Content-Type" : "application/json"},
+        body: JSON.stringify(reviewNo)
+      })
+      .then(resp => resp.json())
+      .then(result => {
+        
+        if(result > 0){
+          alert("리뷰가 삭제 되었습니다.");
+          location.reload();
+        }
+
+      });
+    }else{
+      alert("취소 되었습니다.");
+    }
+  })
+})
 
 

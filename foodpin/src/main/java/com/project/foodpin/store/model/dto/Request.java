@@ -14,13 +14,16 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class Request {
-
 	
 	private int requestNo;
 	private int requestCategoryCode;
 	private String requestContent;
 	private String requestCategoryTitle;
+
 	private int storeNo;
 	private int memberNo;
+  private String requestDate;
 	
+	private String memberName;
+	private String storeName;
 }

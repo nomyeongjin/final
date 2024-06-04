@@ -48,6 +48,7 @@
 		SELECT *
 		FROM MENU
 		WHERE STORE_NO = #{storeNo}
+		ORDER BY MENU_NO
 	</select>
 	
 	
@@ -179,8 +180,16 @@
 	</insert>
 	
 	
+	<delete id="deleteMenu">
+		DELETE FROM REVIEW_MENU
+		WHERE REVIEW_NO = #{reviewNo}
+	</delete>
 	
 	
+	<delete id="deleteHashList">
+		DELETE FROM REVIEW_HASH
+		WHERE REVIEW_NO = #{reviewNo}
+	</delete>
 	
 	
 	

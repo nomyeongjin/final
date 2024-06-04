@@ -259,6 +259,8 @@ i{
    justify-content: center;
    align-items: center;
    height: 90%;
+   transform: translate(0%);
+  
 }
 
 #searchButton{
@@ -298,19 +300,36 @@ i{
 }
 
 .blind{
+   border: none;
    display: flex;
    align-items: center;
    justify-content: center;
-   
+   width: 25px;
+   height: 49px;
 
 }
 .blind > i{
    font-size: 14px;
    color: var(--main-color);
 }
+.show{
+   border: none;
+   display: none;
+   align-items: center;
+   justify-content: center;
+   width: 25px;
+   height: 49px;
+
+}
+.show > i{
+
+   font-size: 14px;
+   color: var(--main-color);
+}
 
 /* sidebar 접기 버튼 */
 #hideSideBar {
+  
    cursor: pointer;
    position: absolute;
    top: 50%;
@@ -318,16 +337,18 @@ i{
    transform: translateY(-50%);
    z-index: 200;
    overflow: hidden;
-   display: inline-block;
+   display: flex;
+   align-items: center;
+   justify-content: center;
    font-size: 1px;
    line-height: 1px;
    background-color: white;
    width: 25px;
    height: 49px;
    border: none;
-   border-right: 1px solid var(--main-color);
-   border-bottom: 1px solid var(--main-color);
    border-top: 1px solid var(--main-color);
+   border-bottom: 1px solid var(--main-color);
+   border-right: 1px solid var(--main-color);
    border-bottom-right-radius: 5px;
    border-top-right-radius: 5px;
  
@@ -337,10 +358,9 @@ i{
 .search-categoryContaier{
    display: flex;
    flex-direction: column;
-   min-height: 176px;
    padding: 20px;
    border-bottom: 1px dotted var(--main-color);
-
+  
 
 }
 
@@ -354,7 +374,7 @@ i{
    flex-wrap: wrap;
    align-items: center;
    justify-content: center;
-    
+  
 }
 
 .searchcategory-Btnbox > button{
@@ -368,13 +388,32 @@ i{
 
 }
 
-/* 가게 상세 내용 창 + 스크롤바 */
+/* 카테고리 박스 더보기 */
+
+.bars{
+  display: none;
+}
+.fa-bars{
+   cursor: pointer;
+   color: var(--main-color);
+   
+}
+.short-bar{
+   display: flex;
+}
+.fa-minus{
+   cursor: pointer;
+   color: var(--main-color);
+
+   
+}
+
+/* 가게 상세 내용 창  */
 .search-panelContent{
    display: flex;
    flex-direction: column;
    width: 390px;
-   max-height: 520px;
-   height: 70%;
+   height: 75%;
    align-items: center;
    padding: 0 20px;
    justify-content: center;
@@ -386,17 +425,12 @@ i{
 }
 
 .searchstore-detailcontainer{
-   display: flex;
-   flex-direction: column;
    width: 390px;
-   max-height: 520px;
-   height: 70%;
-   align-items: center;
-   padding: 0 20px;
-   justify-content: center;
-   overflow: none;
-   overflow-y: scroll;
-   overflow-x: hidden;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 /* 새로고침 버튼 */
@@ -417,6 +451,21 @@ i{
  
 }
 
+/* 가게 조회 순서 */
+.storelist-typeBtnbox{
+   height: 30px;
+   margin: 0px 20px 10px 10px;
+}
+
+.storelist-typeBtnbox > button{
+   cursor: pointer;
+   border: none;
+   background-color: white;
+   font-size: 13px;
+   margin-right: 10px;
+   
+}
+
 /* 가게 사진 */
 #searchStoreImg{
    width: 350px;
@@ -428,11 +477,13 @@ i{
 .search-storelist-type{
  display: flex;
  flex-direction: column;
+ width: 370px;
 }
 
 .storelist-typecontainer{
    display: flex;
-   justify-content: space-between;
+    justify-content: space-between;
+    padding: 10px;
 }
 
 .storesearch-heartcontainer{

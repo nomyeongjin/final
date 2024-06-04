@@ -175,6 +175,51 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		if(result == 0) return 0;
 		
+		int reviewNo = inputReview.getReviewNo();
+		
+		result = mapper.deleteMenu(reviewNo);
+		
+		if(result> 0) {
+			List<ReviewMenu> menuList = new ArrayList<>();
+			for(int i = 0 ; i < menuNo.size(); i++) {
+				if(!menuNo.isEmpty()) {
+					
+					ReviewMenu menu = ReviewMenu.builder()
+									.reviewNo(reviewNo)
+									.menuNo(menuNo.get(i))
+									.build();
+					
+					menuList.add(menu);
+				}
+			}
+			
+			if(menuList.isEmpty()) return reviewNo;
+			
+			result = mapper.insertMenu(menuList);
+		}
+		
+		
+		result = mapper.deleteHashList(reviewNo);
+		
+		if(result > 0) {
+			List<ReviewHash> hashList = new ArrayList<>();
+			for(int i =0 ; i<hashNo.size(); i ++) {
+				if(!hashNo.isEmpty()) {
+					
+					ReviewHash tag = ReviewHash.builder()
+									.reviewNo(reviewNo)
+									.hashNo(hashNo.get(i))
+									.build();
+					hashList.add(tag);
+				}
+			}
+			
+			if(hashList.isEmpty()) return reviewNo;
+			
+			result = mapper.insertHashList(hashList);
+		}
+		
+		
 		if(deleteOrder != null && !deleteOrder.equals("")) {
 			
 			Map<String, Object> map = new HashMap<>();
@@ -215,9 +260,7 @@ public class ReviewServiceImpl implements ReviewService {
 				if(result == 0) {
 					result = mapper.insertImage(img);
 				}
-				
 			}
-			
 			if(result == 0) {
 				throw new ImageUpdateException();
 			}
@@ -232,9 +275,6 @@ public class ReviewServiceImpl implements ReviewService {
 		for(UploadImage img : uploadList) {
 			img.getUploadFile().transferTo(new File(folderPath + img.getImgRename()));
 		}
-		
-		
-		
 		
 		return result;
 	}
