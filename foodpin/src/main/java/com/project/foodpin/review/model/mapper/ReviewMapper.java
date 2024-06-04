@@ -55,6 +55,13 @@ public interface ReviewMapper {
 	// 리뷰 이미지 삽입
 	int insertImage(UploadImage img);
 
+	// 기존에 메뉴 선택했던 거 삭제
+	int deleteMenu(int reviewNo);
+
+	// 기존에 해시태그 선택했던 거 삭제
+	int deleteHashList(int reviewNo);
+
+
 
 
 

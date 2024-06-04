@@ -135,10 +135,10 @@ public class ReveiwController {
 		String message = null;
 		
 		if(result > 0) {
-			path = "myPage/member/memberReview";
+			path = "redirect:/myPage/member/memberReview";
 			message = "리뷰가 수정되었습니다.";
 		} else {
-			path = "storeReview/storeReviewUpdate";
+			path = "redirect:/storeReview/storeReviewUpdate";
 			message = "수정 실패";
 		}
 		

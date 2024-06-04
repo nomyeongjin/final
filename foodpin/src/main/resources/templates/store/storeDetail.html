@@ -570,6 +570,8 @@
 
                     <th:block  th:each=" review : ${reviewList}" th:object="${review}">
                         <div class="review">
+                            
+
                             <div class="storereview-top">
         
                                 <div class="storereview-top-left">
@@ -623,10 +625,23 @@
                                 </div>
         
                                 <div class="storereview-top-right">
-                                    <button type="button" class="reviewReport"  
-                                        th:if="${session.loginMember}" 
-                                        th:attr="data-review-no=*{reviewNo}">🚨신고하기</button>
-                                    <span th:text="*{reviewRegDate}">2024-05-17</span>
+
+                                    <div class="review-btn">
+                                        <th:block th:if="${review.memberNo == session.loginMember?.memberNo}">
+                                            <button type="button" id="reviewDeleteBtn"  
+                                                th:attr="data-review-no=*{reviewNo}">
+                                                삭제하기
+                                            </button>
+                                            <a th:href="'/review/reviewUpdate/' + *{storeNo} +'/' + *{reviewNo}" id="reviewUpdateBtn"  
+                                                th:attr="data-review-no=*{reviewNo}">
+                                                수정하기
+                                            </a>
+                                        </th:block>
+                                    </div>
+
+                                    <div class="review-date">
+                                        <span th:text="*{reviewRegDate}">2024-05-17</span>
+                                    </div>
                                 </div>
         
                             </div>
@@ -656,6 +671,13 @@
                                             <span th:text="|${hash.hashTitle} |" class="review-hash">#해시태그</span>
                                         </th:block>
                                     </div>
+                                </div>
+
+                                <div class="report-area" th:if="${session.loginMember}">
+                                    <button type="button" class="reviewReport"  
+                                        th:if="${session.loginMember}" 
+                                        th:attr="data-review-no=*{reviewNo}">🚨신고하기
+                                    </button>
                                 </div>
                             </th:block>
         
