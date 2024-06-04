@@ -2,6 +2,7 @@ package com.project.foodpin.myPage.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -105,11 +106,18 @@ public class StoreMyPageController {
 	 * @param menuList
 	 * @return
 	 */
-	@PutMapping(value="menuUpdate", produces = "application/json")
+	@PostMapping(value="menuUpdate", produces = "application/json")
 	@ResponseBody
 	public int menuUpdate(@RequestBody List<Menu> inputMenuList) {
 		
-		return service.menuUpdate(inputMenuList);
+		List<MultipartFile> imgUrlList = new ArrayList<>();
+		
+		for (Menu menu : inputMenuList) {
+			imgUrlList.add(menu.getImgUrl());
+		}
+		
+//		MultipartFile imgUrl = inputList.;
+		return service.menuUpdate(inputMenuList, imgUrlList);
 	}
 	
 	

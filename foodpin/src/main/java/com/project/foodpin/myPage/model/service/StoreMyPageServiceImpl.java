@@ -94,20 +94,42 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 
 	// 메뉴 수정 (삭제, 추가)
 	@Override
-	public int menuUpdate(List<Menu> inputMenuList) {
+	public int menuUpdate(List<Menu> inputMenuList, List<MultipartFile> imgUrlList) {
 		
 		int result = 0;
-//		String updatePath = "";
-//		String rename = "";
-
+		String updatePath = "";
+		String rename = "";
+		
 		result = mapper.deleteAllMenu(inputMenuList.get(0).getStoreNo());
 		
 		if( !inputMenuList.get(0).getMenuTitle().isEmpty()) {
 			
-			for(Menu menu : inputMenuList) {
-				result = mapper.insertMenu(menu);
+			for (Menu menu : inputMenuList) {
+				
+
+				for(MultipartFile imgUrl : imgUrlList) {
+					
+					if( !imgUrl.isEmpty()) { // 업로드 한 메뉴 이미지가 있는 경우
+						
+						rename = Utility.fileRename(imgUrl.getOriginalFilename());
+						updatePath = menuWebPath + rename;
+						menu.setMenuImgUrl(rename);
+					}
+					
+					result = mapper.insertMenu(menu);
+					
+					if(result > 0) { // db등록 성공시 파일 업로드 폴더에 이미지 저장
+						
+						try {
+							menu.getImgUrl().transferTo(new File(menuFolderPath + rename)); // db등록 성공시 파일 업로드()
+						}catch (Exception e) {
+							e.printStackTrace();
+						}
+					} // if
+				}
+			
 			}
-		}
+		} // 이미지 있는 경우	
 		
 		
 		
@@ -145,42 +167,7 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 //
 //            
 //		}
-	
-		
-		
-		
-		
-		
-		
-//		// 기존 저장된 데이터 삭제
-//		result = mapper.deleteMenu(inputMenuList.get(0).getStoreNo());
-//		
-//		if( inputMenuList.isEmpty()) return 1; // 입력된 메뉴 정보가 없는 경우
-//		
-//		else {
-//			
-//			for(Menu menu : inputMenuList) {
-//				
-//				if( !menu.getMenuImg().isEmpty()) { // 업로드 한 메뉴 이미지가 있는 경우
-//					
-//					rename = Utility.fileRename(menu.getMenuImg().getOriginalFilename());
-//					updatePath = menuWebPath + rename;
-//					menu.setMenuImgUrl(menuWebPath + rename);
-//				}
-//				
-//				result = mapper.updateMenu(menu);
-//				
-//				if(result > 0) { // db등록 성공시 파일 업로드 폴더에 이미지 저장
-//					
-//					try {
-//						menu.getMenuImg().transferTo(new File(menuFolderPath + rename)); // db등록 성공시 파일 업로드()
-//					}catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				} // if
-//			}
-//		} // 이미지 있는 경우	
-		
+
 		return result;
 	}
 

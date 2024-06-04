@@ -24,7 +24,7 @@ public class Menu {
 	private String menuFl;
 	
 	
-	public MultipartFile menuImg;
+	public MultipartFile imgUrl;
 	
 	
 	

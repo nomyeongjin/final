@@ -29,7 +29,21 @@ updateBtn.addEventListener("click", () => {
  * (메뉴) 사장님 정보 변경 화면 전환
  */
 ceoInfoEdit.addEventListener("click", () => {
+
+
+   // 서브 메뉴에 버튼 기존 체크 클래스 제거 + 해당 메뉴 체크
+   document.querySelectorAll(".sub-title-btn").forEach(btn => { 
+
+      btn.classList.remove('title-btn-checked');
+   });
+   ceoInfoEdit.classList.add('title-btn-checked'); // 선택된 요소 체크 클래스 추가
    
+   container.innerHTML = "";
+
+   const updateFrm = document.createElement("form");
+   updateFrm.classList.add("ceo-info-container");
+
+
    // 기존 회원의 이메일, 전화번호 조회
    fetch("/myPage/store/ceoInfo", {
       method : "POST",
@@ -39,10 +53,7 @@ ceoInfoEdit.addEventListener("click", () => {
    .then(resp => resp.json())
    .then(member => {
 
-      container.innerHTML = "";
 
-      const updateFrm = document.createElement("form");
-      updateFrm.classList.add("ceo-info-container");
    
       const emailArea = document.createElement("div");
       emailArea.classList.add("ceoInfo-input-area");
@@ -86,6 +97,13 @@ ceoInfoEdit.addEventListener("click", () => {
  */
 pwEdit.addEventListener("click", () => {
    
+   // 서브 메뉴에 버튼 기존 체크 클래스 제거 + 해당 메뉴 체크
+   document.querySelectorAll(".sub-title-btn").forEach(btn => { 
+
+      btn.classList.remove('title-btn-checked');
+   });
+   pwEdit.classList.add('title-btn-checked'); // 선택된 요소 체크 클래스 추가
+
    container.innerHTML = "";
 
    const updateFrm = document.createElement("form");
