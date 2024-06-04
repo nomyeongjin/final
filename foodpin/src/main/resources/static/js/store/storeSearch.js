@@ -31,7 +31,7 @@ blind.addEventListener('click', ()=>{
     show.style.display = 'flex';
     searchSidebarBox.style.transform = 'translateX(-100%)';
     searchSidebarBox.style.transition = 'transform 0.4s ease-out';
-    hideSideBar.setAttribute('aria-expanded', 'false');
+    
 })
 show.addEventListener('click', ()=>{
 
@@ -66,6 +66,7 @@ storedetailmapbutton.addEventListener("click", () => {
 
 /* 카테고리 박스 접기 */
 
+const searchCategoryCon = document.querySelector('.search-categoryContaier')
 const searchCategoryBtnBox = document.querySelector('.searchcategory-Btnbox')
 const bars = document.querySelector('.bars')
 const shortBar = document.querySelector('.short-bar')
@@ -74,12 +75,14 @@ shortBar.addEventListener('click', ()=>{
     shortBar.style.display = 'none';
     bars.style.display = 'flex';
 
+    searchCategoryBtnBox.style.display='none';
+   
 })
 
 bars.addEventListener('click', ()=>{
     bars.style.display = 'none';
     shortBar.style.display = 'flex';
-
+    searchCategoryBtnBox.style.display='flex';
 })
 
 

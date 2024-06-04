@@ -308,7 +308,7 @@ storeReport.addEventListener("click", ()=>{
 
 
 const storeMenuList = document.querySelector(".menu-image-container");
-const menuB = storeMenuList.querySelector(".menu-basiclist");
+const menuB = storeMenuList.querySelectorAll(".menu-basiclist");
 const moreMenuImageBtn = document.querySelector("#moreMenuImageBtn");
 const shutMenuImageBtn = document.querySelector("#shutMenuImageBtn");
 
