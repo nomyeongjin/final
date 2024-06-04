@@ -36,7 +36,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 	private final NotificationService service;
 	
 	// 쿨SMS 서비스 
-	private final DefaultMessageService messageService;
+//	private final DefaultMessageService messageService;
 	
 
 	// 서버간 전이중 통신을 담당하는 객체
@@ -109,16 +109,17 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 	 public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		 
 		 // 웹소켓 연결이 끊긴 클라이언트 정보를 Set에서 제거
-		sessions.add(session);
+		sessions.remove(session);
 	}
 	 
 	 
 	 
 	//알림 종류에 따라 알림 객체 추가
 	private void setNotification(Notification notification, Member sendMember, Store store) throws JsonProcessingException, IOException {
+		log.info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 		
-		Message message = new Message();
-		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+//		Message message = new Message();
+//		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
 		
 		// 보낸 사람 회원 번호
 		notification.setReceiveMemberNo(sendMember.getMemberNo());
@@ -129,7 +130,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		// 가게인 경우 :  알림을 보낼 때 필요한 가게 관련 값 조회
 		store = service.selectStoreData(notification.getPkNo());
 		
-		if(sendMember.getMemberNo() == store.getMemberNo()) return;
+//		if(sendMember.getMemberNo() == store.getMemberNo()) return;
 		
 		// 일반 회원에게 보낼 메시지
 		String contentForMember = null;
@@ -139,9 +140,11 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		
 		// 관리자에게 보낼 메시지
 		String contentForManager = null;
+		log.info("-----------------------------------------------------------------------------------");
+		log.info(notification.toString());
+		log.info("-----------------------------------------------------------------------------------");
 		
-		
-		switch(notification.getNotifiactionType()) {
+		switch(notification.getNotificationType()) {
 		
 		/* 예약 대기 상태 */
 		case "readyReservation" : 
@@ -221,9 +224,10 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			Notification memberNotification = new Notification();
 			memberNotification.setReceiveMemberNo(sendMember.getMemberNo());
 			memberNotification.setSendMemberProfileImg(sendMember.getProfileImg());
-			memberNotification.setNotifiactionType(notification.getNotifiactionType()); // 알림 유형
+			memberNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			memberNotification.setNotificationContent(contentForMember);
 			memberNotification.setSendMemberNo(store.getMemberNo()); // 예약한 회원 번호로 알림 전송
+			memberNotification.setNotificationUrl(notification.getNotificationUrl());
 			service.sendNotificationMember(memberNotification);
 			
 			for(WebSocketSession ws : sessions) {
@@ -247,9 +251,10 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			Notification storeNotification = new Notification();
 			storeNotification.setReceiveMemberNo(store.getMemberNo());
 			storeNotification.setSendMemberProfileImg(sendMember.getProfileImg());
-			storeNotification.setNotifiactionType(notification.getNotifiactionType()); // 알림 유형
+			storeNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			storeNotification.setNotificationContent(contentForStore);
 			storeNotification.setSendMemberNo(sendMember.getMemberNo()); // 예약하는 회원 번호로 알림 전송
+			storeNotification.setNotificationUrl(notification.getNotificationUrl());
 			service.sendNotificationStore(storeNotification);
 			
 			for(WebSocketSession ws : sessions) {
@@ -272,9 +277,10 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			Notification managerNotification = new Notification();
 			managerNotification.setReceiveMemberNo(sendMember.getMemberNo());
 			managerNotification.setSendMemberProfileImg(sendMember.getProfileImg());
-			managerNotification.setNotifiactionType(notification.getNotifiactionType()); // 알림 유형
+			managerNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			managerNotification.setNotificationContent(contentForManager);
 			managerNotification.setSendMemberNo(sendMember.getMemberNo()); // 예약하는 회원 번호로 알림 전송
+			managerNotification.setNotificationUrl(notification.getNotificationUrl());
 			service.sendNotificationManager(managerNotification);
 			
 			for(WebSocketSession ws : sessions) {

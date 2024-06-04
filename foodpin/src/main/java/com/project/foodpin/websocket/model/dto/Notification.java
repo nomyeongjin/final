@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class Notification {
 	
-	private int notifiactionNo;
+	private int notificationNo;
 	private String notificationContent;
 	private String notificationCheck;
 	private String notificationDate;
@@ -22,9 +22,9 @@ public class Notification {
 	private int sendMemberNo;
 	private int receiveMemberNo;
 	
-	private String notifiactionType;
+	private String notificationType;
 	private String title;
-	private int pkNo; // 신고하기 눌렀을 때 어느 가기에서 신고하기가 접수 되었는지 확인 하는 용도
+	private String pkNo; // 신고하기 눌렀을 때 어느 가기에서 신고하기가 접수 되었는지 확인 하는 용도
 	
 	private String reservDate;
 }
