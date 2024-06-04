@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,16 +37,38 @@ public class ChattingController {
 	/** 팝업 채팅 화면 이동
 	 * @return
 	 */
-	@GetMapping("chatPopup")
+	@GetMapping("chatPopup/{storeNo}")
 	public String chatPopup(
-//			@SessionAttribute("loginMember") Member loginMember,
+			@PathVariable("storeNo") String storeNo,
+			@SessionAttribute("loginMember") Member loginMember,
 			Model model
 			) {
-//		List<ChattingRoom> roomList = service.selectRoomList(loginMember.getMemberNo());
-//        model.addAttribute("roomList", roomList);                        
 		
+        Map<String, Object> map = new HashMap<String, Object>();
+        
+        map.put("storeNo", storeNo);
+        map.put("loginMemberNo", loginMember.getMemberNo());
+        
+        int chattingNo = service.checkChattingNo(map);
+        
+        if(chattingNo == 0) {
+            chattingNo = service.createChattingRoom(map);
+        }else {
+        	List<Message> messageList = service.selectMsgList(chattingNo);
+        	model.addAttribute("messageList", messageList);
+        	
+        }
+        
+        model.addAttribute("chattingNo", chattingNo);
+        
 		return "chatting/chatPopup";
 	}
+	
+	
+	
+	
+	
+	
 	/** 채팅 화면 이동
 	 * @return
 	 */
@@ -65,9 +88,10 @@ public class ChattingController {
     @GetMapping("enter")
     @ResponseBody
     public int chattingEnter(
-    	@RequestParam("targetNo") int targetNo, @SessionAttribute("loginMember") Member loginMember) {
+    	@RequestParam("targetNo") int targetNo, 
+    	@SessionAttribute("loginMember") Member loginMember) {
      
-        Map<String, Integer> map = new HashMap<String, Integer>();
+    	Map<String, Object> map = new HashMap<String, Object>();
         
         map.put("targetNo", targetNo);
         map.put("loginMemberNo", loginMember.getMemberNo());

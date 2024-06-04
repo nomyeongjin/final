@@ -43,8 +43,8 @@
 	<!-- 채팅 확인 -->
 	<select id="checkChattingNo" resultType="_int">
 		SELECT NVL(SUM(CHATTING_NO),0) CHATTING_NO FROM CHATTING_ROOM
-		WHERE (OPEN_MEMBER = #{loginMemberNo} AND PARTICIPANT = #{targetNo})
-		OR (OPEN_MEMBER = #{targetNo} AND PARTICIPANT = #{loginMemberNo})
+		WHERE (OPEN_MEMBER = #{loginMemberNo} AND PARTICIPANT = #{storeNo})
+		OR (OPEN_MEMBER = #{storeNo} AND PARTICIPANT = #{loginMemberNo})
 	</select>
 	
 	<!-- 채팅방 생성 -->
@@ -55,7 +55,7 @@
 		</selectKey>
 	
 		INSERT INTO CHATTING_ROOM
-		VALUES(#{chattingNo}, DEFAULT, #{loginMemberNo}, #{targetNo})
+		VALUES(#{chattingNo}, DEFAULT, #{loginMemberNo}, #{storeNo})
 	</insert>
 	
 
@@ -92,5 +92,6 @@
 		AND MEMBER_DEL_FL = 'N'
 		AND MEMBER_NO != ${memberNo}
 	</select>
+  
   
 </mapper>

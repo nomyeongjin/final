@@ -24,7 +24,7 @@ public class FilterConfig {
 		filter.setFilter(new LoginFilter());
 		
 		
-		String[] filteringURL = {"/myPage/*","/editBoard/*"};
+		String[] filteringURL = {"/myPage/*","/editBoard/*","/chatting/*"};
 		
 		// 필터가 동작할 URL 세팅
 		
