@@ -488,6 +488,27 @@ header>section:nth-child(3) {
    background-color: #ecececc2;
    transition: opacity 0.5s
 }
+.chat-btn{
+   font-size: 25px;
+   /* position: absolute; */
+   border: none;
+   background-color: rgba(255, 255, 255, 0);
+   cursor: pointer;
+   width: 40px;
+   height: 40px;
+   cursor: pointer;
+}
+
+.action, .chat-btn:hover{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   background-color: #ecececc2;
+   transition: opacity 0.5s
+}
 
 .notification-bell-btn.fa-solid{
    color: rgb(255, 187, 0);

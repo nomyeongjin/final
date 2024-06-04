@@ -7,9 +7,14 @@ let selectTargetProfile; // 대상의 프로필
 /* 팝업 채팅창 */
 const toChatting = document.getElementById("toChatting");
 
-toChatting.addEventListener("click", () => {
-  showPopup();
-})
+if(toChatting != null){
+
+  toChatting.addEventListener("click", () => {
+    showPopup();
+  })
+
+}
+
 
 /* Get 방식 */
 function showPopup() { 
@@ -92,7 +97,7 @@ if(chattingSock != undefined){
         p.innerHTML = msg.messageContent; // br태그 해석을 위해 innerHTML
       
         // 내가 작성한 메세지인 경우
-        if(loginMemberNo == msg.senderNo){ 
+        if(loginMemberNo == msg.memberNo){ 
           li.classList.add("my-chat");
           
           li.append(span, p);
@@ -304,7 +309,7 @@ if(chattingSock != undefined){
               p.innerHTML = msg.messageContent; // br태그 해석을 위해 innerHTML
   
               // 내가 작성한 메세지인 경우
-              if(loginMemberNo == msg.senderNo){ 
+              if(loginMemberNo == msg.memberNo){ 
                   li.classList.add("my-chat");
                   
                   li.append(span, p);
