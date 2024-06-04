@@ -395,12 +395,22 @@ menuBtn.addEventListener("click", () => {
        */
       menuSubmitBtn.addEventListener("click", () => {
 
+
+
+
          const dataList = [];
 
          document.querySelectorAll(".menu-row").forEach( row => {
 
-            const imgUrl = row.querySelector(".menu-img").src; // input으로 읽어온 이미지 src 속성값
-            // console.log(imgUrl);
+            reader.addEventListener("load", e => {
+
+            const file = e.target.files[0]; // 업로드 된 파일 정보
+
+            // console.log(file);
+   
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+
 
             data = {
                "imgUrl" : imgUrl,
@@ -411,6 +421,8 @@ menuBtn.addEventListener("click", () => {
             };
 
             dataList.push(data);
+
+            })
          });
 
          console.log(dataList);

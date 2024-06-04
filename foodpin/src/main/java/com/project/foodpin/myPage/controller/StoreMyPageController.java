@@ -238,6 +238,14 @@ public class StoreMyPageController {
 	
 	
 	
+	//----
+	@GetMapping("review")
+	public String review() {
+		return "myPage/store/review";
+	}
+	
+	
+	// -----
 	
 	// -----
 	
