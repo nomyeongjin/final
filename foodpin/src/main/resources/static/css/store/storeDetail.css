@@ -935,16 +935,6 @@ hr{
     padding-top: 40px;
 }
 
-.review-avgScore{
-    width: 100%;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--main-color);
-    padding: 27px 0;
-
-}
-
 .rating__star{
     color: #ff2a00;
 }
