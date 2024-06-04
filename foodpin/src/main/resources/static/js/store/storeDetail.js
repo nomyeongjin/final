@@ -248,9 +248,14 @@ storeReport.addEventListener("click", ()=>{
   const requestCategoryTitle = document.getElementById('requestSelect');
 
   storeReportBtn.addEventListener("click",e =>{
-      e.preventDefault(); // 기본 폼 제출 동작을 방지합니다.
+      e.preventDefault(); // 기본 폼 제출 동작을 방지
 
-      // 유효성 검사를 수행합니다.
+      if(loginMember == null){
+        alert('로그인 후 신고해주십시오.');
+        return;
+      }
+
+      // 유효성 검사
       if (requestContent.value.trim() === '') {
           alert('상세 내용을 입력해주세요.');
           requestContent.focus();

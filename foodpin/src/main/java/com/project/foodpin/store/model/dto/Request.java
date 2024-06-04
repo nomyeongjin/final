@@ -20,7 +20,8 @@ public class Request {
 	private int requestCategoryCode;
 	private String requestContent;
 	private String requestCategoryTitle;
-	private int storeNo;
+	private String storeNo;
 	private int memberNo;
+    private String requestDate;
 	
 }

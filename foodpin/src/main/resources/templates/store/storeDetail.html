@@ -327,7 +327,11 @@
 
             
                     <div class="store-reportcontainer">
-                        <button type="button" id="storeReport">🚨 폐점 / 가게 정보 정정 신고</button>
+                        <th:block th:if="${session.loginMember?.memberCode !=2 && session.loginMember?.memberCode !=3}">
+                                        
+                            <button type="button" id="storeReport">🚨 폐점 / 가게 정보 정정 신고</button>
+                            
+                        </th:block>
                     </div>
 
                    <!-- ************************************************************** -->
