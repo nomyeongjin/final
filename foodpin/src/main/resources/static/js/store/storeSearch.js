@@ -75,14 +75,21 @@ shortBar.addEventListener('click', ()=>{
     shortBar.style.display = 'none';
     bars.style.display = 'flex';
 
-    searchCategoryBtnBox.style.display='none';
-   
+    searchCategoryCon.style.transform = 'translateY(-100%)';
+    searchCategoryCon.style.transition = 'transform 0.4s ease-out';
+    searchCategoryCon.style.transition = 'transition:height 1s';
+    /* searchCategoryCon.style.height = '166px'; */
+ 
 })
 
 bars.addEventListener('click', ()=>{
     bars.style.display = 'none';
     shortBar.style.display = 'flex';
-    searchCategoryBtnBox.style.display='flex';
+    
+    searchCategoryCon.style.transform = 'translateY(0%)';
+    searchCategoryCon.style.transition = 'transform 0.4s ease-out';
+    
+    
 })
 
 
