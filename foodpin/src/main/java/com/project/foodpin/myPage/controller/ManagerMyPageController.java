@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.service.ManagerMyPageService;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.store.model.dto.Request;
 import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
@@ -57,6 +58,7 @@ public class ManagerMyPageController {
 		
 		return "myPage/manager/storeEnroll";
 	}
+	
 	
 	// 가게 승인
 	@PostMapping("approveMember/{memberNo}")
@@ -133,12 +135,15 @@ public class ManagerMyPageController {
 		return "myPage/manager/reportReview";
 	}
 	
-	// 정보 정정 신청
+	// 정보 정정 신청 조회
 	@GetMapping("managerStoreInfo")
-	public String memberReportReview() {
+	public String memberReportReview(Model model) {
+		
+		List<Request> infoRequest = service.infoRequestList();
+		model.addAttribute("infoRequest", infoRequest);
+		
 		return "myPage/manager/managerStoreInfo";
 	}
-	
 	
 	
 	

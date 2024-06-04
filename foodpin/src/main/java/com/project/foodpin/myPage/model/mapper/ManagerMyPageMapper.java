@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.project.foodpin.member.model.dto.Member;
+import com.project.foodpin.store.model.dto.Request;
 
 @Mapper
 public interface ManagerMyPageMapper {
@@ -22,5 +23,7 @@ public interface ManagerMyPageMapper {
 
 	// 가게 폐점
 	boolean closeStore(@Param("memberNo") int memberNo);
+
+	List<Request> infoRequestList();
 
 }
