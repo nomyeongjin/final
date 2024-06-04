@@ -3,6 +3,7 @@ package com.project.foodpin.myPage.model.service;
 import java.util.List;
 
 import com.project.foodpin.member.model.dto.Member;
+import com.project.foodpin.store.model.dto.Request;
 
 public interface ManagerMyPageService {
 
@@ -17,5 +18,7 @@ public interface ManagerMyPageService {
 
 	// 가게 폐점
 	boolean closeStore(int memberNo);
+
+	List<Request> infoRequestList();
 
 }

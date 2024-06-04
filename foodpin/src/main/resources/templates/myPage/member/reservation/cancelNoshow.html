@@ -50,7 +50,6 @@
                     <!-- 아무 내역 없을 때 -->
                     <th:block th:if="${#lists.isEmpty(reservation)}">
                         <div class="emptyList">취소 / 노쇼 내역이 없습니다</div>
-
                     </th:block>
 
                     <th:block th:unless="${#lists.isEmpty(reservation)}">
