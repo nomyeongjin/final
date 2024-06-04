@@ -105,11 +105,18 @@
     <script th:inline="javascript">
         const loginMember = /*[[session.loginMember]]*/ "로그인회원정보"
         const storeNo = /*[[${storeNo}]]*/ "사업자등록번호"
+        const reservNo = /*[[${reservNo}]]*/ "예약PK"
 
-        const reservDate = /*[[${param.originalReservDate}]]*/ " 예약 날짜"
+        const reservDate = /*[[${param.originalReservDate[0]}]]*/ " 예약 날짜"
         // console.log(reservDate);
 
-        sendNotificationFn("readyReservation", "/myPage/member/reservation/wait", storeNo, reservDate);
+        document.addEventListener("DOMContentLoaded", () => {
+
+            setTimeout(() => {
+                sendNotificationFn("readyReservation", "/myPage/member/reservation/wait", reservNo, reservDate);
+                // alert("예약됨");
+            },500)
+        })
     </script>
     
     <script src="/js/reservation/reservation.js"></script>

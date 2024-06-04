@@ -352,13 +352,15 @@ if(confirmBtn != null) {
         // 예약 인원
         const input4 = document.createElement("input");
         const finalCount = document.querySelector("#reservCount").innerText;
+        // alert(finalCount);
         input4.type="hidden";
         input4.name="reservCount";
-        input4.value=finalCount;
+        // input4.value=finalCount;
         
-        const countPart = finalCount.substr(0,1); // "2명" 에서 "2" 만 추출
-        const reservCount = Number(countPart); // 문자를 숫자로 변환
+        const reservCount = finalCount.replace("명", ""); // "2명" 에서 "2" 만 추출
+        // const reservCount = Number(countPart); // 문자를 숫자로 변환
         input4.value=reservCount; // DB 저장용 
+        // console.log(reservCount);
 
         // 요청사항
         const input5 = document.createElement("input");
