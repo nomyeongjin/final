@@ -11,7 +11,7 @@ public interface NotificationService {
 	int insertNotification(Notification notification);
 
 	// 알림 보낼 때 필요한 데이터 목록 조회
-	Store selectStoreData(int pkNo);
+	Store selectStoreData(String pkNo);
 
 	// 회원에게 알림 전송
 	void sendNotificationMember(Notification memberNotification);

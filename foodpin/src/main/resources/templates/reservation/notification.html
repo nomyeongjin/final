@@ -17,25 +17,47 @@
             <!-- 비동기?? -->
             <th:block th:replace="~{reservation/notificationCategory}"></th:block>
 
-            <ul class="notification-list">
-                <li class="notification-item">
-                    <div class="notification-text">
-                       <div class="border">
+            <!-- notiList -->
+            <div class="notification-list">
 
-                            <div class="notification-content-container">
+                <!-- notoItem -->
+                <!-- <div class="notification-item"> -->
 
+                    <!-- notiText -->
+                    <!-- <div class="notification-text"> -->
+
+                        <!-- border -->
+                        <!-- 반복 -->
+                        <div class="border">
+
+                            <!-- contentContainer -->
+                            <div class="notification-content-container"> 
+
+                                <!-- reservationInfo -->
                                 <div class="reservation-info">
+
+                                    <!-- storeLogo -->
                                     <img src="#" alt="가게로고" class="image" id="image" name="storeLogo">
 
+                                    <!-- notiTitle -->
                                     <span class="notification-store" name="storeName">가게이름, 관리자 </span>
+
+                                    <!-- notiDate -->
                                     <span class="notification-date" id="notificationDate" name="notificationDate">5분전</span>
                                 </div>
 
+                                <!-- notiContent -->
                                 <div class="notification-content">
-                                    <div class="notification-message">
-                                        <span id="reservDate" name="reservDate">5.13.(목) 오후 06:00</span>
-                                        예약이 확정되지 않았습니다.
 
+                                    <!-- notiMessage -->
+                                    <div class="notification-message">
+
+                                        <!-- reserDate -->
+                                        <!-- <b>5.13.(목) 오후 06:00</b>
+
+                                        예약이 확정되지 않았습니다. -->
+
+                                        <!-- xmark -->
                                         <i class="fa-regular fa-circle-xmark"></i>
                                     </div>
                                     
@@ -43,10 +65,10 @@
                             </div>
                         
                        </div>
-                    </div>
+                    <!-- </div> -->
 
-                </li>
-            </ul>
+                <!-- </div> -->
+            </div>
 
         </div>
 
