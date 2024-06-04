@@ -106,8 +106,10 @@
         const loginMember = /*[[session.loginMember]]*/ "로그인회원정보"
         const storeNo = /*[[${storeNo}]]*/ "사업자등록번호"
 
-                                                        // 00.00(요일)
-        sendNotificationFn("readyReservation", null, 0, reservDate);
+        const reservDate = /*[[${param.originalReservDate}]]*/ " 예약 날짜"
+        // console.log(reservDate);
+
+        sendNotificationFn("readyReservation", "/myPage/member/reservation/wait", storeNo, reservDate);
     </script>
     
     <script src="/js/reservation/reservation.js"></script>
