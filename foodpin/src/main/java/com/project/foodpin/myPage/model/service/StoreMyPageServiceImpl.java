@@ -122,7 +122,7 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 					if(result > 0) { // db등록 성공시 파일 업로드 폴더에 이미지 저장
 						
 						try {
-							menu.getImgUrl().transferTo(new File(menuFolderPath + rename)); // db등록 성공시 파일 업로드()
+							menu.getMenuImg().transferTo(new File(menuFolderPath + rename)); // db등록 성공시 파일 업로드()
 						}catch (Exception e) {
 							e.printStackTrace();
 						}

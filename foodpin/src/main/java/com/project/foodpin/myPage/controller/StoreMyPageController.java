@@ -9,11 +9,13 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +27,7 @@ import com.project.foodpin.myPage.model.service.StoreMyPageService;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Menu;
+import com.project.foodpin.store.model.dto.MenuContainer;
 import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
@@ -107,17 +110,18 @@ public class StoreMyPageController {
 	 * @param menuList
 	 * @return
 	 */
-	@PostMapping(value="menuUpdate", produces = "application/json")
+	@PostMapping("menuUpdate")
 	@ResponseBody
-	public int menuUpdate(@RequestBody List<Menu> inputMenuList) {
+	public int menuUpdate(@RequestBody @ModelAttribute MenuContainer menuContainer) {
+		
+		List<Menu> inputMenuList =  menuContainer.getMenuList();
 		
 		List<MultipartFile> imgUrlList = new ArrayList<>();
 		
 		for (Menu menu : inputMenuList) {
-			imgUrlList.add(menu.getImgUrl());
+			imgUrlList.add(menu.getMenuImg());
 		}
 		
-//		MultipartFile imgUrl = inputList.;
 		return service.menuUpdate(inputMenuList, imgUrlList);
 	}
 	

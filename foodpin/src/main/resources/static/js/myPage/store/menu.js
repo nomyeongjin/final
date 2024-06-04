@@ -265,6 +265,7 @@ menuBtn.addEventListener("click", () => {
       menuRowContainer.append(menuRowAdd);
       
       const menuSubmitBtn = document.createElement("button"); // menuSubmitBtn
+      menuSubmitBtn.type = "button";
       menuSubmitBtn.id = "menuSubmitBtn";
       menuSubmitBtn.classList.add("update-btn");
       menuSubmitBtn.innerText = "메뉴 수정";
@@ -398,54 +399,72 @@ menuBtn.addEventListener("click", () => {
 
 
 
-         const dataList = [];
+         // const dataList = [];
 
-         document.querySelectorAll(".menu-row").forEach( row => {
+         // document.querySelectorAll(".menu-row").forEach( row => {
 
-            reader.addEventListener("load", e => {
+         //    const input = row.querySelector(".input-menu-img");
+         //    const file = input.files[0]; // 업로드 된 파일 정보
 
-            const file = e.target.files[0]; // 업로드 된 파일 정보
+         //    console.log(file);
 
-            // console.log(file);
-   
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
+         //    data = {
+         //       "img" : file,
+         //       "menuTitle" : row.querySelector(".menu-title").value,
+         //       "menuAmount" : row.querySelector(".menu-amount").value,
+         //       "menuContent" : row.querySelector(".menu-content").value,
+         //       "storeNo" : storeNo
+         //    };
 
+         //    dataList.push(data);
+
+         //    // })
+         // });
+
+         // console.log(dataList);
+
+         // const formData = new FormData(document.querySelector("#menuEditFrm")) // 폼 내부 input 내용 자동으로 들어감
+
+         const formData = new FormData();
+
+
+         document.querySelectorAll(".menu-row").forEach( (row, index) => {
+
+            const input = row.querySelector(".input-menu-img");
+            const file = input.files[0]; // 업로드 된 파일 정보
+
+            console.log(file);
 
             data = {
-               "imgUrl" : imgUrl,
+               "menuImg" : file,
                "menuTitle" : row.querySelector(".menu-title").value,
                "menuAmount" : row.querySelector(".menu-amount").value,
                "menuContent" : row.querySelector(".menu-content").value,
                "storeNo" : storeNo
             };
 
-            dataList.push(data);
+            console.log(data);
+            formData.append(`menuList[${index}].menuImg`, data.menuImg);
+            formData.append(`menuList[${index}].menuTitle`, data.menuTitle);
+            formData.append(`menuList[${index}].menuAmount`, data.menuAmount);
+            formData.append(`menuList[${index}].menuContent`, data.menuContent);
+            formData.append(`menuList[${index}].storeNo`, data.storeNo);
 
-            })
          });
 
-         console.log(dataList);
-
+         
          fetch("/myPage/store/menuUpdate", {
             method : "POST",
-            headers : {"content-Type" : "application/json"},
-            body : JSON.stringify(dataList)
+            // headers : {"content-Type" : "multipart/form-data"},
+            headers : {},
+            body : formData //JSON.stringify(dataList)
          })
-         .then(resp => resp.json())
-         .then(menuList => {
-            
-
+         .then(resp => resp.text())
+         .then(result => {
+            console.log(result);
          })
          .catch( err => console.log(err)); // 메뉴 정보 등록하는 fetch
       }); // menuSubmitBtn.addEventListener("click"
    })
    .catch( err => console.log(err)); // 메뉴 정보 받아오는 fetch
 }); // menuBtn.addEventListener
-
-
-
-
-
-
-
