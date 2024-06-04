@@ -1,10 +1,69 @@
-:root{
-   --logo-color : #363f75  ;
-   --main-color : #b1ab9a ;
-   --hover-color : #e9ae2f;
+
+
+/* #EFEFCB - 연한 연두
+
+#2B3151 - 남색
+
+#E14C54 - 핫핑크
+
+#DF8B4E - 주황
+
+#F3C186 - 연한 주황
+
+#FDDFB6 - 살구색 */
+
+:root {
+   --main-color : #363f75 ; /* 로고/메인 색상 (파랑)*/
+   --hover-color : #f6f6e5; /* 연한 연두 */
+   --submit-color : #E14C54; /* 핫핑크 */
 }
 
 
+/* 타이틀 영역 */
+.myPage-title-container{
+   padding: 20px 20px 20px 0px;
+}
+.myPage-title{
+   font-size: 20px;
+   font-weight: bold;
+   padding: 15px;
+}
+.myPage-sub-title{
+   padding: 10px;
+}
+
+/* 서브 타이틀 버튼 */
+.sub-title-btn{
+   width: 110px;   
+   height: 32px;
+   font-size: 18px;
+   margin-right: 25px;
+   border-radius: 20px;
+   border: 1px solid var(--main-color);
+   background: var(--main-color); 
+   color: white;
+}
+.sub-title-btn:hover{
+   cursor: pointer;
+   font-weight: bold;
+   border: 1px solid var(--main-color);
+   background-color: white;
+   color: var(--main-color); 
+}
+.title-btn-checked{
+   font-weight: bold;
+   border: 1px solid var(--main-color);
+   background-color: white;
+   color: var(--main-color); 
+}
+.sub-title-btn a {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
+   height: 100%;
+   border-radius: 20px;
+}
 
 /* 사이드 메뉴 */
 .left-side{
@@ -66,14 +125,14 @@
 /* 가게 이미지 */
 .store-img{
    width: 100%;
-   height: 250px;
+   height: 150px;
    /* border: 1px solid grey; */
    margin: 40px auto;
 
 }
 .store-img > img {
    width: 100%;
-   height: 250px;
+   height: 150px;
    object-fit: cover;
    border: 1px solid grey;
 }
@@ -165,18 +224,20 @@
    align-items: center;
    padding: 20px;
 }
+#off-container{
+   margin-bottom: 30px;
+}
 .week-row{
    display: flex;
    flex-direction: row;
    justify-content: center;
    padding: 10px 20px;
-   flex-wrap: wrap;
 }
 .week-li{
    width: 40px;
-   margin: 10px;
    height: 40px;
-   border: 1px solid #2B3151;
+   margin: 10px;
+   border: 1px solid var(--main-color);
    border-radius: 20px;
    cursor: pointer;
    list-style: none;
@@ -184,22 +245,24 @@
    align-items: center;
    justify-content: center;
 }
+/* 공통? */
 .checked{
-   background: #363f75;
-   border: 1px solid #363f75;
+   background: var(--main-color);
+   border: 1px solid var(--main-color);
    color: white;
 }
-.week-checked{
+/* .week-checked{
    background: rgb(223, 154, 154);
    border: 1px solid lightgray;
-}
+} */
+/* 제출 버튼 */
 .update-btn{
    width: 140px;
    margin: 20px;
    height: 30px;
    font-size: 16px;
-   background: #E14C54;
-   border: 1px solid #E14C54;
+   background: var(--submit-color);
+   border: 1px solid var(--submit-color);
    border-radius: 15px;
    cursor: pointer;
    color: white;
@@ -212,6 +275,7 @@
    padding: 15px;
 
 }
+
 /* 월 */
 .fc .fc-toolbar-title {
    font-size: 18px;
@@ -225,13 +289,34 @@
 .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
    max-height: 50px;
 }
-/* 버튼 (today / < / >) */
-.fc .fc-button {
-font-size: 14px;
+
+/* 버튼 (일정 추가) */
+.fc-addEventButton-button.fc-button.fc-button-primary{
+   background: var(--submit-color);
+   border: 1px solid var(--submit-color);
+   border-radius: 20px;
+   width: 80px;
 }
+
+/* 버튼 (today) */
+.fc-today-button.fc-button.fc-button-primary{
+   background: var(--hover-color);
+   border: 1px solid var(--main-color);
+   color: var(--main-color);
+}
+
+/* 버튼 (today / < / >) + 공통 속성 */
+.fc .fc-button{
+   font-size: 14px;
+   background: var(--main-color);
+   border: 1px solid var(--main-color);
+   border-radius: 15px;
+}
+
+
 /* 휴무일일때 배경색 변경 */
 .week-off{
-   background: lightblue;
+   background: var(--hover-color);
 }
 
 
@@ -432,7 +517,6 @@ font-size: 14px;
 
 /* 사장님 정보 영역 */
 .ceo-info-container{
-   width: 100%;
    display: flex;
    flex-direction: column;
    align-items: center;
