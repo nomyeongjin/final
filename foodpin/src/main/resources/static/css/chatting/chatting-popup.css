@@ -1,0 +1,173 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    display: flex;
+    flex-direction: column; /* 중심축 방향 세로 */
+    align-items: center;    /* 교차축 방향 가운데 정렬 */
+    min-height: 100vh;      /* 최소 높이를 화면 비율 100% */
+    
+ }
+
+ main {
+    width: 500px;
+    flex-grow: 1;           /* 중심축 방향으로 팽창 */
+    min-height: 500px;
+ }
+
+ @font-face {
+    font-family: 'SBAggroB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+ }
+ 
+ @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+ }
+.chatting-item{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px;
+}
+
+.target-name{
+    font-weight: bold;
+}
+
+.recent-message{
+    font-size: 0.95em;
+    margin-top: 5px;
+}
+
+.item-body{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-body>p{
+    display: flex;
+    justify-content: space-between;
+}
+
+.recent-send-time{
+    color: #8f8f8f;
+    font-size: 0.9em;
+
+    /* 여러 줄 말줄임 처리 */
+	white-space: normal;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+	/*  줄바꿈 처리 */
+	word-break: break-all;
+}
+
+.target-chat{
+    display: flex;
+}
+
+.chatting-area{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-left: 1px solid #cecece;
+    min-width: 100px;
+}
+
+.display-chatting{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    overflow: auto;
+
+    flex-direction: column;
+    list-style: none;
+    min-width: 500px;
+    padding: 0 10px;
+}
+
+.display-chatting>li{
+    margin-bottom: 10px;
+}
+
+.chatDate{
+    color: #8f8f8f;
+    font-size: 0.8em;
+}
+    
+li>img{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 5px; 
+}
+.my-chat {
+	text-align: right;
+}
+
+.my-chat>.chat{
+    background-color: #FDDFB6;
+}
+
+.chat{
+    display: inline-block;
+	text-align: left;
+	max-width: 500px;
+	word-break: break-all;
+	white-space: pre-wrap;
+    background-color: #EFEFCB;   
+    padding: 10px;
+    border-radius: 15px;
+    margin: 5px 0;
+}
+
+.list-profile{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#inputChatting{
+    width: 90%;
+    height: 45px;
+    border: none;
+    padding: 10px;
+    resize: none;
+    outline: none;
+}
+
+.chatting-item * {
+	pointer-events: none;
+}
+
+.input-area{
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    border-top: 1px solid #cecece;
+}
+
+#send{
+    width: 10%;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    border-left: 1px solid #cecece;
+}

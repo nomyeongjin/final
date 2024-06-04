@@ -668,6 +668,8 @@ CREATE SEQUENCE SEQ_NOTIFICATION_NO NOCACHE;
 --인증번호 시퀀스 번호
 CREATE SEQUENCE SEQ_KEY_NO NOCACHE;
 
+CREATE SEQUENCE SEQ_ROOM_NO NOCACHE;
+
 
 --------------------------------------------------------
 

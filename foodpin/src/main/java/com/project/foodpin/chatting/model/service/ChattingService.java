@@ -10,9 +10,9 @@ import com.project.foodpin.member.model.dto.Member;
 public interface ChattingService {
 	List<ChattingRoom> selectRoomList(int memberNo);
 
-    int checkChattingNo(Map<String, Integer> map);
+    int checkChattingNo(Map<String, Object> map);
 
-    int createChattingRoom(Map<String, Integer> map);
+    int createChattingRoom(Map<String, Object> map);
 
 
     int insertMessage(Message msg);
@@ -22,4 +22,6 @@ public interface ChattingService {
     List<Message> selectMessageList( Map<String, Object> paramMap);
 
 	List<Member> selectTarget(Map<String, Object> map);
+
+	List<Message> selectMsgList(int chattingNo);
 }

@@ -745,9 +745,13 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
 
+    <script th:inline="javascript">
+        const storeMemberNo = /*[[${store.memberNo}]]*/ '사업자번호';
+      </script>
+
     <script src="/js/reservation/reservation.js"></script>
     <script src="/js/reservation/calendar.js"></script>
-    <script src="/js/chatting/chat.js"></script>
+    <script src="/js/chatting/chatPopup.js"></script>
    
 </body>
 </html>

@@ -13,9 +13,9 @@ import com.project.foodpin.member.model.dto.Member;
 public interface ChattingMapper {
 	public List<ChattingRoom> selectRoomList(int memberNo);
 
-    public int checkChattingNo(Map<String, Integer> map);
+    public int checkChattingNo(Map<String, Object> map);
 
-    public int createChattingRoom(Map<String, Integer> map);
+    public int createChattingRoom(Map<String, Object> map);
 
 
     public int insertMessage(Message msg);
@@ -25,4 +25,5 @@ public interface ChattingMapper {
     public List<Message> selectMessageList(int chattingNo);
 
 	public List<Member> selectTarget(Map<String, Object> map);
+
 }

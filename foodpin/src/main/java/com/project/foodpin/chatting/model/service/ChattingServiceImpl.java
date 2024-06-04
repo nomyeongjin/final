@@ -25,12 +25,12 @@ public class ChattingServiceImpl implements ChattingService {
     }
     
     @Override
-    public int checkChattingNo(Map<String, Integer> map) {
+    public int checkChattingNo(Map<String, Object> map) {
         return mapper.checkChattingNo(map);
     }
 
     @Override
-    public int createChattingRoom(Map<String, Integer> map) {
+    public int createChattingRoom(Map<String, Object> map) {
     	int result = mapper.createChattingRoom(map);
     	
         return result <= 0 ? 0 : (int)map.get("chattingNo"); 
@@ -64,6 +64,14 @@ public class ChattingServiceImpl implements ChattingService {
 		return mapper.selectTarget(map);
 	}
 
+	@Override
+	public List<Message> selectMsgList(int chattingNo) {
+		
+		
+		
+		
+		return mapper.selectMessageList(chattingNo);
+	}
 
 	
 	
