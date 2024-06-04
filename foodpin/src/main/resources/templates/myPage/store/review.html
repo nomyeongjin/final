@@ -46,112 +46,139 @@
          </div>
          
          <!-- 리뷰 관리 -->
-         <div class="myPage-content-container">
+         <div class="myPage-review-content-container">
          
             <!-- 리뷰 목록 -->
             <div id="reviewListContainer">
+               <div class="storereview-container" th:if="${reviewList}">
+                    
+                  <th:block th:unless= "${!#lists.isEmpty(reviewList)}">
+                      <h3>작성된 리뷰가 없습니다.</h3>
+                  </th:block>
+                  
+                  <th:block  th:each=" review : ${reviewList}" th:object="${review}">
+                      <div class="review">
+                          
 
-               <!-- 댓글 작성된 리뷰 -->
-               <div class="review-card">
+                          <div class="storereview-top">
+      
+                              <div class="storereview-top-left">
+                                  <img class="review-member-profile"
+                                      th:src="*{profileImg}">
+                                  <div class="review-info">
+                                      <span th:text="*{memberNickname}">닉네임</span>
 
-                  <div class="list-profile-area">
-                     <img class="review-profile-img" th:unless="${profileImg}" th:src="#{user.default.image}">
-                     <span>회원 닉네임</span>
-                  </div>
+                                      <div class="review-memberScore">
+                                          <span th:switch="*{reviewRating}">
+                                              <span th:case="1">
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                              </span>
+                                              <span th:case="2">
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                              </span>
+                                              <span th:case="3">
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                              </span>
+                                              <span th:case="4">
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                              </span>
+                                              <span th:case="5">
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                              </span>
+                                          </span>
+                                          <span th:text="|*{reviewRating} 점|"> 점수</span>
+                                      </div>
+      
+                                  </div>
+                              </div>
+      
+                              <div class="storereview-top-right">
 
-                  <div class="list-content">
+                                  <div class="review-btn">
+                                      
+                                  </div>
 
-                     <!-- 리뷰 이미지 -->
-                     <div class="img-container">
-                        <img class="review-img" img src="/images/storeDetail/burger.jpg" alt="">
-                        <img class="review-img" src="/images/storeDetail/burger2.jpg">
-                        <img class="review-img" src="/images/storeDetail/burger4.jpg" alt="">
-                        <img class="review-img last-img" src="/images/storeDetail/buger3.jpg" alt="">
-                     </div>
+                                  <div class="review-date">
+                                      <span th:text="*{reviewRegDate}">2024-05-17</span>
+                                  </div>
+                              </div>
+      
+                          </div>
+      
+                          
+                          <div class="storereview-mid">
+                              <p th:text="*{reviewContent}">리뷰 내용</p>
+                          </div>
+      
+                          <th:block>
+                              <div class="storereview-bottom">
+                                  
+                                  <th:block th:if="${!#lists.isEmpty(uploadList)}">
+                                      <p th:if="*{uploadList}">주문 내역</p>
+                                  </th:block>
+  
+                                  <div class="storereview-image" th:if="*{uploadList}">
+                                      <th:block th:each=" upload : *{uploadList}">
+                                          <img class="review-look" th:src="|${upload.imagePath}${upload.imgRename}|">
+                                      </th:block>
+                                  </div>
+  
+                                  <p>해시태그</p>
+                                  <div class="review-hashtag">
+      
+                                      <th:block th:each=" hash : *{hashList}">
+                                          <span th:text="|${hash.hashTitle} |" class="review-hash">#해시태그</span>
+                                      </th:block>
+                                  </div>
+                              </div>
+                           </th:block>
 
-                     <!-- 별점 -->
-                     <div class="rating-area">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-   
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <span>3점</span>
-                     </div>
+                           <th:block th:unless="${!#lists.isEmpty(replyList)}" th:each=" reply : *{replyList}">
+                                <div class="store-reply">
+                                    <img class="review-store-profile" th:src="${reply.storeImg}" alt="가게 프로필 이미지">
+            
+                                    <p class="reply-content-bubble" th:text="${reply.replyContent}">
+                                        사장님 답글
+                                    </p>
+                                </div>
+                            </th:block>
 
-                     <div class="review-content">
+      
+                          <th:block th:if="${!#lists.isEmpty(replyList)}" th:each=" reply : *{replyList}">
+                              <div class="store-reply">
+                                  <img class="review-store-profile" th:src="${reply.storeImg}" alt="가게 프로필 이미지">
+          
+                                  <p class="reply-content-bubble" th:text="${reply.replyContent}">
+                                      사장님 답글
+                                  </p>
+                              </div>
+                          </th:block>
 
-                        <pre>우
-                           와
-                              짱
-                                 존
-                                    맛~~
-                        사장님이 맛있고 음식이 친절해요!</pre>
-                     
-                        <span><i class="fa-solid fa-utensils"></i>맛있는 가게</span>
-                        <span><i class="fa-solid fa-location-dot"></i>맛집 골목</span>
-                     </div>
-
-                     <div class="reply-content-bubble">
-                        <input class="review-comment" type="text">
-                        <button id="commentBtn">작성</button>
-                    </div>
-                     
-                  </div>
-               </div>
-
-               <!-- 댓글 작성된 리뷰 -->
-               <div class="review-card">
-
-                  <div class="list-profile-area">
-                     <img class="review-profile-img" th:unless="${profileImg}" th:src="#{user.default.image}">
-                     <span>회원 닉네임</span>
-                  </div>
-
-                  <div class="list-content">
-
-                     <!-- 리뷰 이미지 -->
-                     <div class="img-container">
-                        <img class="big-img" img src="/images/storeDetail/burger.jpg" alt="">
-                        
-                        <div class="small-img-area">
-                           <img class="small-img" src="/images/storeDetail/burger2.jpg">
-                           <img class="small-img" src="/images/storeDetail/buger3.jpg" alt="">
-                           <img class="small-img" src="/images/storeDetail/burger4.jpg" alt="">
-                        </div>
-                     </div>
-
-                     <!-- 별점 -->
-                     <div class="rating-area">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-   
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <span>3점</span>
-                     </div>
-
-                     <div class="review-content">
-
-                        <pre>우
-                           와
-                              짱
-                                 존
-                                    맛~~
-                        사장님이 맛있고 음식이 친절해요!</pre>
-                     
-                        <span><i class="fa-solid fa-utensils"></i>맛있는 가게</span>
-                        <span><i class="fa-solid fa-location-dot"></i>맛집 골목</span>
-                     </div>
-
-                     <p class="reply-content-bubble">
-                        사장님 답글 댓글 후기 댓글
-                    </p>
-                     
-                  </div>
-               </div>
+                      </div>
+                  </th:block>
+                  
+              </div>
+            
 
             </div>
 

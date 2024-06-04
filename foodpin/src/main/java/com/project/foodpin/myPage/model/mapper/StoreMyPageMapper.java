@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
@@ -141,6 +142,13 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	int insertMenu(Menu menu);
+
+
+	/** 사장님 리뷰 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<Review> reviewAll(int memberNo);
 
 
 
