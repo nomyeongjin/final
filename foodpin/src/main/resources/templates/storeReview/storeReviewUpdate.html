@@ -18,7 +18,7 @@
       
       <form th:action="'/review/updateReview/' + *{store.storeNo} + '/' + *{review.reviewNo}" method="POST" id="reviewForm" enctype="multipart/form-data">
         <div class="review-container"> 
-          <h2 th:text="|${store.storeName} 장소의 방문 리뷰쓰기|"></h2>
+          <h2 th:text="|${store.storeName} 장소의 방문 리뷰 수정|"></h2>
           <div class="review-selectBox">
   
             <div class="review-menu">

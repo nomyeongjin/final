@@ -591,9 +591,6 @@ color: rgb(66, 66, 66);
  flex-wrap: nowrap;
  text-align: left;
 }
-.check-store-div >*{
-    
-}
 
 .check-store-div label {
     
@@ -926,14 +923,7 @@ hr{
 .storereview-container{
     position: relative;
 }
-/* 리뷰 쓰기 페이지로 가는 a 태그 */
-.storereview-container a {
-    position: absolute;
-    right: -90px;
-    z-index: 1000;
-    top: 20px;
 
-}
 
 
 .review-title{
@@ -975,9 +965,8 @@ hr{
 }
 
 .storereview-top{
-    padding: 20px 0;
-    padding-top: 10px;
-    border-bottom: 1px solid var(--main-color);
+    padding: 24px 0;
+    border-bottom: 1px solid #E14C54;
     display: flex;
     justify-content: space-between;
 }
@@ -1008,20 +997,40 @@ hr{
 }
 
 
-
 .storereview-top-right{
-    display: flex;
-    font-size: 0.8em;
+    display: flex; /* 요소들을 가로로 배치 */
+    align-items: center; /* 세로축 가운데 정렬 */
     flex-direction: column;
-    justify-content: inherit;
+    height: 100%;
 }
 
-.storereview-top-right > button {
+.review-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 51px;
+    
+}
+
+.review-btn > button{
     border: none;
     background-color: white;
-    cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom: px;
 }
+
+.review-btn > a{
+    font-size: 13px;
+    margin: 10px 0;
+    color: #DF8B4E;
+}
+
+
+.review-date > span{
+    font-size: 13px
+}
+
 
 
 .storereview-mid{
@@ -1044,7 +1053,7 @@ hr{
     height: 25px;
     
     text-align: center;
-    border: 1px solid var(--main-color);
+    border: 1px solid #E14C54;
     border-radius:24px;
     margin: 10px 0;
 }
@@ -1265,9 +1274,11 @@ hr{
 
 .review{
     width: 600px;
-    border: 1px solid var(--main-color);
+    border: 1px solid #E14C54;
     border-radius: 15px;
     padding: 24px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     margin-bottom: 35px;
 }
 
@@ -1281,3 +1292,19 @@ hr{
     align-items: center;
     justify-content: center;
 }
+
+.report-area{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 17px;
+}
+
+.report-area > button{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    margin-right: 10px;
+    color: #696969
+}
+

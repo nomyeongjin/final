@@ -1,4 +1,3 @@
-const popupClose = document.querySelector("#popupClose");
 const popupLayer = document.querySelector("#popupLayer");
 const selectMenu = document.querySelector("#selectMenu");
 const menuSection = document.querySelector("#menuSection");
@@ -22,6 +21,8 @@ selectMenu.addEventListener("click", ()=>{
 const previewList = document.getElementsByClassName("preview");
 const inputImageList = document.getElementsByClassName("inputImage");
 const deleteImageList = document.getElementsByClassName("delete-image");
+
+const deleteOrder = new Set();
 
 
 const backupInputList = new Array(inputImageList.length);
@@ -76,6 +77,7 @@ const changeImageFn = (inputImage, order) => {
 
     backupInputList[order] = inputImage.cloneNode(true);
 
+    deleteOrder.delete(order);
   });
 
 }
@@ -87,6 +89,14 @@ for(let i=0 ; i<inputImageList.length ; i++){
   })
 
   deleteImageList[i].addEventListener("click", () => {
+
+    if(previewList[i].getAttribute("src") != null && previewList[i].getAttribute("src") != ""){
+      
+      if(orderList.includes(i)){
+
+        deleteOrder.add(i);
+      }
+    }
 
     previewList[i].src = "";      
     inputImageList[i].value  = ""; 
@@ -191,6 +201,8 @@ reviewForm.addEventListener("submit", e => {
     return;
   }
 
+  document.querySelector("[name='deleteOrder']").value = Array.from(deleteOrder);
+
 });
 
 /****************  메뉴 가격 합계  ****************/
@@ -223,10 +235,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ************************************************************ */
 for(let hash of hashList){
-keywords[hash.hashNo - 1].checked = true;
+  keywords[hash.hashNo - 1].checked = true;
 }
 /* ************************************************************ */
 for(let menu of menuList){
-  menuCheckbox[menu.menuNo - 1].checked = true;
+  // menuCheckbox[menu.menuNo - 1].checked = true;
+
+  for(let box of menuCheckbox){
+    if(box.value == menu.menuNo){
+      box.checked = true;
+    }
+  }
 }
 /* ************************************************************ */
