@@ -185,7 +185,7 @@ if(nextBtn != null){
         // 인원 선택한 값 저장 input
         const input1 = document.createElement("input");
         const selectCount = document.querySelector(".button-item.select").innerText
-        // console.log(selectCount);
+        console.log(selectCount);
 
         input1.type="hidden";
         input1.name="reservCount";
@@ -351,10 +351,10 @@ if(confirmBtn != null) {
 
         // 예약 인원
         const input4 = document.createElement("input");
-        const finalCount = document.querySelector(".reserv-date-count").innerText;
+        const finalCount = document.querySelector("#reservCount").innerText;
         input4.type="hidden";
         input4.name="reservCount";
-        // input4.value=finalCount;'
+        input4.value=finalCount;
         
         const countPart = finalCount.substr(0,1); // "2명" 에서 "2" 만 추출
         const reservCount = Number(countPart); // 문자를 숫자로 변환

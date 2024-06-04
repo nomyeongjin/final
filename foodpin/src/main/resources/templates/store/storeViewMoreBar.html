@@ -30,10 +30,10 @@
                     <div class="search-categoryContaier">
 
                         <div class="search-categoryContaier-hide">
-                            <span >
-                                <i class="fa-solid fa-plus"></i>
+                            <span class="bars">
+                                <i class="fa-solid fa-bars"></i>
                             </span>
-                            <span >
+                            <span class="short-bar">
                                 <i class="fa-solid fa-minus"></i>
                             </span>
     
@@ -73,7 +73,7 @@
                                     <span>주변</span>
                                 </div>
     
-                                <div>
+               <!--                  <div>
                                     
                                     <div>
                                         <span >
@@ -86,14 +86,17 @@
                                     </div>
                                    
                                 </div>
-
+ -->
                             </div>
                            
 
-                            <div>
-                                <span>내 위치에서(북마크 많은 순 , 리뷰개수 순 , 가까운 순, 평점 순)
-                                    <button></button>
-                                </span>
+                            <div class="storelist-typeBtnbox">
+                                
+                                    <button>거리순</button>
+                                    <button>리뷰순</button>
+                                    <button>좋아요순</button>
+                                    <button>평점순</button>
+                                
                             </div>
 
                             
@@ -194,12 +197,12 @@
                 </div>
             </div>
 
-            <button id="hideSideBar">
-                <span class="blind">
+            <div id="hideSideBar" aria-expanded="true">
+                <button class="blind">
                     <i class="fa-solid fa-chevron-right"></i>
-                </span>
-                <span class="show">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </span>
-            </button>
+                </button>
+                <button class="show">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+            </div>
 
