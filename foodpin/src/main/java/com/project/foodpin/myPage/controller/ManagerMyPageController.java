@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.foodpin.member.model.dto.Member;
@@ -143,6 +144,17 @@ public class ManagerMyPageController {
 		model.addAttribute("infoRequest", infoRequest);
 		
 		return "myPage/manager/managerStoreInfo";
+	}
+	
+	// 정보 정정 처리 완료
+	@PostMapping("managerStoreInfo/{requestNo}")
+	public ResponseEntity<Map<String, Object>> completeRequest(
+		@PathVariable("requestNo") int requestNo) {
+		
+		boolean completeRequest = service.completeRequest(requestNo);
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", completeRequest);
+		return ResponseEntity.ok(response);
 	}
 	
 	

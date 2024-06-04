@@ -40,9 +40,17 @@ public class ManagerMyPageServiceImpl implements ManagerMyPageService{
 		return mapper.closeStore(memberNo);
 	}
 
+	// 가게 정보 정정 신청 조회
 	@Override
 	public List<Request> infoRequestList() {
 		return mapper.infoRequestList();
 	}
+	
+	// 가게 정보 정정 처리 완료
+	@Override
+	public boolean completeRequest(int requestNo) {
+		return mapper.completeRequest(requestNo);
+	}
+	
 
 }

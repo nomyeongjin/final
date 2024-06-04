@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
 // 승인 처리
 function approveMember(memberNo) {
     fetch(`/myPage/manager/approveMember/${memberNo}`, {
@@ -56,6 +57,33 @@ function refuseMember(memberNo) {
     })
 }
 
+/* 정보 정정 신청 처리상태로 */
+const completeBtn = document.querySelectorAll(".completeBtn");
+
+completeBtn.forEach(btn => {
+    btn.addEventListener("click", e => {
+        const requestNo = e.target.dataset.requestNo;
+        completeRequest(requestNo);
+    });
+});
+
+function completeRequest(requestNo) {
+    fetch(`/myPage/manager/managerStoreInfo/${requestNo}`, {
+        method: 'POST',
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify({requestNo : requestNo})
+    })
+    .then(resp => resp.json())
+    .then(result => {
+        if(result.success) {
+            alert('정보 정정 처리가 완료되었습니다');
+            location.reload();
+        } else {
+            console.log(requestNo);
+            alert('정보 정정 처리에 실패하였습니다');
+        }
+    });
+}
 
 
 /* 입점 내역 상세 팝업 */
@@ -79,3 +107,4 @@ window.addEventListener("click", e => {
         popup.style.display = 'none';
     }
 });
+
