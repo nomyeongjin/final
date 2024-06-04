@@ -23,8 +23,8 @@ const selectTimeFn = (reservDate) => {
         
         const selectReservTime = confirmReservDate.length > 0 ? confirmReservDate[0].reservTime : null;
 
-        // const counts = confirmReservDate[0].counts; // 시간에 예약된 개수
-        // console.log(counts);
+        const counts = confirmReservDate.map(item => item.counts); // 시간에 예약된 개수
+        console.log(counts);
 
         
         // console.log(filteredArray);
@@ -129,8 +129,13 @@ const selectTimeFn = (reservDate) => {
             const selectedTimeIsPast = selectedDateTime <= currentTime; // true = 오전, false = 오후
 
             console.log(selectedTimeIsPast);
+            
 
             if (isToday && selectedTimeIsPast || fullTimeList.includes(i)) {
+
+                // storeMaxTable가 0일 경우 == 정해진 인원 없음
+                if(storeMaxTable == 0) return;
+                
                 timeItem.classList.add("disabled");
                 timeItem.classList.remove("select");
             }
@@ -156,6 +161,7 @@ const selectTimeFn = (reservDate) => {
             for (let time of timeItem) {
                 time.addEventListener("click", e => {
 
+                   
                     if (time.classList.contains("disabled")) {
                         alert("해당 시간의 예약이 마감 되었습니다.");
                         return;
