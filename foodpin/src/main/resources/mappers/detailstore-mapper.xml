@@ -68,6 +68,12 @@
                javaType = "java.util.ArrayList"
                ofType = "ReviewHash"
    />
+   <collection property="storeCategoryList"
+               select = "selectStoreCategoryList"
+               column = "STORE_NO"
+               javaType = "java.util.ArrayList"
+               ofType = "StoreCategory"
+   />
 
 </resultMap>
 
@@ -134,7 +140,13 @@
    </select>
 
    
-   
+    <select id="selectStoreCategoryList" resultType="StoreCategory">
+        SELECT CATEGORY_TITLE  FROM "CATEGORY"
+		JOIN "STORE_CATEGORY" USING (CATEGORY_CODE)
+		WHERE STORE_NO = #{storeNo} 
+    </select>
+    
+    
       <!-- 가게 리뷰 상세 조회 -->
    <select id="reviewDetail" resultMap="review_rm">
    		SELECT DISTINCT MEMBER_NICKNAME, PROFILE_IMG, REVIEW_NO, REVIEW_RATING, REVIEW_CONTENT,
