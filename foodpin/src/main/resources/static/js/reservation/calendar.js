@@ -23,8 +23,8 @@ const selectTimeFn = (reservDate) => {
         
         const selectReservTime = confirmReservDate.length > 0 ? confirmReservDate[0].reservTime : null;
 
-        const counts = confirmReservDate.map(item => item.counts); // 시간에 예약된 개수
-        console.log(counts);
+        // const counts = confirmReservDate.forEach(item => item.counts); // 시간에 예약된 개수
+        // console.log(counts);
 
         
         // console.log(filteredArray);
@@ -32,8 +32,16 @@ const selectTimeFn = (reservDate) => {
         // storeMaxTable : 시간별 예약 가능 최대 팀 수
         const fullTimeList = [];
         confirmReservDate.filter(item => {
+            // Ensure storeMaxTable is a number
+            // const maxTable = Number(storeMaxTable);
+            
+            // maxTable가 0이라면 return
+            if (Number(storeMaxTable) === 0) return;
+            
+            // storeMaxTable과 item.counts의 값 비교
             if (Number(item.counts) === Number(storeMaxTable)) {
                 fullTimeList.push(item.reservTime);
+                item.classList.add("disbled");
             }
         });
 
@@ -132,10 +140,7 @@ const selectTimeFn = (reservDate) => {
             
 
             if (isToday && selectedTimeIsPast || fullTimeList.includes(i)) {
-
-                // storeMaxTable가 0일 경우 == 정해진 인원 없음
-                if(storeMaxTable == 0) return;
-                
+               
                 timeItem.classList.add("disabled");
                 timeItem.classList.remove("select");
             }
@@ -175,16 +180,16 @@ const selectTimeFn = (reservDate) => {
                     // 시간
                     time.classList.add("select");
                     checkObj.reservTime = true;
-                    console.log(time.innerText);
+                    // console.log(time.innerText);
 
                     // console.log(storeMaxTable);
 
                     // 클릭한 날짜에 예약된 시간과 클릭 한 시간이 동일할 경우
-                    if (selectReservTime == time.innerText) {
-                        time.classList.remove("select");
-                        return;
-                    }
-
+                    // if (selectReservTime == time.innerText) {
+                    //     time.classList.remove("select");
+                    //     return;
+                    // }
+q
 
                 });
             }

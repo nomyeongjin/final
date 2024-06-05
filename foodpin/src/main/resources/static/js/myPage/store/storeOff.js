@@ -181,12 +181,49 @@ dayoffBtn.addEventListener("click", () => {
    // 버튼 생성
    const weekBtn = document.createElement("button");
    weekBtn.classList.add("update-btn");
+   weekBtn.type = "button";
    weekBtn.id = "offUpdateBtn";
    weekBtn.innerText = "고정 휴무일 수정";
 
    weekOffFrm.append(ul, weekBtn);
 
+   /**
+    * (버튼) 고정 휴무일 폼 제출
+    */
+   weekBtn.addEventListener("click", () => {
 
+
+      console.log("폼제출");
+      const weekList = document.querySelectorAll(".checked"); // 선택된 li 요소 얻어오기
+      const dataList = []; // 값 하나로 묶을 배열 생성
+
+      for(const li of weekList) {
+
+         data = {
+            "offWeek" : li.value,
+            "storeNo" : storeNo
+         };
+
+         dataList.push(data);
+      }
+      // console.log(dataList);
+
+      fetch("/myPage/store/insertOffWeek", {
+         method : "POST",
+         headers : {"content-Type" : "application/json"},
+         body : JSON.stringify(dataList)
+      })
+      .then(resp => resp.json())
+      .then(result => {
+         
+         console.log(result);
+
+         if(result > 0) {
+            alert("고정 휴무일이 변경되었습니다.");
+         }
+      })
+      .catch( err => console.log(err));
+   });
    
    // --------------------------------
 
@@ -302,38 +339,3 @@ const createPopup = () => {
 
 
 
-/**
- * (버튼) 고정 휴무일 폼 제출
- */
-document.querySelector("#offUpdateBtn").addEventListener("click", () => {
-
-   const weekList = document.querySelectorAll(".checked"); // 선택된 li 요소 얻어오기
-   const dataList = []; // 값 하나로 묶을 배열 생성
-
-   for(const li of weekList) {
-
-      data = {
-         "offWeek" : li.value,
-         "storeNo" : storeNo
-      };
-
-      dataList.push(data);
-   }
-   // console.log(dataList);
-
-   fetch("/myPage/store/insertOffWeek", {
-      method : "POST",
-      headers : {"content-Type" : "application/json"},
-      body : JSON.stringify(dataList)
-   })
-   .then(resp => resp.json())
-   .then(result => {
-      
-      console.log(result);
-
-      if(result > 0) {
-         alert("고정 휴무일이 변경되었습니다.");
-      }
-   })
-   .catch( err => console.log(err));
-});

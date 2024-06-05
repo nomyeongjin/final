@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>예약하기</title>
-    
-    <link rel="stylesheet" href="/css/reservation/reservationDetail.css">
+
     <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/reservation/detail.css">
 </head>
 <body>
     <main>
@@ -19,7 +19,7 @@
             <!-- section 지정 -->
     
             <!-- 안내 section -->
-            <section class="reservation-header-container" th:object="${store}"> 
+            <section class="reservation-header-container" th:object="${store}">
     
                 <th:block th:if="*{storeImg}">
                     <img class="store-image" alt="600x300"  th:src="*{storeImg}">
@@ -31,16 +31,15 @@
                 </th:block>
     
                 <div class="header-container">
-
+    
                     <div class="store-name-container">
                         <div class="store" th:text="${store.storeName}">가게이름</div>
                     </div>
-    
                     <!-- <div class="title-container">
                         <i class="fa-regular fa-clock"></i>
                         <h3 class="title">예약 안내</h3>
-                    </div> -->
-    
+                    </div>
+                     -->
     
                     <div class="content-container">
                         <i class="fa-solid fa-message"></i>
@@ -72,7 +71,7 @@
                                 <li class="nav-item">상세정보</li>
                             </a>
 
-                            <a href="#" class="reserv-info">
+                            <a href="#"  class="reserv-info">
                                 <li class="nav-item">
                                     리뷰 <span class="review-count" name="reviewCount" id="reviewCount">20</span> <!-- count로 리뷰 댓글 수 조회 예정 -->
                                 </li>
@@ -80,86 +79,23 @@
                         </ul>
                     </nav>
     
+                </div>
+
+                <div class="info-container" th:object="${store}">
+                    <div class="title-border">
+                        <h3 class="title">예약 안내</h3>
+                    </div>
+
                     <div class="info-content">
-                        <p class="bold">신청 후 확정</p> 업체에서 확인 후 예약을 확정합니다. <br>
-                        (평균 10분 이내)
+                        <th:block th:text="${store.storeInfo}"></th:block>
                     </div>
-        
+
+                    <div class="images">
+                        <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage" th:src="*{storeImg}">
+                        <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage" th:src="*{storeImg}">
+                        <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage" th:src="*{storeImg}">
+                    </div>
                 </div>
-    
-                <div class="content-header">
-
-                    <div class="info">
-                        <div class="content-container">
-                            <i class="fa-solid fa-user"></i>
-                            <h3 class="title">인원을 선택해 주세요</h3>
-                        </div>
-
-                        <span class="content">* 예약 날짜에 방문하는 인원을 선택해 주세요.</span>
-                    </div>
-        
-        
-                    <!-- 가게별 최대 예약 인원에 따라 체크박스가 달라짐 -->
-                    <div class="reservation-count">
-
-                        <div class="checkbox-area">
-            
-                           <ul class="button-list" id="reservCount" th:data-store-max-number="${store.storeMaxNumber}">
-                           </ul>
-                        
-                        <span class="content" th:if="${store.storeMaxNumber}" th:text="|* ${store.storeMaxNumber}명 이상 인원의 예약을 원하시는 경우 별도 문의 부탁드립니다.|">* n명 이상 인원의 예약을 원하시는 경우 별도 문의 부탁드립니다.</span>
-                        <span class="content" th:unless="${store.storeMaxNumber}">* 10명 이상 인원의 예약을 원하시는 경우 별도 문의 부탁드립니다.</span>
-                    </div>
-        
-                </div>
-    
-               <div class="reservation-container">
-                    <div class="reservation-date">
-                        
-                        <div class="calendar-container">
-                            <i class="fa-solid fa-calendar-days"></i>
-                            <h3 class="title">
-                                <span class="select-date"></span> &nbsp;시간을 선택해 주세요
-                            </h3>
-                        </div> <!-- 타임리프로 달력에 선택된 날짜 출력 -->
-            
-                        <!-- 달력 API 예정 -->
-                        <!-- <div class="calendar"> -->
-                            <div id="calendar"></div>
-                        <!-- </div> -->
-        
-                    </div>
-        
-               </div>
-
-               <div class="reserv-time-container">
-
-                    <div class="reservation-time">
-                        
-                        <div class="time-title"></div>
-    
-                        <ul class="time-list">
-                            <!-- <li class="time-item" id="reservTime" name="reservTime">12:00</li> -->
-                        </ul>
-    
-                    </div>
-                    <!-- <div class="reservation-time" id="reservTime" name="reservTime">
-                        
-                        <div class="time_title">오후</div>
-    
-                        <ul class="time-list">
-                            <li class="time-item">12:00</li>
-                            <li class="time-item">12:30</li>
-                            <li class="time-item">13:00</li>
-                            <li class="time-item">13:30</li>
-                            <li class="time-item">14:00</li>
-                            <li class="time-item">14:30</li>
-                            <li class="time-item">15:00</li>
-                            <li class="time-item">16:00</li>
-                        </ul>
-    
-                    </div> -->
-               </div>
     
             </section>
     
@@ -195,24 +131,19 @@
                                 <div class="notice-inner-detail">
                                     <span class="detail-item">
                                         <h1 class="titleH1">푸드핀 노쇼 정책 안내</h1>
-                                        <p class="contentP">&nbsp;안녕하세요, 푸드핀 고객님.</p>
-                                        <p class="contentP">&nbsp;저희 푸드핀 서비스는 고객 분들과 가게 사장님들을 위해 공정하고 원활한 예약 시스템을 운영하기 위해 최선을 다하고 있습니다. 
+                                        <p class="contentP">안녕하세요, 푸드핀 고객님.</p>
+                                        <p class="contentP">저희 푸드핀 서비스는 고객 분들과 가게 사장님들을 위해 공정하고 원활한 예약 시스템을 운영하기 위해 최선을 다하고 있습니다. 
                                             <br>이에 따라 노쇼(No-Show) 정책을 다음과 같이 안내해 드립니다.</p>
                                         
                                         <h2 class="titleH2">노쇼 정책 안내</h2>
                                         <ul class="contentUl">
-                                            <li><strong>노쇼 발생 기준 :</strong> 예약 후 아무런 통보 없이 예약 시간에 나타나지 않는 경우를 노쇼로 간주합니다.</li>
-                                            <li><strong>노쇼 경고 알림 :</strong> 노쇼가 발생할 경우 고객님께 경고 알림이 발송됩니다.</li>
-                                            <li><strong>계정 정지 조치 :</strong>
-                                                <ul class="noshowInfoUl">
-                                                    <li>노쇼가 누적 3회 이상 발생 시, 해당 고객님의 계정이 3일 정지됩니다.</li>
-                                                    <li>노쇼가 누적 5회 이상 발생 시, 해당 고객님의 계정이 5일 정지됩니다.</li>
-                                                </ul>
-                                            </li>
+                                            <li><strong>노쇼 발생 기준:</strong> 예약 후 아무런 통보 없이 예약 시간에 나타나지 않는 경우를 노쇼로 간주합니다.</li>
+                                            <li><strong>노쇼 경고 알림:</strong> 노쇼가 발생할 경우 고객님께 경고 알림이 발송됩니다.</li>
+                                            <li><strong>계정 정지 조치:</strong> 노쇼가 누적 3회 발생 시, 해당 고객님의 계정이 정지됩니다.</li>
                                         </ul>
                                         
                                         <h2 class="titleH2">고객님께 드리는 당부 말씀</h2>
-                                        <p class="contentP">&nbsp;노쇼는 가게 사장님께 큰 손실을 초래하며, 다른 고객님들께도 불편을 줄 수 있습니다. 예약을 하신 후 부득이하게 방문이 어려운 경우, 가급적 사전에 예약을 취소해 주시기 바랍니다. 이는 가게의 원활한 운영과 다른 고객님의 예약 기회를 위해 매우 중요합니다.</p>
+                                        <p class="contentP">노쇼는 가게 사장님께 큰 손실을 초래하며, 다른 고객님들께도 불편을 줄 수 있습니다. 예약을 하신 후 부득이하게 방문이 어려운 경우, 가급적 사전에 예약을 취소해 주시기 바랍니다. 이는 가게의 원활한 운영과 다른 고객님의 예약 기회를 위해 매우 중요합니다.</p>
                                         
                                         <p class="contentP">푸드핀은 고객님의 편리한 예약과 공정한 서비스 제공을 위해 최선을 다하겠습니다. 앞으로도 많은 이용 부탁드립니다.</p>
                                         
@@ -236,8 +167,7 @@
             <section class="button-area">
     
                 <div class="buttons">
-                    <a th:href="'/store/storeDetail/' + ${storeNo}"  class="cancel-btn" id="cancelBtn">취소</a>
-                    <a href="#" class="next-btn" id="nextCheckBtn">다음</a>
+                    <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation'" class="next-btn" id="nextBtn">예약하기 &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
                 </div>
     
             </section>
@@ -250,16 +180,14 @@
 
     <script th:inline="javascript">
         const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원"
+
         const storeNo = /*[[${storeNo}]]*/ "사업자등록번호"
-        const storeMaxTable = /*[[${store.storeMaxTable}]]*/ "최대 예약 팀 수(테이블)"
        
     </script>
 
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
-    <!-- 마이페이지 JS 추가 -->
-    <script src="/js/reservation/reservation.js"></script>
-    <script src="/js/reservation/calendar.js"></script>
-
+    <script src="/js/reservation/reservation.js"></script> 
+    <!-- <script src="/js/reservation/detail.js"></script>  -->
+    
 </body>
 </html> 
