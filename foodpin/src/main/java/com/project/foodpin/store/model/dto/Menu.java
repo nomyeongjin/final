@@ -1,7 +1,5 @@
 package com.project.foodpin.store.model.dto;
 
-import java.util.List;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;

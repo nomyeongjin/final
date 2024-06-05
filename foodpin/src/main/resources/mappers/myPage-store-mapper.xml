@@ -41,8 +41,8 @@
 	<!-- 가게 정보 수정 화면 이동 -->
 	<select id="selectstoreInfo">
 		SELECT STORE_NO, STORE_IMG, STORE_NAME, STORE_TEL, STORE_LOCATION, OPEN_HOUR, CLOSE_HOUR, 
-			BREAKTIME_START, BREAKTIME_END, STORE_STATUS, STORE_MAX_NUMBER, 
-			STORE_MAX_TABLE, STORE_INFO 
+			BREAKTIME_START, BREAKTIME_END, STORE_STATUS, STORE_MAX_NUMBER, STORE_MAX_TABLE, STORE_INFO
+			
 		FROM "STORE"
 		WHERE STORE_NO = (
 			SELECT STORE_NO
@@ -107,9 +107,6 @@
 	
 	<!-- *** 휴무일 정보 *** -->
 
-	
-
-	
 	<!-- 기존 고정 휴무일 삭제 -->
 	<select id="countOffWeek">
 		SELECT COUNT(*) FROM "OFF_WEEK" WHERE STORE_NO = #{storeNo}
@@ -122,7 +119,7 @@
 	
 	<!-- 해당하는 결과가 없을 경우 등록 -->
 	<insert id="insertOffWeek">
-		INSERT INTO "OFF_WEEK" VALUES(SEQ_WEEK_OFF_NO.NEXTVAL, #{storeNo}, #{offWeek})
+		INSERT INTO "OFF_WEEK" VALUES(SEQ_WEEK_OFF_NO.NEXTVAL, #{storeNo}, #{offWeek})S
 	</insert>
 	
 	<!-- 고정 휴무일 조회 -->
