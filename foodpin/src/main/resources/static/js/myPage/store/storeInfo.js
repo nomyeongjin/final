@@ -45,6 +45,8 @@ const changeImageFn = e => {
    
       backupInput = imageInput.cloneNode(true);
    })
+
+   // console.log(storeNo);
    
 }
 

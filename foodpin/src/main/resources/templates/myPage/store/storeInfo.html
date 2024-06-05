@@ -151,16 +151,18 @@
 
             </form>
 
+            <a th:text="${store.storeNo}"></a>
+
             <a id="withdraw">서비스 탈퇴</a>
          </div>
         </div>
          
          <script th:inline="javascript">
-            const memberNo = /*[[${session.loginMember.memberNo}]]*/ "가게 번호";
+            // const memberNo = /*[[${session.loginMember.memberNo}]]*/ "회원 번호";
             const storeNo = /*[[${store.storeNo}]]*/ "가게 번호";
 
                     // 프로필 기본 이미지 전역변수로 저장
-        const menuDefaultImage = /*[[#{menu.default.image}]]*/ "메뉴 기본 이미지";
+            const menuDefaultImage = /*[[#{menu.default.image}]]*/ "메뉴 기본 이미지";
         </script>
       
       </section>
