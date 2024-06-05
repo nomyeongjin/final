@@ -43,8 +43,8 @@
 	<!-- 채팅 확인 -->
 	<select id="checkChattingNo" resultType="_int">
 		SELECT NVL(SUM(CHATTING_NO),0) CHATTING_NO FROM CHATTING_ROOM
-		WHERE (OPEN_MEMBER = #{loginMemberNo} AND PARTICIPANT = #{storeNo})
-		OR (OPEN_MEMBER = #{storeNo} AND PARTICIPANT = #{loginMemberNo})
+		WHERE (OPEN_MEMBER = #{loginMemberNo} AND PARTICIPANT = (SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{storeNo}))
+		OR (OPEN_MEMBER = (SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{storeNo}) AND PARTICIPANT = #{loginMemberNo})
 	</select>
 	
 	<!-- 채팅방 생성 -->
@@ -55,7 +55,7 @@
 		</selectKey>
 	
 		INSERT INTO CHATTING_ROOM
-		VALUES(#{chattingNo}, DEFAULT, #{loginMemberNo}, #{storeNo})
+		VALUES(#{chattingNo}, DEFAULT, #{loginMemberNo}, (SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{storeNo}))
 	</insert>
 	
 
@@ -63,7 +63,7 @@
 	<!-- 채팅 메세지 삽입 -->
 	<insert id="insertMessage">
 		INSERT INTO "MESSAGE"
-		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, #{senderNo}, #{chattingNo})
+		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, #{memberNo}, #{chattingNo})
 	</insert>
 	
 	

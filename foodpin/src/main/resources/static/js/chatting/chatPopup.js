@@ -24,7 +24,7 @@ const toChatting = document.getElementById("toChatting");
 
 /* Get 방식 */
 function showPopup() { 
-  window.open("/chatting/chatPopup/"+storeNo, "chatting", "채팅창", "width=500, height=600, left=100, top=50"); 
+  window.open("/chatting/chatPopup/"+storeNo, "chatting", "채팅창", "width=500px, height=600px, left=100, top=50"); 
 }
 
 
@@ -45,6 +45,7 @@ const sendMessage = () => {
   // 채팅 입력 textarea
   const inputChatting = document.querySelector("#inputChatting");
   const msg = inputChatting.value.trim(); // 입력된 채팅 메시지
+  const chattingNo = document.querySelector("#main").getAttribute("data-chattingNo");
 
   // 로그인이 되어있지 않으면 함수 종료
   if(!notificationLoginCheck) return;
@@ -59,7 +60,7 @@ const sendMessage = () => {
   const chattingObj = {
     "targetNo" : selectTargetNo,    // 메시지를 받을 대상의 회원 번호(웹소켓)
     "messageContent" : msg,         // 전달할 메시지 내용
-    "chattingNo" : selectChattingNo // 채팅방 번호(DB 저장용도)
+    "chattingNo" : chattingNo // 채팅방 번호(DB 저장용도)
   }
 
   // JSON으로 변환하여 웹소켓 핸들러로 전달
