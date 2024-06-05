@@ -238,7 +238,7 @@ public class StoreMyPageController {
 	 */
 	@ResponseBody
 	@GetMapping("updateReservStatus")
-	public List<Reservation> updateReservStatus(@RequestParam("reservNo") int reservNo) {
+	public int updateReservStatus(@RequestParam("reservNo") int reservNo) {
 		
 		
 		return service.updateReservStatus(reservNo);
