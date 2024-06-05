@@ -420,7 +420,7 @@
     cursor: pointer;
 }
 
- .fc .fc-daygrid-day.fc-day-today{
+ .fc.fc-daygrid-day.fc-day-today{
     background-color: rgb(250, 255, 226);
 } 
 
@@ -528,4 +528,14 @@
 .noshowInfoUl{
     list-style-type: disc;
     margin: 10px 0 10px 20px;
+}
+
+/* 고정 휴무 */
+.week-off{
+    background-color: #d3d9ff;
+}
+
+/* 지정 휴무 */
+.day-off{
+    color: #717171;
 }

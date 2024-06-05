@@ -29,7 +29,10 @@ public interface ReservationMapper {
 	// 가게 이름 조회
 	String selectStoreName(Store store);
 
-	// 고정 휴무일, 지정 휴무일 조회
+	// 지정 휴무일 조회
 	List<Off> selecetOffDay(String storeNo);
+
+	// 고정 휴무일 조회
+	List<Off> selectOffWeek(String storeNo);
 
 }

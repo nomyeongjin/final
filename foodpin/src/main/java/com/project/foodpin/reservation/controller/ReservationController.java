@@ -90,7 +90,20 @@ public class ReservationController {
 		model.addAttribute("store", store);
 		return "reservation/detail";
 	}
-
+	
+	// 예약하기 리뷰 페이지
+	@GetMapping("storeDetail/{storeNo}/reservation/reservPageReview")
+	public String reservPageReview(
+			@PathVariable("storeNo") String storeNo,
+			Model model) {
+		
+		Store store = service.storeDetail(storeNo);
+		
+		model.addAttribute("store", store);
+		return "reservation/reservPageReview";
+		
+	}
+	
 	
 	/****** form 태그 제출를 위한 ******/
 	@PostMapping("storeDetail/{storeNo}/reservation/nextPage")
@@ -142,12 +155,21 @@ public class ReservationController {
 	}
 	
 	
-	// 고정 휴무일, 지정 휴무일 조회
+	// 지정 휴무일 조회
 	@ResponseBody
 	@PostMapping("selectOffDay")
 	public List<Off> dayList(
 			@RequestBody String storeNo){
 		return service.selectOffDay(storeNo);
 	}
+	
+	// 고정 휴무일 조회
+	@ResponseBody
+	@PostMapping("selectOffWeek")
+	public List<Off> weekList(
+			@RequestBody String storeNo){ 
+		return service.selectOffWeek(storeNo);
+	}
+	
 	
 }
