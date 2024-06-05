@@ -1,5 +1,9 @@
 <div class="notification-area" id="notificationArea" >
-    <button type="button" id="myNotification" class="notification-bell-btn fa-regular fa-bell" th:if="${session.loginMember}"></button>
+    
+    <button type="button" id="myNotification" class="notification-bell-btn fa-regular fa-bell" th:if="${session.loginMember}">
+        <span class="notReadCount"></span> <!-- 안읽은 알림 개수 -->
+    </button>
+
     <div th:unless="${session.loginMember}" class="temp"></div>
 
     <div class="box-content">
@@ -32,18 +36,21 @@
 
                             <!-- contentContainer -->
                             <div class="notification-content-container"> 
-
+                                
                                 <!-- reservationInfo -->
                                 <div class="reservation-info">
-
+                                    
                                     <!-- storeLogo -->
                                     <img src="#" alt="가게로고" class="image" id="image" name="storeLogo">
-
+                                    
                                     <!-- notiTitle -->
                                     <span class="notification-store" name="storeName">가게이름, 관리자 </span>
-
+                                    
                                     <!-- notiDate -->
                                     <span class="notification-date" id="notificationDate" name="notificationDate">5분전</span>
+
+                                    <!-- xmark -->
+                                    <i class="fa-regular fa-circle-xmark"></i>
                                 </div>
 
                                 <!-- notiContent -->
@@ -57,8 +64,6 @@
 
                                         예약이 확정되지 않았습니다. -->
 
-                                        <!-- xmark -->
-                                        <i class="fa-regular fa-circle-xmark"></i>
                                     </div>
                                     
                                 </div>

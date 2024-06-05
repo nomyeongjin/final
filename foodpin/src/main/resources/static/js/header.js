@@ -83,6 +83,9 @@ if (notificationLoginCheck) {
     notReadCheckFn = async () => {
         const resp = await fetch("/notification/notReadCheck")
         const notReadCount = await resp.text();
+
+        console.log(notReadCount);  
+        document.querySelector(".notReadCount").innerText = notReadCount;
         return notReadCount;
     }
 
@@ -211,9 +214,9 @@ if (notificationLoginCheck) {
                 // border.append(temp);
                 border.append(contentContainer);
                 contentContainer.append(reservationInfo, notiContent);
-                reservationInfo.append(img, notiTitle, notiDate);
+                reservationInfo.append(img, notiTitle, notiDate,xmark);
                 notiContent.append(notiMessage);
-                notiMessage.append(xmark);
+                // notiMessage.append(xmark);
 
             }
 

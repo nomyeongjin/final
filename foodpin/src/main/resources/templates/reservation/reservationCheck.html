@@ -146,7 +146,7 @@
                                     <input type="text" name="visitName" id="visitName" class="input-name" placeholder="방문자 성함을 작성해 주세요">
                                 </th:block>
 
-                                <th:block th:uless="${session.loginMember?.memberCode==1}">
+                                <th:block th:unless="${session.loginMember?.memberCode==1}">
                                     <input type="text" name="visitName" id="visitName" class="input-name" placeholder="현재 로그인 상태로 예약할 수 없습니다." readonly>
                                 </th:block>
                             </div>
@@ -160,7 +160,7 @@
                                     <input type="text" name="visitTel" id="visitTel" class="input-name" placeholder="방문자 연락처를 작성해 주세요('-' 제외)" maxlength="11">
                                 </th:block>
 
-                                <th:block th:uless="${session.loginMember?.memberCode==1}">
+                                <th:block th:unless="${session.loginMember?.memberCode==1}">
                                     <input type="text" name="visitTel" id="visitTel" class="input-name" placeholder="현재 로그인 상태로 예약할 수 없습니다." readonly maxlength="11">
                                 </th:block>
                             </div>

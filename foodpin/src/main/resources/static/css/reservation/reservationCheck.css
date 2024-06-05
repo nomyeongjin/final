@@ -289,7 +289,7 @@
     width: 80px;
     height: 40px;
 
-    border: 1px solid #4A4848;
+    border: 1px solid #363f75;
     font-size: 15px;
     background-color: white;
     border-radius: 5px;
@@ -302,7 +302,7 @@
 }
 
 .next-btn:hover{
-    border: 1px solid #df8b4e;
+    border: 1px solid #363f75;
 }
 
 .next-btn{
@@ -314,7 +314,7 @@
 
     border: none;
     font-size: 15px;
-    background-color: #df8b4e;
+    background-color: #363f75;
     color: white;
     border-radius: 5px;
     cursor: pointer;

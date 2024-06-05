@@ -668,7 +668,7 @@ header>section:nth-child(3) {
 .notification-date{
    margin-left: 10px;
    font-size: 14px;
-   color: #494949;
+   color: black;
 }
 
 .notification-store{
@@ -687,23 +687,38 @@ header>section:nth-child(3) {
 .notification-message{
   font-size: 15px;
   padding: 15px 0;
-  color: #717171;
+  color: black;
 }
 
 .fa-circle-xmark{
-   margin-left: 15px;
    cursor: pointer;
-   font-size: 18px;
+   font-size: 20px;
+   display: flex;
+   position: relative;
+   right: -210px;
 }
+
 .fa-circle-xmark:hover{
    color: red;  
    user-select: none;
+   background-color: white;
 }
 
-.notification-message>.fa-circle-xmark{
+.notification-bell-btn>.notReadCount {
    display: flex;
+   justify-content: center;
+   align-items: center;
    position: absolute;
-   top: 20px;
-   right: 20px;
-   /* margin: 10px; */
+   top: 3px;
+   right: 40px;
+
+   width: 20px;
+   height: 20px;
+   color: white;
+
+   border-radius: 50%;
+   background-color: #e14c54;
+   border: 1px solid #e14c54;
+   font-size: 12px;
+   font-weight: 300;
 }

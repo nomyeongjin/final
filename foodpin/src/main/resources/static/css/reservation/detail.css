@@ -205,7 +205,7 @@
 }
 
 .notice-item{
-    width: 400px;
+    width: 500px;
 }
 
 .notice-inner-detail{
@@ -267,8 +267,36 @@
 
     border: none;
     font-size: 15px;
-    background-color: #4A4848;
+    background-color: #363f75;
     color: white;
     border-radius: 5px;
     cursor: pointer;
 }
+
+.content-container>.title{
+    margin-left: 10px;
+}
+
+.titleH1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.titleH2{
+    margin-top: 30px;
+}
+
+.contentP {
+    margin: 10px 0;
+}
+
+.contentUl{
+    list-style-type: none;
+    padding: 0;
+}
+
+.contentUl, .contentUl>li{
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}   
