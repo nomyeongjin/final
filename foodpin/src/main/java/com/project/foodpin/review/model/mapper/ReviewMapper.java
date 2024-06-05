@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.review.model.dto.ReviewMenu;
+import com.project.foodpin.review.model.dto.ReviewReply;
 import com.project.foodpin.review.model.dto.UploadImage;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
@@ -60,6 +61,7 @@ public interface ReviewMapper {
 
 	// 기존에 해시태그 선택했던 거 삭제
 	int deleteHashList(int reviewNo);
+
 
 
 

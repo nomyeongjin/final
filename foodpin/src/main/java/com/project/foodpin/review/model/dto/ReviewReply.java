@@ -17,4 +17,6 @@ public class ReviewReply {
 	private String replyRegDate;
 	private int reviewNo;
 	
+	private String storeImg;
+	
 }

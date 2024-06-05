@@ -686,7 +686,7 @@
                                 </div>
                             </th:block>
         
-                            <th:block th:if="${!#lists.isEmpty(replyList)}" th:each=" reply : *{replyList}">
+                            <th:block th:if="${!#lists.isEmpty(review.replyList)}" th:each=" reply : *{replyList}">
                                 <div class="store-reply">
                                     <img class="review-store-profile" th:src="${reply.storeImg}" alt="가게 프로필 이미지">
             

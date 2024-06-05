@@ -17,6 +17,7 @@ import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.myPage.model.mapper.StoreMyPageMapper;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.review.model.dto.ReviewReply;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
@@ -220,8 +221,11 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return mapper.reviewAll(memberNo);
 	}
 
-
-
+	// 사장님 댓글 삽입
+	@Override
+	public int insertReply(ReviewReply inputReply) {
+		return mapper.insertReply(inputReply);
+	}
 
 
 

@@ -40,8 +40,8 @@
 
             <!-- 서브타이틀 버튼 -->
             <section class="myPage-sub-title">
-               <button class="sub-title-btn" id="reviewAll">전체</button>
-               <button class="sub-title-btn" id="Unanswered">미답변</button>
+               <a href="/myPage/store/review" class="sub-title-btn" id="reviewAll">전체</a>
+               <a href="/myPage/store/reviewUnanswered" class="sub-title-btn" id="Unanswered">미답변</a>
             </section>
          </div>
          
@@ -56,11 +56,11 @@
                       <h3>작성된 리뷰가 없습니다.</h3>
                   </th:block>
                   
-                  <th:block  th:each=" review : ${reviewList}" th:object="${review}">
-                      <div class="review">
+                    <th:block  th:each=" review : ${reviewList}" th:object="${review}">
+                        <div class="review">
                           
 
-                          <div class="storereview-top">
+                            <div class="storereview-top">
       
                               <div class="storereview-top-left">
                                   <img class="review-member-profile"
@@ -153,28 +153,20 @@
                               </div>
                            </th:block>
 
-                           <th:block th:unless="${!#lists.isEmpty(replyList)}" th:each=" reply : *{replyList}">
-                                <div class="store-reply">
-                                    <img class="review-store-profile" th:src="${reply.storeImg}" alt="가게 프로필 이미지">
-            
-                                    <p class="reply-content-bubble" th:text="${reply.replyContent}">
-                                        사장님 답글
-                                    </p>
-                                </div>
+
+                            <!-- replyList가 비어 있지 않을 때 나타날 블록 -->
+                            <th:block th:if="${!#lists.isEmpty(review.replyList)}">
+                                <th:block th:each="reply : *{replyList}">
+                                    <div class="store-reply">
+                                        <img class="review-store-profile" th:src="${reply.storeImg}" alt="가게 프로필 이미지">
+                                        <p class="reply-content-bubble" th:text="${reply.replyContent}">
+                                            사장님 답글
+                                        </p>
+                                    </div>
+                                </th:block>
                             </th:block>
 
-      
-                          <th:block th:if="${!#lists.isEmpty(replyList)}" th:each=" reply : *{replyList}">
-                              <div class="store-reply">
-                                  <img class="review-store-profile" th:src="${reply.storeImg}" alt="가게 프로필 이미지">
-          
-                                  <p class="reply-content-bubble" th:text="${reply.replyContent}">
-                                      사장님 답글
-                                  </p>
-                              </div>
-                          </th:block>
-
-                      </div>
+                        </div>
                   </th:block>
                   
               </div>
@@ -202,6 +194,7 @@
    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
    <!-- 마이페이지 JS 추가 -->
-   <script src="/js/myPage/storeMyPage.js"></script>
+   <!-- <script src="/js/myPage/storeMyPage.js"></script> -->
+   <script src="/js/myPage/storeMyPageReview.js"></script>
 </body>
 </html>

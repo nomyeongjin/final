@@ -237,7 +237,10 @@
 	</select>
 	
 	
-	
+	<insert id="insertReply">
+		INSERT INTO "REVIEW_REPLY"
+		VALUES (NEXT_REPLY_NO(), #{storeNo}, #{replyContent}, SYSDATE, DEFAULT, #{reviewNo})
+	</insert>
 	
 	
 	

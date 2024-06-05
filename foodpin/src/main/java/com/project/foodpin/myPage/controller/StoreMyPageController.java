@@ -26,6 +26,7 @@ import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.myPage.model.service.StoreMyPageService;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.review.model.dto.ReviewReply;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.MenuContainer;
 import com.project.foodpin.store.model.dto.Store;
@@ -330,6 +331,71 @@ public class StoreMyPageController {
 
 		return service.ceoInfoUpdate(member);
 	}
+	
+	
+	
+	/** 사장님 댓글 삽입
+	 * @param loginMember
+	 * @param replyContent
+	 * @param inputReply
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("insertReply")
+	public String insertReply(
+	    @SessionAttribute("loginMember") Member loginMember,
+	    @RequestParam("replyContent") String replyContent,
+	    ReviewReply inputReply,
+	    RedirectAttributes ra) {
+		
+		inputReply.setReplyContent(replyContent);
+	    
+	    int result = service.insertReply(inputReply);
+	    
+	    String message = null;
+	    
+	    if(result > 0) {
+	    	message = "답글이 작성되었습니다.";
+	    } else {
+	    	message = "답글 작성 실패했습니다.";
+	    }
+	    
+	    ra.addFlashAttribute("message", message);
+	    
+	    return "redirect:/myPage/store/review";
+	}
+	
+	
+	// 댓글 미답변 조회
+	@GetMapping("reviewUnanswered")
+	public String reviewUnanswered(
+		@SessionAttribute("loginMember") Member loginMember,
+		Model model, RedirectAttributes ra
+		) {
+			
+		int memberNo = loginMember.getMemberNo();
+		
+		List<Review> reviewList = service.reviewAll(memberNo);
+		
+		model.addAttribute("reviewList", reviewList);
+		
+		
+		return "myPage/store/reviewUnanswered";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
