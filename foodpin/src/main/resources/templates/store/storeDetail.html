@@ -563,7 +563,7 @@
                 
                 <div class="storereview-container" th:if="${reviewList}">
                     
-                    <th:block th:unless= "${!#lists.isEmpty(reviewList)}">
+                    <th:block th:if="${#lists.isEmpty(reviewList)}">
                         <h3>작성된 리뷰가 없습니다.</h3>
                     </th:block>
 
@@ -690,7 +690,7 @@
                                 <div class="store-reply">
                                     <img class="review-store-profile" th:src="${reply.storeImg}" alt="가게 프로필 이미지">
             
-                                    <p class="reply-content-bubble" th:text="${reply.replyContent}">
+                                    <p class="reply-content-bubble" th:text="${reply.replyConent}">
                                         사장님 답글
                                     </p>
                                 </div>
