@@ -78,7 +78,7 @@
 	<!-- 채팅방 메세지 조회 -->
 	<select id="selectMessageList" resultType="Message">
 		SELECT MESSAGE_NO, MESSAGE_CONTENT, READ_FL, MEMBER_NO, CHATTING_NO,
-		TO_CHAR(SEND_TIME, 'YYYY.MM.DD HH24:MI') SEND_TIME 
+		TO_CHAR(SEND_TIME, 'HH24:MI') SEND_TIME 
 		FROM MESSAGE
 		WHERE CHATTING_NO  = #{chattingNo}
 		ORDER BY MESSAGE_NO

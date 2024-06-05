@@ -326,8 +326,8 @@ if(chattingSock != undefined){
   
               ul.append(li);
               display.scrollTop = display.scrollHeight; // 스크롤 제일 밑으로
-          }
-  
+            }
+            
       })
       .catch(err => console.log(err));
   }
