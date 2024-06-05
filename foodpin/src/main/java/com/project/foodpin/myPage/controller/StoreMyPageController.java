@@ -48,7 +48,9 @@ public class StoreMyPageController {
 	@GetMapping("storeInfo")
 	public String storeInfo(@SessionAttribute("loginMember") Member loginMember, Model model) {
 
-		Store store = service.selectstoreInfo(loginMember.getMemberNo());
+		Store store = service.selectstoreInfo(loginMember.getMemberNo()); // 가게 정보
+		
+		
 		
 		// 불러온 store 정보에서 주소 쪼개기
 		String storeLocation = store.getStoreLocation();
@@ -114,9 +116,10 @@ public class StoreMyPageController {
 	@ResponseBody
 	public int menuUpdate(@RequestBody @ModelAttribute MenuContainer menuContainer) {
 		
+		// menuContainer에서 이미지파일 제외한 정보 inputMenuList로 분리
 		List<Menu> inputMenuList =  menuContainer.getMenuList();
 		
-		List<MultipartFile> imgUrlList = new ArrayList<>();
+		List<MultipartFile> imgUrlList = new ArrayList<>(); // 이미지파일만 담아 줄 리스트 생성
 		
 		for (Menu menu : inputMenuList) {
 			imgUrlList.add(menu.getMenuImg());

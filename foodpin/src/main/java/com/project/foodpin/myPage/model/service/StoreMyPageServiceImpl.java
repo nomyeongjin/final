@@ -101,37 +101,37 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		String updatePath = "";
 		String rename = "";
 		
-		result = mapper.deleteAllMenu(inputMenuList.get(0).getStoreNo());
+		result = mapper.deleteAllMenu(inputMenuList.get(0).getStoreNo()); // 기존 메뉴 데이터 삭제 (플래그 변경)
 		
-		if( !inputMenuList.get(0).getMenuTitle().isEmpty()) {
+		// 메뉴명이 비어있지 않은 경우 (입력된 데이터가 있는 경우)
+		if( !inputMenuList.get(0).getMenuTitle().isEmpty()) { 
 			
 			for (Menu menu : inputMenuList) {
-				
 
-				for(MultipartFile imgUrl : imgUrlList) {
+				// 업로드 한 메뉴 이미지가 있는 경우
+				if( !imgUrlList.isEmpty()) { 
 					
-					if( !imgUrl.isEmpty()) { // 업로드 한 메뉴 이미지가 있는 경우
+					for(MultipartFile imgUrl : imgUrlList) {
 						
 						rename = Utility.fileRename(imgUrl.getOriginalFilename());
 						updatePath = menuWebPath + rename;
-						menu.setMenuImgUrl(rename);
+						menu.setMenuImgUrl(updatePath);
 					}
-					
-					result = mapper.insertMenu(menu);
-					
-					if(result > 0) { // db등록 성공시 파일 업로드 폴더에 이미지 저장
-						
-						try {
-							menu.getMenuImg().transferTo(new File(menuFolderPath + rename)); // db등록 성공시 파일 업로드()
-						}catch (Exception e) {
-							e.printStackTrace();
-						}
-					} // if
 				}
-			
+				
+				result = mapper.insertMenu(menu); // 메뉴 등록
+				
+				if(result > 0) { // db등록 성공시 파일 업로드 폴더에 이미지 저장
+					
+					try {
+						menu.getMenuImg().transferTo(new File(menuFolderPath + rename)); // db등록 성공시 파일 업로드()
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
+				} // if
 			}
-		} // 이미지 있는 경우	
-
+			
+		}
 		return result;
 	}
 
