@@ -131,43 +131,6 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 			
 			}
 		} // 이미지 있는 경우	
-		
-		
-		
-		
-		
-		
-		
-		
-//        for (Menu menu : inputMenuList) {
-//        	
-//        	// 1. 기존 MENU_FL 값을 'Y'로 변경 (삭제)
-//        	result = mapper.deleteMenu(menu);
-//        	
-//            // 2. 메뉴 번호 조회
-//            int menuNo = mapper.selectMenuNo(menu);
-//            
-//            menu.setMenuNo(menuNo); // 조회한 메뉴 번호 세팅
-//            
-//            if (menuNo != 0) { // 데이터가 조회된 경우
-//            	
-//    			// 3. 기존 데이터와 완전히 동일한 메뉴 조회
-//    			result = mapper.selectSameMenuNo(menu);
-//    			
-//    			if(result == 1) return result; // 2번 결과가 1인경우 -> 수정 사항 없음
-//    			
-//    			// 4. 메뉴이름은 그대로인데 나머지 내용이 바뀐 경우 내용 수정
-//    			result = mapper.updateMenu(menu);
-//    			
-//    			// 추후 이미지 추가 예정
-//    			
-//    			
-//    			if(result == 1) return result; // 수정됨
-//    			
-//            }
-//
-//            
-//		}
 
 		return result;
 	}

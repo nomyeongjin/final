@@ -111,6 +111,11 @@
 
 	
 	<!-- 기존 고정 휴무일 삭제 -->
+	<select id="countOffWeek">
+		SELECT COUNT(*) FROM "OFF_WEEK" WHERE STORE_NO = #{storeNo}
+	</select>
+	
+	<!-- 기존 고정 휴무일 삭제 -->
 	<delete id="deleteOffWeek">
 		DELETE FROM "OFF_WEEK" WHERE STORE_NO = #{storeNo}
 	</delete>

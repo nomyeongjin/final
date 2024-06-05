@@ -99,7 +99,7 @@ public class StoreMyPageController {
 	 * @param loginMember
 	 * @return menuList
 	 */
-	@GetMapping(value="menuSelect", produces = "application/json")
+	@GetMapping("menuSelect")
 	@ResponseBody
 	public List<Menu> menuSelect(@RequestParam("storeNo") int storeNo) {
 		

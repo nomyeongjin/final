@@ -3,7 +3,7 @@ const menuContainer = document.querySelector(".myPage-content-container"); // �
 const menuBtn = document.querySelector("#menuBtn"); // 메뉴 정보 버튼
 
 
-
+console.log(storeNo);
 /**
  * (버튼) 메뉴 정보
  */
@@ -17,7 +17,7 @@ menuBtn.addEventListener("click", () => {
    menuBtn.classList.add('title-btn-checked'); // 선택된 요소 체크 클래스 추가
 
    menuContainer.innerHTML = "";
-   // console.log(storeNo);
+   console.log(storeNo);
 
    // DB에서 메뉴 정보 받아오기
    fetch("/myPage/store/menuSelect?storeNo=" + storeNo)
@@ -196,22 +196,40 @@ menuBtn.addEventListener("click", () => {
       }
 
       /* 조회된 MenuList 존재할 경우 menu_row 요소 생성 + 데이터 넣기 */
-      menuList.forEach( (menu, index) => { 
+      menuList.forEach( (menu, i) => { 
 
          const menuRow = document.createElement("section"); // menu_row
          menuRow.classList.add("menu-row");
 
          // 이미지
          const menuImgArea = document.createElement("div"); // menu-img-area
-         menuImgArea.classList.add("menu-img-area");
+         menuImgArea.classList.add("menu-img-area", 'img-ari');
+
+         const menuImgInput = document.createElement("input"); // menu-img-input
+         menuImgInput.id = "inputMenuImg" + i;
+         menuImgInput.classList.add("input-menu-img");
+         menuImgInput.setAttribute('type','file');
+         menuImgInput.setAttribute('accept','image/*');
+         menuImgInput.setAttribute('name','menuImg'); // !!! name="menuImg" !!!
+         
+         const labelMenuImg = document.createElement("label"); // input 연결된 label
+         labelMenuImg.setAttribute('for', 'inputMenuImg' + i);
+         labelMenuImg.classList.add('hidden');
+
+         const iconPic = document.createElement("i"); // i (사진)
+         iconPic.classList.add('fa-regular', 'fa-image');
+
+         const iconPlus = document.createElement("i"); // i (+)
+         iconPlus.classList.add('fa-solid', 'fa-plus');
 
          const menuImgDel = document.createElement("i"); // .menu-img-del (이미지 삭제)
          menuImgDel.classList.add('fa-solid', 'fa-xmark', 'menu-img-del');
 
          const menuImg = document.createElement("img"); // menu-img
-         menuImg.classList.add("menu-img");
-         
-         menuImgArea.append(menuImgDel, menuImg); // 이미지 관련 요소 적재
+         menuImg.classList.add('menu-img');
+
+         labelMenuImg.append(iconPic, iconPlus); // 이미지 관련 요소 적재
+         menuImgArea.append(menuImgInput, labelMenuImg, menuImgDel, menuImg);
 
          // 텍스트
          const menuInputArea = document.createElement("div"); // menu-input-area
@@ -244,7 +262,7 @@ menuBtn.addEventListener("click", () => {
          const menuRowDel = document.createElement("i"); // .menu-row-del (행 삭제)
          menuRowDel.classList.add('fa-solid', 'fa-xmark', 'menu-row-del');
 
-         if(index == 0) menuRowDel.classList.add('blind'); // 첫번쨰 행인 경우 삭제 버튼 숨기기
+         if(i == 0) menuRowDel.classList.add('blind'); // 첫번쨰 행인 경우 삭제 버튼 숨기기
 
          menuInputArea.append(menuTitle, amountArea, menuContent, menuRowDel);
          menuRow.append(menuImgArea, menuInputArea);
@@ -257,6 +275,24 @@ menuBtn.addEventListener("click", () => {
          menuTitle.value = menu.menuTitle;
          menuAmount.value = menu.menuAmount;
          menuContent.value = menu.menuContent;
+
+         /**
+          *  x 버튼 클릭시 이미지태그 제거 + 기본 이미지, input 태그 다시 추가
+          */
+         menuImgDel.addEventListener("click", () => {
+
+            console.log("이미지 삭제");
+            menuImgArea.classList.remove("img-ari"); // 테두리 없애는 클래스 추가
+            
+            menuImg.setAttribute("src", ''); // 이미지 태그 hidden
+            menuImg.classList.add('hidden');
+            menuImgDel.classList.add('hidden');
+
+            menuImgInput.nextSibling.classList.remove('hidden');
+
+            statusCheck = 0;
+         }) // menuImgDel.addEventListener("click"
+
       }) // forEach
 
       const menuRowAdd = document.createElement("i"); // #menuRowAdd (행 추가)
@@ -342,9 +378,9 @@ menuBtn.addEventListener("click", () => {
                const url = e.target.result; // 이미지 정보
 
                // 이미지, 이미지 제거 버튼(X) 요소 추가
-               menuImgArea.classList.add("img-ari");
+               // menuImgArea.classList.add("img-ari");
                
-               // console.log(inputMenuImg.nextSibling);
+               console.log(inputMenuImg.nextSibling);
                inputMenuImg.nextSibling.classList.add('hidden');
 
                const menuImgDel = document.createElement("i"); // .menu-img-del (이미지 삭제 버튼 x)
@@ -367,6 +403,7 @@ menuBtn.addEventListener("click", () => {
                 */
                menuImgDel.addEventListener("click", () => {
       
+                  console.log("이미지 삭제");
                   menuImgArea.classList.remove("img-ari"); // 테두리 없애는 클래스 추가
                   
                   menuImg.setAttribute("src", ''); // 이미지 태그 hidden

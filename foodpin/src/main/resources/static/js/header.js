@@ -107,10 +107,16 @@ if (notificationLoginCheck) {
                 //알림 내용 
                 const border = document.createElement("div");
                 border.classList.add("border");
+                
+                const contentContainer = document.createElement("div");
+                contentContainer.classList.add("notification-content-container");
 
-                // if (data.notificationCheck == 'N') {
-                //     border.classList.add("not-read");
-                // }
+                if (data.notificationCheck == 'N') {
+                    
+                    contentContainer.classList.remove("notification-content-container");
+                    contentContainer.classList.add("not-read");
+                    
+                }
 
                 border.addEventListener("click", e => {
 
@@ -141,8 +147,6 @@ if (notificationLoginCheck) {
                 temp.classList.add("temp");
 
                 //class="notification-content-container"
-                const contentContainer = document.createElement("div");
-                contentContainer.classList.add("notification-content-container");
                
                 // class="reservation-info"
                 const reservationInfo = document.createElement("div");
@@ -177,9 +181,13 @@ if (notificationLoginCheck) {
                 const xmark = document.createElement("i");
                 xmark.classList.add('fa-regular',"fa-circle-xmark");
 
+                // 알림 클릭 후 경로 이동시 읽음으로 처리해서 알림 삭제
+                // border.addEventListener("click", e => {
+                    
+                // })
+                
                 // 알림 삭제
                 xmark.addEventListener("click", e => {
-
                     fetch("/notification", {
                         method: "DELETE",
                         headers: { "Content-Type": "application/json" },
@@ -187,12 +195,12 @@ if (notificationLoginCheck) {
                     })
                     .then(resp => resp.text())
                     .then(result => {
-                        xmark.parentElement.remove();
-
+                        border.parentElement.remove();
+    
                         notReadCheckFn().then(notReadCount => {
-
+    
                             const notificationBtn = document.querySelector(".notification-bell-btn");
-
+    
                             if (notReadCount > 0) {
                                 notificationBtn.classList.remove("fa-regular");
                                 notificationBtn.classList.add("fa-solid");
@@ -201,8 +209,11 @@ if (notificationLoginCheck) {
                                 notificationBtn.classList.remove("fa-solid");
                             }
                         })
-
+    
                     })
+                    
+                    e.stopPropagation();
+
                 })
 
 
