@@ -81,6 +81,12 @@ public interface StoreMyPageService {
 	 */
 	List<Reservation> reservAll(int memberNo);
 
+	/** 예약 승인
+	 * @param reserv
+	 * @return
+	 */
+	int updateReservStatus(int reservNo);
+	
 	/** 확정된 예약 조회
 	 * @param memberNo
 	 * @return
@@ -104,6 +110,8 @@ public interface StoreMyPageService {
 	 * @return
 	 */
 	List<Review> reviewAll(int memberNo);
+
+
 
 	
 
