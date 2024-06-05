@@ -77,6 +77,8 @@ if (notificationLoginCheck) {
         notificationBtn.classList.remove("fa-regular");
         notificationBtn.classList.add("fa-solid");
 
+        notReadCheckFn();
+
         selectnNotificationFn();
     })
 
