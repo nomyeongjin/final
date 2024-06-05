@@ -631,9 +631,8 @@
    display: flex;
    flex-direction: column;
    align-items: center;
-   border: 1px solid gold;
+   border: 1px solid var(--submit-color);
    border-radius: 20px;
-   background: lightgoldenrodyellow;
    padding: 50px 20px;
 }
 #menuRowContainer{
@@ -660,7 +659,7 @@
    flex-direction: column;
    width: 80px;
    height: 80px;
-   border: 1px solid grey;
+   border: 1px solid var(--submit-color);
    border-radius: 5px;
 }
 .img-ari{
@@ -672,6 +671,7 @@
    justify-content: center;
    flex-direction: row;
    padding-left: 5px;
+   color: var(--main-color);
 }
 
 /* 사진 영역 */
@@ -694,7 +694,7 @@
    width: 80px;
    height: 80px;
    border-radius: 5px;
-   /* border: 1px solid var(--main-color); //고민 */
+   border: 1px solid var(--submit-color); //고민
 }
 
 /* 이미지 제거 x 버튼 */
@@ -703,8 +703,8 @@
    position: absolute;
    margin: 65px;
    margin-top: 10px;
-   color: white;
-   -webkit-text-stroke: 0.7px black
+   color: var(--submit-color);
+   /* -webkit-text-stroke: 0.7px var(--submit-color); */
 }
 
 
@@ -719,9 +719,8 @@
    height: 26px;
    outline: none;
    padding: 5px;
-   background: lightgoldenrodyellow;
-   border: 1px solid lightgoldenrodyellow;
-   border-bottom: 1px solid grey;
+   border: 1px solid white;
+   border-bottom: 1px solid var(--submit-color);
 }
 .menu-title{
    width: 23%;
@@ -744,9 +743,11 @@
 /* x 버튼 */
 .menu-row-del{
    font-size: 14px;
+   color: var(--main-color);
 }
 .fa-circle-plus{
    font-size: 20px;
+   color: var(--submit-color);
 }
 /* 버튼 */
 .btn-area{

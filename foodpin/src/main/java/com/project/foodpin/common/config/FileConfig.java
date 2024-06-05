@@ -60,6 +60,16 @@ public class FileConfig implements WebMvcConfigurer {
 	
 	@Value("${my.store.resource-location}")
 	private String storeResourceLocation; // 게시글 이미지 요청 시 연결할 서버 폴더 경로
+	
+	//---------
+	// 메뉴 이미지
+	
+	
+	@Value("${my.menu.resource-handler}")
+	private String menuResourceHandler; // 게시글 이미지 요청 주소 
+	
+	@Value("${my.menu.resource-location}")
+	private String menuResourceLocation; // 게시글 이미지 요청 시 연결할 서버 폴더 경로
 
 	
 	// 요청 주소에 따라 서버 컴퓨터의 어떤 경로에 접근할지 설정 
@@ -81,9 +91,14 @@ public class FileConfig implements WebMvcConfigurer {
 		.addResourceHandler(boardResourceHandler).addResourceLocations(boardResourceLocation);
 		
 		// -----
-		// 리뷰 이미지 요청 - 서버 폴더 연결 추가
+		// 가게 이미지 요청 - 서버 폴더 연결 추가
 		registry
 		.addResourceHandler(storeResourceHandler).addResourceLocations(storeResourceLocation);
+		
+		// -----
+		// 가게 이미지 요청 - 서버 폴더 연결 추가
+		registry
+		.addResourceHandler(menuResourceHandler).addResourceLocations(menuResourceLocation);
 		
 		
 		
