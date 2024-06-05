@@ -13,8 +13,14 @@ mapHome.addEventListener("click", () => {
 const storedetailmapbutton = document.querySelector("#chatS");
 
 storedetailmapbutton.addEventListener("click", () => {
-  location.href = "/chatting/chat";
-
+    
+    if(loginMember == null){
+        alert('로그인이 필요한 기능입니다');
+        location.href = "storeSearch";
+        return;
+    }
+    
+    location.href = "/chatting/chat";
 });
 
 
@@ -209,7 +215,7 @@ window.onload = function() {
 
 
 // 비동기로 내용 불러올 공간
-const sidebarMenu = document.querySelector(".sidebar-menu");
+/* const sidebarMenu = document.querySelector(".sidebar-menu");
 
 
 
@@ -227,4 +233,4 @@ storedetailmapbutton.addEventListener("click", () => {
     sidebarMenu.innerHTML = "";
 
 
-});
+}); */
