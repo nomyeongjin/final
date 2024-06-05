@@ -575,30 +575,7 @@
 .review-content .fa-solid{
    margin: 20px 10px;
 }
-/* 사장님 댓글 */
-.reply-content-bubble {
-   width: 80%;
-   position:relative;
-   margin-top: 23px;
-   margin-left: 10px;
-   padding: 20px;
-   max-width: 480px;
-   background:#666;
-   color: #fff;
-   border-radius: 10px;
-   display: flex;
-   justify-content: space-between;
-}
-.reply-content-bubble:after {
-   border-top:15px solid #666;
-   border-left: 16px solid transparent;
-   border-right: 0px solid transparent;
-   border-bottom: 0px solid transparent;
-   content:"";
-   position:absolute;
-   top:17px;
-   left:-15px;
-}
+
 .review-comment{
    width: 80%;
    background-color: #666;
@@ -1002,6 +979,9 @@
    padding: 0 25px;
    display: flex;
    margin: 30px 0;
+   margin-bottom: 0px;
+   justify-content: center;
+   align-items: center;
 }
 
 
@@ -1010,13 +990,13 @@
    height: 60px;
    border-radius: 50%;
    margin-right: 20px;
-   margin-top: 20px;
 }
 
 .reply-content-bubble {
    position:relative;
    margin: 20px 0px;
-   margin-left: 10px;
+   margin-bottom: 10px;
+   margin-left: 13px;
    padding: 20px;
    width: 480px;
    background:#666;
@@ -1114,3 +1094,28 @@
    justify-content: center;
    align-items: flex-end;
 }
+
+.store-reply-box{
+   display: flex;
+   flex-direction: column;
+}
+
+.store-reply-btn{
+   display: flex;
+   justify-content: flex-end;
+   align-items: flex-end;
+   margin-right: 30px;
+}
+
+.store-reply-btn > button{
+   cursor: pointer;
+   margin-left: 15px;
+   border: 1px solid var(--main-color);
+   border-radius: 7px;
+   width: 70px;
+   height: 25px;
+   font-size: 15px;
+   color: rgb(46, 41, 41);
+   background-color: white;
+}
+

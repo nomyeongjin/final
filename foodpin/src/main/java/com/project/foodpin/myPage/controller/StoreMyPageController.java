@@ -344,11 +344,11 @@ public class StoreMyPageController {
 	@PostMapping("insertReply")
 	public String insertReply(
 	    @SessionAttribute("loginMember") Member loginMember,
-	    @RequestParam("replyContent") String replyContent,
+	    @RequestParam("replyConent") String replyConent,
 	    ReviewReply inputReply,
 	    RedirectAttributes ra) {
 		
-		inputReply.setReplyContent(replyContent);
+		inputReply.setReplyConent(replyConent);
 	    
 	    int result = service.insertReply(inputReply);
 	    
