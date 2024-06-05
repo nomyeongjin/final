@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function() {
   const showReview = document.querySelector("#showReview");
-  const reviewBox = document.getElementsByClassName(".review-container"); // 스크롤할 대상 요소
+  const reviewBox = document.querySelector(".review-container"); // 스크롤할 대상 요소
 
   if (showReview && reviewBox) {
     showReview.addEventListener("click", () => {

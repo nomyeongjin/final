@@ -42,26 +42,7 @@ show.addEventListener('click', ()=>{
 })
 
 
-// 비동기로 내용 불러올 공간
-const sidebarMenu = document.querySelector(".sidebar-menu");
 
-
-
-const remS = document.querySelector("#remS");
-
-storedetailmapbutton.addEventListener("click", () => {
-
-    sidebarMenu.innerHTML = "";
-
-   
-});
-const resS = document.querySelector("#resS");
-
-storedetailmapbutton.addEventListener("click", () => {
-    sidebarMenu.innerHTML = "";
-
-
-});
 
 
 /* 카테고리 박스 접기 */
@@ -227,3 +208,23 @@ window.onload = function() {
 
 
 
+// 비동기로 내용 불러올 공간
+const sidebarMenu = document.querySelector(".sidebar-menu");
+
+
+
+const remS = document.querySelector("#remS");
+
+storedetailmapbutton.addEventListener("click", () => {
+
+    sidebarMenu.innerHTML = "";
+
+   
+});
+const resS = document.querySelector("#resS");
+
+storedetailmapbutton.addEventListener("click", () => {
+    sidebarMenu.innerHTML = "";
+
+
+});

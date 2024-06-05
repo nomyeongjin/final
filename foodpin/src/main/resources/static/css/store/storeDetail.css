@@ -53,6 +53,8 @@ aside >a{
     background-color: #fff;
     border: none;
     cursor: pointer;
+    font-size: 14px;
+    color: rgb(39, 39, 39);
 }
 #toChatting:hover{
     border-bottom: 1px solid rgb(66, 66, 66);
@@ -345,11 +347,7 @@ aside>a:hover{
     margin-right: 5px;
     color: var(--main-color);
 }
-#toChatting{
 
-    font-size: 14px;
-    color: rgb(39, 39, 39);
-}
 
 
 
@@ -816,7 +814,7 @@ hr{
 
 .menuN{
   font-size: 14px;
-  color: var(--main-color);
+  color: gray;
   border-bottom: 1px solid var(--main-color);
 }
 
