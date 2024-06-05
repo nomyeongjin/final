@@ -188,31 +188,46 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		/* 노쇼 처리 */
 		// 예약 노쇼 알림(1회)
 		case "reservFirstNoshow" :
-			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"경고 > 노쇼 누적 1회 (노쇼 3회 처리 시 계정이 정지 됩니다.)", sendMember.getMemberNickname(), notification.getReservDate());
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"경고 > 노쇼 누적 1회 (노쇼 3회 처리 시 계정이 3일 정지 됩니다.)", sendMember.getMemberNickname(), notification.getReservDate());
 			
-			contentForManager = String.format("<b>%s<b>님이 노쇼 누적 1회 건이 있습니다 확인 해주세요", sendMember.getMemberNickname());
+			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 1회 건이 있습니다 확인 해주세요", sendMember.getMemberNickname());
 			
 //			contentForStore = String.format("<b>%s<b>님이 예약 날짜에 방문하지 않았습니다. ", sendMember.getMemberNickname());
 			break;
 		
 		// 예약 노쇼 알림(2회)
 		case "reservSecondNoshow" :
-			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"경고 > 노쇼 누적 2회 (노쇼 3회 처리 시 계정이 정지 됩니다.)");
-			contentForManager = String.format("<b>%s<b>님이 노쇼 누적 2회 건이 있습니다 확인 해주세요", sendMember.getMemberNickname());
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"경고 > 노쇼 누적 2회 (노쇼 3회 처리 시 계정이 3일 정지 됩니다.)");
+			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 2회 건이 있습니다 확인 해주세요", sendMember.getMemberNickname());
 			break;
 		
 		// 예약 노쇼 알림(3회)
 		case "reservThirdNoshow" : 
-			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 3건이 발생하여 계정이 정지 됩니다. 관련 사항은 관리자에게 문의 해주세요.");
-			contentForManager = String.format("<b>%s<b>님이 노쇼 누적 3회 건 발생 되었습니다. 계정 정치 처리 확인 해주세요.", sendMember.getMemberNickname());
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 3건이 발생하여 계정이 3일간 정지 됩니다. 관련 사항은 관리자에게 문의 해주세요.");
+			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 3회 건 발생 되었습니다. 계정 정치 처리 확인 해주세요.", sendMember.getMemberNickname());
 			break;
 			
 			// 문자 보내기
-		}
+		
+		// 예약 노쇼 알림(4회)
+		case "reservFourthNoshow" : 
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 4회 (노쇼 5회 처리 시 계정이 5일 정지됩니다.)");
+			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 4회 건이 있습니다. 확인 해주세요.", sendMember.getMemberNickname());
+			break;
+			
+		// 예약 노쇼 알림(5회)
+		case "reservFifthNoshow" : 
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 5건이 발생하여 계정이 5일간 정지 됩니다. 관련 사항은 관리자에게 문의 해주세요.");
+			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 5회 건이 있습니다. 확인 해주세요.", sendMember.getMemberNickname());
+			break;
+		
 		
 		// 신고 처리(일반 회원, 가게 사장님, 관리자 모두 알림 대상)
+		case "reviewReport" : 
+			contentForManager = String.format("<b>%s<b> 가게의 리뷰 신고가 들어왔습니다.", null);
 		
 		
+		}
 
 		// 알림 전송 및 문자 발송 로직
 		
