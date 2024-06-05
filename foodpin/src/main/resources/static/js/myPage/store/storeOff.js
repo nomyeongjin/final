@@ -317,8 +317,8 @@ const createPopup = () => {
       const off = {
          "storeNo" : storeNo,
          "offDayTitle" : title.value,
-         "offWeekStart" : start.value,
-         "offWeekEnd" : end.value
+         "offDayStart" : start.value,
+         "offDayEnd" : end.value
       };
 
       fetch("/myPage/store/calendarOffInsert", {

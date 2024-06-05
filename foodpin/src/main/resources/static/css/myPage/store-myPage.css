@@ -434,6 +434,7 @@
 
 /* 예약 목록 */
 #reservListContainer{
+   width: 80%;
    padding: 15px;
 }
 /* 목록 1행 */
@@ -462,7 +463,18 @@
    display: flex;
    flex-direction: column;
 }
-.row{
+.row, row-time{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+/* .row-time > p{
+   display: flex;
+   margin: 5px;
+   display: flex;
+   justify-content: space-between;
+} */
+.p-row{
    display: flex;
    flex-direction: row;
 }
@@ -472,16 +484,13 @@
 .row > p{
    margin: 5px;
 }
-.row > p:first-of-type {
-   width: 65%;
-}
 /* 버튼 */
 .list-btn-area{
    display: flex;
    flex-direction: row;
    justify-content: center;
 }
-.list-btn{
+.reserv-btn, .reserv-reject-btn{
    width: 100px;
    height: 22px;
    background: white;

@@ -111,6 +111,13 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	List<Reservation> reservAll(int memberNo);
+	
+	/** 예약 승인 
+	 * @param reserv
+	 * @return
+	 */
+	int updateReservStatus(int reservNo);
+
 
 	/** 확정된 예약 조회
 	 * @param memberNo
@@ -157,6 +164,8 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	int insertReply(ReviewReply inputReply);
+
+
 
 
 

@@ -92,11 +92,6 @@
 		#{menuAmount}, #{menuContent}, #{menuImgUrl}, #{storeNo}, DEFAULT)
 	</insert>
 	
-	
-	
-	
-	
-	
 	<!-- 완전히 동일한 메뉴인지 조회 -->
 	<select id="selectSameMenuNo">
 		SELECT COUNT(*) FROM "MENU"
@@ -147,8 +142,8 @@
 	
 	<!-- 전체 예약 조회 -->
 	<select id="reservAll">
-		SELECT MEMBER_NAME, MEMBER_TEL, TO_CHAR(RESERV_DATE, 'YYYY"년" MM"월" DD"일"') RESERV_DATE, 
-			RESERV_TIME, RESERV_COUNT, RESERV_REQUEST, RESERV_STATUS_FL
+		SELECT MEMBER_NAME, RESERV_NO, MEMBER_TEL, TO_CHAR(RESERV_DATE, 'YYYY"년" MM"월" DD"일"') RESERV_DATE, 
+			RESERV_TIME, RESERV_COUNT, RESERV_REQUEST, RESERV_STATUS_FL, STORE_NO
 		FROM "RESERVATION"
 		JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE STORE_NO = (
@@ -159,6 +154,12 @@
 		)
 		ORDER BY RESERV_DATE
 	</select>
+	
+	<!-- 예약 승인 -->
+	<update id="updateReservStatus">
+		UPDATE "RESERVATION" SET RESERV_STATUS_FL = 'Y'
+		WHERE RESERV_NO = #{reservNo}, 
+	</update>
 	
 	<!-- 확정된 예약 조회 -->
 	<select id="reservConfirm">

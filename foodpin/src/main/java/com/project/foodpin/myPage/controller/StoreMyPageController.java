@@ -198,7 +198,7 @@ public class StoreMyPageController {
 		
 		return service.calendarOffInsert(inputOff);
 	}
-
+	// ------ 예약 관리 ------
 	
 	/** 예약 관리 화면 이동 (+예약 전체 조회)
 	 * @param loginMember
@@ -211,6 +211,7 @@ public class StoreMyPageController {
 		List<Reservation> reservList = service.reservAll(loginMember.getMemberNo());
 		
 		model.addAttribute("reservList", reservList);
+		model.addAttribute("storeNo", reservList.get(0).getStoreNo());
 		
 		return "myPage/store/reservation";
 	}
@@ -224,7 +225,6 @@ public class StoreMyPageController {
 		
 		int memberNo = loginMember.getMemberNo();
 		
-		System.out.println(statusFl);
 		if(statusFl == null) {
 			List<Reservation> reservList = service.reservAll(memberNo);
 			
@@ -233,6 +233,26 @@ public class StoreMyPageController {
 		
 		return null;
 	}
+	
+	/** 예약 승인 (비동기)
+	 * @return reservList
+	 */
+	@ResponseBody
+	@GetMapping("updateReservStatus")
+	public List<Reservation> updateReservStatus(@RequestParam("reservNo") int reservNo) {
+		
+		
+		return service.updateReservStatus(reservNo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/** 확정된 예약 전체 조회 (비동기)
 	 * @return reservList

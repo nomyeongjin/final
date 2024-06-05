@@ -192,6 +192,13 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public List<Reservation> reservAll(int memberNo) {
 		return mapper.reservAll(memberNo);
 	}
+	
+	// 예약 승인
+	@Override
+	public int updateReservStatus(int reservNo) {
+		
+		return mapper.updateReservStatus(reservNo);
+	}
 
 
 	// 확정된 예약 조회
@@ -226,6 +233,7 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int insertReply(ReviewReply inputReply) {
 		return mapper.insertReply(inputReply);
 	}
+
 
 
 

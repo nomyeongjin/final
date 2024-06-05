@@ -180,3 +180,33 @@ reservcancel.addEventListener("click", () => {
    createCard();
 });
 
+/* ------------------- */
+
+
+
+
+addEventListener("DOMContentLoaded", () => {
+
+
+   /**
+    * (버튼) 예약 승인
+    */
+   document.querySelectorAll(".reserv-btn").forEach(btn => {
+      
+      btn.addEventListener("click", e => {
+         const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
+
+         console.log(reservNo, storeNo);
+         
+         fetch("/myPage/store/updateReservStatus?reservNo=" + reservNo)
+         .then(resp => resp.json())
+         .then(result => {
+
+            if(result > 0){
+               alert("예약 번호 " + reservNo + "번 예약이 승인되었습니다.");
+            }
+         })
+   
+      }) // reservBtn.addEventListener("click"
+   }); // forEach(reservBtn
+});
