@@ -115,32 +115,41 @@
                             <div class="storedetail-row">
 
 
-                                <div class="store-avgScore">
+                                <div class="allstar-box">
 
-                                    <div class="background-star">
-                                        <i class="total_star  fas fa-star"></i>
-                                        <i class="total_star  fas fa-star"></i>
-                                        <i class="total_star  fas fa-star"></i>
-                                        <i class="total_star  fas fa-star"></i>
-                                        <i class="total_star  fas fa-star"></i>
-                                       
-                                 
-                                    </div>
-                                 
-                                    <div class="realAvg-star" >    
+                                    <div class="store-avgScore">
+
+                                        <div class="background-star">
+                                            <i class="total_star  fas fa-star"></i>
+                                            <i class="total_star  fas fa-star"></i>
+                                            <i class="total_star  fas fa-star"></i>
+                                            <i class="total_star  fas fa-star"></i>
+                                            <i class="total_star  fas fa-star"></i>
+                                           
                                      
-                                        <i class="total_star  fas fa-star"></i>
-                                        <i class="total_star  fas fa-star"></i>
-                                        <i class="total_star  fas fa-star"></i>
-                                        <i class="total_star  fas fa-star"></i>
-                                        <i class="total_star  fas fa-star"></i>
-
+                                        </div>
+                                     
+                                        <div class="realAvg-star" >    
+                                         
+                                            <i class="total_star  fas fa-star"></i>
+                                            <i class="total_star  fas fa-star"></i>
+                                            <i class="total_star  fas fa-star"></i>
+                                            <i class="total_star  fas fa-star"></i>
+                                            <i class="total_star  fas fa-star"></i>
+    
+                                        </div>
+                                     
+                                        
                                     </div>
-                                 
+    
+                                    <div>
+                                        <span id="totalScoreR" th:text="*{totalRating}"> 점수 </span> 
+                                    </div>
                                     
+
                                 </div>
                                 
-                                <span id="totalScoreR" th:text="*{totalRating}"> 점수 </span> 
+                               
                                   
                                     
                                
@@ -241,6 +250,7 @@
 
                         </div>
 
+                        <th:block th:if="${store.storeInfo != null}">
 
                     
                         <div class="store-detail-content">
@@ -261,6 +271,8 @@
                         </span>
 
                         <hr>
+
+                       </th:block>
                      
 
                      <!-- 가게 예약 버튼-->
@@ -481,7 +493,7 @@
                     </div>
                     </div>
                 
-                    <div class="moreMenuImageBtnBox">
+                    <div class="moreMenuImageBtnBox" th:if="${#lists.size(menuList) > 3}">
                     <button id="moreMenuImageBtn">더보기</button>
                     <button id="shutMenuImageBtn" style="display: none;">접기</button>
                     </div>
@@ -524,9 +536,16 @@
             <div class="storeLookText">
                 <span>식당 사진</span>
             </div>
+
+                   <th:block th:if="${#lists.size(imageList) == 0}">
+                    <span class="imageN">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        아직 가게 사진이 없습니다
+                    </span>
+                    </th:block>
               
         
-        <div class="detail-images" th:if="${#lists.size(imageList)>0}">
+           <div class="detail-images" th:if="${#lists.size(imageList)>0}">
 
             <th:block th:each="i:${#numbers.sequence(0, #lists.size(store.imageList)-1)}">
            
@@ -538,7 +557,7 @@
            
         </div>
 
-        <div class="moreStoreImageBtnBox">
+        <div class="moreStoreImageBtnBox" th:if="${#lists.size(imageList)>6}">
             <button id="moreStoreImageBtn">사진 더보기</button>
             <button id="shutStoreImageBtn">사진 접기</button>
         </div>
