@@ -84,7 +84,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
         if(result == 0) return;
         
         //채팅이 보내진 시간을 MSG 세팅
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         msg.setSendTime(sdf.format(new Date()) );
         
 		
