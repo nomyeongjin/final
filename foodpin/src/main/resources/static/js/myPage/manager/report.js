@@ -1,4 +1,4 @@
-/* 리뷰 신고 처리중/완료 화면 변경 */
+/* 리뷰 신고 처리중 / 처리완료 화면 변경 */
 const reportBtn = document.querySelector("#reportBtn");
 const completeReportBtn = document.querySelector("#completeReportBtn");
 const reportReviewContainer = document.querySelector(".reportReview-container");

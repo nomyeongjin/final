@@ -37,14 +37,18 @@ public interface ManagerMyPageMapper {
 	// 처리한 리뷰 신고 개수
 	int completeReportCount();
 	
-	// 신고리뷰 삭제
-	boolean deleteReport(int reportNo);
+	// UPDATE REPORT_DEL_FL = 'Y'
+	boolean updateReport(int reportNo);
+	
+	// UPDATE REVIEW_DEL_FL = 'Y'
+	boolean updateReview(int reportNo);
 	
 	// 가게 정보 정정 신청 조회
 	List<Request> infoRequestList();
 
 	// 가게 정보 정정 처리 완료
 	boolean completeRequest(int requestNo);
+
 
 
 

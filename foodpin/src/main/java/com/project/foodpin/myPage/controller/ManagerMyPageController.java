@@ -161,6 +161,18 @@ public class ManagerMyPageController {
 		return ResponseEntity.ok(response);
 	}
 	
+	// 신고 리뷰 불충분 처리
+	@PostMapping("notReportReview/{reportNo}")
+	public ResponseEntity<Map<String, Object>> notReportReview(
+		@PathVariable("reportNo") int reportNo) {
+		
+		boolean notReportReview = service.notReportReview(reportNo);
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", notReportReview);
+		return ResponseEntity.ok(response);
+	}
+	
+	
 	// 정보 정정 신청 조회
 	@GetMapping("managerStoreInfo")
 	public String memberReportReview(Model model) {

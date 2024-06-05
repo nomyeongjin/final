@@ -35,11 +35,15 @@ public interface ManagerMyPageService {
 	// 신고리뷰 삭제
 	boolean deleteReport(int reportNo);
 	
+	// 신고 리뷰 불충분
+	boolean notReportReview(int reportNo);
+	
 	// 가게 정보 정정 신청 조회
 	List<Request> infoRequestList();
 
 	// 가게 정보 정정 처리 완료
 	boolean completeRequest(int requestNo);
+
 
 
 

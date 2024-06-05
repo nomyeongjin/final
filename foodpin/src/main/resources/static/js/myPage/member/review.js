@@ -26,8 +26,5 @@ reviewDeleteBtns.forEach((btn) => {
       alert("취소 되었습니다.");
       return;
     }
-
-
-
-  })
+  });
 })

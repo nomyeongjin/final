@@ -150,6 +150,7 @@ tbody tr td {
 /* 정보 수정 신고 */
 .requestList {
     display: flex;
+    width: 600px;
     align-items: center;
     text-align: left;
     margin: 20px 0;
@@ -211,4 +212,19 @@ tbody tr td {
     display: block;
     margin-top: 10px;
     background-color: #2B3151;
+}
+
+.storereview-image{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.review-look{
+    margin: 8px;
+    width: 205px;
+    height: 205px;
+    border-radius: 5px;
 }
