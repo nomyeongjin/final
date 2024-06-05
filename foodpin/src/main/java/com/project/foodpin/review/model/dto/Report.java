@@ -15,6 +15,12 @@ public class Report {
 	private String reportContent;
 	private int reviewNo;
 	private int memberNo;
+	private String reportDate;
 	
+	private String reviewContent;
+	private int storeNo;
+	private String storeTel;
+	private String storeName;
+	private String memberName;
 	
 }

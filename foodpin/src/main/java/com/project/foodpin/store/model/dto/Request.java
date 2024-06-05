@@ -1,7 +1,5 @@
 package com.project.foodpin.store.model.dto;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +21,8 @@ public class Request {
 
 	private int storeNo;
 	private int memberNo;
-  private String requestDate;
+	private String requestDate;
+	private String storeTel;
 	
 	private String memberName;
 	private String storeName;

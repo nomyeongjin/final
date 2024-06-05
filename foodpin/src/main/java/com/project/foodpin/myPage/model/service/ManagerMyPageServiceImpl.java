@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.mapper.ManagerMyPageMapper;
+import com.project.foodpin.review.model.dto.Report;
 import com.project.foodpin.store.model.dto.Request;
 
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,36 @@ public class ManagerMyPageServiceImpl implements ManagerMyPageService{
 	@Override
 	public boolean closeStore(int memberNo) {
 		return mapper.closeStore(memberNo);
+	}
+	
+	// 리뷰 신고 내역 조회
+	@Override
+	public List<Report> reportList() {
+		return mapper.reportList();
+	}
+	
+	// 리뷰 신고 개수
+	@Override
+	public int reportCount() {
+		return mapper.reportCount();
+	}
+	
+	// 처리한 리뷰 신고 조회
+	@Override
+	public List<Report> completeReportList() {
+		return mapper.completeReportList();
+	}
+	
+	// 처리한 리뷰 신고 개수
+	@Override
+	public int completeReportCount() {
+		return mapper.completeReportCount();
+	}
+	
+	// 신고리뷰 삭제
+	@Override
+	public boolean deleteReport(int reportNo) {
+		return mapper.deleteReport(reportNo);
 	}
 
 	// 가게 정보 정정 신청 조회

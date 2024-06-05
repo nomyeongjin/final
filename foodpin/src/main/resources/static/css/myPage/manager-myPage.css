@@ -199,3 +199,16 @@ tbody tr td {
     background-color: #f39da1;
     color: white;
 }
+
+/* 리뷰 신고 */
+.myPage-title span {
+    color: gray;
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+.notReport {
+    display: block;
+    margin-top: 10px;
+    background-color: #2B3151;
+}

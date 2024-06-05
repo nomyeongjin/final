@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.service.ManagerMyPageService;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.review.model.dto.Report;
 import com.project.foodpin.store.model.dto.Request;
 import com.project.foodpin.store.model.dto.Store;
 
@@ -130,10 +131,34 @@ public class ManagerMyPageController {
 		return ResponseEntity.ok(response);
 	}
 	
-	// 리뷰 신고
+	// 리뷰 신고 조회
 	@GetMapping("reportReview")
-	public String storeInfo() {
+	public String storeInfo(Model model) {
+		
+		List<Report> reportList = service.reportList();
+		int reportCount = service.reportCount();
+		
+		model.addAttribute("reportCount", reportCount);
+		model.addAttribute("reportList", reportList);
+		
+		List<Report> completeReportList = service.completeReportList();
+		int completeReportCount = service.completeReportCount();
+		
+		model.addAttribute("completeReportCount", completeReportCount);
+		model.addAttribute("completeReportList", completeReportList);
+		
 		return "myPage/manager/reportReview";
+	}
+	
+	// 신고 리뷰 삭제 처리
+	@PostMapping("deleteReport/{reportNo}")
+	public ResponseEntity<Map<String, Object>> deleteReport(
+		@PathVariable("reportNo") int reportNo) {
+		
+		boolean deleteReport = service.deleteReport(reportNo);
+		Map<String, Object> response = new HashMap<>();
+		response.put("success", deleteReport);
+		return ResponseEntity.ok(response);
 	}
 	
 	// 정보 정정 신청 조회
