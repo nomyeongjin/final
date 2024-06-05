@@ -3,6 +3,7 @@ package com.project.foodpin.myPage.model.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.mapper.ManagerMyPageMapper;
@@ -12,6 +13,7 @@ import com.project.foodpin.store.model.dto.Request;
 import lombok.RequiredArgsConstructor;
 
 @Service
+@Transactional(rollbackFor=Exception.class)
 @RequiredArgsConstructor
 public class ManagerMyPageServiceImpl implements ManagerMyPageService{
 	
@@ -68,7 +70,15 @@ public class ManagerMyPageServiceImpl implements ManagerMyPageService{
 	// 신고리뷰 삭제
 	@Override
 	public boolean deleteReport(int reportNo) {
-		return mapper.deleteReport(reportNo);
+		boolean updateReport = mapper.updateReport(reportNo);
+		boolean updateReview = mapper.updateReview(reportNo);
+		return updateReport && updateReview;
+	}
+	
+	// 신고리뷰 불충분
+	@Override
+	public boolean notReportReview(int reportNo) {
+		return mapper.updateReport(reportNo);
 	}
 
 	// 가게 정보 정정 신청 조회

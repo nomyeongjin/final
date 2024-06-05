@@ -12,8 +12,8 @@ import lombok.Setter;
 public class Report {
 
 	private int reportNo;
-	private String reportContent;
 	private int reviewNo;
+	private String reportContent;
 	private int memberNo;
 	private String reportDate;
 	

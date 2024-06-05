@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.project.foodpin.myPage.model.mapper.ManagerMyPageMapper">
 
+	<resultMap type="Review" id="review_rm">
+		<id property="reviewNo" column="REVIEW_NO"/>
+		
+		<collection 
+			property="uploadList"
+			select = "uploadImageList"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "UploadImage"
+		/>
+		
+	</resultMap>
+
 	<!-- 가게 입점 내역 목록 -->
 	<select id="storeRequestList">
 		SELECT M.MEMBER_NO, MEMBER_NAME, STORE_NAME, STORE_INFO,
@@ -38,9 +51,9 @@
 	</update>
 	
 	<!-- 리뷰 신고 내역 조회 -->
-	<select id="reportList">
-		SELECT STORE_NAME, TO_CHAR(REPORT_DATE, 'YYYY-MM-DD') REPORT_DATE, REPORT_DATE A,
-			REVIEW_CONTENT, REPORT_CONTENT, MEMBER_NAME, STORE_TEL, REPORT_NO
+	<select id="reportList" resultMap="review_rm">
+		SELECT STORE_NO, STORE_NAME, TO_CHAR(REPORT_DATE, 'YYYY-MM-DD') REPORT_DATE, REPORT_DATE A,
+			REVIEW_CONTENT, REPORT_CONTENT, MEMBER_NAME, STORE_TEL, REPORT_NO, REVIEW_NO
 		FROM REPORT
 		JOIN MEMBER USING(MEMBER_NO)
 		JOIN REVIEW USING(REVIEW_NO)
@@ -50,16 +63,25 @@
 		ORDER BY A DESC
 	</select>
 	
+	<!-- 신고 리뷰 이미지 조회 -->
+	<select id="uploadImageList" resultType="UploadImage">
+		SELECT * 
+		FROM UPLOAD_IMAGE
+		WHERE REVIEW_NO = #{reviewNo}
+		ORDER BY IMAGE_ORDER
+	</select>
+	
 	<!-- 리뷰 신고 개수 -->
 	<select id="reportCount">
 		SELECT COUNT(*)
 		FROM REPORT
 		JOIN REVIEW USING(REVIEW_NO)
 		WHERE REVIEW_DEL_FL = 'N'
+		AND REPORT_DEL_FL = 'N'
 	</select>
 	
 	<!-- 처리한 리뷰 신고 조회 -->
-	<select id="completeReportList">
+	<select id="completeReportList" resultMap="review_rm">
 		SELECT STORE_NAME, TO_CHAR(REPORT_DATE, 'YYYY-MM-DD') REPORT_DATE, REPORT_DATE A,
 			REVIEW_CONTENT, REPORT_CONTENT, MEMBER_NAME, STORE_TEL
 		FROM REPORT
@@ -80,11 +102,20 @@
 		AND REPORT_DEL_FL = 'Y'
 	</select>
 	
-	<!-- 신고 리뷰 삭제 -->
-	<update id="deleteReport">
-		{CALL DELETE_REPORT(#{reportNo})}
+	<!-- REPORT_DEL_FL = 'Y' -->
+	<update id="updateReport">
+		UPDATE REPORT SET 
+		REPORT_DEL_FL = 'Y'
+		WHERE REPORT_NO = #{reportNo}
 	</update>
 	
+	<!-- REVIEW_DEL_FL = 'Y' -->
+	<update id="updateReview">
+		UPDATE REVIEW SET 
+		REVIEW_DEL_FL = 'Y'
+		WHERE REVIEW_NO IN(SELECT REVIEW_NO FROM REPORT WHERE REPORT_NO = #{reportNo})
+	</update>
+
 	<!-- 가게 정보 신고 조회 -->
 	<select id="infoRequestList">
 		SELECT REQUEST_CATEGORY_TITLE, 
