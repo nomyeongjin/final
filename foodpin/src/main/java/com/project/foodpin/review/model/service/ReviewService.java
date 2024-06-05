@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewHash;
+import com.project.foodpin.review.model.dto.ReviewReply;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
@@ -33,6 +34,7 @@ public interface ReviewService {
 	// 리뷰 수정
 	int updateReview(Review inputReview, List<Integer> menuNo, List<Integer> hashNo, String deleteOrder,
 			List<MultipartFile> images)  throws IllegalStateException, IOException;
+
 
 
 
