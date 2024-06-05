@@ -73,10 +73,16 @@ public class ReservationServiceImpl implements ReservationService{
 		return mapper.selectStoreName(store);
 	}
 	
-	// 고정 휴무일, 지정 휴무일
+	// 지정 휴무일 조회
 	@Override
 	public List<Off> selectOffDay(String storeNo) {
 		return mapper.selecetOffDay(storeNo);
+	}
+	
+	// 고정 휴무일 조회
+	@Override
+	public List<Off> selectOffWeek(String storeNo) {
+		return mapper.selectOffWeek(storeNo);
 	}
 }
 

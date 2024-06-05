@@ -195,7 +195,7 @@ if (notificationLoginCheck) {
                     })
                     .then(resp => resp.text())
                     .then(result => {
-                        border.parentElement.remove();
+                        contentContainer.parentElement.remove();
     
                         notReadCheckFn().then(notReadCount => {
     
