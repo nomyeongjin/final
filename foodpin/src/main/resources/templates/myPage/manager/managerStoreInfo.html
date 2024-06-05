@@ -26,22 +26,22 @@
                     </th:block>
                     
                     <section class="reportInfo-container">
-                    <th:block th:unless="${#lists.isEmpty(infoRequest)}">
-                        <div class="requestList" th:each="request : ${infoRequest}">
-                            <div class="request" th:object="${request}">
-                                <span class="request-category" th:text="*{requestCategoryTitle}"></span>
-                                <span class="request-date" th:text="*{requestDate}"></span>
-                                <div class="request-content" th:text="*{requestContent}"></div>
-                                <div class="requestMember" th:text="|신고자 : *{memberName}|"></div>
-                                <div class="requestStoreName" th:text="|가게명 : *{storeName}|"></div>
+                        <th:block th:unless="${#lists.isEmpty(infoRequest)}">
+                            <div class="requestList" th:each="request : ${infoRequest}">
+                                <div class="request" th:object="${request}">
+                                    <span class="request-category" th:text="*{requestCategoryTitle}"></span>
+                                    <span class="request-date" th:text="*{requestDate}"></span>
+                                    <div class="request-content" th:text="*{requestContent}"></div>
+                                    <div class="requestMember" th:text="|신고자 : *{memberName}|"></div>
+                                    <span class="requestStoreName" th:text="|가게명 : *{storeName} |"></span> |
+                                    <span class="requestStoreTel" th:text="|가게번호 : *{storeTel}|"></span>
+                                </div>
+                                <span>
+                                    <button class="completeBtn" th:data-request-no="${request.requestNo}">처리완료</button>
+                                </span>
                             </div>
-                            <span>
-                                <button class="completeBtn" th:data-request-no="${request.requestNo}">처리완료</button>
-                            </span>
-                        </div>
-                    </th:block>
+                        </th:block>
 
-                        
                     </section>
 
                 </div>

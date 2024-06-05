@@ -63,12 +63,18 @@
 	</select>
 	
 	
-	<!-- 고정 휴무일, 지정 휴무일 조회 -->
+	<!-- 지정 휴무일 조회 -->
 	<select id="selecetOffDay">
 		SELECT OFF_DAY_NO, OFF_DAY_TITLE , TO_CHAR(OFF_DAY_START, 'YYYY-MM-DD') OFF_DAY_START, 
-			   TO_CHAR(OFF_DAY_END, 'YYYY-MM-DD') OFF_DAY_END, OFF_WEEK
+			   TO_CHAR(OFF_DAY_END, 'YYYY-MM-DD') OFF_DAY_END
 		FROM "OFF_DAY"
-		JOIN "OFF_WEEK" USING (STORE_NO)
+		WHERE STORE_NO = #{storeNo}
+	</select>
+	
+	<!-- 고정 휴무일 조회 -->
+	<select id="selectOffWeek">
+		SELECT OFF_WEEK_NO, STORE_NO, OFF_WEEK
+		FROM "OFF_WEEK"
 		WHERE STORE_NO = #{storeNo}
 	</select>
 	

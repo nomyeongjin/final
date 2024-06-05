@@ -65,10 +65,6 @@ public class ChattingController {
 	}
 	
 	
-	
-	
-	
-	
 	/** 채팅 화면 이동
 	 * @return
 	 */

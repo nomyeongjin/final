@@ -33,6 +33,7 @@
    padding: 15px;
 }
 .myPage-sub-title{
+   display: flex;
    padding: 10px;
 }
 
@@ -47,6 +48,52 @@
    background: var(--main-color); 
    color: white;
 }
+
+#reviewAll{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 110px;  
+   height: 30px;
+   font-size: 16px;
+   margin-right: 25px;
+   border-radius: 20px;
+   border: 1px solid var(--main-color);
+   background: var(--main-color); 
+   color: white;
+}
+
+#reviewAll:hover{
+   cursor: pointer;
+   font-weight: bold;
+   border: 1px solid var(--main-color);
+   background-color: white;
+   color: var(--main-color); 
+}
+
+#Unanswered{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 110px;  
+   height: 30px;
+   font-size: 16px;
+   margin-right: 25px;
+   border-radius: 20px;
+   text-align: center;
+   border: 1px solid var(--main-color);
+   background: var(--main-color); 
+   color: white;
+}
+
+#Unanswered:hover{
+   cursor: pointer;
+   font-weight: bold;
+   border: 1px solid var(--main-color);
+   background-color: white;
+   color: var(--main-color); 
+}
+
 .sub-title-long{
    width: 140px;  
 }
@@ -537,30 +584,7 @@
 .review-content .fa-solid{
    margin: 20px 10px;
 }
-/* 사장님 댓글 */
-.reply-content-bubble {
-   width: 80%;
-   position:relative;
-   margin-top: 23px;
-   margin-left: 10px;
-   padding: 20px;
-   max-width: 480px;
-   background:#666;
-   color: #fff;
-   border-radius: 10px;
-   display: flex;
-   justify-content: space-between;
-}
-.reply-content-bubble:after {
-   border-top:15px solid #666;
-   border-left: 16px solid transparent;
-   border-right: 0px solid transparent;
-   border-bottom: 0px solid transparent;
-   content:"";
-   position:absolute;
-   top:17px;
-   left:-15px;
-}
+
 .review-comment{
    width: 80%;
    background-color: #666;
@@ -964,7 +988,9 @@
    padding: 0 25px;
    display: flex;
    margin: 30px 0;
-   border-bottom: 3px solid var(--main-color);
+   margin-bottom: 0px;
+   justify-content: center;
+   align-items: center;
 }
 
 
@@ -973,13 +999,13 @@
    height: 60px;
    border-radius: 50%;
    margin-right: 20px;
-   margin-top: 20px;
 }
 
 .reply-content-bubble {
    position:relative;
    margin: 20px 0px;
-   margin-left: 10px;
+   margin-bottom: 10px;
+   margin-left: 13px;
    padding: 20px;
    width: 480px;
    background:#666;
@@ -1059,3 +1085,46 @@
    margin-right: 10px;
    color: #696969
 }
+
+.reply-btn{
+   border: 1px solid var(--main-color);
+   border-radius: 5px;
+   background-color: white;
+   cursor: pointer;
+   margin-right: 10px;
+   color: black;
+   width: 70px;
+   height: 25px;
+}
+
+.reply-form{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: flex-end;
+}
+
+.store-reply-box{
+   display: flex;
+   flex-direction: column;
+}
+
+.store-reply-btn{
+   display: flex;
+   justify-content: flex-end;
+   align-items: flex-end;
+   margin-right: 30px;
+}
+
+.store-reply-btn > button{
+   cursor: pointer;
+   margin-left: 15px;
+   border: 1px solid var(--main-color);
+   border-radius: 7px;
+   width: 70px;
+   height: 25px;
+   font-size: 15px;
+   color: rgb(46, 41, 41);
+   background-color: white;
+}
+

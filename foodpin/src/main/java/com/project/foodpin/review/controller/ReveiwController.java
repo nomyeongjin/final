@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewHash;
+import com.project.foodpin.review.model.dto.ReviewReply;
 import com.project.foodpin.review.model.service.ReviewService;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;

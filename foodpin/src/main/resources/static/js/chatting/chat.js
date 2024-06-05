@@ -5,13 +5,6 @@ let selectTargetProfile; // 대상의 프로필
 
 // -----------------------------------------------------------------------------------------
 
-
-/* Get 방식 */
-function showPopup() { 
-  window.open("/chatting/chatPopup", "chatting", "채팅창", "width=500, height=600, left=100, top=50"); 
-}
-
-
 // 채팅에 사용될 SockJS 객체를 저장할 변수
 let chattingSock; 
 
@@ -326,8 +319,8 @@ if(chattingSock != undefined){
   
               ul.append(li);
               display.scrollTop = display.scrollHeight; // 스크롤 제일 밑으로
-          }
-  
+            }
+            
       })
       .catch(err => console.log(err));
   }

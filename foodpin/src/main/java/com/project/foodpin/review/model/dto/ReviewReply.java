@@ -13,8 +13,10 @@ public class ReviewReply {
 
 	private int replyNo;
 	private int storeNo;
-	private String replyContent;
+	private String replyConent;
 	private String replyRegDate;
 	private int reviewNo;
+	
+	private String storeImg;
 	
 }

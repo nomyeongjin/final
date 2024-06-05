@@ -114,7 +114,7 @@
 	
 	<!-- 해당하는 결과가 없을 경우 등록 -->
 	<insert id="insertOffWeek">
-		INSERT INTO "OFF_WEEK" VALUES(SEQ_WEEK_OFF_NO.NEXTVAL, #{storeNo}, #{offWeek})S
+		INSERT INTO "OFF_WEEK" VALUES(SEQ_WEEK_OFF_NO.NEXTVAL, #{storeNo}, #{offWeek})
 	</insert>
 	
 	<!-- 고정 휴무일 조회 -->
@@ -201,8 +201,6 @@
 			STORE_NO, MEMBER_NO
 		FROM REVIEW
 		JOIN "MEMBER" USING (MEMBER_NO)
-		JOIN "REVIEW_HASH" USING (REVIEW_NO)
-		JOIN "HASH" USING (HASH_NO)
 		WHERE STORE_NO = (
 			SELECT STORE_NO
 			FROM "STORE"
@@ -230,15 +228,19 @@
 	
 	<!-- 리뷰 사장님 댓글 조회 -->
 	 <select id="selectReplyList" resultType="ReviewReply">
-		SELECT R.*, S.STORE_IMG
+		SELECT R.REPLY_NO , R.REPLY_CONENT, R.REPLY_REG_DATE ,R.REPLY_DEL_FL, 
+			R.REVIEW_NO,  S.STORE_IMG
 		FROM REVIEW_REPLY R
 		JOIN STORE S ON (R.STORE_NO = S.STORE_NO)
 		WHERE REVIEW_NO = #{reviewNo}
 		AND REPLY_DEL_FL = 'N'
 	</select>
 	
-	
-	
+	<!-- 사장님 댓글 삽입 -->
+	<insert id="insertReply">
+		INSERT INTO "REVIEW_REPLY"
+		VALUES (NEXT_REPLY_NO(), #{storeNo}, #{replyContent}, SYSDATE, DEFAULT, #{reviewNo})
+	</insert>
 	
 	
 	

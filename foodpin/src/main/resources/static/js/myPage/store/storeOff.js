@@ -330,7 +330,10 @@ const createPopup = () => {
       .then(result => {
 
          if(result > 0) {
-            console.log("휴무 일정 등록 성공");
+            alert("휴무 일정 등록 성공");
+         }
+         else{
+            alert("실패")
          }
       })
    });

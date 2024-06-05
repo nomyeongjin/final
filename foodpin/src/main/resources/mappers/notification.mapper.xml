@@ -73,7 +73,7 @@
 		INSERT INTO "NOTIFICATION" VALUES(
 			SEQ_NOTIFICATION_NO.NEXTVAL, #{notificationContent}, DEFAULT, DEFAULT,
 			#{notificationUrl}, #{sendMemberProfileImg}, #{sendMemberNo},
-			#{receiveMemberNo}, #{notificationType})
+			#{receiveMemberNo}, #{notificationType}, 1)
 	</insert>
 	
 	
@@ -82,7 +82,7 @@
 		INSERT INTO "NOTIFICATION" VALUES(
 			SEQ_NOTIFICATION_NO.NEXTVAL, #{notificationContent}, DEFAULT, DEFAULT,
 			#{notificationUrl}, #{sendMemberProfileImg}, #{sendMemberNo},
-			#{receiveMemberNo}, #{notificationType})
+			#{receiveMemberNo}, #{notificationType}, 1)
 	</insert>
 	
 	
@@ -91,7 +91,7 @@
 		INSERT INTO "NOTIFICATION" VALUES(
 			SEQ_NOTIFICATION_NO.NEXTVAL, #{notificationContent}, DEFAULT, DEFAULT,
 			#{notificationUrl}, #{sendMemberProfileImg}, #{sendMemberNo},
-			#{receiveMemberNo}, #{notificationType})
+			#{receiveMemberNo}, #{notificationType}, 1)
 	</insert>
 	
 	

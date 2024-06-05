@@ -68,6 +68,12 @@
                javaType = "java.util.ArrayList"
                ofType = "ReviewHash"
    />
+   <collection property="storeCategoryList"
+               select = "selectStoreCategoryList"
+               column = "STORE_NO"
+               javaType = "java.util.ArrayList"
+               ofType = "StoreCategory"
+   />
 
 </resultMap>
 
@@ -131,10 +137,17 @@
 		JOIN REVIEW_HASH RH ON R.REVIEW_NO = RH.REVIEW_NO
 		JOIN HASH H ON RH.HASH_NO = H.HASH_NO
 		WHERE R.STORE_NO =  #{storeNo} 
+		AND REVIEW_DEL_FL ='N' 
    </select>
 
    
-   
+    <select id="selectStoreCategoryList" resultType="StoreCategory">
+        SELECT CATEGORY_TITLE  FROM "CATEGORY"
+		JOIN "STORE_CATEGORY" USING (CATEGORY_CODE)
+		WHERE STORE_NO = #{storeNo} 
+    </select>
+    
+    
       <!-- 가게 리뷰 상세 조회 -->
    <select id="reviewDetail" resultMap="review_rm">
    		SELECT DISTINCT MEMBER_NICKNAME, PROFILE_IMG, REVIEW_NO, REVIEW_RATING, REVIEW_CONTENT,
@@ -142,8 +155,6 @@
 			STORE_NO, MEMBER_NO
 		FROM REVIEW
 		JOIN "MEMBER" USING (MEMBER_NO)
-		JOIN "REVIEW_HASH" USING (REVIEW_NO)
-		JOIN "HASH" USING (HASH_NO)
 		WHERE STORE_NO = #{storeNo}
 		AND REVIEW_DEL_FL = 'N'
 		ORDER BY REVIEW_NO DESC
@@ -167,7 +178,8 @@
 	
 	<!-- 리뷰 사장님 댓글 조회 -->
 	 <select id="selectReplyList" resultType="ReviewReply">
-		SELECT R.*, S.STORE_IMG
+		SELECT R.REPLY_NO , R.STORE_NO, R.REPLY_CONENT, R.REPLY_REG_DATE ,R.REPLY_DEL_FL , 
+			R.REVIEW_NO,  S.STORE_IMG
 		FROM REVIEW_REPLY R
 		JOIN STORE S ON (R.STORE_NO = S.STORE_NO)
 		WHERE REVIEW_NO = #{reviewNo}
@@ -204,18 +216,7 @@
 	      SELECT SEQ_REPORT_NO.NEXTVAL FROM DUAL
 	  	</selectKey>
 		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		INSERT INTO "REPORT" VALUES(#{reportNo}, #{reportContent}, #{reviewNo}, #{memberNo})
+		INSERT INTO "REPORT" VALUES(#{reportNo}, #{reportContent}, #{reviewNo}, #{memberNo}, DEFAULT, DEFAULT)
 	</insert>   
    
    

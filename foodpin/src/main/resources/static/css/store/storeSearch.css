@@ -154,10 +154,6 @@ body{
    background-color:#363f75;
    color: #EFEFCB;
 }
-#mapHome{
-   background-color: #363f75;                     
-   color: #EFEFCB;
-}
 
 #mapHome::before{
 

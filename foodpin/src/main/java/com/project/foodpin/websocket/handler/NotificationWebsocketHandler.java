@@ -140,6 +140,12 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		
 		// 관리자에게 보낼 메시지
 		String contentForManager = null;
+		
+		// url 저장
+		String urlForMember = null;
+		String urlForStore = null;
+		String urlForManager = null;
+		
 		log.info("-----------------------------------------------------------------------------------");
 		log.info(notification.toString());
 		log.info("-----------------------------------------------------------------------------------");
@@ -150,6 +156,9 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		case "readyReservation" : 
 			contentForMember = String.format("<b>%s<b> <b>%s<b> 사장님이 예약 확인 중입니다.", notification.getReservDate() , store.getStoreName());
 			contentForStore = String.format("<b>%s<b> 예약 신청 내역이 있습니다. 확인해주세요", notification.getReservDate());
+			
+			urlForMember = "/myPage/member/reservation/wait";
+			urlForStore = "/myPage/store/reservation";
 			break;
 		
 		/* 예약 승인 했을 때 */
@@ -234,7 +243,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		 ObjectMapper objectMapper = new ObjectMapper();
 
 		// 회원에게 알림 전송
-		if (contentForMember != null) {
+		if (contentForMember != null && urlForMember != null) {
 
 			Notification memberNotification = new Notification();
 			memberNotification.setReceiveMemberNo(sendMember.getMemberNo());
@@ -242,7 +251,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			memberNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			memberNotification.setNotificationContent(contentForMember);
 			memberNotification.setSendMemberNo(store.getMemberNo()); // 예약한 회원 번호로 알림 전송
-			memberNotification.setNotificationUrl(notification.getNotificationUrl());
+			memberNotification.setNotificationUrl(urlForMember);
 			service.sendNotificationMember(memberNotification);
 			
 			for(WebSocketSession ws : sessions) {
@@ -261,7 +270,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		}
 		
 		// 가게 사장님에게 알림 전송
-		if(contentForStore != null) {
+		if(contentForStore != null && urlForStore != null) {
 			
 			Notification storeNotification = new Notification();
 			storeNotification.setReceiveMemberNo(store.getMemberNo());
@@ -269,7 +278,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			storeNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			storeNotification.setNotificationContent(contentForStore);
 			storeNotification.setSendMemberNo(sendMember.getMemberNo()); // 예약하는 회원 번호로 알림 전송
-			storeNotification.setNotificationUrl(notification.getNotificationUrl());
+			storeNotification.setNotificationUrl(urlForStore);
 			service.sendNotificationStore(storeNotification);
 			
 			for(WebSocketSession ws : sessions) {
@@ -295,7 +304,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			managerNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			managerNotification.setNotificationContent(contentForManager);
 			managerNotification.setSendMemberNo(sendMember.getMemberNo()); // 예약하는 회원 번호로 알림 전송
-			managerNotification.setNotificationUrl(notification.getNotificationUrl());
+			managerNotification.setNotificationUrl(urlForManager);
 			service.sendNotificationManager(managerNotification);
 			
 			for(WebSocketSession ws : sessions) {
