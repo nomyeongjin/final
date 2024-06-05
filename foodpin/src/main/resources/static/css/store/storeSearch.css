@@ -255,16 +255,6 @@ i{
 
 }
 
-.search-panelContent{
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   height: 90%;
-   transform: translate(0%);
-  
-}
-
 #searchButton{
    border: none;
    background-color: white;
@@ -429,11 +419,13 @@ i{
    align-items: center;
    padding: 0 20px;
    justify-content: center;
+   height: 90%;
+   transform: translate(0%);
 
 }
 
 .searchstore-detailcontainer::-webkit-scrollbar {
-   display: none;
+  /*  display: none; */
 }
 
 .searchstore-detailcontainer{
@@ -496,6 +488,14 @@ i{
    display: flex;
     justify-content: space-between;
     padding: 10px;
+}
+
+
+.storesearch-firstrow{
+   height: 40px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
 }
 
 .storesearch-heartcontainer{
