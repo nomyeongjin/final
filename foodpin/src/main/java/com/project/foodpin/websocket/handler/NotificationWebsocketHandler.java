@@ -157,7 +157,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			contentForMember = String.format("<b>%s<b> <b>%s<b> 예약이 승인 되었습니다. 이용에 참고 부탁드립니다.",
 					notification.getReservDate() , store.getStoreName() );
 			
-			contentForStore = String.format("<b>%s<b> 예약 승인 내역이 있습니다. 확인해주세요", notification.getReservDate() );
+//			contentForStore = String.format("<b>%s<b> 예약 승인 내역이 있습니다. 확인해주세요", notification.getReservDate() );
 			break;
 			
 		/* 예약 취소 시(회원/가게) */	
@@ -210,7 +210,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			// 문자 보내기
 		}
 		
-		// 신고 처리
+		// 신고 처리(일반 회원, 가게 사장님, 관리자 모두 알림 대상)
 		
 		
 

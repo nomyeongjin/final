@@ -619,10 +619,20 @@ header>section:nth-child(3) {
 
 /* 안 읽은 알림 */
 .not-read {
-   background-color: rgba(176, 208, 238, 0.7);
+   background-color: #efefdb;
    border-radius: 10px;
    color: black;
    /* font-weight: bold; */
+   padding: 15px;
+   border-radius: 10px;
+   margin-bottom: 10px;
+}
+.not-read>.fa-circle-xmark{
+   cursor: pointer;
+   font-size: 20px;
+   display: flex;
+   /* position: absolute;
+   right: -210px; */
 }
 
 .notification-item{
@@ -638,6 +648,7 @@ header>section:nth-child(3) {
    display: flex;
    align-items: center;
    flex-direction: column;
+   cursor: pointer;
    /* position: relative;
    top: 100px;
    overflow: auto; */
@@ -657,6 +668,11 @@ header>section:nth-child(3) {
    /* justify-content: center; */
    height: 30px;
 }
+
+.notification-content-container>.reservation-info>.notification-date{
+   color: #717171;
+}
+
 
 .image{
    width: 30px;
@@ -684,6 +700,13 @@ header>section:nth-child(3) {
    color: #717171;
 }
 
+.notification-content-container>.notification-content>.notification-message{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: #717171;
+}
+
 .notification-message{
   font-size: 15px;
   padding: 15px 0;
@@ -694,14 +717,14 @@ header>section:nth-child(3) {
    cursor: pointer;
    font-size: 20px;
    display: flex;
-   position: relative;
-   right: -210px;
+   position: absolute;
+   right: 20px;
 }
 
 .fa-circle-xmark:hover{
    color: red;  
    user-select: none;
-   background-color: white;
+   /* background-color: white; */
 }
 
 .notification-bell-btn>.notReadCount {
