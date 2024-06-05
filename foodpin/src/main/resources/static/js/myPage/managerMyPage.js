@@ -62,6 +62,10 @@ const completeBtn = document.querySelectorAll(".completeBtn");
 
 completeBtn.forEach(btn => {
     btn.addEventListener("click", e => {
+        if(!confirm("정정 처리를 완료하시겠습니까?")) {
+            e.preventDefault();
+            return;
+        }
         const requestNo = e.target.dataset.requestNo;
         completeRequest(requestNo);
     });
