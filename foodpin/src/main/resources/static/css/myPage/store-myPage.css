@@ -15,7 +15,7 @@
 :root {
    --main-color : #363f75 ; /* 로고/메인 색상 (파랑)*/
    --main-font-color : #121a49 ; /* 로고/메인 색상 (파랑)*/
-   --hover-color : #f6f6e5; /* 연한 연두 */
+   --hover-color : #EFEFCB; /* 연한 연두 */
    --submit-color : #E14C54; /* 핫핑크 */
    --sub-color : #F3C186; /* 연한 주황 */    
    --border-color : #DF8B4E; /* 연한 주황 */    
@@ -377,6 +377,12 @@
 .fc table {
    font-size: 14px;
 }
+
+/* 오늘 날짜 색상 */
+.fc-today{
+   background: #EFEFCB !important;
+}
+
 .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
    max-height: 50px;
 }
@@ -445,6 +451,7 @@
    background: lightgray;
    margin: 15px;
 }
+/* 예약 타입 */
 .list-title-area{
    margin: 10px 5px;
    display: flex;
@@ -455,33 +462,19 @@
 .list-title{
    font-weight: bold;
 }
-.fa-circle{
-   font-size: 5px;
-   color: red;
-}
+/* 새로운 예약 ? 추가할지... */
+
+/* 예약 내용 */
 .list-content{
    display: flex;
    flex-direction: column;
 }
-.row, row-time{
+.row-time, .row{
    display: flex;
    flex-direction: row;
    justify-content: space-between;
 }
-/* .row-time > p{
-   display: flex;
-   margin: 5px;
-   display: flex;
-   justify-content: space-between;
-} */
-.p-row{
-   display: flex;
-   flex-direction: row;
-}
-.list-content > p{
-   margin: 5px;
-}
-.row > p{
+.list-content > p, .row-time p, .row > p{
    margin: 5px;
 }
 /* 버튼 */

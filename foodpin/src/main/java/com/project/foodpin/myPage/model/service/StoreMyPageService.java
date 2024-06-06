@@ -59,10 +59,6 @@ public interface StoreMyPageService {
 	 */
 	List<Off> selectWeekOff(int storeNo);
 
-	
-	
-	
-	
 	/** 지정 휴무일 조회
 	 * @param storeNo
 	 * @return offList
@@ -75,6 +71,7 @@ public interface StoreMyPageService {
 	 */
 	int calendarOffInsert(Off inputOff);
 	
+	// ------ 예약 관리 ------
 	
 	/** 전체 예약 조회
 	 * @param storeNo
@@ -82,18 +79,33 @@ public interface StoreMyPageService {
 	 */
 	List<Reservation> reservAll(int memberNo);
 
+	/** 예약 조회
+	 * @param storeNo
+	 * @param reservStatusFl
+	 * @return reservList
+	 */
+	List<Reservation> selectReserv(String storeNo, String reservStatusFl);
+
 	/** 예약 승인
-	 * @param reserv
-	 * @return
+	 * @param reservNo
+	 * @return result
 	 */
 	int updateReservStatus(int reservNo);
+	
+	/** 예약 거절 
+	 * @param reservNo
+	 * @return result
+	 */
+	int rejectReservStatus(int reservNo);
 	
 	/** 확정된 예약 조회
 	 * @param memberNo
 	 * @return
 	 */
-	List<Reservation> reservConfirm(int memberNo);
-
+	List<Reservation> reservConfirm(String storeNo);
+	
+	// ------ 사장님 정보 ------
+	
 	/** 사장님 정보 변경 화면으로 전환
 	 * @param memberNo
 	 * @return
@@ -106,6 +118,8 @@ public interface StoreMyPageService {
 	 */
 	int ceoInfoUpdate(Member inputMember);
 
+	// ------ 리뷰 ------
+	
 	/** 사장님 리뷰 조회
 	 * @param memberNo
 	 * @return
@@ -118,6 +132,7 @@ public interface StoreMyPageService {
 	 * @return
 	 */
 	int insertReply(ReviewReply inputReply);
+
 
 
 	

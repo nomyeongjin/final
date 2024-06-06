@@ -2,7 +2,6 @@ package com.project.foodpin.myPage.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -11,11 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
@@ -50,8 +47,6 @@ public class StoreMyPageController {
 	public String storeInfo(@SessionAttribute("loginMember") Member loginMember, Model model) {
 
 		Store store = service.selectstoreInfo(loginMember.getMemberNo()); // 가게 정보
-		
-		
 		
 		// 불러온 store 정보에서 주소 쪼개기
 		String storeLocation = store.getStoreLocation();
@@ -216,53 +211,62 @@ public class StoreMyPageController {
 		return "myPage/store/reservation";
 	}
 
-	/** 예약 전체 조회 (비동기)
+	/** 예약 조회 (조건값 : reservStatusFl) (비동기)
 	 * @return reservList
 	 */
 	@ResponseBody
 	@GetMapping("selectReserv")
-	public List<Reservation> selectReserv(@RequestParam("statusFl") String statusFl, @SessionAttribute("loginMember") Member loginMember) {
+	public List<Reservation> selectReserv(@RequestParam("storeNo") String storeNo, @RequestParam("reservStatusFl") String reservStatusFl) {
 		
-		int memberNo = loginMember.getMemberNo();
-		
-		if(statusFl == null) {
-			List<Reservation> reservList = service.reservAll(memberNo);
-			
-			return reservList;
-		}
-		
-		return null;
+		return service.selectReserv(storeNo, reservStatusFl);
 	}
 	
 	/** 예약 승인 (비동기)
-	 * @return reservList
+	 * @return result
 	 */
 	@ResponseBody
 	@GetMapping("updateReservStatus")
 	public int updateReservStatus(@RequestParam("reservNo") int reservNo) {
 		
-		
 		return service.updateReservStatus(reservNo);
 	}
 	
+	/** 예약 거절 (비동기)
+	 * @return result
+	 */
+	@ResponseBody
+	@GetMapping("rejectReservStatus")
+	public int rejectReservStatus(@RequestParam("reservNo") int reservNo) {
+		
+		return service.rejectReservStatus(reservNo);
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	/** 확정된 예약 전체 조회 (비동기)
+	/** 캘린더에 맞는 형태로 확정된 예약 전체 조회 (비동기)
 	 * @return reservList
 	 */
 	@ResponseBody
 	@GetMapping("reservConfirm")
-	public List<Reservation> reservConfirm(@SessionAttribute("loginMember") Member loginMember) {
+	public List<Map<String, String>> reservConfirm(@RequestParam("storeNo") String storeNo) {
 		
-		int memberNo = loginMember.getMemberNo();
-		return service.reservConfirm(memberNo);
+		List<Reservation> reservList = service.reservConfirm(storeNo);
+		
+		// 확정된 예약 조회 결과 없는 경우
+		if(reservList.isEmpty()) return null; 
+			
+		List<Map<String, String>> listMap = new ArrayList<>();
+		
+		for (Reservation reserv : reservList) {
+			
+			Map<String, String> map = new HashMap<>();
+			
+			map.put("title", reserv.getReservTime() + ", " + reserv.getReservCount() + "인");
+			map.put("start", reserv.getReservDate());
+			map.put("end", reserv.getReservDate());
+			
+			listMap.add(map);
+		}
+		
+		return listMap;
 	}
 	
 	

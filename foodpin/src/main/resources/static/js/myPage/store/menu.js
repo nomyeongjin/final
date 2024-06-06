@@ -32,10 +32,6 @@ menuBtn.addEventListener("click", () => {
       const menuRowContainer = document.createElement("div"); // div
       menuRowContainer.id = "menuRowContainer";
 
-
-
-
-
       
       /**
        * 메뉴 추가 버튼 클릭시 한 행을 구성하는 요소 생성
