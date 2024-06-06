@@ -146,6 +146,15 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		String urlForStore = null;
 		String urlForManager = null;
 		
+		// notiCode 지정
+		// 0 : 전체
+		// 1 : 예약 승인
+		// 2 : 예약 취소
+		// 3 : 신고
+		// 4 : 예약 거절
+		// 5 : 리뷰
+		int notiCode = 0;
+		
 		log.info("-----------------------------------------------------------------------------------");
 		log.info(notification.toString());
 		log.info("-----------------------------------------------------------------------------------");
@@ -159,12 +168,15 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			
 			urlForMember = "/myPage/member/reservation/wait";
 			urlForStore = "/myPage/store/reservation";
+			
+			notiCode = 0;
 			break;
 		
 		/* 예약 승인 했을 때 */
 		case "confirmReservation":
 			contentForMember = String.format("<b>%s<b> <b>%s<b> 예약이 승인 되었습니다. 이용에 참고 부탁드립니다.",
 					notification.getReservDate() , store.getStoreName() );
+			notiCode = 1;
 			
 //			contentForStore = String.format("<b>%s<b> 예약 승인 내역이 있습니다. 확인해주세요", notification.getReservDate() );
 			break;
@@ -173,6 +185,8 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		case "cancelReservation":
 			contentForMember = String.format("<b>%s<b> <b>%s<b> 예약이 취소되었습니다. 이용에 참고 부탁드립니다.", notification.getReservDate() , store.getStoreName());
 			contentForStore = String.format("<b>%s<b> 예약이 취소되었습니다.", notification.getReservDate() );
+			
+			notiCode = 2;
 			break;
 		
 		/* 가게 측에서 예약을 거절 했을 경우 */
@@ -180,6 +194,8 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			
 			contentForMember = String.format("<b>%s<b> 예약하신 <b>%s<b> 님이 예약을 거절했습니다. 확인해주세요", notification.getReservDate() , store.getStoreName());
 			contentForStore = String.format("<b>%s<b> 예약 거절 내역이 있습니다.", notification.getReservDate() );
+			
+			notiCode = 4;
 			break;
 			
 			
@@ -187,11 +203,14 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		// 손님 방문 리뷰
 		case "insertMemberReview" :
 			contentForStore  = String.format("<b>%s<b>이 <b>%s<b> 방문 후 후기를 남겨 주셨습니다.", sendMember.getMemberNickname(), notification.getReservDate());
+			
+			notiCode = 5;
 			break;
 			
 		// 가게 사장님 답글 
 		case "insertStroeReview" :
 			contentForMember  = String.format("<b>%s<b> 님이 남겨주신 후기에 사장님이 답글을 작성 하셨습니다.", sendMember.getMemberNickname());	
+			notiCode = 0;
 			break;
 			
 		/* 노쇼 처리 */
@@ -233,7 +252,8 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		
 		// 신고 처리(일반 회원, 가게 사장님, 관리자 모두 알림 대상)
 		case "reviewReport" : 
-			contentForManager = String.format("<b>%s<b> 가게의 리뷰 신고가 들어왔습니다.", null);
+			contentForManager = String.format("<b>%s<b> 가게의 리뷰 신고가 들어왔습니다.", store.getStoreName());
+			contentForStore = String.format("", null);
 		
 		
 		}
@@ -252,6 +272,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			memberNotification.setNotificationContent(contentForMember);
 			memberNotification.setSendMemberNo(store.getMemberNo()); // 예약한 회원 번호로 알림 전송
 			memberNotification.setNotificationUrl(urlForMember);
+			memberNotification.setNotiCode(notiCode);
 			service.sendNotificationMember(memberNotification);
 			
 			for(WebSocketSession ws : sessions) {
@@ -279,6 +300,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			storeNotification.setNotificationContent(contentForStore);
 			storeNotification.setSendMemberNo(sendMember.getMemberNo()); // 예약하는 회원 번호로 알림 전송
 			storeNotification.setNotificationUrl(urlForStore);
+			storeNotification.setNotiCode(notiCode);
 			service.sendNotificationStore(storeNotification);
 			
 			for(WebSocketSession ws : sessions) {
@@ -305,6 +327,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			managerNotification.setNotificationContent(contentForManager);
 			managerNotification.setSendMemberNo(sendMember.getMemberNo()); // 예약하는 회원 번호로 알림 전송
 			managerNotification.setNotificationUrl(urlForManager);
+			managerNotification.setNotiCode(notiCode);
 			service.sendNotificationManager(managerNotification);
 			
 			for(WebSocketSession ws : sessions) {
