@@ -109,13 +109,17 @@
 
         const reservDate = /*[[${param.originalReservDate[0]}]]*/ " 예약 날짜"
         // console.log(reservDate);
+        const memberCode = /*[[session.loginMember?.memberCode]]*/ "회원코드"
 
         document.addEventListener("DOMContentLoaded", () => {
+            // const url = memberCode == 1 ? "/myPage/member/reservation/wait" : "/myPage/store/reservation";
 
+            ///myPage/store/reservation
             setTimeout(() => {
-                sendNotificationFn("readyReservation", "/myPage/member/reservation/wait", reservNo, reservDate);
+                sendNotificationFn("readyReservation", null, reservNo, reservDate);
                 // alert("예약됨");
-            },500)
+            },500);
+
         })
     </script>
     

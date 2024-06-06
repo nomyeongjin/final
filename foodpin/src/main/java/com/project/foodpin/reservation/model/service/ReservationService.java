@@ -23,8 +23,11 @@ public interface ReservationService {
 	// 가게 이름 조회
 	String selectStoreName(Store store);
 
-	// 고정 휴무일, 지정 휴무일 지정
+	// 지정 휴무일 조회
 	List<Off> selectOffDay(String storeNo);
+
+	// 고정 휴무일 조회
+	List<Off> selectOffWeek(String storeNo);
 
 
 	

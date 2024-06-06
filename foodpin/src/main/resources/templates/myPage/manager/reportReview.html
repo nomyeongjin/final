@@ -21,23 +21,81 @@
                 <div class="myPage-title-container">
                     <section class="myPage-title">리뷰 신고</section>
 
-                    <section class="reportReview-container">
-                        <pre>
-                            신고 대상 리뷰 <i>2024-05-06 작성 리뷰</i>
-                            이거 먹고 배아파요 -0- 장사 똑바로 해
-                            회원명 : 김지사    회원 번호 : 25
-                            
-                            신고 상호명 - 맛나고기집   가게 번호 : 123457890
-                            신고 내용 - 저희는 엄청 깨끗한 집입니다. 이 사람 거짓말입니다.
-
-                            리뷰 조치 - 삭제 / 불충분
-                        </pre>
+                    <section class="myPage-sub-title">
+                        <button class="sub-title-btn" id="reportBtn">신고리뷰</button>
+                        <button class="sub-title-btn" id="completeReportBtn">처리완료</button>
                     </section>
+
+                    <!-- 신고 들어온 리뷰 -->
+                    <div class="reportReview-container">
+                        <th:block th:if="${#lists.isEmpty(reportList)}">
+                            <div class="emptyList">신고 내역이 없습니다</div>
+                        </th:block>
+
+                        <section class="reportReview-container">
+                            <th:block th:unless="${#lists.isEmpty(reportList)}">
+                                <span th:text="|총 *{reportCount}건|"></span>
+                                <div class="requestList" th:each="report : ${reportList}">
+                                    <div class="request" th:object="${report}">
+                                        <span class="request-category" th:text="*{storeName}"></span>
+                                        <span class="request-date" th:text="*{reportDate}"></span>
+
+                                        <!-- 리뷰 사진 -->
+                                        <div class="storereview-image" th:if="*{uploadList}">
+                                            <th:block th:each=" upload : *{uploadList}">
+                                                <img class="review-look" th:src="|${upload.imagePath}${upload.imgRename}|">
+                                            </th:block>
+                                        </div>
+
+                                        <div class="request-content" th:text="*{reviewContent}"></div>
+                                        <div class="requestMember" th:text="|작성자 : *{memberName}|"></div>
+                                        <div>신고자 : </div>
+                                        <div class="report-content" th:text="|신고사유 : *{reportContent}|"></div>
+                                        <span class="requestStoreName" th:text="|가게명 : *{storeName} |"></span> |
+                                        <span class="requestStoreTel" th:text="|가게번호 : *{storeTel}|"></span>
+                                    </div>
+                                    <span>
+                                        <button class="completeBtn deleteReview " th:data-report-no="${report.reportNo}">삭제처리</button>
+                                        <button class="completeBtn notReport" th:data-report-no="${report.reportNo}">불충분</button>
+                                    </span>
+                                </div>
+                            </th:block>
+                        </section>
+                    </div>
+                    <!-- 처리 완료 리뷰 -->
+                    <div class="completeReport-container">
+                        <th:block th:if="${#lists.isEmpty(completeReportList)}">
+                            <div class="emptyList">처리 내역이 없습니다</div>
+                        </th:block>
+
+                        <section class="reportReview-container">
+                            <th:block th:unless="${#lists.isEmpty(completeReportList)}">
+                                <span th:text="|총 *{completeReportCount}건|"></span>
+                                <div class="requestList" th:each="report : ${completeReportList}">
+                                    <div class="request" th:object="${report}">
+                                        <span class="request-category" th:text="*{storeName}"></span>
+                                        <span class="request-date" th:text="*{reportDate}"></span>
+
+                                        <!-- 리뷰 사진 -->
+                                        <div class="storereview-image" th:if="*{uploadList}">
+                                            <th:block th:each=" upload : *{uploadList}">
+                                                <img class="review-look" th:src="|${upload.imagePath}${upload.imgRename}|">
+                                            </th:block>
+                                        </div>
+
+                                        <div class="request-content" th:text="*{reviewContent}"></div>
+                                        <div class="report-content" th:text="|신고사유 : *{reportContent}|"></div>
+                                        <div class="requestMember" th:text="|작성자 : *{memberName}|"></div>
+                                        <span class="requestStoreName" th:text="|가게명 : *{storeName} |"></span> |
+                                        <span class="requestStoreTel" th:text="|가게번호 : *{storeTel}|"></span>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </section>
+                    </div>
 
                 </div>
             </section>
-
-
         </div>
     </main>
 
@@ -48,7 +106,7 @@
         <th:block th:replace="~{common/footer}"></th:block>
 
         <script src="/js/main.js"></script>
-        <script src="/js/myPage/managerMyPage.js"></script>
+        <script src="/js/myPage/manager/report.js"></script>
     
 </body>
 </html>

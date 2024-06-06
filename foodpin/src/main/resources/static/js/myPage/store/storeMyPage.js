@@ -39,3 +39,10 @@ function execDaumPostcode() {
 //   });
 //   calendar.render();
 // });
+
+
+const Unanswered = document.querySelector("#Unanswered");
+
+Unanswered.addEventListener("click", () => {
+  location.href = "/myPage/store/reviewUnanswered";
+});

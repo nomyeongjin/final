@@ -52,96 +52,98 @@
                   <img th:src="*{storeImg}" id="storeImg" alt="">
                </div>
                
-               <input type="file" name="image" id="imageInput" accept="image/*">
-               
-               <div class="edit-area-row">
-                  <label for="storeName">상호명 : </label>
-                  <div>
-                     <input type="text" name="storeName" id="storeName" th:value="*{storeName}" readonly>
+               <div class="storeInfo-container"><!-- 이미지, 가게소게 제외한 컨테이너 -->
+                  <input type="file" name="image" id="imageInput" accept="image/*">
+                  
+                  <div class="non-edit-area-row">
+                     <label for="storeName">상호명 : </label>
+                     <div>
+                        <input type="text" name="storeName" id="storeName" th:value="*{storeName}" readonly>
+                     </div>
                   </div>
-               </div>
-
-               <div class="edit-area-row">
-                  <label for="">전화번호 : </label>
-                  <div>
-                     <input type="text" name="storeTel" id="storeTel" th:value="*{storeTel}" readonly>
+   
+                  <div class="non-edit-area-row">
+                     <label for="">전화번호 : </label>
+                     <div>
+                        <input type="text" name="storeTel" id="storeTel" th:value="*{storeTel}" readonly>
+                     </div>
                   </div>
-               </div>
-
-               <!-- 주소 입력 -->
-               <div class="edit-area-row">
-                  <label for="storeLocation">가게 주소 :</label>
-
-                  <div class="input-area-cols">
+   
+                  <!-- 주소 입력 -->
+                  <div class="non-edit-area-row">
+                     <label for="storeLocation">가게 주소 :</label>
+                     <div>     
+                        <input type="text" name="storeLocation" placeholder="도로명/지번 주소" id="address" th:value="${address}" readonly>
+                        <input type="text" name="storeLocation" placeholder="상세 주소" id="detailAddress" th:value="${detailAddress}" readonly>
+                     </div>
+                  </div>
+   
+                  <!-- 예약 오픈 여부 -->
+                  <div class="edit-area-row">
+                     <label>예약 오픈 여부 : </label>
                      <div class="input-row">
-                        <input type="text" name="storeLocation" placeholder="우편번호" maxlength="6" id="postcode" th:value="${postcode}" readonly>                       
-                        <button type="button" id="searchAddress" readonly>검색</button>
+   
+                        <!-- 선택시 허용/미허용으로 변경 -->
+   
+                        <!-- 허용 -->
+                        <th:block th:if="*{storeStatus == 'Y'}">
+                           <input type="checkbox" id="storeStatus" name="storeStatus" checked><label for="storeStatus">신청 허용</label>
+                        </th:block>
+   
+                        <!-- 미허용 -->
+                        <th:block th:if="*{storeStatus == 'N'}">
+                           <input type="checkbox" id="storeStatus" name="storeStatus"><label for="storeStatus">신청 미허용</label>
+                        </th:block>
                      </div>
-                     
-                     <input type="text" name="storeLocation" placeholder="도로명/지번 주소" id="address" th:value="${address}" readonly>
-                     <input type="text" name="storeLocation" placeholder="상세 주소" id="detailAddress" th:value="${detailAddress}" readonly>
-                  </div>
-               </div>
-
-               <!-- 예약 오픈 여부 -->
-               <div class="edit-area-row">
-                  <label>예약 오픈 여부 : </label>
-                  <div class="input-row">
-
-                     <!-- 선택시 허용/미허용으로 변경 -->
-
-                     <!-- 허용 -->
-                     <th:block th:if="*{storeStatus == 'Y'}">
-                        <input type="checkbox" id="storeStatus" name="storeStatus" checked><label for="storeStatus">신청 허용</label>
-                     </th:block>
-
-                     <!-- 미허용 -->
-                     <th:block th:if="*{storeStatus == 'N'}">
-                        <input type="checkbox" id="storeStatus" name="storeStatus"><label for="storeStatus">신청 미허용</label>
-                     </th:block>
-                  </div>
-               </div>              
-
-               <!-- 예약 정보 -->
-               <div class="edit-area-row">
-                  <label for="storeMaxNumber" id="storeMaxLabel">예약 가능 : </label>
-                  <div class="input-row">
-                     <input type="number" name="storeMaxNumber" id="storeMaxNumber" class="s-input" th:value="*{storeMaxNumber}">인</span>
-                     <input type="number" name="storeMaxTable" id="storeMaxTable" class="s-input" th:value="*{storeMaxTable}"><span>테이블</span>
-                  </div>
-               </div>
-
-               <!-- 영업시간 -->
-               <div class="edit-area-row">
-                  <label for="openHour">영업시간 : </label>
-                  <div class="input-row">
-
-                     <div id="openCloseArea">
-                        <input type="time" name="openHour" id="openHour" th:value="*{openHour}">
-                        <span>~</span>
-                        <input type="time" name="closeHour" id="closeHour" th:value="*{closeHour}">
+                  </div>              
+   
+                  <!-- 예약 정보 -->
+                  <div class="edit-area-row">
+                     <label for="storeMaxNumber" id="storeMaxLabel">예약 가능 : </label>
+                     <div class="input-row">
+                        <input type="number" name="storeMaxNumber" id="storeMaxNumber" class="s-input" th:value="*{storeMaxNumber}">인</span>
+                        <input type="number" name="storeMaxTable" id="storeMaxTable" class="s-input" th:value="*{storeMaxTable}"><span>테이블</span>
                      </div>
-
-                     <!-- 종일 선택시 각 값 변경 ~> 00:00 00:00 -->
-                     <input type="checkbox" id="openClose"><label for="openClose">종일</label>
-
                   </div>
-               </div>
-
-               <!-- 브레이크 타임 -->
-               <div class="edit-area-row">
-                  <label for="breacktimeStart">브레이크 타임 : </label>
-                  <div class="input-row">
-
-                     <div id="breaktimeArea">
-                        <input type="time" name="breaktimeStart" id="breaktimeStart" th:value="*{breaktimeStart}">
-                        <span>~</span>
-                        <input type="time" name="breaktimeEnd" id="breaktimeEnd" th:value="*{breaktimeEnd}">
+   
+                  <!-- 영업시간 -->
+                  <div class="edit-area-row">
+                     <label for="openHour">영업시간 : </label>
+                     <div class="input-row">
+   
+                        <div id="openCloseArea">
+                           <input type="time" name="openHour" id="openHour" th:value="*{openHour}">
+                           <span>~</span>
+                           <input type="time" name="closeHour" id="closeHour" th:value="*{closeHour}">
+                        </div>
+   
+                        <!-- 종일 선택시 각 값 변경 ~> 00:00 00:00 -->
+                        <input type="checkbox" id="openClose"><label for="openClose">종일</label>
+   
                      </div>
-
-                     <!-- 없음 선택시 각 값 변경 ~> null -->
-                     <input type="checkbox" id="breaktime"><label for="breaktime">없음</label>
                   </div>
+   
+                  <!-- 브레이크 타임 -->
+                  <div class="edit-area-row">
+                     <label for="breacktimeStart">브레이크 타임 : </label>
+                     <div class="input-row">
+   
+                        <div id="breaktimeArea">
+                           <input type="time" name="breaktimeStart" id="breaktimeStart" th:value="*{breaktimeStart}">
+                           <span>~</span>
+                           <input type="time" name="breaktimeEnd" id="breaktimeEnd" th:value="*{breaktimeEnd}">
+                        </div>
+   
+                        <!-- 없음 선택시 각 값 변경 ~> null -->
+                        <input type="checkbox" id="breaktime"><label for="breaktime">없음</label>
+                     </div>
+                  </div>
+
+                  <!-- 카테고리 -->
+                  <ul class="category-row">
+                     <li class="category-li">분식</li>
+                     <li class="category-li">한식</li>
+                  </ul>
                </div>
                
                <!-- 가게 소개 -->
@@ -151,16 +153,18 @@
 
             </form>
 
+            <a th:text="${store.storeNo}"></a>
+
             <a id="withdraw">서비스 탈퇴</a>
          </div>
         </div>
          
          <script th:inline="javascript">
-            const memberNo = /*[[${session.loginMember.memberNo}]]*/ "가게 번호";
+            // const memberNo = /*[[${session.loginMember.memberNo}]]*/ "회원 번호";
             const storeNo = /*[[${store.storeNo}]]*/ "가게 번호";
 
                     // 프로필 기본 이미지 전역변수로 저장
-        const menuDefaultImage = /*[[#{menu.default.image}]]*/ "메뉴 기본 이미지";
+            const menuDefaultImage = /*[[#{menu.default.image}]]*/ "메뉴 기본 이미지";
         </script>
       
       </section>

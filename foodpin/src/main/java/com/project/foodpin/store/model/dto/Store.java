@@ -46,6 +46,9 @@ public class Store {
 	
 	//가게 해시태그 목록
 	private List<ReviewHash>storeHashList;
+	
+	//가게 카테고리 목록
+	private List<StoreCategory>storeCategoryList;
 
 	// 찜
 	private int likeCount;

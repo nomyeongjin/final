@@ -8,6 +8,7 @@ import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.review.model.dto.ReviewReply;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 
@@ -110,6 +111,13 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	List<Reservation> reservAll(int memberNo);
+	
+	/** 예약 승인 
+	 * @param reserv
+	 * @return
+	 */
+	int updateReservStatus(int reservNo);
+
 
 	/** 확정된 예약 조회
 	 * @param memberNo
@@ -149,6 +157,15 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	List<Review> reviewAll(int memberNo);
+
+
+	/** 사장님 댓글 삽입
+	 * @param inputReply
+	 * @return
+	 */
+	int insertReply(ReviewReply inputReply);
+
+
 
 
 

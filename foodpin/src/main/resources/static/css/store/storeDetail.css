@@ -53,6 +53,8 @@ aside >a{
     background-color: #fff;
     border: none;
     cursor: pointer;
+    font-size: 14px;
+    color: rgb(39, 39, 39);
 }
 #toChatting:hover{
     border-bottom: 1px solid rgb(66, 66, 66);
@@ -160,7 +162,7 @@ aside>a:hover{
 #storeName{
     font-size: 28px;
     font-weight: bold;
-    color: rgb(43, 38, 38);
+    color: #383838;
 }
 
 
@@ -191,6 +193,12 @@ aside>a:hover{
     
 }
 
+.allstar-box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .store-avgScore{
     position: relative;
   
@@ -217,7 +225,6 @@ aside>a:hover{
     width: 25px;
     position: absolute;
     right: 513px;
-    top: 574px;
     z-index: 1000;
   
 }
@@ -328,6 +335,18 @@ aside>a:hover{
     color: var(--main-color);
 }
 
+.storeCatBox{
+ display: flex;
+ flex-direction: row;
+}
+
+.storeCatLoop{
+    margin-right: 5px;
+}
+#storeCat{
+ color: #383838;
+ cursor: pointer;
+}
 #storeCat::before{
 
     font-family:FontAwesome;
@@ -345,11 +364,7 @@ aside>a:hover{
     margin-right: 5px;
     color: var(--main-color);
 }
-#toChatting{
 
-    font-size: 14px;
-    color: rgb(39, 39, 39);
-}
 
 
 
@@ -816,8 +831,9 @@ hr{
 
 .menuN{
   font-size: 14px;
-  color: var(--main-color);
-  border-bottom: 1px solid var(--main-color);
+  color: gray;
+ 
+
 }
 
 
@@ -884,6 +900,13 @@ hr{
     border-radius: 5px;
 }
 
+.imageN{
+    font-size: 14px;
+    color: gray;
+    border-bottom: 1px solid var(--main-color);
+    margin-bottom: 30px;
+}
+
 /* 식당 사진 더보기 버튼 박스 */
 .moreStoreImageBtnBox{
     display: flex;
@@ -891,6 +914,7 @@ hr{
     justify-content: center;
     align-items: center;
     margin: 60px;
+  
 }
 
 /* 사진 더보기 버튼 */
@@ -1063,7 +1087,6 @@ hr{
     padding: 0 25px;
     display: flex;
     margin: 30px 0;
-    border-bottom: 3px solid var(--main-color);
 }
 
 

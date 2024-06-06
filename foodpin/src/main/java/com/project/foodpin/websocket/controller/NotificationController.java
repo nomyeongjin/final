@@ -3,6 +3,7 @@ package com.project.foodpin.websocket.controller;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +31,7 @@ public class NotificationController {
 	 * @return
 	 */
 	@GetMapping("notReadCheck")
-	public int notReadCheck(@SessionAttribute("loginMember") Member loginMember) {
+	public int notReadCheck(@SessionAttribute("loginMember") Member loginMember, Model model) {
 		return service.notReadCheck(loginMember.getMemberNo());
 	}
 	

@@ -108,6 +108,7 @@
                                                 <p th:if="*{uploadList}">주문 내역</p>
                                             </th:block>
             
+                                            <!-- 리뷰 사진 -->
                                             <div class="storereview-image" th:if="*{uploadList}">
                                                 <th:block th:each=" upload : *{uploadList}">
                                                     <img class="review-look" th:src="|${upload.imagePath}${upload.imgRename}|">

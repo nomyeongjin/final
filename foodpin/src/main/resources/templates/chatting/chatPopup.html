@@ -9,18 +9,18 @@
 <body>
     <!-- 채팅 영역-->
 
-    <maina th:data-chatting-no="${chattingNo}">
+    <main th:data-chattingNo="${chattingNo}" id="main">
         <div class="chatting-area">
             <ul class="display-chatting">
 
                 <th:block th:each="msg : ${messageList}" th:if="${msg.chattingNo} == ${chattingNo}" th:object="${msg}">
-                    <li  class="target-chat">
-                        <span class="chatDate" th:text="*{sendDate}">14:01</span>
-                        <p class="chat" th:text="*{message}"></p>
+                    <li  class="target-chat" th:if="${msg.memberNo} != ${session.loginMember.memberNo}">
+                        <span class="chatDate" th:text="*{sendTime}">14:01</span>
+                        <p class="chat" th:text="*{messageContent}"></p>
                     </li>
-                    <li class="my-chat">
-                        <span class="chatDate" th:text="*{sendDate}">14:01</span>
-                        <p class="chat" th:text="*{message}"></p>
+                    <li class="my-chat" th:if="${msg.memberNo} == ${session.loginMember.memberNo}">
+                        <span class="chatDate" th:text="*{sendTime}">14:01</span>
+                        <p class="chat" th:text="*{messageContent}"></p>
                     </li>
 
                 </th:block>
@@ -59,8 +59,9 @@
 	<script th:inline="javascript">
 		const userDefaultImage = /*[[#{user.default.image}]]*/ '기본 이미지';
 
-        const loginMember = /*[[${session.loginMember}]]*/ '로그인';
+        const loginMemberNo = /*[[${session.loginMember.memberNo}]]*/ '로그인';
 
+        const messageList = /*[[${messageList}]]*/ '메시지 목록';
         
 	</script>
 

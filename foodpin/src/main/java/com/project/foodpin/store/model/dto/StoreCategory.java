@@ -13,19 +13,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Menu {
+public class StoreCategory {
 
-	private int menuNo;
-	private String menuTitle;
-	private String menuAmount;
-	private String menuContent;
-	private String menuImgUrl; 
+	private int categoryCode;
+	private String categoryTitle;
 	private String storeNo;
-	private String menuFl;
-	
-	
-	private MultipartFile menuImg;
-	
-	
 	
 }

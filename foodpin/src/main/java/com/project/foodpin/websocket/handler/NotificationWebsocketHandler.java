@@ -140,6 +140,12 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		
 		// 관리자에게 보낼 메시지
 		String contentForManager = null;
+		
+		// url 저장
+		String urlForMember = null;
+		String urlForStore = null;
+		String urlForManager = null;
+		
 		log.info("-----------------------------------------------------------------------------------");
 		log.info(notification.toString());
 		log.info("-----------------------------------------------------------------------------------");
@@ -150,6 +156,9 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		case "readyReservation" : 
 			contentForMember = String.format("<b>%s<b> <b>%s<b> 사장님이 예약 확인 중입니다.", notification.getReservDate() , store.getStoreName());
 			contentForStore = String.format("<b>%s<b> 예약 신청 내역이 있습니다. 확인해주세요", notification.getReservDate());
+			
+			urlForMember = "/myPage/member/reservation/wait";
+			urlForStore = "/myPage/store/reservation";
 			break;
 		
 		/* 예약 승인 했을 때 */
@@ -157,7 +166,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			contentForMember = String.format("<b>%s<b> <b>%s<b> 예약이 승인 되었습니다. 이용에 참고 부탁드립니다.",
 					notification.getReservDate() , store.getStoreName() );
 			
-			contentForStore = String.format("<b>%s<b> 예약 승인 내역이 있습니다. 확인해주세요", notification.getReservDate() );
+//			contentForStore = String.format("<b>%s<b> 예약 승인 내역이 있습니다. 확인해주세요", notification.getReservDate() );
 			break;
 			
 		/* 예약 취소 시(회원/가게) */	
@@ -188,38 +197,53 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		/* 노쇼 처리 */
 		// 예약 노쇼 알림(1회)
 		case "reservFirstNoshow" :
-			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"경고 > 노쇼 누적 1회 (노쇼 3회 처리 시 계정이 정지 됩니다.)", sendMember.getMemberNickname(), notification.getReservDate());
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"경고 > 노쇼 누적 1회 (노쇼 3회 처리 시 계정이 3일 정지 됩니다.)", sendMember.getMemberNickname(), notification.getReservDate());
 			
-			contentForManager = String.format("<b>%s<b>님이 노쇼 누적 1회 건이 있습니다 확인 해주세요", sendMember.getMemberNickname());
+			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 1회 건이 있습니다 확인 해주세요", sendMember.getMemberNickname());
 			
 //			contentForStore = String.format("<b>%s<b>님이 예약 날짜에 방문하지 않았습니다. ", sendMember.getMemberNickname());
 			break;
 		
 		// 예약 노쇼 알림(2회)
 		case "reservSecondNoshow" :
-			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"경고 > 노쇼 누적 2회 (노쇼 3회 처리 시 계정이 정지 됩니다.)");
-			contentForManager = String.format("<b>%s<b>님이 노쇼 누적 2회 건이 있습니다 확인 해주세요", sendMember.getMemberNickname());
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"경고 > 노쇼 누적 2회 (노쇼 3회 처리 시 계정이 3일 정지 됩니다.)");
+			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 2회 건이 있습니다 확인 해주세요", sendMember.getMemberNickname());
 			break;
 		
 		// 예약 노쇼 알림(3회)
 		case "reservThirdNoshow" : 
-			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 3건이 발생하여 계정이 정지 됩니다. 관련 사항은 관리자에게 문의 해주세요.");
-			contentForManager = String.format("<b>%s<b>님이 노쇼 누적 3회 건 발생 되었습니다. 계정 정치 처리 확인 해주세요.", sendMember.getMemberNickname());
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 3건이 발생하여 계정이 3일간 정지 됩니다. 관련 사항은 관리자에게 문의 해주세요.");
+			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 3회 건 발생 되었습니다. 계정 정치 처리 확인 해주세요.", sendMember.getMemberNickname());
 			break;
 			
 			// 문자 보내기
+		
+		// 예약 노쇼 알림(4회)
+		case "reservFourthNoshow" : 
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 4회 (노쇼 5회 처리 시 계정이 5일 정지됩니다.)");
+			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 4회 건이 있습니다. 확인 해주세요.", sendMember.getMemberNickname());
+			break;
+			
+		// 예약 노쇼 알림(5회)
+		case "reservFifthNoshow" : 
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 5건이 발생하여 계정이 5일간 정지 됩니다. 관련 사항은 관리자에게 문의 해주세요.");
+			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 5회 건이 있습니다. 확인 해주세요.", sendMember.getMemberNickname());
+			break;
+		
+		
+		// 신고 처리(일반 회원, 가게 사장님, 관리자 모두 알림 대상)
+		case "reviewReport" : 
+			contentForManager = String.format("<b>%s<b> 가게의 리뷰 신고가 들어왔습니다.", null);
+		
+		
 		}
-		
-		// 신고 처리
-		
-		
 
 		// 알림 전송 및 문자 발송 로직
 		
 		 ObjectMapper objectMapper = new ObjectMapper();
 
 		// 회원에게 알림 전송
-		if (contentForMember != null) {
+		if (contentForMember != null && urlForMember != null) {
 
 			Notification memberNotification = new Notification();
 			memberNotification.setReceiveMemberNo(sendMember.getMemberNo());
@@ -227,7 +251,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			memberNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			memberNotification.setNotificationContent(contentForMember);
 			memberNotification.setSendMemberNo(store.getMemberNo()); // 예약한 회원 번호로 알림 전송
-			memberNotification.setNotificationUrl(notification.getNotificationUrl());
+			memberNotification.setNotificationUrl(urlForMember);
 			service.sendNotificationMember(memberNotification);
 			
 			for(WebSocketSession ws : sessions) {
@@ -246,7 +270,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		}
 		
 		// 가게 사장님에게 알림 전송
-		if(contentForStore != null) {
+		if(contentForStore != null && urlForStore != null) {
 			
 			Notification storeNotification = new Notification();
 			storeNotification.setReceiveMemberNo(store.getMemberNo());
@@ -254,7 +278,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			storeNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			storeNotification.setNotificationContent(contentForStore);
 			storeNotification.setSendMemberNo(sendMember.getMemberNo()); // 예약하는 회원 번호로 알림 전송
-			storeNotification.setNotificationUrl(notification.getNotificationUrl());
+			storeNotification.setNotificationUrl(urlForStore);
 			service.sendNotificationStore(storeNotification);
 			
 			for(WebSocketSession ws : sessions) {
@@ -280,7 +304,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			managerNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			managerNotification.setNotificationContent(contentForManager);
 			managerNotification.setSendMemberNo(sendMember.getMemberNo()); // 예약하는 회원 번호로 알림 전송
-			managerNotification.setNotificationUrl(notification.getNotificationUrl());
+			managerNotification.setNotificationUrl(urlForManager);
 			service.sendNotificationManager(managerNotification);
 			
 			for(WebSocketSession ws : sessions) {

@@ -26,6 +26,7 @@ import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.myPage.model.service.StoreMyPageService;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.review.model.dto.ReviewReply;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.MenuContainer;
 import com.project.foodpin.store.model.dto.Store;
@@ -48,7 +49,9 @@ public class StoreMyPageController {
 	@GetMapping("storeInfo")
 	public String storeInfo(@SessionAttribute("loginMember") Member loginMember, Model model) {
 
-		Store store = service.selectstoreInfo(loginMember.getMemberNo());
+		Store store = service.selectstoreInfo(loginMember.getMemberNo()); // 가게 정보
+		
+		
 		
 		// 불러온 store 정보에서 주소 쪼개기
 		String storeLocation = store.getStoreLocation();
@@ -99,7 +102,7 @@ public class StoreMyPageController {
 	 * @param loginMember
 	 * @return menuList
 	 */
-	@GetMapping(value="menuSelect", produces = "application/json")
+	@GetMapping("menuSelect")
 	@ResponseBody
 	public List<Menu> menuSelect(@RequestParam("storeNo") int storeNo) {
 		
@@ -114,9 +117,10 @@ public class StoreMyPageController {
 	@ResponseBody
 	public int menuUpdate(@RequestBody @ModelAttribute MenuContainer menuContainer) {
 		
+		// menuContainer에서 이미지파일 제외한 정보 inputMenuList로 분리
 		List<Menu> inputMenuList =  menuContainer.getMenuList();
 		
-		List<MultipartFile> imgUrlList = new ArrayList<>();
+		List<MultipartFile> imgUrlList = new ArrayList<>(); // 이미지파일만 담아 줄 리스트 생성
 		
 		for (Menu menu : inputMenuList) {
 			imgUrlList.add(menu.getMenuImg());
@@ -194,7 +198,7 @@ public class StoreMyPageController {
 		
 		return service.calendarOffInsert(inputOff);
 	}
-
+	// ------ 예약 관리 ------
 	
 	/** 예약 관리 화면 이동 (+예약 전체 조회)
 	 * @param loginMember
@@ -207,6 +211,7 @@ public class StoreMyPageController {
 		List<Reservation> reservList = service.reservAll(loginMember.getMemberNo());
 		
 		model.addAttribute("reservList", reservList);
+		model.addAttribute("storeNo", reservList.get(0).getStoreNo());
 		
 		return "myPage/store/reservation";
 	}
@@ -220,7 +225,6 @@ public class StoreMyPageController {
 		
 		int memberNo = loginMember.getMemberNo();
 		
-		System.out.println(statusFl);
 		if(statusFl == null) {
 			List<Reservation> reservList = service.reservAll(memberNo);
 			
@@ -229,6 +233,26 @@ public class StoreMyPageController {
 		
 		return null;
 	}
+	
+	/** 예약 승인 (비동기)
+	 * @return reservList
+	 */
+	@ResponseBody
+	@GetMapping("updateReservStatus")
+	public int updateReservStatus(@RequestParam("reservNo") int reservNo) {
+		
+		
+		return service.updateReservStatus(reservNo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/** 확정된 예약 전체 조회 (비동기)
 	 * @return reservList
@@ -327,6 +351,71 @@ public class StoreMyPageController {
 
 		return service.ceoInfoUpdate(member);
 	}
+	
+	
+	
+	/** 사장님 댓글 삽입
+	 * @param loginMember
+	 * @param replyContent
+	 * @param inputReply
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("insertReply")
+	public String insertReply(
+	    @SessionAttribute("loginMember") Member loginMember,
+	    @RequestParam("replyConent") String replyConent,
+	    ReviewReply inputReply,
+	    RedirectAttributes ra) {
+		
+		inputReply.setReplyConent(replyConent);
+	    
+	    int result = service.insertReply(inputReply);
+	    
+	    String message = null;
+	    
+	    if(result > 0) {
+	    	message = "답글이 작성되었습니다.";
+	    } else {
+	    	message = "답글 작성 실패했습니다.";
+	    }
+	    
+	    ra.addFlashAttribute("message", message);
+	    
+	    return "redirect:/myPage/store/review";
+	}
+	
+	
+	// 댓글 미답변 조회
+	@GetMapping("reviewUnanswered")
+	public String reviewUnanswered(
+		@SessionAttribute("loginMember") Member loginMember,
+		Model model, RedirectAttributes ra
+		) {
+			
+		int memberNo = loginMember.getMemberNo();
+		
+		List<Review> reviewList = service.reviewAll(memberNo);
+		
+		model.addAttribute("reviewList", reviewList);
+		
+		
+		return "myPage/store/reviewUnanswered";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

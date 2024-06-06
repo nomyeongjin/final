@@ -17,6 +17,7 @@ import com.project.foodpin.common.util.Utility;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.review.model.dto.ReviewMenu;
+import com.project.foodpin.review.model.dto.ReviewReply;
 import com.project.foodpin.review.model.dto.UploadImage;
 import com.project.foodpin.review.model.exception.ImageDeleteException;
 import com.project.foodpin.review.model.exception.ImageUpdateException;

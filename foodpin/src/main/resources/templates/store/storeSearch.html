@@ -65,7 +65,11 @@
     </main>
 
   
-
+    <script th:inline="javascript">
+        const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원";
+     
+    
+    </script>
 
   
 <script src="/js/store/storeSearch.js"></script>

@@ -19,6 +19,10 @@ public class Review {
 	private String reviewRegDate;
 	private String reviewDelFl;
 	
+	private int reportNo;
+	private String reportDate;
+	private String reportContent;
+	
 	private int memberNo;
 	private String storeNo;
 	private int hashNo;
@@ -26,6 +30,7 @@ public class Review {
 	
 	private String storeName;
 	private String storeImg;
+	private String storeTel;
 	
 	private String memberName;
 	private String memberNickname;

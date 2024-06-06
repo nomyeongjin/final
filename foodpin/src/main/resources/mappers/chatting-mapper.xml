@@ -43,8 +43,8 @@
 	<!-- 채팅 확인 -->
 	<select id="checkChattingNo" resultType="_int">
 		SELECT NVL(SUM(CHATTING_NO),0) CHATTING_NO FROM CHATTING_ROOM
-		WHERE (OPEN_MEMBER = #{loginMemberNo} AND PARTICIPANT = #{storeNo})
-		OR (OPEN_MEMBER = #{storeNo} AND PARTICIPANT = #{loginMemberNo})
+		WHERE (OPEN_MEMBER = #{loginMemberNo} AND PARTICIPANT = (SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{storeNo}))
+		OR (OPEN_MEMBER = (SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{storeNo}) AND PARTICIPANT = #{loginMemberNo})
 	</select>
 	
 	<!-- 채팅방 생성 -->
@@ -55,7 +55,7 @@
 		</selectKey>
 	
 		INSERT INTO CHATTING_ROOM
-		VALUES(#{chattingNo}, DEFAULT, #{loginMemberNo}, #{storeNo})
+		VALUES(#{chattingNo}, DEFAULT, #{loginMemberNo}, (SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{storeNo}))
 	</insert>
 	
 
@@ -63,7 +63,7 @@
 	<!-- 채팅 메세지 삽입 -->
 	<insert id="insertMessage">
 		INSERT INTO "MESSAGE"
-		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, #{senderNo}, #{chattingNo})
+		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, #{memberNo}, #{chattingNo})
 	</insert>
 	
 	
@@ -78,7 +78,7 @@
 	<!-- 채팅방 메세지 조회 -->
 	<select id="selectMessageList" resultType="Message">
 		SELECT MESSAGE_NO, MESSAGE_CONTENT, READ_FL, MEMBER_NO, CHATTING_NO,
-		TO_CHAR(SEND_TIME, 'YYYY.MM.DD HH24:MI') SEND_TIME 
+		TO_CHAR(SEND_TIME, 'HH24:MI') SEND_TIME 
 		FROM MESSAGE
 		WHERE CHATTING_NO  = #{chattingNo}
 		ORDER BY MESSAGE_NO
