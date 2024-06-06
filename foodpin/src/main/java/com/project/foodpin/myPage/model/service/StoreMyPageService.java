@@ -1,6 +1,7 @@
 package com.project.foodpin.myPage.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -117,6 +118,12 @@ public interface StoreMyPageService {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+	
+	/** 사장님 비밀번호 변경
+	 * @param map
+	 * @return
+	 */
+	int ceoPwUpdate(int memberNo, Map<String, Object> map);
 
 	// ------ 리뷰 ------
 	
@@ -132,6 +139,8 @@ public interface StoreMyPageService {
 	 * @return
 	 */
 	int insertReply(ReviewReply inputReply);
+
+
 
 
 

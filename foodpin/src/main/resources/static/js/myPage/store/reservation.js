@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
          eventColor : '#DF8B4E',
          // eventClick : fn_calEventClick,
          // dateClick: function(){ createPopup(); }, //날짜 클릭시 해당일자 예약 표시하는 모달 생성
+         
          // eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
          //    console.log(obj);
          //  },

@@ -155,6 +155,20 @@ public interface StoreMyPageMapper {
 	 * @return result
 	 */
 	int ceoInfoUpdate(Member inputMember);
+	
+	
+	/** 기존 암호화 비밀번호 조회
+	 * @param memberNo
+	 * @return
+	 */
+	String selectPw(int memberNo);
+
+
+	/** 비밀번호 변경
+	 * @param map
+	 * @return
+	 */
+	int ceoPwUpdate(Map<String, Object> map);
 
 	// ------ 리뷰 ------
 	
@@ -170,6 +184,9 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	int insertReply(ReviewReply inputReply);
+
+
+
 
 
 

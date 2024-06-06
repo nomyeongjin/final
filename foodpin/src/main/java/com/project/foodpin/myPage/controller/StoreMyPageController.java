@@ -314,11 +314,11 @@ public class StoreMyPageController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping("ceoInfo")
+	@PostMapping("ceoInfoJs")
 	@ResponseBody
-	public Member ceoInfo(@RequestBody int memberNo) {
+	public Member ceoInfoJs(@SessionAttribute("loginMember") Member loginMember) {
 		
-		return service.selectCeoInfo(memberNo);
+		return service.selectCeoInfo(loginMember.getMemberNo());
 	}
 	
 	/** 사장님 정보 변경
@@ -355,6 +355,18 @@ public class StoreMyPageController {
 
 		return service.ceoInfoUpdate(member);
 	}
+	
+	/** 사장님 비밀번호 변경 (비동기)
+	 * @param member
+	 * @return result
+	 */
+	@PostMapping("ceoPwUpdate")
+	public int ceoPwUpdate(@SessionAttribute("loginMember") Member loginMember, @RequestBody Map<String, Object> map) {
+
+		return service.ceoPwUpdate(loginMember.getMemberNo(), map);
+	}
+	
+	
 	
 	
 	

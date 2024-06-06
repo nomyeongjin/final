@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,6 +46,7 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 
 	/* 매퍼 */
 	private final StoreMyPageMapper mapper;
+	private final BCryptPasswordEncoder bcrypt;
 
 	
 	
@@ -237,6 +240,22 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int ceoInfoUpdate(Member inputMember) {
 		return mapper.ceoInfoUpdate(inputMember);
 	}
+	
+	// 사장님 비밀번호 변경
+	@Override
+	public int ceoPwUpdate(int memberNo, Map<String, Object> map) {
+		
+		String originPw = mapper.selectPw(memberNo);
+		
+		if( !bcrypt.matches((String)map.get("memberPw"), originPw)) return 0;
+		
+		String encPw = bcrypt.encode((String)map.get("memberNewPw"));
+		
+		map.put("encPw", encPw);
+		map.put("memberNo", memberNo);
+		
+		return mapper.ceoPwUpdate(map);
+	}
 
 	// ------ 리뷰 ------
 
@@ -251,6 +270,8 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int insertReply(ReviewReply inputReply) {
 		return mapper.insertReply(inputReply);
 	}
+
+
 
 
 
