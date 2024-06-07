@@ -201,3 +201,16 @@ li>img{
     height: 10%;
     border-top: 1px solid #cecece;
 }
+
+.not-read-count{
+	width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    margin: 10px 10px 0 0;
+}
