@@ -40,4 +40,7 @@ public interface NotificationMapper {
 
 	Store selectStoreName(String storeNo);
 
+	// 예약한 사람의 회원 번호
+	int selectReservMemerNo(String pkNo);
+
 }
