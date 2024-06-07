@@ -210,6 +210,13 @@
    margin: 105px;
    padding-left: 70px;
 }
+.storeInfo-img-container .fa-xmark{
+   position: absolute;
+   margin-left: -20px;
+   margin-top: 5px;
+   font-size: 20px;
+   color: var(--submit-color);
+}
 /* 가게 이미지 */
 #storeImg{
    width: 100%;
@@ -272,7 +279,7 @@
    padding: 10px 0px;
    flex-wrap: wrap;
 }
-.category-li{
+.category-btn{
    height: 26px;
    font-size: 16px;
    padding: 0px 20px;
@@ -356,7 +363,7 @@
    justify-content: center;
 }
 
-/* 공통? */
+/* 공통? 핑크색 체크 */
 .checked{
    background: var(--submit-color);
    border: 1px solid var(--submit-color);

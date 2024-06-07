@@ -48,6 +48,7 @@
 		SELECT *
 		FROM MENU
 		WHERE STORE_NO = #{storeNo}
+		AND MENU_FL = 'N'
 		ORDER BY MENU_NO
 	</select>
 	

@@ -10,15 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.review.model.dto.Review;
-import com.project.foodpin.review.model.dto.ReviewHash;
-import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.service.DetailStoreService;
 
@@ -131,9 +129,7 @@ public class DetailStoreController {
 		@RequestBody Map<String, Object> map,
 		@SessionAttribute("loginMember") Member loginMember) {
 		
-		int reporterNo = loginMember.getMemberNo();
-		
-		return service.reviewReport(map, reporterNo);
+		return service.reviewReport(map);
 	}
 	
 	

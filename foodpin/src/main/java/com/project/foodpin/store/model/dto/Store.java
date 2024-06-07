@@ -37,7 +37,6 @@ public class Store {
 	
 	private int memberNo;
 	
-	
 	//가게 이미지 목록
 	private List<UploadImage> imageList;
 

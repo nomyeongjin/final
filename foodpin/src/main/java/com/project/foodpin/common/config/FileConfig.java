@@ -45,6 +45,12 @@ public class FileConfig implements WebMvcConfigurer {
 	// 리뷰
 	
 	
+	@Value("${my.review.resource-handler}")
+	private String reviewResourceHandler; // 게시글 이미지 요청 주소 
+	
+	@Value("${my.review.resource-location}")
+	private String reviewResourceLocation; // 게시글 이미지 요청 시 연결할 서버 폴더 경로
+	
 	@Value("${my.board.resource-handler}")
 	private String boardResourceHandler; // 게시글 이미지 요청 주소 
 	
@@ -87,6 +93,9 @@ public class FileConfig implements WebMvcConfigurer {
 		
 		// -----
 		// 리뷰 이미지 요청 - 서버 폴더 연결 추가
+		registry
+		.addResourceHandler(reviewResourceHandler).addResourceLocations(reviewResourceLocation);
+
 		registry
 		.addResourceHandler(boardResourceHandler).addResourceLocations(boardResourceLocation);
 		

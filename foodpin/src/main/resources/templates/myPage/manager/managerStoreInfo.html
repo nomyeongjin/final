@@ -27,6 +27,7 @@
                     
                     <section class="reportInfo-container">
                         <th:block th:unless="${#lists.isEmpty(infoRequest)}">
+                            <span th:text="|총 *{reportInfoCount}건|"></span>
                             <div class="requestList" th:each="request : ${infoRequest}">
                                 <div class="request" th:object="${request}">
                                     <span class="request-category" th:text="*{requestCategoryTitle}"></span>

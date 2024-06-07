@@ -53,10 +53,18 @@ public class SearchStoreController {
 		
 	
 
-		// 가게들 상세 내용 조회
-		List<Store> searchStoreDetail = service.searchStoreDetail(map);
+
 
 		String path = null;
+		
+		if(searchStoreList.isEmpty()) {
+			
+			ra.addFlashAttribute("message","해당 카테고리의 가게가 없습니다.");
+			path = "/store/storeSearch";
+
+			
+			
+		}else{
 
 			model.addAttribute("searchStoreList", searchStoreList);
 			for (Store store : searchStoreList) {
@@ -64,10 +72,12 @@ public class SearchStoreController {
 			    
 			    map.put("storeNo", storeNo);
 			}
-			
+			// 가게들 상세 내용 조회
+			List<Store> searchStoreDetail = service.searchStoreDetail(map);
 	        model.addAttribute("searchStoreDetail",searchStoreDetail);
 
 
+		}
 			path = "/store/storeSearch";
 
 		

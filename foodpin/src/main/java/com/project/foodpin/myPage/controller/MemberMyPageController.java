@@ -1,6 +1,7 @@
 package com.project.foodpin.myPage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -163,6 +164,17 @@ public class MemberMyPageController {
 		List<Reservation> reservation = service.reservationLast(memberNo);
 		int noshowCount = service.noshowCount(memberNo);
 
+		List<Integer> reservReviewCounts = new ArrayList<>();
+		
+		for(int i = 0; i < reservation.size(); i++) {
+			
+			int reservNo = reservation.get(i).getReservNo();
+			
+			int reservReviewCount = service.reservReviewCount(reservNo);
+			reservReviewCounts.add(reservReviewCount);
+		}
+
+		model.addAttribute("reservReviewCounts", reservReviewCounts);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("noshowCount", noshowCount);
 		

@@ -52,6 +52,15 @@
 		)
 	</select>
 	
+	<!-- 가게 카테고리 조회 -->
+	<select id="selectCategory">
+		SELECT STORE_NO, CATEGORY_CODE, CATEGORY_TITLE 
+		FROM "STORE_CATEGORY"
+		JOIN "CATEGORY" USING (CATEGORY_CODE)
+		WHERE STORE_NO = #{storeNo}
+		ORDER BY CATEGORY_CODE
+	</select>
+	
 	<!-- 모든 카테고리 조회 -->
 	<select id="selectCategoryAll">
 		SELECT CATEGORY_CODE, CATEGORY_TITLE FROM "CATEGORY" ORDER BY CATEGORY_CODE

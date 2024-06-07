@@ -87,6 +87,12 @@ public class ManagerMyPageServiceImpl implements ManagerMyPageService{
 		return mapper.infoRequestList();
 	}
 	
+	// 가게 정보 정정 신청 개수
+	@Override
+	public int reportInfoCount() {
+		return mapper.reportInfoCount();
+	}
+	
 	// 가게 정보 정정 처리 완료
 	@Override
 	public boolean completeRequest(int requestNo) {

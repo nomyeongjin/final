@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.foodpin.store.model.dto.Store;
-import com.project.foodpin.store.model.mapper.DetailStoreMapper;
+import com.project.foodpin.store.model.dto.StoreCategory;
 import com.project.foodpin.store.model.mapper.SearchStoreMapper;
 
 import lombok.RequiredArgsConstructor;

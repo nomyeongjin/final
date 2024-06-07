@@ -4,76 +4,20 @@
 
 
 
-<resultMap type="Store" id="store_rs">
-
-  <id property="storeNo" column="STORE_NO"/>
-  
-  <!-- id(PK역할하는 컬럼, 필드를 작성하는 태그)
-       resultMap의 PK로 storeNo를 하겠다고 지정
-   -->
-   
-   
-   <collection property="searchHashList"
-               select = "selectSearchHashList"
-               column = "STORE_NO"
-               javaType = "java.util.ArrayList"
-               ofType = "ReviewHash"
-   />
-   <collection property="searchCategoryList"
-               select = "selectSearchCategoryList"
-               column = "STORE_NO"
-               javaType = "java.util.ArrayList"
-               ofType = "StoreCategory"
-   />
-
-</resultMap>
 
 
-<select id="searchStoreList">
+<select id="searchStoreList" resultType="Store">
  SELECT STORE_NO, STORE_NAME
 FROM "STORE_CATEGORY"
 JOIN  STORE USING (STORE_NO)
 WHERE CATEGORY_CODE = #{category_code}
+AND STORE_CLOSED ='N'
 </select>
 
 
 
 
-<!-- 가게 검색 페이지에서 가게 상세 조회 -->
-<select id="searchStoreDetail" resultMap="store_rs">
-  	SELECT STORE_NAME, STORE_INFO, STORE_LOCATION, STORE_STATUS,
-       STORE_TEL, OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END, 
-       STORE_CLOSED, STORE_IMG, STORE_NO, 
 
-       (SELECT COUNT(*) 
-       FROM "REVIEW"
-       WHERE STORE_NO = #{storeNo}
-      AND REVIEW_DEL_FL = 'N') REVIEW_COUNT,
-
-
-       	(SELECT COUNT(*) 
-		 FROM "BOOKMARK"
-		 WHERE STORE_NO = #{storeNo}) LIKE_COUNT,
-		 
-
-	     (SELECT ROUND(AVG(REVIEW_RATING), 1)
-		  FROM REVIEW
-		  WHERE STORE_NO =#{storeNo}
-		  AND REVIEW_DEL_FL = 'N') TOTAL_RATING
-		 
-		 <if test="memberNo!=null">
-		 
-		 , (SELECT COUNT(*)FROM "BOOKMARK"
-	    WHERE MEMBER_NO = #{memberNo}
-	    AND STORE_NO =#{storeNo}) BOOKMARK
-	    </if>
-		  
-		FROM "STORE" 
-		JOIN "MEMBER" USING(MEMBER_NO)
-		WHERE STORE_NO = #{storeNo}
-		AND STORE_CLOSED ='N'
-
-</select>
 
 
 </mapper>

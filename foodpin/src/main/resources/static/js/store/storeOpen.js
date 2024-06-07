@@ -45,49 +45,49 @@ function generateSchedule() {
     return schedule; 
 }
 
-// // 일정을 HTML에 동적으로 추가하는 함수
-// function renderSchedule() {
-//     const schedule = generateSchedule();
-//     const currentDaySchedule = document.getElementById('currentDaySchedule'); 
+// 일정을 HTML에 동적으로 추가하는 함수
+function renderSchedule() {
+    const schedule = generateSchedule();
+    const currentDaySchedule = document.getElementById('currentDaySchedule'); 
 
-//     // 현재 요일의 일정을 currentDaySchedule에 추가
-//      const currentDayIndex = getCurrentDayOfWeek();
-//     const currentDay = schedule[currentDayIndex];
-//     const currentListItem = document.createElement('li');
-//     currentListItem.innerHTML = `
-//         <p class="t-txt">${currentDay.day}</p>
-//         <div class="time-wrapper">
-//             <p class="l-txt">
-//                 영업시간: ${currentDay.openHour} - ${currentDay.closeHour}
-//             </p>
-//             <p class="l-txt">
-//                 브레이크타임: ${currentDay.breaktimeStart} - ${currentDay.breaktimeEnd}
-//             </p>
-//         </div>
-//     `;
-//     currentDaySchedule.appendChild(currentListItem);
+    // 현재 요일의 일정을 currentDaySchedule에 추가
+     const currentDayIndex = getCurrentDayOfWeek();
+    const currentDay = schedule[currentDayIndex];
+    const currentListItem = document.createElement('li');
+    currentListItem.innerHTML = `
+        <p class="t-txt">${currentDay.day}</p>
+        <div class="time-wrapper">
+            <p class="l-txt">
+                영업시간: ${currentDay.openHour} - ${currentDay.closeHour}
+            </p>
+            <p class="l-txt">
+                브레이크타임: ${currentDay.breaktimeStart} - ${currentDay.breaktimeEnd}
+            </p>
+        </div>
+    `;
+    currentDaySchedule.appendChild(currentListItem);
 
-//     // 나머지 일정을 weeklySchedule에 추가
-//     const weeklySchedule = document.getElementById('weeklySchedule');
-//     for (let i = 1; i < schedule.length; i++) {
-//         const day = schedule[i];
-//         const listItem = document.createElement('li');
-//         listItem.innerHTML = `
-//             <p class="t-txt">${day.day}</p>
-//             <div class="time-wrapper">
-//                 <p class="l-txt">
-//                     영업시간: ${day.openHour} - ${day.closeHour}
-//                 </p>
-//                 <p class="l-txt">
-//                     브레이크타임: ${day.breaktimeStart} - ${day.breaktimeEnd}
-//                 </p>
-//             </div>
-//         `;
-//         weeklySchedule.appendChild(listItem);
-//     }
-// }
+    // 나머지 일정을 weeklySchedule에 추가
+    const weeklySchedule = document.getElementById('weeklySchedule');
+    for (let i = 1; i < schedule.length; i++) {
+        const day = schedule[i];
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <p class="t-txt">${day.day}</p>
+            <div class="time-wrapper">
+                <p class="l-txt">
+                    영업시간: ${day.openHour} - ${day.closeHour}
+                </p>
+                <p class="l-txt">
+                    브레이크타임: ${day.breaktimeStart} - ${day.breaktimeEnd}
+                </p>
+            </div>
+        `;
+        weeklySchedule.appendChild(listItem);
+    }
+}
 
-// // 페이지 로드 시 일정을 동적으로 생성하여 HTML에 추가
-// document.addEventListener('DOMContentLoaded', function () {
-//     renderSchedule();
-// });
+// 페이지 로드 시 일정을 동적으로 생성하여 HTML에 추가
+document.addEventListener('DOMContentLoaded', function () {
+    renderSchedule();
+});

@@ -178,7 +178,10 @@ public class ManagerMyPageController {
 	public String memberReportReview(Model model) {
 		
 		List<Request> infoRequest = service.infoRequestList();
+		int reportInfoCount = service.reportInfoCount();
+		
 		model.addAttribute("infoRequest", infoRequest);
+		model.addAttribute("reportInfoCount", reportInfoCount);
 		
 		return "myPage/manager/managerStoreInfo";
 	}
