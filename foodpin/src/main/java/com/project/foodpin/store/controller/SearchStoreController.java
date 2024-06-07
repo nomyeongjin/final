@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
+import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.service.SearchStoreService;
 
@@ -28,18 +29,12 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("store")
 public class SearchStoreController {
 
-	private SearchStoreService service;
-
-	// 가게 검색 페이지 이동(+ 카테고리 선택된 상태로 검색되어야 함)
-	/*
-	 * @GetMapping("storeSearch") public String searchPage() {
-	 * 
-	 * return "store/storeSearch"; }
-	 */
+	private final SearchStoreService service;
 
 	
+	// 메인의 카테고리 코드를 pathvariable로 가져와 해당하는 가게 리스트 select해서 보내주기
 	@GetMapping("storeSearch/{categoryCode}")
-	public String storeSearch(@PathVariable("categoryCode") int categoryCode, 
+	public String storeDetail(@PathVariable("categoryCode") int categoryCode, 
 			@SessionAttribute(value="loginMember", required = false) Member loginMember,
 			Model model, RedirectAttributes ra) {
 		
@@ -53,55 +48,30 @@ public class SearchStoreController {
 	
 		map.put("categoryCode", categoryCode);
 
-		Store store = service.storeSearch(map);
-
-
-		/* Store offday = service.storeOff(storeNo); */
-		// request scope 값 세팅
+		// 카테고리에 해당하는 가게 리스트 조회하기
+		List<Store> searchStoreList = service.searchStoreList(map);
 		
-		
+	
 
-		// 불러온 store 정보에서 주소 쪼개기
-		String storeLocation = store.getStoreLocation();
-		String[] arr = storeLocation.split("\\^\\^\\^");
-
-
-
-		model.addAttribute("postcode", arr[0]);
-		model.addAttribute("address", arr[1]);
-		model.addAttribute("detailAddress", arr[2]);
-
-		
+		// 가게들 상세 내용 조회
+		List<Store> searchStoreDetail = service.searchStoreDetail(map);
 
 		String path = null;
 
-	
-
-			model.addAttribute("store", store);
-	
-			model.addAttribute("storeCategoryList", store.getStoreCategoryList());
-			model.addAttribute("storeHashList", store.getStoreHashList());
-			model.addAttribute("menuList", store.getMenuList());
+			model.addAttribute("searchStoreList", searchStoreList);
+			for (Store store : searchStoreList) {
+			    String storeNo = store.getStoreNo();
+			    
+			    map.put("storeNo", storeNo);
+			}
+			
+	        model.addAttribute("searchStoreDetail",searchStoreDetail);
 
 
 			path = "/store/storeSearch";
 
 		
 		return path;
-	}
-	
-	/**
-	 * 가게 찜
-	 * 
-	 * @param map
-	 * @return count
-	 */
-	@ResponseBody
-	@PostMapping("searchlike")
-	public int storeLike(@RequestBody Map<String, Object> map) {
-
-		return service.storeLike(map);
-
 	}
 	
 

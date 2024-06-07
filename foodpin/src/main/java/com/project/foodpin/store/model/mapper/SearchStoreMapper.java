@@ -1,5 +1,6 @@
 package com.project.foodpin.store.model.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -10,16 +11,16 @@ import com.project.foodpin.store.model.dto.Store;
 public interface SearchStoreMapper {
 
 
-	/** 가게 상세 검색
+	/** 카테고리에 해당하는 가게 리스트 조회
 	 * @param map
 	 * @return
 	 */
-	Store storeSearch(Map<String, Object> map);
+	List<Store> searchStoreList(Map<String, Object> map);
 
-	int deleteStoreLike(Map<String, Object> map);
-
-	int insertStoreLike(Map<String, Object> map);
-
-	int selectLikeCount(Object object);
+	/** 동기 / 카테고리로 조회한 가게들 상세 정보
+	 * @param map
+	 * @return
+	 */
+	List<Store> searchStoreDetail(Map<String, Object> map);
 
 }
