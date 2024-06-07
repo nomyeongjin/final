@@ -212,7 +212,7 @@
 	<select id="selectReporterName">
 		SELECT MEMBER_NAME
 		FROM MEMBER
-		WHERE MEMBER_NO = (SELECT REPORTER_NO FROM REPORT WHERE REPORTER_NO = #{reporterNo})
+		WHERE MEMBER_NO = #{reporterNo}
 	</select>
    
    
@@ -251,10 +251,10 @@
         #{storeNo}, 
         #{memberNo},
         CASE 
-            WHEN #{requestCategoryTitle} = 'changeBasicinfo' THEN '1'
+            WHEN #{requestCategoryTitle} = 'changeBasicinfo' THEN '6'
             WHEN #{requestCategoryTitle} = 'changeMenu' THEN '2'
-            WHEN #{requestCategoryTitle} = 'changeStoreTime' THEN '6'
-            WHEN #{requestCategoryTitle} = 'storeClosed' THEN '7'
+            WHEN #{requestCategoryTitle} = 'changeStoreTime' THEN '7'
+            WHEN #{requestCategoryTitle} = 'storeClosed' THEN '1'
             ELSE '0' 
         END,
         DEFAULT,

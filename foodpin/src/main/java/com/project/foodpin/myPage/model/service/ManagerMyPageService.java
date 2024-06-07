@@ -41,8 +41,12 @@ public interface ManagerMyPageService {
 	// 가게 정보 정정 신청 조회
 	List<Request> infoRequestList();
 
+	// 가게 정보 정정 신청 개수
+	int reportInfoCount();
+	
 	// 가게 정보 정정 처리 완료
 	boolean completeRequest(int requestNo);
+
 
 
 
