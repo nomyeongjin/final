@@ -70,6 +70,8 @@ const changeImageFn = e => {
    
 }
 
+// imageInput.addEventListener("change", changeImageFn);
+
 storeImgInput.addEventListener("change", changeImageFn);
 
 

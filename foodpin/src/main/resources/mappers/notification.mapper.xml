@@ -101,5 +101,12 @@
 	</insert>
 	
 	
+	<!-- 예약한 사람의 회원번호  -->
+	<select id="selectReservMemerNo">
+		SELECT MEMBER_NO
+		FROM "RESERVATION"
+		WHERE RESERV_NO = #{reservNo}
+	</select>
+	
 	
 </mapper>

@@ -51,24 +51,45 @@ document.addEventListener('DOMContentLoaded', function () {
     * (버튼) 예약 승인
     */
    document.querySelectorAll(".reserv-btn").forEach(btn => {
-      
+
       btn.addEventListener("click", e => {
          const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
-
-         // console.log(reservNo, storeNo);
          
-         fetch("/myPage/store/updateReservStatus?reservNo=" + reservNo)
-         .then(resp => resp.json())
-         .then(result => {
+         // 2024년 06월 07일 17:30
+         const reservDate = e.target.dataset.reservDate;
 
-            if(result > 0){
-               alert("예약 번호 " + reservNo + "번 예약이 승인 처리되었습니다.");
-            }else {
-               alert("예약 번호 " + reservNo + "번 예약 승인을 실패했습니다.");
-            }
-         })
-         .catch( err => console.log(err)); // 예약 승인 처리 fetch
-      }) // reservBtn.addEventListener("click"
+         // const [datePart, timePart] = reservDate.split('일 ');
+         const year = parseInt(reservDate.slice(0, 4));
+         const month = parseInt(reservDate.slice(6, 8)) - 1; // 월은 0부터 시작하기 때문에 1을 빼줍니다.
+         const day = parseInt(reservDate.slice(10, 12));
+         const hours = parseInt(reservDate.slice(0, 2));
+         const minutes = parseInt(reservDate.slice(3, 5));
+ 
+         // Date 객체 생성
+         const date = new Date(year, month, day, hours, minutes);
+ 
+         // 요일 계산
+         const dayOfWeek = date.toLocaleDateString('ko-KR', { weekday: 'short' });
+ 
+         // 형식화
+         const formattedReservDate = `${String(month + 1).padStart(2, '0')}.${String(day).padStart(2, '0')}(${dayOfWeek}) ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+         console.log(formattedReservDate);
+
+         fetch("/myPage/store/updateReservStatus?reservNo=" + reservNo)
+            .then(resp => resp.json())
+            .then(result => {
+
+               if (result > 0) {
+                  alert("예약 번호 " + reservNo + "번 예약이 승인 처리되었습니다.");
+               } else {
+                  alert("예약 번호 " + reservNo + "번 예약 승인을 실패했습니다.");
+               }
+            })
+            .catch(err => console.log(err)); // 예약 승인 처리 fetch
+
+         // 알림
+         sendNotificationFn("confirmReservation", null, reservNo,  reservDate, null);
+      }) // reservBtn.addEventListener("click
    }); // forEach(reservBtn
 
    /**
@@ -78,6 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
       
       btn.addEventListener("click", e => {
          const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
+
+         const reservDate = e.target.dataset.reservDate;
 
          // console.log(reservNo, storeNo);
          
@@ -200,6 +223,7 @@ const createReservList = (reservStatusFl) => {
          
             const reservBtn = document.createElement("button");
             reservBtn.classList.add("reserv-btn");
+            reservBtn.dataset.reservDate = `${reserv.reservDate} ${reserv.reservTime}`;
             reservBtn.innerText = "예약 승인";
       
             const reservRejectBtn = document.createElement("button");

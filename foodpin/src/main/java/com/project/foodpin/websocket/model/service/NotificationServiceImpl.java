@@ -85,4 +85,9 @@ public class NotificationServiceImpl implements NotificationService{
 	public Store selectStoreName(String storeNo) {
 		return mapper.selectStoreName(storeNo);
 	}
+	
+	@Override
+	public int selectReservMemerNo(String pkNo) {
+		return mapper.selectReservMemerNo(pkNo);
+	}
 }

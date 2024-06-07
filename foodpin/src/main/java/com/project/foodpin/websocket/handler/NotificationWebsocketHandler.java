@@ -48,6 +48,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		
 		// 연결된 Client의 WebSocketSession의 정보를 Set에 추가
 		// -> 웹소켓이 연결된 클라이언트 정보를 모아둠 (=> 누가 접속했는지 정보를 모아둠)
+		log.info("session id : {}", session.getId());
 		sessions.add(session);
 	}
 	
@@ -67,22 +68,18 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		 // 로그인한 회원 중 알림을 보내는 회원
 		 Member sendMember = ((Member)currentSession.getAttribute("loginMember"));
 		 
-		 // 예약한 가게 번호 이용해서 가게 정보 조회(notification.getPkNo())
-		 Store store = service.selectStoreData(notification.getPkNo());
+//		 // 예약한 가게 번호 이용해서 가게 정보 조회(notification.getPkNo())
+//		 Store store = service.selectStoreData(notification.getPkNo());
 		 
 		 // 알림 객체에(notificaiont에 필요한 값 세팅)
-		 setNotification(notification, sendMember, store);
+//		 setNotification(notification, sendMember, store);
+		 setNotification(notification, sendMember);
 		 
 		 // log로 전달받은 메시지 확인
 		 log.info("전달 받은 내용 : {}", notification);
 		 
 		 // 알림 내용이 없음 == 내 게시물
 		 if(notification.getNotificationContent() == null) return;
-		 
-		 // DB에 알림 삽입
-//		 int result = service.insertNotification(notification);
-		 
-//		 if(result == 0) return;
 		 
 		 // /notification.send로 연결된 객체를 만든 클라리언트들(sessions)중
 		 // 회원번호가 받는 회원 번호와 같은 사람에게 베시지 전달
@@ -115,8 +112,15 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 	 
 	 
 	//알림 종류에 따라 알림 객체 추가
-	private void setNotification(Notification notification, Member sendMember, Store store) throws JsonProcessingException, IOException {
+//	private void setNotification(Notification notification, Member sendMember, Store store) throws JsonProcessingException, IOException {
+	private void setNotification(Notification notification, Member sendMember) throws JsonProcessingException, IOException {
 		log.info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+		
+		 // 예약한 가게 번호 이용해서 가게 정보 조회(notification.getPkNo())
+		 Store store = null;
+		 int reservMemerNo = 0;
+		 
+		 
 		
 //		Message message = new Message();
 //		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
@@ -165,6 +169,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		
 		/* 예약 대기 상태 */
 		case "readyReservation" : 
+			store = service.selectStoreData(notification.getPkNo());
 			contentForMember = String.format("<b>%s<b> <b>%s<b> 사장님이 예약 확인 중입니다.", notification.getReservDate() , store.getStoreName());
 			contentForStore = String.format("<b>%s<b> 예약 신청 내역이 있습니다. 확인해주세요", notification.getReservDate());
 			
@@ -176,20 +181,28 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		
 		/* 예약 승인 했을 때 */
 		case "confirmReservation":
-			contentForMember = String.format("<b>%s<b> <b>%s<b> 예약이 승인 되었습니다. 이용에 참고 부탁드립니다.",
-					notification.getReservDate() , store.getStoreName());
+			store = service.selectStoreData(notification.getPkNo());
+			reservMemerNo = service.selectReservMemerNo(notification.getPkNo());
+			
+//			notification.setReceiveMemberNo(reservMemerNo);
+//			notification.setSendMemberNo(sendMember.getMemberNo());
+			
+			sendMember.setMemberNo(reservMemerNo);
+			
+			contentForMember = String.format("<b>%s<b> <b>%s<b> 예약이 승인 되었습니다. 이용에 참고 부탁드립니다.", notification.getReservDate() , store.getStoreName());
+			contentForStore = String.format("<b>%s<b> 예약 승인 내역이 있습니다. 확인해주세요", notification.getReservDate() );
 			
 			urlForMember = "/myPage/member/reservation/fix";
 			urlForStore = "/myPage/store/reservation";
 			
 			notiCode = 1;
 			
-//			contentForStore = String.format("<b>%s<b> 예약 승인 내역이 있습니다. 확인해주세요", notification.getReservDate() );
 			break;
 			 
 			
 		/* 예약 취소 시(회원/가게) */	
 		case "cancelReservation":
+			store = service.selectStoreData(notification.getPkNo());
 			contentForMember = String.format("<b>%s<b> <b>%s<b> 예약이 취소되었습니다. 이용에 참고 부탁드립니다.", notification.getReservDate() , store.getStoreName());
 			contentForStore = String.format("<b>%s<b> 예약이 취소되었습니다.", notification.getReservDate());
 			
@@ -201,7 +214,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		
 		/* 가게 측에서 예약을 거절 했을 경우 */
 		case "noConfrimReservation":
-			
+			store = service.selectStoreData(notification.getPkNo());
 			contentForMember = String.format("<b>%s<b> 예약하신 <b>%s<b> 님이 예약을 거절했습니다. 확인해주세요", notification.getReservDate() , store.getStoreName());
 			contentForStore = String.format("<b>%s<b> 예약 거절 내역이 있습니다.", notification.getReservDate());
 			
@@ -276,6 +289,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		// ---- 리뷰 ---- //
 		// 리뷰 신고 (접수)
 		case "reviewReport" : 
+			store = service.selectStoreData(notification.getPkNo());
 			contentForManager = String.format("<b>%s<b> 가게의 리뷰 신고가 들어왔습니다. 확인 해주세요.", store.getStoreName());
 			
 			urlForManager = "/myPage/manager/reportReview";
@@ -284,6 +298,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		
 		// 리뷰 신고 (해결여부)
 		case "reviewReportComplete" : 
+			store = service.selectStoreData(notification.getPkNo());
 			contentForStore = String.format("안녕하세요. 푸드핀 운영 관리자 입니다.<br>" +
 											"<b>%s<b> 해당 가게에서 발생한 리뷰 신고에 대한 처리가 완료 되었습니다.<br>"+  
 											"가게 운영에 참고 해주세요.<br>" + 
@@ -295,6 +310,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			
 		// ---- 가게 ---- //
 		case "storeReport" : 
+			store = service.selectStoreData(notification.getPkNo());
 			contentForManager = String.format("<b>%s<b> 가게 폐업 및 가게 정보 정정 신고가 들어왔습니다.<br>" + "가게를 확인 해주세요.", store.getStoreName());
 			
 			urlForManager = "/myPage/manager/managerStoreInfo";
@@ -303,6 +319,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			break;
 			
 		case "storeReportComplete" : 
+			store = service.selectStoreData(notification.getPkNo());
 			contentForStore = String.format("안녕하세요. 푸드핀 운영 관리자 입니다.<br>" +
 						                    "<b>%s</b> 해당 가게에서 발생한 폐업 및 가게 정보 정정 신고 처리가 완료 되었습니다.<br>" +  
 						                    "가게 운영에 참고 해주세요.<br>" + 
