@@ -58,6 +58,20 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return mapper.selectstoreInfo(memberNo);
 	}
 	
+	// 모든 카테고리 조회
+	@Override
+	public List<StoreCategory> selectCategoryAll() {
+		
+		return mapper.selectCategoryAll();
+	}
+	
+	// 가게 카테고리 조회
+	@Override
+	public List<StoreCategory> selectCategory(String storeNo) {
+		
+		return mapper.selectCategory(storeNo);
+	}
+	
 	// 가게 정보 수정
 	@Override
 	public int storeInfoUpdate(Store inputStore, MultipartFile image) {
@@ -279,12 +293,7 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return mapper.insertReply(inputReply);
 	}
 
-	// 모든 카테고리 조회
-	@Override
-	public List<StoreCategory> selectCategoryAll() {
-		
-		return mapper.selectCategoryAll();
-	}
+
 
 
 

@@ -5,14 +5,35 @@ const storeEditFrm = document.querySelector("#storeEditFrm"); // form
 
 
 
+
+
+/**
+ *  (버튼) checked 클래스 toggle
+ */
+const categoryCheck = (btn) => {
+
+   btn.addEventListener("click", () => {
+      btn.classList.toggle("checked");
+   });
+}; // categoryCheck
+
+/**
+ * (버튼) x 클릭시 이미지 삭제
+ */
+const storeImgDel = () => {
+
+
+}
+
+// -1 : 초기 상태(변화 없음)
+//   0: 프로필 이미지 삭제
+//  1 : 새 이미지 선택 선택
+let imgStatus = -1;
+let backupInput; // 요소 복제해서 백업하는 변수
+
 /* 가게 이미지 */
-
-const storeImg = document.querySelector("#storeImg");
-let imageInput = document.querySelector("#imageInput"); 
-
-let imgStatus = -1; // 이미지 기록 상태 변수
-let backupInput; // 
-
+const storeImg = document.querySelector("#storeImg"); // img
+let storeImgInput = document.querySelector("#storeImgInput"); // input
 
 /**
  * 가게 이미지 변경
@@ -24,7 +45,6 @@ const changeImageFn = e => {
    const file = e.target.files[0]; // 업로드 된 파일 정보
 
    console.log(file);
-
 
    // 파일 업로드 취소 + 백업본 (추가예정)
 
@@ -41,7 +61,7 @@ const changeImageFn = e => {
       const url = e.target.result;
       storeImg.setAttribute("src", url);
    
-      imgStatus = 1; // 이미지 업로드 상태 기록
+      imgStatus = 1; // 1 <- 새 이미지 선택됨
    
       backupInput = imageInput.cloneNode(true);
    })
@@ -50,33 +70,110 @@ const changeImageFn = e => {
    
 }
 
-imageInput.addEventListener("change", changeImageFn);
+storeImgInput.addEventListener("change", changeImageFn);
+
+
+
+
+/* ---------------------- */
+ document.addEventListener('DOMContentLoaded', () => {
+
+   /**
+    * 카테고리 조회
+    */
+   const checkCategory = () => {
+
+      const ctgBtnList = document.querySelectorAll(".category-btn"); // 카테고리 버튼
+
+      // 카테고리 조회
+      fetch("/myPage/store/selectCategory?storeNo=" + storeNo)
+      .then(resp => resp.json())
+      .then(categoryList => {
+   
+         categoryList.forEach(ctg => {
+
+            ctgBtnList.forEach(btn => {
+
+               // 기존 저장된 카테고리인 경우 체크 표시
+               if(btn.value == ctg.categoryCode) btn.classList.add('checked');
+
+               categoryCheck(btn); // 클릭시 버튼 토글
+
+            }); // ctgBtnList.forEach
+         }); // categoryList.forEach
+
+      }).catch( err => console.log(err)); // fetch (카테고리 조회)
+   } // checkCategory
+
+   checkCategory(); // 저장된 카테고리 조회 + 해당 카테고리에 체크 클래스 추가 
+
+   //-----------
+   // 이미지 삭제
+   document.querySelector(".store-img-del").addEventListener("click", () => {
+
+      document.querySelector(".storeInfo-img-container").classList.remove("img-ari"); // 테두리 없애는 클래스 추가
+
+      const storeImg = document.querySelector("#storeImg"); // img
+      storeImg.setAttribute("src", '');
+      storeImg.classList.add('hidden');
+      console.log(storeImg);
+
+      // document.querySelector(".store-img-del").classList.add('hidden'); // x
+
+      imgStatus = 0; // 이미지 여부 체크 0
+      
+      console.log("이미지 삭제" + imgStatus);
+   });
+
+   
+}); // DOMContentLoaded
+
+
+// // 이미지 삭제
+// document.querySelector(".store-img-del").addEventListener("click", () => {
+
+//    document.querySelector(".storeInfo-img-container").classList.remove("img-ari"); // 테두리 없애는 클래스 추가
+
+//    const storeImg = document.querySelector("#storeImg"); // img
+//    storeImg.setAttribute("src", '');
+//    storeImg.classList.add('hidden');
+//    console.log(storeImg);
+
+//    // document.querySelector(".store-img-del").classList.add('hidden'); // x
+
+//    imgStatus = 0; // 이미지 여부 체크 0
+   
+//    console.log("이미지 삭제" + imgStatus);
+// });
 
 
 
 
 
-/* -------------------------- */
-/* 예약 신청 허용/미허용 선택 */
-/* -------------------------- */
 
-const statusCheck  = document.querySelector("label[for='storeStatus']");
-const storeStatus = document.querySelector("#storeStatus"); // checkbox
 
-/** 예약 신청 여부 선택시
- * 내용 변경
- */
-storeStatus.addEventListener("change", () => {
 
-   if(storeStatus.checked) {
-      statusCheck.innerText = "예약 허용";
-      storeStatus.value = "Y";
-   }
-   else {
-      statusCheck.innerText = "예약 미허용";
-      storeStatus.value = "N";
-   }
-   console.log(storeStatus.value);
+   /* -------------------------- */
+   /* 예약 신청 허용/미허용 선택 */
+   /* -------------------------- */
+
+   const statusCheck  = document.querySelector("label[for='storeStatus']");
+   const storeStatus = document.querySelector("#storeStatus"); // checkbox
+
+   /** 예약 신청 여부 선택시
+    * 내용 변경
+    */
+   storeStatus.addEventListener("change", () => {
+
+      if(storeStatus.checked) {
+         statusCheck.innerText = "예약 허용";
+         storeStatus.value = "Y";
+      }
+      else {
+         statusCheck.innerText = "예약 미허용";
+         storeStatus.value = "N";
+      }
+      console.log(storeStatus.value);
 });
 
 

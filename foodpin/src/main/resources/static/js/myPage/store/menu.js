@@ -2,32 +2,7 @@
 const menuContainer = document.querySelector(".myPage-content-container"); // 본문 div 영역
 const menuBtn = document.querySelector("#menuBtn"); // 메뉴 정보 버튼
 
-document.addEventListener('DOMContentLoaded', () => {
 
-   
-
-   /**
-    * 저장된 카테고리 조회 + 해당 카테고리에 체크 클래스 추가 
-    */
-   const selectCategory = () => {
-
-
-      // selectCategory
-      document.querySelectorAll(".category-li").forEach(li => {
-
-         // if (li.value값 == 조회된 카테고리 코드값) { li.체크 클래스 추가}
-      });
-
-   } // selectCategory
-
-   
-}) // DOMContentLoaded
-
-
-
-
-
-console.log(storeNo);
 /**
  * (버튼) 메뉴 정보
  */
@@ -35,7 +10,6 @@ menuBtn.addEventListener("click", () => {
 
    let imgStatus = -1; // 이미지 기록 상태 변수
    let backupInput; // 
-
 
    // 서브 메뉴에 버튼 기존 체크 클래스 제거 + 해당 메뉴 체크
    document.querySelectorAll(".sub-title-btn").forEach(btn => { 

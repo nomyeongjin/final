@@ -65,6 +65,18 @@ public class StoreMyPageController {
 		return "myPage/store/storeInfo";
 	}
 	
+	/** 가게 카테고리 조회
+	 * @param storeNo
+	 * @return
+	 */
+	@GetMapping("selectCategory")
+	@ResponseBody
+	public List<StoreCategory> selectCategory(@RequestParam("storeNo") String storeNo) {
+		
+		return service.selectCategory(storeNo);
+	}
+	
+	
 	
 	/** 가게 정보 수정
 	 * @param loginMember
