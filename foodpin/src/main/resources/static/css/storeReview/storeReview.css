@@ -192,7 +192,7 @@
 .keyword-box > ul > li:hover{
   background-color: #d7d7d7;
   transition: 0.3s;
-  border: 1px solid rgb(52, 99, 253);
+  border: 1px solid #E14C54;
 }
 
 .keyword-box > ul > li >label{
@@ -206,7 +206,7 @@
 }
 
 .keyword-checkbox:checked + label{
-  color: rgb(36, 86, 253);;
+  color: #E14C54;
 }
 
 

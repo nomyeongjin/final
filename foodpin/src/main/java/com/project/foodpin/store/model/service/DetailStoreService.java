@@ -35,7 +35,7 @@ public interface DetailStoreService {
 	 * @param reporterNo 
 	 * @return
 	 */
-	int reviewReport(Map<String, Object> map, int reporterNo);
+	int reviewReport(Map<String, Object> map);
 
 
 	/** 가게 신고

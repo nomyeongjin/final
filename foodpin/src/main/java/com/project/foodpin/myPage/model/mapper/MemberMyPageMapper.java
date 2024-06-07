@@ -65,6 +65,9 @@ public interface MemberMyPageMapper {
 	// 회원 탈퇴 전 예약 확정/대기 조회
 	int checkReserv(int memberNo);
 
+	// 지난 예약 리뷰 확인용 개수 조회
+	int reservReviewCount(int reservNo);
+
 
 
 

@@ -58,7 +58,7 @@
                             <span th:text="|총 ${reservation[0].lastCount}건|"></span>
                             <table>
                                 <ul>
-                                    <li class="reservationList" th:each="reservation : ${reservation}">
+                                    <li class="reservationList" th:each="reservation, iterStat : ${reservation}">
                                         <div class="reservationStore" th:object="${reservation}">
                                             <div class="reservationDate" th:text="*{reservDate}"></div>
                                             <a class="storeName" th:text="|*{storeName} >|" th:href="'/store/storeDetail/' + *{storeNo}"></a>
@@ -66,7 +66,8 @@
                                             <i class="fa-solid fa-clock"><span class="reservationTime" th:text="| *{reservTime}|"></span></i>
                                             <div class="storeAddress" th:text="*{storeLocation}"></div>
                                         </div>
-                                        <span th:object="${reservation}">
+
+                                        <span th:object="${reservation}"    th:if="${reservReviewCounts[iterStat.index]} == 0">
                                             <a class="insertReviewBtn" th:href="'/review/reviewPage/' + *{storeNo}">리뷰작성</a>
                                         </span>
                                     </li>

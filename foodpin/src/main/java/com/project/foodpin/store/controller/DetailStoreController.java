@@ -131,9 +131,7 @@ public class DetailStoreController {
 		@RequestBody Map<String, Object> map,
 		@SessionAttribute("loginMember") Member loginMember) {
 		
-		int reporterNo = loginMember.getMemberNo();
-		
-		return service.reviewReport(map, reporterNo);
+		return service.reviewReport(map);
 	}
 	
 	

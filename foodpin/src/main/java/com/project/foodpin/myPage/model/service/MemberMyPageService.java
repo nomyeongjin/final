@@ -58,6 +58,9 @@ public interface MemberMyPageService {
 	// 탈퇴 전 예약 확정/대기 조회
 	int selectReserv(int memberNo);
 
+	// 지난 예약 리뷰 확인용 개수 조
+	int reservReviewCount(int reservNo);
+
 
 
 
