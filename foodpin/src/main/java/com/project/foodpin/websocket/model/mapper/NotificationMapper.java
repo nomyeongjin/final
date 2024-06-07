@@ -37,4 +37,7 @@ public interface NotificationMapper {
 	// 관리자에게 보낼 알림
 	void sendNotificationManager(Notification managerNotification);
 
+
+	Store selectStoreName(String storeNo);
+
 }

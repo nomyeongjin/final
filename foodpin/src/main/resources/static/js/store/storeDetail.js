@@ -233,10 +233,71 @@ const storeReport = document.querySelector("#storeReport");
 const storeReportBtn = document.querySelector('#storeReportBtn');
 
 popupShut.addEventListener("click", () => {
-  
+
   storeReportForm.classList.add("popup-storereport");
 });
 
+
+
+storeReport.addEventListener("click", () => {
+
+  storeReportForm.classList.remove("popup-storereport");
+});
+
+
+const requestContent = document.getElementById('requestStoreContent');
+const requestCategoryTitle = document.getElementById('requestSelect');
+
+storeReportBtn.addEventListener("click", e => {
+  e.preventDefault(); // 기본 폼 제출 동작을 방지
+
+  if (loginMember == null) {
+    alert('로그인 후 신고해주십시오.');
+    return;
+  }
+
+  // 유효성 검사
+  if (requestContent.value.trim() === '') {
+    alert('상세 내용을 입력해주세요.');
+    requestContent.focus();
+    return;
+  }
+
+  if (requestCategoryTitle.value === '') {
+    alert('신고 내용을 선택해주세요.');
+    requestType.focus();
+    return;
+  }
+
+
+  // 선택된 신고 내용을 포함하여 객체 생성
+  const obj = {
+    "storeNo": storeNo,
+    "memberNo": loginMember,
+    "requestCategoryTitle": requestCategoryTitle.value,
+    "requestContent": requestStoreContent.value,
+  };
+
+  fetch("/store/storeReport", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(obj)
+  })
+  .then(resp => resp.json())
+  .then(result => {
+    if (result == 0) {
+      alert("신고 접수가 되지 않았습니다.");
+      requestContent.focus();
+    } else {
+      alert("가게 신고가 접수 되었습니다.");
+      storeReportForm.classList.add("popup-hidden");
+      requestContent.value = '';
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('신고 중 오류가 발생했습니다. 다시 시도해주세요.');
+  });
 
 // storeReport.addEventListener("click", ()=>{
  
@@ -298,6 +359,14 @@ popupShut.addEventListener("click", () => {
 //       alert('신고 중 오류가 발생했습니다. 다시 시도해주세요.');
 //     });
 //   });
+
+
+
+
+  /* 가게 신고 알림 */
+  sendNotificationFn("reviewReport", null, storeNo, null, storeName);
+
+});
 
 
 

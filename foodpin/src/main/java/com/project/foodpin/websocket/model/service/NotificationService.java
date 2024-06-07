@@ -36,6 +36,9 @@ public interface NotificationService {
 	int deleteNotification(int notificationNo, int memberNo);
 
 
+	Store selectStoreName(String storeNo);
+
+
 
 
 	

@@ -295,6 +295,42 @@ if(confirmBtn != null) {
             }
         }
 
+        const visitName = document.querySelector("#visitName").value;
+        const visitTel = document.querySelector("#visitTel").value;
+        
+        if(visitName != "" || visitTel != ""){
+            // 둘 중 하나만 값이 있는 경우
+            if (visitName == "") {
+                Swal.fire({
+                    title: "",
+                    text: "방문자 성함을 작성해 주세요",
+                    icon: "warning",
+                    showCancelButton: false,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "확인"
+                });
+                return;
+            }
+            
+            // 방문자 연락처에 숫자가 아닌 다른 문자를 작성했을 경우에 대한 검사 
+            if (!(/^\d+$/.test(visitTel))){
+                e.preventDefault(); 
+                Swal.fire({
+                    title: "",
+                    text: "방문자 전화번호를 확인해 주세요.",
+                    icon: "warning",
+                    showCancelButton: false,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "확인"
+                });
+                return;
+            }
+        }
+
+
+
         /* 예약 확정 하기 전 예약 정보 페이지이기 때문에 별도의 검사 진행XX */
 
         /* 예약 정보를 담은  form 생성... */
@@ -365,48 +401,17 @@ if(confirmBtn != null) {
 
         // 방문자 이름
         const input6 = document.createElement("input");
-        const visitName = document.querySelector("#visitName").value;
+        
         input6.type="hidden";
         input6.name="visitName";
         input6.value=visitName;
 
         // 방문자 전화번호
         const input7 = document.createElement("input");
-        const visitTel = document.querySelector("#visitTel").value;
+       
         input7.type="hidden";
         input7.name="visitTel";
         input7.value=visitTel;
-
-        // 방문자 연락처에 숫자가 아닌 다른 문자를 작성했을 경우에 대한 검사 
-        if (!(/^\d+$/.test(visitTel))){
-            e.preventDefault(); 
-            Swal.fire({
-                title: "",
-                text: "방문자 전화번호를 확인해 주세요.",
-                icon: "warning",
-                showCancelButton: false,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "확인"
-            });
-            return;
-        }
-
-        // 둘 중 하나만 값이 있는 경우
-        if (input6 !== "" || input7 !== "") {
-            e.preventDefault(); 
-            Swal.fire({
-                title: "",
-                text: "이름 또는 전화번호를 입력하세요.",
-                icon: "warning",
-                showCancelButton: false,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "확인"
-            });
-            return;
-        }
-
 
         insertForm.append(input1, input2, input3, input4, input5,  input6, input7);
         
