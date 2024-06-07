@@ -83,6 +83,8 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
     	// DB 삽입 서비스 호출
         int result = service.insertMessage(msg);
         
+        int storeMemberNo = msg.getStoreMemerNo();
+        
         if(result == 0) return;
         
         //채팅이 보내진 시간을 MSG 세팅
