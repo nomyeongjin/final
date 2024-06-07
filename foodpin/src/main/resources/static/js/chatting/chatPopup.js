@@ -57,6 +57,7 @@ const sendMessage = () => {
 
   // 웹소켓 핸들러로 전달할 채팅 관련 데이터를 담은 객체 생성
   const chattingObj = {
+    "targetNo" : targetNo,    // 메시지를 받을 대상의 회원 번호(웹소켓)
     "messageContent" : msg,         // 전달할 메시지 내용
     "chattingNo" : chattingNo // 채팅방 번호(DB 저장용도)
   }
@@ -167,7 +168,7 @@ if(chattingSock != undefined){
           // <ul class="display-chatting">
           const ul = document.querySelector(".display-chatting");
   
-          ul.innerHTML = ""; // 이전 내용 지우기
+          // ul.innerHTML = ""; // 이전 내용 지우기
   
           console.log(messageList);
 
@@ -215,7 +216,7 @@ if(chattingSock != undefined){
               ul.append(li);
               display.scrollTop = display.scrollHeight; // 스크롤 제일 밑으로
           }
-  
+
       })
       .catch(err => console.log(err));
   }
@@ -251,7 +252,6 @@ if(chattingSock != undefined){
       }
     })
     
-    selectChattingFn()
 
   }
   
