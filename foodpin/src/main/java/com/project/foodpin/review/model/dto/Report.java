@@ -16,6 +16,7 @@ public class Report {
 	private String reportContent;
 	private int memberNo;
 	private String reportDate;
+	private String reporterName;
 	
 	private String reviewContent;
 	private int storeNo;

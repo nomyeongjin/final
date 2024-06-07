@@ -138,207 +138,207 @@ const dayoffBtn = document.querySelector("#dayoffBtn");
 /**
  * (메뉴) 휴무일 버튼 클릭시 화면 구성
  */
-dayoffBtn.addEventListener("click", () => {
+// dayoffBtn.addEventListener("click", () => {
 
-   // 서브 메뉴에 버튼 기존 체크 클래스 제거 + 해당 메뉴 체크
-   document.querySelectorAll(".sub-title-btn").forEach(btn => { 
+//    // 서브 메뉴에 버튼 기존 체크 클래스 제거 + 해당 메뉴 체크
+//    document.querySelectorAll(".sub-title-btn").forEach(btn => { 
 
-      btn.classList.remove('title-btn-checked');
-   });
-   dayoffBtn.classList.add('title-btn-checked'); // 선택된 요소 체크 클래스 추가
+//       btn.classList.remove('title-btn-checked');
+//    });
+//    dayoffBtn.classList.add('title-btn-checked'); // 선택된 요소 체크 클래스 추가
 
-   StoreOffContainer.innerText = ""; // 본문 영역에 기존 내용 지우기
+//    StoreOffContainer.innerText = ""; // 본문 영역에 기존 내용 지우기
    
-   /* 고정 휴무일 */
-   // 고정 휴무일 타이틀 생성
-   const offWeekSection = document.createElement("section");
-   offWeekSection.classList.add("section-title");
-   offWeekSection.innerHTML = "고정 휴무일";
+//    /* 고정 휴무일 */
+//    // 고정 휴무일 타이틀 생성
+//    const offWeekSection = document.createElement("section");
+//    offWeekSection.classList.add("section-title");
+//    offWeekSection.innerHTML = "고정 휴무일";
 
-   const weekOffFrm = document.createElement("form"); // div 생성
-   weekOffFrm.id = "off-container";
+//    const weekOffFrm = document.createElement("form"); // div 생성
+//    weekOffFrm.id = "off-container";
 
-   const ul = document.createElement("ul"); // ul 생성
-   ul.classList.add("week-row");
-   // 
-
-
-   // 각 요일 li 생성 
-   const weekList = ['일', '월', '화', '수', '목', '금', '토'];
-
-   weekList.forEach( (week, index) => {
-
-      const li = document.createElement("li");
-      li.classList.add("week-li");
-      li.innerText = week;
-      li.setAttribute('value', index);
-      ul.append(li);
-   })
-
-   selectWeekOff();
-
-   // 버튼 생성
-   const weekBtn = document.createElement("button");
-   weekBtn.classList.add("update-btn");
-   weekBtn.type = "button";
-   weekBtn.id = "offUpdateBtn";
-   weekBtn.innerText = "고정 휴무일 수정";
-
-   weekOffFrm.append(ul, weekBtn);
-
-   /**
-    * (버튼) 고정 휴무일 폼 제출
-    */
-   weekBtn.addEventListener("click", () => {
+//    const ul = document.createElement("ul"); // ul 생성
+//    ul.classList.add("week-row");
+//    // 
 
 
-      console.log("폼제출");
-      const weekList = document.querySelectorAll(".checked"); // 선택된 li 요소 얻어오기
-      const dataList = []; // 값 하나로 묶을 배열 생성
+//    // 각 요일 li 생성 
+//    const weekList = ['일', '월', '화', '수', '목', '금', '토'];
 
-      for(const li of weekList) {
+//    weekList.forEach( (week, index) => {
 
-         data = {
-            "offWeek" : li.value,
-            "storeNo" : storeNo
-         };
+//       const li = document.createElement("li");
+//       li.classList.add("week-li");
+//       li.innerText = week;
+//       li.setAttribute('value', index);
+//       ul.append(li);
+//    })
 
-         dataList.push(data);
-      }
-      // console.log(dataList);
+//    selectWeekOff();
 
-      fetch("/myPage/store/insertOffWeek", {
-         method : "POST",
-         headers : {"content-Type" : "application/json"},
-         body : JSON.stringify(dataList)
-      })
-      .then(resp => resp.json())
-      .then(result => {
+//    // 버튼 생성
+//    const weekBtn = document.createElement("button");
+//    weekBtn.classList.add("update-btn");
+//    weekBtn.type = "button";
+//    weekBtn.id = "offUpdateBtn";
+//    weekBtn.innerText = "고정 휴무일 수정";
+
+//    weekOffFrm.append(ul, weekBtn);
+
+//    /**
+//     * (버튼) 고정 휴무일 폼 제출
+//     */
+//    weekBtn.addEventListener("click", () => {
+
+
+//       console.log("폼제출");
+//       const weekList = document.querySelectorAll(".checked"); // 선택된 li 요소 얻어오기
+//       const dataList = []; // 값 하나로 묶을 배열 생성
+
+//       for(const li of weekList) {
+
+//          data = {
+//             "offWeek" : li.value,
+//             "storeNo" : storeNo
+//          };
+
+//          dataList.push(data);
+//       }
+//       // console.log(dataList);
+
+//       fetch("/myPage/store/insertOffWeek", {
+//          method : "POST",
+//          headers : {"content-Type" : "application/json"},
+//          body : JSON.stringify(dataList)
+//       })
+//       .then(resp => resp.json())
+//       .then(result => {
          
-         console.log(result);
+//          console.log(result);
 
-         if(result > 0) {
-            alert("고정 휴무일이 변경되었습니다.");
-            calendar_rendering();
-         }
-      })
-      .catch( err => console.log(err));
-   });
+//          if(result > 0) {
+//             alert("고정 휴무일이 변경되었습니다.");
+//             calendar_rendering();
+//          }
+//       })
+//       .catch( err => console.log(err));
+//    });
    
-   // --------------------------------
+//    // --------------------------------
 
-   // 지정 휴무일
-   const offDaySection = document.createElement("section");
-   offDaySection.classList.add("section-title");
-   offDaySection.innerHTML = "지정 휴무일";
+//    // 지정 휴무일
+//    const offDaySection = document.createElement("section");
+//    offDaySection.classList.add("section-title");
+//    offDaySection.innerHTML = "지정 휴무일";
 
-   const offDayEditFrm = document.createElement("form"); // form 생성
-   offDayEditFrm.id = "offDayEditFrm";
+//    const offDayEditFrm = document.createElement("form"); // form 생성
+//    offDayEditFrm.id = "offDayEditFrm";
 
-   const dayOffContainer = document.createElement("div"); // div 생성
-   dayOffContainer.classList.add("off-container");
+//    const dayOffContainer = document.createElement("div"); // div 생성
+//    dayOffContainer.classList.add("off-container");
    
    
-   dayOffContainer.append(calendarEl);
-   offDayEditFrm.append(dayOffContainer);
+//    dayOffContainer.append(calendarEl);
+//    offDayEditFrm.append(dayOffContainer);
    
-   // 마이페이지 본문 컨테이너에 각 휴무일 section, form 추가
-   StoreOffContainer.append(offWeekSection, weekOffFrm, offDaySection, offDayEditFrm);
-   calendar_rendering() // 달력 생성 함수 호출(calendarEl 내부에 생성)
+//    // 마이페이지 본문 컨테이너에 각 휴무일 section, form 추가
+//    StoreOffContainer.append(offWeekSection, weekOffFrm, offDaySection, offDayEditFrm);
+//    calendar_rendering() // 달력 생성 함수 호출(calendarEl 내부에 생성)
 
 
-
-   
 
    
-});
 
-const testBtn = document.querySelector("#testBtn");
-const popupLayer = document.querySelector("#popupLayer");
-/**
- * 일정 등록하는 팝업창 생성 
- */
-let addBtn = document.querySelector("#addBtn"); //  팝업창 - 일정 등록 버튼
+   
+// });
 
-const createPopup = () => {
+// const testBtn = document.querySelector("#testBtn");
+// const popupLayer = document.querySelector("#popupLayer");
+// /**
+//  * 일정 등록하는 팝업창 생성 
+//  */
+// let addBtn = document.querySelector("#addBtn"); //  팝업창 - 일정 등록 버튼
 
-   const popupFrm = document.createElement("form");
-   popupFrm.classList.add("popup-container");
+// const createPopup = () => {
 
-   const titleRow = document.createElement("div"); // 일정명
-   titleRow.classList.add("popup-row");
-   titleRow.innerText = "일정명 : ";
+//    const popupFrm = document.createElement("form");
+//    popupFrm.classList.add("popup-container");
 
-   const title = document.createElement("input"); 
-   title.setAttribute("type", "text");
-   title.id = "title";
-   titleRow.append(title);
+//    const titleRow = document.createElement("div"); // 일정명
+//    titleRow.classList.add("popup-row");
+//    titleRow.innerText = "일정명 : ";
 
-   const startRow = document.createElement("div"); // 시작 일자
-   startRow.classList.add("popup-row");
-   startRow.innerText = "시작 일자 : ";
+//    const title = document.createElement("input"); 
+//    title.setAttribute("type", "text");
+//    title.id = "title";
+//    titleRow.append(title);
 
-   const start = document.createElement("input"); 
-   start.setAttribute("type", "date");
-   start.id = "start";
-   startRow.append(start);
+//    const startRow = document.createElement("div"); // 시작 일자
+//    startRow.classList.add("popup-row");
+//    startRow.innerText = "시작 일자 : ";
 
-   const endRow = document.createElement("div"); // 종료 일자
-   endRow.classList.add("popup-row");
-   endRow.innerText = "종료 일자 : ";
+//    const start = document.createElement("input"); 
+//    start.setAttribute("type", "date");
+//    start.id = "start";
+//    startRow.append(start);
 
-   const end = document.createElement("input"); 
-   end.setAttribute("type", "date");
-   end.id = "end";
-   endRow.append(end);
+//    const endRow = document.createElement("div"); // 종료 일자
+//    endRow.classList.add("popup-row");
+//    endRow.innerText = "종료 일자 : ";
 
-   const btnRow = document.createElement("div"); // 버튼 영역
-   btnRow.classList.add("popup-row");
+//    const end = document.createElement("input"); 
+//    end.setAttribute("type", "date");
+//    end.id = "end";
+//    endRow.append(end);
 
-   addBtn = document.createElement("button");
-   addBtn.classList.add("popup-row");
-   addBtn.id = "addBtn";
-   addBtn.innerText = "휴무 등록";
+//    const btnRow = document.createElement("div"); // 버튼 영역
+//    btnRow.classList.add("popup-row");
 
-   const cancelBtn = document.createElement("button");
-   cancelBtn.classList.add("popup-row");
-   cancelBtn.innerText = "취소";
+//    addBtn = document.createElement("button");
+//    addBtn.classList.add("popup-row");
+//    addBtn.id = "addBtn";
+//    addBtn.innerText = "휴무 등록";
 
-   btnRow.append(addBtn, cancelBtn);
-   popupFrm.append(titleRow, startRow, endRow, btnRow);
-   StoreOffContainer.append(popupFrm);
+//    const cancelBtn = document.createElement("button");
+//    cancelBtn.classList.add("popup-row");
+//    cancelBtn.innerText = "취소";
+
+//    btnRow.append(addBtn, cancelBtn);
+//    popupFrm.append(titleRow, startRow, endRow, btnRow);
+//    StoreOffContainer.append(popupFrm);
 
 
-   /**
-    *  (버튼) 휴무 일정 등록 - 팝업창
-    */
-   addBtn.addEventListener("click", () => {
+//    /**
+//     *  (버튼) 휴무 일정 등록 - 팝업창
+//     */
+//    addBtn.addEventListener("click", () => {
 
-      const off = {
-         "storeNo" : storeNo,
-         "offDayTitle" : title.value,
-         "offDayStart" : start.value,
-         "offDayEnd" : end.value
-      };
+//       const off = {
+//          "storeNo" : storeNo,
+//          "offDayTitle" : title.value,
+//          "offDayStart" : start.value,
+//          "offDayEnd" : end.value
+//       };
 
-      fetch("/myPage/store/calendarOffInsert", {
-         method : "POST",
-         headers : {"content-Type" : "application/json"},
-         body : JSON.stringify(off)
-      })
-      .then(resp => resp.json())
-      .then(result => {
+//       fetch("/myPage/store/calendarOffInsert", {
+//          method : "POST",
+//          headers : {"content-Type" : "application/json"},
+//          body : JSON.stringify(off)
+//       })
+//       .then(resp => resp.json())
+//       .then(result => {
 
-         if(result > 0) {
-            alert("휴무 일정 등록 성공");
-         }
-         else{
-            alert("실패")
-         }
-      })
-   });
+//          if(result > 0) {
+//             alert("휴무 일정 등록 성공");
+//          }
+//          else{
+//             alert("실패")
+//          }
+//       })
+//    });
 
-};
+// };
 
 
 

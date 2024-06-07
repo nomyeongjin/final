@@ -35,7 +35,7 @@
       <section class="content-container">
 
          <!-- 타이틀 영역 -->
-         <div class="myPage-title-container">
+         <div class="myPage-title-review-container">
             <section class="myPage-title">리뷰 관리</section>
 
             <!-- 서브타이틀 버튼 -->
@@ -52,120 +52,124 @@
             <div id="reviewListContainer">
                 <div class="storereview-container" th:if="${reviewList}">
                     
-                  <th:block th:unless= "${!#lists.isEmpty(reviewList)}">
-                      <h3>작성된 리뷰가 없습니다.</h3>
-                  </th:block>
+                    <th:block th:unless= "${!#lists.isEmpty(reviewList)}">
+                      <h2>댓글을 작성할 리뷰가 없습니다.</h2>
+                    </th:block>
+
+                    <div class="review-count" th:unless="${#lists.isEmpty(reviewList)}">
+                        <span th:text="|총  ${#lists.size(reviewList)} 건|"></span>
+                    </div>
                   
                     <th:block  th:each=" review : ${reviewList}" th:object="${review}">
-                        <th:block th:if="${#lists.isEmpty(review.replyList)}">
+                        
 
 
-                            <div class="review">
-                              
-    
-                                <div class="storereview-top">
-          
-                                    <div class="storereview-top-left">
-                                        <img class="review-member-profile"
-                                          th:src="*{profileImg}">
-                                        <div class="review-info">
-                                        <span th:text="*{memberNickname}">닉네임</span>
-    
-                                            <div class="review-memberScore">
-                                                <span th:switch="*{reviewRating}">
-                                                  <span th:case="1">
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="empty_star  fas fa-star"></i>
-                                                      <i class="empty_star  fas fa-star"></i>
-                                                      <i class="empty_star  fas fa-star"></i>
-                                                      <i class="empty_star  fas fa-star"></i>
-                                                  </span>
-                                                  <span th:case="2">
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="empty_star  fas fa-star"></i>
-                                                      <i class="empty_star  fas fa-star"></i>
-                                                      <i class="empty_star  fas fa-star"></i>
-                                                  </span>
-                                                  <span th:case="3">
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="empty_star  fas fa-star"></i>
-                                                      <i class="empty_star  fas fa-star"></i>
-                                                  </span>
-                                                  <span th:case="4">
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="empty_star  fas fa-star"></i>
-                                                  </span>
-                                                  <span th:case="5">
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="rating__star fas fa-star"></i>
-                                                      <i class="rating__star fas fa-star"></i>
-                                                  </span>
+                        <div class="review">
+                            
+
+                            <div class="storereview-top">
+        
+                                <div class="storereview-top-left">
+                                    <img class="review-member-profile"
+                                        th:src="*{profileImg}">
+                                    <div class="review-info">
+                                    <span th:text="*{memberNickname}">닉네임</span>
+
+                                        <div class="review-memberScore">
+                                            <span th:switch="*{reviewRating}">
+                                                <span th:case="1">
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="empty_star  fas fa-star"></i>
+                                                    <i class="empty_star  fas fa-star"></i>
+                                                    <i class="empty_star  fas fa-star"></i>
+                                                    <i class="empty_star  fas fa-star"></i>
                                                 </span>
-                                                <span th:text="|*{reviewRating} 점|"> 점수</span>
-                                            </div>
-          
+                                                <span th:case="2">
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="empty_star  fas fa-star"></i>
+                                                    <i class="empty_star  fas fa-star"></i>
+                                                    <i class="empty_star  fas fa-star"></i>
+                                                </span>
+                                                <span th:case="3">
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="empty_star  fas fa-star"></i>
+                                                    <i class="empty_star  fas fa-star"></i>
+                                                </span>
+                                                <span th:case="4">
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="empty_star  fas fa-star"></i>
+                                                </span>
+                                                <span th:case="5">
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="rating__star fas fa-star"></i>
+                                                    <i class="rating__star fas fa-star"></i>
+                                                </span>
+                                            </span>
+                                            <span th:text="|*{reviewRating} 점|"> 점수</span>
                                         </div>
-                                  </div>
-          
-                                    <div class="storereview-top-right">
-    
-                                      <div class="review-btn">
-                                          
-                                      </div>
-    
-                                        <div class="review-date">
-                                          <span th:text="*{reviewRegDate}">2024-05-17</span>
-                                        </div>
+        
                                     </div>
-                                  
                                 </div>
-          
-                              
-                                <div class="storereview-mid">
-                                  <p th:text="*{reviewContent}">리뷰 내용</p>
+        
+                                <div class="storereview-top-right">
+
+                                    <div class="review-btn">
+                                        
+                                    </div>
+
+                                    <div class="review-date">
+                                        <span th:text="*{reviewRegDate}">2024-05-17</span>
+                                    </div>
                                 </div>
-          
-                                <th:block>
-                                  <div class="storereview-bottom">
-                                      
-                                      <th:block th:if="${!#lists.isEmpty(uploadList)}">
-                                          <p th:if="*{uploadList}">주문 내역</p>
-                                      </th:block>
-      
-                                      <div class="storereview-image" th:if="*{uploadList}">
-                                          <th:block th:each=" upload : *{uploadList}">
-                                              <img class="review-look" th:src="|${upload.imagePath}${upload.imgRename}|">
-                                          </th:block>
-                                      </div>
-      
-                                      <p>해시태그</p>
-                                      <div class="review-hashtag">
-          
-                                          <th:block th:each=" hash : *{hashList}">
-                                              <span th:text="|${hash.hashTitle} |" class="review-hash">#해시태그</span>
-                                          </th:block>
-                                      </div>
-                                  </div>
-                                </th:block>
-    
-                                <div class="store-reply">
-                                    <form action="/myPage/store/insertReply" method="POST" class="reply-form">
-                                        <input type="text" class="reply-content-bubble" name="replyContent">
-                                        <input type="text" name="storeNo" th:value="*{storeNo}" hidden>
-                                        <input type="text" name="reviewNo" th:value="*{reviewNo}" hidden>
-                                        <button class="reply-btn">답글등록</button>
-                                    </form>
-                                </div>
+                                
                             </div>
-                        </th:block>
+        
+                            
+                            <div class="storereview-mid">
+                                <p th:text="*{reviewContent}">리뷰 내용</p>
+                            </div>
+        
+                            <th:block>
+                                <div class="storereview-bottom">
+                                    
+                                    <th:block th:if="${!#lists.isEmpty(uploadList)}">
+                                        <p th:if="*{uploadList}">주문 내역</p>
+                                    </th:block>
+    
+                                    <div class="storereview-image" th:if="*{uploadList}">
+                                        <th:block th:each=" upload : *{uploadList}">
+                                            <img class="review-look" th:src="|${upload.imagePath}${upload.imgRename}|">
+                                        </th:block>
+                                    </div>
+    
+                                    <p>해시태그</p>
+                                    <div class="review-hashtag">
+        
+                                        <th:block th:each=" hash : *{hashList}">
+                                            <span th:text="|${hash.hashTitle} |" class="review-hash">#해시태그</span>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </th:block>
+
+                            <div class="store-reply">
+                                <form action="/myPage/store/insertReply" method="POST" class="reply-form">
+                                    <input type="text" class="reply-content-bubble" name="replyConent">
+                                    <input type="text" name="storeNo" th:value="*{storeNo}" hidden>
+                                    <input type="text" name="reviewNo" th:value="*{reviewNo}" hidden>
+                                    <button class="reply-btn">답글등록</button>
+                                </form>
+                            </div>
+                        </div>
+                        
                   </th:block>
                   
               </div>

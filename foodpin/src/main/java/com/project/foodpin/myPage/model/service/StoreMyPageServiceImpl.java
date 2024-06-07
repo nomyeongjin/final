@@ -264,6 +264,12 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public List<Review> reviewAll(int memberNo) {
 		return mapper.reviewAll(memberNo);
 	}
+	
+	// 사장님 미답변 조회
+	@Override
+	public List<Review> reviewAllNoReply(int memberNo) {
+		return mapper.reviewAllNoReply(memberNo);
+	}
 
 	// 사장님 댓글 삽입
 	@Override
@@ -271,9 +277,17 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return mapper.insertReply(inputReply);
 	}
 
-
-
-
+	//사장님 댓글 수정
+	@Override
+	public int updateReply(Map<String, Object> map) {
+		return mapper.updateReply(map);
+	}
+	
+	// 사장님 댓글 삭제
+	@Override
+	public int deleteReply(int replyNo) {
+		return mapper.deleteReply(replyNo);
+	}
 
 
 

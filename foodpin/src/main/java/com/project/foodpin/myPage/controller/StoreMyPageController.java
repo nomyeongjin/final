@@ -367,8 +367,27 @@ public class StoreMyPageController {
 	}
 	
 	
-	
-	
+	/** 사장님 미답변 조회
+	 * @param loginMember
+	 * @param model
+	 * @param ra
+	 * @return
+	 */
+	@GetMapping("reviewUnanswered")
+	public String reviewUnanswered(
+			@SessionAttribute("loginMember") Member loginMember,
+			Model model, RedirectAttributes ra
+			) {
+		
+		int memberNo = loginMember.getMemberNo();
+		
+		List<Review> reviewList = service.reviewAllNoReply(memberNo);
+		
+		model.addAttribute("reviewList", reviewList);
+		
+		
+		return "myPage/store/reviewUnanswered";
+	}
 	
 	/** 사장님 댓글 삽입
 	 * @param loginMember
@@ -380,12 +399,9 @@ public class StoreMyPageController {
 	@PostMapping("insertReply")
 	public String insertReply(
 	    @SessionAttribute("loginMember") Member loginMember,
-	    @RequestParam("replyConent") String replyConent,
 	    ReviewReply inputReply,
 	    RedirectAttributes ra) {
 		
-		inputReply.setReplyConent(replyConent);
-	    
 	    int result = service.insertReply(inputReply);
 	    
 	    String message = null;
@@ -402,28 +418,26 @@ public class StoreMyPageController {
 	}
 	
 	
-	// 댓글 미답변 조회
-	@GetMapping("reviewUnanswered")
-	public String reviewUnanswered(
-		@SessionAttribute("loginMember") Member loginMember,
-		Model model, RedirectAttributes ra
-		) {
-			
-		int memberNo = loginMember.getMemberNo();
-		
-		List<Review> reviewList = service.reviewAll(memberNo);
-		
-		model.addAttribute("reviewList", reviewList);
-		
-		
-		return "myPage/store/reviewUnanswered";
+	/** 사장님 댓글 수정
+	 * @param map
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("updateReply")
+	public int updateReply(@RequestBody Map<String, Object> map) {
+		return service.updateReply(map);
 	}
 	
 	
-	
-	
-	
-	
+	/** 사장님 댓글 삭제
+	 * @param replyNo
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("deleteReply")
+	public int deleteReply(@RequestBody int replyNo) {
+		return service.deleteReply(replyNo);
+	}
 	
 	
 	

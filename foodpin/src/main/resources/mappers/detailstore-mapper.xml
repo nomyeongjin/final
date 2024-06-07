@@ -216,7 +216,7 @@
 	      SELECT SEQ_REPORT_NO.NEXTVAL FROM DUAL
 	  	</selectKey>
 		   
-		INSERT INTO "REPORT" VALUES(#{reportNo}, #{reportContent}, #{reviewNo}, #{memberNo}, DEFAULT, DEFAULT)
+		INSERT INTO "REPORT" VALUES(#{reportNo}, #{reportContent}, #{reviewNo}, #{memberNo}, DEFAULT, DEFAULT, #{reporterName})
 	</insert>   
    
    
