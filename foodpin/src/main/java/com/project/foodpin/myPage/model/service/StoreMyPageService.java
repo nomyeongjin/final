@@ -25,6 +25,17 @@ public interface StoreMyPageService {
 	 */
 	Store selectstoreInfo(int memberNo);
 	
+	/** 모든 카테고리 조회
+	 * @return
+	 */
+	List<StoreCategory> selectCategoryAll();
+
+	/** 가게 카테고리 조회
+	 * @param storeNo
+	 * @return
+	 */
+	List<StoreCategory>  selectCategory(String storeNo);
+	
 	/** 가게 정보 수정
 	 * @param inputStore
 	 * @param storeImg 

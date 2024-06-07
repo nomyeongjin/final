@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
    document.querySelector("#memberEmail").focus();
 
+
+   
    /**
  * (메뉴) 사장님 정보 변경 화면 전환
  */

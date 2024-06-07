@@ -50,11 +50,11 @@
                <!-- 이미지 -->
                <div class="storeInfo-img-container">
 
+                  <!-- 이미지가 없는 경우 -->
                   <th:if="*{storeImg == null}">
                      <img id="storeImg" class="hidden" alt="">
 
                      <div class="store-img-area hidden">
-
                         <label for="storeImgInput" id="storeImgLabel">
                            <i class="fa-regular fa-image"></i>
                            <i class="fa-solid fa-plus"></i>
@@ -64,8 +64,10 @@
                      </div>
                   </th:if>
 
+                  <!-- 이미지가 있는 경우 -->
                   <th:unless="*{storeImg == null}">
                      <img id="storeImg" th:src="*{storeImg}">
+                     <i class="fa-solid fa-xmark store-img-del"></i>
 
                      <label for="storeImgInput" id="storeImgLabel" class="hidden">
                         <i class="fa-regular fa-image"></i>
@@ -165,11 +167,11 @@
                   <!-- 카테고리 -->
                   <div class="category-area">
                      <label class="category-label">카테고리</label>
-                     <ul class="category-row">
+                     <div class="category-row">
                         <th:block th:each="ctg : ${category}">
-                           <li class="category-li" th:text="${ctg.categoryTitle}" th:value="${ctg.categoryCode}">카테고리명</li>
-                        </th:each>
-                     </ul>
+                           <button class="category-btn" th:text="${ctg.categoryTitle}" th:value="${ctg.categoryCode}" type="button">카테고리명</button>
+                        </th:block>
+                     </div>
                   </div>
                </div>
                
