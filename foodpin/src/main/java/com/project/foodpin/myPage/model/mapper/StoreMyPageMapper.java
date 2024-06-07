@@ -179,6 +179,11 @@ public interface StoreMyPageMapper {
 	 */
 	List<Review> reviewAll(int memberNo);
 
+	/** 사장님 미답변 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<Review> reviewAllNoReply(int memberNo);
 
 	/** 사장님 댓글 삽입
 	 * @param inputReply
@@ -191,6 +196,19 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	List<StoreCategory> selectCategoryAll();
+  
+	/** 사장님 댓글 수정
+	 * @param map
+	 * @return
+	 */
+	int updateReply(Map<String, Object> map);
+
+
+	/** 사장님 댓글 삭제
+	 * @param replyNo
+	 * @return
+	 */
+	int deleteReply(int replyNo);
 
 
 

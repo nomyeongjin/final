@@ -64,5 +64,8 @@ public class Store {
 	private String menuContent;
 	private String menuImgUrl;
 	
+	// 가게 카테고리
+	private int categoryCode;
+
 	
 }

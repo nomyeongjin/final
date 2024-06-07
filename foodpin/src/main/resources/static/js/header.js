@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
         myChat.addEventListener("click", () => {
         
-            location.href = "/chatting/chat?memberId=" + loginMember.memberId;
+            location.href = "/chatting/chat?memberNo=" + loginMember.memberNo;
         
         })
     }

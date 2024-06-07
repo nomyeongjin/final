@@ -81,14 +81,17 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 
 	// 리뷰 신고
 	@Override
-	public int reviewReport(Map<String, Object> map) {
+	public int reviewReport(Map<String, Object> map, int reporterNo) {
 		
 		int reviewNo = Integer.parseInt(String.valueOf(map.get("reviewNo")));
 		
 		int memberNo = mapper.selectMemberNo(reviewNo);
 		
-		map.put("memberNo", memberNo);
+		String reporterName = mapper.selectReporterName(reporterNo);
 		
+		map.put("memberNo", memberNo);
+		map.put("reporterNo", reporterNo);
+		map.put("reporterName", reporterName);
 		
 		return mapper.reviewReport(map);
 	}

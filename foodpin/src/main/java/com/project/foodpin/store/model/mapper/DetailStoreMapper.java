@@ -83,6 +83,16 @@ public interface DetailStoreMapper {
 
 
 
+	/** 리뷰 신고자 이름 찾기
+	 * @param reporterNo
+	 * @return
+	 */
+	String selectReporterName(int reporterNo);
+
+
+
+
+
 
 
 
