@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,6 +46,7 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 
 	/* 매퍼 */
 	private final StoreMyPageMapper mapper;
+	private final BCryptPasswordEncoder bcrypt;
 
 	
 	
@@ -161,7 +164,6 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		
 		return result;
 	}
-
 	
 	// 고정 휴무일 조회
 	@Override
@@ -176,7 +178,6 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		
 		return mapper.calendarOffSelect(storeNo);
 	}
-
 	
 	// 지정 휴무일 등록
 	@Override
@@ -185,12 +186,23 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return mapper.calendarOffInsert(inputOff);
 	}
 	
-	
+	// ------ 예약 관리 ------
 	
 	// 전체 예약 조회
 	@Override
 	public List<Reservation> reservAll(int memberNo) {
 		return mapper.reservAll(memberNo);
+	}
+	
+	// 예약 조회
+	@Override
+	public List<Reservation> selectReserv(String storeNo, String reservStatusFl) {
+
+		Map<String, String> map = new HashMap<>();
+		map.put("storeNo", storeNo);
+		map.put("reservStatusFl", reservStatusFl);
+		
+		return mapper.selectReserv(map);
 	}
 	
 	// 예약 승인
@@ -199,14 +211,22 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		
 		return mapper.updateReservStatus(reservNo);
 	}
+	
+	// 예약 거절
+	@Override
+	public int rejectReservStatus(int reservNo) {
+		
+		return mapper.rejectReservStatus(reservNo);
+	}
 
 
 	// 확정된 예약 조회
 	@Override
-	public List<Reservation> reservConfirm(int memberNo) {
-		return mapper.reservConfirm(memberNo);
+	public List<Reservation> reservConfirm(String storeNo) {
+		return mapper.reservConfirm(storeNo);
 	}
 
+	// ------ 사장님 정보 ------
 
 	// 사장님 정보 변경 화면으로 전환
 	@Override
@@ -220,7 +240,24 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int ceoInfoUpdate(Member inputMember) {
 		return mapper.ceoInfoUpdate(inputMember);
 	}
+	
+	// 사장님 비밀번호 변경
+	@Override
+	public int ceoPwUpdate(int memberNo, Map<String, Object> map) {
+		
+		String originPw = mapper.selectPw(memberNo);
+		
+		if( !bcrypt.matches((String)map.get("memberPw"), originPw)) return 0;
+		
+		String encPw = bcrypt.encode((String)map.get("memberNewPw"));
+		
+		map.put("encPw", encPw);
+		map.put("memberNo", memberNo);
+		
+		return mapper.ceoPwUpdate(map);
+	}
 
+	// ------ 리뷰 ------
 
 	// 사장님 리뷰 조회
 	@Override
@@ -233,6 +270,10 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int insertReply(ReviewReply inputReply) {
 		return mapper.insertReply(inputReply);
 	}
+
+
+
+
 
 
 

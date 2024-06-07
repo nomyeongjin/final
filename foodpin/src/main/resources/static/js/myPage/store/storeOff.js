@@ -8,6 +8,7 @@ let calendar;
 
 
 const selectWeekOff = () => {
+
       // 고정 휴무일 DB값 조회 
       fetch("/myPage/store/selectWeekOff", {
          method : "POST",
@@ -92,36 +93,36 @@ function calendar_rendering() {
    .then(listMap => {
       // console.log(listMap);
 
+      selectWeekOff();
+      // 캘린더 생성
+      calendar = new FullCalendar.Calendar(calendarEl, {
 
-
-
-   // 캘린더 생성
-   calendar = new FullCalendar.Calendar(calendarEl, {
-
-      locale: 'kr',
-      timeZone: 'UTC',
-      initialView: 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
-      editable: false, // false로 변경 시 draggable 작동 x
-      eventColor : '#E14C54', // 이벤트 색상
-      // eventClick : fn_calEventClick, // 이벤트 클릭 시
-
-      // 화면 구현용 샘플 데이터
-      events: listMap ,
-      
-      // 헤더
-      headerToolbar: { left: 'addEventButton', center: 'title' },
-      
-      // 커스텀 버튼 설정에서 일정 추가 버튼 추가
-      customButtons: {
-         addEventButton: { // 추가한 버튼 설정
-               text : "일정 추가",  // 버튼 내용
-               click : function(){ createPopup(); }
-         }
-      } 
-   });
-   calendar.render();
-})
-.catch( err => console.log(err));
+         locale: 'kr',
+         timeZone: 'UTC',
+         initialView: 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
+         editable: false,
+         dayMaxEvents: true,
+         eventColor : '#E14C54',
+         // eventClick : fn_calEventClick, // 이벤트 클릭 시
+         dateClick: function(){ createPopup(); },
+         handleEditModal: {},
+         // 화면 구현용 샘플 데이터
+         events: listMap ,
+         
+         // 헤더
+         headerToolbar: { left: 'addEventButton', center: 'title' },
+         
+         // 커스텀 버튼 설정에서 일정 추가 버튼 추가
+         customButtons: {
+            addEventButton: { // 추가한 버튼 설정
+                  text : "일정 추가",  // 버튼 내용
+                  click : function(){ createPopup(); }
+            }
+         } 
+      });
+      calendar.render();
+   })
+   .catch( err => console.log(err));
 }
 
 
@@ -148,8 +149,6 @@ dayoffBtn.addEventListener("click", () => {
 
    StoreOffContainer.innerText = ""; // 본문 영역에 기존 내용 지우기
    
-   // selectWeekOff(); // 기존 고정 휴무 정보 조회
-
    /* 고정 휴무일 */
    // 고정 휴무일 타이틀 생성
    const offWeekSection = document.createElement("section");
@@ -220,6 +219,7 @@ dayoffBtn.addEventListener("click", () => {
 
          if(result > 0) {
             alert("고정 휴무일이 변경되었습니다.");
+            calendar_rendering();
          }
       })
       .catch( err => console.log(err));

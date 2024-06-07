@@ -73,7 +73,6 @@
 	FROM "MENU" WHERE STORE_NO = #{storeNo} AND MENU_FL = 'N'
 	</select>
 	
-	
 	<!-- 메뉴 번호 조회 -->
 	<select id="selectMenuNo">
 		SELECT MENU_NO 
@@ -130,7 +129,6 @@
 		WHERE STORE_NO = #{storeNo}
 	</select>
 	
-	
 	<!-- 지정 휴무일 등록 -->
 	<insert id="calendarOffInsert">
 		INSERT INTO "OFF_DAY" VALUES(SEQ_DAY_OFF_NO.NEXTVAL, #{offDayTitle}, 
@@ -155,26 +153,51 @@
 		ORDER BY RESERV_DATE
 	</select>
 	
+	<!-- 예약 조회 -->
+	<select id="selectReserv">
+		SELECT MEMBER_NAME, RESERV_NO, MEMBER_TEL, TO_CHAR(RESERV_DATE, 'YYYY"년" MM"월" DD"일"') RESERV_DATE, 
+			RESERV_TIME, RESERV_COUNT, RESERV_REQUEST, RESERV_STATUS_FL, STORE_NO
+		FROM "RESERVATION"
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE STORE_NO = #{storeNo} 
+				
+		<if test='reservStatusFl == ""'>
+			AND RESERV_DATE > SYSDATE
+		</if>
+		
+		<if test='reservStatusFl == "Y"'>
+			AND RESERV_STATUS_FL = #{reservStatusFl} AND RESERV_DATE > SYSDATE
+		</if>
+		
+		<if test='reservStatusFl == "N"'>
+			AND RESERV_STATUS_FL = #{reservStatusFl} AND RESERV_DATE > SYSDATE
+		</if>
+		
+		<if test='reservStatusFl == "C"'>
+			AND RESERV_STATUS_FL = #{reservStatusFl} AND RESERV_DATE > SYSDATE
+		</if>
+		
+		ORDER BY RESERV_DATE
+	</select>
+	
 	<!-- 예약 승인 -->
 	<update id="updateReservStatus">
 		UPDATE "RESERVATION" SET RESERV_STATUS_FL = 'Y'
-		WHERE RESERV_NO = #{reservNo}, 
+		WHERE RESERV_NO = #{reservNo}
+	</update>
+	
+	<!-- 예약 거절 -->
+	<update id="rejectReservStatus">
+		UPDATE "RESERVATION" SET RESERV_STATUS_FL = 'C'
+		WHERE RESERV_NO = #{reservNo}
 	</update>
 	
 	<!-- 확정된 예약 조회 -->
 	<select id="reservConfirm">
-		SELECT MEMBER_NAME, MEMBER_TEL, TO_CHAR(RESERV_DATE, 'YYYY"년" MM"월" DD"일"') RESERV_DATE, 
-			RESERV_TIME, RESERV_COUNT, RESERV_REQUEST, RESERV_STATUS_FL
+		SELECT RESERV_NO, TO_CHAR(RESERV_DATE, 'YYYY-MM-DD') RESERV_DATE, 
+			RESERV_TIME, RESERV_COUNT
 		FROM "RESERVATION"
-		JOIN "MEMBER" USING(MEMBER_NO)
-		WHERE STORE_NO = (
-			SELECT STORE_NO
-			FROM "STORE"
-			JOIN MEMBER USING(MEMBER_NO)
-			WHERE MEMBER_NO = #{memberNo}
-		)
-		AND RESERV_STATUS_FL = 'Y'
-		ORDER BY RESERV_DATE
+		WHERE STORE_NO = #{storeNo} AND RESERV_DATE > SYSDATE
 	</select>
 	
 	
@@ -192,6 +215,16 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<!-- 암호화 비밀번호 조회 -->
+	<select id="selectPw">
+		SELECT MEMBER_PW FROM "MEMBER" WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="ceoPwUpdate">
+		UPDATE "MEMBER" SET MEMBER_PW = #{encPw} WHERE MEMBER_NO = #{memberNo}
+		
+	</update>
 	
 	
 	<!-- 사장님 리뷰 조회 -->

@@ -47,7 +47,7 @@
 
             <!-- 서브 타이틀 버튼 -->
             <section class="content-sub-title">
-               <button class="sub-title-btn" id="reservAll">전체</button>
+               <button class="sub-title-btn title-btn-checked" id="reservAll">전체</button>
                <button class="sub-title-btn" id="reservConfirm">확정 예약</button>
                <button class="sub-title-btn" id="reservApply">예약 요청</button>
                <button class="sub-title-btn" id="reservcancel">취소 내역</button>
@@ -75,19 +75,19 @@
 
                   <div class="list-content">
                      <div class="row-time">
-                        <p >예약 일시 : 
+                        <p>예약 일시 : 
                            <span class="reserv-date" th:text="*{reservDate}">예약 일자</span>
                            <span class="reserv-time" th:text="*{reservTime}">예약 시간</span>
-                           <pv class="p-row">예약 인원 : <span class="reserv-count" th:text="*{reservCount}">예약 인원</span>명</pv>
-                        </p>
+
+                           <p>예약 인원 : <span class="reserv-count" th:text="*{reservCount}">예약 인원</span>명</p>
                      </div>
 
                      <div class="row">
-                        <p class="p-row">예약자명 : <span th:text="*{memberName}">예약자명</span></p>
-                        <p class="p-row">예약자 전화번호 : <span th:text="*{memberTel}">예약자 전화번호</span></p>
+                        <p>예약자명 : <span th:text="*{memberName}">예약자명</span></p>
+                        <p>예약자 전화번호 : <span th:text="*{memberTel}">예약자 전화번호</span></p>
                      </div>
                      
-                     <p class="p-row">예약 요청사항 : <span th:text="*{reservRequest}">예약 요청사항</span></p>
+                     <p>예약 요청사항 : <span th:text="*{reservRequest}">예약 요청사항</span></p>
                   </div>
                   
                   <!-- 예약 대기인 경우 승인/거부 버튼 생성 -->
