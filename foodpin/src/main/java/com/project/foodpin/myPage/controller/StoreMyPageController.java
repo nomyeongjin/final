@@ -27,6 +27,7 @@ import com.project.foodpin.review.model.dto.ReviewReply;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.MenuContainer;
 import com.project.foodpin.store.model.dto.Store;
+import com.project.foodpin.store.model.dto.StoreCategory;
 
 import lombok.RequiredArgsConstructor;
 
@@ -48,11 +49,14 @@ public class StoreMyPageController {
 
 		Store store = service.selectstoreInfo(loginMember.getMemberNo()); // 가게 정보
 		
+		List<StoreCategory> allCategory = service.selectCategoryAll(); // 존재하는 모든 카테고리 조회
+		
 		// 불러온 store 정보에서 주소 쪼개기
 		String storeLocation = store.getStoreLocation();
 		String[] arr = storeLocation.split("\\^\\^\\^");
 		
-		model.addAttribute("store", store);
+		model.addAttribute("store", store); // 가게 정보
+		model.addAttribute("category", allCategory); // 모든 카테고리 정보
 		
 		model.addAttribute("postcode", arr[0]);
 		model.addAttribute("address", arr[1]);

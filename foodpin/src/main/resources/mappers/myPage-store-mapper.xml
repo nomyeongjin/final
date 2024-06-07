@@ -52,6 +52,11 @@
 		)
 	</select>
 	
+	<!-- 모든 카테고리 조회 -->
+	<select id="selectCategoryAll">
+		SELECT CATEGORY_CODE, CATEGORY_TITLE FROM "CATEGORY" ORDER BY CATEGORY_CODE
+	</select>
+	
 	<!-- 가게 정보 수정 -->
 	<update id="storeInfoUpdate">
 		UPDATE "STORE" SET STORE_IMG = #{storeImg}, STORE_STATUS = 'Y', 

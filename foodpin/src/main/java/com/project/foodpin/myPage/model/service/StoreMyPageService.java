@@ -12,6 +12,7 @@ import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewReply;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
+import com.project.foodpin.store.model.dto.StoreCategory;
 
 /**
  * 
@@ -139,6 +140,11 @@ public interface StoreMyPageService {
 	 * @return
 	 */
 	int insertReply(ReviewReply inputReply);
+
+	/** 모든 카테고리 조회
+	 * @return
+	 */
+	List<StoreCategory> selectCategoryAll();
 
 
 
