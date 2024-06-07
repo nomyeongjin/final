@@ -38,6 +38,7 @@
                             <tr>
                                 <th>신청인</th>
                                 <th>가게 상호명</th>
+                                <th>이메일</th>
                                 <th>신청일</th>
                                 <th>관리</th>
                             </tr>
@@ -54,6 +55,7 @@
                                 <tr th:each="member : ${storeMember}">
                                     <td th:text="*{member.memberName}">김사장</td>
                                     <td th:text="*{member.storeName}">대박고깃집</td>
+                                    <td th:text="*{member.memberEmail}"></td>
                                     <td th:text="*{member.enrollDate}">24.05.22</td>
                                     <td>
                                         <button class="close" th:data-member-no="${member.memberNo}">폐점등록</button>

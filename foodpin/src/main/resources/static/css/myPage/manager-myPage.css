@@ -232,3 +232,6 @@ tbody tr td {
     height: 205px;
     border-radius: 5px;
 }
+
+.enrollTable tr > *:nth-of-type(1) { width: 16%; }
+.enrollTable tr > *:nth-of-type(5) { width: 14%; }
