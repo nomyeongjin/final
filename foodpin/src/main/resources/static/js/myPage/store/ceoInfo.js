@@ -72,11 +72,36 @@ ceoInfoEdit.addEventListener("click", () => {
       infoUpdateBtn.classList.add("update-btn");
       infoUpdateBtn.id = infoUpdateBtn;
       infoUpdateBtn.innerText = "정보 수정";
+      infoUpdateBtn.type = "button";
    
       updateFrm.append(emailArea, telArea, infoUpdateBtn);
       container.append(updateFrm);
 
       inputEmail.focus(); // 이메일란에 초점
+
+      infoUpdateBtn.addEventListener("click", () => {
+
+         const member = {
+            "memberNo" : memberNo,
+            "memberEmail" : document.querySelector("input[name='memberEmail']").value,
+            "memberTel" : document.querySelector("input[name='memberTel']").value
+         };
+      
+         console.log(member);
+      
+         fetch("/myPage/store/ceoInfoUpdateJs", {
+            method : "POST",
+            headers : {"content-Type" : "application/json"},
+            body : JSON.stringify(member)
+         })
+         .then(resp => resp.json())
+         .then(result => {
+            
+            console.log(result);
+      
+         })
+      
+      });
    })
 });
 
@@ -113,8 +138,6 @@ pwEdit.addEventListener("click", () => {
 
    const updateFrm = document.createElement("form");
    updateFrm.classList.add("ceo-info-container");
-   updateFrm.method = "POST";
-   updateFrm.action = "/myPage/store/ceoPwUpdate";
 
    const pwArea = document.createElement("div"); // 기존 비밀번호
    pwArea.classList.add("ceoInfo-input-area");
@@ -156,62 +179,41 @@ pwEdit.addEventListener("click", () => {
    pwUpdateBtn.classList.add("update-btn"); // 제출 버튼
    pwUpdateBtn.id = pwUpdateBtn;
    pwUpdateBtn.innerText = "비밀번호 변경";
+   pwUpdateBtn.type = "button";
 
    updateFrm.append(pwArea, NewPwArea, NewPwCheckArea, pwUpdateBtn);
    container.append(updateFrm);
 
    inputPw.focus(); // 기존비밀번호란에 초점
+
+   pwUpdateBtn.addEventListener("click", () => {
+
+      // 유효성 검사 예정
+   
+   
+      const data = {
+         "memberPw" : document.querySelector("input[name='memberPw']").value,
+         "memberNewPw" : document.querySelector("input[name='memberNewPw']").value,
+      };
+   
+      fetch("/myPage/store/ceoPwUpdate", {
+         method : "POST",
+         headers : {"content-Type" : "application/json"},
+         body : JSON.stringify(data)
+      })
+      .then(resp => resp.json())
+      .then(result => {
+   
+         if(result > 0) {
+            alert("비밀번호가 변경되었습니다.");
+         }
+         else{
+            alert("비밀번호가 변경이 실패되었습니다.")
+         }
+      })
+   })
 });
 
-infoUpdateBtn.addEventListener("click", () => {
-
-   const member = {
-      "memberNo" : memberNo,
-      "memberEmail" : document.querySelector("input[name='memberEmail']").value,
-      "memberTel" : document.querySelector("input[name='memberTel']").value
-   };
-
-   console.log(member);
-
-   fetch("/myPage/store/ceoInfoUpdateJs", {
-      method : "POST",
-      headers : {"content-Type" : "application/json"},
-      body : JSON.stringify(member)
-   })
-   .then(resp => resp.json())
-   .then(result => {
-      
-      console.log(result);
-
-   })
-
-});
-
-pwUpdateBtn.addEventListener("click", () => {
-
-   // 유효성 검사 예정
 
 
-   const data = {
-      "memberPw" : document.querySelector("input[name='memberPw']").value,
-      "memberNewPw" : document.querySelector("input[name='memberNewPws']").value,
-   };
 
-   fetch("/myPage/store/ceoPwUpdate", {
-      method : "POST",
-      headers : {"content-Type" : "application/json"},
-      body : JSON.stringify(data)
-   })
-   .then(resp => resp.json())
-   .then(result => {
-
-      if(result > 0) {
-         alert("비밀번호가 변경되었습니다.");
-      }
-      else{
-         alert("비밀번호가 변경이 실패되었습니다.")
-      }
-   })
-
-
-})
