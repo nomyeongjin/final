@@ -48,8 +48,8 @@
                                         </div>
 
                                         <div class="request-content" th:text="*{reviewContent}"></div>
-                                        <div class="requestMember" th:text="|작성자 : *{memberName}|"></div>
-                                        <div>신고자 : </div>
+                                        <div class="requestMember" th:text="|작성자 : *{memberName}|"></div> <br>
+                                        <div class="reporterMember" th:text="|신고자 : *{reporterName}|"></div>
                                         <div class="report-content" th:text="|신고사유 : *{reportContent}|"></div>
                                         <span class="requestStoreName" th:text="|가게명 : *{storeName} |"></span> |
                                         <span class="requestStoreTel" th:text="|가게번호 : *{storeTel}|"></span>
@@ -84,8 +84,9 @@
                                         </div>
 
                                         <div class="request-content" th:text="*{reviewContent}"></div>
+                                        <div class="requestMember" th:text="|작성자 : *{memberName}|"></div> <br>
+                                        <div class="reporterMember" th:text="|신고자 : *{reporterName}|"></div>
                                         <div class="report-content" th:text="|신고사유 : *{reportContent}|"></div>
-                                        <div class="requestMember" th:text="|작성자 : *{memberName}|"></div>
                                         <span class="requestStoreName" th:text="|가게명 : *{storeName} |"></span> |
                                         <span class="requestStoreTel" th:text="|가게번호 : *{storeTel}|"></span>
                                     </div>

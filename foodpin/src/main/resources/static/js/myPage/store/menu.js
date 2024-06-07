@@ -3,11 +3,16 @@ const menuContainer = document.querySelector(".myPage-content-container"); // �
 const menuBtn = document.querySelector("#menuBtn"); // 메뉴 정보 버튼
 
 
+
 console.log(storeNo);
 /**
  * (버튼) 메뉴 정보
  */
 menuBtn.addEventListener("click", () => {
+
+   let imgStatus = -1; // 이미지 기록 상태 변수
+   let backupInput; // 
+
 
    // 서브 메뉴에 버튼 기존 체크 클래스 제거 + 해당 메뉴 체크
    document.querySelectorAll(".sub-title-btn").forEach(btn => { 
@@ -52,7 +57,7 @@ menuBtn.addEventListener("click", () => {
          menuImgInput.classList.add("input-menu-img");
          menuImgInput.setAttribute('type','file');
          menuImgInput.setAttribute('accept','image/*');
-         menuImgInput.setAttribute('name','menuImg'); // !!! name="menuImg" !!!
+         menuImgInput.setAttribute('name','menuList['+ i + '].menuImg'); // !!! name="menuList[0].menuImg" !!!
          
          const labelMenuImg = document.createElement("label"); // input 연결된 label
          labelMenuImg.setAttribute('for', 'inputMenuImg' + i);
@@ -72,7 +77,7 @@ menuBtn.addEventListener("click", () => {
 
          const menuTitle = document.createElement("input"); // menu-title
          menuTitle.classList.add("menu-title");
-         menuTitle.setAttribute('name','menuTitle');
+         menuTitle.setAttribute('name','menuList['+ i + '].menuTitle'); // name="menuList[0].menuTitle"
          menuTitle.setAttribute('placeholder','메뉴'); // placeholder 추가
 
          const amountArea = document.createElement("div"); // amount-area
@@ -80,7 +85,7 @@ menuBtn.addEventListener("click", () => {
 
          const menuAmount = document.createElement("input"); // menu-amount
          menuAmount.classList.add("menu-amount");
-         menuAmount.setAttribute('name','menuAmount');
+         menuAmount.setAttribute('name','menuList['+ i + '].menuAmount');
          menuAmount.setAttribute('placeholder','가격');
 
          const spanWon = document.createElement("span"); // span(원)
@@ -91,7 +96,7 @@ menuBtn.addEventListener("click", () => {
 
          const menuContent = document.createElement("input"); // menu-content
          menuContent.classList.add("menu-content");
-         menuContent.setAttribute('name','menuContent');
+         menuContent.setAttribute('name','menuList['+ i + '].menuContent');
          menuContent.setAttribute('placeholder','추가 내용이 있다면 입력해주세요.');
          
          const menuRowDel = document.createElement("i"); // .menu-row-del (행 삭제)
@@ -236,7 +241,7 @@ menuBtn.addEventListener("click", () => {
             menuImgInput.classList.add("input-menu-img");
             menuImgInput.setAttribute('type','file');
             menuImgInput.setAttribute('accept','image/*');
-            menuImgInput.setAttribute('name','menuImg'); // !!! name="menuImg" !!!
+            menuImgInput.setAttribute('name','menuList['+ i + '].menuImg'); // !!! name="menuImg" !!!
             
             const labelMenuImg = document.createElement("label"); // input 연결된 label
             labelMenuImg.setAttribute('for', 'inputMenuImg' + i);
@@ -256,7 +261,7 @@ menuBtn.addEventListener("click", () => {
    
             const menuTitle = document.createElement("input"); // menu-title
             menuTitle.classList.add("menu-title");
-            menuTitle.setAttribute('name','menuTitle');
+            menuTitle.setAttribute('name','menuList['+ i + '].menuTitle');
             menuTitle.setAttribute('placeholder','메뉴'); // placeholder 추가
    
             const amountArea = document.createElement("div"); // amount-area
@@ -264,7 +269,7 @@ menuBtn.addEventListener("click", () => {
    
             const menuAmount = document.createElement("input"); // menu-amount
             menuAmount.classList.add("menu-amount");
-            menuAmount.setAttribute('name','menuAmount');
+            menuAmount.setAttribute('name','menuList['+ i + '].menuAmount');
             menuAmount.setAttribute('placeholder','가격');
    
             const spanWon = document.createElement("span"); // span(원)
@@ -275,7 +280,7 @@ menuBtn.addEventListener("click", () => {
    
             const menuContent = document.createElement("input"); // menu-content
             menuContent.classList.add("menu-content");
-            menuContent.setAttribute('name','menuContent');
+            menuContent.setAttribute('name','menuList['+ i + '].menuContent');
             menuContent.setAttribute('placeholder','추가 내용이 있다면 입력해주세요.');
             
             const menuRowDel = document.createElement("i"); // .menu-row-del (행 삭제)
@@ -304,7 +309,7 @@ menuBtn.addEventListener("click", () => {
          menuImgInput.classList.add("input-menu-img");
          menuImgInput.setAttribute('type','file');
          menuImgInput.setAttribute('accept','image/*');
-         menuImgInput.setAttribute('name','menuImg'); // !!! name="menuImg" !!!
+         menuImgInput.setAttribute('name','menuList['+ i + '].menuImg'); // !!! name="menuImg" !!!
          
          const labelMenuImg = document.createElement("label"); // input 연결된 label
          labelMenuImg.setAttribute('for', 'inputMenuImg' + i);
@@ -331,7 +336,7 @@ menuBtn.addEventListener("click", () => {
 
          const menuTitle = document.createElement("input"); // menu-title
          menuTitle.classList.add("menu-title");
-         menuTitle.setAttribute('name','menuTitle');
+         menuTitle.setAttribute('name','menuList['+ i + '].menuTitle');
          menuTitle.setAttribute('placeholder','메뉴'); // placeholder 추가
 
          const amountArea = document.createElement("div"); // amount-area
@@ -339,7 +344,7 @@ menuBtn.addEventListener("click", () => {
 
          const menuAmount = document.createElement("input"); // menu-amount
          menuAmount.classList.add("menu-amount");
-         menuAmount.setAttribute('name','menuAmount');
+         menuAmount.setAttribute('name','menuList['+ i + '].menuAmount');
          menuAmount.setAttribute('placeholder','가격');
 
          const spanWon = document.createElement("span"); // span(원)
@@ -350,7 +355,7 @@ menuBtn.addEventListener("click", () => {
 
          const menuContent = document.createElement("input"); // menu-content
          menuContent.classList.add("menu-content");
-         menuContent.setAttribute('name','menuContent');
+         menuContent.setAttribute('name','menuList['+ i + '].menuContent');
          menuContent.setAttribute('placeholder','추가 내용이 있다면 입력해주세요.');
          
          const menuRowDel = document.createElement("i"); // .menu-row-del (행 삭제)
@@ -387,6 +392,89 @@ menuBtn.addEventListener("click", () => {
             statusCheck = 0;
          }) // menuImgDel.addEventListener("click"
 
+         document.querySelectorAll(".menu-row").forEach( (row, i) => {
+
+            const menuImgArea = row.querySelector(".menu-img-area"); // 이미지 관련 요소 묶는 div
+            const inputMenuImg = row.querySelector(".input-menu-img"); // input
+            
+            /**
+             * 이미지 변경
+             * @param {*} e 
+             */
+            const changeMenuImageFn = e => {
+   
+               const maxSize =  1024 * 1024 * 5; // 이미지 최대 업로드 사이즈 지정
+               const file = e.target.files[0]; // 업로드 된 파일 정보
+   
+               // console.log(file);
+   
+               // 파일 업로드 취소 + 백업본 (추가예정)
+   
+               /* 선택된 이미지 미리보기 */
+               const reader = new FileReader();
+   
+               reader.readAsDataURL(file);
+               
+               console.log(reader);
+               /**
+                * 업로드 이미지 파일 읽기 완료시 미리보기
+                */
+               reader.addEventListener("load", e => {
+               
+                  const url = e.target.result; // 이미지 정보
+   
+                  // 이미지, 이미지 제거 버튼(X) 요소 추가
+                  // menuImgArea.classList.add("img-ari");
+                  
+                  console.log(inputMenuImg.nextSibling);
+   
+                  inputMenuImg.nextSibling.classList.add('hidden');
+   
+                  const menuImgDel = document.createElement("i"); // .menu-img-del (이미지 삭제 버튼 x)
+                  menuImgDel.classList.add('fa-solid', 'fa-xmark', 'menu-img-del');
+   
+                  const menuImg = document.createElement("img"); // .menu-img
+                  menuImg.classList.add("menu-img");
+                  menuImg.setAttribute("src", url);
+   
+                  // console.log(url); 
+   
+                  menuImgArea.append(menuImgDel, menuImg); // menuImgArea에 버튼, 이미지 태그 추가
+   
+                  imgStatus = 1; // 이미지 업로드 상태 기록
+   
+                  backupInput = inputMenuImg.cloneNode(true);
+   
+                  /**
+                   *  x 버튼 클릭시 이미지태그 제거 + 기본 이미지, input 태그 다시 추가
+                   */
+                  menuImgDel.addEventListener("click", () => {
+         
+                     console.log("이미지 삭제");
+                     menuImgArea.classList.remove("img-ari"); // 테두리 없애는 클래스 추가
+                     
+                     menuImg.setAttribute("src", ''); // 이미지 태그 hidden
+                     menuImg.classList.add('hidden');
+                     menuImgDel.classList.add('hidden');
+   
+                     inputMenuImg.nextSibling.classList.remove('hidden');
+   
+                     statusCheck = 0;
+                  }) // menuImgDel.addEventListener("click"
+   
+               }) // 파일 읽기 - 미리보기
+               console.log("미리보기 호출됨");
+            } // changeImageFn ----
+   
+   
+            /**
+             * inputMenuImg 이미지 변경시 changeImageFn 호출
+             */
+            inputMenuImg.addEventListener("change", changeMenuImageFn);
+   
+         }); // .forEach( (row, i)
+
+         
       }) // forEach
 
       const menuRowAdd = document.createElement("i"); // #menuRowAdd (행 추가)
@@ -444,8 +532,7 @@ menuBtn.addEventListener("click", () => {
 
 
 
-      let imgStatus = -1; // 이미지 기록 상태 변수
-      let backupInput; // 
+
 
       document.querySelectorAll(".menu-row").forEach( (row, i) => {
 
