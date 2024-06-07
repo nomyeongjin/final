@@ -208,6 +208,13 @@
      WHERE STORE_NO = #{storeNo}
    </select>
    
+	<!-- 신고자 이름 찾기 -->
+	<select id="selectReporterName">
+		SELECT MEMBER_NAME
+		FROM MEMBER
+		WHERE MEMBER_NO = (SELECT REPORTER_NO FROM REPORT WHERE REPORTER_NO = #{reporterNo})
+	</select>
+   
    
    <!-- 리뷰 신고 -->
 	<insert id="reviewReport" useGeneratedKeys="true">
@@ -216,9 +223,11 @@
 	      SELECT SEQ_REPORT_NO.NEXTVAL FROM DUAL
 	  	</selectKey>
 		   
-		INSERT INTO "REPORT" VALUES(#{reportNo}, #{reportContent}, #{reviewNo}, #{memberNo}, DEFAULT, DEFAULT, #{reporterName})
+
+		INSERT INTO "REPORT" VALUES(#{reportNo}, #{reportContent}, 
+							#{reviewNo}, #{memberNo}, DEFAULT, DEFAULT, #{reporterName})
 	</insert>   
-   
+	
    
    <!-- 리뷰 신고 회원번호 조회 -->
    <select id="selectMemberNo">

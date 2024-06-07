@@ -127,9 +127,13 @@ public class DetailStoreController {
 	 */
 	@ResponseBody
 	@PostMapping("reviewReport")
-	public int reviewReport(@RequestBody Map<String, Object> map) {
+	public int reviewReport(
+		@RequestBody Map<String, Object> map,
+		@SessionAttribute("loginMember") Member loginMember) {
 		
-		return service.reviewReport(map);
+		int reporterNo = loginMember.getMemberNo();
+		
+		return service.reviewReport(map, reporterNo);
 	}
 	
 	

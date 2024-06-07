@@ -112,6 +112,7 @@ const createReservList = (reservStatusFl) => {
 
       if(reservList.length == 0) {
          const noReserv = document.createElement("div");
+         noReserv.classList.add("no-reserv");
          noReserv.innerText = "해당하는 예약이 존재하지 않습니다.";
 
          listContainer.append(noReserv);
