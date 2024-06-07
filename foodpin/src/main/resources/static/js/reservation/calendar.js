@@ -148,12 +148,12 @@ const selectTimeFn = async (reservDate) => {
         
             timeList.append(timeItem);
 
-            // let ampm = isAM ? "오전" : "오후";
-
-            let pattern = /^11:\d{2}$/;
+            // 11: 59분까지 오전으로 인식
+            // let pattern = /^11:\d{2}$/;
+            // let pattern = /^11:\d*$/;
 
             // 오전 오후 구분용 margin 설정
-            if (pattern.test(timeItem.innerText) || timeItem.innerText === "00:00") {
+            if (timeItem.innerText === "11:30" || timeItem.innerText === "00:00") {
                 const hr = document.createElement("div");
                 hr.style.width = "100%";
                 hr.style.margin = "10px";
@@ -161,6 +161,7 @@ const selectTimeFn = async (reservDate) => {
             }
         }
 
+        // -------------------------------------------------------------------------------
         // 모든 요소에 disabled 클래스가 있는지 확인
         const allDisabled = Array.from(document.querySelectorAll("*")).every(element => element.classList.contains("disabled"));
 
@@ -180,6 +181,8 @@ const selectTimeFn = async (reservDate) => {
             // body에 추가
             reservTimeContainer.append(messageSpan);
         }
+
+        // -------------------------------------------------------------------------------
 
         const timeItem = document.querySelectorAll(".time-item");
 
@@ -265,92 +268,104 @@ const fixedOffWeek = async () => {
             });
         });
     });
+    
 }
 
 
+// 날짜 형식 지정
+const formatFullDate = (dateMs) => {
+    const date = new Date(dateMs);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}년 ${month}월 ${day}일`;
+
+};
 
 // 지정 휴무일 조회
-fetch("/store/selectOffDay", {
-    method : "POST",
-    headers : {"Content-Type" : "application/json"},
-    body : storeNo
-})
-.then(resp => resp.json())
-.then(offDayList=> {
-    
-    console.log("offDayList : ", offDayList);
-
-    offDayList.forEach(item => {
-        console.log(item);
-      
-        // 숫자를 두 자리로 포맷하는 함수
-        const formatDateComponent = value => {
-          return value < 10 ? "0" + value : value;
-        };
-      
-        // 날짜를 "YYYY년 MM월 DD일" 형식으로 변환하는 함수
-        const formatFullDate = date => {
-          const year = date.getFullYear();
-          const month = formatDateComponent(date.getMonth() + 1);
-          const day = formatDateComponent(date.getDate());
-          return `${year}년 ${month}월 ${day}일`;
-
-        };
-      
-        // 휴무 시작일("YYYY-MM-DD" 형식)
-        const offDayStart = item.offDayStart;
-      
-        // 휴무 종료일("YYYY-MM-DD" 형식)
-        const offDayEnd = item.offDayEnd;
-      
-        // 시작일과 종료일을 Date 객체로 변환
-        let startDate = new Date(offDayStart);
-        const endDate = new Date(offDayEnd);
-      
-        // 시작일부터 종료일까지의 모든 날짜를 계산하여 배열에 저장
-        const dateArray = [];
-        while (startDate <= endDate) {
-          dateArray.push(formatFullDate(startDate));
-          startDate.setDate(startDate.getDate() + 1);
-        }
-        console.log("Calculated dateArray:", dateArray);
-      
-        // td 요소를 반복해서 div 태그를 찾고 그 안에 있는 a 태그에 접근
-
-        const tdElements = document.querySelectorAll("td");
-
-        tdElements.forEach(td => {
-
-            const firstDivChild = td.querySelector("div:first-child");
-
-            if (firstDivChild) {
-                const aTag = firstDivChild.querySelector("div > a");
-
-                if (aTag) {
-                    const ariaLabel = aTag.getAttribute("aria-label") // a 태그의 aria-label 속성 값
-
-                    console.log("ariaLabel:", ariaLabel);
-
-                    // dateArray의 값과 ariaLabel을 비교 (안되고 있음.. 왜???)
-                    if (dateArray.includes(ariaLabel)) {
-
-                        aTag.classList.add("day-off"); // 휴무일인 경우 off-day 클래스를 추가
-                        console.log(ariaLabel);
-                    }
-
-                }
-            }
-        });
-
-        // "off-day" 클래스가 추가된 요소들의 innerText 색상 변경
-        const offDayElements = document.querySelectorAll(".day-off");
+const fiexdOffDay = () => {
+    fetch("/store/selectOffDay", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : storeNo
+    })
+    .then(resp => resp.json())
+    .then(offDayList=> {
         
-        offDayElements.forEach(item => {
-            item.classList.add("innerTextColor");
-        });
-    });
+        console.log("offDayList : ", offDayList);
 
-});
+        offDayList.forEach(item => {
+            console.log(item);
+        
+            // 숫자를 두 자리로 포맷하는 함수
+        
+        
+            // 날짜를 "YYYY년 MM월 DD일" 형식으로 변환하는 함수
+            
+            // 휴무 시작일("YYYY-MM-DD" 형식)
+            const offDayStart = item.offDayStart;
+        
+            // 휴무 종료일("YYYY-MM-DD" 형식)
+            const offDayEnd = item.offDayEnd;
+        
+            // 시작일과 종료일을 Date 객체로 변환
+            let startDate = new Date(offDayStart).getTime();
+            const endDate = new Date(offDayEnd).getTime();
+        
+            // 시작일부터 종료일까지의 모든 날짜를 계산하여 배열에 저장
+            const dateArray = [];
+
+            while (startDate <= endDate) {
+            dateArray.push(formatFullDate(startDate));
+            startDate += 1000 * 60 * 60 * 24;
+            }
+
+            console.log("dateArray :", dateArray);
+        
+            // td 요소를 반복해서 div 태그를 찾고 그 안에 있는 a 태그에 접근
+
+            const tdElements = document.querySelectorAll("td");
+
+            tdElements.forEach(td => {
+
+                const firstDivChild = td.querySelector("div:first-child");
+
+                if (firstDivChild) {
+                    const aTag = firstDivChild.querySelector("div > a");
+
+                    if (aTag) {
+                        const ariaLabel = aTag.getAttribute("aria-label") // a 태그의 aria-label 속성 값
+
+                        // console.log("a 태그 속성 :", ariaLabel);
+
+                        // dateArray의 배열에 ariableLabel 이 포함되어 있는지 (안되고 있음.. 왜???)
+                        if (dateArray.includes(ariaLabel)) {
+
+                            aTag.classList.add("day-off"); // 휴무일인 경우 off-day 클래스를 추가
+                            console.log(ariaLabel);
+
+                            // a 태그의 가장 가까운 td 태그에 off-day 클래스 추가
+                            const closestTd = aTag.closest("td");
+                            if (closestTd) {
+                                closestTd.classList.add("day-off");
+                            }
+                        }
+
+                    }
+                }
+            });
+
+            // "off-day" 클래스가 추가된 요소들의 innerText 색상 변경
+            const offDayElements = document.querySelectorAll(".day-off");
+            
+            offDayElements.forEach(item => {
+                item.classList.add("innerTextColor");
+            });
+        });
+
+    });
+}
+
 
 document.addEventListener("DOMContentLoaded", async function () {
 
@@ -373,6 +388,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             // 지정 휴무일인 경우 클릭X
             if(info.dayEl.classList.contains("day-off")) return;
+            
             // console.log(info);
             console.log(info.dateStr);
             // console.log(dayArr[info.date.getDay()]);
@@ -423,7 +439,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     // console.log(now);
     document.querySelector(".select-date").innerText = now;
 
+    fiexdOffDay();
     await fixedOffWeek();
                 /* 현재날짜 */
     await selectTimeFn(nowDate);
+    
+    // 달력에서 달 이동 해도 고정 휴무일 표시 유지
+    document.querySelectorAll(".fc-button").forEach(item => {
+        item.addEventListener("click", () => {
+            fixedOffWeek();
+        });
+    });
+
 });

@@ -75,5 +75,14 @@ public class NotificationServiceImpl implements NotificationService{
 		if(result > 0) return mapper.notReadCheck(memberNo);
 			return 0;
 		}
-		
+	
+//	@Override
+//	public Store selectStoreName(int memberNo) {
+//		return mapper.selectStoreName(memberNo);
+//	}
+	
+	@Override
+	public Store selectStoreName(String storeNo) {
+		return mapper.selectStoreName(storeNo);
+	}
 }
