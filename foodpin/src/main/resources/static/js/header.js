@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
         myChat.addEventListener("click", () => {
         
-            location.href = "/chatting/chat?memberId=" + loginMember.memberId;
+            location.href = "/chatting/chat?memberNo=" + loginMember.memberNo;
         
         })
     }
@@ -56,13 +56,14 @@ if (notificationLoginCheck) {
 
 
     /* 웹소켓을 이용해 알림을 전달하는 함수 */
-    sendNotificationFn = (type, url, pkNo, reservDate) => {
+    sendNotificationFn = (type, url, pkNo, reservDate, storeName) => {
 
         const notification = {
             "notificationType": type,
             "notificationUrl": url,
             "pkNo": pkNo,
-            "reservDate": reservDate
+            "reservDate": reservDate,
+            "storeName": storeName /* === undefined ? null : storeName */
         }
 
         notificationSock.send(JSON.stringify(notification));

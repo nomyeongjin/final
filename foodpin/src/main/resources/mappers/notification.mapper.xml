@@ -30,13 +30,19 @@
 	
 	<!-- 알림 보낼 때 필요한 데이터 조회 -->
 	<select id="selectStoreData">
-		SELECT S.MEMBER_NO, TO_CHAR(R.RESERV_DATE, 'YYYY-MM-DD') "RESERV_DATE", S.STORE_NAME, M.MEMBER_NICKNAME
+		SELECT S.MEMBER_NO, TO_CHAR(R.RESERV_DATE, 'YYYY-MM-DD') "RESERV_DATE", S.STORE_NO , S.STORE_NAME, M.MEMBER_NICKNAME
 		FROM "MEMBER" M
 		JOIN "RESERVATION" R ON M.MEMBER_NO = R.MEMBER_NO
 		JOIN "STORE" S ON R.STORE_NO = S.STORE_NO
 		WHERE R.RESERV_NO = #{reservNo}
 	</select>
 	
+
+	<select id="selectStoreName">
+		SELECT STORE_NO, STORE_NAME
+		FROM "STORE"
+		WHERE STORE_NO = #{storeNo}
+	</select>	
 
 	<!-- 알림 추가 -->
 <!-- 	<insert id="insertNotification">

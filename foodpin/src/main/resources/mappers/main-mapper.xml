@@ -11,5 +11,10 @@
    ORDER BY STORE_NO DESC
  
  </select>
+ 
+ <select id="selectMainCategoryList" resultType="Category">
+   SELECT CATEGORY_CODE, CATEGORY_TITLE 
+    FROM "CATEGORY"
+ </select>
 
 </mapper>

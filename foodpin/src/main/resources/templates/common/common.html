@@ -6,10 +6,12 @@
 
 <!-- 알림 관련 전역 변수 -->
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
 <script th:inline="javascript">
   const notificationLoginCheck = /*[[${session.loginMember} ? true : false]]*/ '로그인 체크';
   const notificationDefaultImage = /*[[#{user.default.image}]]*/ '유저 기본 이미지';
   const memberNo = /*[[${memberNo}]]*/ "회원 번호"
+
 </script>
 
 

@@ -982,7 +982,7 @@ hr{
 
 .storereview-top{
     padding: 24px 0;
-    border-bottom: 1px solid #E14C54;
+    border-bottom: 1px solid var(--main-color);
     display: flex;
     justify-content: space-between;
 }
@@ -1069,7 +1069,7 @@ hr{
     height: 25px;
     
     text-align: center;
-    border: 1px solid #E14C54;
+    border: 1px solid var(--main-color);
     border-radius:24px;
     margin: 10px 0;
 }
@@ -1289,7 +1289,7 @@ hr{
 
 .review{
     width: 600px;
-    border: 1px solid #E14C54;
+    border: 1px solid var(--main-color);
     border-radius: 15px;
     padding: 24px;
     padding-top: 12px;
