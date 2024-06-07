@@ -9,6 +9,32 @@ mapHome.addEventListener("click", () => {
 
 });
 
+const remS = document.querySelector("#remS");
+
+remS.addEventListener('click', ()=>{
+
+    if(loginMember == null){
+        alert('로그인이 필요한 기능입니다');
+        location.href = "storeSearch";
+        return;
+    }
+  location.href = "/myPage/member/memberLike";
+
+});
+
+const resS = document.querySelector("#resS");
+
+resS.addEventListener('click', ()=>{
+
+    if(loginMember == null){
+        alert('로그인이 필요한 기능입니다');
+        location.href = "storeSearch";
+        return;
+    }
+  location.href = "/myPage/member/reservation/fix";
+
+});
+
 // 누르면 채팅 페이지로 이동 해당 가게의 위치가 상세 페이지에서 검색됨
 const storedetailmapbutton = document.querySelector("#chatS");
 
