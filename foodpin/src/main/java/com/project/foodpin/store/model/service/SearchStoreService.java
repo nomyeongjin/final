@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.project.foodpin.store.model.dto.Store;
 
+
 public interface SearchStoreService {
 
 

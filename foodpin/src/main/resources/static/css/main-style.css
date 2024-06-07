@@ -169,7 +169,7 @@ header {
 /* 카테고리 박스 */
 .main-category-button{
    height: 200px;
-   width: 700px;
+   width: 800px;
    display: flex;
    flex-wrap: wrap; /* 요소들이 넘칠 때 가로 줄 바꿈 */
    justify-content: center;
