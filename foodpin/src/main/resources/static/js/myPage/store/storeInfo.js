@@ -50,7 +50,7 @@ const changeImageFn = e => {
    
 }
 
-imageInput.addEventListener("change", changeImageFn);
+// imageInput.addEventListener("change", changeImageFn);
 
 
 

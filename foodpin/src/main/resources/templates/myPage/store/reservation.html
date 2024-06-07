@@ -92,8 +92,8 @@
                   
                   <!-- 예약 대기인 경우 승인/거부 버튼 생성 -->
                   <div th:if="*{reservStatusFl == 'N'}" class="list-btn-area">
-                     <button class="reserv-btn">예약 승인</button>
-                     <button class="reserv-reject-btn">예약 거부</button>
+                     <button class="reserv-btn" th:data-reserv-date="|*{reservDate} *{reservTime}|">예약 승인</button>
+                     <button class="reserv-reject-btn" th:data-reserv-date="|*{reservDate} *{reservTime}|">예약 거부</button>
                      
                   </div>
                </section>

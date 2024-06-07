@@ -79,11 +79,6 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		 // 알림 내용이 없음 == 내 게시물
 		 if(notification.getNotificationContent() == null) return;
 		 
-		 // DB에 알림 삽입
-//		 int result = service.insertNotification(notification);
-		 
-//		 if(result == 0) return;
-		 
 		 // /notification.send로 연결된 객체를 만든 클라리언트들(sessions)중
 		 // 회원번호가 받는 회원 번호와 같은 사람에게 베시지 전달
 		 for(WebSocketSession ws : sessions) {
@@ -176,15 +171,14 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		
 		/* 예약 승인 했을 때 */
 		case "confirmReservation":
-			contentForMember = String.format("<b>%s<b> <b>%s<b> 예약이 승인 되었습니다. 이용에 참고 부탁드립니다.",
-					notification.getReservDate() , store.getStoreName());
+			contentForMember = String.format("<b>%s<b> <b>%s<b> 예약이 승인 되었습니다. 이용에 참고 부탁드립니다.", notification.getReservDate() , store.getStoreName());
+			contentForStore = String.format("<b>%s<b> 예약 승인 내역이 있습니다. 확인해주세요", notification.getReservDate() );
 			
 			urlForMember = "/myPage/member/reservation/fix";
 			urlForStore = "/myPage/store/reservation";
 			
 			notiCode = 1;
 			
-//			contentForStore = String.format("<b>%s<b> 예약 승인 내역이 있습니다. 확인해주세요", notification.getReservDate() );
 			break;
 			 
 			
