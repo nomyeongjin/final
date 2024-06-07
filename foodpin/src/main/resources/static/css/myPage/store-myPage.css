@@ -469,6 +469,14 @@
    display: flex;
    flex-direction: column;
 }
+
+/* 해당 예약 없음 안내 문구 */
+.no-reserv{
+   padding: 10px;
+   text-align: center;
+   font-size: 18px;
+   color: var(--main-font-color);
+}
 .row-time, .row{
    display: flex;
    flex-direction: row;
