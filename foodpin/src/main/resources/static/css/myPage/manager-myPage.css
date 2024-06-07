@@ -202,6 +202,10 @@ tbody tr td {
 }
 
 /* 리뷰 신고 */
+.reportReview-container {
+    margin-top: 10px;
+}
+
 .myPage-title span {
     color: gray;
     margin-left: 10px;
