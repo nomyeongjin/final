@@ -36,6 +36,8 @@ public class Review {
 	private String memberNickname;
 	private String profileImg;
 	
+	private String reporterName;
+	
 	private List<UploadImage> uploadList;
 	private List<ReviewHash> hashList;
 	private List<ReviewReply> replyList;
