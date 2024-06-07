@@ -28,6 +28,21 @@ if(storereservationbutton != null) {
 // 선택 항목 검사용
 const checkObj = {"reservTime" : false};
 
+// 가게 정보에 작성할 수 있는 글자 수 제한
+const content = document.querySelector(".content");
+
+// 제한 할 글자 수
+let length = 30;
+
+if (content != null) {
+
+    let temp = content.innerText;
+    if (temp.length > length) {
+        temp = temp.slice(0, length) +  "...";
+    }
+    content.innerText = temp;
+}
+
 // -------------------------------------------------------------
 
 // 공통 --- 예약 주의 사항
@@ -44,27 +59,6 @@ if(noticeTitle !=null) {
 // -------------------------------------------------------------
 
 /* **************  reservationDetail ************** */
-
-// const reservInfo = document.querySelectorAll(".reserv-info");
-
-// if (reservInfo != null) {
-//     reservInfo[0].classList.add("click-a");
-
-//     for (let a of reservInfo) {
-
-//         reservInfo[0].classList.remove("click-a");
-
-//         a.addEventListener("click", () => {
-
-//             // for(let item of reservInfo) {
-//             //     item.classList.add("click-a");
-//             //     item.classList.remove("click-a");
-//             // }
-//             reservInfo.classList.add("click-a");
-//         })
-//     }
-// }
-
 
 if(document.querySelector("#reservCount") != null){
     const storeMaxNumber = document.querySelector("#reservCount").dataset.storeMaxNumber;
@@ -383,6 +377,37 @@ if(confirmBtn != null) {
         input7.name="visitTel";
         input7.value=visitTel;
 
+        // 방문자 연락처에 숫자가 아닌 다른 문자를 작성했을 경우에 대한 검사 
+        if (!(/^\d+$/.test(visitTel))){
+            e.preventDefault(); 
+            Swal.fire({
+                title: "",
+                text: "방문자 전화번호를 확인해 주세요.",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "확인"
+            });
+            return;
+        }
+
+        // 둘 중 하나만 값이 있는 경우
+        if (input6 !== "" || input7 !== "") {
+            e.preventDefault(); 
+            Swal.fire({
+                title: "",
+                text: "이름 또는 전화번호를 입력하세요.",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "확인"
+            });
+            return;
+        }
+
+
         insertForm.append(input1, input2, input3, input4, input5,  input6, input7);
         
         // body에 form 태그
@@ -391,3 +416,14 @@ if(confirmBtn != null) {
         insertForm.submit(); // 다음 버튼 클릭 시 form 태그 제출
     });
 }
+// 스크롤
+// const detail = document.querySelector(".detail");
+// const navList = document.querySelector(".nav-list");
+// detail.addEventListener("click", () => {
+//     const scrollPosition = navList.offsetTop;
+//     window.scrollTo({
+//         left: 0,
+//         top: scrollPosition,
+//         behavior: 'smooth'
+//     });
+// });

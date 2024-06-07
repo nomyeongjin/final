@@ -453,6 +453,7 @@ color: rgb(66, 66, 66);
     align-items: center;
     cursor: pointer;
     border: 1px solid var(--main-color);
+    border-radius: 8px;
     width: 400px;
     height: 45px;
     font-size: 18px;
@@ -461,9 +462,10 @@ color: rgb(66, 66, 66);
 }
 
 #storereservationbutton:hover{
-    background-color: white;
-    color: #4ed231;
-    border: 1px solid #4ed231;
+    /* background-color: white; */
+    color: #E14C54;
+    background-color: #fffff3;
+    border:1px solid #E14C54;
 }
 
 /********** 가게 내용 1 ************/

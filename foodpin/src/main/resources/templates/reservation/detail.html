@@ -20,41 +20,47 @@
     
             <!-- 안내 section -->
             <section class="reservation-header-container" th:object="${store}">
-    
+            
                 <th:block th:if="*{storeImg}">
-                    <img class="store-image" alt="600x300"  th:src="*{storeImg}">
+                    <img class="store-image" alt="600x300" th:src="*{storeImg}">
                 </th:block>
-
+            
                 <!-- 가게 이미지 없는 경우 -->
                 <th:block th:unless="*{storeImg}">
-                    <img class="store-image" alt="600x300"  src="/images/reservation/storeDefaultImage.png">
+                    <img class="store-image" alt="600x300" src="/images/reservation/storeDefaultImage.png">
                 </th:block>
-    
                 <div class="header-container">
-    
+            
                     <div class="store-name-container">
                         <div class="store" th:text="${store.storeName}">가게이름</div>
                     </div>
                     <!-- <div class="title-container">
-                        <i class="fa-regular fa-clock"></i>
-                        <h3 class="title">예약 안내</h3>
-                    </div>
-                     -->
-    
+                                                    <i class="fa-regular fa-clock"></i>
+                                                    <h3 class="title">예약 안내</h3>
+                                                    </div>
+                                                    -->
+            
                     <div class="content-container">
                         <i class="fa-solid fa-message"></i>
-                        <span class="content" name="storeInfo" id="storeId">
-                            <th:block th:text="${store.storeInfo}">가게 정보 어쩌구 저쩌구 </th:block>
-        
-                            <a class="more" th:href="'/store/storeDetail/' + ${storeNo} + '/reservation/detail'">더보기<i class="fa-solid fa-chevron-down fa-rotate-270"></i></a> <!-- 상세 정보로 넘어감 -->
-                        </span>
+            
+                        <!-- 가게 정보가 있을 경우 -->
+                        <th:block th:if="${store.storeInfo}">
+                            <span class="content" name="storeInfo" id="storeId" th:text="${store.storeInfo}"></span>
+
+                            <a class="more" th:href="'/store/storeDetail/' + ${storeNo} + '/reservation/detail'">더보기
+                                <i class="fa-solid fa-chevron-down fa-rotate-270"></i>
+                            </a>
+                        </th:block>
+
+                        <!-- 가게 정보가 없는 경우 -->
+                        <th:block th:unless="${store.storeInfo}">
+                            <span class="content" name="storeInfo" id="storeId" th:text="|가게 정보 준비중 입니다.|"></span>
+                        </th:block> <!-- 상세 정보로 넘어감 -->
+            
+            
                     </div>
-    
                 </div>
-    
-    
             </section>
-    
     
             <!-- 예약 인원, 날짜 section -->
             <section class="reservation-body-container">
@@ -68,7 +74,7 @@
                             </a>
                             
                             <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation/detail'" class="reserv-info">
-                                <li class="nav-item">상세정보</li>
+                                <li class="nav-item detail">상세정보</li>
                             </a>
 
                             <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation/reservPageReview'"  class="reserv-info">
