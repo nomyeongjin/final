@@ -321,7 +321,7 @@ i{
    cursor: pointer;
    position: absolute;
    top: 50%;
-   left: 453px;
+   left:390px;
    transform: translateY(-50%);
    z-index: 200;
    overflow: hidden;
@@ -415,7 +415,7 @@ i{
    align-items: center;
    padding: 0 20px;
    justify-content: center;
-   height: 90%;
+   height: 65%;
    transform: translate(0%);
 
 }

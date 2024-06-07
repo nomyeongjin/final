@@ -1,57 +1,45 @@
 package com.project.foodpin.store.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.foodpin.store.model.dto.Store;
+import com.project.foodpin.store.model.mapper.DetailStoreMapper;
 import com.project.foodpin.store.model.mapper.SearchStoreMapper;
+
+import lombok.RequiredArgsConstructor;
 
 
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class) // 모든 예외 발생 시 롤백
+@RequiredArgsConstructor
 public class SearchStoreServiceImpl implements SearchStoreService{
 
-	private SearchStoreMapper mapper;
+	private final SearchStoreMapper mapper;
 	
+    // 카테고리에 해당하는 가게 리스트 조회
 	@Override
-	public Store storeSearch(Map<String, Object> map) {
+	public List<Store> searchStoreList(Map<String, Object> map) {
 	
-		return mapper.storeSearch(map);
+		return mapper.searchStoreList(map);
 	}
 
+    
 	@Override
-	public int storeLike(Map<String, Object> map) {
+	public List<Store> searchStoreDetail(Map<String, Object> map) {
 		
-      int result = 0;
-		
-		//1. 좋아요가 체크된 상태인 경우 (bookmark ==1)
-		// -> Bookmark 테이블에 DELETE
-		if(Integer.parseInt(String.valueOf(map.get("bookmark")) )== 1) {
-			
-			result = mapper.deleteStoreLike(map);
-			
-			
-			
-		}
-			
-		//2. 좋아요가 해제된 상태인 경우 (bookmark ==0)
-		// -> Bookmark 테이블에 INSERT
-		
-		else {
-			
-			result = mapper.insertStoreLike(map);
-		}
-		
-		// 3. 다시 해당 게시글의 좋아요 개수를 조회해서 반환
-		if(result > 0) {
-			return mapper.selectLikeCount(map.get("storeNo"));
-		}
-		
-		
-		
-		return -1;
+		return mapper.searchStoreDetail(map);
 	}
+
+	//비동기로 화면 바꿀 카테고리 리스트 조회
+	
+	// 비동기로 좋아요 
+	
+	// 비동기로 거리순, 리뷰순 좋아요순 평점순
+	
+
 	
 }

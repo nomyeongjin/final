@@ -253,8 +253,9 @@ dayoffBtn.addEventListener("click", () => {
    
 });
 
-const testBtn = document.querySelector("#testBtn");
+// const testBtn = document.querySelector("#testBtn");
 const popupLayer = document.querySelector("#popupLayer");
+
 /**
  * 일정 등록하는 팝업창 생성 
  */
@@ -337,6 +338,14 @@ const createPopup = () => {
          }
       })
    });
+
+   /**
+    * (버튼) 취소 - 팝업창
+    */
+   cancelBtn.addEventListener("click", () => {
+
+      popupFrm.classList.add("blind");
+   })
 
 };
 

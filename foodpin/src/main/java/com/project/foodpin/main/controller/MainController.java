@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.main.model.service.MainService;
+import com.project.foodpin.store.model.dto.Category;
 import com.project.foodpin.store.model.dto.Store;
+import com.project.foodpin.store.model.dto.StoreCategory;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,10 +41,13 @@ public class MainController {
 
 		// 가게 게시글 조회
 		List<Store> storeList = service.selectMainStore();
+		
+		List<Category> mainCategoryList = service.selectMainCategory();
 
 		if (!storeList.isEmpty()) {
-			model.addAttribute(storeList);
+			model.addAttribute("storeList",storeList);
 		}
+		model.addAttribute("mainCategoryList",mainCategoryList);
 
 		return "common/main";
 	}

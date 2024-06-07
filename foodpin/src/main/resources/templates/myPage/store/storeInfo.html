@@ -45,16 +45,39 @@
          <div class="myPage-content-container">
    
             <!-- 프로필 수정 폼 -->
-            <form action="/myPage/store/storeInfoUpdate" id="storeEditFrm" method="POST" th:object="${store}" enctype="multipart/form-data">
+            <form action="/myPage/store/storeInfoUpdate" id="storeEditFrm" th:object="${store}" method="POST" enctype="multipart/form-data">
 
-               <!-- 가게 이미지 -->
-               <div class="store-img">
-                  <img th:src="*{storeImg}" id="storeImg" alt="">
+               <!-- 이미지 -->
+               <div class="storeInfo-img-container">
+
+                  <th:if="*{storeImg == null}">
+                     <img id="storeImg" class="hidden" alt="">
+
+                     <div class="store-img-area hidden">
+
+                        <label for="storeImgInput" id="storeImgLabel">
+                           <i class="fa-regular fa-image"></i>
+                           <i class="fa-solid fa-plus"></i>
+                        </label>
+
+                        <input name="image" id="storeImgInput" type="file" accept="image/*">
+                     </div>
+                  </th:if>
+
+                  <th:unless="*{storeImg == null}">
+                     <img id="storeImg" th:src="*{storeImg}">
+
+                     <label for="storeImgInput" id="storeImgLabel" class="hidden">
+                        <i class="fa-regular fa-image"></i>
+                        <i class="fa-solid fa-plus"></i>
+                     </label>
+                     <input class="hidden" name="image" id="storeImgInput" type="file" accept="image/*">
+                     <!-- <input class="" name="image" id="imageInput" type="file" accept="image/*"> -->
+                  </th:if>
                </div>
-               
-               <div class="storeInfo-container"><!-- 이미지, 가게소게 제외한 컨테이너 -->
-                  <input type="file" name="image" id="imageInput" accept="image/*">
-                  
+
+               <!-- 이미지외 내용 -->
+               <div class="storeInfo-container">
                   <div class="non-edit-area-row">
                      <label for="storeName">상호명 : </label>
                      <div>
@@ -140,30 +163,30 @@
                   </div>
 
                   <!-- 카테고리 -->
-                  <ul class="category-row">
-                     <li class="category-li">분식</li>
-                     <li class="category-li">한식</li>
-                  </ul>
+                  <div class="category-area">
+                     <label class="category-label">카테고리</label>
+                     <ul class="category-row">
+                        <th:block th:each="ctg : ${category}">
+                           <li class="category-li" th:text="${ctg.categoryTitle}" th:value="${ctg.categoryCode}">카테고리명</li>
+                        </th:each>
+                     </ul>
+                  </div>
                </div>
                
                <!-- 가게 소개 -->
                <textarea name="storeInfo" id="storeInfo" rows="10" th:text="*{storeInfo}"/></textarea>               
 
-               <button id="storeInfoEditBtn">수정</button>
+               <button id="storeInfoEditBtn" class="update-btn">수정</button>
 
             </form>
 
-            <a th:text="${store.storeNo}"></a>
-
             <a id="withdraw">서비스 탈퇴</a>
+
          </div>
         </div>
          
          <script th:inline="javascript">
-            // const memberNo = /*[[${session.loginMember.memberNo}]]*/ "회원 번호";
             const storeNo = /*[[${store.storeNo}]]*/ "가게 번호";
-
-                    // 프로필 기본 이미지 전역변수로 저장
             const menuDefaultImage = /*[[#{menu.default.image}]]*/ "메뉴 기본 이미지";
         </script>
       

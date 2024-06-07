@@ -11,10 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class StoreCategory {
+public class Category {
 
 	private int categoryCode;
 	private String categoryTitle;
-	private String storeNo;
-	
 }

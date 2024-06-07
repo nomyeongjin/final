@@ -37,23 +37,18 @@
       <div class="main-category-content">
 
         <div id="main-category-text">
-          <p>뭘 먹을까...</p>
+          <p>뭘 먹을까...</p> <button>가게 검색 페이지 ></button>
         </div>
         
         <!-- 맛집 랭킹 순으로 4개 -->
-        <div class="main-category-button">
-          <button>전체</button>
-          <button>한식</button>
-          <button>중식</button>
-          <button>일식</button>
-          <button>양식</button>
-          <button>분식</button>
-          <button>고기.구이</button>
-          <button>뷔페</button>
-          <button>카페.디저트</button>
-          <button>패스트푸드</button>
-          <button>찜.탕.찌개</button>
-          <button>맛집랭킹</button>
+        <div class="main-category-button" >
+          <div th:each="category :${mainCategoryList}">
+
+            <a th:href="'/store/storeSearch/' + ${category.categoryCode}">
+
+              <button th:text="${category.categoryTitle}"></button>
+            </a>
+          </div>
         </div>
          
       </div>

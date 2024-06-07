@@ -1,4 +1,4 @@
-/* Full Calendar */
+
 document.addEventListener('DOMContentLoaded', function () {
 
    /**
@@ -10,8 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(resp => resp.json())
       .then(reservList => {
    
-         console.log(reservList);
+         // console.log(reservList);
 
+         /* Full Calendar */
          let calendarEl = document.getElementById('calendar');
 
          // 캘린더 설정
@@ -112,6 +113,7 @@ const createReservList = (reservStatusFl) => {
 
       if(reservList.length == 0) {
          const noReserv = document.createElement("div");
+         noReserv.classList.add("no-reserv");
          noReserv.innerText = "해당하는 예약이 존재하지 않습니다.";
 
          listContainer.append(noReserv);

@@ -16,6 +16,12 @@ if( notificationLoginCheck ){
 }
 
 
+
+// -----------------------------------------------------------------------------------------
+
+
+
+
 /* 채팅 메시지를 보내는 함수 */ 
 const sendMessage = () => {
 
@@ -177,6 +183,7 @@ if(chattingSock != undefined){
               
               
               const div = document.createElement("div");
+              div.classList.add("recent-message-box");
               
               const recentMessage = document.createElement("p");
               recentMessage.classList.add("recent-message");
@@ -213,6 +220,8 @@ if(chattingSock != undefined){
   
               li.append(itemHeader, itemBody);
               chattingList.append(li);
+
+              li.addEventListener('click', chattingEnter);
           }
   
           roomListAddEvent();
@@ -334,6 +343,9 @@ if(chattingSock != undefined){
   
     // 채팅방 목록에 클릭 이벤트 추가하는 함수 호출
     roomListAddEvent();
+
+    // 채팅방 목록 조회
+    selectRoomList()
   
     // 보내기 버튼 클릭 시 메시지 보내기
     document.querySelector("#send").addEventListener("click", sendMessage);
