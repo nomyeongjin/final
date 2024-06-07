@@ -12,6 +12,7 @@ import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewReply;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
+import com.project.foodpin.store.model.dto.StoreCategory;
 
 @Mapper
 public interface StoreMyPageMapper {
@@ -191,6 +192,11 @@ public interface StoreMyPageMapper {
 	int insertReply(ReviewReply inputReply);
 
 
+	/** 모든 카테고리 조회
+	 * @return
+	 */
+	List<StoreCategory> selectCategoryAll();
+  
 	/** 사장님 댓글 수정
 	 * @param map
 	 * @return
@@ -203,8 +209,6 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	int deleteReply(int replyNo);
-
-
 
 
 

@@ -1,4 +1,4 @@
-/* Full Calendar */
+
 document.addEventListener('DOMContentLoaded', function () {
 
    /**
@@ -10,8 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(resp => resp.json())
       .then(reservList => {
    
-         console.log(reservList);
+         // console.log(reservList);
 
+         /* Full Calendar */
          let calendarEl = document.getElementById('calendar');
 
          // 캘린더 설정

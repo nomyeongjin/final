@@ -22,6 +22,7 @@ import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewReply;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
+import com.project.foodpin.store.model.dto.StoreCategory;
 
 import lombok.RequiredArgsConstructor;
 
@@ -71,6 +72,13 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 			updatePath = storeWebPath + rename;
 			
 			inputStore.setStoreImg(updatePath);
+			
+		} else {
+			
+			// 이미지체크값 == 1 (이전 이전 이미지패스값 얻어와서 그대로 업데이트)
+			// 이미지체크값 == 0 inputStore.setStoreImg();
+			
+
 		}
 		
 		int result = mapper.storeInfoUpdate(inputStore);
@@ -276,6 +284,14 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int insertReply(ReviewReply inputReply) {
 		return mapper.insertReply(inputReply);
 	}
+
+	// 모든 카테고리 조회
+	@Override
+	public List<StoreCategory> selectCategoryAll() {
+		
+		return mapper.selectCategoryAll();
+	}
+
 
 	//사장님 댓글 수정
 	@Override
