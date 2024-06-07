@@ -499,6 +499,7 @@
 /* 예약 목록 */
 #reviewListContainer{
    padding: 15px;
+   padding-top: 0px;
 }
 /* 목록 1행 */
 .review-card{
@@ -848,7 +849,6 @@
    display: flex;
    flex-direction: column;
    justify-content: center;
-   align-items: center;
    margin: 15px;
 
 }
@@ -874,7 +874,7 @@
 
 .storereview-top{
    padding: 24px 0;
-   border-bottom: 1px solid #E14C54;
+   border-bottom: 1px solid rgb(204, 204, 204);
    display: flex;
    justify-content: space-between;
 }
@@ -961,7 +961,7 @@
    height: 25px;
    
    text-align: center;
-   border: 1px solid #E14C54;
+   border: 1px solid rgb(204, 204, 204);
    border-radius:24px;
    margin: 10px 0;
 }
@@ -1045,7 +1045,7 @@
 
 .review{
    width: 600px;
-   border: 1px solid #E14C54;
+   border: 1px solid rgb(204, 204, 204);
    border-radius: 15px;
    padding: 24px;
    padding-top: 12px;
