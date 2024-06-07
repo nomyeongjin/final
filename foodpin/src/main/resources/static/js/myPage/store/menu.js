@@ -52,7 +52,7 @@ menuBtn.addEventListener("click", () => {
          menuImgInput.classList.add("input-menu-img");
          menuImgInput.setAttribute('type','file');
          menuImgInput.setAttribute('accept','image/*');
-         menuImgInput.setAttribute('name','menuImg'); // !!! name="menuImg" !!!
+         menuImgInput.setAttribute('name','menuImg'); // !!! name="menuList[0].menuImg" !!!
          
          const labelMenuImg = document.createElement("label"); // input 연결된 label
          labelMenuImg.setAttribute('for', 'inputMenuImg' + i);
@@ -72,7 +72,7 @@ menuBtn.addEventListener("click", () => {
 
          const menuTitle = document.createElement("input"); // menu-title
          menuTitle.classList.add("menu-title");
-         menuTitle.setAttribute('name','menuTitle');
+         menuTitle.setAttribute('name','menuTitle'); // name="menuList[0].menuTitle"
          menuTitle.setAttribute('placeholder','메뉴'); // placeholder 추가
 
          const amountArea = document.createElement("div"); // amount-area

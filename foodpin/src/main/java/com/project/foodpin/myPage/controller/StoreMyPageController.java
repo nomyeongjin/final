@@ -361,6 +361,7 @@ public class StoreMyPageController {
 	 * @return result
 	 */
 	@PostMapping("ceoPwUpdate")
+	@ResponseBody
 	public int ceoPwUpdate(@SessionAttribute("loginMember") Member loginMember, @RequestBody Map<String, Object> map) {
 
 		return service.ceoPwUpdate(loginMember.getMemberNo(), map);

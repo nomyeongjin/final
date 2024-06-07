@@ -223,7 +223,6 @@
 	<!-- 비밀번호 변경 -->
 	<update id="ceoPwUpdate">
 		UPDATE "MEMBER" SET MEMBER_PW = #{encPw} WHERE MEMBER_NO = #{memberNo}
-		
 	</update>
 	
 	
