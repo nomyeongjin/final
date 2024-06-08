@@ -94,6 +94,8 @@ public class ManagerMyPageController {
 		String memberStatus = "N";
 		List<Member> storeMember = service.storeRequestList(memberCode, memberStatus);
 		model.addAttribute("storeMember", storeMember);
+		
+		
 		return "myPage/manager/ableStore";
 	}
 	
