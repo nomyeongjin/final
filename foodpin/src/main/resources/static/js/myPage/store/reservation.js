@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
          const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
          
          // 2024년 06월 07일 17:30
-         const reservDate = e.target.dataset.reservDate;
+         let  reservDate = e.target.dataset.reservDate;
 
          // const [datePart, timePart] = reservDate.split('일 ');
          const year = parseInt(reservDate.slice(0, 4));
@@ -73,7 +73,9 @@ document.addEventListener('DOMContentLoaded', function () {
  
          // 형식화
          const formattedReservDate = `${String(month + 1).padStart(2, '0')}.${String(day).padStart(2, '0')}(${dayOfWeek}) ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
-         console.log(formattedReservDate);
+         reservDate = formattedReservDate;
+         // console.log(reservDate);
+
 
          fetch("/myPage/store/updateReservStatus?reservNo=" + reservNo)
             .then(resp => resp.json())
@@ -100,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.addEventListener("click", e => {
          const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
 
-         const reservDate = e.target.dataset.reservDate;
+         let reservDate = e.target.dataset.reservDate;
 
          // console.log(reservNo, storeNo);
          

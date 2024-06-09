@@ -56,14 +56,15 @@ if (notificationLoginCheck) {
 
 
     /* 웹소켓을 이용해 알림을 전달하는 함수 */
-    sendNotificationFn = (type, url, pkNo, reservDate, storeName) => {
+    sendNotificationFn = (type, url, pkNo, reservDate, storeName, memberNickname) => {
 
         const notification = {
             "notificationType": type,
             "notificationUrl": url,
             "pkNo": pkNo,
             "reservDate": reservDate,
-            "storeName": storeName /* === undefined ? null : storeName */
+            "storeName": storeName, /* === undefined ? null : storeName */
+            "memberNickname" : memberNickname
         }
 
         notificationSock.send(JSON.stringify(notification));
@@ -263,4 +264,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
     })
 })
-
