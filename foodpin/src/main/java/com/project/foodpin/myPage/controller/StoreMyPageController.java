@@ -58,11 +58,48 @@ public class StoreMyPageController {
 		model.addAttribute("store", store); // 가게 정보
 		model.addAttribute("category", allCategory); // 모든 카테고리 정보
 		
-		model.addAttribute("postcode", arr[0]);
 		model.addAttribute("address", arr[1]);
 		model.addAttribute("detailAddress", arr[2]);
 		
 		return "myPage/store/storeInfo";
+	}
+	
+	/** 가게 정보 조회
+	 * @param loginMember
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("storeInfoJs")
+	@ResponseBody
+	public Store storeInfoJs(@RequestParam("storeNo") String storeNo) {
+		
+		//Store store = service.selectstoreInfoJs(storeNo); // 가게 정보
+		
+		
+		
+		// 불러온 store 정보에서 주소 쪼개기
+//		String storeLocation = store.getStoreLocation();
+//		String[] arr = storeLocation.split("\\^\\^\\^");
+//		
+//		Map<String, Object> map = new HashMap<>();
+//		
+//		map.put("store", store);
+//		map.put("address", arr[1]);
+//		map.put("detailAddress", arr[2]);
+		
+		return service.selectstoreInfoJs(storeNo);
+	}
+
+	
+	/** 카테고리 조회
+	 * @param storeNo
+	 * @return
+	 */
+	@GetMapping("selectCategoryAll")
+	@ResponseBody
+	public List<StoreCategory> selectCategory() {
+		
+		return service.selectCategoryAll();
 	}
 	
 	/** 가게 카테고리 조회
@@ -196,8 +233,16 @@ public class StoreMyPageController {
 		return listMap;
 	}
 	
-	
-
+	/** 팝업창에서 지정 휴무일 등록
+	 * @param inputOff
+	 * @return
+	 */
+	@PostMapping("calendarOffCheck")
+	@ResponseBody
+	public int calendarOffCheck(@RequestBody Off inputOff) {
+		
+		return service.calendarOffCheck(inputOff);
+	}
 
 	/** 팝업창에서 지정 휴무일 등록
 	 * @param inputOff
@@ -209,6 +254,29 @@ public class StoreMyPageController {
 		
 		return service.calendarOffInsert(inputOff);
 	}
+	
+	/** 팝업창에서 지정 휴무일 변경
+	 * @param inputOff
+	 * @return
+	 */
+	@PostMapping("calendaroffUpdate")
+	@ResponseBody
+	public int calendaroffUpdate(@RequestBody Off inputOff) {
+		
+		return service.calendaroffUpdate(inputOff);
+	}
+	
+	/** 팝업창에서 지정 휴무일 삭제 
+	 * @param inputOff
+	 * @return
+	 */
+	@PostMapping("calendaroffDelete")
+	@ResponseBody
+	public int calendaroffDelete(@RequestBody String storeNo) {
+		
+		return service.calendaroffDelete(storeNo);
+	}
+	
 	// ------ 예약 관리 ------
 	
 	/** 예약 관리 화면 이동 (+예약 전체 조회)

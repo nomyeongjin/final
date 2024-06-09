@@ -52,6 +52,14 @@
 		)
 	</select>
 	
+	<!-- 가게 정보 조회 -->
+	<select id="selectstoreInfoJs">
+		SELECT STORE_NO, STORE_IMG, STORE_NAME, STORE_TEL, STORE_LOCATION, OPEN_HOUR, CLOSE_HOUR, 
+			BREAKTIME_START, BREAKTIME_END, STORE_STATUS, STORE_MAX_NUMBER, STORE_MAX_TABLE, STORE_INFO
+		FROM "STORE"
+		WHERE STORE_NO = #{storeNo}
+	</select>
+	
 	<!-- 가게 카테고리 조회 -->
 	<select id="selectCategory">
 		SELECT STORE_NO, CATEGORY_CODE, CATEGORY_TITLE 
@@ -143,12 +151,38 @@
 		WHERE STORE_NO = #{storeNo}
 	</select>
 	
+	<!-- 기존에 존재하는 휴무일 검색 -->
+	<select id="calendarOffCheck">
+		SELECT COUNT(*) FROM "OFF_DAY" 
+		WHERE STORE_NO = #{storeNo} AND (OFF_DAY_START = #{offDayStart} OR OFF_DAY_END = #{offDayStart})
+		
+	</select>
+	
 	<!-- 지정 휴무일 등록 -->
 	<insert id="calendarOffInsert">
 		INSERT INTO "OFF_DAY" VALUES(SEQ_DAY_OFF_NO.NEXTVAL, #{offDayTitle}, 
 		#{offDayStart}, #{offDayEnd}, #{storeNo})
 	</insert>
 	
+	<!-- 지정 후무일 변경 -->
+	<update id="calendaroffUpdate">
+		UPDATE "OFF_DAY" SET OFF_DAY_TITLE = #{offDayTitle}, OFF_DAY_START = #{offDayStart}, OFF_DAY_END = #{offDayEnd}
+		WHERE OFF_DAY_NO = (
+			SELECT OFF_DAY_NO
+			FROM "OFF_DAY"
+			WHERE STORE_NO = #{storeNo} AND OFF_DAY_START = #{offDayStart} AND OFF_DAY_END = #{offDayEnd}
+		)
+	</update>
+	
+	<!-- 지정 후무일 삭제 -->
+	<delete id="calendaroffDelete">
+		DELETE FROM "OFF_DAY" 		
+		WHERE OFF_DAY_NO = (
+			SELECT OFF_DAY_NO
+			FROM "OFF_DAY"
+			WHERE STORE_NO = #{storeNo} AND OFF_DAY_START = #{offDayStart} AND OFF_DAY_END = #{offDayEnd}
+		)
+	</delete>
 	
 	<!-- *** 예약 *** -->
 	
