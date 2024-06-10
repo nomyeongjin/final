@@ -180,7 +180,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				urlForMember = "/myPage/member/reservation/wait";
 				urlForStore = "/myPage/store/reservation";
 
-//				notiCode=0;
+				notiCode=0;
 				break;
 
 			case "cancelReservation":
@@ -270,11 +270,12 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 
 		
 		// 보내는 사람과 리뷰 작성한 사람의 회원 번호가 같은 경우 return;
-		if(sendMember.getMemberNo() == store.getMemberNo()) return;
+//		if(sendMember.getMemberNo() == store.getMemberNo()) return;
 
 		// 1) 보내는 사람이 가게 사장
 		if (notificationType.equals(notificationTypes.getInsertStoreReview())) {
 			
+			review = service.selectReviewData(notification.getPkNo());
 			
 			switch(notificationType) {
 			

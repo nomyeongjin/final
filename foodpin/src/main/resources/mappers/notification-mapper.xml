@@ -108,5 +108,12 @@
 		WHERE RESERV_NO = #{reservNo}
 	</select>
 	
+	<!-- 가게 사장님이 답글 작성하기 위한 데이터 조회 -->
+	<select id="selectReviewData">
+		SELECT V.REVIEW_NO , M.MEMBER_NICKNAME, V.STORE_NO , M.MEMBER_NO
+		FROM "REVIEW" V
+		JOIN "MEMBER" M ON (M.MEMBER_NO = V.MEMBER_NO)
+		WHERE V.REVIEW_NO = #{reviewNo}
+	</select>
 	
 </mapper>
