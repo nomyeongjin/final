@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.dto.StoreCategory;
 import com.project.foodpin.store.model.mapper.SearchStoreMapper;
@@ -28,17 +29,21 @@ public class SearchStoreServiceImpl implements SearchStoreService{
 	}
 
     
+
+
 	@Override
-	public List<Store> searchStoreDetail(Map<String, Object> map) {
+	public List<StoreCategory> searchStoreCategoryList(String storeNo) {
 		
-		return mapper.searchStoreDetail(map);
+		return mapper.searchStoreCategoryList(storeNo);
 	}
 
 
+
+
 	@Override
-	public List<Store> searchStoreDetail(String storeNo) {
-	
-		return mapper.searchStoreDetail(storeNo);
+	public List<ReviewHash> searchStoreHashList(String storeNo) {
+		
+		return mapper.searchStoreHashList(storeNo);
 	}
 
 	//비동기로 화면 바꿀 카테고리 리스트 조회

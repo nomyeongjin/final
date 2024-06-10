@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
+import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.service.DetailStoreService;
@@ -50,6 +51,8 @@ public class DetailStoreController {
 		Store store = service.storeDetail(map);
 
 		List<Review> reviewList = service.reviewDetail(storeNo);
+		
+		/* List<Off> offList = service.storeOffList(storeNo); */
 
 		/* Store offday = service.storeOff(storeNo); */
 		// request scope 값 세팅
@@ -82,6 +85,7 @@ public class DetailStoreController {
 			model.addAttribute("storeHashList", store.getStoreHashList());
 			model.addAttribute("menuList", store.getMenuList());
 			model.addAttribute("imageList", store.getImageList());
+			model.addAttribute("storeOffDay", store.getImageList());
 
 			path = "/store/storeDetail";
 
