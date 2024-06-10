@@ -28,6 +28,7 @@ public class Review {
 	private String storeNo;
 	private int hashNo;
 	private String hashTitle;
+	private int hashCount;
 	
 	private String storeName;
 	private String storeImg;

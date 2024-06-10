@@ -317,6 +317,13 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return mapper.reviewAll(memberNo);
 	}
 	
+	// 사장님 답변 조회
+	@Override
+	public List<Review> reviewReply(int memberNo) {
+		return mapper.reviewReply(memberNo);
+	}
+	
+	
 	// 사장님 미답변 조회
 	@Override
 	public List<Review> reviewAllNoReply(int memberNo) {

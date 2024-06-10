@@ -367,7 +367,7 @@ public class StoreMyPageController {
 		model.addAttribute("reviewList", reviewList);
 		
 		
-		return "myPage/store/review";
+		return "myPage/store/review/review";
 	}
 	
 	
@@ -449,6 +449,21 @@ public class StoreMyPageController {
 		return service.ceoPwUpdate(loginMember.getMemberNo(), map);
 	}
 	
+	@GetMapping("reviewAnswered")
+	public String reviewAnsered(
+		@SessionAttribute("loginMember") Member loginMember,
+		Model model, RedirectAttributes ra) {
+		
+		int memberNo = loginMember.getMemberNo();
+		
+		List<Review> reviewList = service.reviewReply(memberNo);
+		
+		model.addAttribute("reviewList", reviewList);
+		
+		return "myPage/store/review/reviewAnswered";
+	}
+	
+	
 	
 	/** 사장님 미답변 조회
 	 * @param loginMember
@@ -469,7 +484,7 @@ public class StoreMyPageController {
 		model.addAttribute("reviewList", reviewList);
 		
 		
-		return "myPage/store/reviewUnanswered";
+		return "myPage/store/review/reviewUnanswered";
 	}
 	
 	/** 사장님 댓글 삽입

@@ -505,16 +505,15 @@
 
                 <div class="storedetail-hashtagcontainer" >
 
-                    <th:block th:each="hash:${store.storeHashList}">
-                        <span id="storeHashT" th:text="${hash.hashTitle}">가게 해시태그</span>
+                    <th:block th:each="hash:${store.storeHashList}" >
+                        <div class="store-hashtag" data-count="${hash.hashCount}">
+                            <span id="storeHashT" th:text="${hash.hashTitle}">가게 해시태그</span>
+                            <span id="storeHashC" th:text="${hash.hashCount}"></span>
+                        </div>
                     </th:block>
                    
                     
                 </div>
-
-                
-
-
 
             </div>
  
