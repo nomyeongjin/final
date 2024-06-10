@@ -255,9 +255,7 @@ form[name='member-myPageFrm']{
 }
 
 .storereview-top{
-    padding: 20px 0;
     padding-top: 10px;
-    border-bottom: 1px solid var(--main-color);
     display: flex;
     justify-content: space-between;
 }
@@ -366,13 +364,13 @@ form[name='member-myPageFrm']{
     margin-left: 10px;
     padding: 20px;
     width: 480px;
-    background:#666;
+    background:#DF8B4E;
     color: #fff;
     border-radius: 10px;
 }
 
 .reply-content-bubble:after {
-    border-top:15px solid #666;
+    border-top:15px solid #DF8B4E;
     border-left: 16px solid transparent;
     border-right: 0px solid transparent;
     border-bottom: 0px solid transparent;

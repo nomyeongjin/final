@@ -36,13 +36,11 @@
 
       <div class="main-category-content">
 
-        <div id="main-category-text">
-          <p>뭘 먹을까...</p>
-        </div>
+
         
        
         <div class="main-category-button" >
-          <div th:each="category :${mainCategoryList}">
+          <div class="main-category-list" th:each="category :${mainCategoryList}">
 
             <a th:href="'/store/storeSearch/' + ${category.categoryCode}">
 
