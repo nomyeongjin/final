@@ -2,6 +2,7 @@ package com.project.foodpin.websocket.model.service;
 
 import java.util.List;
 
+import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.websocket.model.dto.Notification;
@@ -45,8 +46,19 @@ public interface NotificationService {
 	// 가게 사장님이 답글 작성하기 위한 데이터 조회
 	Review selectReviewData(String pkNo);
 
-	// 리뷰 답글 받는 사람 회원 번호
 	int memberNo(String pkNo);
+	
+	// 관리자에게 알림 보낼 때 필요한 데이터 조회
+	Store selectManagerData(String pkNo);
+
+	int selectManagerNo(int memberNo);
+
+	// 예약 노쇼 알림에 필요한 데이터 조회
+	Reservation selectNoshowData(int reservNo);
+
+
+	// 리뷰 답글 받는 사람 회원 번호
+//	int memberNo(String pkNo);
 
 
 

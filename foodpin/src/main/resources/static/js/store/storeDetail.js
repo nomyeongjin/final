@@ -301,9 +301,9 @@ storeReportBtn.addEventListener("click", e => {
   });
 
 
-
   /* 가게 신고 알림 */
-  sendNotificationFn("reviewReport", null, storeNo, null, storeName);
+  const storeName = document.querySelector("#storeName").innerText;
+  sendNotificationFn("reviewReport", null, storeNo, null, storeName, null);
 
 });
 

@@ -122,4 +122,26 @@
 		WHERE REVIEW_NO = #{reviewNo}
 	</select>
 	
+	<!-- 관리자에게 알림 보낼 때 필요한 데이터 조회 -->
+	<select id="selectManagerData">
+		SELECT STORE_NAME
+		FROM "STORE"
+		WHERE STORE_NO = #{storeNo}
+	</select>
+	
+	<select id="selectManagerNo">
+		SELECT MEMBER_NO
+		FROM "MEMBER"
+		WHERE MEMBER_CODE = 3
+		AND MEMBER_NO = #{memeberNo}
+	</select>
+	
+	<!-- 예약 노쇼 알림 보낼 때 사용하는 데이터 조회 -->
+	<select id="selectNoshowData">
+		SELECT MEMBER_NICKNAME , TO_CHAR(RESERV_DATE, 'YYYY-MM-DD') "RESERV_DATE", MEMBER_NO
+		FROM "RESERVATION"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE RESERV_NO = #{reservNo}
+	</select>
+	
 </mapper>
