@@ -12,6 +12,29 @@
     font-weight: bold;
 }
 
+.title-btn-checked{
+   font-weight: bold;
+   border: 1px solid #2B3151;
+   background-color: white;
+   color: #2B3151; 
+}
+
+.able, .unable {
+    cursor: pointer;
+    background-color: white;
+    color: #2B3151 !important;
+    border: 1px solid #2B3151;
+    font-weight: bold;
+}
+
+.able a {
+    color: #2B3151;
+}
+
+.unable a {
+    color: #2B3151;
+}
+
 .enrollTable{
     width: 100%;
     margin-top: 10px;
@@ -51,6 +74,10 @@ tbody tr td {
     font-size: 14px;
     margin: 0 5px;
     cursor: pointer;
+}
+
+.approval:hover, .refuse:hover {
+    text-decoration: underline;
 }
 
 .popup {

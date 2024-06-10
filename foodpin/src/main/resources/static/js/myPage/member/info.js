@@ -6,15 +6,24 @@ const infoContainer = document.querySelector("#infoContainer");
 
 document.addEventListener('DOMContentLoaded', function() {    
 
+    infoBtn.classList.add('title-btn-checked');
+    changePwBtn.classList.remove('title-btn-checked');
+
     infoContainer.style.display = "block";
     changePwContainer.style.display = "none";
     
     infoBtn.addEventListener("click", function() {
+        document.querySelectorAll(".sub-title-btn").forEach(btn => {
+            btn.classList.remove('title-btn-checked');
+        });
+        infoBtn.classList.add('title-btn-checked');
         changePwContainer.style.display = "none";
         infoContainer.style.display = "block";
     });
 
     changePwBtn.addEventListener("click", function() {
+        changePwBtn.classList.add('title-btn-checked');
+        infoBtn.classList.remove('title-btn-checked');
         infoContainer.style.display = "none";
         changePwContainer.style.display = "block";
     });
