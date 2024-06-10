@@ -190,6 +190,16 @@
    <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 
 
+   <!-- <script th:inline="javascript">
+
+    const memberNickname = document.querySelector(".memberNickname").innerText;
+    const reviewNo = document.querySelector("#reviewNo").value;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        sendNotification("insertStoreReview", null, reviewNo, null, null, memberNickname);
+    })
+   </script> -->
+
    <!-- 다음 주소 API 추가 -->
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
    

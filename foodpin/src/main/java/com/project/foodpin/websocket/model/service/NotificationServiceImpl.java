@@ -99,4 +99,10 @@ public class NotificationServiceImpl implements NotificationService{
 	public Review selectReviewData(String pkNo) {
 		return mapper.selectReviewData(pkNo);
 	}
+	
+	// 리뷰 답글 받는 사람 회원 번호
+	@Override
+	public int memberNo(String pkNo) {
+		return mapper.memberNo(pkNo);
+	}
 }

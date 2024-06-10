@@ -47,8 +47,8 @@ Unanswered.addEventListener("click", () => {
 });
 
 const memberNickname = document.querySelector(".memberNickname").innerText;
-const storeNo = document.querySelector("#storeNo").value;
 const reviewNo = document.querySelector("#reviewNo").value;
+const storeNo = document.querySelector("#storeNo").value;
 console.log(reviewNo);
 // console.log(memberNickname);
 
@@ -56,7 +56,7 @@ console.log(reviewNo);
 const replyForm = document.querySelector(".reply-form");
 const replyBtn = document.querySelector(".reply-btn");
 
-replyBtn.addEventListener("click", e => {
+replyForm.addEventListener("submit", e => {
 
   // 버튼 클릭 될 때 form 태그 제출을 막음
   // e.preventDefault();

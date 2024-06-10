@@ -116,4 +116,10 @@
 		WHERE V.REVIEW_NO = #{reviewNo}
 	</select>
 	
+	<select id="memberNo">
+		SELECT MEMBER_NO 
+		FROM "REVIEW"
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
 </mapper>

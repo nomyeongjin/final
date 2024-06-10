@@ -164,6 +164,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 		String notificationType = notification.getNotificationType();
 
 		int reservMemerNo = 0;
+		;
 		
 		// 1) 예약 대기, 취소의 경우 일반 회원이 가게 사장에게 알림 전달 (== 보내는 사람이 일반 회원)
 		if (notificationType.equals(notificationTypes.getReadyReservation())
@@ -275,20 +276,32 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 		String notificationType = notification.getNotificationType();
 		
 		store = service.selectStoreData(notification.getPkNo());
+		
+		int reviewMemerNo = 0;
 
 		
 		// 보내는 사람과 리뷰 작성한 사람의 회원 번호가 같은 경우 return;
-//		if(sendMember.getMemberNo() == store.getMemberNo()) return;
 
 		// 1) 보내는 사람이 가게 사장
 		if (notificationType.equals(notificationTypes.getInsertStoreReview())) {
 			
+			// 받는 사람이 가게 사장인 경우 return;
+			if(sendMember.getMemberNo() == store.getMemberNo()) return;
+			
 			review = service.selectReviewData(notification.getPkNo());
+			
+			// 받는 사람 (일반 회원)
+			
+			reviewMemerNo = service.memberNo(notification.getPkNo());
+			
+			// 보내는 사람 (가게 사장)
+			sendMember.setMemberNo(store.getMemberNo());
+			
 			
 			switch(notificationType) {
 			
 			case "insertStoreReview" :
-				contentForMember  = String.format("<b>%s<b> 님이 남겨주신 후기에 사장님이 답글을 작성 하셨습니다.", sendMember.getMemberNickname());	
+				contentForMember  = String.format("<b>%s<b> 님이 남겨주신 후기에 사장님이 답글을 작성 하셨습니다.", review.getMemberNickname());	
 				
 				urlForMember = "/store/storeDetail/" + store.getStoreNo();
 				
@@ -328,27 +341,27 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 			}
 		}
 
-		if (contentForMember != null && urlForMember != null) {
+		if (contentForMember != null/* || urlForMember != null */) {
 
-			Notification memberNotification = new Notification();
-			memberNotification.setReceiveMemberNo(sendMember.getMemberNo());
+			memberNotification = new Notification();
+			memberNotification.setReceiveMemberNo(reviewMemerNo);
 			memberNotification.setSendMemberProfileImg(sendMember.getProfileImg());
 			memberNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			memberNotification.setNotificationContent(contentForMember);
-			memberNotification.setSendMemberNo(store.getMemberNo()); // 예약한 회원 번호로 알림 전송
+			memberNotification.setSendMemberNo(sendMember.getMemberNo()); // 예약한 회원 번호로 알림 전송
 			memberNotification.setNotificationUrl(urlForMember);
 			memberNotification.setNotiCode(notiCode);
 			service.sendNotificationMember(memberNotification);
 		}
 		
-		if (contentForStore != null && urlForStore != null) {
+		if (contentForStore != null/* || urlForStore != null */) {
 
-			Notification storeNotification = new Notification();
-			storeNotification.setReceiveMemberNo(store.getMemberNo());
+			storeNotification = new Notification();
+			storeNotification.setReceiveMemberNo(sendMember.getMemberNo());
 			storeNotification.setSendMemberProfileImg(sendMember.getProfileImg());
 			storeNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			storeNotification.setNotificationContent(contentForStore);
-			storeNotification.setSendMemberNo(sendMember.getMemberNo()); // 예약하는 회원 번호로 알림 전송
+			storeNotification.setSendMemberNo(store.getMemberNo()); // 예약하는 회원 번호로 알림 전송
 			storeNotification.setNotificationUrl(urlForStore);
 			storeNotification.setNotiCode(notiCode);
 			service.sendNotificationStore(storeNotification);

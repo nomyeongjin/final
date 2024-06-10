@@ -760,6 +760,7 @@ header>section:nth-child(3) {
   font-size: 15px;
   padding: 15px 0;
   color: black;
+  width: 300px;
 }
 
 .fa-circle-xmark{

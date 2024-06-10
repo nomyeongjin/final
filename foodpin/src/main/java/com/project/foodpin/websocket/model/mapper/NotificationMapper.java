@@ -47,4 +47,7 @@ public interface NotificationMapper {
 	// 가게 사장님이 답글 작성하기 위한 데이터 조회
 	Review selectReviewData(String pkNo);
 
+	// 리뷰 답글 받는 사람 회원 번호
+	int memberNo(String pkNo);
+
 }
