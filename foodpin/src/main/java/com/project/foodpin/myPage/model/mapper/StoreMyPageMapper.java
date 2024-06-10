@@ -238,6 +238,12 @@ public interface StoreMyPageMapper {
 	 */
 	int deleteReply(int replyNo);
 
+	/** 기존 가게 사진 패스 조회
+	 * @param storeNo
+	 * @return
+	 */
+	String selectStoreImg(String storeNo);
+
 
 
 

@@ -2,6 +2,8 @@ package com.project.foodpin.store.model.dto;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.review.model.dto.UploadImage;
 
@@ -36,6 +38,9 @@ public class Store {
 	public int storeMaxTable;
 	
 	public int memberNo;
+	
+	private MultipartFile storeImgInput;
+	private int imgStatus;
 	
 	//가게 이미지 목록
 	public List<UploadImage> imageList;
