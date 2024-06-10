@@ -6,15 +6,24 @@ const completeReportContainer = document.querySelector(".completeReport-containe
 
 document.addEventListener('DOMContentLoaded', function() {    
 
+    reportBtn.classList.add('title-btn-checked');
+    completeReportBtn.classList.remove('title-btn-checked');
+
     reportReviewContainer.style.display = "block";
     completeReportContainer.style.display = "none";
     
     reportBtn.addEventListener("click", function() {
+        document.querySelectorAll(".sub-title-btn").forEach(btn =>{
+            btn.classList.remove('title-btn-checked');
+        });
+        reportBtn.classList.add('title-btn-checked');
         completeReportContainer.style.display = "none";
         reportReviewContainer.style.display = "block";
     });
 
     completeReportBtn.addEventListener("click", function() {
+        completeReportBtn.classList.add('title-btn-checked');
+        reportBtn.classList.remove('title-btn-checked');
         reportReviewContainer.style.display = "none";
         completeReportContainer.style.display = "block";
     });

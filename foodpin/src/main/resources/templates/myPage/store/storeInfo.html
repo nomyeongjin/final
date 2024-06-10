@@ -47,35 +47,29 @@
             <!-- 프로필 수정 폼 -->
             <form action="/myPage/store/storeInfoUpdate" id="storeEditFrm" th:object="${store}" method="POST" enctype="multipart/form-data">
 
-               <!-- 이미지 -->
-               <div class="storeInfo-img-container">
+               <!-- 이미지가 없는 경우 -->
+               <div th:if="*{storeImg == null}"class="storeInfo-img-container">
+                  <img id="storeImg" class="hidden" alt="">
+                  <i class="fa-solid fa-xmark store-img-del hidden"></i>
 
-                  <!-- 이미지가 없는 경우 -->
-                  <th:if="*{storeImg == null}">
-                     <img id="storeImg" class="hidden" alt="">
+                  <label for="storeImgInput" id="storeImgLabel">
+                     <i class="fa-regular fa-image"></i>
+                     <i class="fa-solid fa-plus"></i>
+                  </label>
 
-                     <div class="store-img-area hidden">
-                        <label for="storeImgInput" id="storeImgLabel">
-                           <i class="fa-regular fa-image"></i>
-                           <i class="fa-solid fa-plus"></i>
-                        </label>
+                  <input name="image" id="storeImgInput" type="file" accept="image/*">
+               </div>
 
-                        <input name="image" id="storeImgInput" type="file" accept="image/*">
-                     </div>
-                  </th:if>
+               <!-- 이미지가 있는 경우 -->
+               <div th:unless="*{storeImg == null}"class="storeInfo-img-container img-ari">
+                  <img id="storeImg" th:src="*{storeImg}">
+                  <i class="fa-solid fa-xmark store-img-del"></i>
 
-                  <!-- 이미지가 있는 경우 -->
-                  <th:unless="*{storeImg == null}">
-                     <img id="storeImg" th:src="*{storeImg}">
-                     <i class="fa-solid fa-xmark store-img-del"></i>
-
-                     <label for="storeImgInput" id="storeImgLabel" class="hidden">
-                        <i class="fa-regular fa-image"></i>
-                        <i class="fa-solid fa-plus"></i>
-                     </label>
-                     <input class="hidden" name="image" id="storeImgInput" type="file" accept="image/*">
-                     <!-- <input class="" name="image" id="imageInput" type="file" accept="image/*"> -->
-                  </th:if>
+                  <label for="storeImgInput" id="storeImgLabel" class="hidden">
+                     <i class="fa-regular fa-image"></i>
+                     <i class="fa-solid fa-plus"></i>
+                  </label>
+                  <input class="hidden" name="image" id="storeImgInput" type="file" accept="image/*">
                </div>
 
                <!-- 이미지외 내용 -->
@@ -105,26 +99,16 @@
    
                   <!-- 예약 오픈 여부 -->
                   <div class="edit-area-row">
-                     <label>예약 오픈 여부 : </label>
+                     <label>예약 신청 받는 여부 : </label>
                      <div class="input-row">
-   
-                        <!-- 선택시 허용/미허용으로 변경 -->
-   
-                        <!-- 허용 -->
-                        <th:block th:if="*{storeStatus == 'Y'}">
-                           <input type="checkbox" id="storeStatus" name="storeStatus" checked><label for="storeStatus">신청 허용</label>
-                        </th:block>
-   
-                        <!-- 미허용 -->
-                        <th:block th:if="*{storeStatus == 'N'}">
-                           <input type="checkbox" id="storeStatus" name="storeStatus"><label for="storeStatus">신청 미허용</label>
-                        </th:block>
+                           <button class="store-status-btn" value="Y">받음</button>
+                           <button class="store-status-btn" value="N">받지 않음</button>
                      </div>
                   </div>              
    
-                  <!-- 예약 정보 -->
+                  <!-- 예약 가능 -->
                   <div class="edit-area-row">
-                     <label for="storeMaxNumber" id="storeMaxLabel">예약 가능 : </label>
+                     <label for="storeMaxNumber" id="labelstoreMax">예약 가능 : </label>
                      <div class="input-row">
                         <input type="number" name="storeMaxNumber" id="storeMaxNumber" class="s-input" th:value="*{storeMaxNumber}">인</span>
                         <input type="number" name="storeMaxTable" id="storeMaxTable" class="s-input" th:value="*{storeMaxTable}"><span>테이블</span>
@@ -133,7 +117,7 @@
    
                   <!-- 영업시간 -->
                   <div class="edit-area-row">
-                     <label for="openHour">영업시간 : </label>
+                     <label>영업시간 : </label>
                      <div class="input-row">
    
                         <div id="openCloseArea">
@@ -150,7 +134,7 @@
    
                   <!-- 브레이크 타임 -->
                   <div class="edit-area-row">
-                     <label for="breacktimeStart">브레이크 타임 : </label>
+                     <label>브레이크 타임 : </label>
                      <div class="input-row">
    
                         <div id="breaktimeArea">

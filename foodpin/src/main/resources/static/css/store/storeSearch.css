@@ -421,7 +421,7 @@ i{
 }
 
 .searchstore-detailcontainer::-webkit-scrollbar {
-  /*  display: none; */
+   display: none;
 }
 
 .searchstore-detailcontainer{
@@ -431,6 +431,14 @@ i{
     justify-content: center;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.searchstore-none{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 330px;
+   overflow-y: hidden;
 }
 
 /* 새로고침 버튼 */
@@ -454,6 +462,7 @@ i{
 /* 가게 조회 순서 */
 .storelist-typeBtnbox{
    height: 30px;
+   border-bottom: 1px solid var(--main-color);
    margin: 0px 20px 10px 10px;
 }
 

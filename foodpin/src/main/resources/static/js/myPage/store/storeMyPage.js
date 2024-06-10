@@ -40,9 +40,27 @@ function execDaumPostcode() {
 //   calendar.render();
 // });
 
-
 const Unanswered = document.querySelector("#Unanswered");
 
 Unanswered.addEventListener("click", () => {
   location.href = "/myPage/store/reviewUnanswered";
+});
+
+const memberNickname = document.querySelector(".memberNickname").innerText;
+const storeNo = document.querySelector("#storeNo").value;
+// console.log(memberNickname);
+
+// 답글 제출하는 form
+const replyForm = document.querySelector(".reply-form");
+const replyBtn = document.querySelector(".reply-btn");
+
+replyBtn.addEventListener("click", e => {
+
+  // 버튼 클릭 될 때 form 태그 제출을 막음
+  e.preventDefault();
+
+  sendNotification("insertStoreReview", null, memberNo, null, null, memberNickname);
+
+  // 알림 보내는 함수 실행 후 폼 태그 제출
+  replyForm.submit();
 });

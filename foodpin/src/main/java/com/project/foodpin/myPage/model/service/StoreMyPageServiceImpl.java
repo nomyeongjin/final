@@ -58,6 +58,12 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return mapper.selectstoreInfo(memberNo);
 	}
 	
+	// 가게 정보 조회
+	@Override
+	public Store selectstoreInfoJs(String storeNo) {
+		return mapper.selectstoreInfoJs(storeNo);
+	}
+	
 	// 모든 카테고리 조회
 	@Override
 	public List<StoreCategory> selectCategoryAll() {
@@ -201,11 +207,32 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return mapper.calendarOffSelect(storeNo);
 	}
 	
+	// 지정 휴무일 중복 검색 
+	@Override
+	public int calendarOffCheck(Off inputOff) {
+		
+		return mapper.calendarOffCheck(inputOff);
+	}
+	
 	// 지정 휴무일 등록
 	@Override
 	public int calendarOffInsert(Off inputOff) {
 		
 		return mapper.calendarOffInsert(inputOff);
+	}
+	
+	// 지정 휴무일 변경 
+	@Override
+	public int calendaroffUpdate(Off inputOff) {
+		
+		return mapper.calendaroffUpdate(inputOff);
+	}
+
+	// 지정 휴무일 삭제 
+	@Override
+	public int calendaroffDelete(String storeNo) {
+		
+		return mapper.calendaroffDelete(storeNo);
 	}
 	
 	// ------ 예약 관리 ------
@@ -313,6 +340,8 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public int deleteReply(int replyNo) {
 		return mapper.deleteReply(replyNo);
 	}
+
+
 
 
 

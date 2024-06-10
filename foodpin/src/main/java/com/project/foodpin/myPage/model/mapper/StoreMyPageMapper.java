@@ -24,6 +24,12 @@ public interface StoreMyPageMapper {
 	 * @return store
 	 */
 	Store selectstoreInfo(int memberNo);
+	
+	/** 가게 정보 조회
+	 * @param storeNo
+	 * @return
+	 */
+	Store selectstoreInfoJs(String storeNo);
 
 	/** 모든 카테고리 조회
 	 * @return
@@ -96,6 +102,12 @@ public interface StoreMyPageMapper {
 	 */
 	int deleteOffWeek(String storeNo);
 
+	/** 고정 휴무일 중복 검색 
+	 * @param off
+	 * @return result 
+	 */
+	int calendarOffCheck(Off off);
+
 	/** 고정 휴무일 등록 
 	 * @param off
 	 * @return result 
@@ -119,6 +131,18 @@ public interface StoreMyPageMapper {
 	 * @return result
 	 */
 	int calendarOffInsert(Off inputOff);
+	
+	/** 지정 휴무일 변경 
+	 * @param inputOff
+	 * @return
+	 */
+	int calendaroffUpdate(Off inputOff);
+
+	/** 지정 휴무일 삭제 
+	 * @param storeNo
+	 * @return
+	 */
+	int calendaroffDelete(String storeNo);
 	
 	// ------ 예약 관리 ------
 	
@@ -213,6 +237,10 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	int deleteReply(int replyNo);
+
+
+
+
 
 
 

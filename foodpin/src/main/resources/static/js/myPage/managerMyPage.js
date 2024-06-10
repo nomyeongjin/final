@@ -99,6 +99,7 @@ openStoreDetail.forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
         popup.style.display = 'block';
+
     });
 });
 
@@ -111,4 +112,5 @@ window.addEventListener("click", e => {
         popup.style.display = 'none';
     }
 });
+
 

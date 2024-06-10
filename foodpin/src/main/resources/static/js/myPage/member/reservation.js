@@ -23,6 +23,25 @@ cancelBtn.forEach(btn => {
         }
         const reservNo = e.target.dataset.reservNo;
         cancelReservation(reservNo);
+
+        let reservDate = e.target.dataset.reservDate;
+
+        // 2024. 06. 13 11:00
+        const date = new Date(reservDate);
+
+        // 요일을 계산
+        const options = { weekday: 'short' };
+        const dayOfWeek = date.toLocaleDateString('ko-KR', options);
+        
+        // 형식화
+        const formattedReservDate =
+          `${reservDate.slice(6, 8)}.${reservDate.slice(10, 12)}(${dayOfWeek}) ${reservDate.slice(13, 18)}`;
+        
+
+        reservDate = formattedReservDate;
+        console.log(formattedReservDate); 
+
+        sendNotificationFn("cancelReservation", null, reservNo, reservDate, null);
     });
 });
    

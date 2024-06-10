@@ -2,6 +2,26 @@
     --main-color: #E14C54 ;
 }
 
+.fix, .wait, .last, .canno {
+    cursor: pointer;
+    background-color: white;
+    color: #2B3151 !important;
+    border: 1px solid #2B3151;
+    font-weight: bold;
+}
+
+.fix a, .wait a, .last a, .canno a {
+    color: #2B3151;
+}
+
+.title-btn-checked {
+    cursor: pointer;
+    background-color: white;
+    color: #2B3151 !important;
+    border: 1px solid #2B3151;
+    font-weight: bold;
+}
+
 
 /* MEMBER INFO */
 #infoContainer {

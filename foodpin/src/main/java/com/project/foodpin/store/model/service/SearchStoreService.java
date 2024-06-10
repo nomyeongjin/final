@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.project.foodpin.store.model.dto.Store;
+import com.project.foodpin.store.model.dto.StoreCategory;
 
 
 public interface SearchStoreService {
@@ -21,5 +22,7 @@ public interface SearchStoreService {
 	 * @return
 	 */
 	List<Store> searchStoreDetail(Map<String, Object> map);
+
+	List<Store> searchStoreDetail(String storeNo);
 
 }
