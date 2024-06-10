@@ -97,8 +97,8 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 		handleNotification(notification, sendMember, store, review);
 
 //		log.info("전달 받은 내용 : {}", notification);
-		if (notification.getNotificationContent() == null)
-			return;
+//		if (notification.getNotificationContent() == null)
+//			return;
 
 		// /notification.send로 연결된 객체를 만든 클라리언트들(sessions)중
 		// 회원번호가 받는 회원 번호와 같은 사람에게 베시지 전달
@@ -170,6 +170,14 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				|| notificationType.equals(notificationTypes.getCancelReservation())) {
 
 			store = service.selectStoreData(notification.getPkNo());
+			
+			// 보내는 사람 : 회원
+//			sendMember.setMemberNo(reservMemerNo);
+			
+			// 받는 사람 : 사장
+//			reservMemerNo = store.getMemberNo();
+			reservMemerNo = sendMember.getMemberNo();
+			
 
 			switch (notificationType) {
 
@@ -180,7 +188,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				urlForMember = "/myPage/member/reservation/wait";
 				urlForStore = "/myPage/store/reservation";
 
-//				notiCode=0;
+				notiCode=0;
 				break;
 
 			case "cancelReservation":

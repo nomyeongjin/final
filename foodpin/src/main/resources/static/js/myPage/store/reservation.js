@@ -128,11 +128,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }else {
                alert("예약 번호 " + reservNo + "번 예약 거부에 실패했습니다.");
             }
+            
+            console.log("reservNo: " + reservNo, "reservDate: " + reservDate);
+            //  알림
+            sendNotificationFn("noConfrimReservation", null, reservNo,  reservDate, null, null);
          })
          .catch( err => console.log(err)); // 예약 승인 처리 fetch
 
-         //  알림
-         sendNotificationFn("noConfrimReservation", null, reservNo,  reservDate, null);
 
       }) // reservBtn.addEventListener("click"
    }); // forEach(reservBtn
