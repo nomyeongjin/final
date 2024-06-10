@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.mapper.DetailStoreMapper;
@@ -128,5 +129,16 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 	}
 
 
+
+
+
+	/*
+	 * @Override public List<Off> storeOffList(String storeNo) {
+	 * 
+	 * List<Off> offList = mapper.storeOffList(storeNo);
+	 * 
+	 * return offList; }
+	 * 
+	 */
 	
 }

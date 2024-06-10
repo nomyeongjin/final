@@ -2,7 +2,7 @@
 const storedetailmapbutton = document.querySelector("#storedetailmapbutton");
 
 storedetailmapbutton.addEventListener("click", () => {
-  location.href = "storeSearch"+categoryCode;
+  location.href = "/store/storeSearch/1";
   currentlocation();
 
 });
@@ -110,7 +110,7 @@ window.onload = function() {
 
 
 /* 가게 상세 설명 더보기 */
-
+document.addEventListener('DOMContentLoaded', function () {
 const storeDetailContent =document.querySelector('.store-detail-content');
 const storeDetailText =document.querySelector('.store-detail-text');
 const moreText =document.querySelector('.more-text');
@@ -133,7 +133,7 @@ lessText.addEventListener("click", ()=>{
   storeDetailText.style.display = '-webkit-box'; 
 });
 
-
+});
 
 
 /* 별점  */

@@ -53,6 +53,13 @@ public class Store {
 	
 	//가게 카테고리 목록
 	public List<StoreCategory>storeCategoryList;
+	
+	
+	// 가게 검색 페이지의 가게 상세 카테고리
+	public List<StoreCategory>searchStoreCategoryList;
+	
+	// 가게 검색 페이지의 가게 해시태그 목록
+	public List<ReviewHash>searchStoreHashList;
 
 	// 찜
 	private int likeCount;
