@@ -18,12 +18,14 @@ public interface ChattingMapper {
     public int createChattingRoom(Map<String, Object> map);
 
 
-    public int insertMessage(Message msg);
+    public int insertToStoreMessage(Message msg);
 
     public int updateReadFlag(Map<String, Object> paramMap);
 
     public List<Message> selectMessageList(int chattingNo);
 
 	public List<Member> selectTarget(Map<String, Object> map);
+
+	public int insertToMemberMessage(Message msg);
 
 }

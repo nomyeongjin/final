@@ -3,6 +3,7 @@ package com.project.foodpin.store.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.dto.StoreCategory;
 
@@ -17,12 +18,12 @@ public interface SearchStoreService {
 	 */
 	List<Store> searchStoreList(Map<String, Object> map);
 
-	/** 검색 페이지에서 보이는 가게 정보
-	 * @param map
-	 * @return
-	 */
-	List<Store> searchStoreDetail(Map<String, Object> map);
 
-	List<Store> searchStoreDetail(String storeNo);
+
+	List<StoreCategory> searchStoreCategoryList(String storeNo);
+
+
+
+	List<ReviewHash> searchStoreHashList(String storeNo);
 
 }

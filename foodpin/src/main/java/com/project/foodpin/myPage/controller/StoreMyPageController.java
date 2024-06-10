@@ -73,20 +73,6 @@ public class StoreMyPageController {
 	@ResponseBody
 	public Store storeInfoJs(@RequestParam("storeNo") String storeNo) {
 		
-		//Store store = service.selectstoreInfoJs(storeNo); // 가게 정보
-		
-		
-		
-		// 불러온 store 정보에서 주소 쪼개기
-//		String storeLocation = store.getStoreLocation();
-//		String[] arr = storeLocation.split("\\^\\^\\^");
-//		
-//		Map<String, Object> map = new HashMap<>();
-//		
-//		map.put("store", store);
-//		map.put("address", arr[1]);
-//		map.put("detailAddress", arr[2]);
-		
 		return service.selectstoreInfoJs(storeNo);
 	}
 
@@ -113,8 +99,6 @@ public class StoreMyPageController {
 		return service.selectCategory(storeNo);
 	}
 	
-	
-	
 	/** 가게 정보 수정
 	 * @param loginMember
 	 * @param storeImg
@@ -125,13 +109,12 @@ public class StoreMyPageController {
 	 */
 	@PostMapping("storeInfoUpdate")
 	public String storeInfoUpdate(@SessionAttribute("loginMember") Member loginMember, 
-			@RequestParam("image") MultipartFile image, 
-			Store inputStore, 
-			Model model, RedirectAttributes ra) {
+			@RequestParam("image") MultipartFile image, Store inputStore, Model model, RedirectAttributes ra) {
 		
 		inputStore.setMemberNo(loginMember.getMemberNo());
+		inputStore.setStoreImgInput(image);
 		
-		int result = service.storeInfoUpdate(inputStore, image);
+		int result = service.storeInfoUpdate(inputStore);
 		
 		String message = "";
 		
@@ -142,6 +125,21 @@ public class StoreMyPageController {
 		ra.addFlashAttribute("message", message);
 		
 		return "redirect:/myPage/store/storeInfo";
+	}
+	
+	/** 가게 정보 수정 비동기 
+	 * @param loginMember
+	 * @param storeImg
+	 * @param inputStore
+	 * @param model
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("storeInfoUpdateJS")
+	@ResponseBody
+	public int storeInfoUpdateJS(@RequestBody @ModelAttribute Store inputStore) {
+	
+		return service.storeInfoUpdate(inputStore);
 	}
 	
 	// ------ 메뉴 ------

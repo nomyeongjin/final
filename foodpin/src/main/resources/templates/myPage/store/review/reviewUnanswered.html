@@ -167,7 +167,7 @@
                                 <form action="/myPage/store/insertReply" method="POST" class="reply-form">
                                     <input type="text" class="reply-content-bubble" name="replyConent">
                                     <input type="text" name="storeNo" id="storeNo" th:value="*{storeNo}" hidden>
-                                    <input type="text" name="reviewNo" th:value="*{reviewNo}" hidden>
+                                    <input type="text" name="reviewNo" id="reviewNo" th:value="*{reviewNo}" hidden>
                                     <button class="reply-btn">답글등록</button>
                                 </form>
                             </div>
@@ -193,6 +193,16 @@
    <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 
 
+   <!-- <script th:inline="javascript">
+
+    const memberNickname = document.querySelector(".memberNickname").innerText;
+    const reviewNo = document.querySelector("#reviewNo").value;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        sendNotification("insertStoreReview", null, reviewNo, null, null, memberNickname);
+    })
+   </script> -->
+
    <!-- 다음 주소 API 추가 -->
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
    
@@ -200,5 +210,5 @@
    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
    <!-- 마이페이지 JS 추가 -->
-   <script src="/js/myPage/storeMyPage.js"></script>
+   <script src="/js/myPage/store/storeMyPage.js"></script>
 </body>

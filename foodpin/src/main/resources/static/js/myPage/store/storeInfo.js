@@ -27,54 +27,94 @@ const storeImgDel = () => {
 
 //-------------- 예약 신청 허용/미허용 선택 --------------
 
-/** 예약 신청 여부 선택시
- * 내용 변경
- */
-const changeStoreStatus = () => {
-   const statusCheck  = document.querySelector("label[for='storeStatus']");
+// 예약 신청 여부 선택 +  토글
+const checkStoreStatus = () => {
 
-   if(storeStatus.checked) {
-      statusCheck.innerText = "예약 허용";
-      storeStatus.value = "Y";
-   } else {
-      statusCheck.innerText = "예약 미허용";
-      storeStatus.value = "N";
-   }
-   // console.log(storeStatus.value);
-}
+   document.querySelectorAll(".store-status-btn").forEach(btn => {
+   
+      // 저장된 값에 체크
+      if(storeStatus == btn.value) btn.classList.add("checked");
+   
+      // 토글
+      btn.addEventListener("click", e => {
+         document.querySelectorAll(".store-status-btn").forEach(button => {
+            button.classList.remove("checked");
+         });
+   
+         e.target.classList.add("checked");
+      });
+   });
+};
+
 
 //-------------- 영업시간 종일 선택 --------------
 
-const openCloseArea = document.querySelector("#openCloseArea"); // input 감싸는 div 영역
+const checkBoxOpenClose = () => {
 
-let preOpenHour = "";  // 종일 선택하기 전 시간 임시저장하는 변수
-let preCloseHour = "";
-
-/** 영업시간 종일 선택시
- * input 값 '00:00' 으로 변경 + .blind 클래스 추가
- */
-document.querySelector("#openClose").addEventListener("change", () => {
-
-   const openHour = document.querySelector("#openHour"); // input- 영업시간 시작 / 종료
-   const closeHour = document.querySelector("#closeHour");
+   const openCloseArea = document.querySelector("#openCloseArea"); // input 감싸는 div 영역
    
-   if(openClose.checked) { // 종일 선택
-      preOpenHour = openHour.value; 
-      preCloseHour = closeHour.value;
+   let preOpenHour = "";  // 종일 선택하기 전 시간 임시저장하는 변수
+   let preCloseHour = "";
+   
+   /** 영업시간 종일 선택시
+    * input 값 '00:00' 으로 변경 + .blind 클래스 추가
+    */
+   document.querySelector("#openClose").addEventListener("change", () => {
+   
+      const openHour = document.querySelector("#openHour"); // input- 영업시간 시작 / 종료
+      const closeHour = document.querySelector("#closeHour");
+      
+      if(openClose.checked) { // 종일 선택
+         preOpenHour = openHour.value; 
+         preCloseHour = closeHour.value;
+   
+         openHour.setAttribute('value', '00:00');
+         closeHour.setAttribute('value', '00:00');
+   
+         openCloseArea.classList.add('blind');
+      } else { // 선택 해제
+         openHour.setAttribute('value', preOpenHour);
+         closeHour.setAttribute('value', preCloseHour);
+   
+         openCloseArea.classList.remove('blind');
+      }
+   });
+};
 
-      openHour.setAttribute('value', '00:00');
-      closeHour.setAttribute('value', '00:00');
+/**
+ * (체크박스) 브레이크타임 없음 선택
+ */
+const checkBoxBreak = () => {
 
-      openCloseArea.classList.add('blind');
-   } else { // 선택 해제
-      openHour.setAttribute('value', preOpenHour);
-      closeHour.setAttribute('value', preCloseHour);
-
-      openCloseArea.classList.remove('blind');
-   }
-});
-
-//-------------- 브레이크타임 없음 선택 --------------
+   const breaktimeArea = document.querySelector("#breaktimeArea"); // input 감싸는 div 영역
+   
+   const breaktimeStart = document.querySelector("#breaktimeStart"); // input- 브레이크타임 시작 / 종료
+   const breaktimeEnd = document.querySelector("#breaktimeEnd");
+   
+   let preBreaktimeStart = "";  // 없음 선택하기 전 시간 임시저장하는 변수
+   let preBreaktimeEnd = "";
+   
+   /** 브레이크타임 없음 선택시
+    * input 값 '00:00' 으로 변경 + .blind 클래스 추가
+    */
+   document.querySelector("#breaktime").addEventListener("change", e => {
+   
+      if(e.target.checked) { // 없음 선택
+         preBreaktimeStart = breaktimeStart.value; 
+         preBreaktimeEnd = breaktimeEnd.value;
+   
+         breaktimeStart.setAttribute('value', '00:00');
+         breaktimeEnd.setAttribute('value', '00:00');
+   
+         breaktimeArea.classList.add('blind');
+      } else { // 선택 해제
+         breaktimeStart.setAttribute('value', preBreaktimeStart);
+         breaktimeEnd.setAttribute('value', preBreaktimeEnd);
+   
+         breaktimeArea.classList.remove('blind');
+      }
+   });
+} // checkBoxBreak
 
 
 
@@ -100,28 +140,27 @@ const checkCategory = () => {
 
             // 기존 저장된 카테고리인 경우 체크 표시
             if(btn.value == ctg.categoryCode) btn.classList.add('checked');
-
-            categoryCheck(btn); // 클릭시 버튼 토글
-
          }); // ctgBtnList.forEach
       }); // categoryList.forEach
-
    }).catch( err => console.log(err)); // fetch (카테고리 조회)
 } // checkCategory
 
 /**
- *  (버튼) checked 클래스 toggle
+ * 카테고리 체크시 클래스 토글
  */
-const categoryCheck = (btn) => {
+const toggleCategory = () => {
 
-   btn.addEventListener("click", () => {
-      btn.classList.toggle("checked");
+   document.querySelectorAll(".category-btn").forEach(btn => {
+      btn.addEventListener("click", e => {
+         e.target.classList.toggle("checked");
+      });
    });
-}; // categoryCheck
+}
+
+
+
 
 //-------------- 가게 소개 --------------
-
-
 
 
 /* 가게 이미지 */
@@ -156,7 +195,7 @@ const changeImageFn = e => {
    
       imgStatus = 1; // 1 <- 새 이미지 선택됨
    
-      backupInput = imageInput.cloneNode(true);
+      backupInput = storeImgInput.cloneNode(true);
    })
 
    // console.log(storeNo);
@@ -173,24 +212,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
    checkCategory(); // 저장된 카테고리 조회 + 체크
 
+
    // x 버튼 클릭시 이미지 삭제
    document.querySelector(".store-img-del").addEventListener("click", () => {
       
       storeImgDel();
    });
 
-   // 예약 신청 여부 선택 토글
-   document.querySelector("#storeStatus").addEventListener("change", () => {
-   
-      changeStoreStatus();
-   });
-   
-
+   toggleCategory();
 
 }); // DOMContentLoaded
 
 // --------------------------
-
+/**
+ * (메뉴) 가게 정보
+ */
 const infoBtn = document.querySelector("#infoBtn");
 infoBtn.addEventListener("click", () => {
 
@@ -209,8 +245,6 @@ infoBtn.addEventListener("click", () => {
    .then(store => {
 
       // const store = map.get(store);
-
-
 
       const storeEditFrm = document.createElement("form"); // storeEditFrm
       storeEditFrm.id = "storeEditFrm";
@@ -262,21 +296,30 @@ infoBtn.addEventListener("click", () => {
 
          const div = document.createElement("div"); // div
    
-         const input = document.createElement("input"); // input
-         input.setAttribute('name', el);
-         input.id = el
-
-
-
-         if (index == 0) label.innerText = "상호명 :";
-         if (index == 1) label.innerText = "전화번호 :";
-         if (index == 2) label.innerText = "가게 주소 :";
+         if(index < 2) {
+            const input = document.createElement("input"); // input
+            input.id = el
    
-         div.append(input);
+            if (index == 0) label.innerText = "상호명 :";
+            if (index == 1) label.innerText = "전화번호 :";
+
+            div.append(input);
+         }
+
+         if (index == 2) {
+            label.innerText = "가게 주소 :";
+
+            const input1 = document.createElement("input"); // input
+            input1.id = "address";
+
+            const input2 = document.createElement("input"); // input
+            input2.id = "detailAddress";
+
+            div.append(input1, input2);
+         }
+
          row.append(label, div);
          storeInfoContainer.append(row);
-
-
       });
 
       // 예약 오픈
@@ -342,6 +385,9 @@ infoBtn.addEventListener("click", () => {
       const divHour = document.createElement("div"); // div
       divHour.id = "openCloseArea";
 
+      const inputRowHour = document.createElement("div"); // div
+      inputRowHour.classList.add("input-row");
+
       const openHour = document.createElement("input"); // time
       openHour.setAttribute('name', 'openHour');
       openHour.type = "time";
@@ -364,25 +410,29 @@ infoBtn.addEventListener("click", () => {
       labelopenClose.innerText = "종일";
 
       divHour.append(openHour, spanHour, closeHour);
-      rowHour.append(labelHour, divHour, openClose, labelopenClose);
+      inputRowHour.append(divHour, openClose, labelopenClose);
+      rowHour.append(labelHour, inputRowHour);
 
       // 브레이크 타임
-      const rowBreack = document.createElement("div"); // Breack
-      rowBreack.classList.add("edit-area-row");
+      const rowBreak = document.createElement("div"); // Breack
+      rowBreak.classList.add("edit-area-row");
 
-      const labelBreack = document.createElement("label"); // label 
-      labelBreack.innerText = "브레이크 타임 : ";
+      const labelBreak = document.createElement("label"); // label 
+      labelBreak.innerText = "브레이크 타임 : ";
 
-      const divBreack = document.createElement("div"); // div
-      divBreack.id = "breaktimeArea";
+      const inputRowBreak = document.createElement("div"); // div
+      inputRowBreak.classList.add("input-row");
+
+      const divBreak = document.createElement("div"); // div
+      divBreak.id = "breaktimeArea";
 
       const breaktimeStart = document.createElement("input"); // time
       breaktimeStart.setAttribute('name', 'breaktimeStart');
       breaktimeStart.type = "time";
       breaktimeStart.id = "breaktimeStart";
 
-      const spanBreack = document.createElement("span");
-      spanBreack.innerText = "~";
+      const spanBreak = document.createElement("span");
+      spanBreak.innerText = "~";
 
       const breaktimeEnd = document.createElement("input"); // time
       breaktimeEnd.setAttribute('name', 'breaktimeEnd');
@@ -397,8 +447,9 @@ infoBtn.addEventListener("click", () => {
       labelCheckBreak.setAttribute('for', 'breaktime');
       labelCheckBreak.innerText = "없음";
 
-      divBreack.append(breaktimeStart, spanBreack, breaktimeEnd);
-      rowBreack.append(labelBreack, divBreack, breaktime, labelCheckBreak);
+      divBreak.append(breaktimeStart, spanBreak, breaktimeEnd);
+      inputRowBreak.append(divBreak, breaktime, labelCheckBreak);
+      rowBreak.append(labelBreak, inputRowBreak);
 
       // 카테고리 조회 + 생성
       const categoryArea = document.createElement("div"); // Breack
@@ -425,6 +476,10 @@ infoBtn.addEventListener("click", () => {
 
          categoryArea.append(labelCategory, categoryRow);
 
+         checkCategory(); // 저장된 카테고리 체크
+         toggleCategory(); // 체크시 토글
+
+         // categoryCheck(); // 토글
       }).catch( err => console.log(err)); // fetch (카테고리 조회)
 
       // 가게 소개
@@ -438,11 +493,11 @@ infoBtn.addEventListener("click", () => {
       storeInfoEditBtn.classList.add("update-btn");
       storeInfoEditBtn.innerText = "수정";
 
-      //
-      storeInfoContainer.append(rowStatus, rowMax, rowHour, rowBreack, categoryArea);
+      // 정보 넣기
+      storeInfoContainer.append(rowStatus, rowMax, rowHour, rowBreak, categoryArea);
       storeEditFrm.append(storeImgContainer, storeInfoContainer, storeInfo, storeInfoEditBtn);
       StoreInfoContainer.append(storeEditFrm);
-
+      
       // 이미지 없는 경우
       if(store.storeImg == null) {
          storeImg.classList.add("hidden"); // img
@@ -456,77 +511,217 @@ infoBtn.addEventListener("click", () => {
 
       document.querySelector("#storeName").value = store.storeName;
       document.querySelector("#storeTel").value = store.storeTel;
+      document.querySelector("#address").value = store.storeLocation.split('^^^')[1];
+      document.querySelector("#detailAddress").value = store.storeLocation.split('^^^')[2];
 
-      const storeLocation = store.storeLocation.split('\\^\\^\\^');
-
-      console.log(storeLocation[1]);
-      
+      // 예약 정보
       document.querySelectorAll(".store-status-btn").forEach(btn => {
          if(btn.value == store.storeStatus) btn.classList.add("checked");
+
+         checkStoreStatus();
       });
 
       storeMaxNumber.value = store.storeMaxNumber;
       storeMaxTable.value = store.storeMaxTable;
 
+      openHour.value = store.openHour;
+      closeHour.value = store.closeHour;
+
+      breaktimeStart.value = store.breaktimeStart;
+      breaktimeEnd.value = store.breaktimeEnd;
+      const ctgBtnList = document.querySelectorAll(".category-btn"); // 카테고리 버튼
+
+      // 카테고리 조회
+      fetch("/myPage/store/selectCategory?storeNo=" + storeNo)
+      .then(resp => resp.json())
+      .then(categoryList => {
+   
+         categoryList.forEach(ctg => {
+   
+            ctgBtnList.forEach(btn => {
+   
+               // 기존 저장된 카테고리인 경우 체크 표시
+               if(btn.value == ctg.categoryCode) btn.classList.add('checked');
+   
+               categoryCheck(btn); // 클릭시 버튼 토글
+   
+            }); // ctgBtnList.forEach
+         }); // categoryList.forEach
+   
+      }).catch( err => console.log(err)); // fetch (카테고리 조회)
 
       
+      // 예약 신청 여부 선택 토글
+      document.querySelectorAll(".store-status-btn").forEach(btn => {
+         btn.addEventListener("click", e => {
 
+            document.querySelectorAll(".store-status-btn").forEach(button => {
 
-      // document.querySelector("#address").value = store.storeName;
-      // document.querySelector("#detailAddress").value = store.storeName;
+               button.classList.remove("checked");
+            });
+            e.target.classList.add("checked");
+         });
+      });
 
+      checkBoxBreak();
 
-//---
+      //---
       // x 버튼 클릭시 이미지 삭제
       storeImgDel.addEventListener("click", () => {
          
          storeImgDel();
       });
    })
-
-
-
-
-
-
-
-
 });
 
 
+checkStoreStatus();
+checkBoxOpenClose();
+checkBoxBreak();
 
 
 
-/* ---------------------- */
-/*  */
-/* ---------------------- */
-const breaktimeArea = document.querySelector("#breaktimeArea"); // input 감싸는 div 영역
-
-const breaktimeStart = document.querySelector("#breaktimeStart"); // input- 브레이크타임 시작 / 종료
-const breaktimeEnd = document.querySelector("#breaktimeEnd");
-
-let preBreaktimeStart = "";  // 없음 선택하기 전 시간 임시저장하는 변수
-let preBreaktimeEnd = "";
-
-/** 브레이크타임 없음 선택시
- * input 값 '00:00' 으로 변경 + .blind 클래스 추가
+/**
+ * (버튼) 가게 정보 수정
  */
-document.querySelector("#breaktime").addEventListener("change", e => {
+document.querySelector("#storeInfoEditBtn").addEventListener("click", () => {
 
-   if(e.target.checked) { // 없음 선택
-      preBreaktimeStart = breaktimeStart.value; 
-      preBreaktimeEnd = breaktimeEnd.value;
+   let categorys = [];
 
-      breaktimeStart.setAttribute('value', '00:00');
-      breaktimeEnd.setAttribute('value', '00:00');
+   // 유효성 검사
+   const checkData = {
+      "storeMaxNumber" : false,
+      "storeMaxTable" : false,
+      "opencloseHour" : false,
+      "breaktime" : false,
+      "category" : false,
+      "storeInfo" : false
+   };
 
-      breaktimeArea.classList.add('blind');
-   } else { // 선택 해제
-      breaktimeStart.setAttribute('value', preBreaktimeStart);
-      breaktimeEnd.setAttribute('value', preBreaktimeEnd);
-
-      breaktimeArea.classList.remove('blind');
+   const storeMaxNumber = document.querySelector("#storeMaxNumber").value;
+   if(storeMaxNumber.trim().length === 0) {
+      alert("한 테이블당 착석 가능한 최대 인원을 입력해주세요.");
+      storeMaxNumber.value = "";
+      checkData.storeMaxNumber = false;
+   } else {
+      checkData.storeMaxNumber = true;
    }
+
+   const storeMaxTable = document.querySelector("#storeMaxTable").value;
+   if(storeMaxTable.trim().length === 0) {
+      alert("예약 가능한 가게의 테이블 수를 입력해주세요.");
+      storeMaxNumber.value = "";
+      checkData.storeMaxTable = false;
+   } else {
+      checkData.storeMaxTable = true;
+   }
+
+   const openHour = document.querySelector("#openHour").value;
+   const closeHour = document.querySelector("#closeHour").value;
+   if(openHour.trim().length === 0 || closeHour.trim().length === 0) {
+      alert("영업 시간을 입력해주세요.");
+      checkData.opencloseHour = false;
+
+   } else if(!(openHour.trim().length === 0 && closeHour.trim().length === 0)) {
+      checkData.opencloseHour = true;
+   }
+
+   const breaktimeStart = document.querySelector("#breaktimeStart").value;
+   const breaktimeEnd = document.querySelector("#breaktimeEnd").value;
+   if(breaktimeStart.trim().length === 0 || breaktimeEnd.trim().length === 0) {
+      alert("브레이크 타임을 입력해주세요.");
+      checkData.opencloseHour = false;
+
+   } else if(!(breaktimeStart.trim().length === 0 && breaktimeEnd.trim().length === 0)) {
+      checkData.breaktime = true;
+   }
+
+   document.querySelectorAll(".category-btn").forEach(btn => {
+
+      if(btn.classList.contains("checked")) {
+         checkData.category = true;
+         categorys.push(btn);
+      } 
+   }); // (".category-btn").forEach
+
+   if(categorys.isEmpty) {
+      alert("하나 이상의 카테고리를 선택해주세요.");
+      checkData.category = false;
+   }
+
+   const storeInfo = document.querySelector("#storeInfo").value;
+   if(storeInfo.trim().length === 0) {
+      alert("가게 소개를 입력해주세요.");
+      checkData.storeInfo = false;
+   } else {
+      checkData.storeInfo = true;
+   }
+   
+   //    const formData = new FormData();
+
+   //    formData.append("imgStatus", imgStatus);
+   //    formData.append("storeNo", storeNo);
+   //    formData.append("storeImgInput", storeImgInput.files[0]);
+   //    formData.append("storeStatus", storeStatus);
+   //    formData.append("storeMaxNumber", storeMaxNumber);
+   //    formData.append("storeMaxTable", storeMaxTable);
+   //    formData.append("openHour", openHour);
+   //    formData.append("closeHour", closeHour);
+   //    formData.append("breaktimeStart", breaktimeStart);
+   //    formData.append("breaktimeEnd", breaktimeEnd);
+   //    formData.append("categorys", categorys);
+   //    formData.append("storeInfo", storeInfo);
+
+
+   //    let file;
+   //    if(imgStatus == 1) file = storeImgInput.files[0]; 
+   //    formData.append("storeImgInput", file);
+   // const input = document.querySelector("#storeImgInput");
+
+
+   // // 수정된 이미지가 없는 경우 file null값 
+
+   // else file = null;
+
+   // // console.log(formData);
+   // const data = {
+   //    "storeNo" : storeNo,
+   //    "imgStatus" : imgStatus,
+   //    "img" : file,
+   //    "storeStatus" : storeStatus,
+   //    "storeMaxNumber" : storeMaxNumber,
+   //    "storeMaxTable" : storeMaxTable,
+   //    "openHour" : openHour,
+   //    "closeHour" : closeHour,
+   //    "breaktimeStart": breaktimeStart,
+   //    "breaktimeEnd" : breaktimeEnd,
+   //    "categorys" : categorys,
+   //    "storeInfo" : storeInfo
+   // };
+   // console.log(data);
+   
+   // fetch("/myPage/store/storeInfoUpdateJS", {
+   //    method : "POST",
+   //    headers : {},
+   //    body : formData
+   // })
+   // .then(resp => resp.text())
+   // .then(result => {
+
+   //    if(result > 0) {
+   //       alert("휴무 일정 수정 성공");
+   //    }
+   //    else{
+   //       alert("실패");
+   //    }
+   // })
+
+
+
+
+
 });
+
+
 
 

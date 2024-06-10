@@ -80,33 +80,36 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	
 	// 가게 정보 수정
 	@Override
-	public int storeInfoUpdate(Store inputStore, MultipartFile image) {
+	public int storeInfoUpdate(Store inputStore) {
 		
 		String updatePath = "";
 		String rename = "";
 		
-		if( !image.isEmpty()) { // input에서 이미지를 업로드 한 경우
+		// 이미지 그대로거나 삭제된 경우
+		if(inputStore.getStoreImgInput() == null) {
 			
-			rename = Utility.fileRename(image.getOriginalFilename());
+			if(inputStore.getImgStatus() == -1) updatePath = mapper.selectStoreImg(inputStore.getStoreNo());
 			
+			else if(inputStore.getImgStatus() == 0) updatePath = null; 
+			
+		}	
+		// 변경된 이미지가 있는 경우
+		else if( !inputStore.getStoreImgInput().isEmpty()) { 
+			
+			rename = Utility.fileRename(inputStore.getStoreImgInput().getOriginalFilename());
 			updatePath = storeWebPath + rename;
-			
-			inputStore.setStoreImg(updatePath);
-			
-		} else {
-			
-			// 이미지체크값 == 1 (이전 이전 이미지패스값 얻어와서 그대로 업데이트)
-			// 이미지체크값 == 0 inputStore.setStoreImg();
-			
+		} 
 
-		}
+		inputStore.setStoreImg(updatePath);
 		
 		int result = mapper.storeInfoUpdate(inputStore);
 		
-		if(result > 0) { // db등록 성공시 파일 업로드 폴더에 이미지 저장
+		// 변경된 이미지가 있는 경우만 이미지 파일 저장
+		if(inputStore.getImgStatus() == 1) { 
 			
 			try {
-				image.transferTo(new File(storeFolderPath + rename));
+				inputStore.getStoreImgInput().transferTo(new File(storeFolderPath + rename));
+				
 			} catch (Exception e) {
 				
 				e.printStackTrace();

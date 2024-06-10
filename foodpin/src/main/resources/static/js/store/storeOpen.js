@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </p>
                 </div>
             </div>
+           
         `;
         currentDaySchedule.appendChild(currentListItem);
 
@@ -77,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const day = schedule[i]; 
             const listItem = document.createElement('li');
             listItem.innerHTML = `
+               <hr/>
                 <div class="time-wrapper space-between">
                     <p class="t-txt">${day.day}</p>
                     <div class="time-details">

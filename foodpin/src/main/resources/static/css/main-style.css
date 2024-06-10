@@ -67,7 +67,8 @@ header {
 }
 
 .login-area{
-   width: 350px;
+   /* width: 350px; */
+   width: 450px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -174,20 +175,13 @@ header {
    flex-wrap: wrap; /* 요소들이 넘칠 때 가로 줄 바꿈 */
    justify-content: center;
    align-items: center;
-   
+   margin-top: 15px;
    
 }
 
-#main-category-text{
-   height: 50px;
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-}
-
+  
 /* 카테고리 버튼 영역 */
 .main-category-button button {
-  
    cursor: pointer;
    display: inline-block;
    width: 100px;
@@ -238,6 +232,9 @@ header {
    top: 2px;
 }
 
+.main-category-list a button {
+   font-size: 15px;
+}
 
 /* @keyframes mainCatBtn {
    25% {
@@ -760,6 +757,7 @@ header>section:nth-child(3) {
   font-size: 15px;
   padding: 15px 0;
   color: black;
+  width: 300px;
 }
 
 .fa-circle-xmark{

@@ -9,16 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
-import com.project.foodpin.review.model.dto.Review;
+import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.store.model.dto.Store;
+import com.project.foodpin.store.model.dto.StoreCategory;
 import com.project.foodpin.store.model.service.SearchStoreService;
 
 import lombok.RequiredArgsConstructor;
@@ -62,16 +60,25 @@ public class SearchStoreController {
 		                store.setPostcode(arr[0]);
 		                store.setAddress(arr[1]);
 		                store.setDetailAddress(arr[2]);
+		       
+		                String storeNo = store.getStoreNo();
+		                List<StoreCategory> searchStoreCategoryList = service.searchStoreCategoryList(storeNo);
+		                store.setSearchStoreCategoryList(searchStoreCategoryList);
+
+		                List<ReviewHash> searchStoreHashList = service.searchStoreHashList(storeNo);
+		                store.setSearchStoreHashList(searchStoreHashList);
+		  				
+		        		 
 		            }
 		
+		   
 
 		String path = null;
 		
 	
 		// 카테고리가 등록된 가게들만 나옴 
 			model.addAttribute("searchStoreList", searchStoreList);
-		
- 
+
 			path = "store/storeSearch";
 
 		
@@ -79,5 +86,7 @@ public class SearchStoreController {
 	}
 	
 	
+	
+
 
 	}

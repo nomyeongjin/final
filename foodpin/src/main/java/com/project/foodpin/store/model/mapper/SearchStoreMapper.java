@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.store.model.dto.Store;
+import com.project.foodpin.store.model.dto.StoreCategory;
 
 
 @Mapper
@@ -18,12 +20,10 @@ public interface SearchStoreMapper {
 	 */
 	List<Store> searchStoreList(Map<String, Object> map);
 
-	/** 동기 / 카테고리로 조회한 가게들 상세 정보
-	 * @param map
-	 * @return
-	 */
-	List<Store> searchStoreDetail(Map<String, Object> map);
 
-	List<Store> searchStoreDetail(String storeNo);
+	List<StoreCategory> searchStoreCategoryList(String storeNo);
+
+
+	List<ReviewHash> searchStoreHashList(String storeNo);
 
 }

@@ -71,7 +71,12 @@
 	
 	<!-- 모든 카테고리 조회 -->
 	<select id="selectCategoryAll">
-		SELECT CATEGORY_CODE, CATEGORY_TITLE FROM "CATEGORY" ORDER BY CATEGORY_CODE
+		SELECT CATEGORY_CODE, CATEGORY_TITLE FROM "CATEGORY" WHERE CATEGORY_CODE > 1 ORDER BY CATEGORY_CODE
+	</select>
+	
+	<!-- 기존 가게 사진 경로 조회 -->
+	<select id="selectStoreImg">
+		SELECT STORE_IMG FROM "STORE" WHERE STORE_NO = #{storeNo}
 	</select>
 	
 	<!-- 가게 정보 수정 -->
@@ -80,12 +85,21 @@
 			STORE_MAX_NUMBER = #{storeMaxNumber}, STORE_MAX_TABLE = #{storeMaxTable}, 
 			OPEN_HOUR = #{openHour}, CLOSE_HOUR = #{closeHour}, 
 			BREAKTIME_START = #{breaktimeStart}, BREAKTIME_END = #{breaktimeEnd}, STORE_INFO = #{storeInfo}
+		
+		<if test='storeNo == null'>
 		WHERE STORE_NO =(
 			SELECT STORE_NO FROM "STORE"
 			JOIN MEMBER USING(MEMBER_NO)
 			WHERE MEMBER_NO = #{memberNo}
 		)
+		</if>
+		
+		<if test='storeNo != null'>
+		WHERE STORE_NO = #{storeNo}
+		</if>
+		
 	</update>
+
 	
 	<!-- *** 메뉴 정보 *** -->
 	
