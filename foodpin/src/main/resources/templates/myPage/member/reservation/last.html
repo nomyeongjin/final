@@ -67,8 +67,10 @@
                                             <div class="storeAddress" th:text="*{storeLocation}"></div>
                                         </div>
 
-                                        <span th:object="${reservation}"   > <!--  th:if="${reservReviewCounts[iterStat.index]} == 0" -->
-                                            <a class="insertReviewBtn" th:href="'/review/reviewPage/' + *{storeNo}">리뷰작성</a>
+
+                                        <span th:object="${reservation}" th:if="${reservReviewCounts[iterStat.index]} == 0">
+                                            <a class="insertReviewBtn" th:href="'/review/reviewPage/' + *{storeNo} + '/' + *{reservNo}">리뷰작성</a>
+
                                         </span>
                                     </li>
                                 </ul>

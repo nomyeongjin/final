@@ -2,6 +2,7 @@ package com.project.foodpin.myPage.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -170,7 +171,15 @@ public class MemberMyPageController {
 			
 			int reservNo = reservation.get(i).getReservNo();
 			
-			int reservReviewCount = service.reservReviewCount(reservNo);
+			Map<String, Object> map = new HashMap<>();
+			map.put("reservNo", reservNo);
+			map.put("memberNo", memberNo);
+			
+			 System.out.println("ReservNo: " + reservNo + ", MemberNo: " + memberNo);
+			
+			
+			int reservReviewCount = service.reservReviewCount(map);
+			
 			reservReviewCounts.add(reservReviewCount);
 		}
 
