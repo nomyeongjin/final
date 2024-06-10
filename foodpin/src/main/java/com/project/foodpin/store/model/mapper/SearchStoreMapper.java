@@ -24,4 +24,6 @@ public interface SearchStoreMapper {
 	 */
 	List<Store> searchStoreDetail(Map<String, Object> map);
 
+	List<Store> searchStoreDetail(String storeNo);
+
 }

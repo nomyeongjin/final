@@ -20,6 +20,7 @@
 
     <main>
      
+     
         <!-- 1. 붙어있는 헤더 조각 만들고 사이드바를 만들어야 함 -->
        
         <!-- 지도를 불러와서 자동으로 사이드바 열릴 때 크기 조정 가능하게 함 -->
@@ -67,8 +68,13 @@
   
     <script th:inline="javascript">
         const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원";
-     
-    
+       
+    </script>
+
+    <script th:inline="javascript">
+    const message =  /*[[${message}]]*/ "전달 받은 message";
+
+    if(message != null) alert(message);
     </script>
 
   

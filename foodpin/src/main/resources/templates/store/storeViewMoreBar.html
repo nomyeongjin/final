@@ -97,36 +97,47 @@
 
                             <div class="storelist-typeBtnbox">
                                 
-                                    <button>거리순</button>
-                                    <button>리뷰순</button>
-                                    <button>좋아요순</button>
-                                    <button>평점순</button>
+                                <button>❈ 거리순</button>
+                                <button>❈ 리뷰순</button>
+                                <button>❈ 좋아요순</button>
+                                <button>❈ 평점순</button>
                                 
                             </div>
 
                             
                         </div>
+
+
+                        <!-- 가게 카드 -->
                     
                         <div class="searchstore-detailcontainer">
+
+                            <th:block th:if="${#lists.isEmpty(searchStoreList)}">
+                                <div class="searchstore-none">
+                                   <span>해당 카테고리의 가게가 없습니다.</span> 
+                                </div>
+                            </th:block>
+        
                            
-                            <div>
+                            <div class="searchstore-storeList" th:each="store : ${searchStoreList}">
                                 <div>
-                                    <img src="/images/storeDetail/store.jpg" id="searchStoreImg">
+                                    <img th:src="${store.storeImg}" id="searchStoreImg">
                                     
                                      
                                 </div>
 
                                 <div class="storesearch-firstrow">
                                     <div>
-
-                                        <span>
+                                        <a th:href="'/store/storeDetail/' + ${store.storeNo}" >
+                                        <span th:text="${store.storeName}">
                                             가게 이름
                                         </span>
-                                        <span>
+                                        </a>
+                                        <span > 
                                             가게 카테고리
                                         </span>
 
-                                        <a href="store/storeDetail/${store.storeNo}/reservation">예약</a>
+                                        <a th:href="'/store/storeDetail/' + ${store.storeNo} + '/reservation'" >예약</a>
                                     </div>
 
                                     <div class="storesearch-heartcontainer">
@@ -134,64 +145,63 @@
                                     </div>
                                 </div>
 
-                                <div>
-                                    가게 정보 한 줄만 보이게
-                                </div>
+                                
 
                                 <div>
-                                    가게 정보 들어갈 곳
+                                    
                                     <div>
-                                      가게 주소
+
+                                        <div class="storelocbox-one">
+                                            <span id="detailLoc" th:text="${store.address}"></span>
+                                       
+
+                                            <div>
+                                                <span  class="more-address">
+                                                    <i class="fa-solid fa-chevron-down"></i>
+                                                </span>
+                                                <span  class="less-address">
+                                                    <i class="fa-solid fa-chevron-up"></i>
+                                                </span>
+                        
+                                            </div>
+                                          
+                                        
+                                        </div>
+                                        
+                                      
+
+
+                                        <div> <!-- 숨길 주소 -->
+
+                                            <div class="detailLoc-m">
+
+                                                <span class="storeloc-detail">도로명</span>
+                                                <span th:text="${store.address}"></span>
+                                            </div>
+                                            <div class="detailLoc-m">
+                                                <span class="storeloc-detail">지번</span>
+                                                <span th:text="${store.detailAddress}"></span>
+                                            </div>
+                                           
+                                            <div class="detailLoc-m">
+                                                <span class="storeloc-detail">우</span>
+                                                <span th:text="${store.postcode}"></span>
+                                            </div>
+
+                                        </div>
+                                       
                                     </div>
 
                                     <div>
-                                        가게 별점 / 리뷰 개수 / 영업 중인지 아닌지
+                                        <span th:text="${store.totalRating}">가게 별점</span> /
+                                        <span th:text="${store.reviewCount}">리뷰 개수</span> /
+                                        <span th:text="${store.storeStatus}">영업 중인지 아닌지</span>
                                     </div>
                                 </div>
                         
                             </div>
                            
-                            <div>
-                                <div>
-                                    <img src="/images/storeDetail/store.jpg" id="searchStoreImg">
-                                    
-                                     
-                                </div>
-
-                                <div>
-                                    <div>
-
-                                        <span>
-                                            가게 이름(클락하면 상세 페이지로 이동)
-                                        </span>
-                                        <span>
-                                            가게 카테고리
-                                        </span>
-
-                                        <a href="store/storeDetail/${store.storeNo}/reservation">예약 페이지로 이동</a>
-                                    </div>
-
-                                    <div class="storesearch-heartcontainer">
-                                        <i class="fa-solid fa-heart"> </i>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    가게 정보 한 줄만 보이게
-                                </div>
-
-                                <div>
-                                    가게 정보 들어갈 곳
-                                    <div>
-                                      가게 주소
-                                    </div>
-
-                                    <div>
-                                        가게 별점 / 리뷰 개수 / 영업 중인지 아닌지
-                                    </div>
-                                </div>
-                        
-                            </div>
+                            
                         </div>
 
 

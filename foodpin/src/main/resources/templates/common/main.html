@@ -40,14 +40,15 @@
           <p>뭘 먹을까...</p>
         </div>
         
-        <!-- 맛집 랭킹 순으로 4개 -->
+       
         <div class="main-category-button" >
           <div th:each="category :${mainCategoryList}">
 
             <a th:href="'/store/storeSearch/' + ${category.categoryCode}">
 
-              <button th:text="${category.categoryTitle}"></button>
+              <button class="mainCatBtn" th:text="${category.categoryTitle}"></button>
             </a>
+            
           </div>
         </div>
          

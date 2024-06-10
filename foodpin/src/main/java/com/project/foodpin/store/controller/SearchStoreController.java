@@ -1,5 +1,6 @@
 package com.project.foodpin.store.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,43 +48,36 @@ public class SearchStoreController {
 		}
 	
 		map.put("categoryCode", categoryCode);
+		map.put("closedYn", "N");
 
 		// 카테고리에 해당하는 가게 리스트 조회하기
 		List<Store> searchStoreList = service.searchStoreList(map);
 		
-	
-
-
+		
+		 for (Store store : searchStoreList) {
+		        String storeLocation = store.getStoreLocation();
+		      
+		            String[] arr = storeLocation.split("\\^\\^\\^");
+		          
+		                store.setPostcode(arr[0]);
+		                store.setAddress(arr[1]);
+		                store.setDetailAddress(arr[2]);
+		            }
+		
 
 		String path = null;
 		
-		if(searchStoreList.isEmpty()) {
-			
-			ra.addFlashAttribute("message","해당 카테고리의 가게가 없습니다.");
-			path = "/store/storeSearch";
-
-			
-			
-		}else{
-
+	
+		// 카테고리가 등록된 가게들만 나옴 
 			model.addAttribute("searchStoreList", searchStoreList);
-			for (Store store : searchStoreList) {
-			    String storeNo = store.getStoreNo();
-			    
-			    map.put("storeNo", storeNo);
-			}
-			// 가게들 상세 내용 조회
-			List<Store> searchStoreDetail = service.searchStoreDetail(map);
-	        model.addAttribute("searchStoreDetail",searchStoreDetail);
-
-
-		}
-			path = "/store/storeSearch";
+		
+ 
+			path = "store/storeSearch";
 
 		
 		return path;
 	}
 	
+	
 
-
-}
+	}

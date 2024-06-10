@@ -3,10 +3,10 @@
 const mapHome = document.querySelector("#mapHome");
 
 mapHome.addEventListener("click", () => {
-  location.href = "storeSearch";
+  location.href = "storeSearch"+categoryCode;
   currentlocation();
   
-
+/* 버튼 클릭 시 해당 가게 storeNo를 넘겨서 전체에서 그 가게 위치 지도에 표시 */
 });
 
 const remS = document.querySelector("#remS");
@@ -15,7 +15,7 @@ remS.addEventListener('click', ()=>{
 
     if(loginMember == null){
         alert('로그인이 필요한 기능입니다');
-        location.href = "storeSearch";
+        location.href = "storeSearch"+categoryCode;
         return;
     }
   location.href = "/myPage/member/memberLike";
@@ -28,7 +28,7 @@ resS.addEventListener('click', ()=>{
 
     if(loginMember == null){
         alert('로그인이 필요한 기능입니다');
-        location.href = "storeSearch";
+        location.href = "storeSearch"+categoryCode;
         return;
     }
   location.href = "/myPage/member/reservation/fix";
@@ -42,7 +42,7 @@ storedetailmapbutton.addEventListener("click", () => {
     
     if(loginMember == null){
         alert('로그인이 필요한 기능입니다');
-        location.href = "storeSearch";
+        location.href = "storeSearch"+categoryCode;
         return;
     }
     
