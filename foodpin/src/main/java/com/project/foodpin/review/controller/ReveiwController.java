@@ -35,15 +35,17 @@ public class ReveiwController {
 	private final ReviewService service;
 	
 	// 리뷰 페이지 
-	@GetMapping("reviewPage/{storeNo}")
+	@GetMapping("reviewPage/{storeNo}/{reservNo}")
 	public String reviewPage(
-		@PathVariable("storeNo") String storeNo
+		@PathVariable("storeNo") String storeNo,
+		@PathVariable("reservNo") int reservNo
 		,Model model) {
 		
 		Store store = service.selectStore(storeNo);
 		
 		List<Menu> menuList = service.selectMenu(storeNo);
 
+		model.addAttribute("reservNo", reservNo);
 		model.addAttribute("store", store);
 		model.addAttribute("menuList", menuList);
 		
@@ -52,9 +54,10 @@ public class ReveiwController {
 	
 	
 	// 리뷰 작성
-	@PostMapping("insertReview/{storeNo}")
+	@PostMapping("insertReview/{storeNo}/{reservNo}")
 	public String insertReview(
 		@PathVariable("storeNo") String storeNo,
+		@PathVariable("reservNo") int reservNo,
 		@SessionAttribute("loginMember") Member loginMember,
 		@RequestParam("images") List<MultipartFile> images,
 		@RequestParam("hashNo") List<Integer> hashNo,
@@ -65,6 +68,7 @@ public class ReveiwController {
 		
 		inputReview.setMemberNo(loginMember.getMemberNo());
 		inputReview.setStoreNo(storeNo);
+		inputReview.setReservNo(reservNo);
 		
 		int result = service.insertReview(inputReview, menuNo, hashNo, images);
 		

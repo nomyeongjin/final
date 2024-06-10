@@ -24,6 +24,7 @@ cancelBtn.forEach(btn => {
         const reservNo = e.target.dataset.reservNo;
         cancelReservation(reservNo);
 
+        // 알림 보내기 위한 예약시간 형식화
         let reservDate = e.target.dataset.reservDate;
 
         // 2024. 06. 13 11:00
@@ -41,6 +42,7 @@ cancelBtn.forEach(btn => {
         reservDate = formattedReservDate;
         console.log(formattedReservDate); 
 
+        // 알림 전송
         sendNotificationFn("cancelReservation", null, reservNo, reservDate, null);
     });
 });
@@ -62,3 +64,10 @@ function cancelReservation(reservNo) {
         }
     });
 }
+
+const insertReviewBtn = document.querySelector(".insertReviewBtn");
+insertReviewBtn.addEventListener("click", () => { 
+
+    sendNotificationFn("insertMemberReview", null, memberNo, null, null, memberNickname);
+
+});

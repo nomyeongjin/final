@@ -47,7 +47,7 @@ public interface StoreMyPageService {
 	 * @param storeImg 
 	 * @return
 	 */
-	int storeInfoUpdate(Store inputStore, MultipartFile image);
+	int storeInfoUpdate(Store inputStore);
 	
 	// ------ 메뉴 ------
 	

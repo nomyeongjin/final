@@ -7,7 +7,6 @@ body {
     display: flex;
     flex-direction: column; /* 중심축 방향 세로 */
     align-items: center;    /* 교차축 방향 가운데 정렬 */
-    min-height: 100vh;      /* 최소 높이를 화면 비율 100% */
     
  }
 
@@ -70,6 +69,14 @@ body {
 
 	/*  줄바꿈 처리 */
 	word-break: break-all;
+}
+
+    
+li>img{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 5px; 
 }
 
 .target-chat{
