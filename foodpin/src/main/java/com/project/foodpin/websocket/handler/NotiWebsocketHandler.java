@@ -50,7 +50,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 	String urlForStore = null;
 	String urlForManager = null;
 	
-	int notiCode = 0;
+	int notiCode;
 	
 	// notiCode 지정
 	// 0 : 전체
@@ -61,6 +61,9 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 	// 5 : 리뷰
 	// 6 : 가게 신고
 	
+	
+	Notification memberNotification;
+	Notification storeNotification;
 	
 	// 클라이언트와 연결이 완료되고 통신할 준비가 끝나면 실헹
 	@Override
@@ -103,14 +106,16 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 
 			// 세션에 접속한 회원의 정보를 알 수 있음
 			HttpSession temp = (HttpSession) ws.getAttributes().get("session");
-
-			int loginMemebrNo = ((Member) temp.getAttribute("loginMember")).getMemberNo();
-
-			// 로그인 한 회원 == 알림을 받는 사람(도착 알림을 보냄)
-			if (loginMemebrNo == notification.getReceiveMemberNo()) {
+			int currentMemberNo = ((Member) temp.getAttribute("loginMember")).getMemberNo();
+			
+			if(memberNotification != null && currentMemberNo == memberNotification.getReceiveMemberNo()) {
+				ws.sendMessage(new TextMessage(objectMapper.writeValueAsString(memberNotification)));
+				memberNotification = null;
+			}
+			
+			if(storeNotification != null && currentMemberNo == storeNotification.getReceiveMemberNo()) {
 				ws.sendMessage(new TextMessage(objectMapper.writeValueAsString(notification)));
-			} else if (loginMemebrNo == notification.getSendMemberNo()) {
-				ws.sendMessage(new TextMessage(objectMapper.writeValueAsString(notification)));
+				storeNotification = null;
 			}
 		}
 	}
@@ -158,6 +163,8 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 
 		String notificationType = notification.getNotificationType();
 
+		int reservMemerNo = 0;
+		
 		// 1) 예약 대기, 취소의 경우 일반 회원이 가게 사장에게 알림 전달 (== 보내는 사람이 일반 회원)
 		if (notificationType.equals(notificationTypes.getReadyReservation())
 				|| notificationType.equals(notificationTypes.getCancelReservation())) {
@@ -193,6 +200,10 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				|| notificationType.equals(notificationTypes.getNoConfirmReservation())) {
 			
 			
+			
+			store = service.selectStoreData(notification.getPkNo());
+			reservMemerNo = service.selectReservMemerNo(notification.getPkNo());
+			sendMember.setMemberNo(store.getMemberNo());
 
 			switch (notificationType) {
 
@@ -207,24 +218,23 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				notiCode = 1;
 				break;
 
-			case "cancelReservation":
+			case "noConfrimReservation":
 
-				contentForMember = String.format("<b>%s<b> <b>%s<b> 예약이 취소되었습니다. 이용에 참고 부탁드립니다.",
-						notification.getReservDate(), store.getStoreName());
-				contentForStore = String.format("<b>%s<b> 예약이 취소되었습니다.", notification.getReservDate());
-
+				contentForMember = String.format("<b>%s<b> 예약하신 <b>%s<b> 님이 예약을 거절했습니다. 확인해주세요", notification.getReservDate() , store.getStoreName());
+				contentForStore = String.format("<b>%s<b> 예약 거절 내역이 있습니다. 확인해주세요", notification.getReservDate());
+				
 				urlForMember = "/myPage/member/reservation/cancelNoshow";
 				urlForStore = "/myPage/store/reservation";
-
-				notiCode = 2;
+				
+				notiCode = 4;
 				break;
 			}
 		}
 		
 		if (contentForMember != null && urlForMember != null) {
 
-			Notification memberNotification = new Notification();
-			memberNotification.setReceiveMemberNo(sendMember.getMemberNo());
+			memberNotification = new Notification();
+			memberNotification.setReceiveMemberNo(reservMemerNo);
 			memberNotification.setSendMemberProfileImg(sendMember.getProfileImg());
 			memberNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			memberNotification.setNotificationContent(contentForMember);
@@ -236,7 +246,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 		
 		if (contentForStore != null && urlForStore != null) {
 
-			Notification storeNotification = new Notification();
+			storeNotification = new Notification();
 			storeNotification.setReceiveMemberNo(store.getMemberNo());
 			storeNotification.setSendMemberProfileImg(sendMember.getProfileImg());
 			storeNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
@@ -246,6 +256,8 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 			storeNotification.setNotiCode(notiCode);
 			service.sendNotificationStore(storeNotification);
 		}
+		
+		
 
 	}
 
@@ -258,7 +270,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 
 		
 		// 보내는 사람과 리뷰 작성한 사람의 회원 번호가 같은 경우 return;
-		if(sendMember.getMemberNo() == review.getMemberNo()) return;
+		if(sendMember.getMemberNo() == store.getMemberNo()) return;
 
 		// 1) 보내는 사람이 가게 사장
 		if (notificationType.equals(notificationTypes.getInsertStoreReview())) {
@@ -280,8 +292,33 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 		} else if (notificationType.equals(notificationTypes.getReservFirstNoshow())
 				|| notificationType.equals(notificationTypes.getReservSecondNoshow())
 				|| notificationType.equals(notificationTypes.getReservThirdNoshow())) {
+
+			switch (notificationType) {
+
+			// 예약 노쇼 알림(1회)
+			case "reservFirstNoshow":
+				contentForMember = String.format(
+						"<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." + "/n" + "경고 > 노쇼 누적 1회 (노쇼 3회 처리 시 계정이 정지 됩니다.)",
+						sendMember.getMemberNickname(), notification.getReservDate());
+				urlForMember = "/myPage/member/reservation/noshow";
+
+				break;
+
+			// 예약 노쇼 알림(2회)
+			case "reservSecondNoshow":
+				contentForMember = String.format(
+						"<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." + "/n" + "경고 > 노쇼 누적 2회 (노쇼 3회 처리 시 계정이 정지 됩니다.)");
+				urlForMember = "/myPage/member/reservation/noshow";
+				break;
+				
+				// 예약 노쇼 알림(3회)
+			case "reservThirdNoshow" : 
+				contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 3건이 발생하여 계정이 정지 되었습니다. 관련 사항은 관리자에게 문의 해주세요.");
+				urlForMember = "/myPage/member/reservation/noshow";
+				break;
+			}
 		}
-		
+
 		if (contentForMember != null && urlForMember != null) {
 
 			Notification memberNotification = new Notification();

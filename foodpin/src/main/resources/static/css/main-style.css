@@ -572,6 +572,7 @@ header>section:nth-child(3) {
 
 .all-notification{
    z-index: 2500;
+   width: 400px;
 }
 
 .all-list{
