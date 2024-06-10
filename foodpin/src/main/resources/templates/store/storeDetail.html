@@ -798,6 +798,7 @@
     <script th:inline="javascript">
         const storeMemberNo = /*[[${store.memberNo}]]*/ '사업자번호';
         const loginMemberNickname = /*[[${session.loginMember?.memberNickname}]]*/ '회원 이름';
+        const type = /*[[${session.loginMember?.memberCode}]]*/ '멤버 타입';
     </script>
 
     <script src="/js/reservation/reservation.js"></script>
