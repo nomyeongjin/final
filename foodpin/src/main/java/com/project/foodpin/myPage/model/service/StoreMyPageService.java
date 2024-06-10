@@ -170,6 +170,12 @@ public interface StoreMyPageService {
 	 */
 	List<Review> reviewAll(int memberNo);
 
+	/** 사장님 답변 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<Review> reviewReply(int memberNo);
+	
 	/** 사장님 미답변 조회
 	 * @param memberNo
 	 * @return
@@ -193,6 +199,7 @@ public interface StoreMyPageService {
 	 * @return
 	 */
 	int deleteReply(int replyNo);
+
 
 
 

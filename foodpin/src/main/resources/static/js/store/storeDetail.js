@@ -563,3 +563,19 @@ reviewDeleteBtns.forEach((btn) => {
 })
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  const hashtags = document.querySelectorAll('.store-hashtag');
+  const maxCount = Math.max(...Array.from(hashtags, tag => parseInt(tag.dataset.count, 10)));
+
+  hashtags.forEach(tag => {
+    const count = parseInt(tag.dataset.count, 10);
+    const gauge = document.createElement('div');
+    gauge.className = 'gauge';
+
+    gauge.style.width = `${(count / maxCount) * 100}%`;
+
+    gauge.style.backgroundColor = `rgb(96, 197, 96)`;
+
+    tag.insertBefore(gauge, tag.firstChild);
+  });
+});

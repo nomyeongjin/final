@@ -109,41 +109,55 @@ for(let i=0 ; i<inputImageList.length ; i++){
 const ratingStars = [...document.getElementsByClassName("rating__star")];
 const ratingResult = document.querySelector(".rating__result");
 
-printRatingResult(ratingResult, OriginReviewRating);
-setInitialRating(ratingStars, OriginReviewRating);
+const initialRating = parseInt(ratingResult.value, 10) || 0;
+updateStars(ratingStars, initialRating);
+printRatingResult(ratingResult, initialRating);
 
 function executeRating(stars, result) {
   const starClassActive = "rating__star fas fa-star";
   const starClassUnactive = "rating__star far fa-star";
   const starsLength = stars.length;
-  let i;
   
   stars.map((star) => {
     star.onclick = () => {
-      i = stars.indexOf(star);
+      const i = stars.indexOf(star);
 
       if (star.className.indexOf(starClassUnactive) !== -1) {
         printRatingResult(result, i + 1);
-        for (i; i >= 0; --i) stars[i].className = starClassActive;
+        for (let j = 0; j <= i; j++) stars[j].className = starClassActive;
+        for (let j = i + 1; j < starsLength; j++) stars[j].className = starClassUnactive;
       } else {
-        printRatingResult(result, i);
-        for (i; i < starsLength; ++i) stars[i].className = starClassUnactive;
+        printRatingResult(result, i + 1);
+        for (let j = 0; j < starsLength; j++) {
+          if (j <= i) {
+            stars[j].className = starClassActive;
+          } else {
+            stars[j].className = starClassUnactive;
+          }
+        }
       }
     };
   });
 }
 
-function printRatingResult(result, num = OriginReviewRating) {
+function printRatingResult(result, num = 0) {
   result.value = num;
 }
 
-function setInitialRating(stars, rating) {
+function updateStars(stars, rating) {
   const starClassActive = "rating__star fas fa-star";
-  for (let i = 0; i < rating; i++) {
-    stars[i].className = starClassActive;
+  const starClassUnactive = "rating__star far fa-star";
+
+  for (let i = 0; i < stars.length; i++) {
+    if (i < rating) {
+      stars[i].className = starClassActive;
+    } else {
+      stars[i].className = starClassUnactive;
+    }
   }
 }
 
+// 별점 요소들을 초기화
 executeRating(ratingStars, ratingResult);
 
 /* ***************************************************************************** */
