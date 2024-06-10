@@ -54,26 +54,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
       btn.addEventListener("click", e => {
          const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
-         
-         // 2024년 06월 07일 17:30
-         const reservDate = e.target.dataset.reservDate;
 
-         // const [datePart, timePart] = reservDate.split('일 ');
-         const year = parseInt(reservDate.slice(0, 4));
-         const month = parseInt(reservDate.slice(6, 8)) - 1; // 월은 0부터 시작하기 때문에 1을 빼줍니다.
-         const day = parseInt(reservDate.slice(10, 12));
-         const hours = parseInt(reservDate.slice(0, 2));
-         const minutes = parseInt(reservDate.slice(3, 5));
- 
-         // Date 객체 생성
-         const date = new Date(year, month, day, hours, minutes);
- 
-         // 요일 계산
-         const dayOfWeek = date.toLocaleDateString('ko-KR', { weekday: 'short' });
- 
-         // 형식화
-         const formattedReservDate = `${String(month + 1).padStart(2, '0')}.${String(day).padStart(2, '0')}(${dayOfWeek}) ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
-         console.log(formattedReservDate);
+         let reservDate = e.target.dataset.reservDate;
+
+         // reservDate를 부분 문자열로 잘라내기
+         const year = reservDate.slice(0, 4);
+         const month = reservDate.slice(6, 8);
+         const day = reservDate.slice(10, 12);
+         const time = reservDate.slice(14);
+
+         const date = new Date(`${year}-${month}-${day}T${time}`);
+
+         // 요일을 계산
+         const options = { weekday: 'short' };
+         const dayOfWeek = date.toLocaleDateString('ko-KR', options);
+
+         // 형식화된 문자열 생성
+         const formattedDate = `${month}.${day}(${dayOfWeek}) ${time}`;
+         reservDate = formattedDate;
+   // console.log(reservDate);
+
 
          fetch("/myPage/store/updateReservStatus?reservNo=" + reservNo)
             .then(resp => resp.json())
@@ -100,7 +100,22 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.addEventListener("click", e => {
          const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
 
-         const reservDate = e.target.dataset.reservDate;
+         let reservDate = e.target.dataset.reservDate;
+         // reservDate를 부분 문자열로 잘라내기
+         const year = reservDate.slice(0, 4);
+         const month = reservDate.slice(6, 8);
+         const day = reservDate.slice(10, 12);
+         const time = reservDate.slice(14);
+
+         const date = new Date(`${year}-${month}-${day}T${time}`);
+
+         // 요일을 계산
+         const options = { weekday: 'short' };
+         const dayOfWeek = date.toLocaleDateString('ko-KR', options);
+
+         // 형식화된 문자열 생성
+         const formattedDate = `${month}.${day}(${dayOfWeek}) ${time}`;
+         reservDate = formattedDate;
 
          // console.log(reservNo, storeNo);
          
@@ -113,8 +128,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }else {
                alert("예약 번호 " + reservNo + "번 예약 거부에 실패했습니다.");
             }
+            
+            console.log("reservNo: " + reservNo, "reservDate: " + reservDate);
+            //  알림
+            sendNotificationFn("noConfrimReservation", null, reservNo,  reservDate, null, null);
          })
          .catch( err => console.log(err)); // 예약 승인 처리 fetch
+
+
       }) // reservBtn.addEventListener("click"
    }); // forEach(reservBtn
 }); // addEventListener('DOMContentLoaded'

@@ -505,16 +505,15 @@
 
                 <div class="storedetail-hashtagcontainer" >
 
-                    <th:block th:each="hash:${store.storeHashList}">
-                        <span id="storeHashT" th:text="${hash.hashTitle}">가게 해시태그</span>
+                    <th:block th:each="hash:${store.storeHashList}" >
+                        <div class="store-hashtag" data-count="${hash.hashCount}">
+                            <span id="storeHashT" th:text="${hash.hashTitle}">가게 해시태그</span>
+                            <span id="storeHashC" th:text="${hash.hashCount}"></span>
+                        </div>
                     </th:block>
                    
                     
                 </div>
-
-                
-
-
 
             </div>
  
@@ -767,6 +766,7 @@
         const storeMaxTable = /*[[${store.storeMaxTable}]]*/ "최대 예약 팀 수(테이블)"
         const storeNo = /*[[${store.storeNo}]]*/ "사업자등록번호"
         const storeName = /*[[${store.storeName}]]*/ "가게 이름"
+        const categoryCode = /*[[${store.categoryCode}]]*/ "가게 카테고리 코드"
     
         let bookmark =/*[[${store.bookmark}]]*/ "좋아요 여부";
         
@@ -789,9 +789,7 @@
     
 
 
-    <script src="/js/store/storeDetail.js"></script>
-    <script src="/js/store/storeLike.js"></script>
-    <script src="/js/store/storeOpen.js"></script>
+  
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
@@ -799,6 +797,7 @@
     <script th:inline="javascript">
         const storeMemberNo = /*[[${store.memberNo}]]*/ '사업자번호';
         const loginMemberNickname = /*[[${session.loginMember?.memberNickname}]]*/ '회원 이름';
+        const type = /*[[${session.loginMember?.memberCode}]]*/ '멤버 타입';
     </script>
 
     <script src="/js/reservation/reservation.js"></script>
@@ -806,6 +805,11 @@
     <script src="/js/chatting/chatPopup.js"></script>
    
 </body>
+
+<script src="/js/store/storeDetail.js"></script>
+<script src="/js/store/storeLike.js"></script>
+<script src="/js/store/storeOpen.js"></script>
+
 </html>
 
 

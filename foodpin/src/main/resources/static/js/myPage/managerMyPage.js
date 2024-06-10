@@ -1,7 +1,7 @@
 /* 입점 승인/거절 */
 document.addEventListener('DOMContentLoaded', () => {
     const approval = document.querySelectorAll(".approval");
-    const refuse = document.querySelectorAll(".refuse");
+    const close = document.querySelectorAll(".close");
 
 
     approval.forEach(button => {
@@ -11,14 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    refuse.forEach(button => {
+    close.forEach(button => {
         button.addEventListener('click', e => {
             const memberNo = e.target.dataset.memberNo;
-            refuseMember(memberNo);
+            closeMember(memberNo);
         });
     });
 });
-
 
 // 승인 처리
 function approveMember(memberNo) {
@@ -29,6 +28,13 @@ function approveMember(memberNo) {
     })
     .then(resp => resp.json())
     .then(result => {
+
+        if(!confirm("승인처리 하시겠습니까?")) {
+            alert("취소 되었습니다");
+            this.preventDefault();
+            return;
+        }
+
         if(result.success) {
             alert('승인되었습니다');
             location.reload();
@@ -38,9 +44,9 @@ function approveMember(memberNo) {
     });
 }
 
-// 거절 처리
-function refuseMember(memberNo) {
-    fetch(`/myPage/manager/refuseMember/${memberNo}`, {
+// 폐업 처리
+function closeMember(memberNo) {
+    fetch(`/myPage/manager/closeStore/${memberNo}`, {
         method: 'POST',
         headers: {'Content-Type' : 'application/json'},
         body: JSON.stringify({memberNo : memberNo})
@@ -48,15 +54,20 @@ function refuseMember(memberNo) {
     .then(resp => resp.json())
     .then(result => {
 
+        if(!confirm("정말 폐점처리 하시겠습니까?")) {
+            alert("취소 되었습니다");
+            this.preventDefault();
+            return;
+        }
+
         if(result.success) {
-            alert('거절되었습니다');
+            alert('폐점되었습니다');
             location.reload();
         } else {
             alert('거절에 실패했습니다');
         }
     })
 }
-
 /* 정보 정정 신청 처리상태로 */
 const completeBtn = document.querySelectorAll(".completeBtn");
 
@@ -98,9 +109,23 @@ const closePopup = document.querySelector(".close-popup");
 openStoreDetail.forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
+        const row = link.closest("tr");
+        openPopup(row);
         popup.style.display = 'block';
     });
 });
+
+function openPopup(row) {
+    popup.querySelector(".storeInfo").innerText = row.getAttribute("data-store-info");
+    popup.querySelector(".storeName").innerText = row.getAttribute("data-store-name");
+    popup.querySelector(".ceoName").innerText = `대표자 : ${row.getAttribute("data-member-name")}`;
+    popup.querySelector(".ceoTel").innerText = `대표자 전화번호 : ${row.getAttribute("data-member-tel")}`;
+    popup.querySelector(".ceoEmail").innerText = `대표자 이메일 : ${row.getAttribute("data-member-email")}`;
+    popup.querySelector(".storeName2").innerText = `가게 상호명 : ${row.getAttribute("data-store-name")}`;
+    popup.querySelector(".storeAddress").innerText = `가게 주소 : ${row.getAttribute("data-store-location")}`;
+    popup.querySelector(".storeTel").innerText = `가게 전화번호 : ${row.getAttribute("data-store-tel")}`;
+    popup.querySelector(".storeNo").innerText = `사업자 등록증 : ${row.getAttribute("data-store-no")}`;
+}
 
 closePopup.addEventListener('click', () => {
     popup.style.display = 'none';

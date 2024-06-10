@@ -146,7 +146,7 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewNo;
 	}
 	
-	
+	// 리뷰 개수 
 	@Override
 	public int reviewCount(int memberNo) {
 		return mapper.reviewCount(memberNo);

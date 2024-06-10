@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.boot.autoconfigure.graphql.GraphQlProperties.Websocket;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -48,7 +47,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		
 		// 연결된 Client의 WebSocketSession의 정보를 Set에 추가
 		// -> 웹소켓이 연결된 클라이언트 정보를 모아둠 (=> 누가 접속했는지 정보를 모아둠)
-		log.info("session id : {}", session.getId());
+		log.info("session id 추가: {}", session.getId());
 		sessions.add(session);
 	}
 	
@@ -66,7 +65,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		 HttpSession currentSession = (HttpSession)session.getAttributes().get("session");
 		 
 		 // 로그인한 회원 중 알림을 보내는 회원
-		 Member sendMember = ((Member)currentSession.getAttribute("loginMember"));
+		 Member sendMember = (Member)currentSession.getAttribute("loginMember");
 		 
 //		 // 예약한 가게 번호 이용해서 가게 정보 조회(notification.getPkNo())
 //		 Store store = service.selectStoreData(notification.getPkNo());
@@ -79,10 +78,10 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		 log.info("전달 받은 내용 : {}", notification);
 		 
 		 // 알림 내용이 없음 == 내 게시물
-		 if(notification.getNotificationContent() == null) return;
+//		 if(notification.getNotificationContent() == null) return;
 		 
 		 // /notification.send로 연결된 객체를 만든 클라리언트들(sessions)중
-		 // 회원번호가 받는 회원 번호와 같은 사람에게 베시지 전달
+		 // 회원번호가 받는 회원 번호와 같은 사람에게 메시지 전달
 		 for(WebSocketSession ws : sessions) {
 			 
 			 // 세션에 접속한 회원의 정보를 알 수 있음
@@ -104,7 +103,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 	 // 연결 끊김
 	 @Override
 	 public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		 
+		 log.info("session id  나감 : {}", session.getId());
 		 // 웹소켓 연결이 끊긴 클라이언트 정보를 Set에서 제거
 		sessions.remove(session);
 	}
@@ -125,7 +124,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 //		Message message = new Message();
 //		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
 		
-		// 보낸 사람 회원 번호
+		// 받는 사람 회원 번호
 		notification.setReceiveMemberNo(sendMember.getMemberNo());
 		
 		// 보낸 사람 프로필
@@ -176,7 +175,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			urlForMember = "/myPage/member/reservation/wait";
 			urlForStore = "/myPage/store/reservation";
 	
-			notiCode = 0;
+//			notiCode = 0;
 			break;
 		
 		/* 예약 승인 했을 때 */
@@ -215,6 +214,9 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		/* 가게 측에서 예약을 거절 했을 경우 */
 		case "noConfrimReservation":
 			store = service.selectStoreData(notification.getPkNo());
+			reservMemerNo = service.selectReservMemerNo(notification.getPkNo());
+			sendMember.setMemberNo(reservMemerNo);
+			
 			contentForMember = String.format("<b>%s<b> 예약하신 <b>%s<b> 님이 예약을 거절했습니다. 확인해주세요", notification.getReservDate() , store.getStoreName());
 			contentForStore = String.format("<b>%s<b> 예약 거절 내역이 있습니다.", notification.getReservDate());
 			
@@ -250,7 +252,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		// !!! 페이지 구현 되면 경로 지정 !!!
 		// 예약 노쇼 알림(1회)
 		case "reservFirstNoshow" :
-			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"경고 > 노쇼 누적 1회 (노쇼 3회 처리 시 계정이 3일 정지 됩니다.)", sendMember.getMemberNickname(), notification.getReservDate());
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"경고 > 노쇼 누적 1회 (노쇼 3회 처리 시 계정이 정지 됩니다.)", sendMember.getMemberNickname(), notification.getReservDate());
 			urlForMember = "/myPage/member/reservation/noshow";
 			
 			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 1회 건이 있습니다. 해당 회원을 확인 해주세요", sendMember.getMemberNickname());
@@ -259,30 +261,30 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		
 		// 예약 노쇼 알림(2회)
 		case "reservSecondNoshow" :
-			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"경고 > 노쇼 누적 2회 (노쇼 3회 처리 시 계정이 3일 정지 됩니다.)");
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"경고 > 노쇼 누적 2회 (노쇼 3회 처리 시 계정이 정지 됩니다.)");
 			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 2회 건이 있습니다. 해당 회원을 확인 해주세요", sendMember.getMemberNickname());
 			break;
 		
 		// 예약 노쇼 알림(3회)
 		case "reservThirdNoshow" : 
-			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 3건이 발생하여 계정이 3일간 정지 됩니다. 관련 사항은 관리자에게 문의 해주세요.");
+			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 3건이 발생하여 계정이 정지 되었습니다. 관련 사항은 관리자에게 문의 해주세요.");
 			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 3회 건 발생 되었습니다." + "/n" +"해당 회원의 계정 정치 처리 확인 해주세요.", sendMember.getMemberNickname());
 			break;
 			
 			// 문자 보내기
-		
-		// 예약 노쇼 알림(4회)
-		case "reservFourthNoshow" : 
-			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 4회 (노쇼 5회 처리 시 계정이 5일 정지됩니다.)");
-			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 4회 건이 있습니다. 해당 회원을 확인 해주세요.", sendMember.getMemberNickname());
-			break;
-			
-		// 예약 노쇼 알림(5회)
-		case "reservFifthNoshow" : 
-			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 5건이 발생하여 계정이 5일간 정지 됩니다. 관련 사항은 관리자에게 문의 해주세요.");
-			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 5회 건이 있습니다. 해당 회원을 확인 해주세요.", sendMember.getMemberNickname());
-			break;
-		
+//		
+//		// 예약 노쇼 알림(4회)
+//		case "reservFourthNoshow" : 
+//			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 4회 (노쇼 5회 처리 시 계정이 5일 정지됩니다.)");
+//			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 4회 건이 있습니다. 해당 회원을 확인 해주세요.", sendMember.getMemberNickname());
+//			break;
+//			
+//		// 예약 노쇼 알림(5회)
+//		case "reservFifthNoshow" : 
+//			contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." +  "/n" +"노쇼 누적 5건이 발생하여 계정이 5일간 정지 됩니다. 관련 사항은 관리자에게 문의 해주세요.");
+//			contentForManager = String.format("<b>%s<b>님의 노쇼 누적 5회 건이 있습니다. 해당 회원을 확인 해주세요.", sendMember.getMemberNickname());
+//			break;
+//		
 		
 		/**** 신고 처리(일반 회원, 가게 사장님, 관리자 모두 알림 대상) ****/
 			
@@ -327,7 +329,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			notiCode = 6;
 			break;
 		}
-		
+	
 
 		// 알림 전송 및 문자 발송 로직(.......)
 		
@@ -337,7 +339,7 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 		if (contentForMember != null && urlForMember != null) {
 
 			Notification memberNotification = new Notification();
-			memberNotification.setReceiveMemberNo(sendMember.getMemberNo());
+			memberNotification.setReceiveMemberNo(reservMemerNo);
 			memberNotification.setSendMemberProfileImg(sendMember.getProfileImg());
 			memberNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
 			memberNotification.setNotificationContent(contentForMember);
@@ -346,17 +348,17 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			memberNotification.setNotiCode(notiCode);
 			service.sendNotificationMember(memberNotification);
 			
-			for(WebSocketSession ws : sessions) {
-				 
-				 // 세션에 접속한 회원의 정보를 알 수 있음
-				 HttpSession temp = (HttpSession)ws.getAttributes().get("session");
-				 int loginMemebrNo = ((Member)temp.getAttribute("loginMember")).getMemberNo();
-				 
-				 // 로그인 한 회원 == 알림을 받는 사람(도착 알림을 보냄)
-				 if(loginMemebrNo == memberNotification.getReceiveMemberNo() ) {
-					 ws.sendMessage(new TextMessage(objectMapper.writeValueAsString(memberNotification)));
-				 }
-			 }
+//			for(WebSocketSession ws : sessions) {
+//				 
+//				 // 세션에 접속한 회원의 정보를 알 수 있음
+//				 HttpSession temp = (HttpSession)ws.getAttributes().get("session");
+//				 int loginMemebrNo = ((Member)temp.getAttribute("loginMember")).getMemberNo();
+//				 
+//				 // 로그인 한 회원 == 알림을 받는 사람(도착 알림을 보냄)
+//				 if(loginMemebrNo == memberNotification.getReceiveMemberNo() ) {
+//					 ws.sendMessage(new TextMessage(objectMapper.writeValueAsString(memberNotification)));
+//				 }
+//			 }
 			// 문자 보내는 로직 필요
 //			messageService.sendMessage(memberNotification.getSendMemberNo(), memberNotification.getNotificationContent());
 		}
@@ -374,17 +376,17 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			storeNotification.setNotiCode(notiCode);
 			service.sendNotificationStore(storeNotification);
 			
-			for(WebSocketSession ws : sessions) {
-				 
-				 // 세션에 접속한 회원의 정보를 알 수 있음
-				 HttpSession temp = (HttpSession)ws.getAttributes().get("session");
-				 int loginMemebrNo = ((Member)temp.getAttribute("loginMember")).getMemberNo();
-				 
-				 // 로그인 한 회원 == 알림을 받는 사람(도착 알림을 보냄)
-				 if(loginMemebrNo == storeNotification.getReceiveMemberNo() ) {
-					 ws.sendMessage(new TextMessage(objectMapper.writeValueAsString(storeNotification)));
-				 }
-			 }
+//			for(WebSocketSession ws : sessions) {
+//				 
+//				 // 세션에 접속한 회원의 정보를 알 수 있음
+//				 HttpSession temp = (HttpSession)ws.getAttributes().get("session");
+//				 int loginMemebrNo = ((Member)temp.getAttribute("loginMember")).getMemberNo();
+//				 
+//				 // 로그인 한 회원 == 알림을 받는 사람(도착 알림을 보냄)
+//				 if(loginMemebrNo == storeNotification.getReceiveMemberNo() ) {
+//					 ws.sendMessage(new TextMessage(objectMapper.writeValueAsString(storeNotification)));
+//				 }
+//			 }
 		}
 		
 		
@@ -401,17 +403,17 @@ public class NotificationWebsocketHandler extends TextWebSocketHandler{ // 서�
 			managerNotification.setNotiCode(notiCode);
 			service.sendNotificationManager(managerNotification);
 			
-			for(WebSocketSession ws : sessions) {
-				 
-				 // 세션에 접속한 회원의 정보를 알 수 있음
-				 HttpSession temp = (HttpSession)ws.getAttributes().get("session");
-				 int loginMemebrNo = ((Member)temp.getAttribute("loginMember")).getMemberNo();
-				 
-				 // 로그인 한 회원 == 알림을 받는 사람(도착 알림을 보냄)
-				 if(loginMemebrNo == managerNotification.getReceiveMemberNo() ) {
-					 ws.sendMessage(new TextMessage(objectMapper.writeValueAsString(managerNotification)));
-				 }
-			 }
+//			for(WebSocketSession ws : sessions) {
+//				 
+//				 // 세션에 접속한 회원의 정보를 알 수 있음
+//				 HttpSession temp = (HttpSession)ws.getAttributes().get("session");
+//				 int loginMemebrNo = ((Member)temp.getAttribute("loginMember")).getMemberNo();
+//				 
+//				 // 로그인 한 회원 == 알림을 받는 사람(도착 알림을 보냄)
+//				 if(loginMemebrNo == managerNotification.getReceiveMemberNo() ) {
+//					 ws.sendMessage(new TextMessage(objectMapper.writeValueAsString(managerNotification)));
+//				 }
+//			 }
 		}
 		
 	}

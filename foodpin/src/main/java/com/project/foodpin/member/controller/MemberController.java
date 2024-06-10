@@ -136,7 +136,7 @@ public class MemberController {
 			
 			
 			if(loginMember==null) {
-				ra.addFlashAttribute("message","해당 이메일을 가진 회원이 존재하지 않습니다.");
+				ra.addFlashAttribute("message","해당 아이디를 가진 회원이 존재하지 않습니다.");
 			}else {
 				model.addAttribute("loginMember",loginMember);
 			}

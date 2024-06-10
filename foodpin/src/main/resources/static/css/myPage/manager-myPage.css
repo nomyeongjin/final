@@ -12,6 +12,29 @@
     font-weight: bold;
 }
 
+.title-btn-checked{
+   font-weight: bold;
+   border: 1px solid #2B3151;
+   background-color: white;
+   color: #2B3151; 
+}
+
+.able, .unable {
+    cursor: pointer;
+    background-color: white;
+    color: #2B3151 !important;
+    border: 1px solid #2B3151;
+    font-weight: bold;
+}
+
+.able a {
+    color: #2B3151;
+}
+
+.unable a {
+    color: #2B3151;
+}
+
 .enrollTable{
     width: 100%;
     margin-top: 10px;
@@ -53,6 +76,10 @@ tbody tr td {
     cursor: pointer;
 }
 
+.approval:hover, .refuse:hover {
+    text-decoration: underline;
+}
+
 .popup {
     display: none;
     position: fixed;
@@ -90,7 +117,7 @@ tbody tr td {
 }
 
 .storeInfo {
-    line-height: 0;
+    /* line-height: 0; */
     color: #F3C186;
     margin-bottom: 10px;
 }
@@ -180,8 +207,16 @@ tbody tr td {
     margin: 10px;
 }
 
+.requestMember {
+    margin-bottom: 5px;
+}
+
 .requestMember, .requestStoreName {
     font-size: 15px;
+}
+
+.requestStoreName, .requestStoreTel {
+    color: gray;
 }
 
 .completeBtn {

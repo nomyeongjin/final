@@ -25,7 +25,7 @@
                         <button class="sub-title-btn" id="ableStoreBtn">
                             <a href="/myPage/manager/ableStore">입점 가게</a>
                         </button>
-                        <button class="sub-title-btn" id="unableStoreBtn">
+                        <button class="sub-title-btn unable" id="unableStoreBtn">
                             <a href="/myPage/manager/unableStore">거절 가게</a>
                         </button>
                     </section>
@@ -47,14 +47,24 @@
                         <tbody>
                             <th:block th:if="${#lists.isEmpty(storeMember)}">
                                 <tr>
-                                    <th colspan="4">거절 가게가 존재하지 않습니다</th>
+                                    <th colspan="5">거절 가게가 존재하지 않습니다</th>
                                 </tr>
                             </th:block> 
 
                             <th:block th:unless="${#lists.isEmpty(storeMember)}">
-                                <tr th:each="member : ${storeMember}">
+                                <tr th:each="member : ${storeMember}"
+                                    th:data-store-info="${member.storeInfo}"
+                                    th:data-member-name="${member.memberName}" 
+                                    th:data-store-name="${member.storeName}"
+                                    th:data-member-email="${member.memberEmail}"
+                                    th:data-member-tel="${member.memberTel}"
+                                    th:data-store-location="${member.storeLocation}"
+                                    th:data-store-tel="${member.storeTel}"
+                                    th:data-store-no="${member.storeNo}"
+                                    th:data-enroll-date="${member.enrollDate}">
+                                    
                                     <td th:text="*{member.memberName}">김사장</td>
-                                    <td th:text="*{member.storeName}">대박고깃집</td>
+                                    <td th:text="*{member.storeName}" class="open-storeDetail"></td>
                                     <td th:text="*{member.memberEmail}"></td>
                                     <td th:text="*{member.enrollDate}">24.05.22</td>
                                     <td>
@@ -64,12 +74,25 @@
 
                             </th:block>
                         </tbody>
-
                     </table>
+
+                    <div id="popup" class="popup">
+                        <div class="popup-content">
+                            <span class="close-popup">&times;</span>
+                            <p class="storeInfo"></p>
+                            <h2 class="storeName"></h2>
+                            <div class="ceoName"></div>
+                            <div class="ceoTel"></div>
+                            <div class="ceoEmail"></div>
+                            <div class="storeName2"></div>
+                            <div class="storeAddress"></div>
+                            <div class="storeTel"></div>
+                            <div class="storeNo"></div>
+                        </div>
+                    </div>
+
                 </section>
-
             </section>
-
 
         </div>
     </main>
@@ -81,7 +104,7 @@
         <th:block th:replace="~{common/footer}"></th:block>
 
         <script src="/js/main.js"></script>
-        <script src="/js/myPage/manager/enroll.js"></script>
+        <script src="/js/myPage/managerMyPage.js"></script>
     
 </body>
 </html>

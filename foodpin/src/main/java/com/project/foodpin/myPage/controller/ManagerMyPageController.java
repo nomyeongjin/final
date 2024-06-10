@@ -93,6 +93,22 @@ public class ManagerMyPageController {
 		int memberCode = 2;
 		String memberStatus = "N";
 		List<Member> storeMember = service.storeRequestList(memberCode, memberStatus);
+		for (Member stores : storeMember) {
+	        String storeLocation = stores.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        stores.setStoreLocation(addressWithoutPostcode);
+	        
+	        String memberTel = stores.getMemberTel();
+	        String formattedTel = memberTel.substring(0, 3) + "-" + memberTel.substring(3, 7) + "-" + memberTel.substring(7);
+	        stores.setMemberTel(formattedTel);
+	        
+//	        String storeNo = stores.getStoreNo();
+//	        String formattedStoreNo = storeNo.substring(0, 3) + "-" + storeNo.substring(3, 5) + "-" + storeNo.substring(5);
+//	        stores.setStoreNo(formattedStoreNo);
+	    }	
+		
 		model.addAttribute("storeMember", storeMember);
 		return "myPage/manager/ableStore";
 	}
@@ -105,6 +121,21 @@ public class ManagerMyPageController {
 		int memberCode = 2;
 		String memberStatus = "Y";
 		List<Member> storeMember = service.storeRequestList(memberCode, memberStatus);
+		for (Member stores : storeMember) {
+	        String storeLocation = stores.getStoreLocation();
+	        String arr = storeLocation.replace("^^^", " ");
+	        int firstSpaceIndex = arr.indexOf(" ");
+	        String addressWithoutPostcode = arr.substring(firstSpaceIndex + 1);
+	        stores.setStoreLocation(addressWithoutPostcode);
+	        
+	        String memberTel = stores.getMemberTel();
+	        String formattedTel = memberTel.substring(0, 3) + "-" + memberTel.substring(3, 7) + "-" + memberTel.substring(7);
+	        stores.setMemberTel(formattedTel);
+	        
+	        String storeNo = stores.getStoreNo();
+	        String formattedStoreNo = storeNo.substring(0, 3) + "-" + storeNo.substring(3, 5) + "-" + storeNo.substring(5);
+	        stores.setStoreNo(formattedStoreNo);
+	    }	
 		model.addAttribute("storeMember", storeMember);
 		return "myPage/manager/unableStore";
 	}

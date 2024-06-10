@@ -67,7 +67,8 @@ header {
 }
 
 .login-area{
-   width: 350px;
+   /* width: 350px; */
+   width: 450px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -174,35 +175,79 @@ header {
    flex-wrap: wrap; /* 요소들이 넘칠 때 가로 줄 바꿈 */
    justify-content: center;
    align-items: center;
-   
+   margin-top: 15px;
    
 }
 
-#main-category-text{
-   height: 50px;
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-}
-
+  
 /* 카테고리 버튼 영역 */
 .main-category-button button {
-  
    cursor: pointer;
    display: inline-block;
    width: 100px;
    height: 40px;
-   background:gainsboro;
+   background:rgb(255, 255, 255);
    color: black;
-  
-   font-size: 11px;
-   border: 1px solid var(--main-color);
-   border-radius: 35px;
-  
-  flex-basis: calc(15%-10px); /* 버튼 너비 계산: 20% 너비에서 간격을 제외한 값 */
+   z-index: 1;
+   font-size: 12px;
+  /*  border: 1px solid var(--main-color);
+   border-radius: 5px; */
+   border: none;
+   border-top: 1px solid var(--main-color);
+   border-bottom: 1px solid var(--main-color);
+   position: relative;
+   flex-basis: calc(15% - 10px);/* 버튼 너비 계산: 20% 너비에서 간격을 제외한 값 */
   margin: 15px;
 }
 
+.mainCatBtn:hover {
+   background-color: #E14C54;
+   color: white;
+   transition: 0.3s cubic-bezier(0.77, 0, 0.175, 1); 
+}
+
+.mainCatBtn:after {
+   position: absolute;
+   content: "";
+   width: 0;
+   height: 100%;
+   top: 0;
+   right: 0;
+   z-index: -1;
+   background: #E14C54;
+   color: white;
+   transition: all 0.4s ease;
+}
+
+.mainCatBtn:hover {
+   color: #ffffff;
+}
+
+.mainCatBtn:hover:after {
+   left: 0;
+   width: 100%;
+}
+
+.mainCatBtn:active {
+   top: 2px;
+}
+
+.main-category-list a button {
+   font-size: 15px;
+}
+
+/* @keyframes mainCatBtn {
+   25% {
+     transform: scale(0.9, 1.1);
+   }
+   50% {
+     transform: scale(1.1, 0.9);
+   }
+   75% {
+     transform: scale(0.95, 1.05);
+   }
+}
+ */
 /* 메인 가게 사진 영역 */
 .main-store-image-container{
    display: flex;
@@ -572,6 +617,7 @@ header>section:nth-child(3) {
 
 .all-notification{
    z-index: 2500;
+   width: 400px;
 }
 
 .all-list{
@@ -711,6 +757,7 @@ header>section:nth-child(3) {
   font-size: 15px;
   padding: 15px 0;
   color: black;
+  width: 300px;
 }
 
 .fa-circle-xmark{

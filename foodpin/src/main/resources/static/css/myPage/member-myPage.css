@@ -2,10 +2,30 @@
     --main-color: #E14C54 ;
 }
 
+.fix, .wait, .last, .canno {
+    cursor: pointer;
+    background-color: white;
+    color: #2B3151 !important;
+    border: 1px solid #2B3151;
+    font-weight: bold;
+}
+
+.fix a, .wait a, .last a, .canno a {
+    color: #2B3151;
+}
+
+.title-btn-checked {
+    cursor: pointer;
+    background-color: white;
+    color: #2B3151 !important;
+    border: 1px solid #2B3151;
+    font-weight: bold;
+}
+
 
 /* MEMBER INFO */
 #infoContainer {
-    display: flex;
+    margin-left: 30px;
     padding-top: 30px;
 }
 
@@ -176,6 +196,7 @@ form[name='member-myPageFrm']{
 .likeList {
     list-style: none;
     display: flex;
+    width: 600px;
     position: relative;
     align-items: flex-start;
     text-align: left;
@@ -234,9 +255,7 @@ form[name='member-myPageFrm']{
 }
 
 .storereview-top{
-    padding: 20px 0;
     padding-top: 10px;
-    border-bottom: 1px solid var(--main-color);
     display: flex;
     justify-content: space-between;
 }
@@ -345,13 +364,13 @@ form[name='member-myPageFrm']{
     margin-left: 10px;
     padding: 20px;
     width: 480px;
-    background:#666;
+    background:#DF8B4E;
     color: #fff;
     border-radius: 10px;
 }
 
 .reply-content-bubble:after {
-    border-top:15px solid #666;
+    border-top:15px solid #DF8B4E;
     border-left: 16px solid transparent;
     border-right: 0px solid transparent;
     border-bottom: 0px solid transparent;
@@ -479,7 +498,7 @@ form[name='member-myPageFrm']{
  
 /* 마이페이지 행 단위 스타일 지정 */
 .myPage-row{
-    width: 500px;
+    width: 400px;
     height: 50px;
     margin: 0 0 30px 0;
     border-bottom: 1px solid rgb(161, 161, 161);

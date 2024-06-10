@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>FOODPIN</title>
+
+   <!-- templetes/common/common.html  조각 추가 -->
+   <th:block th:replace="~{common/common}"></th:block>
+   
+   <link rel="stylesheet" href="/css/myPage/myPage-style.css">
+   <link rel="stylesheet" href="/css/myPage/store-myPage.css">
+
+      <!-- 풀캘린더 추가 -->
+      <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
+      <!-- 마이페이지 JS 추가 -->
+      <script src="/js/myPage/store/storeOff.js"></script>
+</head>
+<body>
+
+   <main>
+
+   <!-- templetes/common/header.html  조각 추가 -->
+   <th:block th:replace="~{common/header}"></th:block>
+
+   <div class="myPage-container">
+
+      <!-- templetes/myPage/store/storeSide.html  조각 추가 -->
+      <th:block th:replace="~{myPage/store/storeSide}"></th:block>
+      
+      <hr>
+
+      <!-- 마이페이지 본문 -->
+      <section class="content-container">
+
+         <!-- 타이틀 영역 -->
+        <div class="myPage-title-review-container">
+            <section class="myPage-title">리뷰 관리</section>
+
+            <!-- 서브타이틀 버튼 -->
+            <section class="myPage-sub-title">
+               <a href="/myPage/store/review" class="sub-title-btn" id="reviewAll">전체</a>
+               <a href="/myPage/store/reviewAnswered" class="sub-title-btn" id="answered">답변</a>
+               <a href="/myPage/store/reviewUnanswered" class="sub-title-btn" id="Unanswered">미답변</a>
+            </section>
+        </div>
+         
+        <!-- 리뷰 관리 -->
+        <div class="myPage-review-content-container">
+         
+            <!-- 리뷰 목록 -->
+            <div id="reviewListContainer">
+                <div class="storereview-container" th:if="${reviewList}">
+                    
+                  <th:block th:unless= "${!#lists.isEmpty(reviewList)}">
+                      <div class="review-empty">
+                        <h2>댓글을 작성한 리뷰가 없습니다.</h2>
+                      </div>
+                  </th:block>
+
+                    <div class="review-count" th:unless="${#lists.isEmpty(reviewList)}">
+                      <span th:text="|총  ${#lists.size(reviewList)} 건|"></span>
+                    </div>
+                  
+                    <th:block  th:each=" review : ${reviewList}" th:object="${review}">
+                        <div class="review">
+                            
+                            <div class="storereview-top">
+      
+                                <div class="storereview-top-left">
+                                    <img class="review-member-profile"
+                                      th:src="*{profileImg}">
+                                    <div class="review-info">
+                                        <span th:text="*{memberNickname}">닉네임</span>
+
+                                        <div class="review-memberScore">
+                                            <span th:switch="*{reviewRating}">
+                                              <span th:case="1">
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                              </span>
+                                              <span th:case="2">
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                              </span>
+                                              <span th:case="3">
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                              </span>
+                                              <span th:case="4">
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="empty_star  fas fa-star"></i>
+                                              </span>
+                                              <span th:case="5">
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                                  <i class="rating__star fas fa-star"></i>
+                                              </span>
+                                            </span>
+                                          <span th:text="|*{reviewRating} 점|"> 점수</span>
+                                        </div>
+      
+                                    </div>
+                                </div>
+      
+                                <div class="storereview-top-right">
+
+                                    <div class="review-btn">
+                                      
+                                    </div>
+
+                                    <div class="review-date">
+                                      <span th:text="*{reviewRegDate}">2024-05-17</span>
+                                    </div>
+                                </div>
+      
+                            </div>
+      
+                          
+                            <div class="storereview-mid">
+                              <p th:text="*{reviewContent}">리뷰 내용</p>
+                            </div>
+      
+                            <th:block>
+                                <div class="storereview-bottom">
+                                  
+                                    <th:block th:if="${!#lists.isEmpty(uploadList)}">
+                                      <p th:if="*{uploadList}">주문 내역</p>
+                                    </th:block>
+  
+                                    <div class="storereview-image" th:if="*{uploadList}">
+                                      <th:block th:each=" upload : *{uploadList}">
+                                          <img class="review-look" th:src="|${upload.imagePath}${upload.imgRename}|">
+                                      </th:block>
+                                    </div>
+  
+                                  <p>해시태그</p>
+                                    <div class="review-hashtag">
+      
+                                      <th:block th:each=" hash : *{hashList}">
+                                          <span th:text="|${hash.hashTitle} |" class="review-hash">#해시태그</span>
+                                      </th:block>
+                                    </div>
+                                </div>
+                           </th:block>
+
+
+                            <!-- replyList가 비어 있지 않을 때 나타날 블록 -->
+                            <th:block th:if="${!#lists.isEmpty(review.replyList)}">
+                                <th:block th:each="reply : *{replyList}">
+                                    <div class="store-reply-box">
+                                        <div class="store-reply">
+                                            <img class="review-store-profile" th:src="${reply.storeImg}" alt="가게 프로필 이미지">
+                                            <input type="text" class="reply-content-bubble" th:value="${reply.replyConent}" id="replyConent" name="replyConent">
+                                        </div>
+                                        <div class="store-reply-btn">
+                                            <button type="button" class="replyUpdateBtn" th:attr="data-reply-no=${reply.replyNo}">댓글 수정</button>
+                                            <button type="button" class="replyDeleteBtn" th:attr="data-reply-no=${reply.replyNo}">댓글 삭제</button>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </th:block>
+
+                        </div>
+                    </th:block>
+                  
+                </div>
+            
+
+            </div>
+
+
+
+
+         </div>
+         
+        </section>
+   </div>  
+   </main>
+
+
+   <!-- templetes/common/footer.html  조각 추가 -->
+   <th:block th:replace="~{common/footer}"></th:block> 
+
+   <!-- 다음 주소 API 추가 -->
+   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+   
+   <!-- 풀캘린더 추가 -->
+   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
+   <!-- 마이페이지 JS 추가 -->
+   <!-- <script src="/js/myPage/store/storeMyPage.js"></script> -->
+   <script src="/js/myPage/store/storeMyPageReview.js"></script>
+</body>
+</html>

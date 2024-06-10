@@ -16,7 +16,7 @@
     <th:block th:replace="~{common/header}"></th:block>
     <section class="review-section">
       
-      <form th:action="'/review/insertReview/' + *{store.storeNo}" method="POST" id="reviewForm" enctype="multipart/form-data">
+      <form th:action="'/review/insertReview/' + *{store.storeNo} + '/' + *{reservNo}" method="POST" id="reviewForm" enctype="multipart/form-data">
         <div class="review-container"> 
           <h2 th:text="|${store.storeName} 장소의 방문 리뷰쓰기|"></h2>
           <div class="review-selectBox">

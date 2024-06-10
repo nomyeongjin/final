@@ -3,10 +3,10 @@
 const mapHome = document.querySelector("#mapHome");
 
 mapHome.addEventListener("click", () => {
-  location.href = "storeSearch";
+  location.href = "storeSearch"+categoryCode;
   currentlocation();
   
-
+/* 버튼 클릭 시 해당 가게 storeNo를 넘겨서 전체에서 그 가게 위치 지도에 표시 */
 });
 
 const remS = document.querySelector("#remS");
@@ -15,7 +15,7 @@ remS.addEventListener('click', ()=>{
 
     if(loginMember == null){
         alert('로그인이 필요한 기능입니다');
-        location.href = "storeSearch";
+        location.href = "storeSearch"+categoryCode;
         return;
     }
   location.href = "/myPage/member/memberLike";
@@ -28,7 +28,7 @@ resS.addEventListener('click', ()=>{
 
     if(loginMember == null){
         alert('로그인이 필요한 기능입니다');
-        location.href = "storeSearch";
+        location.href = "storeSearch"+categoryCode;
         return;
     }
   location.href = "/myPage/member/reservation/fix";
@@ -42,7 +42,7 @@ storedetailmapbutton.addEventListener("click", () => {
     
     if(loginMember == null){
         alert('로그인이 필요한 기능입니다');
-        location.href = "storeSearch";
+        location.href = "storeSearch"+categoryCode;
         return;
     }
     
@@ -238,6 +238,67 @@ window.onload = function() {
 
 /* ************************************* 지도 ******************************************* */
 
+/* 가게 리스트가 클릭되면 해당 위치의 가게의 상세 페이지로 보내기 */
+
+/* document.addEventListener('DOMContentLoaded', function () {
+    const storeList = document.querySelector('.searchstore-storeList');
+
+    storeList.addEventListener("click", function(event) {
+        const storeElement = event.target.closest('[data-store-no]');
+        if (storeElement) {
+            const storeNo = storeElement.getAttribute('data-store-no');
+            location.href = "/store/storeDetail/" + storeNo;
+        }
+    });
+});
+
+ */
+/* 가게 주소  */
+
+document.addEventListener('DOMContentLoaded', function () {
+    const searchStoreLocContent =document.querySelector('.searchstore-detailInfo-container');
+    const storelocboxTwo =document.querySelector('.storelocbox-two');
+    const moreAddress =document.querySelector('.more-address');
+    const lessAddress =document.querySelector('.less-address');
+    
+    moreAddress.addEventListener("click", () => {
+      
+      moreAddress.style.display = 'none'; 
+      lessAddress.style.display = 'block'; 
+      storelocboxTwo.style.display = 'inline';
+    });
+    
+    
+    lessAddress.addEventListener("click", ()=>{
+     
+     
+      
+      lessAddress.style.display = 'none'; 
+      moreAddress.style.display = 'flex';
+      storelocboxTwo.style.display ='none'; 
+    });
+});
+
+/*  가게 전화번호 */
+
+document.addEventListener('DOMContentLoaded', function () {
+    // phoneFormatter 함수 정의
+    function phoneFormatter(storeTel) {
+        var formatNum = '';
+        formatNum = storeTel.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, '$1-$2-$3');
+        return formatNum;
+    }
+  
+    // storeTel 값을 가져옴
+    var storeTelElement = document.getElementById('searchMemberTel');
+    var storeTel = storeTelElement.textContent.trim();
+  
+    // 포맷팅된 전화번호로 업데이트
+    var formattedTel = phoneFormatter(storeTel);
+    storeTelElement.textContent = formattedTel;
+  });
+
+/* 가게 설명 */
 
 
 // 비동기로 내용 불러올 공간
@@ -264,61 +325,3 @@ storedetailmapbutton.addEventListener("click", () => {
 /**************** 가게 찜, 좋아요 개수 ******************/
 
 
-// 1. #bookmarkCheck 클릭 되었을 때
-const bookmarkCheck = document.querySelector("#bookmarkCheck");
-bookmarkCheck.addEventListener("click", e=>{
-
-  
-    // 3. 준비된 3개의 변수를 객체로 저장 -> (Json 변환 예정)
-    const obj = {
-        "memberNo" : loginMember,
-        "storeNo"  : storeNo,
-        "bookmark": bookmark
-    };
-
-    //4. 좋아요 INSERT / DELETE 비동기 요청
-    fetch("/store/searchlike", {
-
-    method  : "POST",
-    headers : {"Content-Type" : "application/json"},
-    body    : JSON.stringify(obj) // 객체를 Json으로 문자화 
-
-    })
-
-    .then(resp =>resp.text()) // 반환 결과 text(글자) 형태로 변환
-    .then(count =>{
-
-        // count == 첫 번째 then의 파싱되어 반환된 값('-1' 또는 게시글 좋아요 수)
-        //console.log("result :", result);
-
-
-        if(count == -1){
-            console.log("좋아요 처리 실패");
-            return;
-        }
-
-        // 5. bookmark 값 0<->1 변환
-        // (왜? 클릭 될 때 마다 INSERT/DELETE 동작을 번갈아 가면서 할 수 있음)
-        bookmark = bookmark == 0? 1: 0;
-
-        // 6. 하트를 채웠다/비웠다 바꾸기
-        
-        e.target.classList.toggle("fa-regular");
-        e.target.classList.toggle("fa-solid");
-        
-
-
-        // 7. 게시글 좋아요 수 수정
-        e.target.nextElementSibling.innerText = count;
-
-        bookmarkCheck.classList.add('fa-bounce');
-
-        // 1초 후에 fa-shake 클래스를 제거
-        setTimeout(function () {
-          bookmarkCheck.classList.remove('fa-bounce');
-        }, 500);
-       
-
-    });
-
-});

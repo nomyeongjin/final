@@ -22,25 +22,36 @@ const selectTimeFn = async (reservDate) => {
         // console.log(result);
         const reservTimes = result.reservTimes;
         const confirmReservDate = result.confirmReservDate; // 시간별 예약 개수를 List로 조회한 결과
+        console.log(typeof(confirmReservDate));
         console.log(confirmReservDate);
         
         const selectReservTime = confirmReservDate.length > 0 ? confirmReservDate[0].reservTime : null;
 
-        // console.log(filteredArray);
         // 예약이 꽉 찬 시간대만 저장한 배열
         // storeMaxTable : 시간별 예약 가능 최대 팀 수
         const fullTimeList = [];
         confirmReservDate.filter(item => {
-            // Ensure storeMaxTable is a number
-            // const maxTable = Number(storeMaxTable);
-            
-            // maxTable가 0이라면 return
-            if (Number(storeMaxTable) === 0) return;
-            
+
+            // item.counts를 숫자로 변환하여 비교
+            const counts = Number(item.counts);
+            console.log("counts : ", counts);
+
+            // storeMaxTable이 0이라면 return
+            if (storeMaxTable === 0) return;
+
             // storeMaxTable과 item.counts의 값 비교
-            if (Number(item.counts) === Number(storeMaxTable)) {
+            if (counts === storeMaxTable) {
                 fullTimeList.push(item.reservTime);
-                item.classList.add("disbled");
+
+                // 예약된 시간대에 해당하는 DOM 요소에 disabled 클래스를 추가
+
+                // data-reserv-time 속성을 가진 DOM 요소를 찾아 disabled 클래스를 추가
+                const timeElement = document.querySelector(`[data-reserv-time="${item.reservTime}"]`);
+
+                if (timeElement) {
+                    timeElement.classList.add("disabled");
+                } 
+                
             }
         });
 
