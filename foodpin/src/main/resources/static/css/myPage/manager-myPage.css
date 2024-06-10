@@ -117,7 +117,7 @@ tbody tr td {
 }
 
 .storeInfo {
-    line-height: 0;
+    /* line-height: 0; */
     color: #F3C186;
     margin-bottom: 10px;
 }
@@ -207,8 +207,16 @@ tbody tr td {
     margin: 10px;
 }
 
+.requestMember {
+    margin-bottom: 5px;
+}
+
 .requestMember, .requestStoreName {
     font-size: 15px;
+}
+
+.requestStoreName, .requestStoreTel {
+    color: gray;
 }
 
 .completeBtn {

@@ -25,7 +25,7 @@
 
 /* MEMBER INFO */
 #infoContainer {
-    display: flex;
+    margin-left: 30px;
     padding-top: 30px;
 }
 
@@ -196,6 +196,7 @@ form[name='member-myPageFrm']{
 .likeList {
     list-style: none;
     display: flex;
+    width: 600px;
     position: relative;
     align-items: flex-start;
     text-align: left;
@@ -499,7 +500,7 @@ form[name='member-myPageFrm']{
  
 /* 마이페이지 행 단위 스타일 지정 */
 .myPage-row{
-    width: 500px;
+    width: 400px;
     height: 50px;
     margin: 0 0 30px 0;
     border-bottom: 1px solid rgb(161, 161, 161);
