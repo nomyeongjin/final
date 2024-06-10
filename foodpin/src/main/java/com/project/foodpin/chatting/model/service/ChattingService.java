@@ -15,7 +15,8 @@ public interface ChattingService {
     int createChattingRoom(Map<String, Object> map);
 
 
-    int insertMessage(Message msg);
+    int insertToStoreMessage(Message msg);
+    int insertToMemberMessage(Message msg);
 
     int updateReadFlag(Map<String, Object> paramMap);
 
@@ -24,4 +25,5 @@ public interface ChattingService {
 	List<Member> selectTarget(Map<String, Object> map);
 
 	List<Message> selectMsgList(int chattingNo);
+
 }

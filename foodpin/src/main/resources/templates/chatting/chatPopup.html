@@ -15,8 +15,12 @@
 
                 <th:block th:each="msg : ${messageList}" th:if="${msg.chattingNo} == ${chattingNo}" th:object="${msg}">
                     <li  class="target-chat" th:if="${msg.memberNo} != ${session.loginMember.memberNo}">
-                        <span class="chatDate" th:text="*{sendTime}">14:01</span>
-                        <p class="chat" th:text="*{messageContent}"></p>
+                        <!-- <img th:src="${msg.profileImg}"> -->
+                        <div>
+                            <!-- <b th:text="${msg.storeName}"></b> -->
+                            <p class="chat" th:text="*{messageContent}"></p>
+                            <span class="chatDate" th:text="*{sendTime}">14:01</span>
+                        </div>
                     </li>
                     <li class="my-chat" th:if="${msg.memberNo} == ${session.loginMember.memberNo}">
                         <span class="chatDate" th:text="*{sendTime}">14:01</span>
@@ -59,11 +63,13 @@
 	<script th:inline="javascript">
 		const userDefaultImage = /*[[#{user.default.image}]]*/ '기본 이미지';
 
-        const loginMemberNo = /*[[${session.loginMember.memberNo}]]*/ '로그인';
+        const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ '로그인';
 
         const messageList = /*[[${messageList}]]*/ '메시지 목록';
 
         const targetNo = /*[[${storeNo}]]*/ '가게 번호';
+        
+        const type = /*[[${session.loginMember?.memberCode}]]*/ '멤버 타입';
         
 	</script>
 
