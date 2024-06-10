@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.project.foodpin.store.model.mapper.SearchStoreMapper">
-
-
-
-
-
-<select id="searchStoreList" resultType="Store">
- SELECT STORE_NO, STORE_NAME
-FROM "STORE_CATEGORY"
-JOIN  STORE USING (STORE_NO)
-WHERE CATEGORY_CODE = #{category_code}
-AND STORE_CLOSED ='N'
+<select id="searchStoreList" parameterType="map" resultType="Store">
+  SELECT DISTINCT STORE_NO, STORE_NAME, STORE_INFO, STORE_LOCATION, STORE_STATUS,
+       STORE_TEL, OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END, 
+       STORE_CLOSED, STORE_IMG
+  FROM "STORE"
+  JOIN "STORE_CATEGORY" USING (STORE_NO)
+  <where>
+    <if test="categoryCode != 1">
+      AND CATEGORY_CODE = #{categoryCode}
+    </if>
+    <if test="closedYn != null and closedYn != ''">
+      AND STORE_CLOSED = #{closedYn}
+    </if>
+  </where>
 </select>
 
-
-
-
-
-
+  <!-- 가게 상세 조회 -->
+   <select id="searchStoreDetail" resultType="Store">
+   	SELECT *
+		FROM "STORE" 
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE STORE_NO = #{storeNo}
+		AND STORE_CLOSED ='N'
+   </select>
 
 </mapper>

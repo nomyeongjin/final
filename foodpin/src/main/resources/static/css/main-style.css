@@ -192,17 +192,65 @@ header {
    display: inline-block;
    width: 100px;
    height: 40px;
-   background:gainsboro;
+   background:rgb(255, 255, 255);
    color: black;
-  
-   font-size: 11px;
-   border: 1px solid var(--main-color);
-   border-radius: 35px;
-  
-  flex-basis: calc(15%-10px); /* 버튼 너비 계산: 20% 너비에서 간격을 제외한 값 */
+   z-index: 1;
+   font-size: 12px;
+  /*  border: 1px solid var(--main-color);
+   border-radius: 5px; */
+   border: none;
+   border-top: 1px solid var(--main-color);
+   border-bottom: 1px solid var(--main-color);
+   position: relative;
+   flex-basis: calc(15% - 10px);/* 버튼 너비 계산: 20% 너비에서 간격을 제외한 값 */
   margin: 15px;
 }
 
+.mainCatBtn:hover {
+   background-color: #E14C54;
+   color: white;
+   transition: 0.3s cubic-bezier(0.77, 0, 0.175, 1); 
+}
+
+.mainCatBtn:after {
+   position: absolute;
+   content: "";
+   width: 0;
+   height: 100%;
+   top: 0;
+   right: 0;
+   z-index: -1;
+   background: #E14C54;
+   color: white;
+   transition: all 0.4s ease;
+}
+
+.mainCatBtn:hover {
+   color: #ffffff;
+}
+
+.mainCatBtn:hover:after {
+   left: 0;
+   width: 100%;
+}
+
+.mainCatBtn:active {
+   top: 2px;
+}
+
+
+/* @keyframes mainCatBtn {
+   25% {
+     transform: scale(0.9, 1.1);
+   }
+   50% {
+     transform: scale(1.1, 0.9);
+   }
+   75% {
+     transform: scale(0.95, 1.05);
+   }
+}
+ */
 /* 메인 가게 사진 영역 */
 .main-store-image-container{
    display: flex;
@@ -576,7 +624,7 @@ header>section:nth-child(3) {
 
 .all-list{
    display: flex;
-   margin: 10px 0;
+   margin: 10px 5px;
    list-style: none;
 }
 
@@ -711,7 +759,6 @@ header>section:nth-child(3) {
   font-size: 15px;
   padding: 15px 0;
   color: black;
-  width: 320px;
 }
 
 .fa-circle-xmark{

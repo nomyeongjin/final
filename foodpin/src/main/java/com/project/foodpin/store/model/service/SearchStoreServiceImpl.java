@@ -34,6 +34,13 @@ public class SearchStoreServiceImpl implements SearchStoreService{
 		return mapper.searchStoreDetail(map);
 	}
 
+
+	@Override
+	public List<Store> searchStoreDetail(String storeNo) {
+	
+		return mapper.searchStoreDetail(storeNo);
+	}
+
 	//비동기로 화면 바꿀 카테고리 리스트 조회
 	
 	// 비동기로 좋아요 
