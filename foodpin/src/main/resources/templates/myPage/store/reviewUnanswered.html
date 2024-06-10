@@ -73,7 +73,7 @@
                                     <img class="review-member-profile"
                                         th:src="*{profileImg}">
                                     <div class="review-info">
-                                    <span th:text="*{memberNickname}">닉네임</span>
+                                    <span th:text="*{memberNickname}" class="memberNickname">닉네임</span>
 
                                         <div class="review-memberScore">
                                             <span th:switch="*{reviewRating}">
@@ -163,7 +163,7 @@
                             <div class="store-reply">
                                 <form action="/myPage/store/insertReply" method="POST" class="reply-form">
                                     <input type="text" class="reply-content-bubble" name="replyConent">
-                                    <input type="text" name="storeNo" th:value="*{storeNo}" hidden>
+                                    <input type="text" name="storeNo" id="storeNo" th:value="*{storeNo}" hidden>
                                     <input type="text" name="reviewNo" th:value="*{reviewNo}" hidden>
                                     <button class="reply-btn">답글등록</button>
                                 </form>
