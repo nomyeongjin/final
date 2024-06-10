@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.websocket.model.dto.Notification;
@@ -49,5 +50,14 @@ public interface NotificationMapper {
 
 	// 리뷰 답글 받는 사람 회원 번호
 	int memberNo(String pkNo);
+
+	// 관리자에게 알림 보낼 때 필요한 데이터 조회
+	Store selectManagerData(String pkNo);
+	
+	int selectManagerNo(int MemberNo);
+
+	// 예약 노쇼 알림 보낼 때 사용하는 데이터 조회
+	Reservation selectNoshowData(int reservNo);
+
 
 }
