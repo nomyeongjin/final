@@ -291,7 +291,7 @@ reservConfirm.addEventListener("click", () => {
   */
 reservApply.addEventListener("click", () => {
 
-   reservStatusFl = "W";
+   reservStatusFl = "N";
 
    // 서브 메뉴에 버튼 기존 체크 클래스 제거 + 해당 메뉴 체크
    document.querySelectorAll(".sub-title-btn").forEach(menu => { 
