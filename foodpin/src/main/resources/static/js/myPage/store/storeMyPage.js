@@ -48,12 +48,19 @@ Unanswered.addEventListener("click", () => {
 
 const memberNickname = document.querySelector(".memberNickname").innerText;
 const storeNo = document.querySelector("#storeNo").value;
-console.log(memberNickname);
+// console.log(memberNickname);
 
 // 답글 제출하는 form
 const replyForm = document.querySelector(".reply-form");
-replyForm.addEventListener("submit", () => {
-  
-  sendNotification("insertStoreReview", null, reservNo, null, null, memberNickname);
+const replyBtn = document.querySelector(".reply-btn");
 
+replyBtn.addEventListener("click", e => {
+
+  // 버튼 클릭 될 때 form 태그 제출을 막음
+  e.preventDefault();
+
+  sendNotification("insertStoreReview", null, memberNo, null, null, memberNickname);
+
+  // 알림 보내는 함수 실행 후 폼 태그 제출
+  replyForm.submit();
 });
