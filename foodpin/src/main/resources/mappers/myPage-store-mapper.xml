@@ -238,6 +238,9 @@
 		<if test='reservStatusFl == "C"'>
 			AND RESERV_STATUS_FL = #{reservStatusFl} AND RESERV_DATE > SYSDATE
 		</if>
+		<if test='reservStatusFl == "P"'>
+			AND RESERV_DATE   <![CDATA[<]]> SYSDATE
+		</if>
 		
 		ORDER BY RESERV_DATE
 	</select>
@@ -252,6 +255,24 @@
 	<update id="rejectReservStatus">
 		UPDATE "RESERVATION" SET RESERV_STATUS_FL = 'C'
 		WHERE RESERV_NO = #{reservNo}
+	</update>
+	
+	<!-- 회원 경고 횟수, 번호  조회 -->
+	<select id="selectFlag">
+		SELECT MEMBER_NO, MEMBER_FLAG 
+		FROM "RESERVATION" r 
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE RESERV_NO = #{reservNo}
+	</select>
+	
+	<!-- 경고 횟수 증가 -->
+	<update id="updateFlag">
+		UPDATE "MEMBER" SET MEMBER_FLAG = #{memberFlag} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 3번 이상시 회원 탈퇴 -->
+	<update id="updateReject">
+		UPDATE "MEMBER" SET MEMBER_STATUS = 'Y' WHERE MEMBER_NO = #{memberNo} AND MEMBER_FLAG = 3
 	</update>
 	
 	<!-- 확정된 예약 조회 -->

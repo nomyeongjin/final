@@ -548,7 +548,7 @@
    flex-direction: row;
    justify-content: center;
 }
-.reserv-btn, .reserv-reject-btn{
+.reserv-btn, .reserv-reject-btn, .reserv-noshow-btn{
    width: 100px;
    height: 22px;
    background: white;

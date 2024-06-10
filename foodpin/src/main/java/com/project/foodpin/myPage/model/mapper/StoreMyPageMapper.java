@@ -169,6 +169,24 @@ public interface StoreMyPageMapper {
 	 * @return result
 	 */
 	int rejectReservStatus(int reservNo);
+	
+	/** 회원 경고 횟수 조회
+	 * @param map
+	 * @return
+	 */
+	Map<String, Integer> selectFlag(Map<String, Object> map);
+
+	/** 경고 횟수 증가
+	 * @param map
+	 * @return
+	 */
+	int updateFlag(Map<String, Object> map);
+
+	/** 3번 이상시 회원 탈퇴
+	 * @param map
+	 * @return
+	 */
+	int updateReject(Map<String, Object> map);
 
 
 	/** 확정된 예약 조회
@@ -265,13 +283,6 @@ public interface StoreMyPageMapper {
 
 
 
-
-
-
-
-
-
-	
 
 
 
