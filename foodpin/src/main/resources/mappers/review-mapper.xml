@@ -68,7 +68,8 @@
 	                SYSDATE,
 	                DEFAULT,
 	                #{memberNo},
-	                #{storeNo}
+	                #{storeNo},
+	                #{reservNo}
 	    )
 	</insert>
 	

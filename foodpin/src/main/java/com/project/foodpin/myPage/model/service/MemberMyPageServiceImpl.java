@@ -182,8 +182,8 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 
 	// 지난 예약 리뷰 확인용 개수 조회
 	@Override
-	public int reservReviewCount(int reservNo) {
-		return mapper.reservReviewCount(reservNo);
+	public int reservReviewCount(Map<String, Object> map) {
+		return mapper.reservReviewCount(map);
 	}
 
 

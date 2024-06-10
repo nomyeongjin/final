@@ -18,6 +18,7 @@ public class Review {
 	private String reviewContent;
 	private String reviewRegDate;
 	private String reviewDelFl;
+	private int reservNo;
 	
 	private int reportNo;
 	private String reportDate;
