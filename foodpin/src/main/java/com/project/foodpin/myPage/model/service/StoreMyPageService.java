@@ -136,6 +136,12 @@ public interface StoreMyPageService {
 	 */
 	int rejectReservStatus(int reservNo);
 	
+	/** 노쇼 등록
+	 * @param map
+	 * @return
+	 */
+	int noshowReserv(Map<String, Object> map);
+
 	/** 확정된 예약 조회
 	 * @param memberNo
 	 * @return

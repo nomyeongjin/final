@@ -323,6 +323,20 @@ public class StoreMyPageController {
 		return service.rejectReservStatus(reservNo);
 	}
 	
+	/** 노쇼 등록 (비동기)
+	 * @return result
+	 */
+	@ResponseBody
+	@GetMapping("noshowReserv")
+	public int noshowReserv(@SessionAttribute("loginMember") Member loginMember, @RequestParam("reservNo") int reservNo) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberNo", loginMember.getMemberNo());
+		map.put("reservNo", reservNo);
+		
+		return service.noshowReserv(map);
+	}
+	
 	/** 캘린더에 맞는 형태로 확정된 예약 전체 조회 (비동기)
 	 * @return reservList
 	 */

@@ -344,6 +344,35 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return mapper.deleteReply(replyNo);
 	}
 
+	// 노쇼 등록
+	@Override
+	public int noshowReserv(Map<String, Object> map) {
+		
+		// 회원 경고 횟수 조회
+		int result = 0;
+		Map<String, Integer> member = mapper.selectFlag(map);
+		
+		int memberNo = member.get(0) ;
+		int memberFlag = member.get(1);
+		
+		
+		if(memberFlag < 3) { // 경고 횟수 증가
+			memberFlag++;
+			map.put("memberFlag", memberFlag);
+			map.put("memberNo", memberNo);
+			mapper.updateFlag(map); 
+			
+			result = 1;
+		}
+		
+		else {// 3번 이상시 회원 탈퇴
+			mapper.updateReject(map); 
+			result = 2;
+		}
+		
+		return result;
+	}
+
 
 
 
