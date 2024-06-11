@@ -41,5 +41,7 @@ public class Reservation {
 	private int noshowCount;
 	
 	private int counts;
+	
+	private String memberNickname;
 
 }

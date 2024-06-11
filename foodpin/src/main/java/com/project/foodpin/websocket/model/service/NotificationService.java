@@ -56,6 +56,13 @@ public interface NotificationService {
 	// 예약 노쇼 알림에 필요한 데이터 조회
 	Reservation selectNoshowData(int reservNo);
 
+	// 회원이 방문 리뷰 작성할 때 필요안 데이터 조회
+	Reservation selectReservationData(String pkNo);
+
+	// 가게 회원 번호
+	int selectStoreMemberNo(String storeNo);
+
+
 
 	// 리뷰 답글 받는 사람 회원 번호
 //	int memberNo(String pkNo);

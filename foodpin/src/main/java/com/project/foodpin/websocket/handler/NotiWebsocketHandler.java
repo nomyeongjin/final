@@ -151,7 +151,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 		} else if (notificationType.equals(notificationTypes.getInsertMemberReview())
 				|| notificationType.equals(notificationTypes.getReviewReportComplete())
 				|| notificationType.equals(notificationTypes.getStoreReportComplete())) {
-			setStore(notification, sendMember, store);
+			setStore(notification, sendMember, store, reservation);
 
 			// 관리자인 경우 
 		} else if (notificationType.equals(notificationTypes.getReviewReport())
@@ -358,9 +358,11 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 	}
 
 	// 3. 알림 받는 사람이 가게 사장님인 경우
-	private void setStore(Notification notification, Member sendMember, Store store) throws JsonProcessingException, IOException {
+	private void setStore(Notification notification, Member sendMember, Store store, Reservation reservation) throws JsonProcessingException, IOException {
 
 		String notificationType = notification.getNotificationType();
+		
+		int memberNo = 0;
 
 		if (notificationType.equals(notificationTypes.getInsertMemberReview())
 				|| notificationType.equals(notificationTypes.getReviewReportComplete())
@@ -370,7 +372,14 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 
 			// 손님 방문 리뷰
 			case "insertMemberReview":
-				contentForStore = String.format("<b>%s<b>이 <b>%s<b> 방문 후 후기를 남겨 주셨습니다.", sendMember.getMemberNickname(),
+				
+				// pkNo = reservNo
+				
+				reservation = service.selectReservationData(notification.getPkNo());
+				
+				memberNo = service.selectStoreMemberNo(reservation.getStoreNo());
+				
+				contentForStore = String.format("<b>%s<b>이 <b>%s<b> 방문 후 후기를 남겨 주셨습니다.", reservation.getMemberNickname(),
 						notification.getReservDate());
 
 				urlForStore = "/myPage/store/review";
@@ -380,7 +389,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				
 				// 리뷰 신고 (해결여부)
 			case "reviewReportComplete" : 
-				store = service.selectStoreData(notification.getPkNo());
+//				store = service.selectStoreData(notification.getPkNo());
 				contentForStore = String.format("안녕하세요. 푸드핀 운영 관리자 입니다.<br>" +
 												"<b>%s<b> 해당 가게에서 발생한 리뷰 신고에 대한 처리가 완료 되었습니다.<br>"+  
 												"가게 운영에 참고 해주세요.<br>" + 
@@ -390,21 +399,34 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				break;
 				
 			case "storeReportComplete" : 
-				store = service.selectStoreData(notification.getPkNo());
+//				store = service.selectStoreData(notification.getPkNo());
 				contentForStore = String.format("안녕하세요. 푸드핀 운영 관리자 입니다.<br>" +
 							                    "<b>%s</b> 해당 가게에서 발생한 폐업 및 가게 정보 정정 신고 처리가 완료 되었습니다.<br>" +  
 							                    "가게 운영에 참고 해주세요.<br>" + 
 							                    "자세한 사항은 관리자에게 문의 부탁드립니다.", store.getStoreName());
 				notiCode = 6;
 				break;
-				
+
 			}
 
 		}
 
+		if (contentForStore != null || urlForStore != null) {
+
+			Notification storeNotification = new Notification();
+			storeNotification.setReceiveMemberNo(memberNo);
+			storeNotification.setSendMemberProfileImg(sendMember.getProfileImg());
+			storeNotification.setNotificationType(notification.getNotificationType()); // 알림 유형
+			storeNotification.setNotificationContent(contentForStore);
+			storeNotification.setSendMemberNo(sendMember.getMemberNo());
+			storeNotification.setNotificationUrl(urlForStore);
+			storeNotification.setNotiCode(notiCode);
+			service.sendNotificationStore(storeNotification);
+		}
+
 	}
 
-	// 4. 알림 받는 사람이 관리지인 경우
+	// 4. 알림 받는 사람이 관리자인 경우
 	private void setManager(Notification notification, Member sendMember, Store store, Reservation reservation) throws JsonProcessingException, IOException {
 		String notificationType = notification.getNotificationType();
 		
@@ -443,44 +465,44 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				break;
 				
 				
-			// 예약 노쇼 알림(1회)
-			case "reservFirstNoshow" :
-				
-				reservation = service.selectNoshowData(reservation.getReservNo());
-				
-				contentForMember = String.format(
-						"<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." + "/n" + "경고 > 노쇼 누적 1회 (노쇼 3회 처리 시 계정이 정지 됩니다.)",
-						sendMember.getMemberNickname(), notification.getReservDate());
-				urlForMember = "/myPage/member/reservation/noshow";
-
-				contentForManager = String.format("<b>%s<b>님의 노쇼 누적 1회 건이 있습니다. 해당 회원을 확인 해주세요",
-						sendMember.getMemberNickname());
-				
-				notiCode = 0;
-
-				break;
-
-			// 예약 노쇼 알림(2회)
-			case "reservSecondNoshow":
-				
-				reservation = service.selectNoshowData(reservation.getReservNo());
-				
-				contentForMember = String.format(
-						"<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." + "/n" + "경고 > 노쇼 누적 2회 (노쇼 3회 처리 시 계정이 정지 됩니다.)");
-				contentForManager = String.format("<b>%s<b>님의 노쇼 누적 2회 건이 있습니다. 해당 회원을 확인 해주세요",
-						sendMember.getMemberNickname());
-				
-				notiCode = 0;
-				break;
+//			// 예약 노쇼 알림(1회)
+//			case "reservFirstNoshow" :
+//				
+//				reservation = service.selectNoshowData(reservation.getReservNo());
+//				
+//				contentForMember = String.format(
+//						"<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." + "/n" + "경고 > 노쇼 누적 1회 (노쇼 3회 처리 시 계정이 정지 됩니다.)",
+//						sendMember.getMemberNickname(), notification.getReservDate());
+//				urlForMember = "/myPage/member/reservation/noshow";
+//
+//				contentForManager = String.format("<b>%s<b>님의 노쇼 누적 1회 건이 있습니다. 해당 회원을 확인 해주세요",
+//						sendMember.getMemberNickname());
+//				
+//				notiCode = 0;
+//
+//				break;
+//
+//			// 예약 노쇼 알림(2회)
+//			case "reservSecondNoshow":
+//				
+//				reservation = service.selectNoshowData(reservation.getReservNo());
+//				
+//				contentForMember = String.format(
+//						"<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." + "/n" + "경고 > 노쇼 누적 2회 (노쇼 3회 처리 시 계정이 정지 됩니다.)");
+//				contentForManager = String.format("<b>%s<b>님의 노쇼 누적 2회 건이 있습니다. 해당 회원을 확인 해주세요",
+//						sendMember.getMemberNickname());
+//				
+//				notiCode = 0;
+//				break;
 
 			// 예약 노쇼 알림(3회)
 			case "reservThirdNoshow":
 				
 				reservation = service.selectNoshowData(reservation.getReservNo());
 				
-				contentForMember = String.format("<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다." + "/n"
-						+ "노쇼 누적 3건이 발생하여 계정이 정지 되었습니다. 관련 사항은 관리자에게 문의 해주세요.");
-				contentForManager = String.format("<b>%s<b>님의 노쇼 누적 3회 건 발생 되었습니다." + "/n" + "해당 회원의 계정 정치 처리 확인 해주세요.",
+//				contentForMember = String.format("<b>%s<b>님의 노죠" + "/n"
+//						+ "노쇼 누적 3건이 발생하여 계정이 정지 되었습니다. 관련 사항은 관리자에게 문의 해주세요.");
+				contentForManager = String.format("<b>%s<b>님의 노쇼 누적 3회 발생으로 계정 정지 처리 되었습니다. " + "/n" + "해당 회원의 계정 정치 처리 확인 해주세요.",
 						sendMember.getMemberNickname());
 				
 				notiCode = 0;
