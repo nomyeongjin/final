@@ -41,7 +41,8 @@ const sendMessage = () => {
   const chattingObj = {
     "targetNo" : selectTargetNo,    // 메시지를 받을 대상의 회원 번호(웹소켓)
     "messageContent" : msg,         // 전달할 메시지 내용
-    "chattingNo" : selectChattingNo // 채팅방 번호(DB 저장용도)
+    "chattingNo" : selectChattingNo, // 채팅방 번호(DB 저장용도)
+    "type" : 0
   }
 
   // JSON으로 변환하여 웹소켓 핸들러로 전달

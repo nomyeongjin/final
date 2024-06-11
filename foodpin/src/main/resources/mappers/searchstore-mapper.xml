@@ -5,19 +5,73 @@
 
 
 
+<!-- 카테고리에 해당하는 가게들 리스트 -->
+<select id="searchStoreList" parameterType="map" resultType="Store">
+  SELECT DISTINCT STORE_NO, STORE_NAME, STORE_INFO, STORE_LOCATION, STORE_STATUS,
+       STORE_TEL, OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END, 
+       STORE_CLOSED, STORE_IMG,
+       
+          (SELECT COUNT(*) 
+       FROM "REVIEW"
+       WHERE STORE_NO = #{storeNo}
+      AND REVIEW_DEL_FL = 'N') REVIEW_COUNT,
 
-<select id="searchStoreList" resultType="Store">
- SELECT STORE_NO, STORE_NAME
-FROM "STORE_CATEGORY"
-JOIN  STORE USING (STORE_NO)
-WHERE CATEGORY_CODE = #{category_code}
-AND STORE_CLOSED ='N'
+
+       	(SELECT COUNT(*) 
+		 FROM "BOOKMARK"
+		 WHERE STORE_NO = #{storeNo}) LIKE_COUNT,
+		 
+
+	     (SELECT ROUND(AVG(REVIEW_RATING), 1)
+		  FROM REVIEW
+		  WHERE STORE_NO =#{storeNo}
+		  AND REVIEW_DEL_FL = 'N') TOTAL_RATING
+		 
+		 <if test="memberNo!=null">
+		 
+		 , (SELECT COUNT(*)FROM "BOOKMARK"
+	    WHERE MEMBER_NO = #{memberNo}
+	    AND STORE_NO =#{storeNo}) BOOKMARK
+	    </if>
+		  
+       
+  FROM "STORE"
+  JOIN "STORE_CATEGORY" USING (STORE_NO)
+  JOIN "MEMBER" USING(MEMBER_NO)
+  <where>
+    <if test="categoryCode != 1">
+      AND CATEGORY_CODE = #{categoryCode}
+    </if>
+    <if test="closedYn != null and closedYn != ''">
+      AND STORE_CLOSED = #{closedYn}
+    </if>
+  </where>
 </select>
 
 
 
+<!-- 가게 카테고리 조회 -->
+<select id="searchStoreCategoryList" resultType="StoreCategory">
+  SELECT CATEGORY_TITLE  FROM "CATEGORY"
+	JOIN "STORE_CATEGORY" USING (CATEGORY_CODE)
+	WHERE STORE_NO = #{storeNo} 
+</select>
 
-
-
-
+  <select id="searchStoreHashList" resultType="ReviewHash">
+     
+		SELECT DISTINCT H.HASH_TITLE
+		FROM REVIEW R
+		JOIN REVIEW_HASH RH ON R.REVIEW_NO = RH.REVIEW_NO
+		JOIN HASH H ON RH.HASH_NO = H.HASH_NO
+		WHERE R.STORE_NO =  #{storeNo} 
+		AND REVIEW_DEL_FL ='N' 
+   </select>
+   
+   
+   
+   
+  <!-- 가게 휴무일 조회 -->
+   <select id="storeOffList" resultType="Off">
+    
+   </select>
 </mapper>

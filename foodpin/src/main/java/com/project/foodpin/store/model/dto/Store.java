@@ -20,39 +20,46 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Store {
 	
-	private String storeNo;
-	private String storeName;
-	private String storeInfo;
-	private String storeLocation;
-	private String storeStatus;
-	private int storeMaxNumber;
-	private String storeTel;
-	private String openHour;
-	private String closeHour;
-	private String breaktimeStart;
-	private String breaktimeEnd;
-	private String storeClosed; // 폐업여부
-	private String storeImg;
-	private double totalRating;
+	public String storeNo;
+	public String storeName;
+	public String storeInfo;
+	public String storeLocation;
+	public String storeStatus;
+	public int storeMaxNumber;
+	public String storeTel;
+	public String openHour;
+	public String closeHour;
+	public String breaktimeStart;
+	public String breaktimeEnd;
+	public String storeClosed; // 폐업여부
+	public String storeImg;
+	public double totalRating;
 
-	private int storeMaxTable;
+	public int storeMaxTable;
 	
-	private int memberNo;
+	public int memberNo;
 	
 	private MultipartFile storeImgInput;
 	private int imgStatus;
 	
 	//가게 이미지 목록
-	private List<UploadImage> imageList;
+	public List<UploadImage> imageList;
 
 	// 가게 메뉴 목록
-	private List<Menu> menuList;
+	public List<Menu> menuList;
 	
 	//가게 해시태그 목록
-	private List<ReviewHash>storeHashList;
+	public List<ReviewHash>storeHashList;
 	
 	//가게 카테고리 목록
-	private List<StoreCategory>storeCategoryList;
+	public List<StoreCategory>storeCategoryList;
+	
+	
+	// 가게 검색 페이지의 가게 상세 카테고리
+	public List<StoreCategory>searchStoreCategoryList;
+	
+	// 가게 검색 페이지의 가게 해시태그 목록
+	public List<ReviewHash>searchStoreHashList;
 
 	// 찜
 	private int likeCount;
@@ -71,5 +78,9 @@ public class Store {
 	// 가게 카테고리
 	private int categoryCode;
 
+	// 가게 주소
+    private String postcode;
+    private String address;
+    private String detailAddress;
 	
 }

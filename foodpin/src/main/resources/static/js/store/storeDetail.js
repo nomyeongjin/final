@@ -2,7 +2,7 @@
 const storedetailmapbutton = document.querySelector("#storedetailmapbutton");
 
 storedetailmapbutton.addEventListener("click", () => {
-  location.href = "/store/storeSearch";
+  location.href = "/store/storeSearch/1";
   currentlocation();
 
 });
@@ -110,34 +110,35 @@ window.onload = function() {
 
 
 /* 가게 상세 설명 더보기 */
-// const storeDetailContent =document.querySelector('.store-detail-content');
-// const storeDetailText =document.querySelector('.store-detail-text');
-// const moreText =document.querySelector('.more-text');
-// const lessText =document.querySelector('.less-text');
+document.addEventListener('DOMContentLoaded', function () {
+const storeDetailContent =document.querySelector('.store-detail-content');
+const storeDetailText =document.querySelector('.store-detail-text');
+const moreText =document.querySelector('.more-text');
+const lessText =document.querySelector('.less-text');
 
-// moreText.addEventListener("click", () => {
+moreText.addEventListener("click", () => {
   
-//   moreText.style.display = 'none'; 
-//   lessText.style.display = 'block'; 
-//   storeDetailText.style.display = 'inline';
-// });
+  moreText.style.display = 'none'; 
+  lessText.style.display = 'block'; 
+  storeDetailText.style.display = 'inline';
+});
 
 
-// lessText.addEventListener("click", ()=>{
+lessText.addEventListener("click", ()=>{
  
  
   
-//   lessText.style.display = 'none'; 
-//   moreText.style.display = 'flex';
-//   storeDetailText.style.display = '-webkit-box'; 
-// });
+  lessText.style.display = 'none'; 
+  moreText.style.display = 'flex';
+  storeDetailText.style.display = '-webkit-box'; 
+});
 
+});
 
 
 /* 별점  */
 
-document.addEventListener('DOMContentLoaded', function () {
- 
+
 
   var totalRatingELement = document.getElementById('totalScoreR');
   var totalRating = Number(totalRatingELement.textContent);
@@ -152,11 +153,11 @@ document.addEventListener('DOMContentLoaded', function () {
  
 
    averageStar(totalRating);
-});
+
 
 
 /* 가게 주소 더보기 */
-
+document.addEventListener('DOMContentLoaded', function () {
 const detailStoreLocContent =document.querySelector('.detailstoreloc-content');
 const storelocboxTwo =document.querySelector('.storelocbox-two');
 const moreAddress =document.querySelector('.more-address');
@@ -179,7 +180,7 @@ lessAddress.addEventListener("click", ()=>{
   storelocboxTwo.style.display ='none'; 
 });
 
-
+});
 
 /* 전화번호 - 넣기 */
 
@@ -204,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* 리뷰> 클릭 시 아래 리뷰 페이지로 이동 */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const showReview = document.querySelector("#showReview");
   const reviewBox = document.querySelector(".review-container"); // 스크롤할 대상 요소
 
@@ -218,14 +219,14 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   }
-});
 
+});
 
 
 
 /*********************** 폐점/ 정보 정정 신고 팝업 ******************/
 
-
+document.addEventListener('DOMContentLoaded', function() {
 const popupShut = document.querySelector("#popupShut");
 const popupbox = document.querySelector("#popupbox");
 const storeReportForm = document.querySelector("#storeReportForm");
@@ -299,230 +300,171 @@ storeReportBtn.addEventListener("click", e => {
     alert('신고 중 오류가 발생했습니다. 다시 시도해주세요.');
   });
 
-// storeReport.addEventListener("click", ()=>{
- 
-//   storeReportForm.classList.remove("popup-storereport");
-// });
-
-
-//   const requestContent = document.getElementById('requestStoreContent');
-//   const requestCategoryTitle = document.getElementById('requestSelect');
-
-//   storeReportBtn.addEventListener("click",e =>{
-//       e.preventDefault(); // 기본 폼 제출 동작을 방지
-
-//       if(loginMember == null){
-//         alert('로그인 후 신고해주십시오.');
-//         return;
-//       }
-
-//       // 유효성 검사
-//       if (requestContent.value.trim() === '') {
-//           alert('상세 내용을 입력해주세요.');
-//           requestContent.focus();
-//           return;
-//       }
-
-//       if (requestCategoryTitle.value === '') {
-//           alert('신고 내용을 선택해주세요.');
-//           requestType.focus();
-//           return;
-//       }
-
-      
-//         // 선택된 신고 내용을 포함하여 객체 생성
-//     const obj = {
-//       "storeNo": storeNo,
-//       "memberNo": loginMember,
-//       "requestCategoryTitle": requestCategoryTitle.value, 
-//       "requestContent": requestStoreContent.value,
-//     };
-
-//     fetch("/store/storeReport", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(obj)
-//     })
-//     .then(resp => resp.json())
-//     .then(result => {
-//       if (result == 0) {
-//         alert("신고 접수가 되지 않았습니다.");
-//         requestContent.focus();
-//       } else {
-//         alert("가게 신고가 접수 되었습니다.");
-//         storeReportForm.classList.add("popup-hidden");
-//         requestContent.value = '';
-//       }
-//     })
-//     .catch(error => {
-//       console.error('Error:', error);
-//       alert('신고 중 오류가 발생했습니다. 다시 시도해주세요.');
-//     });
-//   });
-
-
-
 
   /* 가게 신고 알림 */
-  sendNotificationFn("reviewReport", null, storeNo, null, storeName);
+  const storeName = document.querySelector("#storeName").innerText;
+  sendNotificationFn("reviewReport", null, storeNo, null, storeName, null);
 
 });
 
-
+});
 
 
 /* ************************************************************* */
 
 /* 메뉴 이미지 더보기 */
 
+document.addEventListener('DOMContentLoaded', function() {
+const storeMenuList = document.querySelector(".menu-image-container");
+const menuB = storeMenuList.querySelectorAll(".menu-basiclist");
+const moreMenuImageBtn = document.querySelector("#moreMenuImageBtn");
+const shutMenuImageBtn = document.querySelector("#shutMenuImageBtn");
 
-// const storeMenuList = document.querySelector(".menu-image-container");
-// const menuB = storeMenuList.querySelectorAll(".menu-basiclist");
-// const moreMenuImageBtn = document.querySelector("#moreMenuImageBtn");
-// const shutMenuImageBtn = document.querySelector("#shutMenuImageBtn");
+// 처음에 3개의 메뉴를 표시
+let visibleMenus = 3;
+const totalMenus = menuB.length;
 
-// // 처음에 3개의 메뉴를 표시
-// let visibleMenus = 3;
-// const totalMenus = menuB.length;
+showMenus();
 
-// showMenus();
+moreMenuImageBtn.addEventListener('click', () => {
+  visibleMenus += 3;
+  showMenus();
+});
 
-// moreMenuImageBtn.addEventListener('click', () => {
-//   visibleMenus += 3;
-//   showMenus();
-// });
+shutMenuImageBtn.addEventListener("click", () => {
+  visibleMenus = 3;
+  showMenus();
+});
 
-// shutMenuImageBtn.addEventListener("click", () => {
-//   visibleMenus = 3;
-//   showMenus();
-// });
+// 메뉴를 표시/숨김 처리하는 함수
+function showMenus() {
+  for (let i = 0; i < totalMenus; i++) {
+    if (i < visibleMenus) {
+      menuB[i].style.display = "flex";
+    } else {
+      menuB[i].style.display = "none";
+    }
+  }
 
-// // 메뉴를 표시/숨김 처리하는 함수
-// function showMenus() {
-//   for (let i = 0; i < totalMenus; i++) {
-//     if (i < visibleMenus) {
-//       menuB[i].style.display = "flex";
-//     } else {
-//       menuB[i].style.display = "none";
-//     }
-//   }
+  // 더보기/접기 버튼 토글
+  if (totalMenus <= 3) {
+    moreMenuImageBtn.style.display = "none";
+    shutMenuImageBtn.style.display = "none";
+  } else if (visibleMenus >= totalMenus) {
+    moreMenuImageBtn.style.display = "none";
+    shutMenuImageBtn.style.display = "block";
+  } else {
+    moreMenuImageBtn.style.display = "block";
+    shutMenuImageBtn.style.display = "none";
+  }
+}
 
-//   // 더보기/접기 버튼 토글
-//   if (totalMenus <= 3) {
-//     moreMenuImageBtn.style.display = "none";
-//     shutMenuImageBtn.style.display = "none";
-//   } else if (visibleMenus >= totalMenus) {
-//     moreMenuImageBtn.style.display = "none";
-//     shutMenuImageBtn.style.display = "block";
-//   } else {
-//     moreMenuImageBtn.style.display = "block";
-//     shutMenuImageBtn.style.display = "none";
-//   }
-// }
-
-
+});
 
 
 /* ****************************식당 사진 더보기*********************************** */
 
-// const detailImages = document.querySelector(".detail-images");
-// const storeLook = document.querySelector(".store-look");
-// const moreStoreImageBtn = document.querySelector("#moreStoreImageBtn");
-// const shutStoreImageBtn = document.querySelector("#shutStoreImageBtn");
+document.addEventListener('DOMContentLoaded', function() {
+const detailImages = document.querySelector(".detail-images");
+const storeLook = document.querySelector(".store-look");
+const moreStoreImageBtn = document.querySelector("#moreStoreImageBtn");
+const shutStoreImageBtn = document.querySelector("#shutStoreImageBtn");
 
-// // 처음 이미지 6개 
-// let visibleImages = 6;
-// const totalImages = detailImages.querySelectorAll("img").length;
+// 처음 이미지 6개 
+let visibleImages = 6;
+const totalImages = detailImages.querySelectorAll("img").length;
 
-// // 초기에 보여줄 이미지 
-// showImages();
+// 초기에 보여줄 이미지 
+showImages();
 
-// // 더보기 버튼 클릭 시
-// moreStoreImageBtn.addEventListener("click", () => {
-//     visibleImages += 6;
-//     showImages();
-// });
+// 더보기 버튼 클릭 시
+moreStoreImageBtn.addEventListener("click", () => {
+    visibleImages += 6;
+    showImages();
+});
 
-// // 접기 버튼 클릭 시
-// shutStoreImageBtn.addEventListener("click", () => {
-//     visibleImages = 6;
-//     showImages();
-// });
+// 접기 버튼 클릭 시
+shutStoreImageBtn.addEventListener("click", () => {
+    visibleImages = 6;
+    showImages();
+});
 
-// // 이미지 보이기 함수
-// function showImages() {
-//     const images = detailImages.querySelectorAll("img");
-//     images.forEach((image, index) => {
-//         if (index < visibleImages) {
-//             image.style.display = "inline-block";
-//         } else {
-//             image.style.display = "none";
-//         }
-//     });
+// 이미지 보이기 함수
+function showImages() {
+    const images = detailImages.querySelectorAll("img");
+    images.forEach((image, index) => {
+        if (index < visibleImages) {
+            image.style.display = "inline-block";
+        } else {
+            image.style.display = "none";
+        }
+    });
 
-//     // 더보기/접기 버튼 토글
-//     if (totalImages <= 6) {
-//       moreStoreImageBtn.style.display = "none";
-//       shutStoreImageBtn.style.display = "none";
-//   } else if (visibleImages >= totalImages) {
-//       moreStoreImageBtn.style.display = "none";
-//       shutStoreImageBtn.style.display = "inline-block";
-//   } else {
-//       moreStoreImageBtn.style.display = "inline-block";
-//       shutStoreImageBtn.style.display = "none";
-//   }
+    // 더보기/접기 버튼 토글
+    if (totalImages <= 6) {
+      moreStoreImageBtn.style.display = "none";
+      shutStoreImageBtn.style.display = "none";
+  } else if (visibleImages >= totalImages) {
+      moreStoreImageBtn.style.display = "none";
+      shutStoreImageBtn.style.display = "inline-block";
+  } else {
+      moreStoreImageBtn.style.display = "inline-block";
+      shutStoreImageBtn.style.display = "none";
+  }
 
-//   }
+  }
 
-
+});
 
 /*********************************** 리뷰 더보기 ***********************************************/
+document.addEventListener('DOMContentLoaded', function() {
+const reviewContainer = document.querySelector(".review-container");
+const reviews = reviewContainer.querySelectorAll(".review");
+const moreReviewBtn = document.querySelector("#moreReviewBtn");
+const hideReviewBtn = document.querySelector("#hideReviewBtn");
 
-// const reviewContainer = document.querySelector(".review-container");
-// const reviews = reviewContainer.querySelectorAll(".review");
-// const moreReviewBtn = document.querySelector("#moreReviewBtn");
-// const hideReviewBtn = document.querySelector("#hideReviewBtn");
+let visibleReviews = 5;
+const totalReviews = reviews.length;
 
-// let visibleReviews = 5;
-// const totalReviews = reviews.length;
+// 초기 상태 설정
+showReviews();
 
-// // 초기 상태 설정
-// showReviews();
+// 더보기 버튼 클릭 시
+moreReviewBtn.addEventListener("click", () => {
+    visibleReviews += 5;
+    showReviews();
+});
 
-// // 더보기 버튼 클릭 시
-// moreReviewBtn.addEventListener("click", () => {
-//     visibleReviews += 5;
-//     showReviews();
-// });
+// 접기 버튼 클릭 시
+hideReviewBtn.addEventListener("click", () => {
+    visibleReviews = 5;
+    showReviews();
+});
 
-// // 접기 버튼 클릭 시
-// hideReviewBtn.addEventListener("click", () => {
-//     visibleReviews = 5;
-//     showReviews();
-// });
+// 리뷰 보기 함수
+function showReviews() {
+    reviews.forEach((review, index) => {
+        if (index < visibleReviews) {
+            review.style.display = "block";
+        } else {
+            review.style.display = "none";
+        }
+    });
 
-// // 리뷰 보기 함수
-// function showReviews() {
-//     reviews.forEach((review, index) => {
-//         if (index < visibleReviews) {
-//             review.style.display = "block";
-//         } else {
-//             review.style.display = "none";
-//         }
-//     });
+    // 더보기/접기 버튼 토글
+    if (totalReviews <= 5) {
+        moreReviewBtn.style.display = "none";
+        hideReviewBtn.style.display = "none";
+    } else if (visibleReviews >= totalReviews) {
+        moreReviewBtn.style.display = "none";
+        hideReviewBtn.style.display = "block";
+    } else {
+        moreReviewBtn.style.display = "block";
+        hideReviewBtn.style.display = "none";
+    }
+}
 
-//     // 더보기/접기 버튼 토글
-//     if (totalReviews <= 5) {
-//         moreReviewBtn.style.display = "none";
-//         hideReviewBtn.style.display = "none";
-//     } else if (visibleReviews >= totalReviews) {
-//         moreReviewBtn.style.display = "none";
-//         hideReviewBtn.style.display = "block";
-//     } else {
-//         moreReviewBtn.style.display = "block";
-//         hideReviewBtn.style.display = "none";
-//     }
-// }
+});
 
 
 
@@ -621,3 +563,19 @@ reviewDeleteBtns.forEach((btn) => {
 })
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  const hashtags = document.querySelectorAll('.store-hashtag');
+  const maxCount = Math.max(...Array.from(hashtags, tag => parseInt(tag.dataset.count, 10)));
+
+  hashtags.forEach(tag => {
+    const count = parseInt(tag.dataset.count, 10);
+    const gauge = document.createElement('div');
+    gauge.className = 'gauge';
+
+    gauge.style.width = `${(count / maxCount) * 100}%`;
+
+    gauge.style.backgroundColor = `rgb(96, 197, 96)`;
+
+    tag.insertBefore(gauge, tag.firstChild);
+  });
+});

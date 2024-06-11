@@ -67,14 +67,27 @@
 
 
 	<!-- 상점에 보낸 채팅 메세지 삽입 -->
-	<insert id="insertMessage" useGeneratedKeys="true">
+	<insert id="insertToStoreMessage" useGeneratedKeys="true">
 		<selectKey order="BEFORE" resultType="_int" keyProperty="storeMemberNo">
-			SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{targetNo})
+			SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{targetNo}
 		</selectKey>
+		
 	
 		INSERT INTO "MESSAGE"
 		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, 
-		 #{storeMemberNo}
+		 #{memberNo}
+		, #{chattingNo})
+	</insert>
+	
+	<!-- 일반회원에 보낸 채팅 메세지 삽입 -->
+	<insert id="insertToMemberMessage" useGeneratedKeys="true">
+	<selectKey order="BEFORE" resultType="_int" keyProperty="storeMemberNo">
+			SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{targetNo}
+		</selectKey>
+		
+		INSERT INTO "MESSAGE"
+		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, 
+		 #{memberNo}
 		, #{chattingNo})
 	</insert>
 	

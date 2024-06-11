@@ -3,6 +3,7 @@ package com.project.foodpin.store.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
@@ -45,6 +46,10 @@ public interface DetailStoreService {
 	int storeReport(Map<String, Object> map);
 
 
+	/*
+	 * List<Off> storeOffList(String storeNo);
+	 * 
+	 */
 	
 
 

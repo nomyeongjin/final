@@ -59,7 +59,7 @@ public interface MemberMyPageService {
 	int selectReserv(int memberNo);
 
 	// 지난 예약 리뷰 확인용 개수 조
-	int reservReviewCount(int reservNo);
+	int reservReviewCount(Map<String, Object> map);
 
 
 

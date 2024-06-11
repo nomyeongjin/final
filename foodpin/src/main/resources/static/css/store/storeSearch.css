@@ -415,13 +415,13 @@ i{
    align-items: center;
    padding: 0 20px;
    justify-content: center;
-   height: 65%;
+   height: 70%;
    transform: translate(0%);
 
 }
 
 .searchstore-detailcontainer::-webkit-scrollbar {
-  /*  display: none; */
+   display: none;
 }
 
 .searchstore-detailcontainer{
@@ -431,6 +431,88 @@ i{
     justify-content: center;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.searchstore-nameLink{
+   text-decoration: none;
+   font-size: 17px;
+   font-weight: bold;
+   color: rgb(78, 78, 78);
+}
+
+.searchstore-categoryL{
+ font-size: 13px;
+ color: rgb(44, 44, 44);
+}
+.searchstore-categoryL:before{
+   font-family:FontAwesome;
+   content:"\f02c";
+   font-size: 13px;
+   margin-right: 5px;
+   color: var(--main-color);
+
+}
+
+/* 예약 버튼 */
+.storesearch-reservationLink{
+
+color: rgb(49, 204, 49);
+text-decoration: none;
+font-size: 12px;
+
+}
+
+.storesearch-reservationLink:before{
+   font-family:FontAwesome;
+   content:"\f133";
+   font-size: 13px;
+   margin-right: 5px;
+   color: rgb(49, 204, 49);
+}
+
+#searchMemberTel{
+   font-size: 14px;
+  
+}
+#searchMemberTel:before{
+   font-family:FontAwesome;
+   content:"\f095";
+   font-size: 13px;
+   margin-right: 5px;
+   color: var(--main-color)
+}
+
+.searchstore-detailInfo-container{
+   margin-bottom: 10px;
+}
+
+.searchstore-detailInfo-container > *{
+   margin-bottom: 5px;
+}
+
+.searchstore-none{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 330px;
+   overflow-y: hidden;
+}
+
+.more-address{
+
+   display: flex;
+   color: var(--main-color);
+   margin-left: 10px;
+   cursor: pointer;
+ 
+  
+}
+.less-address{
+
+   display: none;
+    margin-left: 10px;
+    cursor: pointer;
+   color: var(--main-color);
 }
 
 /* 새로고침 버튼 */
@@ -454,6 +536,7 @@ i{
 /* 가게 조회 순서 */
 .storelist-typeBtnbox{
    height: 30px;
+   border-bottom: 1px solid var(--main-color);
    margin: 0px 20px 10px 10px;
 }
 
@@ -512,3 +595,36 @@ i{
    color: rgb(252, 57, 57); 
  /*  color: #E14C54; */
 }
+
+
+/* 가게 주소 더보기 */
+.storelocbox-one{
+ display: flex;
+}
+
+#searchDetailLoc{
+ font-size: 14px;
+}
+
+.storelocbox-two > *{
+   font-size: 14px;
+}
+
+.more-address{
+
+   display: flex;
+   color: var(--main-color);
+   margin-left: 10px;
+   cursor: pointer;
+ 
+  
+}
+.less-address{
+
+   display: none;
+    margin-left: 10px;
+    cursor: pointer;
+   color: var(--main-color);
+}
+
+

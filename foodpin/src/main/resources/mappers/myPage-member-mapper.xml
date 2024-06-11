@@ -138,11 +138,13 @@
 		]]>
 	</select>
 	
+	<!-- 예약마다 리뷰 개수 -->
 	<select id="reservReviewCount">
 		SELECT COUNT(*)
 		FROM REVIEW 
-		JOIN RESERVATION USING (STORE_NO)
 		WHERE RESERV_NO = #{reservNo}
+		AND MEMBER_NO = #{memberNo}
+		AND REVIEW_DEL_FL = 'N'
 	</select>
 	
 	<!-- 예약 취소/노쇼 조회 -->

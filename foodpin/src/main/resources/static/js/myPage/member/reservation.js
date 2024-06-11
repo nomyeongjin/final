@@ -23,6 +23,27 @@ cancelBtn.forEach(btn => {
         }
         const reservNo = e.target.dataset.reservNo;
         cancelReservation(reservNo);
+
+        // 알림 보내기 위한 예약시간 형식화
+        let reservDate = e.target.dataset.reservDate;
+
+        // 2024. 06. 13 11:00
+        const date = new Date(reservDate);
+
+        // 요일을 계산
+        const options = { weekday: 'short' };
+        const dayOfWeek = date.toLocaleDateString('ko-KR', options);
+        
+        // 형식화
+        const formattedReservDate =
+          `${reservDate.slice(6, 8)}.${reservDate.slice(10, 12)}(${dayOfWeek}) ${reservDate.slice(13, 18)}`;
+        
+
+        reservDate = formattedReservDate;
+        console.log(formattedReservDate); 
+
+        // 알림 전송
+        sendNotificationFn("cancelReservation", null, reservNo, reservDate, null);
     });
 });
    
@@ -43,3 +64,10 @@ function cancelReservation(reservNo) {
         }
     });
 }
+
+const insertReviewBtn = document.querySelector(".insertReviewBtn");
+insertReviewBtn.addEventListener("click", () => { 
+
+    sendNotificationFn("insertMemberReview", null, memberNo, null, null, memberNickname);
+
+});

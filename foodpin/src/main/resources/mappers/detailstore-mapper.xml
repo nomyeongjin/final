@@ -83,7 +83,7 @@
    <select id="storeDetail" resultMap="store_rm">
    	SELECT STORE_NAME, STORE_INFO, STORE_LOCATION, STORE_STATUS,
        STORE_TEL, OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END, 
-       STORE_CLOSED, STORE_IMG, STORE_NO, 
+       STORE_CLOSED, STORE_IMG, STORE_NO,
 
        (SELECT COUNT(*) 
        FROM "REVIEW"
@@ -117,9 +117,11 @@
    
    <select id="selectImageList" resultType="UploadImage">
      SELECT *
-     FROM "UPLOAD_IMAGE"
-     WHERE STORE_NO = #{storeNo}
-     ORDER BY REVIEW_NO DESC
+     FROM "UPLOAD_IMAGE" U
+     JOIN REVIEW R ON (R.REVIEW_NO = U.REVIEW_NO)
+     WHERE U.STORE_NO = #{storeNo}
+     AND R.REVIEW_DEL_FL = 'N'
+     ORDER BY R.REVIEW_NO DESC
    </select> 
    
    <select id="selectMenuList" resultType="Menu">
@@ -131,13 +133,14 @@
    </select>
    
    <select id="selectStoreHashList" resultType="ReviewHash">
-     
-		SELECT DISTINCT H.HASH_TITLE
+		SELECT H.HASH_TITLE, COUNT(*) HASH_COUNT
 		FROM REVIEW R
 		JOIN REVIEW_HASH RH ON R.REVIEW_NO = RH.REVIEW_NO
 		JOIN HASH H ON RH.HASH_NO = H.HASH_NO
-		WHERE R.STORE_NO =  #{storeNo} 
-		AND REVIEW_DEL_FL ='N' 
+		WHERE R.STORE_NO = #{storeNo} 
+		AND R.REVIEW_DEL_FL = 'N'
+		GROUP BY H.HASH_TITLE
+		ORDER BY HASH_COUNT DESC
    </select>
 
    

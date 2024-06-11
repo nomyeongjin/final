@@ -25,15 +25,14 @@
                             <span th:text="|누적 노쇼 ${noshowCount}회|"></span>
                             <i class="fa-solid fa-circle-exclamation tooltip" >
                                 <span class="tooltip-text">
-                                    노쇼 3회 이상 누적 시 3일 정지 <br>
-                                    노쇼 5회 이상 누적 시 계정 정지
+                                    노쇼 3회 이상 누적 시 계정 정지
                                 </span>
                             </i>
                         </span>
                     </section>
 
                     <section class="myPage-sub-title">
-                        <button class="sub-title-btn" id="confirmReservation">
+                        <button class="sub-title-btn fix" id="confirmReservation">
                             <a href="/myPage/member/reservation/fix">예약 확정</a>
                         </button>
                         <button class="sub-title-btn" id="waitReservation">
@@ -67,7 +66,7 @@
                                             <div class="storeAddress" th:text="*{storeLocation}"></div>
                                         </div>
                                         <span>
-                                            <button class="cancelReservation" th:data-reserv-no="${reservation.reservNo}">예약 취소</button>
+                                            <button class="cancelReservation" th:data-reserv-no="${reservation.reservNo}" th:data-reserv-date="|*{reservation.reservDate} *{reservation.reservTime}|">예약 취소</button>
                                         </span>
                                     </li>
                                 </ul>
