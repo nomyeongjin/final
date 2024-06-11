@@ -145,7 +145,6 @@ const createReservList = (reservStatusFl) => {
       console.log(reservStatusFl);
 
       for(let reserv of reservList) {
-
          const reservCard = document.createElement("section"); // 개별 카드를 구성하는 section
          reservCard.classList.add("reserv-card");
    
@@ -158,16 +157,11 @@ const createReservList = (reservStatusFl) => {
          if(reserv.reservStatusFl == "Y") listTitle.innerText = "확정 예약"; 
          if(reserv.reservStatusFl == "N") listTitle.innerText = "예약 요청"; 
          if(reserv.reservStatusFl == "C") listTitle.innerText = "취소 내역";
+         if(reserv.reservStatusFl == "X") listTitle.innerText = "노쇼 예약";
    
          const reservNo= document.createElement("p");
          reservNo.classList.add('list-title', 'reserv-no');
          reservNo.innerText = reserv.reservNo;
-
-         // const notification = document.createElement("p");
-         // notification.classList.add("fa-solid", "fa-circle");
-      
-         // listTitleArea.append(listTitle, notification);
-
          listTitleArea.append(listTitle, reservNo);
       
          // 예약 내용
@@ -231,7 +225,6 @@ const createReservList = (reservStatusFl) => {
             reservRejectBtn.innerText = "예약 거부";
       
             listBtnArea.append(reservBtn, reservRejectBtn);
-      
             listContent.append(listBtnArea);
          }
 
@@ -241,38 +234,35 @@ const createReservList = (reservStatusFl) => {
             const listBtnArea = document.createElement("div");
             listBtnArea.classList.add("list-btn-area");
       
-            const reservNoshowBtn = document.createElement("button");
-            reservNoshowBtn.classList.add("reserv-noshow-btn");
-            reservNoshowBtn.innerText = "노쇼 등록";
+            if(reserv.reservStatusFl != "X") { // 노쇼 처리된 예약이 아닐때 버튼 생성 + 처리
+               const reservNoshowBtn = document.createElement("button");
+               reservNoshowBtn.classList.add("reserv-noshow-btn");
+               reservNoshowBtn.dataset.memberNo = `${reserv.memberNo}`;
+               reservNoshowBtn.innerText = "노쇼 등록";
 
-            listBtnArea.append(reservNoshowBtn);
-      
-            listContent.append(listBtnArea);
+               listBtnArea.append(reservNoshowBtn);
+               listContent.append(listBtnArea);
 
-            reservNoshowBtn.addEventListener("click", e => {
+               reservNoshowBtn.addEventListener("click", e => {
 
-               const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
-               const memberNo = e.target.closest("section").querySelector(".reserv-no").innerText;
-               console.log(reservNo);
-               fetch("/myPage/store/noshowReserv?reservNo=" + reservNo)
-                  .then(resp => resp.json())
-                  .then(result => {
-      
-                     if (result > 0) {
-                        alert("예약 번호 " + reservNo + "번 노쇼 처리되었습니다.");
-                     } else {
-                        alert("예약 번호 " + reservNo + "번 노쇼 승인을 실패했습니다.");
-                     }
-                  })
-                  .catch(err => console.log(err)); // 예약 승인 처리 fetch
-      
-               // 알림
-               // 우선 주석 처리 해뒀습니다.!!! result 1 : 경고 누적 / result 2 : 탈퇴
-               // sendNotificationFn("confirmReservation", null, reservNo,  reservDate, null);
+                  const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
+                  // console.log(reservNo);
+                  fetch("/myPage/store/noshowReserv?reservNo=" + reservNo + "&memberNo=" + reservNoshowBtn.dataset.memberNo)
+                     .then(resp => resp.json())
+                     .then(result => {
+         
+                        if (result > 0) alert("예약 번호 " + reservNo + "번 노쇼 처리되었습니다.");
+                        else alert("예약 번호 " + reservNo + "번 노쇼 승인을 실패했습니다.");
+                     })
+                     .catch(err => console.log(err)); // 예약 승인 처리 fetch
+         
+                  // 알림
+                  // 우선 주석 처리 해뒀습니다.!!! result 1 : 경고 누적 / result 2 : 탈퇴
+                  // sendNotificationFn("confirmReservation", null, reservNo,  reservDate, null);
+               })
+            } // 노쇼 버튼 생성
+         } // 지난 내역 조회
 
-            })
-         }
-      
          reservCard.append(listTitleArea, listContent);
          listContainer.append(reservCard);
       }
