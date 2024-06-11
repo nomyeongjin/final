@@ -118,7 +118,7 @@ function storelocation() {
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 
-
+     /*현재 내 위치를 기본으로 표시 / 나중에 가게 위치 주소를 좌표로 변경해서 마커로 띄우기*/
     function detaillocation(){
 
         
