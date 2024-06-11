@@ -51,5 +51,24 @@ public class MainController {
 
 		return "common/main";
 	}
+	
+	
+	/*
+	 * // 가게명, 지역, 카테고리로 검색하는 경우
+	 * 
+	 * @GetMapping("/") public String mainSearchRegion(
+	 * 
+	 * ) {
+	 * 
+	 * 
+	 * String path = null;
+	 * 
+	 * path = "store/storeSearch";
+	 * 
+	 * 
+	 * return path;
+	 * 
+	 * }
+	 */
 
 }
