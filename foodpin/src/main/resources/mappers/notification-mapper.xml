@@ -144,4 +144,20 @@
 		WHERE RESERV_NO = #{reservNo}
 	</select>
 	
+	<!-- 회원이 방문 리뷰 작성할 때 필요안 데이터 조회 -->
+	<select id="selectReservationData">
+		SELECT M.MEMBER_NICKNAME , TO_CHAR(R.RESERV_DATE, 'YYYY-MM-DD') "RESERV_DATE", R.RESERV_NO, R.STORE_NO 
+		FROM "RESERVATION" R 
+		JOIN "MEMBER" M  ON (R.MEMBER_NO = M.MEMBER_NO)
+		WHERE RESERV_NO = #{reservNo}
+	</select>
+	
+	<!-- 가게 회원 번호 -->
+	<select id="selectStoreMemberNo">
+		SELECT MEMBER_NO  
+		FROM  "STORE"
+		WHERE STORE_NO = #{storeNo}
+	</select>
+	
+	
 </mapper>

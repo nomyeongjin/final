@@ -123,4 +123,16 @@ public class NotificationServiceImpl implements NotificationService{
 	public Reservation selectNoshowData(int reservNo) {
 		return mapper.selectNoshowData(reservNo);
 	}
+	
+	// 회원이 방문 리뷰 작성할 때 필요안 데이터 조회
+	@Override
+	public Reservation selectReservationData(String pkNo) {
+		return mapper.selectReservationData(pkNo);
+	}
+	
+	// 가게 회원 번호
+	@Override
+	public int selectStoreMemberNo(String storeNo) {
+		return mapper.selectStoreMemberNo(storeNo);
+	}
 }

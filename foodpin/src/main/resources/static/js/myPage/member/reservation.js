@@ -65,9 +65,40 @@ function cancelReservation(reservNo) {
     });
 }
 
+// 알림 보내기 위한 데이터
+
+const memberNickname = loginMember.memberNickname;
+// const memberNo = loginMember.memberNo;
+
+let reservDate = document.querySelector(".reservationDate").innerText;
+const reservTime = document.querySelector(".reservationTime").innerText;
+
+const date = new Date(reservDate);
+
+const options = { weekday: 'short' };
+const dayOfWeek = date.toLocaleDateString('ko-KR', options);
+
+// 형식화
+const formattedReservDate = `${reservDate.slice(6, 8)}.${reservDate.slice(10, 12)}(${dayOfWeek}) ${reservTime}`;
+
+reservDate = formattedReservDate;
+console.log(reservDate);
+
+// 타임리프로 작성된 a태그 경로에서 reservNo 가져오기
+const reviewLink = document.querySelector('.insertReviewBtn');
+
+const href = reviewLink.getAttribute('href');
+
+const parts = href.split('/');
+const reservNo = parts[parts.length - 1];
+
+console.log(reservNo);
+
 const insertReviewBtn = document.querySelector(".insertReviewBtn");
 insertReviewBtn.addEventListener("click", () => { 
 
-    sendNotificationFn("insertMemberReview", null, memberNo, null, null, memberNickname);
+    sendNotificationFn("insertMemberReview", null, reservNo, reservDate, null, memberNickname);
 
 });
+
+
