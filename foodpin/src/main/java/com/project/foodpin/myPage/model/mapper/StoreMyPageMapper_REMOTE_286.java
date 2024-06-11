@@ -170,25 +170,17 @@ public interface StoreMyPageMapper {
 	 */
 	int rejectReservStatus(int reservNo);
 	
-	/** 노쇼시 예약 상태 변경 (X)
-	 * @param map
-	 * @return
-	 */
-	int noshowReservStatus(Map<String, Object> map);
-	
 	/** 회원 경고 횟수 조회
 	 * @param map
 	 * @return
 	 */
-	int selectFlag(Map<String, Object> map);
+	Map<String, Integer> selectFlag(Map<String, Object> map);
 
-	
 	/** 경고 횟수 증가
 	 * @param map
 	 * @return
 	 */
 	int updateFlag(Map<String, Object> map);
-	
 
 	/** 3번 이상시 회원 탈퇴
 	 * @param map
@@ -275,6 +267,45 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	String selectStoreImg(String storeNo);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

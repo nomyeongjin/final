@@ -277,4 +277,55 @@ public interface StoreMyPageMapper {
 	String selectStoreImg(String storeNo);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<<<<<<< HEAD
+
+	
+
+
+
+
+
+
+
+=======
+>>>>>>> 5d035d79a5df3e53224ed37b5d244db8311d4414
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

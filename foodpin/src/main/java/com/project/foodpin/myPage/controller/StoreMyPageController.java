@@ -328,10 +328,10 @@ public class StoreMyPageController {
 	 */
 	@ResponseBody
 	@GetMapping("noshowReserv")
-	public int noshowReserv(@SessionAttribute("loginMember") Member loginMember, @RequestParam("reservNo") int reservNo) {
+	public int noshowReserv(@RequestParam("reservNo") int reservNo, @RequestParam("memberNo") int memberNo) {
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("memberNo", loginMember.getMemberNo());
+		map.put("memberNo", memberNo);
 		map.put("reservNo", reservNo);
 		
 		return service.noshowReserv(map);

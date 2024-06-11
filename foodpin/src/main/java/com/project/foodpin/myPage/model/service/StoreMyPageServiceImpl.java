@@ -355,43 +355,19 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	@Override
 	public int noshowReserv(Map<String, Object> map) {
 		
-		// 회원 경고 횟수 조회
-		int result = 0;
-		Map<String, Integer> member = mapper.selectFlag(map);
+		int memberFlag = mapper.selectFlag(map); // 회원 경고 횟수 조회
 		
-		int memberNo = member.get(0) ;
-		int memberFlag = member.get(1);
+		int result = mapper.noshowReservStatus(map); // 노쇼 상태로 변경
 		
-		
-		if(memberFlag < 3) { // 경고 횟수 증가
-			memberFlag++;
-			map.put("memberFlag", memberFlag);
-			map.put("memberNo", memberNo);
-			mapper.updateFlag(map); 
+		if(result > 0) {
 			
-			result = 1;
+			if(memberFlag < 3) { // 경고 횟수 증가
+				memberFlag++;
+				map.put("memberFlag", memberFlag);
+				result = mapper.updateFlag(map); 
+			}
+			else result = mapper.updateReject(map); // 3번 이상시 회원 탈퇴
 		}
-		
-		else {// 3번 이상시 회원 탈퇴
-			mapper.updateReject(map); 
-			result = 2;
-		}
-		
 		return result;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
