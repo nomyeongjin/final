@@ -169,14 +169,11 @@ header {
 
 /* 카테고리 박스 */
 .main-category-button{
-   height: 200px;
-   width: 800px;
+   width: 1300px;
    display: flex;
    flex-wrap: wrap; /* 요소들이 넘칠 때 가로 줄 바꿈 */
    justify-content: center;
    align-items: center;
-   margin-top: 15px;
-   
 }
 
   
@@ -186,24 +183,23 @@ header {
    display: inline-block;
    width: 100px;
    height: 40px;
+   border-radius: 10px;
    background:rgb(255, 255, 255);
    color: black;
    z-index: 1;
-   font-size: 12px;
-  /*  border: 1px solid var(--main-color);
-   border-radius: 5px; */
-   border: none;
-   border-top: 1px solid var(--main-color);
-   border-bottom: 1px solid var(--main-color);
+   border: 1px solid var(--main-color);
    position: relative;
    flex-basis: calc(15% - 10px);/* 버튼 너비 계산: 20% 너비에서 간격을 제외한 값 */
-  margin: 15px;
+   margin: 15px;
+   transition-duration: 0.2s;
+   transition-timing-function: linear;
+   transition-delay: 0s;
+   transition-property: all;
 }
 
 .mainCatBtn:hover {
    background-color: #E14C54;
    color: white;
-   transition: 0.3s cubic-bezier(0.77, 0, 0.175, 1); 
 }
 
 .mainCatBtn:after {
@@ -213,10 +209,10 @@ header {
    height: 100%;
    top: 0;
    right: 0;
+   border-radius: 10px;
    z-index: -1;
    background: #E14C54;
    color: white;
-   transition: all 0.4s ease;
 }
 
 .mainCatBtn:hover {
