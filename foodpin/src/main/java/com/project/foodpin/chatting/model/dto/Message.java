@@ -18,5 +18,7 @@ public class Message {
     private int senderNo;
     private int storeMemberNo;
     private int type;
+    private String storeName;
+    private String storeImg;
     
 }

@@ -46,12 +46,33 @@
 		ORDER BY MAX_MESSAGE_NO DESC NULLS LAST
 	</select>
 
+	<!-- 관리자 채팅 확인 -->
+	<select id="checkAskChattingNo" resultType="_int">
+		SELECT NVL(SUM(CHATTING_NO),0) CHATTING_NO FROM CHATTING_ROOM
+		WHERE (OPEN_MEMBER = #{loginMemberNo} AND PARTICIPANT = 3)
+		OR (OPEN_MEMBER = 3 AND PARTICIPANT = #{loginMemberNo})
+	</select>
+	
+	<!-- 관리자 채팅방 생성 -->
+	<insert id="createAskChattingRoom" parameterType="map" useGeneratedKeys="true">
+	
+		<selectKey keyProperty="chattingNo" order="BEFORE" resultType="_int">
+			SELECT SEQ_ROOM_NO.NEXTVAL FROM DUAL
+		</selectKey>
+	
+		INSERT INTO CHATTING_ROOM
+		VALUES(#{chattingNo}, DEFAULT, #{loginMemberNo}, 3)
+	</insert>
+	
 	<!-- 채팅 확인 -->
 	<select id="checkChattingNo" resultType="_int">
 		SELECT NVL(SUM(CHATTING_NO),0) CHATTING_NO FROM CHATTING_ROOM
-		WHERE (OPEN_MEMBER = #{loginMemberNo} AND PARTICIPANT = (SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{storeNo}))
-		OR (OPEN_MEMBER = (SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{storeNo}) AND PARTICIPANT = #{loginMemberNo})
+		
+		WHERE (OPEN_MEMBER = #{loginMemberNo} AND PARTICIPANT =  #{targetNo})
+		OR (OPEN_MEMBER = #{targetNo} AND PARTICIPANT = #{loginMemberNo})
+		
 	</select>
+	
 	
 	<!-- 채팅방 생성 -->
 	<insert id="createChattingRoom" parameterType="map" useGeneratedKeys="true">
@@ -61,30 +82,13 @@
 		</selectKey>
 	
 		INSERT INTO CHATTING_ROOM
-		VALUES(#{chattingNo}, DEFAULT, #{loginMemberNo}, (SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{storeNo}))
+		VALUES(#{chattingNo}, DEFAULT, #{loginMemberNo}, #{targetNo})
 	</insert>
 	
 
 
 	<!-- 상점에 보낸 채팅 메세지 삽입 -->
-	<insert id="insertToStoreMessage" useGeneratedKeys="true">
-		<selectKey order="BEFORE" resultType="_int" keyProperty="storeMemberNo">
-			SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{targetNo}
-		</selectKey>
-		
-	
-		INSERT INTO "MESSAGE"
-		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, 
-		 #{memberNo}
-		, #{chattingNo})
-	</insert>
-	
-	<!-- 일반회원에 보낸 채팅 메세지 삽입 -->
-	<insert id="insertToMemberMessage" useGeneratedKeys="true">
-	<selectKey order="BEFORE" resultType="_int" keyProperty="storeMemberNo">
-			SELECT MEMBER_NO FROM STORE WHERE STORE_NO = #{targetNo}
-		</selectKey>
-		
+	<insert id="insertMessage" useGeneratedKeys="true">
 		INSERT INTO "MESSAGE"
 		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, 
 		 #{memberNo}
@@ -102,9 +106,10 @@
 
 	<!-- 채팅방 메세지 조회 -->
 	<select id="selectMessageList" resultType="Message">
-		SELECT MESSAGE_NO, MESSAGE_CONTENT, READ_FL, MEMBER_NO, CHATTING_NO,
+		SELECT MESSAGE_NO, MESSAGE_CONTENT, READ_FL, MEMBER_NO, CHATTING_NO,STORE_NAME, STORE_IMG,
 		TO_CHAR(SEND_TIME, 'HH24:MI') SEND_TIME 
 		FROM MESSAGE
+		LEFT JOIN "STORE" USING(MEMBER_NO)
 		WHERE CHATTING_NO  = #{chattingNo}
 		ORDER BY MESSAGE_NO
 	</select>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 문의</title>
+    <link rel="stylesheet" href="/css/chatting/chatting-style.css">
+
+    <th:block th:replace="~{common/common}"></th:block>
+
+</head>
+<body>
+    <main id="main" th:data-chattingNo="${chattingNo}">
+        <th:block th:replace="~{common/header}">header.html</th:block>
+
+        <h2>관리자 문의</h2>
+        <div class="chatting-container">
+            
+
+            <!-- 채팅 영역-->
+
+                <div class="chatting-area">
+                    <ul class="display-chatting">
+                        <!-- <li class="my-chat">
+                            <span class="chatDate">14:01</span>                                                            
+                            <p class="chat">안녕하세요?</p>
+                        </li>
+                        
+                        <li class="target-chat">
+                            <img src="/images/user.png">
+                            
+                            <div>
+                                <b>상대방</b>	<br>
+                                <p class="chat">
+안녕하세요?? 반갑습니다.
+ㅎㅎㅎㅎㅎ
+                                </p>
+                                <span class="chatDate">14:05</span>
+                            </div>
+                        </li>-->
+                       
+                    </ul>
+
+
+
+                    <!-- 채팅 입력 부분 -->
+                    <div class="input-area">
+                        <textarea id="inputChatting" rows="1"></textarea>
+                        <button id="send">전송</button>
+                    </div>
+                </div>
+        </div>
+
+        
+    </main>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+
+
+    <!-- https://github.com/sockjs/sockjs-client -->
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	<script th:inline="javascript">
+		const userDefaultImage = /*[[#{user.default.image}]]*/ '기본 이미지';
+
+        const loginMemberNo = /*[[${session.loginMember.memberNo}]]*/ '로그인 멤버 번호';
+        
+    </script>
+
+
+    <script src="/js/chatting/askChat.js"></script>
+
+</body>
+</html>

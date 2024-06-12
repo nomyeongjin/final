@@ -39,7 +39,7 @@
 		#{memberId},
 		#{memberEmail},
 		#{memberName},
-		NULL,
+		#{storeName},
 		#{memberPw},
 		#{memberTel},
 		'/images/user.png',

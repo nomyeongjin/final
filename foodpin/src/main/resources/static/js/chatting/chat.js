@@ -372,7 +372,7 @@ function chattingEnter(e){
 	console.log(e.target); // 실제 클릭된 요소
 	console.log(e.currentTarget); // 이벤트 리스트가 설정된 요소
 
-	const targetNo = e.currentTarget.getAttribute("data-id");
+	const targetNo = e.currentTarget.getAttribute("target-no");
 
 	fetch("/chatting/enter?targetNo="+targetNo)
 	.then(resp => resp.text())
@@ -387,10 +387,10 @@ function chattingEnter(e){
 			for(let item of itemList) {		
 				if(item.getAttribute("chat-no") == chattingNo){
 					item.focus();
-					item.click();
-					addTargetPopupLayer.classList.toggle("popup-layer-close");
-					targetInput.value = "";
-					resultArea.innerHTML = "";
+					// item.click();
+					// addTargetPopupLayer.classList.toggle("popup-layer-close");
+					// targetInput.value = "";
+					// resultArea.innerHTML = "";
 					return;
 				}
 			}
