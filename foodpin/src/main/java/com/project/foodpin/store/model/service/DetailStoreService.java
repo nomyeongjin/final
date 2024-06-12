@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.project.foodpin.myPage.model.dto.Off;
+import com.project.foodpin.review.model.dto.Hash;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
@@ -46,10 +47,20 @@ public interface DetailStoreService {
 	int storeReport(Map<String, Object> map);
 
 
-	/*
-	 * List<Off> storeOffList(String storeNo);
-	 * 
+	/** 가게 해시태그 검색
+	 * @param hashNo
+	 * @return
 	 */
+	List<Store> hashSearchStore(String hashNo);
+
+
+	/** 가게 해시태그 검색(해시태그 내용)
+	 * @param hashNo
+	 * @return
+	 */
+	Hash hashTitle(String hashNo);
+
+
 	
 
 

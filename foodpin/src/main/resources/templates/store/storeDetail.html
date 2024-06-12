@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>가게 상세 조회 페이지</title>
+    <title th:text="${store.storeName}">가게 상세 조회 페이지</title>
 
      <!-- templetes/common/common.html  조각 추가 -->
      <th:block th:replace="~{common/common}"></th:block>
@@ -82,12 +82,12 @@
     
                                     </th:block>
                                 
-                                           <!-- 좋아요 개수 -->
-                                           <th:block th:if="${session.loginMember?.memberCode !=1}">
-                                            <i class="fa-solid fa-heart"> </i>
-                                           </th:block>
-                                           <!-- &nbsp; -->
-                                           <span id="storeLikeCount" th:text="*{likeCount}">0</span>
+                                        <!-- 좋아요 개수 -->
+                                        <th:block th:if="${session.loginMember?.memberCode !=1}">
+                                        <i class="fa-solid fa-heart"> </i>
+                                        </th:block>
+                                        <!-- &nbsp; -->
+                                        <span id="storeLikeCount" th:text="*{likeCount}">0</span>
                                     
                                    
                                 
@@ -278,11 +278,11 @@
                      <!-- 가게 예약 버튼-->
                      <div class="storedetail-reservationbuttonbox">
                         <!-- 클릭하면 예약하기 페이지로 이동 -->
-                        <th:block th:if="${session.loginMember?.memberCode==1 || session.loginMember==null}">
+                        <th:block th:if="${session.loginMember?.memberCode==1 && session.loginMember?.memberFlag < 3 || session.loginMember==null}">
                             <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation'" id="storereservationbutton">예약하기</a>
                         </th:block>
 
-                        <th:block th:unless="${session.loginMember?.memberCode==1|| session.loginMember==null}">
+                        <th:block th:unless="${session.loginMember==null || (session.loginMember?.memberCode == 1 and session.loginMember?.memberFlag < 3)}">
                             <a href="/" id="storereservationbutton">예약하기</a>
                         </th:block>
 
@@ -503,16 +503,13 @@
 
                 <!-- 해시태그(댓글에 달린 해시들) -->
 
-                <div class="storedetail-hashtagcontainer" >
-
-                    <th:block th:each="hash:${store.storeHashList}" >
+                <div class="storedetail-hashtagcontainer">
+                    <th:block th:each="hash : ${store.storeHashList}">
                         <div class="store-hashtag" data-count="${hash.hashCount}">
-                            <span id="storeHashT" th:text="${hash.hashTitle}">가게 해시태그</span>
+                            <a th:href="'/store/searchStore/'+ ${hash.hashNo}" id="storeHashT" th:text="${hash.hashTitle}">가게 해시태그</a>
                             <span id="storeHashC" th:text="${hash.hashCount}"></span>
                         </div>
                     </th:block>
-                   
-                    
                 </div>
 
             </div>
@@ -698,7 +695,7 @@
 
                                 <div class="report-area" th:if="${session.loginMember}">
                                     <button type="button" class="reviewReport"  
-                                        th:if="${session.loginMember}" 
+                                        th:if="${session.loginMember != null and review.memberNo != session.loginMember?.memberNo}" 
                                         th:attr="data-review-no=*{reviewNo}">🚨신고하기
                                     </button>
                                 </div>
@@ -762,6 +759,7 @@
     <script th:inline="javascript">
         const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원";
         const memberCode = /*[[${session.loginMember?.memberCode}]]*/ "회원코드";
+        const memberFlag = /*[[${session.loginMember?.memberFlag}]]*/ "회원 경고횟수";
 
         const storeMaxTable = /*[[${store.storeMaxTable}]]*/ "최대 예약 팀 수(테이블)"
         const storeNo = /*[[${store.storeNo}]]*/ "사업자등록번호"
@@ -780,7 +778,7 @@
         <a href="#bodyTop"><i class="fa-solid fa-angles-up"></i></a>
       
         
-        <a href="/chatting/chat"><i class="fa-regular fa-comment"></i></a>
+        <a href="/chatting/askChat"><i class="fa-solid fa-headset"></i></a>
         
         <a href="/store/storeSearch"><i class="fa-solid fa-location-dot"></i></a>
         
@@ -798,6 +796,7 @@
         const storeMemberNo = /*[[${store.memberNo}]]*/ '사업자번호';
         const loginMemberNickname = /*[[${session.loginMember?.memberNickname}]]*/ '회원 이름';
         const type = /*[[${session.loginMember?.memberCode}]]*/ '멤버 타입';
+        const storeImg = /*[[${store.storeImg}]]*/ '가게 이미지';
     </script>
 
     <script src="/js/reservation/reservation.js"></script>

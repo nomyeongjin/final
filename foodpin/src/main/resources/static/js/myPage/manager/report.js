@@ -31,20 +31,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* 리뷰 신고 처리 */
+
 const deleteReview = document.querySelectorAll(".deleteReview");
 const notReport = document.querySelectorAll(".notReport");
 
+// const storeName = document.querySelector(".request-category").innerText;
+
+// let reportDate = document.querySelector(".request-date").innerText;
+
 deleteReview.forEach(btn => {
     btn.addEventListener("click", e => {
+
         const reportNo = e.target.dataset.reportNo;
+        const storeName = e.target.dataset.requestCategory;
+        const reportDate = e.target.dataset.requestDate;
         deleteReport(reportNo);
+
+        sendNotificationFn("reviewReportDeleteReview", null, reportNo, null, storeName, null, reportDate);
+        
     });
 });
 
+// 신고 불충분
 notReport.forEach(btn => {
     btn.addEventListener("click", e => {
         const reportNo = e.target.dataset.reportNo;
+        const storeName = e.target.dataset.requestCategory;
+        const reportDate = e.target.dataset.requestDate;
         notReportReview(reportNo);
+
+        sendNotificationFn("reviewReportComplete", null, reportNo, null, storeName, null, reportDate);
+
     });
 });
 

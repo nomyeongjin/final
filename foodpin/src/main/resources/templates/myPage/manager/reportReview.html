@@ -55,8 +55,8 @@
                                         <span class="requestStoreTel" th:text="|가게번호 : *{storeTel}|"></span>
                                     </div>
                                     <span>
-                                        <button class="completeBtn deleteReview " th:data-report-no="${report.reportNo}">삭제처리</button>
-                                        <button class="completeBtn notReport" th:data-report-no="${report.reportNo}">불충분</button>
+                                        <button class="completeBtn deleteReview " th:data-report-no="${report.reportNo}" th:data-request-date="${report.reportDate}" th:data-request-category="${report.storeName}">삭제처리</button>
+                                        <button class="completeBtn notReport" th:data-report-no="${report.reportNo}" th:data-request-date="${report.reportDate}" th:data-request-category="${report.storeName}">불충분</button>
                                     </span>
                                 </div>
                             </th:block>

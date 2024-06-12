@@ -32,6 +32,13 @@ public class SearchStoreController {
 
 	private final SearchStoreService service;
 
+
+	@GetMapping("storeSearch")
+	public String storeSearch() {
+		return "/store/storeSearch";
+	}
+	
+
 	// 메인의 카테고리 코드를 pathvariable로 가져와 해당하는 가게 리스트 select해서 보내주기
 	@GetMapping("storeSearch/{categoryCode}")
 	public String storeDetail(@PathVariable("categoryCode") int categoryCode,

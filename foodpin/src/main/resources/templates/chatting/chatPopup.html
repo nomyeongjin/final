@@ -11,53 +11,55 @@
 
     <main th:data-chattingNo="${chattingNo}" id="main">
         <div class="chatting-area">
-            <ul class="display-chatting">
-
-                <th:block th:each="msg : ${messageList}" th:if="${msg.chattingNo} == ${chattingNo}" th:object="${msg}">
-                    <li  class="target-chat" th:if="${msg.memberNo} != ${session.loginMember.memberNo}">
-                        <!-- <img th:src="${msg.profileImg}"> -->
-                        <div>
-                            <!-- <b th:text="${msg.storeName}"></b> -->
-                            <p class="chat" th:text="*{messageContent}"></p>
+           <div>
+                <ul class="display-chatting">
+    
+                    <th:block th:each="msg : ${messageList}" th:if="${msg.chattingNo} == ${chattingNo}" th:object="${msg}">
+                        <li  class="target-chat" th:if="${msg.memberNo} != ${session.loginMember.memberNo}">
+                            <img th:src="${msg.storeImg}">
+                            <div>
+                                <b th:text="${msg.storeName}"></b><br>
+                                <p class="chat" th:text="*{messageContent}"></p>
+                                <span class="chatDate" th:text="*{sendTime}">14:01</span>
+                            </div>
+                        </li>
+                        <li class="my-chat" th:if="${msg.memberNo} == ${session.loginMember.memberNo}">
                             <span class="chatDate" th:text="*{sendTime}">14:01</span>
-                        </div>
+                            <p class="chat" th:text="*{messageContent}"></p>
+                        </li>
+    
+                    </th:block>
+    
+                    <!-- <li class="my-chat">
+                        <span class="chatDate">14:01</span>
+                        <p class="chat">안녕하세요?</p>
                     </li>
-                    <li class="my-chat" th:if="${msg.memberNo} == ${session.loginMember.memberNo}">
-                        <span class="chatDate" th:text="*{sendTime}">14:01</span>
-                        <p class="chat" th:text="*{messageContent}"></p>
-                    </li>
-
-                </th:block>
-
-                <!-- <li class="my-chat">
-                    <span class="chatDate">14:01</span>
-                    <p class="chat">안녕하세요?</p>
-                </li>
-                
-                <li class="target-chat">
-                    <img src="/images/user.png">
                     
-                    <div>
-                        <b>상대방</b>	<br>
-                        <p class="chat">
-    안녕하세요?? 반갑습니다.
-    ㅎㅎㅎㅎㅎ
-                        </p>
-                        <span class="chatDate">14:05</span>
-                    </div>
-                </li> -->
-               
-            </ul>
-    </main>
-
-
-
-        <!-- 채팅 입력 부분 -->
-        <div class="input-area">
-            <textarea id="inputChatting" rows="3"></textarea>
-            <button id="send">전송</button>
-        </div>
+                    <li class="target-chat">
+                        <img src="/images/user.png">
+                        
+                        <div>
+                            <b>상대방</b>	<br>
+                            <p class="chat">
+        안녕하세요?? 반갑습니다.
+        ㅎㅎㅎㅎㅎ
+                            </p>
+                            <span class="chatDate">14:05</span>
+                        </div>
+                    </li> -->
+                   
+                </ul>
+            
+            
+            
+            <!-- 채팅 입력 부분 -->
+            <div class="input-area">
+                <textarea id="inputChatting" rows="3"></textarea>
+                <button id="send">전송</button>
+            </div>
+           </div>
     </div>
+</main>
 
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 	<script th:inline="javascript">
@@ -67,10 +69,14 @@
 
         const messageList = /*[[${messageList}]]*/ '메시지 목록';
 
-        const targetNo = /*[[${storeNo}]]*/ '가게 번호';
+        const targetNo = /*[[${storeMemberNo}]]*/ '가게사장번호';
         
         const type = /*[[${session.loginMember?.memberCode}]]*/ '멤버 타입';
         
+        const storeImg = window.opener.document.querySelector(".storedetail-thumbnail").getAttribute("src");
+
+        const storeName = window.opener.document.querySelector("#storeName").innerText;
+
 	</script>
 
     <script src="/js/chatting/chatPopup.js"></script>

@@ -37,16 +37,16 @@ public class ChattingController {
 	/** 팝업 채팅 화면 이동
 	 * @return
 	 */
-	@GetMapping("chatPopup/{storeNo}")
+	@GetMapping("chatPopup/{storeMemberNo}")
 	public String chatPopup(
-			@PathVariable("storeNo") String storeNo,
+			@PathVariable("storeMemberNo") String targetNo,
 			@SessionAttribute("loginMember") Member loginMember,
 			Model model
 			) {
 		
         Map<String, Object> map = new HashMap<String, Object>();
         
-        map.put("storeNo", storeNo);
+        map.put("targetNo", targetNo);
         map.put("loginMemberNo", loginMember.getMemberNo());
         
         int chattingNo = service.checkChattingNo(map);
@@ -63,6 +63,35 @@ public class ChattingController {
         
 		return "chatting/chatPopup";
 	}
+	
+	/** 관리자 팝업 채팅 화면 이동
+	 * @return
+	 */
+	@GetMapping("askChat")
+	public String askChat(
+			@SessionAttribute("loginMember") Member loginMember,
+			Model model
+			) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("loginMemberNo", loginMember.getMemberNo());
+		
+		int chattingNo = service.checkAskChattingNo(map);
+		
+		if(chattingNo == 0) {
+			chattingNo = service.createAskChattingRoom(map);
+		}else {
+			List<Message> messageList = service.selectMsgList(chattingNo);
+			model.addAttribute("messageList", messageList);
+			
+		}
+		
+		model.addAttribute("chattingNo", chattingNo);
+		
+		return "chatting/askChat";
+	}
+	
 	
 	
 	/** 채팅 화면 이동

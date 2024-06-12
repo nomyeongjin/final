@@ -43,10 +43,11 @@ public class MainController {
 		List<Store> storeList = service.selectMainStore();
 		
 		List<Category> mainCategoryList = service.selectMainCategory();
-
+		
 		if (!storeList.isEmpty()) {
 			model.addAttribute("storeList",storeList);
 		}
+		
 		model.addAttribute("mainCategoryList",mainCategoryList);
 
 		return "common/main";

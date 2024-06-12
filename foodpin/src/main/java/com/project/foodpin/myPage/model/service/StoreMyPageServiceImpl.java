@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.foodpin.common.util.Utility;
@@ -20,6 +22,7 @@ import com.project.foodpin.myPage.model.mapper.StoreMyPageMapper;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewReply;
+import com.project.foodpin.store.model.dto.Category;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.dto.StoreCategory;
@@ -85,27 +88,75 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		String updatePath = "";
 		String rename = "";
 		
-		// 이미지 그대로거나 삭제된 경우
-		if(inputStore.getStoreImgInput() == null) {
-			
-			if(inputStore.getImgStatus() == -1) updatePath = mapper.selectStoreImg(inputStore.getStoreNo());
-			
-			else if(inputStore.getImgStatus() == 0) updatePath = null; 
-			
-		}	
+
 		// 변경된 이미지가 있는 경우
-		else if( !inputStore.getStoreImgInput().isEmpty()) { 
+		if( !inputStore.getStoreImgInput().isEmpty()) { 
 			
 			rename = Utility.fileRename(inputStore.getStoreImgInput().getOriginalFilename());
 			updatePath = storeWebPath + rename;
 		} 
+		
+		// 카테고리 변경
+		
+		
+		
+		Map<String, Object> categoryMap = new HashMap<>();
+		
+		categoryMap.put("storeNo", inputStore.getStoreNo());
+		
+		
+		
+
+//		for(int i = 0; i < categorys.length; i++) {
+//			categorys[i] = categorys[i].substring(0, 1);
+//		}
+		
+//		StoreCategory.setCategoryCode(int.join("/", categorys));
+		
+		
+		int categoryCode = Integer.parseInt(inputStore.getCategorys().split("/")[0]);
+		
+		
+//		List<StoreCategory> categorys = parseInt(inputStore.getCategorys().split("/"));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//				;
+//		for(StoreCategory ctg : categorys) {
+//			
+//			mapper.categoryDelete(data);
+//			mapper.categoryUpdate(ctg);
+//		}
+		
+		
+		
+		
+		
+		
+		
+
+		
 
 		inputStore.setStoreImg(updatePath);
 		
 		int result = mapper.storeInfoUpdate(inputStore);
 		
 		// 변경된 이미지가 있는 경우만 이미지 파일 저장
-		if(inputStore.getImgStatus() == 1) { 
+		if(result > 0 || inputStore.getImgStatus() == 1) {
+			
+		} 
 			
 			try {
 				inputStore.getStoreImgInput().transferTo(new File(storeFolderPath + rename));
@@ -114,7 +165,8 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 				
 				e.printStackTrace();
 			} 
-		}
+
+
 		
 		return result;
 	}
@@ -167,6 +219,24 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 			}
 			
 		}
+		return result;
+	}
+	
+	// 선택 변경 
+	@Override
+	@ResponseBody
+	public int storeInfoUpdateCheck(@RequestBody Store data) {
+		
+		List<StoreCategory> categorys = data.getStoreCategoryList();
+		
+		for(StoreCategory ctg : categorys) {
+			
+			mapper.categoryDelete(data);
+			mapper.categoryUpdate(ctg);
+		}
+		
+		int result = mapper.storeStautusUpdate(data);
+		
 		return result;
 	}
 
@@ -361,13 +431,13 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		
 		if(result > 0) {
 			
-			if(memberFlag < 3) { // 경고 횟수 증가
-				memberFlag++;
-				map.put("memberFlag", memberFlag);
-				result = mapper.updateFlag(map); 
-			}
-			else result = mapper.updateReject(map); // 3번 이상시 회원 탈퇴
+			// 경고 횟수 증가
+			memberFlag++;
+			map.put("memberFlag", memberFlag);
+			result = mapper.updateFlag(map); 
 		}
 		return result;
 	}
+
+
 }

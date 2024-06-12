@@ -44,7 +44,7 @@
          <div class="myPage-content-container">
             
             <!-- 사장님 정보 확인란 -->
-            <form action="/myPage/store/ceoInfoUpdate" method="POST" class="ceo-info-container" th:object="${member}">
+            <form action="/myPage/store/ceoInfoUpdate" id="ceoInfoUpdate" method="POST" class="ceo-info-container" th:object="${member}">
                <div class="ceoInfo-input-area">
                   <label for="memberEmail">이메일</label>
                   <input id="memberEmail" name="memberEmail" th:value="*{memberEmail}"></input>
@@ -69,7 +69,7 @@
    </main>
 
    <script th:inline="javascript">
-      const = /*[[${session.loginMember.memberNo}]]*/ "회원 번호";
+      const memberNumber = /*[[${session.loginMember.memberNo}]]*/ "회원 번호";
   </script>
 
    <!-- templetes/common/footer.html  조각 추가 -->

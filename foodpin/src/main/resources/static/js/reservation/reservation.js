@@ -6,7 +6,7 @@ if(storereservationbutton != null) {
     storereservationbutton.addEventListener("click", e => {
 
         // 로그인한 회원의 memberCode가 1이 아닌 경우
-        if(memberCode !== 1 && loginMember != null){
+        if(memberCode != 1 && loginMember != null || memberFlag > 2){
             // alert("현재 로그인한 정보로 접근할 수 없는 서비스 입니다.");
             Swal.fire({
                 title: "",

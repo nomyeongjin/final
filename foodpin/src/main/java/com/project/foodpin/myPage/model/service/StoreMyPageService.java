@@ -49,9 +49,16 @@ public interface StoreMyPageService {
 	 */
 	int storeInfoUpdate(Store inputStore);
 	
+	/** 가게 정보 수정
+	 * @param inputStore
+	 * @param storeImg 
+	 * @return
+	 */
+	int storeInfoUpdateCheck(Store data);
+	
 	// ------ 메뉴 ------
 	
-	/** 메뉴 조회
+	/** 메뉴 조회 
 	 * @param memberNo
 	 * @return menuList
 	 */

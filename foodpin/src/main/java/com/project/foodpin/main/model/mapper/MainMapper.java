@@ -15,4 +15,6 @@ public interface MainMapper {
 
 	List<Category> selectMainCategoryList();
 
+	int likeCount(String storeNo);
+
 }

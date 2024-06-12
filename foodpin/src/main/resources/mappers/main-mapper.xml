@@ -2,21 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.project.foodpin.main.model.mapper.MainMapper">
 
- <select id="selectStoreList"  resultType="store">
-    SELECT STORE_IMG, STORE_NAME, STORE_NO
-   FROM "STORE"
-   JOIN "MEMBER" USING (MEMBER_NO)
-   WHERE STORE_CLOSED='N'
-   AND MEMBER_STATUS='N'
-   ORDER BY STORE_NO DESC
+	<select id="selectStoreList"  resultType="store">
+    	SELECT STORE_IMG, STORE_NAME, STORE_NO
+		FROM "STORE"
+   		JOIN "MEMBER" USING (MEMBER_NO)
+   		WHERE STORE_CLOSED='N'
+   		AND MEMBER_STATUS='N'
+   		ORDER BY STORE_NO DESC
+ 	</select>
  
- </select>
+ 	<select id="selectMainCategoryList" resultType="Category">
+   		SELECT CATEGORY_CODE, CATEGORY_TITLE 
+    	FROM "CATEGORY"
+    	ORDER BY CATEGORY_CODE
+ 	</select>
+ 	
+ 	<select id="likeCount">
+ 		SELECT COUNT(*)
+ 		FROM BOOKMARK
+ 		WHERE STORE_NO = #{storeNo}
+ 	</select>
  
+ 
+
  <select id="selectMainCategoryList" resultType="Category">
    SELECT CATEGORY_CODE, CATEGORY_TITLE 
     FROM "CATEGORY"
     ORDER BY CATEGORY_CODE
  </select>
  
+
 
 </mapper>
