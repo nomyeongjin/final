@@ -54,12 +54,18 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	int storeStautusUpdate(Store inputStore);
+	
+	/** 카테고리 삭제 
+	 * @param string
+	 * @return 
+	 */
+	int categoryDelete(String string);
 
 	/** 카테고리 수정
-	 * @param categorys
+	 * @param categoryMap
 	 * @return
 	 */
-	int categoryUpdate(StoreCategory ctg);
+	int categoryUpdate(Map<String, Object> categoryMap);
 	
 	// ------ 메뉴 ------
 
@@ -289,10 +295,6 @@ public interface StoreMyPageMapper {
 	 */
 	String selectStoreImg(String storeNo);
 
-	/** 카테고리 삭제 
-	 * @param inputStore
-	 */
-	void categoryDelete(Store inputStore);
 
 
 

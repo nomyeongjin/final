@@ -104,54 +104,29 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		
 		categoryMap.put("storeNo", inputStore.getStoreNo());
 		
+		String[] inputCategorys = inputStore.getCategorys().split("/");
 		
+		int result = mapper.categoryDelete(inputStore.getStoreNo());
 		
+		if(result > 0) {
+			
+	        for (String ctg : inputCategorys) {
+	            int categoryCode = Integer.parseInt(ctg);
+	            categoryMap.put("categoryCode", categoryCode);
+	            categoryMap.put("storeNo", inputStore.getStoreNo());
+	            
+				mapper.categoryUpdate(categoryMap);
+	        }
+		}
 
-//		for(int i = 0; i < categorys.length; i++) {
-//			categorys[i] = categorys[i].substring(0, 1);
-//		}
-		
-//		StoreCategory.setCategoryCode(int.join("/", categorys));
-		
-		
-		int categoryCode = Integer.parseInt(inputStore.getCategorys().split("/")[0]);
-		
-		
-//		List<StoreCategory> categorys = parseInt(inputStore.getCategorys().split("/"));
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//				;
-//		for(StoreCategory ctg : categorys) {
-//			
-//			mapper.categoryDelete(data);
-//			mapper.categoryUpdate(ctg);
-//		}
-		
-		
-		
-		
-		
-		
+
 		
 
 		
 
 		inputStore.setStoreImg(updatePath);
 		
-		int result = mapper.storeInfoUpdate(inputStore);
+		result = mapper.storeInfoUpdate(inputStore);
 		
 		// 변경된 이미지가 있는 경우만 이미지 파일 저장
 		if(result > 0 || inputStore.getImgStatus() == 1) {
@@ -219,24 +194,6 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 			}
 			
 		}
-		return result;
-	}
-	
-	// 선택 변경 
-	@Override
-	@ResponseBody
-	public int storeInfoUpdateCheck(@RequestBody Store data) {
-		
-		List<StoreCategory> categorys = data.getStoreCategoryList();
-		
-		for(StoreCategory ctg : categorys) {
-			
-			mapper.categoryDelete(data);
-			mapper.categoryUpdate(ctg);
-		}
-		
-		int result = mapper.storeStautusUpdate(data);
-		
 		return result;
 	}
 
@@ -437,6 +394,12 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 			result = mapper.updateFlag(map); 
 		}
 		return result;
+	}
+/////////
+	@Override
+	public int storeInfoUpdateCheck(Store data) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

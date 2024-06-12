@@ -662,34 +662,31 @@ document.querySelector("#storeEditFrm").addEventListener("submit", e => {
    if(openHour.trim().length === 0 || closeHour.trim().length === 0) {
       alert("영업 시간을 입력해주세요.");
       e.preventDefault();
-      return;
-   } else if(!(openHour.trim().length === 0 && closeHour.trim().length === 0)) {
-      checkData.opencloseHour = true;
-   }
+      return;}
+   // } else if(!(openHour.trim().length === 0 && closeHour.trim().length === 0)) {
+   // }
 
-   const breaktimeStart = document.querySelector("#breaktimeStart").value;
-   const breaktimeEnd = document.querySelector("#breaktimeEnd").value;
-   if(breaktimeStart.trim().length === 0 || breaktimeEnd.trim().length === 0) {
-      alert("브레이크 타임을 입력해주세요.");
-      checkData.opencloseHour = false;
+   // const breaktimeStart = document.querySelector("#breaktimeStart").value;
+   // const breaktimeEnd = document.querySelector("#breaktimeEnd").value;
+   // if(breaktimeStart.trim().length === 0 || breaktimeEnd.trim().length === 0) {
+   //    alert("브레이크 타임을 입력해주세요.");
 
-   } else if(!(breaktimeStart.trim().length === 0 && breaktimeEnd.trim().length === 0)) {
-      checkData.breaktime = true;
-   }
+   // } else if(!(breaktimeStart.trim().length === 0 && breaktimeEnd.trim().length === 0)) {
+   // }
 
 
 
    if(categorys.isEmpty) {
       alert("하나 이상의 카테고리를 선택해주세요.");
-      checkData.category = false;
+      // checkData.category = false;
    }
 
    const storeInfo = document.querySelector("#storeInfo").value;
    if(storeInfo.trim().length === 0) {
       alert("가게 소개를 입력해주세요.");
-      checkData.storeInfo = false;
+      // checkData.storeInfo = false;
    } else {
-      checkData.storeInfo = true;
+      // checkData.storeInfo = true;
    }
    
       // const formData = new FormData();
