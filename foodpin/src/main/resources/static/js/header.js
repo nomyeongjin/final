@@ -56,7 +56,7 @@ if (notificationLoginCheck) {
 
 
     /* 웹소켓을 이용해 알림을 전달하는 함수 */
-    sendNotificationFn = (type, url, pkNo, reservDate, storeName, memberNickname) => {
+    sendNotificationFn = (type, url, pkNo, reservDate, storeName, memberNickname, reportDate) => {
 
         const notification = {
             "notificationType": type,
@@ -64,7 +64,8 @@ if (notificationLoginCheck) {
             "pkNo": pkNo,
             "reservDate": reservDate,
             "storeName": storeName, /* === undefined ? null : storeName */
-            "memberNickname" : memberNickname
+            "memberNickname" : memberNickname,
+            "reportDate" : reportDate
         }
 
         notificationSock.send(JSON.stringify(notification));
@@ -167,7 +168,7 @@ if (notificationLoginCheck) {
                 const notiDate = document.createElement("span");
                 notiDate.classList.add("notification-date");
                 notiDate.innerText = data.notificationDate;
-                console.log(data.notificationDate);
+                // console.log(data.notificationDate);
 
                 //class="notification-content"
                 const notiContent = document.createElement("div");
@@ -177,7 +178,7 @@ if (notificationLoginCheck) {
                 const notiMessage = document.createElement("div");
                 notiMessage.classList.add("notification-message");
                 notiMessage.innerHTML = data.notificationContent;
-                console.log(data.notificationContent);
+                // console.log(data.notificationContent);
 
                 // const messageContent = document.createElement("span");
                 // messageContent.className("notification-message");

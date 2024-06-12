@@ -38,7 +38,7 @@
                                     <span class="requestStoreTel" th:text="|가게번호 : *{storeTel}|"></span>
                                 </div>
                                 <span>
-                                    <button class="completeBtn" th:data-request-no="${request.requestNo}">처리완료</button>
+                                    <button class="completeBtn" th:data-request-no="${request.requestNo}" th:data-request-store-name="${request.storeName}">처리완료</button>
                                 </span>
                             </div>
                         </th:block>

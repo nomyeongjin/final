@@ -258,90 +258,87 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 /*********************** 폐점/ 정보 정정 신고 팝업 ******************/
-
-document.addEventListener('DOMContentLoaded', function() {
-const popupShut = document.querySelector("#popupShut");
-const popupbox = document.querySelector("#popupbox");
-const storeReportForm = document.querySelector("#storeReportForm");
-const storeReport = document.querySelector("#storeReport");
-const storeReportBtn = document.querySelector('#storeReportBtn');
-
-popupShut.addEventListener("click", () => {
-
-  storeReportForm.classList.add("popup-storereport");
-});
+document.addEventListener('DOMContentLoaded', function () {
+  const popupShut = document.querySelector("#popupShut");
+  const popupbox = document.querySelector("#popupbox");
+  const storeReportForm = document.querySelector("#storeReportForm");
+  const storeReport = document.querySelector("#storeReport");
+  const storeReportBtn = document.querySelector('#storeReportBtn');
 
 
+  popupShut.addEventListener("click", () => {
 
-storeReport.addEventListener("click", () => {
-
-  storeReportForm.classList.remove("popup-storereport");
-});
-
-
-const requestContent = document.getElementById('requestStoreContent');
-const requestCategoryTitle = document.getElementById('requestSelect');
-
-storeReportBtn.addEventListener("click", e => {
-  e.preventDefault(); // 기본 폼 제출 동작을 방지
-
-  if (loginMember == null) {
-    alert('로그인 후 신고해주십시오.');
-    return;
-  }
-
-  // 유효성 검사
-  if (requestContent.value.trim() === '') {
-    alert('상세 내용을 입력해주세요.');
-    requestContent.focus();
-    return;
-  }
-
-  if (requestCategoryTitle.value === '') {
-    alert('신고 내용을 선택해주세요.');
-    requestType.focus();
-    return;
-  }
-
-
-  // 선택된 신고 내용을 포함하여 객체 생성
-  const obj = {
-    "storeNo": storeNo,
-    "memberNo": loginMember,
-    "requestCategoryTitle": requestCategoryTitle.value,
-    "requestContent": requestStoreContent.value,
-  };
-
-  fetch("/store/storeReport", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(obj)
-  })
-  .then(resp => resp.json())
-  .then(result => {
-    if (result == 0) {
-      alert("신고 접수가 되지 않았습니다.");
-      requestContent.focus();
-    } else {
-      alert("가게 신고가 접수 되었습니다.");
-      storeReportForm.classList.add("popup-hidden");
-      requestContent.value = '';
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('신고 중 오류가 발생했습니다. 다시 시도해주세요.');
+    storeReportForm.classList.add("popup-storereport");
   });
 
 
-  /* 가게 신고 알림 */
-  const storeName = document.querySelector("#storeName").innerText;
-  sendNotificationFn("reviewReport", null, storeNo, null, storeName, null);
+  storeReport.addEventListener("click", () => {
+
+    storeReportForm.classList.remove("popup-storereport");
+  });
+
+
+  const requestContent = document.getElementById('requestStoreContent');
+  const requestCategoryTitle = document.getElementById('requestSelect');
+
+  storeReportBtn.addEventListener("click", e => {
+    e.preventDefault(); // 기본 폼 제출 동작을 방지
+
+    if (loginMember == null) {
+      alert('로그인 후 신고해주십시오.');
+      return;
+    }
+
+    // 유효성 검사
+    if (requestContent.value.trim() === '') {
+      alert('상세 내용을 입력해주세요.');
+      requestContent.focus();
+      return;
+    }
+
+    if (requestCategoryTitle.value === '') {
+      alert('신고 내용을 선택해주세요.');
+      requestType.focus();
+      return;
+    }
+
+
+    // 선택된 신고 내용을 포함하여 객체 생성
+    const obj = {
+      "storeNo": storeNo,
+      "memberNo": loginMember,
+      "requestCategoryTitle": requestCategoryTitle.value,
+      "requestContent": requestStoreContent.value,
+    };
+
+    fetch("/store/storeReport", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(obj)
+    })
+      .then(resp => resp.json())
+      .then(result => {
+        if (result == 0) {
+          alert("신고 접수가 되지 않았습니다.");
+          requestContent.focus();
+        } else {
+          alert("가게 신고가 접수 되었습니다.");
+          storeReportForm.classList.add("popup-hidden");
+          requestContent.value = '';
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('신고 중 오류가 발생했습니다. 다시 시도해주세요.');
+      });
+
+    /* 가게 신고 알림 */
+    const storeName = document.querySelector("#storeName").innerText;
+    sendNotificationFn("storeReport", null, storeNo, null, storeName, null);
+
+  });
 
 });
-
-});
-
 
 /* ************************************************************* */
 
@@ -502,6 +499,12 @@ function showReviews() {
 
 
 /* ***************** 리뷰 신고 팝업 ****************** */
+
+// const reviewReportButton = document.querySelector('.reviewReport');
+// const reviewNo = reviewReportButton.getAttribute('data-review-no');
+// console.log('Review No:', reviewNo);  // 콘솔에 출력
+
+
 const popupClose = document.querySelector("#popupClose");
 const popupLayer = document.querySelector("#popupLayer");
 const reviewReportForm = document.querySelector("#reviewReportForm");
@@ -513,53 +516,59 @@ popupClose.addEventListener("click", () => {
   reviewReportForm.classList.add("popup-hidden");
 });
 reviewReport.forEach((report) => {
-  report.addEventListener("click", ()=>{
+  report.addEventListener("click", () => {
     reviewReportForm.classList.remove("popup-hidden");
-   
+
     const reviewNo = report.dataset.reviewNo;
-   
-    reportComplete.addEventListener("click" , e => {
-    
-      if(reportContent.value.trim().length == 0){
+
+    reportComplete.addEventListener("click", e => {
+
+      if (reportContent.value.trim().length == 0) {
         alert("신고 내용을 입력해주세요");
         reportContent.focus();
         e.preventDefault();
         return;
-      }else{
+      } else {
         const obj = {
-          "reviewNo" : reviewNo,
-          "reportContent" : reportContent.value,
-          "reporterName" : loginMemberNickname
+          "reviewNo": reviewNo,
+          "reportContent": reportContent.value,
+          "reporterName": loginMemberNickname
         };
-    
+
         fetch("/store/reviewReport", {
           method: "POST",
-          headers: {"Content-Type": "application/json"},
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(obj)
         })
-        .then(resp => resp.json())
-        .then(result => {
-    
-          if(result == 0){
-            Swal.fire({
-              icon: "error",
-              title: "신고 접수 실패",
-              text: "신고 접수가 실패했습니다. 다시 한 번 확인해주세요.",
-            });
-            reportContent.focus();
-            e.preventDefault();
-          }
-          else{
-            Swal.fire({
-              title: "신고 접수 완료",
-              text: "신고 접수가 정상적으로 처리 되었습니다.",
-              icon: "success"
-            });
-            reviewReportForm.classList.add("popup-hidden");
-            reportContent.value = '';
-          }
-        })
+          .then(resp => resp.json())
+          .then(result => {
+
+            if (result == 0) {
+              Swal.fire({
+                icon: "error",
+                title: "신고 접수 실패",
+                text: "신고 접수가 실패했습니다. 다시 한 번 확인해주세요.",
+              });
+              reportContent.focus();
+              e.preventDefault();
+            }
+            else {
+              Swal.fire({
+                title: "신고 접수 완료",
+                text: "신고 접수가 정상적으로 처리 되었습니다.",
+                icon: "success"
+              });
+              reviewReportForm.classList.add("popup-hidden");
+              reportContent.value = '';
+            }
+          })
       }
+
+      // console.log('Review No:', reviewNo); 
+      // 리뷰 신고 알림
+      const storeName = document.querySelector("#storeName").innerText;
+      sendNotificationFn("reviewReport", null, reviewNo, null, storeName, null);
+
     })
   })
 })

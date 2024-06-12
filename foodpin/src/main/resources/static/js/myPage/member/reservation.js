@@ -94,11 +94,5 @@ const reservNo = parts[parts.length - 1];
 
 console.log(reservNo);
 
-const insertReviewBtn = document.querySelector(".insertReviewBtn");
-insertReviewBtn.addEventListener("click", () => { 
-
-    sendNotificationFn("insertMemberReview", null, reservNo, reservDate, null, memberNickname);
-
-});
 
 
