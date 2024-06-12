@@ -104,13 +104,15 @@
 		UPDATE "STORE" STORE_STATUS = #{storeStatus} WHERE STORE_NO = #{storeNo}
 	</update>
 	
+	<!-- 카테고리 삭제 -->
 	<update id="categoryDelete">
-		DELETE FROM "STORE_CATEGORY" STORE_NO = #{storeNo}
+		DELETE FROM "STORE_CATEGORY" WHERE STORE_NO = #{storeNo}
 	</update>
 	
-	<update id="STORE_CATEGORY">
-		INSERT "STORE" CATEGORY_CODE = #{categoryCode} WHERE STORE_NO = #{storeNo}
-	</update>
+	<!-- 카테고리 수정 -->
+	<insert id="categoryUpdate">
+		INSERT INTO "STORE_CATEGORY" VALUES(#{storeNo}, #{categoryCode})
+	</insert>
 	
 	<!-- *** 메뉴 정보 *** -->
 	
