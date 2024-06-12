@@ -21,8 +21,12 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public List<Store> selectMainStore() {
 		
-		
 		List<Store> storeList = mapper.selectStoreList();
+		
+		for(Store store : storeList) {
+			int likeCount = mapper.likeCount(store.getStoreNo());
+			store.setLikeCount(likeCount);
+		}
 		
 		 return storeList;
 	}
