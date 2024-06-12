@@ -25,6 +25,12 @@ const storeImgDel = () => {
    imgStatus = 0; // 이미지 여부 체크 0 (삭제)
 } // storeImgDel
 
+// x 버튼 클릭시 이미지 삭제
+document.querySelector(".store-img-del").addEventListener("click", () => {
+   
+   storeImgDel();
+});
+
 
 /**
  * 가게 이미지 변경
@@ -58,8 +64,6 @@ const changeImageFn = e => {
       imgStatus = 1; // 1 <- 새 이미지 선택됨
    
       backupInput = storeImgInput.cloneNode(true);
-
-      
    })
 
    // console.log(storeNo);
@@ -215,15 +219,8 @@ const toggleCategory = () => {
 document.addEventListener('DOMContentLoaded', () => {
 
    checkCategory(); // 저장된 카테고리 조회 + 체크
-   
-   
-   // x 버튼 클릭시 이미지 삭제
-   document.querySelector(".store-img-del").addEventListener("click", () => {
-      
-      storeImgDel();
-   });
-
    toggleCategory();
+
 
 }); // DOMContentLoaded
 
@@ -253,7 +250,8 @@ infoBtn.addEventListener("click", () => {
       const storeEditFrm = document.createElement("form"); // storeEditFrm
       storeEditFrm.id = "storeEditFrm";
       storeEditFrm.setAttribute('enctype', 'multipart/form-data');
-      // storeEditFrm.setAttribute('enctype', '/myPage/store/storeInfoUpdate');
+      // storeEditFrm.setAttribute('action', '/myPage/store/storeInfoUpdate');
+      // storeEditFrm.setAttribute('method', 'POST');
 
       // 이미지
       const storeImgContainer = document.createElement("div"); // storeImgContainer
@@ -494,7 +492,7 @@ infoBtn.addEventListener("click", () => {
       storeInfo.id = "storeInfo";
 
       const storeInfoEditBtn = document.createElement("button");
-      // storeInfoEditBtn.type = "button";
+      storeInfoEditBtn.type = "button";
       storeInfoEditBtn.classList.add("update-btn");
       storeInfoEditBtn.innerText = "수정";
 
@@ -573,9 +571,130 @@ infoBtn.addEventListener("click", () => {
 
       //---
       // x 버튼 클릭시 이미지 삭제
-      storeImgDel.addEventListener("click", () => { storeImgDel();});
+      storeImgDel.addEventListener("click", () => { 
+         document.querySelector(".storeInfo-img-container").classList.remove("img-ari"); // 테두리 없애는 클래스 추가
+
+         const storeImg = document.querySelector("#storeImg"); // img
+         storeImg.setAttribute("src", '');
+         storeImg.classList.add('hidden');
+         // console.log(storeImg);
+      
+         document.querySelector(".store-img-del").classList.add('hidden'); // x 버튼
+         document.querySelector("#storeImgLabel").classList.remove('hidden'); // input label
+      
+         imgStatus = 0; // 이미지 여부 체크 0 (삭제)
+      });
 
       document.querySelector("#storeImgInput").addEventListener("change", changeImageFn);
+
+
+         
+      /**
+       * (버튼) 가게 정보 수정
+       */
+
+      storeInfoEditBtn.addEventListener("click", e => {
+
+         let status = "";
+         document.querySelectorAll(".store-status-btn").forEach(btn => {
+            if(btn.classList.contains("checked")) status = btn.value;
+         });
+         // console.log(status);
+
+         let categorys = "";
+         let str = "";
+         document.querySelectorAll(".category-btn").forEach(btn => {
+      
+            if(btn.classList.contains("checked")) {
+               str = btn.value + "/";
+               categorys += str;
+            } 
+         }); // (".category-btn").forEach
+         // console.log(categorys);
+
+         categorysinput.value = ctg;
+         console.log(categorysinput.value);
+      
+         // 유효성 검사
+         if(ctg.length < 1){
+            alert("하나 이상의 카테고리를 선택해주세요.");
+            e.preventDefault();
+            return;
+         }
+      
+         // 최대 인원수
+         const storeMaxNumber = document.querySelector("#storeMaxNumber");
+         if(storeMaxNumber.value.length === 0) {
+            alert("한 테이블당 착석 가능한 최대 인원을 입력해주세요.");
+            e.preventDefault();
+            return;
+         } else if(storeMaxNumber.value < 1) {
+            alert("한 테이블당 최소 1명 이상의 인원만 입력이 가능합니다.");
+            e.preventDefault();
+            return;
+         }
+      
+         // 테이블수
+         const storeMaxTable = document.querySelector("#storeMaxTable");
+         if(storeMaxTable.value.length === 0 || storeMaxTable.value < 1) {
+            alert("예약 가능한 가게의 테이블 수를 입력해주세요.");
+            e.preventDefault();
+            return;
+         } else if(storeMaxNumber.value < 1) {
+            alert("가게의 테이블 수는 최소 1개 이상만 입력이 가능합니다.");
+            e.preventDefault();
+            return;
+         }
+      
+         // 영업시간
+         const openHour = document.querySelector("#openHour").value;
+         const closeHour = document.querySelector("#closeHour").value;
+      
+         if(openHour.trim().length === 0 || closeHour.trim().length === 0) {
+            alert("영업 시간을 입력해주세요.");
+            e.preventDefault();
+            return;
+         }
+      
+         if(categorys.isEmpty) {
+            alert("하나 이상의 카테고리를 선택해주세요.");
+         }
+      
+         const storeInfo = document.querySelector("#storeInfo").value;
+         if(storeInfo.trim().length === 0) {
+            alert("가게 소개를 입력해주세요.");
+         }
+
+         // 폼데이터 생성 + 추가 
+         let formData = new FormData();
+
+         formData.append('storeNo', storeNo);
+         formData.append('storeImgInput',document.querySelector("#storeImgInput").files[0]);
+         formData.append('storeStatus', status);
+         formData.append('openHour', document.querySelector("#openHour").value);
+         formData.append('closeHour', document.querySelector("#closeHour").value);
+         formData.append('breaktimeStart', document.querySelector("#breaktimeStart").value);
+         formData.append('breaktimeEnd', document.querySelector("#breaktimeEnd").value);
+         formData.append('categorys', categorys);
+         formData.append('storeInfo', document.querySelector("#storeInfo").value);
+
+         fetch("/myPage/store/storeInfoUpdateJs", {
+            method : "POST",
+            body : formData
+         })
+         .then(resp => resp.json())
+         .then(result => {
+            console.log(result);
+         })
+      
+      });
+      
+
+
+
+
+
+
    })
 });
 
@@ -590,7 +709,6 @@ checkBoxBreak();
  * (버튼) 가게 정보 수정
  */
 document.querySelector("#storeEditFrm").addEventListener("submit", e => {
-// document.querySelector("#storeInfoEditBtn").addEventListener("click", e => {
 
    const storeStatustInput = document.querySelector("input[name='storeStatus']");
 
@@ -662,89 +780,16 @@ document.querySelector("#storeEditFrm").addEventListener("submit", e => {
    if(openHour.trim().length === 0 || closeHour.trim().length === 0) {
       alert("영업 시간을 입력해주세요.");
       e.preventDefault();
-      return;}
-   // } else if(!(openHour.trim().length === 0 && closeHour.trim().length === 0)) {
-   // }
-
-   // const breaktimeStart = document.querySelector("#breaktimeStart").value;
-   // const breaktimeEnd = document.querySelector("#breaktimeEnd").value;
-   // if(breaktimeStart.trim().length === 0 || breaktimeEnd.trim().length === 0) {
-   //    alert("브레이크 타임을 입력해주세요.");
-
-   // } else if(!(breaktimeStart.trim().length === 0 && breaktimeEnd.trim().length === 0)) {
-   // }
-
-
+      return;
+   }
 
    if(categorys.isEmpty) {
       alert("하나 이상의 카테고리를 선택해주세요.");
-      // checkData.category = false;
    }
 
    const storeInfo = document.querySelector("#storeInfo").value;
    if(storeInfo.trim().length === 0) {
       alert("가게 소개를 입력해주세요.");
-      // checkData.storeInfo = false;
-   } else {
-      // checkData.storeInfo = true;
    }
-   
-      // const formData = new FormData();
-
-      // formData.append("storeNo", storeNo);
-      // formData.append("storeCategoryList", categorys);
-      // formData.append("storeStatus", storeStatus);
-
-
-
-      
-
-
-
-
-
-
-
-
-
-
-
-
-   //    formData.append("imgStatus", imgStatus);
-   //    formData.append("storeNo", storeNo);
-   //    formData.append("storeImgInput", storeImgInput.files[0]);
-   //    formData.append("storeStatus", storeStatus);
-   //    formData.append("storeMaxNumber", storeMaxNumber);
-   //    formData.append("storeMaxTable", storeMaxTable);
-   //    formData.append("openHour", openHour);
-   //    formData.append("closeHour", closeHour);
-   //    formData.append("breaktimeStart", breaktimeStart);
-   //    formData.append("breaktimeEnd", breaktimeEnd);
-      // formData.append("categorys", categorys);
-   //    formData.append("storeInfo", storeInfo);
-
-         // formData.append("storeCategoryList", categorys);
-
-
-   // fetch("/myPage/store/storeInfoUpdateCheck", {
-   //    method : "POST",
-   //    headers : {"content-Type" : "application/json"},
-   //    body : JSON.stringify(data)
-   // })
-   // .then(resp => resp.json())
-   // .then(result => {
-   // })
-
-   // if(!checkData) {
-   //    e.preventDefault();
-   // }
-
-   // console.log(categorys);
 
 });
-
-
-
-
-
-

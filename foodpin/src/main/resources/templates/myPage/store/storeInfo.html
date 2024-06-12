@@ -48,7 +48,7 @@
             <form action="/myPage/store/storeInfoUpdate" id="storeEditFrm" th:object="${store}" method="POST" enctype="multipart/form-data">
 
                <!-- 이미지가 없는 경우 -->
-                <th:block th:if="*{storeImg == null}">
+               <th:block th:if="${store.storeImg == null}">
                   <div class="storeInfo-img-container">
                      <img id="storeImg" class="hidden" alt="">
                      <i class="fa-solid fa-xmark store-img-del hidden"></i>
@@ -60,19 +60,19 @@
    
                      <input name="image" id="storeImgInput" type="file" class="hidden" accept="image/* ">
                   </div>
-                </th:block>
+               </th:block>
 
                <!-- 이미지가 있는 경우 -->
-               <th:block th:unless="*{storeImg == null}">
-                  <div class="storeInfo-img-container img-ari">
-                     <img id="storeImg" th:src="*{storeImg}">
+               <th:block th:if="${store.storeImg != null}">
+                  <div class="storeInfo-img-container">
+                     <img id="storeImg" th:src="${store.storeImg}" alt="">
                      <i class="fa-solid fa-xmark store-img-del"></i>
    
-                     <label for="storeImgInput" id="storeImgLabel"  class="hidden">
+                     <label for="storeImgInput" id="storeImgLabel" class="hidden">
                         <i class="fa-regular fa-image"></i>
                         <i class="fa-solid fa-plus"></i>
                      </label>
-                     <input class="hidden" name="image" id="storeImgInput" type="file" accept="image/*">
+                     <input name="image" id="storeImgInput" type="file" accept="image/*" hidden>
                   </div>
                </th:block>
 
