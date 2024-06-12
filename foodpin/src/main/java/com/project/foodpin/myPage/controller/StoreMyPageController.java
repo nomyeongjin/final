@@ -135,11 +135,11 @@ public class StoreMyPageController {
 	 * @param ra
 	 * @return
 	 */
-	@PostMapping("storeInfoUpdateCheck")
+	@PostMapping("storeInfoUpdateJs")
 	@ResponseBody
-	public int storeInfoUpdateCheck(@RequestBody @ModelAttribute Store data) {
+	public int storeInfoUpdateJs(@RequestBody @ModelAttribute Store inputStore) {
 	
-		return service.storeInfoUpdateCheck(data);
+		return service.storeInfoUpdate(inputStore);
 	}
 	
 	// ------ 메뉴 ------

@@ -96,37 +96,9 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 			updatePath = storeWebPath + rename;
 		} 
 		
-		// 카테고리 변경
-		
-		
-		
-		Map<String, Object> categoryMap = new HashMap<>();
-		
-		categoryMap.put("storeNo", inputStore.getStoreNo());
-		
-		String[] inputCategorys = inputStore.getCategorys().split("/");
-		
-		int result = mapper.categoryDelete(inputStore.getStoreNo());
-		
-		if(result > 0) {
-			
-	        for (String ctg : inputCategorys) {
-	            int categoryCode = Integer.parseInt(ctg);
-	            categoryMap.put("categoryCode", categoryCode);
-	            categoryMap.put("storeNo", inputStore.getStoreNo());
-	            
-				mapper.categoryUpdate(categoryMap);
-	        }
-		}
-
-
-		
-
-		
-
 		inputStore.setStoreImg(updatePath);
 		
-		result = mapper.storeInfoUpdate(inputStore);
+		int result = mapper.storeInfoUpdate(inputStore);
 		
 		// 변경된 이미지가 있는 경우만 이미지 파일 저장
 		if(result > 0 || inputStore.getImgStatus() == 1) {
@@ -140,6 +112,35 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 				
 				e.printStackTrace();
 			} 
+		
+		
+		
+		
+		
+		// 카테고리 변경
+		String[] inputCategorys = inputStore.getCategorys().split("/");
+		
+		Map<String, Object> categoryMap = new HashMap<>();
+		categoryMap.put("storeNo", inputStore.getStoreNo());
+		
+		result = mapper.categoryDelete(inputStore.getStoreNo()); // 기존 카테고리 삭제
+		
+		if(result > 0) { // 변경된 카테고리 데이터 등록
+	        for (String ctg : inputCategorys) {
+	            int categoryCode = Integer.parseInt(ctg);
+	            categoryMap.put("categoryCode", categoryCode);
+	            categoryMap.put("storeNo", inputStore.getStoreNo());
+	            
+				mapper.categoryUpdate(categoryMap); 
+	        }
+		}
+		
+		
+		
+		
+
+
+
 
 
 		
