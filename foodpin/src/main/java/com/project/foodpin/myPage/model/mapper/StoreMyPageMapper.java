@@ -10,6 +10,7 @@ import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewReply;
+import com.project.foodpin.store.model.dto.Category;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.dto.StoreCategory;
@@ -47,6 +48,18 @@ public interface StoreMyPageMapper {
 	 * @return result
 	 */
 	int storeInfoUpdate(Store inputStore);
+	
+	/** 예약 여부 수정 
+	 * @param storeStautus
+	 * @return
+	 */
+	int storeStautusUpdate(Store inputStore);
+
+	/** 카테고리 수정
+	 * @param categorys
+	 * @return
+	 */
+	int categoryUpdate(StoreCategory ctg);
 	
 	// ------ 메뉴 ------
 
@@ -275,6 +288,13 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	String selectStoreImg(String storeNo);
+
+	/** 카테고리 삭제 
+	 * @param inputStore
+	 */
+	void categoryDelete(Store inputStore);
+
+
 
 
 }

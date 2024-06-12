@@ -81,7 +81,7 @@
 	
 	<!-- 가게 정보 수정 -->
 	<update id="storeInfoUpdate">
-		UPDATE "STORE" SET STORE_IMG = #{storeImg}, STORE_STATUS = 'Y', 
+		UPDATE "STORE" SET STORE_IMG = #{storeImg}, 
 			STORE_MAX_NUMBER = #{storeMaxNumber}, STORE_MAX_TABLE = #{storeMaxTable}, 
 			OPEN_HOUR = #{openHour}, CLOSE_HOUR = #{closeHour}, 
 			BREAKTIME_START = #{breaktimeStart}, BREAKTIME_END = #{breaktimeEnd}, STORE_INFO = #{storeInfo}
@@ -95,11 +95,22 @@
 		</if>
 		
 		<if test='storeNo != null'>
-		WHERE STORE_NO = #{storeNo}
+		WHERE STORE_NO = #{storeNo} 
 		</if>
 		
 	</update>
-
+	
+	<update id="storeStautusUpdate">
+		UPDATE "STORE" STORE_STATUS = #{storeStatus} WHERE STORE_NO = #{storeNo}
+	</update>
+	
+	<update id="categoryDelete">
+		DELETE FROM "STORE_CATEGORY" STORE_NO = #{storeNo}
+	</update>
+	
+	<update id="STORE_CATEGORY">
+		INSERT "STORE" CATEGORY_CODE = #{categoryCode} WHERE STORE_NO = #{storeNo}
+	</update>
 	
 	<!-- *** 메뉴 정보 *** -->
 	
@@ -273,11 +284,6 @@
 	<!-- 경고 횟수 증가 -->
 	<update id="updateFlag">
 		UPDATE "MEMBER" SET MEMBER_FLAG = #{memberFlag} WHERE MEMBER_NO = #{memberNo}
-	</update>
-	
-	<!-- 3번 이상시 회원 탈퇴 -->
-	<update id="updateReject">
-		UPDATE "MEMBER" SET MEMBER_STATUS = 'Y' WHERE MEMBER_NO = #{memberNo} AND MEMBER_FLAG = 3
 	</update>
 	
 	<!-- 확정된 예약 조회 -->
