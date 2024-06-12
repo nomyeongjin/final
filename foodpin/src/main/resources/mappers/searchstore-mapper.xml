@@ -69,9 +69,68 @@
    
    
    
+  <!-- 메인에서 검색하면 조회되는 가게 수 -->
+ <select id="getSearchStoreListCount">
+  SELECT COUNT(*)
+  FROM "STORE"
+  JOIN "STORE_CATEGORY" USING (STORE_NO)
+  JOIN "CATEGORY" USING (CATEGORY_CODE)
+  WHERE STORE_CLOSED='N' 
+  AND ( STORE_NAME LIKE '%'|| #{mainSearch}||'%'
+       OR
+      CATEGORY_TITLE LIKE '%'|| #{mainSearch}||'%'
+      )
+ </select>
+ 
+ 
+ <select id="mainSearchStore">
+    SELECT DISTINCT STORE_NO, STORE_NAME, STORE_INFO, STORE_LOCATION, STORE_STATUS,
+       STORE_TEL, OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END, 
+       STORE_CLOSED, STORE_IMG,
+       
+
+
+	     (SELECT ROUND(AVG(REVIEW_RATING), 1)
+		  FROM REVIEW
+		  WHERE STORE_NAME LIKE '%'|| #{mainSearch}||'%'
+		  AND REVIEW_DEL_FL = 'N') TOTAL_RATING,
+		  
+		  (SELECT COUNT(*) 
+		 FROM "BOOKMARK"
+		 WHERE STORE_NAME LIKE '%'|| #{mainSearch}||'%') LIKE_COUNT,
+		 
+
+	     (SELECT ROUND(AVG(REVIEW_RATING), 1)
+		  FROM REVIEW
+		  WHERE STORE_NAME LIKE '%'|| #{mainSearch}||'%'
+		  AND REVIEW_DEL_FL = 'N') TOTAL_RATING
+		 
+		 <if test="memberNo!=null">
+		 
+		 , (SELECT COUNT(*)FROM "BOOKMARK"
+	    WHERE MEMBER_NO = #{memberNo}
+	    AND STORE_NAME LIKE '%'|| #{mainSearch}||'%') BOOKMARK
+	    </if>
+		  
+       
+  FROM "STORE"
+  JOIN "STORE_CATEGORY" USING (STORE_NO)
+  JOIN "CATEGORY" USING (CATEGORY_CODE)
+  JOIN "MEMBER" USING(MEMBER_NO)
+   WHERE STORE_CLOSED='N' 
+  AND ( STORE_NAME LIKE '%'|| #{mainSearch}||'%'
+       OR
+      CATEGORY_TITLE LIKE '%'|| #{mainSearch}||'%'
+      )
+ </select>
+
+ 
+  <select id="selectSearchCategory" resultType="Category">
+   SELECT CATEGORY_CODE, CATEGORY_TITLE 
+    FROM "CATEGORY"
+    ORDER BY CATEGORY_CODE
+ </select>
+ 
    
-  <!-- 가게 휴무일 조회 -->
-   <select id="storeOffList" resultType="Off">
-    
-   </select>
+
 </mapper>

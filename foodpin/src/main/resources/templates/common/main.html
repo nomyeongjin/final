@@ -23,15 +23,23 @@
 
 
             <!-- 검색하는 박스 -->
+
             <div class="search-wrap">
 
-              <div class="search-box">
+              <form action="searchStoreList" method="GET"
+                name="searchStoreListFrom" id="searchStoreListFrom">
+
+                <div class="search-box">
                   <button id="searchButton">
                       <i class="fa-solid fa-magnifying-glass"></i>
                   </button>
 
-                  <input type="text" class="input-box" name="mainSearch" id="mainSearch"  placeholder="지역, 음식 또는 식당명 입력">
+                  <input type="text" class="input-box" name="mainSearch" id="mainSearch" 
+                   placeholder="지역, 카테고리 또는 식당명 입력">
               </div>
+              </form>
+           
+          
 
           </div>
 

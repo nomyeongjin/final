@@ -17,5 +17,6 @@
     FROM "CATEGORY"
     ORDER BY CATEGORY_CODE
  </select>
+ 
 
 </mapper>
