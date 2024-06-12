@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="|${hashTitle.hashTitle} 검색|"></title>
+
+  <th:block th:replace="~{common/common}"></th:block>
+  <link rel="stylesheet" href="/css/store/hashSearch.css">
+  
+</head>
+<body>
+
+  <main>
+    <th:block th:replace="~{common/header}"></th:block>
+    
+    <section class="section">
+      <div class="store-container">
+        <div class="store-hash-search">
+  
+          <div class="store-hashtag">
+            <span th:text="${hashTitle.hashTitle}">#hashTag Title</span>
+          </div>
+          
+          <span>해시태그가 많이 사용된 순으로 정렬되었습니다.</span>
+        </div>
+        
+
+        <div class="store-List" th:each=" store : ${storeList}" th:object="${store}">
+          
+          <div class="storeList-left">
+            <img th:src="*{storeImg}" alt="">
+          </div>
+
+
+          <div class="storeList-mid">
+            
+            
+            <div class="store-info">
+              <a th:href="'/store/storeDetail/' + *{storeNo}" th:text="|*{storeName}|">store name</a>
+              <div class="allstar-box">
+  
+                <div class="store-avgScore">
+  
+                  <div class="background-star">
+                    <i class="total_star  fas fa-star"></i>
+                    <i class="total_star  fas fa-star"></i>
+                    <i class="total_star  fas fa-star"></i>
+                    <i class="total_star  fas fa-star"></i>
+                    <i class="total_star  fas fa-star"></i>
+                  </div>
+                
+                  <div class="realAvg-star" >    
+                    <i class="total_star  fas fa-star"></i>
+                    <i class="total_star  fas fa-star"></i>
+                    <i class="total_star  fas fa-star"></i>
+                    <i class="total_star  fas fa-star"></i>
+                    <i class="total_star  fas fa-star"></i>
+                  </div>
+                  <div>
+                    <span id="totalScoreR" th:text="*{totalRating}"> 점수 </span> 
+                  </div>
+                </div>
+  
+                
+  
+              </div>
+              <span class="store-address" th:text="${address} + ' | ' + ${detailAddress} + ' | ' + ${postcode}"></span>
+              <div class="store-time">
+                <table>
+                  <tbody class="time-table">
+                    <tr>
+                      <td style="width: 100px;">영업 시간 :</td>
+                      <td><span th:text="|*{openHour} ~ *{closeHour}|"></span></td>
+                    </tr>
+                    <tr>
+                      <td style="width: 100px;">브레이크 타임 : </td>
+                      <td>
+                        <span th:if="${breaktimeStart == null}"  th:text="|*{breaktimeStart} ~ *{breaktimeEnd}|"></span>
+                        <span th:unless="${breaktimeStart == null}">없음</span>
+                      </td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+
+              <div>
+                <span th:text="*{storeTel}"></span>
+              </div>
+              
+              <span th:text="| 리뷰 *{reviewCount} 개|"></span>
+              <div class="hashtag">
+                <span th:text="${hashTitle.hashTitle}">#hashTag Title</span>
+                <span th:text="*{hashCount}"></span>
+              </div>
+  
+            </div>
+          </div>
+
+          <div class="storeList-right">
+            <a class="store-reservation" th:href="'/store/storeDetail/' + *{storeNo} + '/reservation'">예약하기</a>
+          </div>
+  
+        </div>
+      </div>
+    
+    
+    </section>
+
+
+
+  </main>
+  
+  <th:block th:replace="~{common/footer}"></th:block>
+  
+  <script th:inline="javascript">
+    const loginMember = /*[[${session.loginMember}]]*/ "로그인 회원 정보";
+  </script>
+  <script src="/js/store/hashSearch.js"></script>
+</body>
+</html>

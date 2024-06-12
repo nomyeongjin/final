@@ -1,0 +1,169 @@
+.section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 30px;
+}
+
+.store-container{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%
+}
+
+.store-hash-search{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  height: 100px;
+}
+
+.store-hashtag{
+  border: 1px solid #2B3151;
+  color: #2B3151;
+  width: 200px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: rgb(46, 41, 41);
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: 13px;
+}
+
+.hashtag{
+  border: 1px solid var(--main-color);
+  width: 200px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  color: rgb(46, 41, 41);
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 13px;
+}
+
+.storeList-left{
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.storeList-left > img{
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.storeList-mid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 55%;
+}
+
+.store-List{
+  width: 80%;
+  height: auto;
+  border: 1px solid var(--main-color);
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 20px;
+  display: flex;
+}
+
+
+.store-info{
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+}
+
+
+.allstar-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 500px;
+}
+
+.store-avgScore{
+  position: relative;
+  margin-top: 10px;
+}
+
+.background-star{
+  position: absolute;
+  overflow: hidden;
+  width: 107px;
+  color: var(--main-color);
+  
+}
+
+.realAvg-star  {
+  position: absolute;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 107px;
+  color: #ff2a00;
+
+}
+
+#totalScoreR{
+  width: 25px;
+  position: absolute;
+  left: 110px;
+  z-index: 1000;
+}
+
+.store-info > a:first-child{
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.store-address{
+  margin : 10px 0;
+}
+
+.store-time{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.storeList-right{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+}
+
+.store-reservation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 30px;
+  border: 1px solid #E14C54;
+  background-color: #E14C54;
+  color: white;
+  border-radius: 10px;
+}
+
+.store-reservation:hover{
+  background-color: white;
+  color: #E14C54;
+}

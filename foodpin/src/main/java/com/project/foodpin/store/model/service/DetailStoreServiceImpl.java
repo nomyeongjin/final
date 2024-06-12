@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.foodpin.myPage.model.dto.Off;
+import com.project.foodpin.review.model.dto.Hash;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.mapper.DetailStoreMapper;
@@ -128,7 +129,17 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 	    return mapper.storeReport(map);
 	}
 
+	// 가게 해시태그 검색
+	@Override
+	public List<Store> hashSearchStore(String hashNo) {
+		return mapper.hashSearchStore(hashNo);
+	}
 
+	// 가게 해시태그 검색(해시태그 내용)
+	@Override
+	public Hash hashTitle(String hashNo) {
+		return mapper.hashTitle(hashNo);
+	}
 
 
 

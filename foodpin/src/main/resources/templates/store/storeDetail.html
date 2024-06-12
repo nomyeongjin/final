@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>가게 상세 조회 페이지</title>
+    <title th:text="${store.storeName}">가게 상세 조회 페이지</title>
 
      <!-- templetes/common/common.html  조각 추가 -->
      <th:block th:replace="~{common/common}"></th:block>
@@ -82,12 +82,12 @@
     
                                     </th:block>
                                 
-                                           <!-- 좋아요 개수 -->
-                                           <th:block th:if="${session.loginMember?.memberCode !=1}">
-                                            <i class="fa-solid fa-heart"> </i>
-                                           </th:block>
-                                           <!-- &nbsp; -->
-                                           <span id="storeLikeCount" th:text="*{likeCount}">0</span>
+                                        <!-- 좋아요 개수 -->
+                                        <th:block th:if="${session.loginMember?.memberCode !=1}">
+                                        <i class="fa-solid fa-heart"> </i>
+                                        </th:block>
+                                        <!-- &nbsp; -->
+                                        <span id="storeLikeCount" th:text="*{likeCount}">0</span>
                                     
                                    
                                 
@@ -503,16 +503,13 @@
 
                 <!-- 해시태그(댓글에 달린 해시들) -->
 
-                <div class="storedetail-hashtagcontainer" >
-
-                    <th:block th:each="hash:${store.storeHashList}" >
+                <div class="storedetail-hashtagcontainer">
+                    <th:block th:each="hash : ${store.storeHashList}">
                         <div class="store-hashtag" data-count="${hash.hashCount}">
-                            <span id="storeHashT" th:text="${hash.hashTitle}">가게 해시태그</span>
+                            <a th:href="'/store/searchStore/'+ ${hash.hashNo}" id="storeHashT" th:text="${hash.hashTitle}">가게 해시태그</a>
                             <span id="storeHashC" th:text="${hash.hashCount}"></span>
                         </div>
                     </th:block>
-                   
-                    
                 </div>
 
             </div>
@@ -698,7 +695,7 @@
 
                                 <div class="report-area" th:if="${session.loginMember}">
                                     <button type="button" class="reviewReport"  
-                                        th:if="${session.loginMember}" 
+                                        th:if="${session.loginMember != null and review.memberNo != session.loginMember?.memberNo}" 
                                         th:attr="data-review-no=*{reviewNo}">🚨신고하기
                                     </button>
                                 </div>
