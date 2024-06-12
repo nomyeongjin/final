@@ -68,6 +68,9 @@ public class Store {
 	// 리뷰 개수
 	private int reviewCount;
 	
+	// 해시태그 개수
+	private int hashCount;
+	
 	// 메뉴
 	private int menuNo;
 	private String menuTitle;

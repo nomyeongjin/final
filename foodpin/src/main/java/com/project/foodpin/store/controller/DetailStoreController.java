@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.dto.Off;
+import com.project.foodpin.review.model.dto.Hash;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.service.DetailStoreService;
@@ -121,8 +122,6 @@ public class DetailStoreController {
 	}
 	
 	
-	
-	
 	/** 리뷰 신고
 	 * @param map
 	 * @return
@@ -134,6 +133,33 @@ public class DetailStoreController {
 		@SessionAttribute("loginMember") Member loginMember) {
 		
 		return service.reviewReport(map);
+	}
+	
+	
+	@GetMapping("searchStore/{hashNo}")
+	public String hashSearchStore(
+		@PathVariable("hashNo") String hashNo, Model model) {
+		
+		List<Store> storeList = service.hashSearchStore(hashNo);
+		
+		Hash hashTitle = service.hashTitle(hashNo);
+
+		for(int i = 0 ; i< storeList.size() ; i++) {
+
+			String storeLocation = storeList.get(i).getStoreLocation();
+			
+			String[] arr = storeLocation.split("\\^\\^\\^");
+			
+			model.addAttribute("postcode", arr[0]);
+			model.addAttribute("address", arr[1]);
+			model.addAttribute("detailAddress", arr[2]);
+		}
+		
+		
+		model.addAttribute("storeList", storeList);
+		model.addAttribute("hashTitle", hashTitle);
+			
+		return "store/hashSearch"; 
 	}
 	
 	

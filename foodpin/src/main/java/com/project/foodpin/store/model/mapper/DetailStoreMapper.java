@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import com.project.foodpin.myPage.model.dto.Off;
+import com.project.foodpin.review.model.dto.Hash;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
@@ -94,6 +95,24 @@ public interface DetailStoreMapper {
 	 */
 	String selectReporterName(int reporterNo);
 
+
+	/** 해시태그 가게 검색
+	 * @param hashNo
+	 * @return
+	 */
+	List<Store> hashSearchStore(String hashNo);
+
+	/** 해시태그 가게 검색(해시태그 내용)
+	 * @param hashNo
+	 * @return
+	 */
+	Hash hashTitle(String hashNo);
+
+	
+	
+	
+	
+	
 	/*
 		*//**
 			 * 가게 휴무일
