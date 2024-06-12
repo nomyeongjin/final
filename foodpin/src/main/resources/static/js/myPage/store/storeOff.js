@@ -409,6 +409,7 @@ const insertPopup = (info) => {
             "offDayStart" : start.value,
             "offDayEnd" : end.value
          };
+         
    
          fetch("/myPage/store/calendarOffInsert", {
             method : "POST",

@@ -83,26 +83,42 @@ ceoInfoEdit.addEventListener("click", () => {
 
       infoUpdateBtn.addEventListener("click", () => {
 
-         const member = {
-            "memberNo" : memberNo,
-            "memberEmail" : document.querySelector("input[name='memberEmail']").value,
-            "memberTel" : document.querySelector("input[name='memberTel']").value
-         };
+         const email = document.querySelector("input[name='memberEmail']").value;
+         const tel = document.querySelector("input[name='memberTel']").value;
+         
+         const regExpEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+         const regExpTel = /^01[0-9]{1}[0-9]{3,4}[0-9]{4}$/;
+
+         if (!regExpEmail.test(email) || email.trim().length === 0) { 
+            alert("이메일을 다시 확인해주세요.");
+            return;
+
+         } else if (!regExpTel.test(tel) || tel.trim().length === 0) { 
+            alert("연락처를 다시 확인해주세요.");
+            return;
+
+         }else {
+
+            const member = {
+               "memberNo" : email,
+               "memberEmail" : tel,
+               "memberTel" : document.querySelector("input[name='memberTel']").value
+            };
+
+            console.log(member);
       
-         console.log(member);
-      
-         fetch("/myPage/store/ceoInfoUpdateJs", {
-            method : "POST",
-            headers : {"content-Type" : "application/json"},
-            body : JSON.stringify(member)
-         })
-         .then(resp => resp.json())
-         .then(result => {
-            
-            console.log(result);
-      
-         })
-      
+            fetch("/myPage/store/ceoInfoUpdateJs", {
+               method : "POST",
+               headers : {"content-Type" : "application/json"},
+               body : JSON.stringify(member)
+            })
+            .then(resp => resp.json())
+            .then(result => {
+               
+               console.log(result);
+         
+            })
+         }
       });
    })
 });
@@ -115,10 +131,26 @@ ceoInfoEdit.addEventListener("click", () => {
 /** 
  * 사장님 정보 변경 폼 제출 (동기식)
  */
-updateBtn.addEventListener("click", () => {
+document.querySelector("#ceoInfoUpdate").addEventListener("submit", e => {
 
-   // 유효성 검사 추가 예정
-   
+         const email = document.querySelector("input[name='memberEmail']").value;
+         const tel = document.querySelector("input[name='memberTel']").value;
+         
+         const regExpEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+         const regExpTel = /^01[0-9]{1}[0-9]{3,4}[0-9]{4}$/;
+
+         if (!regExpEmail.test(email) || email.trim().length === 0) { 
+            alert("이메일을 다시 확인해주세요.");
+            
+            e.preventDefault();
+            return;
+         }
+         if (!regExpTel.test(tel) || tel.trim().length === 0) { 
+            alert("연락처를 다시 확인해주세요.");
+
+            e.preventDefault();
+            return;
+         }
 });
 
 
@@ -188,14 +220,31 @@ pwEdit.addEventListener("click", () => {
 
    inputPw.focus(); // 기존비밀번호란에 초점
 
-   pwUpdateBtn.addEventListener("click", () => {
+   pwUpdateBtn.addEventListener("click", e => {
 
       // 유효성 검사 예정
+      const pw = document.querySelector("input[name='memberPw']").value;
+      const newPw = document.querySelector("input[name='memberNewPw']").value;
+      const newPwCheck = document.querySelector("input[name='memberNewPwCheck']").value;
    
-   
+      const regExpPw = /^[a-zA-Z0-9!@#_-]{6,20}$/;
+
+      if(!regExpPw.test(newPw, newPwCheck)){
+         
+         alert("비밀번호 형태가 유효하지 않습니다.");
+         e.preventDefault();
+         return;
+      } else if(newPw != newPwCheck) {
+         
+         alert("비밀번호 확인이 유효하지 않습니다.");
+         e.preventDefault();
+         return;
+      }
+
+      
       const data = {
-         "memberPw" : document.querySelector("input[name='memberPw']").value,
-         "memberNewPw" : document.querySelector("input[name='memberNewPw']").value,
+         "memberPw" : pw,
+         "memberNewPw" : newPw,
       };
    
       fetch("/myPage/store/ceoPwUpdate", {
@@ -210,7 +259,7 @@ pwEdit.addEventListener("click", () => {
             alert("비밀번호가 변경되었습니다.");
          }
          else{
-            alert("비밀번호가 변경이 실패되었습니다.")
+            alert("기존 비밀번호가 잘못 입력되었습니다.")
          }
       })
    })

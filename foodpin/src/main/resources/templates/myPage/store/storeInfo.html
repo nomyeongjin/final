@@ -48,29 +48,34 @@
             <form action="/myPage/store/storeInfoUpdate" id="storeEditFrm" th:object="${store}" method="POST" enctype="multipart/form-data">
 
                <!-- 이미지가 없는 경우 -->
-               <div th:if="*{storeImg == null}"class="storeInfo-img-container">
-                  <img id="storeImg" class="hidden" alt="">
-                  <i class="fa-solid fa-xmark store-img-del hidden"></i>
-
-                  <label for="storeImgInput" id="storeImgLabel">
-                     <i class="fa-regular fa-image"></i>
-                     <i class="fa-solid fa-plus"></i>
-                  </label>
-
-                  <input name="image" id="storeImgInput" type="file" class="hidden" accept="image/* ">
-               </div>
+                <th:block th:if="*{storeImg == null}">
+                  <div class="storeInfo-img-container">
+                     <img id="storeImg" class="hidden" alt="">
+                     <i class="fa-solid fa-xmark store-img-del hidden"></i>
+   
+                     <label for="storeImgInput" id="storeImgLabel">
+                        <i class="fa-regular fa-image"></i>
+                        <i class="fa-solid fa-plus"></i>
+                     </label>
+   
+                     <input name="image" id="storeImgInput" type="file" class="hidden" accept="image/* ">
+                  </div>
+                </th:block>
 
                <!-- 이미지가 있는 경우 -->
-               <div th:unless="*{storeImg == null}"class="storeInfo-img-container img-ari">
-                  <img id="storeImg" th:src="*{storeImg}">
-                  <i class="fa-solid fa-xmark store-img-del"></i>
+               <th:block th:unless="*{storeImg == null}">
+                  <div class="storeInfo-img-container img-ari">
+                     <img id="storeImg" th:src="*{storeImg}">
+                     <i class="fa-solid fa-xmark store-img-del"></i>
+   
+                     <label for="storeImgInput" id="storeImgLabel"  class="hidden">
+                        <i class="fa-regular fa-image"></i>
+                        <i class="fa-solid fa-plus"></i>
+                     </label>
+                     <input class="hidden" name="image" id="storeImgInput" type="file" accept="image/*">
+                  </div>
+               </th:block>
 
-                  <label for="storeImgInput" id="storeImgLabel" class="hidden">
-                     <i class="fa-regular fa-image"></i>
-                     <i class="fa-solid fa-plus"></i>
-                  </label>
-                  <input class="hidden" name="image" id="storeImgInput" type="file" accept="image/*">
-               </div>
 
                <!-- 이미지외 내용 -->
                <div class="storeInfo-container">
@@ -162,7 +167,11 @@
                <!-- 가게 소개 -->
                <textarea name="storeInfo" id="storeInfo" rows="10" th:text="*{storeInfo}"/></textarea>               
 
-               <button id="storeInfoEditBtn" class="update-btn" type="button">수정</button>
+               <button id="storeInfoEditBtn" class="update-btn">수정</button>
+
+               <input type="text" name="imgStatus" value="-1" hidden>
+               <input type="text" name="storeStatus" hidden>
+               <input type="text" name="categorys" hidden>
 
             </form>
 

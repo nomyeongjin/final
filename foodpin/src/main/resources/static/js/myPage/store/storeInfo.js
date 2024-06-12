@@ -20,11 +20,53 @@ const storeImgDel = () => {
    // console.log(storeImg);
 
    document.querySelector(".store-img-del").classList.add('hidden'); // x 버튼
-   document.querySelector("#storeImgLabel").classList.remove('hidden'); // x 버튼
+   document.querySelector("#storeImgLabel").classList.remove('hidden'); // input label
 
    imgStatus = 0; // 이미지 여부 체크 0 (삭제)
 } // storeImgDel
 
+
+/**
+ * 가게 이미지 변경
+ * @param {*} e 
+ */
+const changeImageFn = e => {
+
+   const maxSize =  1024 * 1024 * 5; // 이미지 최대 업로드 사이즈 지정
+   const file = e.target.files[0]; // 업로드 된 파일 정보
+
+   console.log(file);
+
+   // 파일 업로드 취소 + 백업본 (추가예정)
+
+   /* 선택된 이미지 미리보기 */
+   const reader = new FileReader();
+   reader.readAsDataURL(file);
+   
+   /**
+    * 업로드 이미지 파일 읽기 완료시 미리보기
+    */
+   reader.addEventListener("load", e => {
+   
+      const url = e.target.result;
+      document.querySelector("#storeImg").setAttribute("src", url);
+
+      document.querySelector("#storeImg").classList.remove('hidden'); // img
+      document.querySelector(".store-img-del").classList.remove('hidden'); // x 버튼
+      document.querySelector("#storeImgLabel").classList.add('hidden'); // input label
+   
+      imgStatus = 1; // 1 <- 새 이미지 선택됨
+   
+      backupInput = storeImgInput.cloneNode(true);
+
+      
+   })
+
+   // console.log(storeNo);
+   
+}
+document.querySelector("#storeImgInput").addEventListener("change", changeImageFn);
+storeImgDel();
 //-------------- 예약 신청 허용/미허용 선택 --------------
 
 // 예약 신청 여부 선택 +  토글
@@ -153,6 +195,7 @@ const toggleCategory = () => {
    document.querySelectorAll(".category-btn").forEach(btn => {
       btn.addEventListener("click", e => {
          e.target.classList.toggle("checked");
+
       });
    });
 }
@@ -163,46 +206,7 @@ const toggleCategory = () => {
 //-------------- 가게 소개 --------------
 
 
-/* 가게 이미지 */
-const storeImg = document.querySelector("#storeImg"); // img
-let storeImgInput = document.querySelector("#storeImgInput"); // input
 
-/**
- * 가게 이미지 변경
- * @param {*} e 
- */
-const changeImageFn = e => {
-
-   const maxSize =  1024 * 1024 * 5; // 이미지 최대 업로드 사이즈 지정
-   const file = e.target.files[0]; // 업로드 된 파일 정보
-
-   console.log(file);
-
-   // 파일 업로드 취소 + 백업본 (추가예정)
-
-
-   /* 선택된 이미지 미리보기 */
-   const reader = new FileReader();
-   reader.readAsDataURL(file);
-   
-   /**
-    * 업로드 이미지 파일 읽기 완료시 미리보기
-    */
-   reader.addEventListener("load", e => {
-   
-      const url = e.target.result;
-      storeImg.setAttribute("src", url);
-   
-      imgStatus = 1; // 1 <- 새 이미지 선택됨
-   
-      backupInput = storeImgInput.cloneNode(true);
-   })
-
-   // console.log(storeNo);
-   
-}
-
-storeImgInput.addEventListener("change", changeImageFn);
 
 
 
@@ -211,8 +215,8 @@ storeImgInput.addEventListener("change", changeImageFn);
 document.addEventListener('DOMContentLoaded', () => {
 
    checkCategory(); // 저장된 카테고리 조회 + 체크
-
-
+   
+   
    // x 버튼 클릭시 이미지 삭제
    document.querySelector(".store-img-del").addEventListener("click", () => {
       
@@ -249,6 +253,7 @@ infoBtn.addEventListener("click", () => {
       const storeEditFrm = document.createElement("form"); // storeEditFrm
       storeEditFrm.id = "storeEditFrm";
       storeEditFrm.setAttribute('enctype', 'multipart/form-data');
+      // storeEditFrm.setAttribute('enctype', '/myPage/store/storeInfoUpdate');
 
       // 이미지
       const storeImgContainer = document.createElement("div"); // storeImgContainer
@@ -489,7 +494,7 @@ infoBtn.addEventListener("click", () => {
       storeInfo.id = "storeInfo";
 
       const storeInfoEditBtn = document.createElement("button");
-      storeInfoEditBtn.type = "button";
+      // storeInfoEditBtn.type = "button";
       storeInfoEditBtn.classList.add("update-btn");
       storeInfoEditBtn.innerText = "수정";
 
@@ -507,6 +512,7 @@ infoBtn.addEventListener("click", () => {
          storeImgContainer.classList.add('img-ari');
          storeImg.src = store.storeImg;
          storeImgLabel.classList.add("hidden"); // label
+         storeImgDel.classList.remove("hidden"); // x
       }
 
       document.querySelector("#storeName").value = store.storeName;
@@ -550,7 +556,7 @@ infoBtn.addEventListener("click", () => {
    
       }).catch( err => console.log(err)); // fetch (카테고리 조회)
 
-      
+      document.querySelector("#storeInfo").value = store.storeInfo;
       // 예약 신청 여부 선택 토글
       document.querySelectorAll(".store-status-btn").forEach(btn => {
          btn.addEventListener("click", e => {
@@ -567,10 +573,9 @@ infoBtn.addEventListener("click", () => {
 
       //---
       // x 버튼 클릭시 이미지 삭제
-      storeImgDel.addEventListener("click", () => {
-         
-         storeImgDel();
-      });
+      storeImgDel.addEventListener("click", () => { storeImgDel();});
+
+      document.querySelector("#storeImgInput").addEventListener("change", changeImageFn);
    })
 });
 
@@ -584,44 +589,80 @@ checkBoxBreak();
 /**
  * (버튼) 가게 정보 수정
  */
-document.querySelector("#storeInfoEditBtn").addEventListener("click", () => {
+document.querySelector("#storeEditFrm").addEventListener("submit", e => {
+// document.querySelector("#storeInfoEditBtn").addEventListener("click", e => {
 
-   let categorys = [];
+   const storeStatustInput = document.querySelector("input[name='storeStatus']");
 
-   // 유효성 검사
-   const checkData = {
-      "storeMaxNumber" : false,
-      "storeMaxTable" : false,
-      "opencloseHour" : false,
-      "breaktime" : false,
-      "category" : false,
-      "storeInfo" : false
-   };
+   document.querySelectorAll(".store-status-btn").forEach(btn => {
 
-   const storeMaxNumber = document.querySelector("#storeMaxNumber").value;
-   if(storeMaxNumber.trim().length === 0) {
+      if(btn.classList.contains("checked")) {
+
+         // checkData.category = true;
+         storeStatustInput.value = btn.value;
+      } 
+   });
+   // console.log(storeStatustInput.value);
+
+
+   let ctg = "";
+   let categorys = "";
+   let categorysinput = document.querySelector("input[name='categorys']");
+
+   // console.log(categorys);
+   document.querySelectorAll(".category-btn").forEach(btn => {
+
+      let code = "";
+
+      if(btn.classList.contains("checked")) {
+         // checkData.category = true;
+         code = btn.value + "/";
+         
+         ctg += code;
+      } 
+   }); // (".category-btn").forEach
+
+   categorysinput.value = ctg;
+   console.log(categorysinput.value);
+
+   if(ctg.length < 1){
+      alert("하나 이상의 카테고리를 선택해주세요.");
+      e.preventDefault();
+      return;
+   }
+
+   // 최대 인원수
+   const storeMaxNumber = document.querySelector("#storeMaxNumber");
+   if(storeMaxNumber.value.length === 0) {
       alert("한 테이블당 착석 가능한 최대 인원을 입력해주세요.");
-      storeMaxNumber.value = "";
-      checkData.storeMaxNumber = false;
-   } else {
-      checkData.storeMaxNumber = true;
+      e.preventDefault();
+      return;
+   } else if(storeMaxNumber.value < 1) {
+      alert("한 테이블당 최소 1명 이상의 인원만 입력이 가능합니다.");
+      e.preventDefault();
+      return;
    }
 
-   const storeMaxTable = document.querySelector("#storeMaxTable").value;
-   if(storeMaxTable.trim().length === 0) {
+   // 테이블수
+   const storeMaxTable = document.querySelector("#storeMaxTable");
+   if(storeMaxTable.value.length === 0 || storeMaxTable.value < 1) {
       alert("예약 가능한 가게의 테이블 수를 입력해주세요.");
-      storeMaxNumber.value = "";
-      checkData.storeMaxTable = false;
-   } else {
-      checkData.storeMaxTable = true;
+      e.preventDefault();
+      return;
+   } else if(storeMaxNumber.value < 1) {
+      alert("가게의 테이블 수는 최소 1개 이상만 입력이 가능합니다.");
+      e.preventDefault();
+      return;
    }
 
+   // 영업시간
    const openHour = document.querySelector("#openHour").value;
    const closeHour = document.querySelector("#closeHour").value;
+
    if(openHour.trim().length === 0 || closeHour.trim().length === 0) {
       alert("영업 시간을 입력해주세요.");
-      checkData.opencloseHour = false;
-
+      e.preventDefault();
+      return;
    } else if(!(openHour.trim().length === 0 && closeHour.trim().length === 0)) {
       checkData.opencloseHour = true;
    }
@@ -636,13 +677,7 @@ document.querySelector("#storeInfoEditBtn").addEventListener("click", () => {
       checkData.breaktime = true;
    }
 
-   document.querySelectorAll(".category-btn").forEach(btn => {
 
-      if(btn.classList.contains("checked")) {
-         checkData.category = true;
-         categorys.push(btn);
-      } 
-   }); // (".category-btn").forEach
 
    if(categorys.isEmpty) {
       alert("하나 이상의 카테고리를 선택해주세요.");
@@ -657,7 +692,26 @@ document.querySelector("#storeInfoEditBtn").addEventListener("click", () => {
       checkData.storeInfo = true;
    }
    
-   //    const formData = new FormData();
+      // const formData = new FormData();
+
+      // formData.append("storeNo", storeNo);
+      // formData.append("storeCategoryList", categorys);
+      // formData.append("storeStatus", storeStatus);
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
 
    //    formData.append("imgStatus", imgStatus);
    //    formData.append("storeNo", storeNo);
@@ -669,58 +723,30 @@ document.querySelector("#storeInfoEditBtn").addEventListener("click", () => {
    //    formData.append("closeHour", closeHour);
    //    formData.append("breaktimeStart", breaktimeStart);
    //    formData.append("breaktimeEnd", breaktimeEnd);
-   //    formData.append("categorys", categorys);
+      // formData.append("categorys", categorys);
    //    formData.append("storeInfo", storeInfo);
 
-
-   //    let file;
-   //    if(imgStatus == 1) file = storeImgInput.files[0]; 
-   //    formData.append("storeImgInput", file);
-   // const input = document.querySelector("#storeImgInput");
+         // formData.append("storeCategoryList", categorys);
 
 
-   // // 수정된 이미지가 없는 경우 file null값 
-
-   // else file = null;
-
-   // // console.log(formData);
-   // const data = {
-   //    "storeNo" : storeNo,
-   //    "imgStatus" : imgStatus,
-   //    "img" : file,
-   //    "storeStatus" : storeStatus,
-   //    "storeMaxNumber" : storeMaxNumber,
-   //    "storeMaxTable" : storeMaxTable,
-   //    "openHour" : openHour,
-   //    "closeHour" : closeHour,
-   //    "breaktimeStart": breaktimeStart,
-   //    "breaktimeEnd" : breaktimeEnd,
-   //    "categorys" : categorys,
-   //    "storeInfo" : storeInfo
-   // };
-   // console.log(data);
-   
-   // fetch("/myPage/store/storeInfoUpdateJS", {
+   // fetch("/myPage/store/storeInfoUpdateCheck", {
    //    method : "POST",
-   //    headers : {},
-   //    body : formData
+   //    headers : {"content-Type" : "application/json"},
+   //    body : JSON.stringify(data)
    // })
-   // .then(resp => resp.text())
+   // .then(resp => resp.json())
    // .then(result => {
-
-   //    if(result > 0) {
-   //       alert("휴무 일정 수정 성공");
-   //    }
-   //    else{
-   //       alert("실패");
-   //    }
    // })
 
+   // if(!checkData) {
+   //    e.preventDefault();
+   // }
 
-
-
+   // console.log(categorys);
 
 });
+
+
 
 
 

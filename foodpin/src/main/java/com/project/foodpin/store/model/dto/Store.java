@@ -52,8 +52,7 @@ public class Store {
 	public List<ReviewHash>storeHashList;
 	
 	//가게 카테고리 목록
-	public List<StoreCategory>storeCategoryList;
-	
+	public List<StoreCategory> storeCategoryList;
 	
 	// 가게 검색 페이지의 가게 상세 카테고리
 	public List<StoreCategory>searchStoreCategoryList;
@@ -77,6 +76,8 @@ public class Store {
 	
 	// 가게 카테고리
 	private int categoryCode;
+	private String categorys;
+	
 
 	// 가게 주소
     private String postcode;
