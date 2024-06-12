@@ -278,11 +278,11 @@
                      <!-- 가게 예약 버튼-->
                      <div class="storedetail-reservationbuttonbox">
                         <!-- 클릭하면 예약하기 페이지로 이동 -->
-                        <th:block th:if="${session.loginMember?.memberCode==1 || session.loginMember==null}">
+                        <th:block th:if="${session.loginMember?.memberCode==1 && session.loginMember?.memberFlag < 3 || session.loginMember==null}">
                             <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation'" id="storereservationbutton">예약하기</a>
                         </th:block>
 
-                        <th:block th:unless="${session.loginMember?.memberCode==1|| session.loginMember==null}">
+                        <th:block th:unless="${session.loginMember==null || (session.loginMember?.memberCode == 1 and session.loginMember?.memberFlag < 3)}">
                             <a href="/" id="storereservationbutton">예약하기</a>
                         </th:block>
 
@@ -759,6 +759,7 @@
     <script th:inline="javascript">
         const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원";
         const memberCode = /*[[${session.loginMember?.memberCode}]]*/ "회원코드";
+        const memberFlag = /*[[${session.loginMember?.memberFlag}]]*/ "회원 경고횟수";
 
         const storeMaxTable = /*[[${store.storeMaxTable}]]*/ "최대 예약 팀 수(테이블)"
         const storeNo = /*[[${store.storeNo}]]*/ "사업자등록번호"
