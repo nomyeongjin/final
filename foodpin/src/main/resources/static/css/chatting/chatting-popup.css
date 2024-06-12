@@ -10,10 +10,12 @@ body {
     
  }
 
+
  main {
     width: 500px;
     flex-grow: 1;           /* 중심축 방향으로 팽창 */
     min-height: 500px;
+    overflow: hidden;
  }
 
  @font-face {
@@ -85,7 +87,7 @@ li>img{
 
 .chatting-area{
     width: 100%;
-    height: 100%;
+    height: 650px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,14 +98,14 @@ li>img{
 
 .display-chatting{
     width: 100%;
-    height: 90%;
+    height: 600px;
     display: flex;
     overflow: auto;
 
     flex-direction: column;
     list-style: none;
     min-width: 500px;
-    padding: 0 10px;
+    padding: 5px 10px 0px
 }
 
 .display-chatting>li{
@@ -113,6 +115,7 @@ li>img{
 .chatDate{
     color: #8f8f8f;
     font-size: 0.8em;
+    margin: 0px 2px;
 }
     
 li>img{

@@ -84,21 +84,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
     	int storeMemberNo = msg.getStoreMemberNo();
 		
 
-    	int result = 0;
-    	
-    	// 채팅을 보낸 사람이 일반 회원일 경우
-    	if(msg.getType()==1) { // 일반 -> 가게
-    		
-    	
-    		// 가게 번호를 저장
-    		
-    		result= service.insertToMemberMessage(msg);
-    	
-    	
-    	}else { // 가게 -> 일반
-    		result = service.insertToStoreMessage(msg);
-    	}
-    	
+    	int result = service.insertMessage(msg);
         
         
         
@@ -124,18 +110,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
 			
 			// MSG 객체를 json으로 변경한 값을
 			// 보낸 사람/받는 사람에게 전달
-			if(msg.getType() == 1) {
-				if(msg.getStoreMemberNo() == clientMemberNo || msg.getMemberNo() ==  clientMemberNo) {
-					log.info("찾음");
-					TextMessage textMessage 
-					= new TextMessage( objectMapper.writeValueAsString(msg) ); 
-					//  JSON       <-          DTO
-					
-					// JSON으로 변환된 데이터를 지정된 클라이언트에게 전달
-					s.sendMessage(textMessage);
-				}
-				
-			}else {
+			
 				if(msg.getTargetNo() == clientMemberNo || msg.getMemberNo() ==  clientMemberNo) {
 					log.info("찾음");
 					TextMessage textMessage 
@@ -145,7 +120,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
 					// JSON으로 변환된 데이터를 지정된 클라이언트에게 전달
 					s.sendMessage(textMessage);
 				}
-			}
+			
 			
 		}
 	

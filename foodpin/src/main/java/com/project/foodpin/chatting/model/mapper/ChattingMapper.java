@@ -18,7 +18,7 @@ public interface ChattingMapper {
     public int createChattingRoom(Map<String, Object> map);
 
 
-    public int insertToStoreMessage(Message msg);
+    public int insertMessage(Message msg);
 
     public int updateReadFlag(Map<String, Object> paramMap);
 
@@ -26,6 +26,8 @@ public interface ChattingMapper {
 
 	public List<Member> selectTarget(Map<String, Object> map);
 
-	public int insertToMemberMessage(Message msg);
+	public int checkAskChattingNo(Map<String, Object> map);
+
+	public int createAskChattingRoom(Map<String, Object> map);
 
 }

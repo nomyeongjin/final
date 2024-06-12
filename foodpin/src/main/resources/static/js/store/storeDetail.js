@@ -11,6 +11,39 @@ storedetailmapbutton.addEventListener("click", () => {
 
 
 
+/* 팝업 채팅창 */
+const toChatting = document.getElementById("toChatting");
+
+
+ if(toChatting != null){
+    toChatting.addEventListener("click", () => {
+        if(!notificationLoginCheck){
+
+            alert("로그인 후 이용해주세요.")
+
+        }else if(type==2){
+
+          alert("일반 회원만 문의하기가 가능합니다.")
+
+        }else{
+            showPopup();
+            
+        }
+    })
+
+ }
+
+
+
+/* Get 방식 */
+function showPopup() { 
+  let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,location=no,width=515, height=700, top=150,left=500";
+  window.open("/chatting/chatPopup/"+storeMemberNo, "chatting", options); 
+  
+  
+}
+
+
 
 
 /* ****************지도******************* */
