@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.review.model.dto.Report;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.websocket.model.dto.Notification;
@@ -107,7 +108,7 @@ public class NotificationServiceImpl implements NotificationService{
 		return mapper.memberNo(pkNo);
 	}
 	
-	// 관리자에게 알림 보낼 때 필요한 데이터 조회
+	// 가게 신고 데이터 조회
 	@Override
 	public Store selectManagerData(String pkNo) {
 		return mapper.selectManagerData(pkNo);
@@ -135,4 +136,28 @@ public class NotificationServiceImpl implements NotificationService{
 	public int selectStoreMemberNo(String storeNo) {
 		return mapper.selectStoreMemberNo(storeNo);
 	}
+	
+	// 리뷰 신고를 위한 데이터 조회
+	@Override
+	public Review selectReivewReportData(String pkNo) {
+		return mapper.selectReivewReportData(pkNo);
+	}
+	
+	// 리뷰 신고 후 삭제 처리 시 필요한 데이터 조회
+	@Override
+	public Report selectReportData(String pkNo) {
+		return mapper.selectReportData(pkNo);
+	}
+	
+	// 가게 신고 (해결 완료)
+	@Override
+	public Store storeReportComplete(String pkNo) {
+		return mapper.storeReportComplete(pkNo);
+	}
+	
+	// 가게 정보 요청 처리에 필요한 회원 번호
+	/*
+	 * @Override public int selectMemberNo(String storeNo) { return
+	 * mapper.selectMemberNo(storeNo); }
+	 */
 }

@@ -43,11 +43,19 @@
                     
                     <div class="content-container">
                         <i class="fa-solid fa-message"></i>
-                        <span class="content" name="storeInfo" id="storeId" th:text="${store.storeInfo}"></span>
-                        <!-- <th:block th:text="${store.storeInfo}">가게 정보 어쩌구 저쩌구 </th:block> -->
-                    
-                        <a class="more" th:href="'/store/storeDetail/' + ${storeNo} + '/reservation/detail'">더보기<i
-                                class="fa-solid fa-chevron-down fa-rotate-270"></i></a> <!-- 상세 정보로 넘어감 -->
+                        <!-- 가게 정보가 있을 경우 -->
+                        <th:block th:if="${store.storeInfo}">
+                            <span class="content" name="storeInfo" id="storeId" th:text="${store.storeInfo}"></span>
+            
+                            <a class="more" th:href="'/store/storeDetail/' + ${storeNo} + '/reservation/detail'">더보기
+                                <i class="fa-solid fa-chevron-down fa-rotate-270"></i>
+                            </a><!-- 상세 정보로 넘어감 -->
+                        </th:block>
+
+                        <!-- 가게 정보가 없는 경우 -->
+                        <th:block th:unless="${store.storeInfo}">
+                            <span class="content" name="storeInfo" id="storeId" th:text="|가게 정보 준비중 입니다.|"></span>
+                        </th:block> <!-- 상세 정보로 넘어감 -->
                     </div>
                 </div>
     

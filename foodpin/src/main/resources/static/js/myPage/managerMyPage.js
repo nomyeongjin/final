@@ -78,7 +78,10 @@ completeBtn.forEach(btn => {
             return;
         }
         const requestNo = e.target.dataset.requestNo;
+        const storeName = e.target.dataset.requestStoreName;
+
         completeRequest(requestNo);
+        sendNotificationFn("storeReportComplete", null, requestNo, null, storeName, null, null);
     });
 });
 

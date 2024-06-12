@@ -40,14 +40,20 @@ public class NotificationTypes {
 	/* 리뷰 신고 (접수) */
 	private final String reviewReport = "reviewReport";
 	
-	/* 리뷰 신고 (처리 완료) */
+	/* 리뷰 신고 (불충분) */
 	private final String reviewReportComplete = "reviewReportComplete";
+	
+	/* 리뷰 신고 후 삭제 처리 시 */
+	private final String reviewReportDeleteReview = "reviewReportDeleteReview";
 	
 	/* 가게 신고 (접수) */
 	private final String storeReport = "storeReport";
 	
 	/* 가게 신고 (해결 완료) */
 	private final String storeReportComplete = "storeReportComplete";
+	
+	/* 노쇼 취소 알림 */
+//	private final String noshowCancel = "noshowCancel";
 	
 
 }

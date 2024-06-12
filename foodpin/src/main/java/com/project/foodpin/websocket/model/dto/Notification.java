@@ -30,4 +30,6 @@ public class Notification {
 	private String reservDate;
 	private String storeName;
 	private String memberNickname;
+	
+	private String reportDate;
 }
