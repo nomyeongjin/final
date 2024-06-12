@@ -16,7 +16,7 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
 
-                    <input type="text" class="input-box" placeholder="장소, 가게 검색">
+                    <input type="text" class="input-box" placeholder="지역, 가게 검색">
                 </div>
 
             </div>
@@ -29,7 +29,7 @@
 
 
         
-        <div class="search-categoryContaier-hide">
+        <div class="search-categoryContainer-hide">
             <span class="bars">
                 <i class="fa-solid fa-bars"></i>
             </span>
@@ -40,27 +40,16 @@
         </div>
 
             
-        <div class="search-categoryContaier">
+        <div class="search-categoryContainer">
 
             
-            <div class="searchcategory-Btnbox">
-                <button>전체</button>
-                <button>한식</button>
-                <button>중식</button>
-                <button>일식</button>
-                <button>양식</button>
-                <button>분식</button>
-                <button>고기.구이</button>
-                <button>뷔페</button>
-                <button>카페.디저트</button>
-                <button>패스트푸드</button>
-                <button>찜.탕.찌개</button>
-                <button>맛집랭킹</button>
+            <div class="searchcategory-Btnbox" th:each="category : ${searchCategory}">
+                <button class="searchCat-btn" th:text="${category.categoryTitle}">카테고리 버튼</button>
             </div>
             
             
         </div>
-    
+
         <span class="searchbar-line">-</span>
         <!-- 검색창 아래 내용 -->
         <div class="search-panelContent">
@@ -75,7 +64,7 @@
                 <div class="storelist-typecontainer">
 
                     <div>
-                        <span>내 주변</span>
+                        <span>지역</span>
                     </div>
 
     <!--                  <div>

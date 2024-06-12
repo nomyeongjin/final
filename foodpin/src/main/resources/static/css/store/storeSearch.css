@@ -343,30 +343,25 @@ i{
 }
 
 /* 사이드바 내부 카테고리 */
-.search-categoryContaier{
+.search-categoryContainer{
    display: flex;
-   flex-direction: column;
-   padding: 5px 20px 20px 20px;
+   padding: 5px 35px 20px 35px;
    transform: translateY(0%);
-   z-index : -100;
+   flex-direction: row;
+   flex-wrap: wrap;
+   align-items: center;
+ 
 
 }
 
-.search-categoryContaier-hide{
+.search-categoryContainer-hide{
    display: flex;
    justify-content: flex-end;
    padding-right: 20px;
    background-color: white;
+   z-index: 10;
 }
 
-.searchcategory-Btnbox{
-   display: flex;
-   flex-direction: row;
-   flex-wrap: wrap;
-   align-items: center;
-   justify-content: center;
-
-}
 
 .searchbar-line{
    border-top: 1px dotted var(--main-color);
@@ -376,7 +371,7 @@ i{
    align-items: center;
 }
 
-.searchcategory-Btnbox > button{
+.searchCat-btn{
    margin: 5px;
    cursor: pointer;
    width: 70px;

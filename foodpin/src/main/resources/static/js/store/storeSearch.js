@@ -79,7 +79,7 @@ show.addEventListener('click', ()=>{
 
 /* 카테고리 박스 접기 */
 
-const searchCategoryCon = document.querySelector('.search-categoryContaier')
+const searchCategoryCon = document.querySelector('.search-categoryContainer')
 const searchCategoryBtnBox = document.querySelector('.searchcategory-Btnbox')
 const bars = document.querySelector('.bars')
 const shortBar = document.querySelector('.short-bar')

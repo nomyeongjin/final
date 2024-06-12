@@ -68,7 +68,7 @@
                                 <!-- 안에 이름이랑 북마크 만들고 
                                     양 옆으로 보내기 -->
                                 <div class="storedetail-name">
-                                    <span id="storeName" th:text="*{storeName}">가게 이름</span> 
+                                    <span id="storeName" th:text="*{storeName}" th:data-storeName="${store.storeName}">가게 이름</span> 
                                 </div>
                                 
                                 <div class="bookmark-box">
@@ -169,7 +169,7 @@
                                     <div class="detailstoreloc-content">
 
                                         <div class="storelocbox-one">
-                                            <span id="detailLoc" th:text="${address}"></span>
+                                            <span id="detailLoc" th:text="${address}" th:data-address="${address}"></span>
                                        
 
                                             <div>
@@ -765,7 +765,7 @@
         const storeNo = /*[[${store.storeNo}]]*/ "사업자등록번호"
         const storeName = /*[[${store.storeName}]]*/ "가게 이름"
         const categoryCode = /*[[${store.categoryCode}]]*/ "가게 카테고리 코드"
-    
+        const storeLocation = /*[[${store.storeLocation}]]*/ "가게 주소"
         let bookmark =/*[[${store.bookmark}]]*/ "좋아요 여부";
         
 
