@@ -17,6 +17,26 @@
      <!-- templetes/common/header.html  조각 추가 -->
      <th:block th:replace="~{common/header}"></th:block>
 
+      <!-- section 2  카테고리 공간 -->
+      <section class="main-category-container">
+
+        <div class="main-category-content">
+  
+          <div class="main-category-button" >
+            <div class="main-category-list" th:each="category :${mainCategoryList}">
+  
+              <a th:href="'/store/storeSearch/' + ${category.categoryCode}">
+  
+                <button class="mainCatBtn" th:text="${category.categoryTitle}"></button>
+              </a>
+              
+            </div>
+          </div>
+            
+        </div>
+        
+      </section>
+
      <!-- section 1 검색하는 공간 -->
        <div class="main-search-container">
         <!-- <img src="/images/table.jpg"> -->
@@ -36,7 +56,7 @@
       
 
      <!-- section 2  카테고리 공간 -->
-     <section class="main-category-container">
+     <!-- <section class="main-category-container">
 
       <div class="main-category-content">
 
@@ -53,7 +73,7 @@
          
       </div>
       
-     </section>
+     </section> -->
 
 
      <!-- section 3 내 근처 가게 리스트 -->

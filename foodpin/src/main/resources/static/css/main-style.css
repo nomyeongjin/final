@@ -295,13 +295,13 @@ header {
    display: inline-block;
    width: 100px;
    height: 40px;
-   border-radius: 10px;
-   background:rgb(255, 255, 255);
+   background-color: white;
    color: black;
+   letter-spacing: 1px;
    z-index: 1;
-   border: 1px solid var(--hotpink);
+   border: none;
    position: relative;
-   margin: 12px;
+   margin: 0 12px;
    transition-duration: 0.2s;
    transition-timing-function: linear;
    transition-delay: 0s;
@@ -309,11 +309,11 @@ header {
 }
 
 .mainCatBtn:hover {
-   background-color: #E14C54;
+   background-color: var(--hotpink);
    color: white;
 }
 
-.mainCatBtn:after {
+/* .mainCatBtn:after {
    position: absolute;
    content: "";
    width: 0;
@@ -322,9 +322,9 @@ header {
    right: 0;
    border-radius: 10px;
    z-index: -1;
-   background: #E14C54;
-   color: white;
-}
+   background: white;
+   color: black;
+} */
 
 .mainCatBtn:hover {
    color: #ffffff;
