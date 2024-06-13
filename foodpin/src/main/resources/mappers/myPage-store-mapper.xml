@@ -195,21 +195,13 @@
 	<!-- 지정 후무일 변경 -->
 	<update id="calendaroffUpdate">
 		UPDATE "OFF_DAY" SET OFF_DAY_TITLE = #{offDayTitle}, OFF_DAY_START = #{offDayStart}, OFF_DAY_END = #{offDayEnd}
-		WHERE OFF_DAY_NO = (
-			SELECT OFF_DAY_NO
-			FROM "OFF_DAY"
-			WHERE STORE_NO = #{storeNo} AND OFF_DAY_START = #{offDayStart} AND OFF_DAY_END = #{offDayEnd}
-		)
+		WHERE OFF_DAY_NO = #{offDayNo}
 	</update>
 	
 	<!-- 지정 후무일 삭제 -->
 	<delete id="calendaroffDelete">
 		DELETE FROM "OFF_DAY" 		
-		WHERE OFF_DAY_NO = (
-			SELECT OFF_DAY_NO
-			FROM "OFF_DAY"
-			WHERE STORE_NO = #{storeNo} AND OFF_DAY_START = #{offDayStart} AND OFF_DAY_END = #{offDayEnd}
-		)
+		WHERE OFF_DAY_NO = #{offDayNo}
 	</delete>
 	
 	<!-- *** 예약 *** -->
