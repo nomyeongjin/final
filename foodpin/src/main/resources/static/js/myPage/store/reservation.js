@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
          initialView: 'dayGridMonth',
          editable: false,
          dayMaxEvents: true,
-         eventColor : '#DF8B4E',
+         eventColor : '#e14c54ba',
          events: reservList,
          eventClick : function(info) { reservPopup(info.event.id); },
          });
@@ -326,7 +326,6 @@ const createReservList = (reservStatusFl) => {
       
             }) // reservRejectBtn.addEventListener("click" <- 예약 거절 버튼
 
-      
             listBtnArea.append(reservBtn, reservRejectBtn);
             listContent.append(listBtnArea);
          }
@@ -423,9 +422,7 @@ const createReservList = (reservStatusFl) => {
 
          reservCard.append(listTitleArea, listContent);
          listContainer.append(reservCard);
-
       }
-      
    });
 
 };
@@ -555,7 +552,6 @@ reservPrev.addEventListener("click", () => {
 
 
 
-
 // --------------------------------------------------
 const popupLayer = document.querySelector("#popupLayer");
 
@@ -579,24 +575,53 @@ const reservPopup = (reservNo) => {
       popupFrm.classList.add("popup-container");
 
       const divReservNo = document.createElement("div"); // 예약 번호
-      divReservNo.classList.add("popup-row");
-      divReservNo.innerText = "예약 번호 : " + reservNo;
+      divReservNo.classList.add("popup-row-reserv");
+      divReservNo.innerText = "예약 번호 : ";
+
+      const inputReservNo = document.createElement("p");  // 예약 번호 input
+      inputReservNo.setAttribute("type", "text");
+      inputReservNo.innerText = reservNo;
+      divReservNo.append(inputReservNo);
 
       const divReservDateTime = document.createElement("div"); // 예약일
-      divReservDateTime.classList.add("popup-row");
-      divReservDateTime.innerText = "예약일 : " + reserv.reservDate + reserv.reservTime;
+      divReservDateTime.classList.add("popup-row-reserv");
+      divReservDateTime.innerText = "예약일 : ";
+
+      const inputDate = document.createElement("p");  // 예약일 input
+      inputDate.setAttribute("type", "text");
+      inputDate.innerText = reserv.reservDate;
+
+      const inputTime = document.createElement("p");  // 예약일 input
+      inputTime.setAttribute("type", "text");
+      inputTime.innerText = reserv.reservTime;
+      divReservDateTime.append(inputDate, inputTime);
 
       const divReservCount = document.createElement("div"); // 예약 인원
-      divReservCount.classList.add("popup-row");
-      divReservCount.innerText = "예약 인원 : " + reserv.reservCount;
+      divReservCount.classList.add("popup-row-reserv");
+      divReservCount.innerText = "예약 인원 : ";
+
+      const inputReservCount = document.createElement("p");  // 예약 인원 input
+      inputReservCount.setAttribute("type", "text");
+      inputReservCount.innerText = reserv.reservCount + " 인";
+      divReservCount.append(inputReservCount);
 
       const divMemberName = document.createElement("div"); // 예약자명
-      divMemberName.classList.add("popup-row");
-      divMemberName.innerText = "예약자명 : " + reserv.memberName;
+      divMemberName.classList.add("popup-row-reserv");
+      divMemberName.innerText = "예약자명 : ";
+
+      const inputMemberName = document.createElement("p");  // 예약자명 input
+      inputMemberName.setAttribute("type", "text");
+      inputMemberName.innerText = reserv.memberName;
+      divMemberName.append(inputMemberName);
 
       const divMemberTel = document.createElement("div"); // 전화번호
-      divMemberTel.classList.add("popup-row");
-      divMemberTel.innerText = "전화번호 : " + reserv.memberTel;
+      divMemberTel.classList.add("popup-row-reserv");
+      divMemberTel.innerText = "전화번호 : ";
+
+      const inputMemberTel = document.createElement("p");  // 전화번호 input
+      inputMemberTel.setAttribute("type", "text");
+      inputMemberTel.innerText = reserv.memberTel;
+      divMemberTel.append(inputMemberTel);
 
       popupFrm.append(divReservNo, divReservDateTime, divReservCount, divMemberName, divMemberTel);
       
@@ -613,7 +638,7 @@ const reservPopup = (reservNo) => {
 
       const cancelBtn = document.createElement("button");
       cancelBtn.type = "button";
-      cancelBtn.classList.add("popup-row");
+      cancelBtn.classList.add("popup-btn");
       cancelBtn.innerText = "확인";
       popupFrm.append(cancelBtn);
 
