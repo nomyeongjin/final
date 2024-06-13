@@ -338,6 +338,16 @@ public class StoreMyPageController {
 		return service.noshowReserv(map);
 	}
 	
+	/** 노쇼 취소 (비동기)
+	 * @return result
+	 */
+	@ResponseBody
+	@GetMapping("NoshowCancel")
+	public int NoshowCancel(@RequestParam("reservNo") int reservNo) {
+		
+		return service.noshowReserv(reservNo);
+	}
+	
 	/** 캘린더에 맞는 형태로 확정된 예약 전체 조회 (비동기)
 	 * @return reservList
 	 */

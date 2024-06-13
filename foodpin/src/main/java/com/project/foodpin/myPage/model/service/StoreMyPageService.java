@@ -141,6 +141,12 @@ public interface StoreMyPageService {
 	 * @return
 	 */
 	int noshowReserv(Map<String, Object> map);
+	
+	/** 노쇼 취
+	 * @param reservNo
+	 * @return
+	 */
+	int noshowReserv(int reservNo);
 
 	/** 확정된 예약 조회
 	 * @param memberNo
@@ -212,6 +218,7 @@ public interface StoreMyPageService {
 	 * @return
 	 */
 	int deleteReply(int replyNo);
+
 
 
 
