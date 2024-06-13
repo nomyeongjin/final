@@ -108,6 +108,10 @@ public interface DetailStoreMapper {
 	 */
 	Hash hashTitle(String hashNo);
 
+
+
+
+
 	
 	
 	

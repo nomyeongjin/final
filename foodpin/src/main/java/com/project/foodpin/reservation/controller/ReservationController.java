@@ -21,6 +21,7 @@ import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.reservation.model.service.ReservationService;
+import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
@@ -41,9 +42,12 @@ public class ReservationController {
 			@PathVariable("storeNo") String storeNo,
 			Model model) {
 		
+		int reviewCount = service.reviewCount(storeNo);
+		
 		Store store = service.storeDetail(storeNo);
 		
 		model.addAttribute("store", store);
+		model.addAttribute("reviewCount", reviewCount);
 		
 		return "reservation/reservationDetail";
 	}
@@ -87,7 +91,10 @@ public class ReservationController {
 		
 		Store store = service.storeDetail(storeNo);
 		
+		int reviewCount = service.reviewCount(storeNo);
+		
 		model.addAttribute("store", store);
+		model.addAttribute("reviewCount", reviewCount);
 		return "reservation/detail";
 	}
 	
@@ -99,7 +106,10 @@ public class ReservationController {
 		
 		Store store = service.storeDetail(storeNo);
 		
+		List<Review> reviewList = service.reviewDetail(storeNo);
+		
 		model.addAttribute("store", store);
+		model.addAttribute("reviewList", reviewList);
 		return "reservation/reservPageReview";
 		
 	}

@@ -512,66 +512,70 @@ const reviewReport = document.querySelectorAll(".reviewReport");
 const reportComplete = document.querySelector("#reportComplete");
 const reportContent = document.querySelector("#reportContent");
 
+let currentReviewNo = null;
+
 popupClose.addEventListener("click", () => {
   reviewReportForm.classList.add("popup-hidden");
+  reportContent.value = '';  // 내용 초기화
 });
+
 reviewReport.forEach((report) => {
   report.addEventListener("click", () => {
     reviewReportForm.classList.remove("popup-hidden");
 
-    const reviewNo = report.dataset.reviewNo;
+    currentReviewNo = report.dataset.reviewNo;
+  });
+});
 
-    reportComplete.addEventListener("click", e => {
+const reportHandler = (e) => {
+  if (reportContent.value.trim().length == 0) {
+    alert("신고 내용을 입력해주세요");
+    reportContent.focus();
+    e.preventDefault();
+    return;
+  } else {
+    const obj = {
+      "reviewNo": currentReviewNo,
+      "reportContent": reportContent.value,
+      "reporterName": loginMemberNickname
+    };
 
-      if (reportContent.value.trim().length == 0) {
-        alert("신고 내용을 입력해주세요");
-        reportContent.focus();
-        e.preventDefault();
-        return;
-      } else {
-        const obj = {
-          "reviewNo": reviewNo,
-          "reportContent": reportContent.value,
-          "reporterName": loginMemberNickname
-        };
-
-        fetch("/store/reviewReport", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(obj)
-        })
-          .then(resp => resp.json())
-          .then(result => {
-
-            if (result == 0) {
-              Swal.fire({
-                icon: "error",
-                title: "신고 접수 실패",
-                text: "신고 접수가 실패했습니다. 다시 한 번 확인해주세요.",
-              });
-              reportContent.focus();
-              e.preventDefault();
-            }
-            else {
-              Swal.fire({
-                title: "신고 접수 완료",
-                text: "신고 접수가 정상적으로 처리 되었습니다.",
-                icon: "success"
-              });
-              reviewReportForm.classList.add("popup-hidden");
-              reportContent.value = '';
-            }
-          })
-      }
-
-      // console.log('Review No:', reviewNo); 
-      // 리뷰 신고 알림
-      const storeName = document.querySelector("#storeName").innerText;
-      sendNotificationFn("reviewReport", null, reviewNo, null, storeName, null);
-
+    fetch("/store/reviewReport", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(obj)
     })
-  })
-})
+      .then(resp => resp.json())
+      .then(result => {
+        if (result == 0) {
+          Swal.fire({
+            icon: "error",
+            title: "신고 접수 실패",
+            text: "신고 접수가 실패했습니다. 다시 한 번 확인해주세요.",
+          });
+          reportContent.focus();
+          e.preventDefault();
+        } else {
+          Swal.fire({
+            title: "신고 접수 완료",
+            text: "신고 접수가 정상적으로 처리 되었습니다.",
+            icon: "success"
+          });
+          reviewReportForm.classList.add("popup-hidden");
+          reportContent.value = '';  // 내용 초기화
+        }
+      });
+
+    // 리뷰 신고 알림
+    const storeName = document.querySelector("#storeName").innerText;
+    sendNotificationFn("reviewReport", null, currentReviewNo, null, storeName, null);
+  }
+};
+
+// 이전 이벤트 핸들러 제거
+reportComplete.removeEventListener("click", reportHandler);
+// 새로운 이벤트 핸들러 추가
+reportComplete.addEventListener("click", reportHandler);
 
 
 const reviewDeleteBtns = document.querySelectorAll("#reviewDeleteBtn");

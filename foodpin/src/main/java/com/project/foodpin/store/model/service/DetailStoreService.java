@@ -61,6 +61,8 @@ public interface DetailStoreService {
 	Hash hashTitle(String hashNo);
 
 
+
+
 	
 
 

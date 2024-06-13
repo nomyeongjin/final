@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title th:text="|${hashTitle.hashTitle} 검색|"></title>
+  <title th:text="|${hashTitle.hashTitle} 검색|">dd</title>
 
   <th:block th:replace="~{common/common}"></th:block>
   <link rel="stylesheet" href="/css/store/hashSearch.css">
@@ -13,16 +13,112 @@
 
   <main>
     <th:block th:replace="~{common/header}"></th:block>
+
+
+    <div id="hashSelectForm" class="popup-hidden">
+      <section class="popupLayer">
+
+        <p id="p">해시태그 추가</p>
+        <span id="popupClose" class="fa-solid fa-xmark"></span>
+        
+        <div class="explain">
+          <span>원하는 해시태그를 추가해주세요!</span>
+        </div>
+
+        <div class="keyword-box">
+          <ul id="keywords">
+            <li>
+              <input type="checkbox" id="goodFood" class="keyword-checkbox" value="1" name="hashNo" hidden>
+              <label for="goodFood">#음식이 맛있어요!</label>
+            </li>
+            <li>
+              <input type="checkbox" id="fast" class="keyword-checkbox" value="2" name="hashNo" hidden>
+              <label for="fast">#음식이 빨리 나와요!</label>
+            </li>
+            <li>
+              <input type="checkbox" id="many" class="keyword-checkbox" value="3" name="hashNo" hidden>
+              <label for="many">#양이 많아요!</label>
+            </li>
+            <li>
+              <input type="checkbox" id="fresh" class="keyword-checkbox" value="4" name="hashNo" hidden>
+              <label for="fresh">#재료가 신선해요!</label>
+            </li>
+            <li>
+              <input type="checkbox" id="goodMenu" class="keyword-checkbox" value="5" name="hashNo" hidden>
+              <label for="goodMenu">#메뉴 구성이 알차요!</label>
+            </li>
+          </ul>
+          <ul id="keywords">
+            <li>
+              <input type="checkbox" id="kind" class="keyword-checkbox" value="6" name="hashNo" hidden>
+              <label for="kind">#사장님이 친절해요!</label>
+            </li>
+            <li>
+              <input type="checkbox" id="clean" class="keyword-checkbox" value="7" name="hashNo" hidden>
+              <label for="clean">#매장이 청결해요!</label>
+            </li>
+            <li>
+              <input type="checkbox" id="toilet" class="keyword-checkbox" value="8" name="hashNo" hidden>
+              <label for="toilet">#화장실이 깨끗해요!</label>
+            </li>
+            <li>
+              <input type="checkbox" id="parking" class="keyword-checkbox" value="9" name="hashNo" hidden>
+              <label for="parking">#주차하기 편해요!</label>
+            </li>
+            <li>
+              <input type="checkbox" id="view" class="keyword-checkbox" value="10" name="hashNo" hidden>
+              <label for="view">#뷰가 좋아요!</label>
+            </li>
+          </ul>
+          <ul id="keywords">
+            <li>
+              <input type="checkbox" id="group" class="keyword-checkbox" value="11" name="hashNo" hidden>
+              <label for="group">#단체 모임하기 좋아요!</label>
+            </li>
+            <li>
+              <input type="checkbox" id="solo" class="keyword-checkbox" value="12" name="hashNo" hidden>
+              <label for="solo">#혼밥하기 좋아요!</label>
+            </li>
+            <li>
+              <input type="checkbox" id="interior" class="keyword-checkbox" value="13" name="hashNo" hidden>
+              <label for="interior">#인테리어가 멋져요!</label>
+            </li>
+            <li>
+              <input type="checkbox" id="mood" class="keyword-checkbox" value="14" name="hashNo" hidden>
+              <label for="mood">#분위기가 좋아요!</label>
+            </li>
+            <li>
+              <input type="checkbox" id="wide" class="keyword-checkbox" value="15" name="hashNo" hidden>
+              <label for="wide">#매장이 넓어요!</label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="keyword-btn">
+          <button id="addBtn">추가</button>
+        </div>
+
+      </section>
+    </div>
+
+
     
     <section class="section">
       <div class="store-container">
         <div class="store-hash-search">
   
-          <div class="store-hashtag">
-            <span th:text="${hashTitle.hashTitle}">#hashTag Title</span>
+          <div class="store-hashtag-container">
+            <div class="store-hashtag" >
+              <span th:text="${hashTitle.hashTitle}" >#hashTag Title</span>
+              <input id="mHashNo" type="text" th:value="${hashTitle.hashNo}" hidden>
+            </div>
+            
+            <!-- <span class="add" id="add"><i class="fa-solid fa-plus"></i></span> -->
+            
           </div>
-          
+            
           <span>해시태그가 많이 사용된 순으로 정렬되었습니다.</span>
+
         </div>
         
 
@@ -65,7 +161,7 @@
                 
   
               </div>
-              <span class="store-address" th:text="${address} + ' | ' + ${detailAddress} + ' | ' + ${postcode}"></span>
+              <span class="store-address" th:text="*{address} + ' | ' + *{detailAddress} + ' | ' + *{postcode}"></span>
               <div class="store-time">
                 <table>
                   <tbody class="time-table">
@@ -76,8 +172,8 @@
                     <tr>
                       <td style="width: 100px;">브레이크 타임 : </td>
                       <td>
-                        <span th:if="${breaktimeStart == null}"  th:text="|*{breaktimeStart} ~ *{breaktimeEnd}|"></span>
-                        <span th:unless="${breaktimeStart == null}">없음</span>
+                        <span th:unless="${store.breaktimeStart == null or store.breaktimeStart == '00:00' or store.breaktimeEnd == '00:00'}"  th:text="|*{breaktimeStart} ~ *{breaktimeEnd}|"></span>
+                        <span th:if="${store.breaktimeStart == null or store.breaktimeStart == '00:00' or store.breaktimeEnd == '00:00'}">없음</span>
                       </td>
                     </tr>
                   </tbody>
