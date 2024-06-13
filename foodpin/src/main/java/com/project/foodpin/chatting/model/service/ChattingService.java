@@ -35,4 +35,5 @@ public interface ChattingService {
 
 	int notReadChattingCount(int memberNo);
 
+
 }

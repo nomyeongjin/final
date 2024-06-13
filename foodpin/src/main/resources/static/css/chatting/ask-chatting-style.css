@@ -98,7 +98,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-left: 1px solid #cecece;
     min-width: 500px;
 }
 

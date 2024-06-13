@@ -920,6 +920,10 @@ header>section:nth-child(3) {
    right: 20px;
 }
 
+#chat{
+   cursor: pointer;
+}
+
 .fa-circle-xmark:hover{
    color: red;  
    user-select: none;

@@ -85,15 +85,19 @@ public class ChattingController {
 		
 		int chattingNo = service.checkAskChattingNo(map);
 		
+		
+		
 		if(chattingNo == 0) {
 			chattingNo = service.createAskChattingRoom(map);
-		}else {
-			List<Message> messageList = service.selectMsgList(chattingNo);
-			model.addAttribute("messageList", messageList);
-			model.addAttribute("profileImg", profileImg);
-			model.addAttribute("memberNickname", memberNickname);
+//			int result = service.insertInfoMessage(map);
 			
 		}
+		
+		List<Message> messageList = service.selectMsgList(chattingNo);
+		model.addAttribute("messageList", messageList);
+		model.addAttribute("profileImg", profileImg);
+		model.addAttribute("memberNickname", memberNickname);
+			
 		
 		model.addAttribute("chattingNo", chattingNo);
 		
@@ -141,7 +145,9 @@ public class ChattingController {
     // 채팅방 목록 조회
     @GetMapping(value="roomList", produces="application/json; charset=UTF-8")
     @ResponseBody
-    public List<ChattingRoom> selectRoomList(@SessionAttribute("loginMember") Member loginMember) {
+    public List<ChattingRoom> selectRoomList(
+    		@SessionAttribute("loginMember") Member loginMember
+    		) {
     	return service.selectRoomList(loginMember.getMemberNo());
     }
     
@@ -162,6 +168,7 @@ public class ChattingController {
         return service.selectMessageList(paramMap);
     }
 	
+    // 채팅 읽음 여부
     @GetMapping("notReadChattingCount")
 	@ResponseBody
 	public int notReadChattingCount(

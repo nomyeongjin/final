@@ -82,7 +82,9 @@ public class ChattingServiceImpl implements ChattingService {
 	
 	@Override
 	public int createAskChattingRoom(Map<String, Object> map) {
-		return mapper.createChattingRoom(map);
+		mapper.createChattingRoom(map);
+		mapper.insertInfoMessage(map);
+		return Integer.parseInt(String.valueOf(map.get("chattingNo")));
 	}
 	
 	@Override
@@ -99,5 +101,7 @@ public class ChattingServiceImpl implements ChattingService {
 	public int notReadChattingCount(int memberNo) {
 		return mapper.notReadChattingCount(memberNo);
 	}
+	
+	
 	
 }

@@ -87,12 +87,20 @@
 	
 
 
-	<!-- 상점에 보낸 채팅 메세지 삽입 -->
+	<!-- 채팅 메세지 삽입 -->
 	<insert id="insertMessage" useGeneratedKeys="true">
 		INSERT INTO "MESSAGE"
 		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, 
 		 #{memberNo}
 		, #{chattingNo},#{targetNo})
+	</insert>
+
+	<!-- 안내 채팅 메세지 삽입 -->
+	<insert id="insertInfoMessage" useGeneratedKeys="true">
+		INSERT INTO "MESSAGE"
+		VALUES(SEQ_MESSAGE_NO.NEXTVAL, '안녕하세요. FOODPIN입니다. 문의를 남겨주시면 빠른 시간내에 답변드리겠습니다. 감사합니다.', DEFAULT, DEFAULT, 
+		 #{targetNo}
+		, #{chattingNo},#{loginMemberNo})
 	</insert>
 	
 	
