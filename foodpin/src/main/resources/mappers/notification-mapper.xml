@@ -197,4 +197,16 @@
 		WHERE REPORT_NO = #{reportNo}
 	</select>
 	
+	<select id="noshowMemberNo">
+		SELECT MEMBER_NICKNAME , MEMBER_NO
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<select id="selectNoshowMemberNo">
+		SELECT MEMBER_NO
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
 </mapper>
