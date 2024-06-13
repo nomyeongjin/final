@@ -262,6 +262,8 @@ const createReservList = (reservStatusFl) => {
                reservNoshowBtn.dataset.memberNo = `${reserv.memberNo}`;
                reservNoshowBtn.dataset.memberFlag = `${reserv.memberFlag}`;
                reservNoshowBtn.dataset.memberEmail = `${reserv.memberEmail}`;
+               reservNoshowBtn.dataset.reservDate = `${reserv.reservDate}`;
+               reservNoshowBtn.dataset.reservTime = `${reserv.reservTime}`;
                reservNoshowBtn.innerText = "노쇼 등록";
 
                listBtnArea.append(reservNoshowBtn);
@@ -271,6 +273,37 @@ const createReservList = (reservStatusFl) => {
                   const memberFlag = reservNoshowBtn.dataset.memberFlag;
                   const memberEmail = reservNoshowBtn.dataset.memberEmail;
                   console.log("경고 " + memberFlag);
+
+                  const memberNo = reservNoshowBtn.dataset.memberNo;
+
+                  let reservDate = reservNoshowBtn.dataset.reservDate;
+                  const reservTime = reservNoshowBtn.dataset.reservTime;
+                  // reservDate를 부분 문자열로 잘라내기
+                  const year = reservDate.slice(0, 4);
+                  const month = reservDate.slice(6, 8);
+                  const day = reservDate.slice(10, 12);
+
+                  const date = new Date(`${year}-${month}-${day}T${reservTime}`);
+
+                  // 요일을 계산
+                  const options = { weekday: 'short' };
+                  const dayOfWeek = date.toLocaleDateString('ko-KR', options);
+
+                  // 형식화된 문자열 생성
+                  const formattedDate = `${month}.${day}(${dayOfWeek}) ${reservTime}`;
+                  reservDate = formattedDate;
+
+                  // console.log(memberNo);
+
+                  // 노소 누적 1회 시 알림 발송
+                  if (memberFlag == 0) {
+                     sendNotificationFn("reservFirstNoshow", null, memberNo, reservDate, null, null, null)
+                  };
+
+                  // 노소 누적 2회 시 알림 발송
+                  if (memberFlag == 1) {
+                     sendNotificationFn("reservSecondNoshow", null, memberNo, reservDate, null, null, null)
+                  };
 
                   // 노쇼 3회 달성 메일 발송
                   if(memberFlag == 2) {

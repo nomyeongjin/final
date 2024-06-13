@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.review.model.dto.Report;
 import com.project.foodpin.review.model.dto.Review;
@@ -155,13 +156,18 @@ public class NotificationServiceImpl implements NotificationService{
 		return mapper.storeReportComplete(pkNo);
 	}
 	
-	// 가게 정보 요청 처리에 필요한 회원 번호
-	/*
-	 * @Override public int selectMemberNo(String storeNo) { return
-	 * mapper.selectMemberNo(storeNo); }
-	 */
 	@Override
 	public int selectReviewNo(String pkNo) {
 		return mapper.selectReivewNo(pkNo);
+	}
+	
+	@Override
+	public Member noshowMemberNo(String pkNo) {
+		return mapper.noshowMemberNo(pkNo);
+	}
+	
+	@Override
+	public int selectNoshowMemberNo(int memberNo) {
+		return mapper.selectNoshowMemberNo(memberNo);
 	}
 }
