@@ -117,7 +117,7 @@
             
           </div>
             
-          <span>해시태그가 많이 사용된 순으로 정렬되었습니다.</span>
+          <span>해시태그가 많이 사용된 순으로 정렬 되었습니다.</span>
 
         </div>
         
@@ -161,6 +161,7 @@
                 
   
               </div>
+              <span class="review-count" th:text="| 리뷰 *{reviewCount} 개|"></span>
               <span class="store-address" th:text="*{address} + ' | ' + *{detailAddress} + ' | ' + *{postcode}"></span>
               <div class="store-time">
                 <table>
@@ -185,7 +186,6 @@
                 <span th:text="*{storeTel}"></span>
               </div>
               
-              <span th:text="| 리뷰 *{reviewCount} 개|"></span>
               <div class="hashtag">
                 <span th:text="${hashTitle.hashTitle}">#hashTag Title</span>
                 <span th:text="*{hashCount}"></span>
