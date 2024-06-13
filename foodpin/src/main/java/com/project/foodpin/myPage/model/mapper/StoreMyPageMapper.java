@@ -222,6 +222,13 @@ public interface StoreMyPageMapper {
 	 */
 	List<Reservation> reservConfirm(String storeNo);
 
+	
+	/** 예약 1건 자세히 조회
+	 * @param reservNo
+	 * @return
+	 */
+	Reservation reservDetail(int reservNo);
+	
 	// ------ 사장님 정보 ------
 	
 	/** 사장님 정보 변경 화면으로 전환
@@ -294,6 +301,8 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	String selectStoreImg(String storeNo);
+
+
 
 
 

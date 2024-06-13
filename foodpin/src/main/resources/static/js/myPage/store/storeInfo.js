@@ -70,7 +70,7 @@ const changeImageFn = e => {
    
 }
 document.querySelector("#storeImgInput").addEventListener("change", changeImageFn);
-storeImgDel();
+
 //-------------- 예약 신청 허용/미허용 선택 --------------
 
 // 예약 신청 여부 선택 +  토글
@@ -219,7 +219,7 @@ const toggleCategory = () => {
 document.addEventListener('DOMContentLoaded', () => {
 
    checkCategory(); // 저장된 카테고리 조회 + 체크
-   toggleCategory();
+   toggleCategory(); // 카테고리 선택시 클래스 토글
 
 
 }); // DOMContentLoaded
@@ -685,24 +685,10 @@ infoBtn.addEventListener("click", () => {
          .then(resp => resp.json())
          .then(result => {
             console.log(result);
-         })
-      
+         }).catch( err => console.log(err));
       });
-      
-
-
-
-
-
-
    })
 });
-
-
-checkStoreStatus();
-checkBoxOpenClose();
-checkBoxBreak();
-
 
 
 /**
@@ -793,3 +779,7 @@ document.querySelector("#storeEditFrm").addEventListener("submit", e => {
    }
 
 });
+
+checkStoreStatus();
+checkBoxOpenClose();
+checkBoxBreak();

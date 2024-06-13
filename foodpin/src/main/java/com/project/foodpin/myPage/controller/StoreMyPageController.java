@@ -342,28 +342,43 @@ public class StoreMyPageController {
 	 */
 	@ResponseBody
 	@GetMapping("reservConfirm")
-	public List<Map<String, String>> reservConfirm(@RequestParam("storeNo") String storeNo) {
+	public List<Map<String, Object>> reservConfirm(@RequestParam("storeNo") String storeNo) {
 		
 		List<Reservation> reservList = service.reservConfirm(storeNo);
 		
 		// 확정된 예약 조회 결과 없는 경우
 		if(reservList.isEmpty()) return null; 
 			
-		List<Map<String, String>> listMap = new ArrayList<>();
+		List<Map<String, Object>> listMap = new ArrayList<>();
 		
 		for (Reservation reserv : reservList) {
 			
-			Map<String, String> map = new HashMap<>();
+			Map<String, Object> map = new HashMap<>();
 			
-			map.put("title", reserv.getReservTime() + ", " + reserv.getReservCount() + "인");
+			map.put("title", reserv.getReservTime() + "	(" + reserv.getReservCount() + "인)");
 			map.put("start", reserv.getReservDate());
 			map.put("end", reserv.getReservDate());
+			map.put("id", reserv.getReservNo());
 			
 			listMap.add(map);
 		}
 		
 		return listMap;
 	}
+	
+	/** 캘린더에서 예약 자세한 내용 조회 
+	 * @param reservNo
+	 * @return
+	 */
+	@GetMapping("reservDetail")
+	@ResponseBody
+	public Reservation reservDetail(@RequestParam("reservNo") int reservNo) {
+		
+		return service.reservDetail(reservNo);
+	}
+	
+	
+	
 	
 	
 	
