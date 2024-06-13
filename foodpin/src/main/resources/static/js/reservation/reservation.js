@@ -421,14 +421,15 @@ if(confirmBtn != null) {
         insertForm.submit(); // 다음 버튼 클릭 시 form 태그 제출
     });
 }
+
 // 스크롤
-// const detail = document.querySelector(".detail");
-// const navList = document.querySelector(".nav-list");
-// detail.addEventListener("click", () => {
-//     const scrollPosition = navList.offsetTop;
-//     window.scrollTo({
-//         left: 0,
-//         top: scrollPosition,
-//         behavior: 'smooth'
-//     });
-// });
+const detail = document.querySelector(".detail");
+const navList = document.querySelector(".nav-list");
+detail.addEventListener("click", () => {
+    const scrollPosition = navList.offsetTop;
+    window.scrollTo({
+        left: 0,
+        top: scrollPosition,
+        behavior: 'smooth'
+    });
+});
