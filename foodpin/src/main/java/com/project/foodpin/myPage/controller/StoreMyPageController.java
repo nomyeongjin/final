@@ -359,6 +359,7 @@ public class StoreMyPageController {
 			map.put("start", reserv.getReservDate());
 			map.put("end", reserv.getReservDate());
 			map.put("id", reserv.getReservNo());
+			map.put("content", reserv.getMemberName());
 			
 			listMap.add(map);
 		}
