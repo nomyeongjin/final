@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
          editable: false,
          dayMaxEvents: true,
          eventColor : '#DF8B4E',
-         // eventClick : fn_calEventClick,
+         events: reservList,
+         eventClick : function(info) { reservPopup(info.event.id); },
          // dateClick: function(){ createPopup(); }, //날짜 클릭시 해당일자 예약 표시하는 모달 생성
          
          // eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
          //  eventRemove: function(obj){ // 이벤트가 삭제되면 발생하는 이벤트
          //    console.log(obj);
          //  },
-         events: reservList,
+
          
          });
 
@@ -459,3 +460,82 @@ reservPrev.addEventListener("click", () => {
 
    createReservList(reservStatusFl);
 });
+
+
+const popupLayer = document.querySelector("#popupLayer");
+
+let popupCheck = 0; // 등록 0 / 수정, 삭제 1
+let count = 0; // 등록된 휴무 갯수
+
+/**
+ * 일정 등록/수정 팝업창 생성 
+ */
+let addBtn = document.querySelector("#addBtn"); //  팝업창 - 일정 등록 버튼
+
+const reservPopup = (reservNo) => {
+   
+   console.log(reservNo);
+   
+   fetch("/myPage/store/reservDetail?reservNo=" + reservNo)
+   .then(resp => resp.json())
+   .then(reserv => {
+
+      console.log(reserv);
+      
+      const popupFrm = document.createElement("form");
+      popupFrm.classList.add("popup-container");
+
+      const divReservNo = document.createElement("div"); // 예약 번호
+      divReservNo.classList.add("popup-row");
+      divReservNo.innerText = "예약 번호 : " + reservNo;
+
+      const divReservDateTime = document.createElement("div"); // 예약일
+      divReservDateTime.classList.add("popup-row");
+      divReservDateTime.innerText = "예약일 : " + reserv.reservDate + reserv.reservTime;
+
+      const divReservCount = document.createElement("div"); // 예약 인원
+      divReservCount.classList.add("popup-row");
+      divReservCount.innerText = "예약 인원 : " + reserv.reservCount;
+
+      const divMemberName = document.createElement("div"); // 예약자명
+      divMemberName.classList.add("popup-row");
+      divMemberName.innerText = "예약자명 : " + reserv.memberName;
+
+      const divMemberTel = document.createElement("div"); // 전화번호
+      divMemberTel.classList.add("popup-row");
+      divMemberTel.innerText = "전화번호 : " + reserv.memberTel;
+
+      popupFrm.append(divReservNo, divReservDateTime, divReservCount, divMemberName, divMemberTel);
+      
+      // 요청사항이 있는 경우
+      if(reserv.reservRequest != null) {
+         const divReservRequest = document.createElement("div"); // 예약 요청사항
+         divReservRequest.classList.add("popup-row");
+         divReservRequest.innerText = "예약 요청사항 : " + reserv.reservRequest;
+         popupFrm.append(divReservRequest);
+      }
+
+      // const btnRow = document.createElement("div"); // 버튼 영역
+      // btnRow.classList.add("popup-row");
+
+      const cancelBtn = document.createElement("button");
+      cancelBtn.type = "button";
+      cancelBtn.classList.add("popup-row");
+      cancelBtn.innerText = "확인";
+      popupFrm.append(cancelBtn);
+
+      listContainer.append(popupFrm);
+      
+      /**
+       * (버튼) 확인 - 팝업창
+       */
+      cancelBtn.addEventListener("click", () => {
+
+         popupFrm.classList.add("blind");
+      })
+
+      // 팝업창 외 다른 클릭 이벤트 방지
+   })
+
+
+};

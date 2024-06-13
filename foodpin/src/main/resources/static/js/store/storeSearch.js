@@ -134,8 +134,7 @@ function storelocation() {
                     var lat = resp.coords.latitude, // 위도
                         lon = resp.coords.longitude; // 경도
                     
-                    var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
-                        message = '<div style="padding:5px;">현재 위치</div>'; // 인포윈도우에 표시될 내용
+                    var locPosition = new kakao.maps.LatLng(lat, lon) // 현재 위치
                     
                     // 마커와 인포윈도우를 표시
                     displayMarker(locPosition, message);
@@ -153,21 +152,15 @@ function storelocation() {
                 message = 'geolocation을 사용할수 없어요..'
             displayMarker(locPosition, message);
         }
-   
-        
+    
 
     };
 
-
     detaillocation();
-
-
 
     // 화면 크기가 변경될 때마다 지도 중심을 유지
     window.addEventListener('resize', function() {
-          
-    
-            
+                 
         detaillocation();
        
     
@@ -185,14 +178,7 @@ function storelocation() {
             map.setCenter(center);
 
 
-
-
-
-
-        });
-
-
-        
+        });  
              // 지도에 마커와 인포윈도우를 표시하는 함수
        function displayMarker(locPosition, message) {
         /* 나중에 현재 위치는 마커 지우고 근처 가게들에 마커 생성 */
@@ -219,11 +205,6 @@ function storelocation() {
         map.setCenter(locPosition);      
     }    
 
-    
-
-
-   
-
 }
 
 
@@ -238,21 +219,6 @@ window.onload = function() {
 
 /* ************************************* 지도 ******************************************* */
 
-/* 가게 리스트가 클릭되면 해당 위치의 가게의 상세 페이지로 보내기 */
-
-/* document.addEventListener('DOMContentLoaded', function () {
-    const storeList = document.querySelector('.searchstore-storeList');
-
-    storeList.addEventListener("click", function(event) {
-        const storeElement = event.target.closest('[data-store-no]');
-        if (storeElement) {
-            const storeNo = storeElement.getAttribute('data-store-no');
-            location.href = "/store/storeDetail/" + storeNo;
-        }
-    });
-});
-
- */
 /* 가게 주소  */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -322,6 +288,13 @@ storedetailmapbutton.addEventListener("click", () => {
 
 }); */
 
-/**************** 가게 찜, 좋아요 개수 ******************/
 
+
+/* 비동기로 카테고리 검색하기 */
+
+
+
+/* 비동기로 가게 검색하기 */
+
+/* 비동기로 거리순 리뷰순 좋아요순 평점순  */
 

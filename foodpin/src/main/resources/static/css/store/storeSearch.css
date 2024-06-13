@@ -382,6 +382,43 @@ i{
 
 }
 
+
+/* 가게 검색 페이지 찜 */
+
+
+.fa-heart{
+   
+   font-size: 20px;
+   background-color: white;
+   color: rgb(252, 57, 57); 
+ /*  color: #E14C54; */
+}
+
+#bookmarkCheck{
+cursor: pointer;
+}
+
+
+#storeLikeCount{
+ font-size: 14px;
+ color: #6e6e6e;
+}
+
+.searchstore-detailinfo{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+}
+.searchstore-detailinfo >*{
+   margin-right: 5px;
+}
+ 
+/* 가게 검색 페이지 별점 */
+.fa-star{
+   color: #ff2a00;
+   font-size: 15px;
+}
+
 /* 카테고리 박스 더보기 */
 
 .bars{
@@ -409,7 +446,7 @@ i{
    width: 390px;
    align-items: center;
    padding: 0 20px;
-   justify-content: center;
+   
    height: 70%;
    transform: translate(0%);
 
@@ -477,13 +514,6 @@ font-size: 12px;
    color: var(--main-color)
 }
 
-.searchstore-detailInfo-container{
-   margin-bottom: 10px;
-}
-
-.searchstore-detailInfo-container > *{
-   margin-bottom: 5px;
-}
 
 .searchstore-none{
    display: flex;
@@ -493,22 +523,120 @@ font-size: 12px;
    overflow-y: hidden;
 }
 
-.more-address{
+.searchstore-detailinfo > div >span {
+   font-size: 14px
+}
 
+.searchstore-detailInfo-container{
+   margin-bottom: 10px;
+}
+
+/* 주소 */
+#detailLoc::before{
+
+   font-family:FontAwesome;
+   content:"\f3c5";
+   font-size: 15px;
+   margin-right: 5px;
+   color: var(--main-color);
+}
+.detailstoreloc-content{
    display: flex;
-   color: var(--main-color);
-   margin-left: 10px;
-   cursor: pointer;
- 
-  
+   flex-direction: column;
+   width: 100%;
 }
-.less-address{
 
-   display: none;
-    margin-left: 10px;
-    cursor: pointer;
-   color: var(--main-color);
+
+.storelocbox-one{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   
 }
+
+.storelocbox-two{
+   
+   display: none;
+}
+
+
+.detailLoc{
+   position: relative;
+   width: 100%;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   color: rgb(66, 66, 66);
+}
+
+.detailLocHide{
+   display: flex;
+   flex-direction: column;
+   margin-left: 16px;
+}
+.detailLocHide > *{
+   margin-bottom: 5px;
+}
+
+.detailLoc-m{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   height: 20px;
+
+}
+
+.detailLoc-m > *{
+ margin-right: 5px;
+}
+
+.storeloc-detail{
+   border-radius: 2px;
+   color: var(--main-color);
+   font-size: 13px;
+   border: 1px solid var(--main-color);
+   padding: 1px;
+   letter-spacing: 1px;
+   text-align: center;
+}
+
+
+/* 가게 상세 설명 */
+.storesearch-info{
+   text-decoration: none;
+   color: black;
+   
+}
+
+.store-detail-text{
+   width: 100%;
+   height: 20px;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   font-size: 14px;
+   white-space: pre-wrap;
+   -webkit-line-clamp: 1;
+   color: rgb(66, 66, 66);
+   
+   }
+   
+.store-detail-content{
+   border: 1px solid var(--main-color);
+   border-radius: 5px;
+   height: 30px;
+   background-color: #d8d8d8;
+   margin-bottom: 5px;
+   
+}
+
+.searchstore-storeList{
+   margin-bottom: 15px;
+}
+
+
+
 
 /* 새로고침 버튼 */
 
@@ -594,6 +722,7 @@ font-size: 12px;
 
 /* 가게 주소 더보기 */
 .storelocbox-one{
+   font-size: 14px;
  display: flex;
 }
 

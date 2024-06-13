@@ -7,12 +7,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.foodpin.common.util.Utility;
@@ -22,7 +19,6 @@ import com.project.foodpin.myPage.model.mapper.StoreMyPageMapper;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.review.model.dto.ReviewReply;
-import com.project.foodpin.store.model.dto.Category;
 import com.project.foodpin.store.model.dto.Menu;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.dto.StoreCategory;
@@ -305,6 +301,13 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	public List<Reservation> reservConfirm(String storeNo) {
 		return mapper.reservConfirm(storeNo);
 	}
+	
+	// 예약 1건 자세히 조회
+	@Override
+	public Reservation reservDetail(int reservNo) {
+		
+		return mapper.reservDetail(reservNo);
+	}
 
 	// ------ 사장님 정보 ------
 
@@ -396,12 +399,10 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		}
 		return result;
 	}
-/////////
-	@Override
-	public int storeInfoUpdateCheck(Store data) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
+
+
+
 
 
 }

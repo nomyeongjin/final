@@ -84,7 +84,15 @@ public class ChattingServiceImpl implements ChattingService {
 	public int createAskChattingRoom(Map<String, Object> map) {
 		return mapper.createChattingRoom(map);
 	}
-
 	
+	@Override
+	public String selectProfileImg() {
+		return mapper.selectProfileImg();
+	}
+
+	@Override
+	public String selectMemberNickname() {
+		return mapper.selectMemberNickname();
+	}
 	
 }
