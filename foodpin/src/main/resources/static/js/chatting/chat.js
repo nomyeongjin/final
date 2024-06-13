@@ -158,11 +158,12 @@ if(chattingSock != undefined){
               const listProfile = document.createElement("img");
               listProfile.classList.add("list-profile");
   
-              if(room.targetProfile == undefined)	
-                  listProfile.setAttribute("src", userDefaultImage);
-              else								
-                  listProfile.setAttribute("src", room.targetProfile);
-  
+
+                if(room.targetProfile == undefined)	
+                    listProfile.setAttribute("src", userDefaultImage);
+                else								
+                    listProfile.setAttribute("src", room.targetProfile);
+
               itemHeader.append(listProfile);
   
               // item-body 부분

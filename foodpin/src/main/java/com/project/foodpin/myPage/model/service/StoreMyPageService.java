@@ -213,6 +213,8 @@ public interface StoreMyPageService {
 	 */
 	int deleteReply(int replyNo);
 
+	
+
 
 
 

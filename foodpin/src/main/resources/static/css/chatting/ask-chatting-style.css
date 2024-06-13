@@ -16,10 +16,6 @@
     border: 1px solid #cecece;
 }
 
-.chatting-item.select{
-	background-color: #EFEFCB;
-}
-
 .room-list-container{
     width: 300px;
     height: 100%;
@@ -102,7 +98,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-left: 1px solid #cecece;
     min-width: 500px;
 }
 
