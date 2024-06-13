@@ -55,6 +55,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
       btn.addEventListener("click", e => {
          const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
+         const memberTel = e.dataset.memberTel;
+         console.log("저나번호 :" + memberTel);
+
+         fetch("/myPage/store/sendMessage", {
+            method :"POST",
+            headers : {"Content-Type" : "application/json"},
+            body : memberTel
+         })
+         .then(resp => resp.text())
+         .then(result => {
+            if(result != null){
+               console.log("문자 발송 성공");
+            } else {
+               console.log("문자 발송 실패");
+            }
+         })
 
          let reservDate = e.target.dataset.reservDate;
 
@@ -378,7 +394,7 @@ reservApply.addEventListener("click", () => {
    createReservList(reservStatusFl);
 
    
-      /**
+   /**
     * (버튼) 예약 승인
     */
       document.querySelectorAll(".reserv-btn").forEach(btn => {
@@ -387,7 +403,7 @@ reservApply.addEventListener("click", () => {
 
          btn.addEventListener("click", e => {
             const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
-            
+
             // 2024년 06월 07일 17:30
             const reservDate = e.target.dataset.reservDate;
    
@@ -414,6 +430,7 @@ reservApply.addEventListener("click", () => {
    
                   if (result > 0) {
                      alert("예약 번호 " + reservNo + "번 예약이 승인 처리되었습니다.");
+                     console.log(memberTel);
                   } else {
                      alert("예약 번호 " + reservNo + "번 예약 승인을 실패했습니다.");
                   }

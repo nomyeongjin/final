@@ -400,6 +400,8 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		return result;
 	}
 
+	
+
 
 
 

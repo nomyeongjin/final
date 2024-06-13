@@ -30,6 +30,10 @@ import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.dto.StoreCategory;
 
 import lombok.RequiredArgsConstructor;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
+import net.nurigo.sdk.message.response.SingleMessageSentResponse;
+import net.nurigo.sdk.message.service.DefaultMessageService;
 
 @Controller
 @RequiredArgsConstructor
@@ -37,6 +41,8 @@ import lombok.RequiredArgsConstructor;
 public class StoreMyPageController {
 
 	private final StoreMyPageService service;
+	
+	private final DefaultMessageService messageService;
 	
 
 	/** 가게 정보 수정 화면 이동 (+ 가게 기본 정보 조회)
@@ -566,6 +572,23 @@ public class StoreMyPageController {
 		return service.deleteReply(replyNo);
 	}
 	
+	@ResponseBody
+	@PostMapping("sendMessage")
+	public String sendMessage(@RequestBody String memberTel) {
+		Message message = new Message();
+//		String storeName
+//		String reservDate
+//		String reservTime
+		
+		message.setFrom("01026624515");
+		message.setTo(memberTel);
+		message.setText( "에 예약이 확정되었습니다.");
+		
+		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+		
+		return response.toString();
+		
+	}
 	
 	
 	
