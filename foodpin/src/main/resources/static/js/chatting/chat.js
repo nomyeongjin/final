@@ -6,7 +6,7 @@ let selectTargetProfile; // 대상의 프로필
 // -----------------------------------------------------------------------------------------
 
 // 채팅에 사용될 SockJS 객체를 저장할 변수
-let chattingSock; 
+// let chattingSock; 
 
 // 로그인이 되어있을 경우
 if( notificationLoginCheck ){

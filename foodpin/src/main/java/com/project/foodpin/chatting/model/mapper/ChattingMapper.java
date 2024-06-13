@@ -34,4 +34,6 @@ public interface ChattingMapper {
 
 	public String selectMemberNickname();
 
+	public int notReadChattingCount(int memberNo);
+
 }

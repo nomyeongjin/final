@@ -42,8 +42,52 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+let chattingSock;
+let notChattingCheckFn;
+
+// span태그
+
+if(notificationLoginCheck){
+
+    chattingSock = new SockJS("/chattingSock");
+
+}
+
+chattingSock.addEventListener("message", e => {
+
+    notChattingCheckFn();
+
+})
+
+notChattingCheckFn = async () => {
+    const resp = await fetch("/chatting/notReadChattingCount")
+    const notReadChattingCount = await resp.text();
+    const myChatBtn = document.querySelector("#myChat");
+
+    if(notReadChattingCount == 0){
+        document.querySelector("#chatCount").classList.add("none");
+        document.querySelector("#chatCount").classList.remove("notReadChattingCount");
+
+        myChatBtn.classList.add("fa-regular");
+        myChatBtn.classList.remove("fa-solid");
+    
+    }else{
+
+        myChatBtn.classList.remove("fa-regular");
+        myChatBtn.classList.add("fa-solid");
 
 
+        document.querySelector("#chatCount").classList.remove("none");
+        document.querySelector("#chatCount").classList.add("notReadChattingCount");
+        document.querySelector("#chatCount").innerText = notReadChattingCount
+    }
+    return notReadChattingCount;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let notificationSock;       // 알림 웹소켓 객체
 let sendNotificationFn;      //웹소켓을 이용해 알림을 보내는 함수
 
@@ -88,9 +132,24 @@ if (notificationLoginCheck) {
     notReadCheckFn = async () => {
         const resp = await fetch("/notification/notReadCheck")
         const notReadCount = await resp.text();
+        const notificationBtn = document.querySelector(".notification-bell-btn");
 
-        console.log(notReadCount);  
-        document.querySelector(".notReadCount").innerText = notReadCount;
+        if(notReadCount == 0){
+            document.querySelector("#notificationCount").classList.add("none");
+            document.querySelector("#notificationCount").classList.remove("notReadCount");
+    
+            notificationBtn.classList.add("fa-regular");
+            notificationBtn.classList.remove("fa-solid");
+        
+        }else{
+
+            notificationBtn.classList.remove("fa-regular");
+            notificationBtn.classList.add("fa-solid");
+            document.querySelector("#notificationCount").classList.remove("none");
+            document.querySelector("#notificationCount").classList.add("notReadCount");
+
+            document.querySelector("#notificationCount").innerText = notReadCount;
+        }
         return notReadCount;
     }
 
@@ -242,14 +301,51 @@ if (notificationLoginCheck) {
 
 document.addEventListener("DOMContentLoaded", () => {
     const notificationBtn = document.querySelector(".notification-bell-btn");
+    const myChatBtn = document.querySelector("#myChat");
 
+    notChattingCheckFn().then(notChattingCount => {
+
+        if (notChattingCount > 0) {
+            myChatBtn.classList.remove("fa-regular");
+            myChatBtn.classList.add("fa-solid");
+
+                
+                
+            document.querySelector("#chatCount").classList.remove("none");
+            document.querySelector("#chatCount").classList.add("notReadChattingCount");
+
+        }else{
+            document.querySelector("#chatCount").classList.add("none");
+            document.querySelector("#chatCount").classList.remove("notReadChattingCount");
+
+            myChatBtn.classList.add("fa-regular");
+            myChatBtn.classList.remove("fa-solid");
+                
+        }
+    });
+    
     notReadCheckFn().then(notReadCount => {
 
-        if (notReadCount > 0) {
+        if (notReadCount > 0) { // 알림이 있을 경우
             notificationBtn.classList.remove("fa-regular");
             notificationBtn.classList.add("fa-solid");
+
+            document.querySelector("#notificationCount").classList.remove("none");
+            document.querySelector("#notificationCount").classList.add("notReadCount");
+        }else{
+
+            notificationBtn.classList.add("fa-regular");
+            notificationBtn.classList.remove("fa-solid");
+
+            document.querySelector("#notificationCount").classList.add("none");
+            document.querySelector("#notificationCount").classList.remove("notReadCount")
         }
+
+
+
+        
     })
+
 
 
     notificationBtn.addEventListener("click", e => {
