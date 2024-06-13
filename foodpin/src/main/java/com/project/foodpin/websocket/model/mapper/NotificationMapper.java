@@ -50,7 +50,7 @@ public interface NotificationMapper {
 	Review selectReviewData(String pkNo);
 
 	// 리뷰 답글 받는 사람 회원 번호
-	int memberNo(String pkNo);
+	int memberNo(int reviewNo);
 
 	// 기게 신고 데이터 조회
 	Store selectManagerData(String pkNo);
@@ -74,6 +74,8 @@ public interface NotificationMapper {
 
 	// 가게 신고 (해결 완료)
 	Store storeReportComplete(String pkNo);
+
+	int selectReivewNo(String pkNo);
 
 	// 가게 정보 요청 처리에 필요한 회원 번호
 //	int selectMemberNo(String storeNo);

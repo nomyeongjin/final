@@ -195,28 +195,24 @@ reviewForm.addEventListener("submit", e => {
     return;
   }
 
-  const reviewButton = document.querySelector(".review-button");
-  reviewButton.addEventListener("click", () => {
 
-    e.preventDefault()
+  const memberNickname = loginMember.memberNickname;
 
-    const memberNickname = loginMember.memberNickname;
+  const actionUrl = reviewForm.getAttribute('action');
 
-    const actionUrl = reviewForm.getAttribute('action');
-            
-    // URL에서 reservNo 추출
-    const urlParts = actionUrl.split('/');
-    const reservNo = urlParts[urlParts.length - 1];
-    // console.log(reservNo);
-    sendNotificationFn("insertMemberReview", null, reservNo, reservDate, null, memberNickname);
+  // URL에서 reservNo 추출
+  const urlParts = actionUrl.split('/');
+  const reservNo = urlParts[urlParts.length - 1];
+  // console.log(reservNo);
+  sendNotificationFn("insertMemberReview", null, reservNo, null, null, memberNickname);
 
-    reviewForm.submit();
+  reviewForm.submit();
 
-  });
 
 
 });
 
+console.log(document.querySelector("#reservDate").value);
 
 /****************  메뉴 가격 합계  ****************/
 

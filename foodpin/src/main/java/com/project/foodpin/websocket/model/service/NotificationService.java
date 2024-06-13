@@ -47,7 +47,7 @@ public interface NotificationService {
 	// 가게 사장님이 답글 작성하기 위한 데이터 조회
 	Review selectReviewData(String pkNo);
 
-	int memberNo(String pkNo);
+	int memberNo(int reviewNo);
 	
 	// 가게 신고 데이터 조회
 	Store selectManagerData(String pkNo);
@@ -73,6 +73,8 @@ public interface NotificationService {
 	Store storeReportComplete(String pkNo);
 
 	int selectStoreMemberNo(String storeNo);
+
+	int selectReviewNo(String pkNo);
 
 	// 가게 정보 요청 처리에 필요한 회원 번호
 //	int selectMemberNo(String storeNo);

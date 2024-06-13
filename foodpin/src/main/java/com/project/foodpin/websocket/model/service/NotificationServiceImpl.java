@@ -104,8 +104,8 @@ public class NotificationServiceImpl implements NotificationService{
 	
 	// 리뷰 답글 받는 사람 회원 번호
 	@Override
-	public int memberNo(String pkNo) {
-		return mapper.memberNo(pkNo);
+	public int memberNo(int reviewNo) {
+		return mapper.memberNo(reviewNo);
 	}
 	
 	// 가게 신고 데이터 조회
@@ -160,4 +160,8 @@ public class NotificationServiceImpl implements NotificationService{
 	 * @Override public int selectMemberNo(String storeNo) { return
 	 * mapper.selectMemberNo(storeNo); }
 	 */
+	@Override
+	public int selectReviewNo(String pkNo) {
+		return mapper.selectReivewNo(pkNo);
+	}
 }

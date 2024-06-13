@@ -59,24 +59,24 @@ replyDeleteBtn.forEach((btn) => {
     const replyNo = btn.dataset.replyNo;
     console.log(replyNo);
 
-    if(confirm("댓글를 삭제하시겠습니까?")){
-      
+    if (confirm("댓글를 삭제하시겠습니까?")) {
+
       fetch("/myPage/store/deleteReply", {
-        method : "POST",
-        headers : {"content-Type" : "application/json"},
+        method: "POST",
+        headers: { "content-Type": "application/json" },
         body: JSON.stringify(replyNo)
       })
-      .then(resp => resp.json())
-      .then(result => {
-        console.log(result);
-        if(result > 0){
-          alert("댓글이 삭제되었습니다.");
-          location.reload();
-        }else{
-          alert("삭제 실패");
-        }
-      })
-    }else{
+        .then(resp => resp.json())
+        .then(result => {
+          console.log(result);
+          if (result > 0) {
+            alert("댓글이 삭제되었습니다.");
+            location.reload();
+          } else {
+            alert("삭제 실패");
+          }
+        })
+    } else {
       alert("취소 되었습니다.");
       return;
     }
@@ -87,3 +87,25 @@ replyDeleteBtn.forEach((btn) => {
 
 })
 
+const memberNickname = document.querySelector(".memberNickname").innerText;
+const reviewNo = document.querySelector("#reviewNo").value;
+const storeNo = document.querySelector("#storeNo").value;
+// console.log(reviewNo);
+// console.log(memberNickname);
+
+// 답글 제출하는 form
+const replyForm = document.querySelector(".reply-form");
+const replyBtn = document.querySelector(".reply-btn");
+
+replyForm.addEventListener("submit",  e => {
+
+  // 버튼 클릭 될 때 form 태그 제출을 막음
+  e.preventDefault();
+
+  sendNotificationFn("insertStoreReview", null, reviewNo, null, null, memberNickname);
+  // 알림 보내는 함수 실행 후 폼 태그 제출
+
+  setTimeout(() => {
+    replyForm.submit();
+  }, 300)
+});
