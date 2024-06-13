@@ -25,6 +25,8 @@ public class Reservation {
 	
 	private String memberName; // 예약 회원명
 	private String memberTel; // 예약 회원 연락처
+	private String memberEmail;
+	private int memberFlag;
 	
 	private String storeName;
 	private String storeLocation;

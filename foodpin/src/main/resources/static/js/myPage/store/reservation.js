@@ -259,12 +259,34 @@ const createReservList = (reservStatusFl) => {
                const reservNoshowBtn = document.createElement("button");
                reservNoshowBtn.classList.add("reserv-noshow-btn");
                reservNoshowBtn.dataset.memberNo = `${reserv.memberNo}`;
+               reservNoshowBtn.dataset.memberFlag = `${reserv.memberFlag}`;
+               reservNoshowBtn.dataset.memberEmail = `${reserv.memberEmail}`;
                reservNoshowBtn.innerText = "노쇼 등록";
 
                listBtnArea.append(reservNoshowBtn);
                listContent.append(listBtnArea);
 
                reservNoshowBtn.addEventListener("click", e => {
+                  const memberFlag = reservNoshowBtn.dataset.memberFlag;
+                  const memberEmail = reservNoshowBtn.dataset.memberEmail;
+                  console.log("경고 " + memberFlag);
+
+                  // 노쇼 3회 달성 메일 발송
+                  if(memberFlag == 2) {
+                     fetch("/email/memberFlag", {
+                        method: "POST",
+                        headers : {"content-type" : "application/json"},
+                        body : memberEmail
+                     })
+                     .then(response => response.text())
+                     .then(result => {
+                        if(result == 1) {
+                           console.log("메일 발송 성공");
+                        } else {
+                           console.log("메일 발성 실패");
+                        }
+                     })
+                  }
 
                   const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
                   // console.log(reservNo);
