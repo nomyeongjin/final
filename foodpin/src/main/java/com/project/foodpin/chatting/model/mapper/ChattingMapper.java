@@ -36,4 +36,6 @@ public interface ChattingMapper {
 
 	public int notReadChattingCount(int memberNo);
 
+	public int insertInfoMessage(Map<String, Object> map);
+
 }

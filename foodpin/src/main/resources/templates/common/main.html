@@ -120,7 +120,7 @@
   <aside>
     <a href="#bodyTop"><i class="fa-solid fa-angles-up"></i></a>
     
-    <a href="/chatting/askChat"><i class="fa-solid fa-headset"></i></a>
+    <a id="chat"><i class="fa-solid fa-headset"></i></a>
     
     <a href="/store/storeSearch"><i class="fa-solid fa-location-dot"></i></a>
     
@@ -131,6 +131,8 @@
   <script th:inline="javascript">
 
     const loginMember = /*[[${session.loginMember}]]*/"로그인 회원 정보";
+
+    const loginMemberCode = /*[[${session.loginMember.memberCode}]]*/'로그인멤버코드';
 
   </script>
      

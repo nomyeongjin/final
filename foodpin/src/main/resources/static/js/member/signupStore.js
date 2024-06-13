@@ -26,6 +26,8 @@ function execDaumPostcode() {
         
 
         /* 가게 주소 유효성 검사 */
+
+        /* 우편번호 */
         const postcode = document.querySelector("#postcode")
         const postcodeMessage = document.querySelector("#postcodeMessage")
         const inputPostcode = postcode.value;
@@ -51,6 +53,7 @@ function execDaumPostcode() {
         postcodeMessage.innerText = "";
         checkObj.postcode = true;
 
+        /* 주소 */
         const address = document.querySelector("#address")
         const addressMessage = document.querySelector("#addressMessage")
 
@@ -67,6 +70,29 @@ function execDaumPostcode() {
       
         addressMessage.innerText = "";
         checkObj.address = true;
+
+        /* 상세주소 */
+
+
+        const detailAddress = document.querySelector("#detailAddress")
+        const detailAddressMessage = document.querySelector("#detailAddressMessage")
+
+
+
+        detailAddress.addEventListener("input", e=>{
+          const inputDetailAddress = e.target.value;
+
+          if (inputDetailAddress.trim().length === 0) {
+            detailAddressMessage.innerText = "상세 주소를 입력해주세요.";
+            detailAddressMessage.classList.remove("confirm", "error");
+            checkObj.detailAddress = false;
+            detailAddressMessage.value = "";
+            return;
+          }
+            detailAddressMessage.innerText = "";
+            checkObj.detailAddress = true;
+          
+        });
 
 
 
@@ -111,6 +137,7 @@ function execDaumPostcode() {
     "storeName"       : false,
     "postcode"        : false,
     "address"         : false,
+    "detailAddress"   : false,
     "storeTel"        : false,
     "openHour"        : false,
     "closeHour"       : false
@@ -797,6 +824,9 @@ signUpForm.addEventListener("submit", e => {
 
       case "address": 
       str = "도로명/지번 주소가 유효하지 않습니다"; break;
+      
+      case "detailAddress": 
+      str = "상세 주소가 유효하지 않습니다"; break;
 
       case "storeTel": 
       str = "가게 전화번호가 유효하지 않습니다"; break;
