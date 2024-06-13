@@ -90,6 +90,7 @@ public class SearchStoreController {
 		return path;
 	}
 
+	// 메인에서 가게 검색
 	@GetMapping("searchStoreList")
 	public String searchStoreList(@RequestParam("mainSearch") String mainSearch,
 			@SessionAttribute(value = "loginMember", required = false) Member loginMember, Model model,
@@ -104,9 +105,6 @@ public class SearchStoreController {
 
 		map.put("mainSearch", mainSearch);
 
-		// 결과가 없는 경우 searchstore로 보내주지만 검색 결과가 없습니다, 전체 페이지로 보내기 String path = null;
-
-		Map<String, Object> result = null;
 
 		List<Store> storeAllList = service.mainStoreList(map);
 		List<Category> searchCategory = service.selectSearchCategory();
@@ -123,6 +121,7 @@ public class SearchStoreController {
 
 		model.addAttribute("storeAllList", storeAllList);
 		model.addAttribute("searchCategory", searchCategory);
+		model.addAttribute("mainSearch", mainSearch); 
 
 		String path = null;
 
@@ -131,6 +130,62 @@ public class SearchStoreController {
 		return path;
 
 	}
+	
+	
+    /** 비동기로 카테고리에 해당하는 가게 리스트 조회
+     * @param categoryCode
+     * @param loginMember
+     * @param model
+     * @param ra
+     * @return
+     */
+	  @ResponseBody
+	    @GetMapping("searchCat")
+	    public Map<String, Object> selectSearchCat(
+	        @SessionAttribute(value = "loginMember", required = false) Member loginMember,
+	        @RequestParam("categoryCode") int categoryCode
+	    ) {
+	        Map<String, Object> map = new HashMap<>();
+
+	        if (loginMember != null) {
+	            int memberNo = loginMember.getMemberNo();
+	            map.put("memberNo", memberNo);
+	        }
+
+	        map.put("categoryCode", categoryCode);
+	        map.put("closedYn", "N");
+
+	        // 카테고리에 해당하는 가게 리스트 조회하기
+	        List<Store> searchStoreList = service.searchStoreList(map);
+
+	        for (Store store : searchStoreList) {
+	            String storeLocation = store.getStoreLocation();
+	            String[] arr = storeLocation.split("\\^\\^\\^");
+	            store.setPostcode(arr[0]);
+	            store.setAddress(arr[1]);
+	            store.setDetailAddress(arr[2]);
+
+	            String storeNo = store.getStoreNo();
+	            List<StoreCategory> searchStoreCategoryList = service.searchStoreCategoryList(storeNo);
+	            store.setSearchStoreCategoryList(searchStoreCategoryList);
+
+	            List<ReviewHash> searchStoreHashList = service.searchStoreHashList(storeNo);
+	            store.setSearchStoreHashList(searchStoreHashList);
+	        }
+
+	        Map<String, Object> result = new HashMap<>();
+	        result.put("searchStoreList", searchStoreList);
+
+	        return result;
+	    }
+	  
+	  
+	  
+	  
+	  
+
+	
+	
 
 	/*	*//**
 			 * 가게 찜
