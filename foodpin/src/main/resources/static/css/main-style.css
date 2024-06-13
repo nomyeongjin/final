@@ -63,6 +63,10 @@ aside >a{
 
 }
 
+.none{
+   display: none;
+}
+
 #toChatting{
    background-color: #fff;
    border: none;
@@ -70,8 +74,30 @@ aside >a{
    font-size: 14px;
    color: rgb(39, 39, 39);
 }
+
+
 #toChatting:hover{
    border-bottom: 1px solid rgb(66, 66, 66);
+}
+#myChat{
+   color: #363f75;
+}
+
+#myChat>.notReadChattingCount{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: absolute;
+   top: 3px;
+   right: 0px;
+   width: 20px;
+   height: 20px;
+   color: white;
+   border-radius: 50%;
+   background-color: #e14c54;
+   border: 1px solid #e14c54;
+   font-size: 12px;
+   font-weight: 300;
 }
 
 
@@ -632,6 +658,10 @@ header>section:nth-child(3) {
 .temp{
    width: 40px;
    height: 40px;
+}
+
+#myNotification{
+   color:#363f75;
 }
 
 .notification-bell-btn{

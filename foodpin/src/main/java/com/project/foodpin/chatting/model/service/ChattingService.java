@@ -33,4 +33,6 @@ public interface ChattingService {
 
 	String selectMemberNickname();
 
+	int notReadChattingCount(int memberNo);
+
 }

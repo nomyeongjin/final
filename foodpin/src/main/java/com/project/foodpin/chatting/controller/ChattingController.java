@@ -162,6 +162,16 @@ public class ChattingController {
         return service.selectMessageList(paramMap);
     }
 	
+    @GetMapping("notReadChattingCount")
+	@ResponseBody
+	public int notReadChattingCount(
+			@SessionAttribute("loginMember") Member loginMember
+			) {
+    	int memberNo = loginMember.getMemberNo();
+    	
+		return service.notReadChattingCount(memberNo);
+	}
+    
 	
 	
 }
