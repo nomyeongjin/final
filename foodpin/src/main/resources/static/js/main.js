@@ -49,12 +49,9 @@ if(searchStoreList != null){
     searchStoreList.addEventListener("submit", e=>{
         const mainSearch =document.querySelector("#mainSearch");
         
-        let str; 
+       
 
-        if(mainSearch.ariaValue.trim().length == 0) str= "검색어가 존재하지 않습니다.";
-
-        alert(str);
-        e.preventDefault();
-        return;
     })
 }
+
+
