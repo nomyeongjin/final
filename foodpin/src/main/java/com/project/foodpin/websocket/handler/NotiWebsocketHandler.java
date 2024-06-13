@@ -287,13 +287,12 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 		String notificationType = notification.getNotificationType();
 		
 //		store = service.selectStoreData(notification.getPkNo());
-		review = service.selectReviewData(notification.getPkNo());
+//		review = service.selectReviewData(notification.getPkNo());
 		
 		int reviewMemerNo = 0;
 		// 받는 사람 (일반 회원) - 리뷰 작성한 사람
-		reviewMemerNo = service.memberNo(notification.getPkNo());
 		
-		// 보내는 사람과 리뷰 작성한 사람의 회원 번호가 같은 경우 return;
+//		reviewMemerNo = service.memberNo(notification.getPkNo());
 
 		if (notificationType.equals(notificationTypes.getInsertStoreReview())
 				|| notificationType.equals(notificationTypes.getReservFirstNoshow())
@@ -305,15 +304,23 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 			switch(notificationType) {
 			
 			case "insertStoreReview" :
+				
+				// reviewNo
+				review = service.selectReviewData(notification.getPkNo());
+				reviewMemerNo = service.memberNo(review.getReviewNo());
 				contentForMember  = String.format("<b>%s<b> 님이 남겨주신 후기에 사장님이 답글을 작성 하셨습니다.", review.getMemberNickname());	
 				
 				urlForMember = "/store/storeDetail/";
 				
 				notiCode = 0;
 				break;
-				
 
-			// 2) 보내는 사람이 관리자
+				/* 예약 노쇼 
+				 * 1, 2회는 알림 발송
+				 * 3회는 문자 , 이메일 발송 */
+				
+				// 노쇼 횟수 조회
+				int reservNoshowCount =  service.reservNoshowCount();
 
 			// 예약 노쇼 알림(1회)
 			case "reservFirstNoshow":
@@ -340,20 +347,33 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				// 리뷰 신고 ( 삭제 조치 )
 			case "reviewReportDeleteReview" : 
 				
+				// reportNo
 				report = service.selectReportData(notification.getPkNo());	
+				reviewMemerNo = service.selectReviewNo(notification.getPkNo());
 				
 //				store = service.selectStoreData(notification.getPkNo());
 				contentForMember = String.format("안녕하세요. 푸드핀 운영 관리자 입니다.<br>" +
 												"<b>%s<b> <b>%s<b> 가게의 리뷰 신고 접수되어 <br>"+  
 												"확인 결과 해당 댓글은 부적절한 댓글로 삭제 조치 되었습니다.<br>"+  
-												"자세한 사항은 관리자에게 문의해 주세요.", report.getStoreName(),report.getReportDate());
+												"자세한 사항은 관리자에게 문의해 주세요.", report.getStoreName(),notification.getReportDate());
 				
 				notiCode = 3;
+				
+//				memberNotification = Notification.builder()
+//						.receiveMemberNo(reviewMemerNo)
+//						.sendMemberProfileImg(sendMember.getProfileImg())
+//						.notificationType("reviewReportDeleteReview")
+//						.notificationContent(contentForMember)
+//						.sendMemberNo(sendMember.getMemberNo())
+//						.notiCode(3)
+//						.build();
+//				
+//				service.sendNotificationMember(memberNotification);
 				break;
 			}
 		}
 
-		if (contentForMember != null && urlForMember != null ) {
+		if (contentForMember != null || urlForMember != null ) {
 
 			memberNotification = new Notification();
 			memberNotification.setReceiveMemberNo(reviewMemerNo);
@@ -390,7 +410,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				memberNo = service.selectStoreMemberNo(reservation.getStoreNo());
 				
 				contentForStore = String.format("<b>%s<b>이 <b>%s<b> 방문 후 후기를 남겨 주셨습니다.", reservation.getMemberNickname(),
-						notification.getReservDate());
+						reservation.getReservDate() + " " + reservation.getReservTime());
 
 				urlForStore = "/myPage/store/review";
 
@@ -400,15 +420,16 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				// 리뷰 신고 (해결여부)
 			case "reviewReportDeleteReview" : 
 				
+				// reportNo
 				report = service.selectReportData(notification.getPkNo());
-				memberNo = service.selectStoreMemberNo(reservation.getStoreNo());
+				memberNo = service.selectStoreMemberNo(notification.getPkNo());
 				
 //				store = service.selectStoreData(notification.getPkNo());
 				contentForStore = String.format("안녕하세요. 푸드핀 운영 관리자 입니다.<br>" +
 												"<b>%s<b> 해당 가게에서 발생한 리뷰 신고에 발생으로 확인한 결과<br>"+  
 												"해당 댓글은 부적절한 댓글로 삭제 조치 되었습니다.<br>"+  
 												"가게 운영에 참고 해주세요.<br>" + 
-												"자세한 사항은 관리자에게 문의해 주세요.", store.getStoreName());
+												"자세한 사항은 관리자에게 문의해 주세요.", report.getStoreName());
 				
 				notiCode = 3;
 				break;

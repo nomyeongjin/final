@@ -84,15 +84,5 @@ const formattedReservDate = `${reservDate.slice(6, 8)}.${reservDate.slice(10, 12
 reservDate = formattedReservDate;
 console.log(reservDate);
 
-// 타임리프로 작성된 a태그 경로에서 reservNo 가져오기
-const reviewLink = document.querySelector('.insertReviewBtn');
-
-const href = reviewLink.getAttribute('href');
-
-const parts = href.split('/');
-const reservNo = parts[parts.length - 1];
-
-console.log(reservNo);
-
 
 

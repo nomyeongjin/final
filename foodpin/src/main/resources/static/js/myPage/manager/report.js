@@ -42,11 +42,28 @@ const notReport = document.querySelectorAll(".notReport");
 deleteReview.forEach(btn => {
     btn.addEventListener("click", e => {
 
+        // 2024-06-13
         const reportNo = e.target.dataset.reportNo;
         const storeName = e.target.dataset.requestCategory;
-        const reportDate = e.target.dataset.requestDate;
+        let reportDate = e.target.dataset.requestDate;
+        const year = reportDate.slice(0, 4);
+         const month = reportDate.slice(5, 7);
+         const day = reportDate.slice(8, 10);
+
+        // Date 객체 생성
+        const date = new Date(`${year}-${month}-${day}`);
+
+        // 요일 계산
+        const options = { weekday: 'short' };
+        const dayOfWeek = date.toLocaleDateString('ko-KR', options);
+
+        // 형식화된 문자열 생성
+        const formattedDate = `${month}.${day}(${dayOfWeek})`;
+        reportDate = formattedDate
+
         deleteReport(reportNo);
 
+        // 삭제 처리 알림
         sendNotificationFn("reviewReportDeleteReview", null, reportNo, null, storeName, null, reportDate);
         
     });
@@ -60,7 +77,8 @@ notReport.forEach(btn => {
         const reportDate = e.target.dataset.requestDate;
         notReportReview(reportNo);
 
-        sendNotificationFn("reviewReportComplete", null, reportNo, null, storeName, null, reportDate);
+        // 불충분 알림
+        // sendNotificationFn("reviewReportComplete", null, reportNo, null, storeName, null, reportDate);
 
     });
 });

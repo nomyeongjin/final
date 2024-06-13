@@ -16,11 +16,12 @@
     <th:block th:replace="~{common/header}"></th:block>
     <section class="review-section">
       
-      <form th:action="'/review/insertReview/' + *{store.storeNo} + '/' + *{reservNo}" method="POST" id="reviewForm" enctype="multipart/form-data"
-      th:data-reserv-date="*{reservDate}">
+      <form th:action="'/review/insertReview/' + *{store.storeNo} + '/' + *{reservNo}" method="POST" id="reviewForm" enctype="multipart/form-data">
         <div class="review-container"> 
           <h2 th:text="|${store.storeName} 장소의 방문 리뷰쓰기|"></h2>
           <div class="review-selectBox">
+
+            <input type="hidden" id="reservDate" th:text="${reservDate}">
   
             <div class="review-menu">
               <span>메뉴선택</span>
