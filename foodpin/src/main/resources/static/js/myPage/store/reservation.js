@@ -42,22 +42,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       btn.addEventListener("click", e => {
          const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
-         const memberTel = e.dataset.memberTel;
-         console.log("저나번호 :" + memberTel);
-
-         fetch("/myPage/store/sendMessage", {
-            method :"POST",
-            headers : {"Content-Type" : "application/json"},
-            body : memberTel
-         })
-         .then(resp => resp.text())
-         .then(result => {
-            if(result != null){
-               console.log("문자 발송 성공");
-            } else {
-               console.log("문자 발송 실패");
-            }
-         })
 
          let reservDate = e.target.dataset.reservDate;
 
@@ -145,12 +129,6 @@ document.addEventListener('DOMContentLoaded', function () {
 }); // addEventListener('DOMContentLoaded'
 
  // ----------------------------- 
-
-
-
-
-
-
 
 /**
  * 예약 정보 카드 생성하는 함수
@@ -249,15 +227,16 @@ const createReservList = (reservStatusFl) => {
             const reservBtn = document.createElement("button");
             reservBtn.classList.add("reserv-btn");
             reservBtn.dataset.reservDate = `${reserv.reservDate} ${reserv.reservTime}`;
+            reservBtn.dataset.memberTel = `${reserv.memberTel}`;
+            reservBtn.dataset.storeName = `${reserv.storeName}`;
             reservBtn.innerText = "예약 승인";
 
             reservBtn.addEventListener("click", e => {
 
-               // console.log(e.target);
                const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
 
                let reservDate = e.target.dataset.reservDate;
-      
+               
                // reservDate를 부분 문자열로 잘라내기
                const year = reservDate.slice(0, 4);
                const month = reservDate.slice(6, 8);
@@ -265,7 +244,7 @@ const createReservList = (reservStatusFl) => {
                const time = reservDate.slice(14);
       
                const date = new Date(`${year}-${month}-${day}T${time}`);
-      
+               
                // 요일을 계산
                const options = { weekday: 'short' };
                const dayOfWeek = date.toLocaleDateString('ko-KR', options);
@@ -274,6 +253,27 @@ const createReservList = (reservStatusFl) => {
                const formattedDate = `${month}.${day}(${dayOfWeek}) ${time}`;
                reservDate = formattedDate;
                 // console.log(reservDate);
+
+                let memberTel = e.target.dataset.memberTel;
+               let storeName = e.target.dataset.storeName;
+      
+               fetch("/myPage/store/sendMessage", {
+                  method :"POST",
+                  headers : {"Content-Type" : "application/json"},
+                  body : JSON.stringify({
+                     memberTel: memberTel,
+                     storeName: storeName,
+                     reservDate: reservDate
+                 })
+               })
+               .then(resp => resp.text())
+               .then(result => {
+                  if(result != null){
+                     console.log("문자 발송 성공"); 
+                  } else {
+                     console.log("문자 발송 실패");
+                  }
+               })
       
       
                fetch("/myPage/store/updateReservStatus?reservNo=" + reservNo)
@@ -299,6 +299,8 @@ const createReservList = (reservStatusFl) => {
             const reservRejectBtn = document.createElement("button");
             reservRejectBtn.classList.add("reserv-reject-btn");
             reservRejectBtn.dataset.reservDate = `${reserv.reservDate} ${reserv.reservTime}`;
+            reservBtn.dataset.memberTel = `${reserv.memberTel}`;
+            reservBtn.dataset.storeName = `${reserv.storeName}`;
             reservRejectBtn.innerText = "예약 거부";
 
             reservRejectBtn.addEventListener("click", e => {
@@ -306,6 +308,7 @@ const createReservList = (reservStatusFl) => {
                const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
 
                let reservDate = e.target.dataset.reservDate;
+
                // reservDate를 부분 문자열로 잘라내기
                const year = reservDate.slice(0, 4);
                const month = reservDate.slice(6, 8);
@@ -323,6 +326,28 @@ const createReservList = (reservStatusFl) => {
                reservDate = formattedDate;
       
                // console.log(reservNo, storeNo);
+
+               let memberTel = e.target.dataset.memberTel;
+               let storeName = e.target.dataset.storeName;
+      
+               // 예약 거부 문자 보내기
+               fetch("/myPage/store/sendReject", {
+                  method :"POST",
+                  headers : {"Content-Type" : "application/json"},
+                  body : JSON.stringify({
+                     memberTel: memberTel,
+                     storeName: storeName,
+                     reservDate: reservDate
+                 })
+               })
+               .then(resp => resp.text())
+               .then(result => {
+                  if(result != null){
+                     console.log("문자 발송 성공");
+                  } else {
+                     console.log("문자 발송 실패");
+                  }
+               })
                
                fetch("/myPage/store/rejectReservStatus?reservNo=" + reservNo)
                .then(resp => resp.json())
@@ -518,51 +543,9 @@ reservApply.addEventListener("click", () => {
     * (버튼) 예약 승인
     */
    const reservBtnList = document.querySelectorAll(".reserv-btn");
-         console.log(btn);
-
-         btn.addEventListener("click", e => {
-            const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
-
-            // 2024년 06월 07일 17:30
-            const reservDate = e.target.dataset.reservDate;
-   
-            // const [datePart, timePart] = reservDate.split('일 ');
-            const year = parseInt(reservDate.slice(0, 4));
-            const month = parseInt(reservDate.slice(6, 8)) - 1; // 월은 0부터 시작하기 때문에 1을 빼줍니다.
-            const day = parseInt(reservDate.slice(10, 12));
-            const hours = parseInt(reservDate.slice(0, 2));
-            const minutes = parseInt(reservDate.slice(3, 5));
-    
-            // Date 객체 생성
-            const date = new Date(year, month, day, hours, minutes);
-    
-            // 요일 계산
-            const dayOfWeek = date.toLocaleDateString('ko-KR', { weekday: 'short' });
-    
-            // 형식화
-            const formattedReservDate = `${String(month + 1).padStart(2, '0')}.${String(day).padStart(2, '0')}(${dayOfWeek}) ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
-            console.log(formattedReservDate);
-   
-            fetch("/myPage/store/updateReservStatus?reservNo=" + reservNo)
-               .then(resp => resp.json())
-               .then(result => {
-   
-                  if (result > 0) {
-                     alert("예약 번호 " + reservNo + "번 예약이 승인 처리되었습니다.");
-                     console.log(memberTel);
-                  } else {
-                     alert("예약 번호 " + reservNo + "번 예약 승인을 실패했습니다.");
-                  }
-               })
-               .catch(err => console.log(err)); // 예약 승인 처리 fetch
-   
-            // 알림
-            sendNotificationFn("confirmReservation", null, reservNo,  reservDate, null);
-         }) // reservBtn.addEventListener("click
-      }); // forEach(reservBtn
-
+         
    console.log(reservBtnList);
-
+      
 });
 
 /**
