@@ -215,22 +215,21 @@ public class StoreMyPageController {
 	 */
 	@PostMapping("calendarOffSelect")
 	@ResponseBody
-	public List<Map<String, Object>> calendarOffSelect(@RequestBody int storeNo) {
+	public List<Map<String, String>> calendarOffSelect(@RequestBody int storeNo) {
 		
 		List<Off> offList = service.calendarOffSelect(storeNo);
 		
 //		if(offList.isEmpty()) return null; // 지정 휴무일 조회 결과 없는 경우
 			
-		List<Map<String, Object>> listMap = new ArrayList<>();
+		List<Map<String, String>> listMap = new ArrayList<>();
 		
 		for (Off off : offList) {
 			
-			Map<String, Object> map = new HashMap<>();
+			Map<String, String> map = new HashMap<>();
 			
 			map.put("title", off.getOffDayTitle());
 			map.put("start", off.getOffDayStart());
 			map.put("end", off.getOffDayEnd());
-			map.put("id", off.getOffDayNo());
 			
 			listMap.add(map);
 		}
@@ -277,9 +276,9 @@ public class StoreMyPageController {
 	 */
 	@PostMapping("calendaroffDelete")
 	@ResponseBody
-	public int calendaroffDelete(@RequestBody int offDayNo) {
+	public int calendaroffDelete(@RequestBody String storeNo) {
 		
-		return service.calendaroffDelete(offDayNo);
+		return service.calendaroffDelete(storeNo);
 	}
 	
 	// ------ 예약 관리 ------
@@ -366,7 +365,6 @@ public class StoreMyPageController {
 			map.put("start", reserv.getReservDate());
 			map.put("end", reserv.getReservDate());
 			map.put("id", reserv.getReservNo());
-			map.put("content", reserv.getMemberName());
 			
 			listMap.add(map);
 		}
@@ -574,22 +572,35 @@ public class StoreMyPageController {
 		return service.deleteReply(replyNo);
 	}
 	
+	// 예약 확정 문자 발송
 	@ResponseBody
 	@PostMapping("sendMessage")
-	public String sendMessage(@RequestBody String memberTel) {
+	public String sendMessage(@RequestBody Reservation reservation) {
 		Message message = new Message();
-//		String storeName
-//		String reservDate
-//		String reservTime
 		
 		message.setFrom("01026624515");
-		message.setTo(memberTel);
-		message.setText( "에 예약이 확정되었습니다.");
+		message.setTo(reservation.getMemberTel());
+		message.setText("[FOODPIN]\n" + "["+reservation.getStoreName()+"] " + reservation.getReservDate() + "에 예약이 확정되었습니다.");
 		
 		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
 		
 		return response.toString();
 		
+	}
+	
+	// 예약 거부 문자 발송
+	@ResponseBody
+	@PostMapping("sendReject")
+	public String sendReject(@RequestBody Reservation reservation) {
+		Message message = new Message();
+		
+		message.setFrom("01026624515");
+		message.setTo(reservation.getMemberTel());
+		message.setText("[FOODPIN]\n" + "["+reservation.getStoreName()+"] " + reservation.getReservDate() + "에 예약이 거절되었습니다.");
+		
+		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+		
+		return response.toString();
 	}
 	
 	
