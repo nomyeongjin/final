@@ -25,21 +25,21 @@ public interface SearchStoreMapper {
 
 	List<ReviewHash> searchStoreHashList(String storeNo);
 
-
-	
-	  /** 메인에서 조회하는 가게 리스트 수
+	/**
+	 * 메인에서 조회하는 가게 리스트 수
+	 * 
 	 * @param map
 	 * @return
 	 */
 	int getSearchStoreListCount(Map<String, Object> map);
-	 
 
-	 /** 메인에서 조회하는 가게
+	/**
+	 * 메인에서 조회하는 가게
+	 * 
 	 * @param map
 	 * @return
 	 */
 	List<Store> mainSearchStore(Map<String, Object> map);
-			
 
 	/**
 	 * 가게 상세에서 사용할 카테고리 리스트
@@ -47,5 +47,33 @@ public interface SearchStoreMapper {
 	 * @return
 	 */
 	List<Category> selectSearchCategory();
+
+	/*	
+		*//**
+			 * 가게 찜 해제
+			 * 
+			 * @param map
+			 * @return
+			 */
+	/*
+	 * int deleteSearchStoreLike(Map<String, Object> map);
+	 * 
+	 *//**
+		 * 가게 찜 체크
+		 * 
+		 * @param map
+		 * @return
+		 */
+	/*
+	 * int insertSearchStoreLike(Map<String, Object> map);
+	 * 
+	 *//**
+		 * 가게 찜 개수 조회
+		 * 
+		 * @param object
+		 * @return
+		 *//*
+			 * int selectSearchLikeCount(Object object);
+			 */
 
 }
