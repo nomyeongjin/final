@@ -689,7 +689,7 @@
 .popup-container{
    width: 400px;
    height: 400px;
-   border: 1px solid gray;
+   border: 1px solid var(--main-color);
    border-radius: 16px;
    background-color: white;
    position: fixed;

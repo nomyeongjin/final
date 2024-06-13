@@ -105,7 +105,7 @@ function calendar_rendering() {
          eventColor : '#E14C54',
          eventClick : function(info){ updatePopup(info) },
          dateClick: function(info){ insertPopup(info) },
-         events: listMap , // 화면 구현용 샘플 데이터
+         
          
          // 헤더
          headerToolbar: { left: 'addEventButton', center: 'title' },
@@ -116,7 +116,8 @@ function calendar_rendering() {
                   text : "일정 추가",  // 버튼 내용
                   click : function(){ createPopup(); }
             }
-         } 
+         },
+         events: listMap // 화면 구현용 샘플 데이터 
       });
       calendar.render();
    })
@@ -251,13 +252,14 @@ dayoffBtn.addEventListener("click", () => {
 const popupLayer = document.querySelector("#popupLayer");
 
 let count = 0; // 등록된 휴무 갯수
+let popupCheck = 0; // 등록된 휴무 갯수
 
 /**
  * 일정 등록 팝업창 생성 
  */
 let addBtn = document.querySelector("#addBtn"); //  팝업창 - 일정 등록 버튼
 
-const createPopup = () => {
+const createPopup = (info) => {
    
    const popupFrm = document.createElement("form");
    popupFrm.classList.add("popup-container");
@@ -269,12 +271,14 @@ const createPopup = () => {
    const titleRow = document.createElement("div"); // 일정명
    titleRow.classList.add("popup-row");
    titleRow.innerText = "일정명 : ";
+   
 
    const title = document.createElement("input"); 
    title.setAttribute("type", "text");
    title.id = "title";
+   title.focus();
    titleRow.append(title);
-
+   
    const startRow = document.createElement("div"); // 시작 일자
    startRow.classList.add("popup-row");
    startRow.innerText = "시작 일자 : ";
@@ -282,6 +286,7 @@ const createPopup = () => {
    const start = document.createElement("input"); 
    start.setAttribute("type", "date");
    start.id = "start";
+   if(info != null) start.value = info.dateStr;
    startRow.append(start);
 
    const endRow = document.createElement("div"); // 종료 일자
@@ -291,6 +296,7 @@ const createPopup = () => {
    const end = document.createElement("input"); 
    end.setAttribute("type", "date");
    end.id = "end";
+   if(info != null) end.value = info.dateStr;
    endRow.append(end);
 
    const btnRow = document.createElement("div"); // 버튼 영역
@@ -314,16 +320,9 @@ const createPopup = () => {
    /**
     * (버튼) 취소 - 팝업창
     */
-   cancelBtn.addEventListener("click", () => {
-
-      popupFrm.classList.add("blind");
-   })
+   cancelBtn.addEventListener("click", () => {popupFrm.classList.add("blind");})
 
    // 팝업창 외 다른 클릭 이벤트 방지
-
-
-
-
 };
 
 /**
@@ -331,8 +330,6 @@ const createPopup = () => {
  */
 
 const insertPopup = (info) => {
-
-   popupCheck = 0;
 
    const data = {
       "storeNo" : storeNo,
@@ -352,13 +349,8 @@ const insertPopup = (info) => {
          return;
       }
 
-      console.log(count);
+      createPopup(info); // 팝업창 생성
 
-      createPopup(popupCheck);
-      
-      document.querySelector("#title").focus();
-      document.querySelector("#start").value = info.dateStr;
-   
       /**
        *  (버튼) 휴무 일정 등록 - 팝업창
        */
@@ -383,12 +375,13 @@ const insertPopup = (info) => {
             if(result > 0) {
                alert("휴무 일정이 등록되었습니다.");
                document.querySelector(".popup-container").classList.add("blind");
+               calendar_rendering();
             }
             else{
                alert("휴무 일정 등록 실패되었습니다.");
             }
          })
-      });
+      }); // 일정 등록 클릭
    })
 };
    
@@ -400,8 +393,6 @@ const insertPopup = (info) => {
  * @param {*} info 
  */
 const updatePopup = (info) => {
-
-   popupCheck = 1;
 
    const popupFrm = document.createElement("form");
    popupFrm.classList.add("popup-container");
@@ -466,27 +457,23 @@ const updatePopup = (info) => {
    btnRow.append(cancelBtn);
    popupFrm.append(headRow, titleRow, startRow, endRow, btnRow);
    StoreOffContainer.append(popupFrm);
+   //-------
 
    /**
     * (버튼) 취소 - 팝업창
     */
-   cancelBtn.addEventListener("click", () => {
-
-      popupFrm.classList.add("blind");
-   })
+   cancelBtn.addEventListener("click", () => {popupFrm.classList.add("blind");})
 
 
-
-   // 중복 휴무 체크
-   const data = {
-      "storeNo" : storeNo,
-      "offDayStart" : start,
-      "offDayEnd" : end
-   };
+   // // 중복 휴무 체크
+   // const data = {
+   //    "storeNo" : storeNo,
+   //    "offDayStart" : start,
+   //    "offDayEnd" : end
+   // };
 
    // offCheck(data); // 중복 휴무 체크
 
-   // if (count > 0 ) return;
 
    /**
     *  (버튼) 휴무 일정 변경 - 팝업창
@@ -495,9 +482,10 @@ const updatePopup = (info) => {
 
       const off = {
          "storeNo" : storeNo,
-         "offDayTitle" : title,
-         "offDayStart" : start,
-         "offDayEnd" : end
+         "offDayNo" : info.event.id,
+         "offDayTitle" : title.value,
+         "offDayStart" : start.value,
+         "offDayEnd" : end.value
       };
 
       fetch("/myPage/store/calendaroffUpdate", {
@@ -509,12 +497,15 @@ const updatePopup = (info) => {
       .then(result => {
 
          if(result > 0) {
-            alert("휴무 일정 수정 성공");
+            alert("일정이 수정되었습니다.");
+            popupFrm.classList.add("blind");
+            calendar_rendering();
          }
          else{
-            alert("실패");
+            alert("일정 수정이 실패되었습니다.");
          }
-      })
+
+      }).catch( err => console.log(err));
    });
 
    /**
@@ -522,28 +513,24 @@ const updatePopup = (info) => {
     */
    document.querySelector("#deleteBtn").addEventListener("click", () => {
 
-      const off = {
-         "storeNo" : storeNo,
-         "offDayTitle" : title,
-         "offDayStart" : start,
-         "offDayEnd" : end
-      };
-
       fetch("/myPage/store/calendaroffDelete", {
          method : "POST",
          headers : {"content-Type" : "application/json"},
-         body : JSON.stringify(off)
+         body : JSON.stringify(info.event.id)
       })
       .then(resp => resp.json())
       .then(result => {
 
          if(result > 0) {
             alert("일정이 삭제되었습니다.");
+            popupFrm.classList.add("blind");
+            calendar_rendering();
+            
          }
          else{
-            alert("실패");
+            alert("일정 삭제가 실패되었습니다.");
          }
-      })
+      }).catch( err => console.log(err));
    });
 
 }

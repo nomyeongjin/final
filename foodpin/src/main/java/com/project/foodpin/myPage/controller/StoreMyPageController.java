@@ -209,21 +209,22 @@ public class StoreMyPageController {
 	 */
 	@PostMapping("calendarOffSelect")
 	@ResponseBody
-	public List<Map<String, String>> calendarOffSelect(@RequestBody int storeNo) {
+	public List<Map<String, Object>> calendarOffSelect(@RequestBody int storeNo) {
 		
 		List<Off> offList = service.calendarOffSelect(storeNo);
 		
 //		if(offList.isEmpty()) return null; // 지정 휴무일 조회 결과 없는 경우
 			
-		List<Map<String, String>> listMap = new ArrayList<>();
+		List<Map<String, Object>> listMap = new ArrayList<>();
 		
 		for (Off off : offList) {
 			
-			Map<String, String> map = new HashMap<>();
+			Map<String, Object> map = new HashMap<>();
 			
 			map.put("title", off.getOffDayTitle());
 			map.put("start", off.getOffDayStart());
 			map.put("end", off.getOffDayEnd());
+			map.put("id", off.getOffDayNo());
 			
 			listMap.add(map);
 		}
@@ -270,9 +271,9 @@ public class StoreMyPageController {
 	 */
 	@PostMapping("calendaroffDelete")
 	@ResponseBody
-	public int calendaroffDelete(@RequestBody String storeNo) {
+	public int calendaroffDelete(@RequestBody int offDayNo) {
 		
-		return service.calendaroffDelete(storeNo);
+		return service.calendaroffDelete(offDayNo);
 	}
 	
 	// ------ 예약 관리 ------
