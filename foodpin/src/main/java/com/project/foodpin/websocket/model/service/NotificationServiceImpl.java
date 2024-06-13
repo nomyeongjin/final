@@ -170,4 +170,9 @@ public class NotificationServiceImpl implements NotificationService{
 	public int selectNoshowMemberNo(int memberNo) {
 		return mapper.selectNoshowMemberNo(memberNo);
 	}
+	
+	@Override
+	public int selectStoreNo(int storeNo) {
+		return mapper.selectStoreNo(storeNo);
+	}
 }

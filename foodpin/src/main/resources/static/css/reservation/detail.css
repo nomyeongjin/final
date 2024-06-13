@@ -96,7 +96,7 @@
     /* border: 1px solid #cecece; */
     flex-direction: column;
     width: 800px;
-    height: 400px;
+    /* height: 400px; */
     margin: 10px;
 }
 
@@ -113,6 +113,7 @@
     font-size: 16px;
     width: 500px;
     height: 100px;
+    margin-bottom: 20px;
 }
 
 .images{
@@ -232,11 +233,10 @@
     padding: 25px;
     border-radius: 12px;
     background-color: #f3f3f3b0;
-    display: none;
 }
 
 .show-box{
-    display: block;
+    display: none;
 }
 
 /* 버튼 section */
