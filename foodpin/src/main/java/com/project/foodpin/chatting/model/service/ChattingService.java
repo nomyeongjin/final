@@ -29,4 +29,8 @@ public interface ChattingService {
 
 	int createAskChattingRoom(Map<String, Object> map);
 
+	String selectProfileImg();
+
+	String selectMemberNickname();
+
 }

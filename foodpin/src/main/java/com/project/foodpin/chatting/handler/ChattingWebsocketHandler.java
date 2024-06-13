@@ -80,9 +80,6 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
     	
     	// msg 세팅 값 : chattingNo, messageContent, sendMember, targetNo
 
-    	// 가게 사장 회원 번호
-    	int storeMemberNo = msg.getStoreMemberNo();
-		
 
     	int result = service.insertMessage(msg);
         
