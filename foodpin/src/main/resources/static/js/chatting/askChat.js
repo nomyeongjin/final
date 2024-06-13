@@ -4,8 +4,6 @@
 
 // -----------------------------------------------------------------------------------------
 
-
-
 // 채팅에 사용될 SockJS 객체를 저장할 변수
 let chattingSock; 
 
@@ -101,13 +99,13 @@ if(chattingSock != undefined){
       
           // 상대 프로필
           const img = document.createElement("img");
-          img.setAttribute("src", storeImg);
+          img.setAttribute("src", profileImg);
           
           const div = document.createElement("div");
       
           // 상대 이름
           const b = document.createElement("b");
-          b.innerText = storeName; // 전역변수
+          b.innerText = memberNickname; // 전역변수
       
           const br = document.createElement("br");
       
@@ -181,13 +179,13 @@ if(chattingSock != undefined){
   
                   //상대 프로필
                   const img = document.createElement("img");
-                  img.setAttribute("src", storeImg);
+                  img.setAttribute("src", profileImg);
                   
                   const div = document.createElement("div");
   
                   // 상대 이름
                   const b = document.createElement("b");
-                  b.innerText = storeName; // 전역변수
+                  b.innerText = memberNickname; // 전역변수
   
                   const br = document.createElement("br");
   

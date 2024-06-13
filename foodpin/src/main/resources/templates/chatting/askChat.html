@@ -10,34 +10,33 @@
 
 </head>
 <body>
-    <main id="main" th:data-chattingNo="${chattingNo}">
+
+    <main th:data-chattingNo="${chattingNo}" id="main">
         <th:block th:replace="~{common/header}">header.html</th:block>
 
-        <h2>관리자 문의</h2>
         <div class="chatting-container">
             
+
 
             <!-- 채팅 영역-->
 
                 <div class="chatting-area">
                     <ul class="display-chatting">
-                        <!-- <li class="my-chat">
-                            <span class="chatDate">14:01</span>                                                            
-                            <p class="chat">안녕하세요?</p>
-                        </li>
-                        
-                        <li class="target-chat">
-                            <img src="/images/user.png">
-                            
+                        <th:block th:each="msg : ${messageList}" th:if="${msg.chattingNo} == ${chattingNo}" th:object="${msg}">
+                        <li  class="target-chat" th:if="${msg.memberNo} != ${session.loginMember.memberNo}">
+                            <img th:src="${msg.profileImg}">
                             <div>
-                                <b>상대방</b>	<br>
-                                <p class="chat">
-안녕하세요?? 반갑습니다.
-ㅎㅎㅎㅎㅎ
-                                </p>
-                                <span class="chatDate">14:05</span>
+                                <b th:text="${msg.memberNickname}"></b><br>
+                                <p class="chat" th:text="*{messageContent}"></p>
+                                <span class="chatDate" th:text="*{sendTime}">14:01</span>
                             </div>
-                        </li>-->
+                        </li>
+                        <li class="my-chat" th:if="${msg.memberNo} == ${session.loginMember.memberNo}">
+                            <span class="chatDate" th:text="*{sendTime}">14:01</span>
+                            <p class="chat" th:text="*{messageContent}"></p>
+                        </li>
+    
+                    </th:block>
                        
                     </ul>
 
@@ -54,6 +53,7 @@
         
     </main>
 
+
     <th:block th:replace="~{common/footer}"></th:block>
 
 
@@ -63,7 +63,9 @@
 		const userDefaultImage = /*[[#{user.default.image}]]*/ '기본 이미지';
 
         const loginMemberNo = /*[[${session.loginMember.memberNo}]]*/ '로그인 멤버 번호';
-        
+
+        const profileImg = /*[[${profileImg}]]*/ '관리자이미지';
+        const memberNickname = /*[[${memberNickname}]]*/ '관리자이름';
     </script>
 
 

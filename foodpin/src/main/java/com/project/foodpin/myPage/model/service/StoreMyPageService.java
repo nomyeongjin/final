@@ -49,13 +49,6 @@ public interface StoreMyPageService {
 	 */
 	int storeInfoUpdate(Store inputStore);
 	
-	/** 가게 정보 수정
-	 * @param inputStore
-	 * @param storeImg 
-	 * @return
-	 */
-	int storeInfoUpdateCheck(Store data);
-	
 	// ------ 메뉴 ------
 	
 	/** 메뉴 조회 
@@ -155,6 +148,13 @@ public interface StoreMyPageService {
 	 */
 	List<Reservation> reservConfirm(String storeNo);
 	
+
+	/** 예약 1건 자세히 조회
+	 * @param reservNo
+	 * @return 
+	 */
+	Reservation reservDetail(int reservNo);
+	
 	// ------ 사장님 정보 ------
 	
 	/** 사장님 정보 변경 화면으로 전환
@@ -212,6 +212,7 @@ public interface StoreMyPageService {
 	 * @return
 	 */
 	int deleteReply(int replyNo);
+
 
 
 

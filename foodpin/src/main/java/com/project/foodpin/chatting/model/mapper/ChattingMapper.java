@@ -30,4 +30,8 @@ public interface ChattingMapper {
 
 	public int createAskChattingRoom(Map<String, Object> map);
 
+	public String selectProfileImg();
+
+	public String selectMemberNickname();
+
 }

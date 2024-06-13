@@ -9,7 +9,49 @@
 <body>
     <!-- 채팅 영역-->
 
+
     <main th:data-chattingNo="${chattingNo}" id="main">
+
+        <div class="chatting-container">
+            
+
+
+            <!-- 채팅 영역-->
+
+                <div class="chatting-area">
+                    <ul class="display-chatting">
+                        <th:block th:each="msg : ${messageList}" th:if="${msg.chattingNo} == ${chattingNo}" th:object="${msg}">
+                        <li  class="target-chat" th:if="${msg.memberNo} != ${session.loginMember.memberNo}">
+                            <img th:src="${msg.storeImg}">
+                            <div>
+                                <b th:text="${msg.storeName}"></b><br>
+                                <p class="chat" th:text="*{messageContent}"></p>
+                                <span class="chatDate" th:text="*{sendTime}">14:01</span>
+                            </div>
+                        </li>
+                        <li class="my-chat" th:if="${msg.memberNo} == ${session.loginMember.memberNo}">
+                            <span class="chatDate" th:text="*{sendTime}">14:01</span>
+                            <p class="chat" th:text="*{messageContent}"></p>
+                        </li>
+    
+                    </th:block>
+                       
+                    </ul>
+
+
+
+                    <!-- 채팅 입력 부분 -->
+                    <div class="input-area">
+                        <textarea id="inputChatting" rows="1"></textarea>
+                        <button id="send">전송</button>
+                    </div>
+                </div>
+        </div>
+
+        
+    </main>
+
+    <!-- <main th:data-chattingNo="${chattingNo}" id="main">
         <div class="chatting-area">
            <div>
                 <ul class="display-chatting">
@@ -46,20 +88,20 @@
                             </p>
                             <span class="chatDate">14:05</span>
                         </div>
-                    </li> -->
+                    </li> 
                    
-                </ul>
+                </ul> -->
             
             
             
             <!-- 채팅 입력 부분 -->
-            <div class="input-area">
+            <!-- <div class="input-area">
                 <textarea id="inputChatting" rows="3"></textarea>
                 <button id="send">전송</button>
             </div>
            </div>
     </div>
-</main>
+</main> -->
 
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 	<script th:inline="javascript">

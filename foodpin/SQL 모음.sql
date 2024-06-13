@@ -917,7 +917,7 @@ SELECT * FROM "STORE";
 
 INSERT INTO "STORE_CATEGORY"(
 STORE_NO, CATEGORY_CODE)VALUES(
-'1', 6
+'0104534247', 8
 );
 
 
@@ -950,3 +950,8 @@ SELECT COUNT(*)
        OR
       CATEGORY_TITLE LIKE '%아%'
       );
+      
+     
+     
+    SELECT * FROM STORE 
+    WHERE STORE_NAME = '피자책피자';

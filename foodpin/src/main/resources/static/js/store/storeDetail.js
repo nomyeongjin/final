@@ -37,7 +37,7 @@ const toChatting = document.getElementById("toChatting");
 
 /* Get 방식 */
 function showPopup() { 
-  let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,location=no,width=515, height=700, top=150,left=500";
+  let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,location=no,width=515, height=660, top=150,left=500";
   window.open("/chatting/chatPopup/"+storeMemberNo, "chatting", options); 
   
   
