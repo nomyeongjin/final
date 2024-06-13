@@ -223,7 +223,7 @@
 	
 	<!-- 예약 조회 -->
 	<select id="selectReserv">
-		SELECT MEMBER_NO, MEMBER_NAME, RESERV_NO, MEMBER_TEL, TO_CHAR(RESERV_DATE, 'YYYY"년" MM"월" DD"일"') RESERV_DATE, 
+		SELECT MEMBER_NO, MEMBER_NAME, RESERV_NO, MEMBER_TEL, TO_CHAR(RESERV_DATE, 'YYYY"년" MM"월" DD"일"') RESERV_DATE,
 			RESERV_TIME, RESERV_COUNT, RESERV_REQUEST, RESERV_STATUS_FL, STORE_NO, MEMBER_EMAIL, MEMBER_FLAG
 		FROM "RESERVATION"
 		JOIN "MEMBER" USING(MEMBER_NO)
@@ -234,21 +234,21 @@
 		</if>
 		
 		<if test='reservStatusFl == "Y"'>
-			AND RESERV_STATUS_FL = #{reservStatusFl} AND RESERV_DATE > SYSDATE
+			AND RESERV_STATUS_FL = #{reservStatusFl} AND TO_DATE(TO_CHAR(RESERV_DATE, 'YYYY-MM-DD') || ' ' || RESERV_TIME, 'YYYY-MM-DD HH24:MI') > SYSDATE
 		</if>
 		
 		<if test='reservStatusFl == "N"'>
-			AND RESERV_STATUS_FL = #{reservStatusFl} AND RESERV_DATE > SYSDATE
+			AND RESERV_STATUS_FL = #{reservStatusFl} AND TO_DATE(TO_CHAR(RESERV_DATE, 'YYYY-MM-DD') || ' ' || RESERV_TIME, 'YYYY-MM-DD HH24:MI') > SYSDATE
 		</if>
 		
 		<if test='reservStatusFl == "C"'>
-			AND RESERV_STATUS_FL = #{reservStatusFl} AND RESERV_DATE > SYSDATE
+			AND RESERV_STATUS_FL = #{reservStatusFl} AND TO_DATE(TO_CHAR(RESERV_DATE, 'YYYY-MM-DD') || ' ' || RESERV_TIME, 'YYYY-MM-DD HH24:MI') > SYSDATE
 		</if>
 		<if test='reservStatusFl == "P"'>
 			AND RESERV_DATE   <![CDATA[<]]> SYSDATE
 		</if>
 		
-		ORDER BY RESERV_DATE
+		ORDER BY RESERV_DATE, RESERV_TIME
 	</select>
 	
 	<!-- 예약 승인 -->
