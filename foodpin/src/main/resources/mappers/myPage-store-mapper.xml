@@ -283,6 +283,10 @@
 		UPDATE "MEMBER" SET MEMBER_FLAG = #{memberFlag} WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<update id="noshowReserv">
+		UPDATE "RESERVATION" SET RESERV_STATUS_FL = 'Y' WHERE RESERV_NO = #{reservNo}
+	</update>
+	
 	<!-- 확정된 예약 조회 -->
 	<select id="reservConfirm">
 		SELECT RESERV_NO, TO_CHAR(RESERV_DATE, 'YYYY-MM-DD') RESERV_DATE, 
