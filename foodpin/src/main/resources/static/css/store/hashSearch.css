@@ -143,7 +143,6 @@
 .store-time{
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
 }
 
 .storeList-right{
@@ -333,4 +332,8 @@
 .keyword-btn > button:hover{
   background-color: white;
   color: #E14C54;
+}
+
+.review-count{
+  margin-top: 10px;
 }
