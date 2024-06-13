@@ -45,6 +45,7 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 		return reviewList;
 	}
 	
+
 	
 
 
@@ -142,6 +143,11 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 	public Hash hashTitle(String hashNo) {
 		return mapper.hashTitle(hashNo);
 	}
+
+
+
+
+
 	
 	
 

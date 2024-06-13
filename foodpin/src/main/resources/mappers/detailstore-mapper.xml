@@ -74,7 +74,13 @@
                javaType = "java.util.ArrayList"
                ofType = "StoreCategory"
    />
-
+<!--    <collection property="storeOffList"
+               select = "selectStoreOffList"
+               column = "STORE_NO"
+               javaType = "java.util.ArrayList"
+               ofType = "Off"
+   />
+ -->
 </resultMap>
 
 
@@ -150,6 +156,13 @@
 		WHERE STORE_NO = #{storeNo} 
     </select>
     
+    
+    <!-- 가게 휴무일 조회 -->
+   <!--  <select id="selectStoreOffList" resultType="Off">
+        SELECT CATEGORY_TITLE  FROM "CATEGORY"
+		JOIN "STORE_CATEGORY" USING (CATEGORY_CODE)
+		WHERE STORE_NO = #{storeNo} 
+    </select> -->
     
       <!-- 가게 리뷰 상세 조회 -->
    <select id="reviewDetail" resultMap="review_rm">
