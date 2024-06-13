@@ -257,9 +257,9 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 
 	// 지정 휴무일 삭제 
 	@Override
-	public int calendaroffDelete(String storeNo) {
+	public int calendaroffDelete(int offDayNo) {
 		
-		return mapper.calendaroffDelete(storeNo);
+		return mapper.calendaroffDelete(offDayNo);
 	}
 	
 	// ------ 예약 관리 ------

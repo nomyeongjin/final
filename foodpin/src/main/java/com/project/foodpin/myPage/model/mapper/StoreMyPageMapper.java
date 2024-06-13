@@ -161,7 +161,7 @@ public interface StoreMyPageMapper {
 	 * @param storeNo
 	 * @return
 	 */
-	int calendaroffDelete(String storeNo);
+	int calendaroffDelete(int offDayNo);
 	
 	// ------ 예약 관리 ------
 	

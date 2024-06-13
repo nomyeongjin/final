@@ -95,4 +95,9 @@ public class ChattingServiceImpl implements ChattingService {
 		return mapper.selectMemberNickname();
 	}
 	
+	@Override
+	public int notReadChattingCount(int memberNo) {
+		return mapper.notReadChattingCount(memberNo);
+	}
+	
 }

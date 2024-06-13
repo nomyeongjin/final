@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.foodpin.member.model.dto.Member;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.review.model.dto.Report;
 import com.project.foodpin.review.model.dto.Review;
@@ -50,7 +51,7 @@ public interface NotificationMapper {
 	Review selectReviewData(String pkNo);
 
 	// 리뷰 답글 받는 사람 회원 번호
-	int memberNo(String pkNo);
+	int memberNo(int reviewNo);
 
 	// 기게 신고 데이터 조회
 	Store selectManagerData(String pkNo);
@@ -74,6 +75,12 @@ public interface NotificationMapper {
 
 	// 가게 신고 (해결 완료)
 	Store storeReportComplete(String pkNo);
+
+	int selectReivewNo(String pkNo);
+
+	Member noshowMemberNo(String pkNo);
+
+	int selectNoshowMemberNo(int memberNo);
 
 	// 가게 정보 요청 처리에 필요한 회원 번호
 //	int selectMemberNo(String storeNo);

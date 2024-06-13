@@ -92,7 +92,7 @@
 		INSERT INTO "MESSAGE"
 		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, DEFAULT, DEFAULT, 
 		 #{memberNo}
-		, #{chattingNo})
+		, #{chattingNo},#{targetNo})
 	</insert>
 	
 	
@@ -147,6 +147,13 @@
   		SELECT MEMBER_NICKNAME
   		FROM MEMBER
   		WHERE MEMBER_NO = 3
+  	</select>
+  	
+  	<select id="notReadChattingCount">
+  	SELECT COUNT(*)
+	FROM MESSAGE
+	WHERE TARGET_NO = #{memberNo}
+  	AND READ_FL = 'N'
   	</select>
   	
   	

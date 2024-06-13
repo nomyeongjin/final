@@ -110,7 +110,7 @@
 	
 	<!-- 가게 사장님이 답글 작성하기 위한 데이터 조회 -->
 	<select id="selectReviewData">
-		SELECT V.REVIEW_NO , M.MEMBER_NICKNAME, V.STORE_NO , M.MEMBER_NO, V.REVIEW_NO 
+		SELECT V.REVIEW_NO , M.MEMBER_NICKNAME, V.STORE_NO , M.MEMBER_NO
 		FROM "REVIEW" V
 		JOIN "MEMBER" M ON (M.MEMBER_NO = V.MEMBER_NO)
 		WHERE V.REVIEW_NO = #{reviewNo}
@@ -144,9 +144,9 @@
 		WHERE RESERV_NO = #{reservNo}
 	</select>
 	
-	<!-- 회원이 방문 리뷰 작성할 때 필요안 데이터 조회 -->
+	<!-- 회원이 방문 리뷰 작성할 때 필요안 데이터 조회 00.00(요일) 00:00-->
 	<select id="selectReservationData">
-		SELECT M.MEMBER_NICKNAME , TO_CHAR(R.RESERV_DATE, 'YYYY-MM-DD') "RESERV_DATE", R.RESERV_NO, R.STORE_NO 
+		SELECT M.MEMBER_NICKNAME , TO_CHAR(R.RESERV_DATE, 'MM.DD(DY)') RESERV_DATE, R.RESERV_NO, R.STORE_NO , R.RESERV_TIME
 		FROM "RESERVATION" R 
 		JOIN "MEMBER" M  ON (R.MEMBER_NO = M.MEMBER_NO)
 		WHERE RESERV_NO = #{reservNo}
@@ -188,5 +188,25 @@
 <!-- 	<select id="selectMemberNo">
 		
 	</select> -->
+	
+	<select id="selectReivewNo">
+			SELECT V.MEMBER_NO 
+		FROM "REVIEW" V
+		JOIN "REPORT" R ON (V.REVIEW_NO = R.REVIEW_NO)
+		JOIN "STORE" S ON (S.STORE_NO = V.STORE_NO)
+		WHERE REPORT_NO = #{reportNo}
+	</select>
+	
+	<select id="noshowMemberNo">
+		SELECT MEMBER_NICKNAME , MEMBER_NO
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<select id="selectNoshowMemberNo">
+		SELECT MEMBER_NO
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
 	
 </mapper>

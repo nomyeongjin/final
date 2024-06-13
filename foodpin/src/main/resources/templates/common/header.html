@@ -50,7 +50,8 @@
         </div>
 
        <th:block th:replace="~{reservation/notification}"></th:block>
-       <button type="button" id="myChat" class="chat-btn fa-regular fa-comments" th:if="${session.loginMember}"></button>
+       <button type="button" id="myChat" class="chat-btn fa-regular fa-comments" th:if="${session.loginMember}"><span id="chatCount" class="none" th:text="${notReadChattingCount}">1</span></button>
+       
 
     </th:block>
 
