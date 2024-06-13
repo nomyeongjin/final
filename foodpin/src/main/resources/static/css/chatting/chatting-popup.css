@@ -92,8 +92,8 @@ li>img{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-left: 1px solid #cecece;
     min-width: 100px;
+
 }
 
 .display-chatting{
@@ -164,6 +164,10 @@ li>img{
 	pointer-events: none;
 }
 
+.chatting-container{
+    border: 1px solid #cecece;
+}
+
 .input-area{
     
     display: flex;
@@ -176,7 +180,7 @@ li>img{
 
 #send{
     width: 10%;
-    height: 50px;
+    height: 100%;
     border: none;
     cursor: pointer;
     border-left: 1px solid #cecece;

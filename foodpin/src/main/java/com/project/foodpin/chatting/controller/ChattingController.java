@@ -75,7 +75,13 @@ public class ChattingController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
+		String profileImg = service.selectProfileImg();
+		String memberNickname = service.selectMemberNickname();
+		
 		map.put("loginMemberNo", loginMember.getMemberNo());
+		map.put("targetNo", 3);
+		
+		
 		
 		int chattingNo = service.checkAskChattingNo(map);
 		
@@ -84,6 +90,8 @@ public class ChattingController {
 		}else {
 			List<Message> messageList = service.selectMsgList(chattingNo);
 			model.addAttribute("messageList", messageList);
+			model.addAttribute("profileImg", profileImg);
+			model.addAttribute("memberNickname", memberNickname);
 			
 		}
 		
