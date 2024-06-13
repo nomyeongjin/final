@@ -16,6 +16,10 @@
     border: 1px solid #cecece;
 }
 
+.chatting-item.select{
+	background-color: #EFEFCB;
+}
+
 .room-list-container{
     width: 300px;
     height: 100%;
