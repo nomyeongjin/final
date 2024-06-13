@@ -298,17 +298,12 @@
 		ORDER BY HASH_COUNT DESC
 	</select>
 
-	
+	<!-- 해시태그 내용 조회 -->
 	<select id="hashTitle">
-		SELECT HASH_TITLE
+		SELECT HASH_TITLE, HASH_NO
 		FROM HASH
 		WHERE HASH_NO = #{hashNo}
 	</select>
-
-
-
-
-
 
 
 

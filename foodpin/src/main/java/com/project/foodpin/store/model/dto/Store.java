@@ -70,6 +70,8 @@ public class Store {
 	// 해시태그 개수
 	private int hashCount;
 	
+	private int hashNo;
+	
 	// 메뉴
 	private int menuNo;
 	private String menuTitle;

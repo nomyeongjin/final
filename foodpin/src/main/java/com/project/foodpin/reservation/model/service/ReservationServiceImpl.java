@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
 import com.project.foodpin.reservation.model.mapper.ReservationMapper;
+import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Store;
 
 import lombok.RequiredArgsConstructor;
@@ -84,5 +85,18 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<Off> selectOffWeek(String storeNo) {
 		return mapper.selectOffWeek(storeNo);
 	}
+	
+	// 리뷰 조회
+	@Override
+	public List<Review> reviewDetail(String storeNo) {
+		return mapper.reviewDetail(storeNo);
+	}
+	
+	// 가게 리뷰 개수 조회
+	@Override
+	public int reviewCount(String storeNo) {
+		return mapper.reviewCount(storeNo);
+	}
+	
 }
 

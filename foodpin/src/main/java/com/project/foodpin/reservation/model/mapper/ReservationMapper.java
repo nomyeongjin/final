@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.project.foodpin.myPage.model.dto.Off;
 import com.project.foodpin.reservation.model.dto.Reservation;
+import com.project.foodpin.review.model.dto.Review;
 import com.project.foodpin.store.model.dto.Store;
 
 @Mapper
@@ -34,5 +35,11 @@ public interface ReservationMapper {
 
 	// 고정 휴무일 조회
 	List<Off> selectOffWeek(String storeNo);
+
+	// 가게 리뷰 조회
+	List<Review> reviewDetail(String storeNo);
+
+	// 가게 리뷰 개수 조회
+	int reviewCount(String storeNo);
 
 }
