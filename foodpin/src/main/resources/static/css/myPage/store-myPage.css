@@ -711,7 +711,6 @@
    align-items: center;
    justify-content: space-between;
 }
-
 .popup-title{
    width: 80%;
    padding: 10px;
@@ -733,7 +732,7 @@
 }
 
 /* button */
-.popup-btn-row {
+.popup-btn-row{
    width: 80%;
    padding: 30px 10px;
    margin: 10px;
@@ -741,7 +740,7 @@
    display: flex;
    align-items: center;
    justify-content: center;
-
+}
 .popup-btn{
    display: flex;
    padding: 0 20px;
@@ -753,10 +752,6 @@
    margin: 10px 5px;
    align-items: center;
 }
-
-
-
-
 
 /* popup layer 숨기기, 보이기 */
 .hidden{ display: none !important; }
