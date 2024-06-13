@@ -27,6 +27,7 @@ quickLoginBtn.forEach((item) =>{
 })
 
 
+
 const searchStoreList = document.querySelector("#searchStoreList");
 
 
