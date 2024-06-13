@@ -687,7 +687,7 @@
 /* -------------- */
 
 .popup-container{
-   width: 400px;
+   width: 360px;
    height: 400px;
    border: 1px solid var(--main-color);
    border-radius: 16px;
@@ -703,13 +703,22 @@
    padding: 20px;
 }
 .popup-row{
-   width: 80%;
+   width: 90%;
    padding: 10px;
    margin: 10px;
    position: relative;
    display: flex;
    align-items: center;
    justify-content: space-between;
+}
+.popup-row-reserv{
+   width: 90%;
+   padding: 10px;
+   margin: 10px;
+   position: relative;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 .popup-title{
    width: 80%;
@@ -731,9 +740,13 @@
    font-size: 14px;
 }
 
+.popup-row-reserv > p{
+   padding: 0 10px;
+}
+
 /* button */
 .popup-btn-row{
-   width: 80%;
+   width: 100%;
    padding: 30px 10px;
    margin: 10px;
    position: relative;

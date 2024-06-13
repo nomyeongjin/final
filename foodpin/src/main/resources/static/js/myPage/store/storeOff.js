@@ -272,7 +272,6 @@ const createPopup = (info) => {
    titleRow.classList.add("popup-row");
    titleRow.innerText = "일정명 : ";
    
-
    const title = document.createElement("input"); 
    title.setAttribute("type", "text");
    title.id = "title";
@@ -393,6 +392,11 @@ const insertPopup = (info) => {
  * @param {*} info 
  */
 const updatePopup = (info) => {
+
+   console.log(info.event.id);
+   console.log(info.event.start);
+   console.log(info.event.end);
+   console.log(info.event.allDay);
 
    const popupFrm = document.createElement("form");
    popupFrm.classList.add("popup-container");
