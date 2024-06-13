@@ -276,9 +276,9 @@ public class StoreMyPageController {
 	 */
 	@PostMapping("calendaroffDelete")
 	@ResponseBody
-	public int calendaroffDelete(@RequestBody String storeNo) {
+	public int calendaroffDelete(@RequestBody int offDayNo) {
 		
-		return service.calendaroffDelete(storeNo);
+		return service.calendaroffDelete(offDayNo);
 	}
 	
 	// ------ 예약 관리 ------

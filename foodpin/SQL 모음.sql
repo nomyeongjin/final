@@ -951,7 +951,10 @@ SELECT COUNT(*)
       CATEGORY_TITLE LIKE '%아%'
       );
       
-     
-     
-    SELECT * FROM STORE 
+     UPDATE "STORE" SET STORE_LOCATION = '04543^^^서울 중구 수표로 58-1 4층^^^을지로3가 5-7'
+     WHERE STORE_NO =8420348333;
+ 
+    SELECT * FROM STORE
     WHERE STORE_NAME = '피자책피자';
+    
+   COMMIT;
