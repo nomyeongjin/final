@@ -148,7 +148,11 @@ public class ChattingController {
     public List<ChattingRoom> selectRoomList(
     		@SessionAttribute("loginMember") Member loginMember
     		) {
-    	return service.selectRoomList(loginMember.getMemberNo());
+    	
+    	List<ChattingRoom> roomList = service.selectRoomList(loginMember.getMemberNo());
+    	
+    	return roomList;
+    
     }
     
     
@@ -190,8 +194,9 @@ public class ChattingController {
     	map.put("memberNo", loginMember.getMemberNo());
     	map.put("query", query);
     	
-    	return service.selectTarget(map);
+    	List<ChattingRoom> list = service.selectTarget(map);
     	
+    	return list;
     	
     	
     	
