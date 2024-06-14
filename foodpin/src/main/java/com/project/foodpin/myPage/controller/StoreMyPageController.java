@@ -215,21 +215,22 @@ public class StoreMyPageController {
 	 */
 	@PostMapping("calendarOffSelect")
 	@ResponseBody
-	public List<Map<String, String>> calendarOffSelect(@RequestBody int storeNo) {
+	public List<Map<String, Object>> calendarOffSelect(@RequestBody int storeNo) {
 		
 		List<Off> offList = service.calendarOffSelect(storeNo);
 		
 //		if(offList.isEmpty()) return null; // 지정 휴무일 조회 결과 없는 경우
 			
-		List<Map<String, String>> listMap = new ArrayList<>();
+		List<Map<String, Object>> listMap = new ArrayList<>();
 		
 		for (Off off : offList) {
 			
-			Map<String, String> map = new HashMap<>();
+			Map<String, Object> map = new HashMap<>();
 			
 			map.put("title", off.getOffDayTitle());
 			map.put("start", off.getOffDayStart());
 			map.put("end", off.getOffDayEnd());
+			map.put("id", off.getOffDayNo());
 			
 			listMap.add(map);
 		}
@@ -371,7 +372,7 @@ public class StoreMyPageController {
 			
 			Map<String, Object> map = new HashMap<>();
 			
-			map.put("title", reserv.getReservTime() + "	(" + reserv.getReservCount() + "인)");
+			map.put("title", reserv.getReservTime() + "	(" + reserv.getReservCount() + "인) +");
 			map.put("start", reserv.getReservDate());
 			map.put("end", reserv.getReservDate());
 			map.put("id", reserv.getReservNo());
@@ -607,6 +608,21 @@ public class StoreMyPageController {
 		message.setFrom("01026624515");
 		message.setTo(reservation.getMemberTel());
 		message.setText("[FOODPIN]\n" + "["+reservation.getStoreName()+"] " + reservation.getReservDate() + "에 예약이 거절되었습니다.");
+		
+		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+		
+		return response.toString();
+	}
+	
+	// 예약 노쇼 문자 발송
+	@ResponseBody
+	@PostMapping("sendNoshow")
+	public String sendNoshow(@RequestBody Reservation reservation) {
+		Message message = new Message();
+		
+		message.setFrom("01026624515");
+		message.setTo(reservation.getMemberTel());
+		message.setText("[FOODPIN]\n" + "["+reservation.getStoreName()+"] " + reservation.getReservDate() + "에 예약 하셨으나 당일 연락 안되어 노쇼처리 되었습니다.");
 		
 		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
 		

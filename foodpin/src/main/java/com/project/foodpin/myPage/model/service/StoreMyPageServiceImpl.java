@@ -119,7 +119,10 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		Map<String, Object> categoryMap = new HashMap<>();
 		categoryMap.put("storeNo", inputStore.getStoreNo());
 		
-		result = mapper.categoryDelete(inputStore.getStoreNo()); // 기존 카테고리 삭제
+		List<StoreCategory> storeCtg = mapper.selectCategory(inputStore.getStoreNo());		
+		
+		// 기존 등록된 카테고리가 있는 경우 카테고리 삭제
+		if(!storeCtg.isEmpty()) result = mapper.categoryDelete(inputStore.getStoreNo()); 
 		
 		if(result > 0) { // 변경된 카테고리 데이터 등록
 	        for (String ctg : inputCategorys) {

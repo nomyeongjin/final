@@ -35,11 +35,6 @@
                     <div class="store-name-container">
                         <div class="store" th:text="${store.storeName}">가게이름</div>
                     </div>
-                    <!-- <div class="title-container">
-                        <i class="fa-regular fa-clock"></i>
-                        <h3 class="title">예약 안내</h3>
-                    </div>
-                    -->
                     
                     <div class="content-container">
                         <i class="fa-solid fa-message"></i>
@@ -57,13 +52,9 @@
                             <span class="content" name="storeInfo" id="storeId" th:text="|가게 정보 준비중 입니다.|"></span>
                         </th:block> <!-- 상세 정보로 넘어감 -->
                     </div>
-                    
-
-
 
                 </div>
-    
-    
+
             </section>
     
     
@@ -92,6 +83,7 @@
     
                 </div>
 
+                <!-- 리뷰 영역 -->
                 <div id="reviewListContainer">
                     <div class="storereview-container" th:if="${reviewList}">
                         
@@ -100,7 +92,6 @@
                                 <h2>작성된 리뷰가 없습니다.</h2>
                             </div>
                       </th:block>
-    
                       
                         <th:block  th:each=" review : ${reviewList}" th:object="${review}">
                             <div class="review">
@@ -235,6 +226,19 @@
         const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원"
 
         const storeNo = /*[[${storeNo}]]*/ "사업자등록번호"
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            let targetElement = document.querySelector(".nav-list");
+
+            if (targetElement) {
+                const scrollPosition = targetElement.offsetTop;
+                window.scrollTo({
+                    top: scrollPosition - 150, /* 스크롤 됐을 때 위에서 작성한 위치 만큼 떨어진 위치에서 보여줌 */
+                    behavior: 'smooth'
+                });
+            }
+        })
+
        
     </script>
 

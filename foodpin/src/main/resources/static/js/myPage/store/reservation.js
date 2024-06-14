@@ -299,8 +299,8 @@ const createReservList = (reservStatusFl) => {
             const reservRejectBtn = document.createElement("button");
             reservRejectBtn.classList.add("reserv-reject-btn");
             reservRejectBtn.dataset.reservDate = `${reserv.reservDate} ${reserv.reservTime}`;
-            reservBtn.dataset.memberTel = `${reserv.memberTel}`;
-            reservBtn.dataset.storeName = `${reserv.storeName}`;
+            reservRejectBtn.dataset.memberTel = `${reserv.memberTel}`;
+            reservRejectBtn.dataset.storeName = `${reserv.storeName}`;
             reservRejectBtn.innerText = "예약 거부";
 
             reservRejectBtn.addEventListener("click", e => {
@@ -386,6 +386,8 @@ const createReservList = (reservStatusFl) => {
                reservNoshowBtn.dataset.memberEmail = `${reserv.memberEmail}`;
                reservNoshowBtn.dataset.reservDate = `${reserv.reservDate}`;
                reservNoshowBtn.dataset.reservTime = `${reserv.reservTime}`;
+               reservNoshowBtn.dataset.memberTel = `${reserv.memberTel}`;
+               reservNoshowBtn.dataset.storeName = `${reserv.storeName}`;
                reservNoshowBtn.innerText = "노쇼 등록";
 
                listBtnArea.append(reservNoshowBtn);
@@ -394,6 +396,8 @@ const createReservList = (reservStatusFl) => {
                reservNoshowBtn.addEventListener("click", e => {
                   const memberFlag = reservNoshowBtn.dataset.memberFlag;
                   const memberEmail = reservNoshowBtn.dataset.memberEmail;
+                  const memberTel = reservNoshowBtn.dataset.memberTel;
+                  const storeName = reservNoshowBtn.dataset.storeName;
                   console.log("경고 " + memberFlag);
 
                   const memberNo = reservNoshowBtn.dataset.memberNo;
@@ -439,10 +443,28 @@ const createReservList = (reservStatusFl) => {
                         if(result == 1) {
                            console.log("메일 발송 성공");
                         } else {
-                           console.log("메일 발성 실패");
+                           console.log("메일 발송 실패");
                         }
                      })
                   }
+
+                  fetch("/myPage/store/sendNoshow", {
+                     method : "POST",
+                     headers : {"content-type" : "application/json"},
+                     body : JSON.stringify({
+                        memberTel: memberTel,
+                        storeName: storeName,
+                        reservDate: reservDate
+                    })
+                  }) 
+                  .then(resp => resp.text())
+                  .then(result => {
+                     if(result != null) {
+                        console.log("노쇼 발송 성공");
+                     } else {
+                        console.log("노쇼 발송 실패");
+                     }
+                  })
 
                   const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
                   // console.log(reservNo);
@@ -686,7 +708,7 @@ const reservPopup = (reservNo) => {
        */
       cancelBtn.addEventListener("click", () => {
 
-         popupFrm.classList.add("blind");
+         popupFrm.remove();
       })
 
       // 팝업창 외 다른 클릭 이벤트 방지

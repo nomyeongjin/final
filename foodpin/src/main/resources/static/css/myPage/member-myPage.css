@@ -189,7 +189,6 @@ form[name='member-myPageFrm']{
 .likeTable {
     margin: 20px;
     width: 400px;
-    height: 700px;
 }
  
 .likeList {
@@ -345,7 +344,7 @@ form[name='member-myPageFrm']{
     display: flex;
     margin-top: 30px;
     padding-top: 7px;
-    border-top: 2px solid var(--main-color);
+    border-top: 1px solid var(--main-color);
 }
 
 
@@ -603,6 +602,7 @@ label[for='agree']{
     align-items: center;
     text-align: left;
     margin: 30px 0;
+    width: 650px;
 }
  
 .reservationStore {

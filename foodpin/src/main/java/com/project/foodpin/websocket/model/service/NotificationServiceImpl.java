@@ -1,6 +1,7 @@
 package com.project.foodpin.websocket.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,11 +80,6 @@ public class NotificationServiceImpl implements NotificationService{
 		if(result > 0) return mapper.notReadCheck(memberNo);
 			return 0;
 		}
-	
-//	@Override
-//	public Store selectStoreName(int memberNo) {
-//		return mapper.selectStoreName(memberNo);
-//	}
 	
 	// 가게 이름 조회
 	@Override
@@ -174,5 +170,11 @@ public class NotificationServiceImpl implements NotificationService{
 	@Override
 	public int selectStoreNo(int storeNo) {
 		return mapper.selectStoreNo(storeNo);
+	}
+	
+	// 알림 카테고리별 조회
+	@Override
+	public List<Notification> selectList(Map<String, Object> map) {
+		return mapper.selectList(map);
 	}
 }

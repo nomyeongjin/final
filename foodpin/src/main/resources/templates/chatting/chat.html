@@ -17,8 +17,10 @@
             
             <div class="room-list-container">
                 <div class="search-chat-container">
-                    <input type="text" name="inputSearch" id="inputSearch" placeholder="가게 이름">
-                    <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <i id="searchBtn" class="fa-solid fa-magnifying-glass"></i>
+                    <input th:if="${session.loginMember.memberCode==1}" type="text" name="inputSearch" id="inputSearch" placeholder="가게 이름">
+                    <input th:if="${session.loginMember.memberCode==2}" type="text" name="inputSearch" id="inputSearch" placeholder="회원 닉네임">
+                    <input th:if="${session.loginMember.memberCode==3}" type="text" name="inputSearch" id="inputSearch" placeholder="가게 이름/회원 닉네임">
                 </div>
                 
                 <!-- 채팅방 리스트 -->  
