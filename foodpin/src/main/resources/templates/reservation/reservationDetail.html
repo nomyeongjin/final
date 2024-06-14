@@ -247,7 +247,19 @@
         const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원"
         const storeNo = /*[[${storeNo}]]*/ "사업자등록번호"
         const storeMaxTable = /*[[${store.storeMaxTable}]]*/ "최대 예약 팀 수(테이블)"
-       
+
+        document.addEventListener("DOMContentLoaded", () => {
+            let targetElement = document.querySelector(".nav-list");
+
+            if (targetElement) {
+                const scrollPosition = targetElement.offsetTop;
+                window.scrollTo({
+                    top: scrollPosition - 150, /* 스크롤 됐을 때 위에서 작성한 위치 만큼 떨어진 위치에서 보여줌 */
+                    behavior: 'smooth'
+                });
+            }
+        })
+    
     </script>
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>

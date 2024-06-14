@@ -338,7 +338,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 					report.getStoreName(), notification.getReportDate());
 			urlForMember = "/myPage/member/memberReview";
 
-			notiCode = 4;
+			notiCode = 6;
 
 //				memberNotification = Notification.builder()
 //						.receiveMemberNo(reviewMemerNo)
