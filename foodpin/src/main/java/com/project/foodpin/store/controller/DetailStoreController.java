@@ -168,7 +168,6 @@ public class DetailStoreController {
 		return "store/hashSearch"; 
 	}
 	
-	
 	@ResponseBody
 	@PostMapping("addHash")
 	public Map<String, Object> addHash(@RequestBody Map<String, List<Hash>> map) {
@@ -200,6 +199,20 @@ public class DetailStoreController {
 	    
 	    return result;
 	}
+	
+	/** 가게 영업시간, 휴무일, 브레이크타임 조회
+	 * @param storeNo
+	 * @return
+	 */
+	@GetMapping("storeOpen")
+	@ResponseBody
+	public Map<String, Object> storeOpen(@RequestParam("storeNo") String storeNo) {
+		
+		return service.storeOpen(storeNo);
+	}
+	
+	
+
 	
 
 	

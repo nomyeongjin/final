@@ -120,6 +120,19 @@ public interface DetailStoreMapper {
 	 */
 	List<Hash> hashTitleList(List<Hash> hashNoList);
 
+	
+	/** 가게 영업시간, 휴무일, 브레이크타임 조회
+	 * @param storeNo
+	 * @return
+	 */
+	Store storeOpen(String storeNo);
+
+	/** 고정 휴무일 조회
+	 * @param storeNo
+	 * @return 
+	 */
+	List<String> selectWeekOff(String storeNo);
+
 
 
 
@@ -131,7 +144,7 @@ public interface DetailStoreMapper {
 	
 	/*
 		*//**
-			 * 가게 휴무일
+			 * 가게 휴무일 
 			 * 
 			 * @param storeNo
 			 * @return
@@ -139,5 +152,12 @@ public interface DetailStoreMapper {
 				 * List<Off> storeOffList(String storeNo);
 				 * 
 				 */
+	
+	
+	
+	
+	
+	
+	
 
 }

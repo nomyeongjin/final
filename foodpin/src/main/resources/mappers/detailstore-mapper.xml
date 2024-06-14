@@ -319,7 +319,6 @@
 		WHERE HASH_NO = #{hashNo}
 	</select>
 
-
 	<select id="addHash" parameterType="list">
 		SELECT
 		    STORE_WITH_HASH_COUNT.STORE_NO, STORE_NAME, STORE_LOCATION, OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START,
@@ -362,6 +361,18 @@
 			<foreach collection="list" item="hash" open="(" close=")" separator=" , ">
 		    	#{hash.hashNo}
 		    </foreach>
+	</select>
+	
+		<!-- 가게 영업시간, 휴무일, 브레이크타임 조회 -->
+	<select id="storeOpen">
+		SELECT OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END
+		FROM "STORE"
+		WHERE STORE_NO = #{storeNo}
+	</select>
+	
+	<!-- 고정 휴무일 조회 -->
+	<select id="selectWeekOff">
+		SELECT OFF_WEEK FROM "OFF_WEEK" WHERE STORE_NO = #{storeNo}
 	</select>
 
    
