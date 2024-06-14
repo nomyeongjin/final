@@ -14,18 +14,31 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
+    // 알림 아이콘 클릭 시 팝업 껐다 켰다
     const notificationBellBtn = document.querySelector(".notification-bell-btn");
-
-    if (notificationBellBtn != null) {
-
-        notificationBellBtn.addEventListener("click", () => {
-            const notificationList = document.querySelector(".box-content");
-
+    const notificationList = document.querySelector(".box-content");
+    
+    if (notificationBellBtn != null && notificationList != null) {
+    
+        notificationBellBtn.addEventListener("click", (event) => {
             notificationList.classList.toggle("notification-show");
             notificationBellBtn.classList.toggle("action");
-
+            event.stopPropagation();
         });
-    };
+    
+        window.addEventListener("click", () => {
+            if (notificationList.classList.contains("notification-show")) {
+                notificationList.classList.remove("notification-show");
+                notificationBellBtn.classList.remove("action");
+            }
+        });
+    
+        notificationList.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+    }
+
+
 
     // 알림 카테고리 클릭 시 색상 변환
     const category = document.querySelectorAll(".category");
@@ -42,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 });
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 let chattingSock;
@@ -331,8 +345,6 @@ document.addEventListener("DOMContentLoaded", () => {
         
     })
 
-
-
     notificationBtn.addEventListener("click", e => {
         const notiList = document.querySelector(".notification-list");
 
@@ -343,6 +355,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
         selectnNotificationFn();
         notiList.classList.add("notification-show");
-
     })
 })

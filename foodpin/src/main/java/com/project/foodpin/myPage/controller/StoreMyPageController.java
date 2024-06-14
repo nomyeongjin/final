@@ -613,6 +613,21 @@ public class StoreMyPageController {
 		return response.toString();
 	}
 	
+	// 예약 노쇼 문자 발송
+	@ResponseBody
+	@PostMapping("sendNoshow")
+	public String sendNoshow(@RequestBody Reservation reservation) {
+		Message message = new Message();
+		
+		message.setFrom("01026624515");
+		message.setTo(reservation.getMemberTel());
+		message.setText("[FOODPIN]\n" + "["+reservation.getStoreName()+"] " + reservation.getReservDate() + "에 예약 하셨으나 당일 연락 안되어 노쇼처리 되었습니다.");
+		
+		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+		
+		return response.toString();
+	}
+	
 	
 	
 	
