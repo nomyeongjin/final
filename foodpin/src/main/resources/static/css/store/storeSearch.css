@@ -536,7 +536,7 @@ font-size: 12px;
 }
 
 /* 주소 */
-#detailLoc::before{
+.detailLoc::before{
 
    font-family:FontAwesome;
    content:"\f3c5";
@@ -566,10 +566,9 @@ font-size: 12px;
 
 .detailLoc{
    position: relative;
-   width: 100%;
    overflow: hidden;
    display: flex;
-   flex-direction: column;
+   align-items: center;
    color: rgb(66, 66, 66);
 }
 
@@ -637,10 +636,16 @@ font-size: 12px;
 
 .searchstore-storeList{
    margin-bottom: 15px;
+  
 }
 
 
-
+/* 가게 지역 선택 */
+.search-region{
+  
+   margin-left: 20px;
+   margin-bottom: 10px;
+}
 
 /* 새로고침 버튼 */
 
@@ -660,8 +665,18 @@ font-size: 12px;
  
 }
 
+/* 마커 오버레이*/
+#smn{
+   display: flex;
+   justify-content: center;
+   text-align: center;
+   color:#363f75;
+}
+
 /* 가게 조회 순서 */
 .storelist-typeBtnbox{
+   display: flex;
+   justify-content: flex-end;
    height: 30px;
    border-bottom: 1px solid var(--main-color);
    margin: 0px 20px 10px 10px;

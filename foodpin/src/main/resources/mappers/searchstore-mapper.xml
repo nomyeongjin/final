@@ -80,28 +80,29 @@
 	 OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END, STORE_CLOSED, STORE_IMG, 
 	 
 	
-	 (SELECT COUNT(*) 
+	   (SELECT COUNT(*) 
        FROM "REVIEW"
-       WHERE STORE_NAME LIKE '%'|| #{mainSearch}||'%' 
+       WHERE STORE_NO = #{storeNo}
       AND REVIEW_DEL_FL = 'N') REVIEW_COUNT,
-	 
-	 
-	 (SELECT COUNT(*) 
-	 FROM "BOOKMARK" 
-	 WHERE STORE_NAME LIKE '%'|| #{mainSearch}||'%') LIKE_COUNT, 
-	 
-	 (SELECT ROUND(AVG(REVIEW_RATING), 1) 
-	 FROM REVIEW 
-	 WHERE STORE_NAME LIKE '%'|| #{mainSearch}||'%' 
-	 AND 
-	 REVIEW_DEL_FL = 'N') TOTAL_RATING
-	
-	
-	 <if test="memberNo!=null">
-	 , (SELECT COUNT(*)
-	 FROM "BOOKMARK" WHERE MEMBER_NO = #{memberNo}
-	  AND STORE_NAME LIKE '%'|| #{mainSearch}||'%') BOOKMARK 
-	  </if>
+
+
+       	(SELECT COUNT(*) 
+		 FROM "BOOKMARK"
+		 WHERE STORE_NO = #{storeNo}) LIKE_COUNT,
+		 
+
+	     (SELECT ROUND(AVG(REVIEW_RATING), 1)
+		  FROM REVIEW
+		  WHERE STORE_NO =#{storeNo}
+		  AND REVIEW_DEL_FL = 'N') TOTAL_RATING
+		 
+		 <if test="memberNo!=null">
+		 
+		 , (SELECT COUNT(*)FROM "BOOKMARK"
+	    WHERE MEMBER_NO = #{memberNo}
+	    AND STORE_NO =#{storeNo}) BOOKMARK
+	    </if>
+		  
 	  
 	FROM "STORE" 
 	JOIN "STORE_CATEGORY" USING (STORE_NO) 

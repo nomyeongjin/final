@@ -117,6 +117,10 @@ public class SearchStoreController {
 			store.setPostcode(arr[0]);
 			store.setAddress(arr[1]);
 			store.setDetailAddress(arr[2]);
+			
+			String storeNo = store.getStoreNo();
+			List<StoreCategory> searchStoreCategoryList = service.searchStoreCategoryList(storeNo);
+			store.setSearchStoreCategoryList(searchStoreCategoryList);
 		}
 
 		model.addAttribute("storeAllList", storeAllList);
@@ -169,8 +173,7 @@ public class SearchStoreController {
 	            List<StoreCategory> searchStoreCategoryList = service.searchStoreCategoryList(storeNo);
 	            store.setSearchStoreCategoryList(searchStoreCategoryList);
 
-	            List<ReviewHash> searchStoreHashList = service.searchStoreHashList(storeNo);
-	            store.setSearchStoreHashList(searchStoreHashList);
+
 	        }
 
 	        Map<String, Object> result = new HashMap<>();
@@ -181,26 +184,52 @@ public class SearchStoreController {
 	  
 	  
 	  
+	  // 비동기로 가게 검색
+	  @ResponseBody
+	  @GetMapping("search")
+		public  Map<String, Object> searchStoreList(
+				@SessionAttribute(value = "loginMember", required = false) Member loginMember, Model model,
+				@RequestParam("searchStoreR") String mainSearch,
+				RedirectAttributes ra) {
+
+			Map<String, Object> map = new HashMap<>();
+
+			if (loginMember != null) {
+				int memberNo = loginMember.getMemberNo();
+				map.put("memberNo", memberNo);
+			}
+
+			map.put("mainSearch", mainSearch);
+
+
+			List<Store> storeAllList = service.mainStoreList(map);
+			List<Category> searchCategory = service.selectSearchCategory();
+
+			for (Store store : storeAllList) {
+				String storeLocation = store.getStoreLocation();
+
+				String[] arr = storeLocation.split("\\^\\^\\^");
+
+				store.setPostcode(arr[0]);
+				store.setAddress(arr[1]);
+				store.setDetailAddress(arr[2]);
+				
+				String storeNo = store.getStoreNo();
+				List<StoreCategory> searchStoreCategoryList = service.searchStoreCategoryList(storeNo);
+				store.setSearchStoreCategoryList(searchStoreCategoryList);
+			}
+
+
+			
+	        Map<String, Object> result = new HashMap<>();
+	        result.put("storeAllList", storeAllList);
+
+	        return result;
+
+		}
+	  
 	  
 	  
 
-	
-	
-
-	/*	*//**
-			 * 가게 찜
-			 * 
-			 * @param map
-			 * @return count
-			 *//*
-				 * @ResponseBody
-				 * 
-				 * @PostMapping("searchLike") public int storeLike(@RequestBody Map<String,
-				 * Object> map) {
-				 * 
-				 * return service.storeLike(map);
-				 * 
-				 * }
-				 */
 
 }
