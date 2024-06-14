@@ -29,6 +29,13 @@
     flex-direction: column;
 }
 
+.recent-message-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
 .room-list{
     width: 300px;
     height: 95%;
