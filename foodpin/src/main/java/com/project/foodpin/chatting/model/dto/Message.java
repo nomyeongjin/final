@@ -22,5 +22,4 @@ public class Message {
     private String storeImg;
     private String memberNickname;
 	private String profileImg;
-    
 }
