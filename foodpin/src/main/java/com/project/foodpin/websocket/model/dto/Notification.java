@@ -38,4 +38,6 @@ public class Notification {
 	private String memberNickname;
 	
 	private String reportDate;
+	
+	private String memberCode;
 }

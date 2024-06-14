@@ -182,7 +182,7 @@
 }
 
 .review-count{
-    color: var(--border-color);
+    color: var( --submit-color);
 }
 
 

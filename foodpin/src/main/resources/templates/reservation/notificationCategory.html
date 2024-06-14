@@ -2,56 +2,56 @@
 
     <ul class="all-list" th:if="${session.loginMember?.memberCode==1}">
         <li class="all">
-            <a href="#" class="category">전체</a>
+            <a href="#" class="category" id="memberNotiCode">전체</a>
         </li>
 
         <li class="all">
-            <a href="#" class="category">예약 승인</a>
+            <a href="#" class="category" id="memberNotiCode1">예약 승인</a>
         </li>
 
         <li class="all">
-            <a href="#" class="category">예약 거절</a>
+            <a href="#" class="category" id="memberNotiCode2">예약 거절</a>
         </li>
 
         <li class="all">
-            <a href="#" class="category">리뷰 신고</a>
+            <a href="#" class="category" id="memberNotiCode6">리뷰 신고</a>
         </li>
     </ul>
 
     <ul class="all-list" th:if="${session.loginMember?.memberCode==2}">
         <li class="all">
-            <a href="#" class="category">전체</a>
+            <a href="#" class="category" id="storeNotiCode">전체</a>
         </li>
 
         <li class="all">
-            <a href="#" class="category">예약 취소</a>
+            <a href="#" class="category" id="storeNotiCode3">예약 요청</a>
         </li>
 
         <li class="all">
-            <a href="#" class="category">리뷰</a>
+            <a href="#" class="category" id="storeNotiCode4">예약 취소</a>
+        </li>
+
+        <li class="all">
+            <a href="#" class="category" id="storeNotiCode5">리뷰</a>
         </li>
         
         <li class="all">
-            <a href="#" class="category">리뷰 신고</a>
-        </li>
-
-        <li class="all">
-            <a href="#" class="category">가게 신고</a>
+            <a href="#" class="category" id="storeNotiCode6">리뷰 신고</a>
         </li>
 
     </ul>
     
     <ul class="all-list" th:if="${session.loginMember?.memberCode==3}">
         <li class="all">
-            <a href="#" class="category">전체</a>
+            <a href="#" class="category" id="adminNotiCode">전체</a>
         </li>
 
         <li class="all">
-            <a href="#" class="category">리뷰 신고</a>
+            <a href="#" class="category" id="adminNotiCode6">리뷰 신고</a>
         </li>
         
         <li class="all">
-            <a href="#" class="category">가게 신고</a>
+            <a href="#" class="category" id="adminNotiCode7">가게 신고</a>
         </li>
     </ul>
 
