@@ -4,7 +4,6 @@
 
 	<!-- 리뷰 조회 resultMap -->
 	<resultMap type="Review" id="review_rm">
-
 	
 		<id property="reviewNo" column="REVIEW_NO"/>
 		
@@ -69,7 +68,6 @@
 			#{visitTel}
 	)
 	</insert>
-	
 	
 	<!-- 예약하려는 날짜의 예약 건수 조회 -->
 	<select id="confirmReservDate">

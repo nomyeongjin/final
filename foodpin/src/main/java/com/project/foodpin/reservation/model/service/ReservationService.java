@@ -18,9 +18,6 @@ public interface ReservationService {
 	// 예약 저장
 	int insertReservation(Map<String, Object> map);
 
-	// 예약 가능 상태 변경
-//	int updateStoreStatus(Store store);
-
 	// 가게 이름 조회
 	String selectStoreName(Store store);
 
@@ -35,7 +32,6 @@ public interface ReservationService {
 
 	// 가게 리뷰 개수 조회
 	int reviewCount(String storeNo);
-
 
 	
 }

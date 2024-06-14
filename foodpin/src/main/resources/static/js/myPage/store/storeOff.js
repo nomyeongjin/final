@@ -315,7 +315,15 @@ const createPopup = (info) => {
    /**
     * (버튼) 취소 - 팝업창
     */
-   cancelBtn.addEventListener("click", () => {popupFrm.classList.add("blind");})
+   cancelBtn.addEventListener("click", () => {
+      
+
+      popupFrm.remove();
+   })
+
+   window.addEventListener("click", () => {
+      popupFrm.remove();
+   })
 
    // 팝업창 외 다른 클릭 이벤트 방지
 };
@@ -532,6 +540,15 @@ const updatePopup = (info) => {
          }
       }).catch( err => console.log(err));
    });
+
+   cancelBtn.addEventListener("click", () => {
+
+      popupFrm.remove();
+   })
+
+   window.addEventListener("click", () => {
+      popupFrm.remove();
+   })
 
 }
 

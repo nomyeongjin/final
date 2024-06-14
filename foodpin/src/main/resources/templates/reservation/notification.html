@@ -1,6 +1,7 @@
-<div class="notification-area" id="notificationArea" >
-    
-    <button type="button" id="myNotification" class="notification-bell-btn fa-regular fa-bell" th:if="${session.loginMember}">
+<div class="notification-area" id="notificationArea">
+
+    <button type="button" id="myNotification" class="notification-bell-btn fa-regular fa-bell"
+        th:if="${session.loginMember}">
         <span id="notificationCount" class="none"></span> <!-- 안읽은 알림 개수 -->
     </button>
 
@@ -12,7 +13,7 @@
         </div>
 
         <!-- memberCode == 1 -->
-        <div class="notification-view">   
+        <div class="notification-view">
 
             <div class="pre-notification">
                 <p class="title">이전 알림</p>
@@ -24,53 +25,42 @@
             <!-- notiList -->
             <div class="notification-list">
 
-                <!-- notoItem -->
-                <!-- <div class="notification-item"> -->
+                <!-- border -->
+                <!-- 반복 -->
+                <div class="border">
 
-                    <!-- notiText -->
-                    <!-- <div class="notification-text"> -->
+                    <!-- contentContainer -->
+                    <div class="notification-content-container">
 
-                        <!-- border -->
-                        <!-- 반복 -->
-                        <div class="border">
+                        <!-- reservationInfo -->
+                        <div class="reservation-info">
 
-                            <!-- contentContainer -->
-                            <div class="notification-content-container"> 
-                                
-                                <!-- reservationInfo -->
-                                <div class="reservation-info">
-                                    
-                                    <!-- storeLogo -->
-                                    <img src="#" alt="가게로고" class="image" id="image" name="storeLogo">
-                                    
-                                    <!-- notiTitle -->
-                                    <span class="notification-store" name="storeName">가게이름, 관리자 </span>
-                                    
-                                    <!-- notiDate -->
-                                    <span class="notification-date" id="notificationDate" name="notificationDate">5분전</span>
+                            <!-- storeLogo -->
+                            <img src="#" alt="가게로고" class="image" id="image" name="storeLogo">
 
-                                    <!-- xmark -->
-                                    <i class="fa-regular fa-circle-xmark"></i>
-                                </div>
+                            <!-- notiTitle -->
+                            <span class="notification-store" name="storeName">가게이름, 관리자 </span>
 
-                                <!-- notiContent -->
-                                <div class="notification-content">
+                            <!-- notiDate -->
+                            <span class="notification-date" id="notificationDate" name="notificationDate">5분전</span>
 
-                                    <!-- notiMessage -->
-                                    <div class="notification-message">
+                            <!-- xmark -->
+                            <i class="fa-regular fa-circle-xmark"></i>
+                        </div>
 
-                                        <!-- reserDate -->
-                                        <!-- <b>5.13.(목) 오후 06:00</b>
+                        <!-- notiContent -->
+                        <div class="notification-content">
 
-                                        예약이 확정되지 않았습니다. -->
+                            <!-- notiMessage -->
+                            <div class="notification-message">
 
-                                    </div>
-                                    
-                                </div>
                             </div>
-                        
-                       </div>
-                    <!-- </div> -->
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- </div> -->
 
                 <!-- </div> -->
             </div>
@@ -78,5 +68,5 @@
         </div>
 
     </div>
-    
+
 </div>

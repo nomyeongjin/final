@@ -27,7 +27,6 @@
 		BY NOTIFICATION_NO DESC
 	</select>
 	
-	
 	<!-- 알림 보낼 때 필요한 데이터 조회 -->
 	<select id="selectStoreData">
 		SELECT S.MEMBER_NO, TO_CHAR(R.RESERV_DATE, 'YYYY-MM-DD') "RESERV_DATE", S.STORE_NO , S.STORE_NAME, M.MEMBER_NICKNAME
@@ -36,7 +35,6 @@
 		JOIN "STORE" S ON R.STORE_NO = S.STORE_NO
 		WHERE R.RESERV_NO = #{reservNo}
 	</select>
-	
 
 	<select id="selectStoreName">
 		SELECT STORE_NO, STORE_NAME
@@ -44,14 +42,6 @@
 		WHERE STORE_NO = #{storeNo}
 	</select>	
 
-	<!-- 알림 추가 -->
-<!-- 	<insert id="insertNotification">
-		INSERT INTO "NOTIFICATION" VALUES(
-			SEQ_NOTI_NO.NEXTVAL, #{notificationContent}, DEFAULT, DEFAULT,
-			#{notificationUrl}, #{sendMemberProfileImg}, #{sendMemberNo},
-			#{receiveMemberNo})
-	</insert> -->
-	
 	<!-- 읽지 않은 알림 조회 -->
 	<select id="notReadCheck">
 		SELECT COUNT(*) 
@@ -183,11 +173,6 @@
 		JOIN "STORE" S ON (R.STORE_NO = S.STORE_NO)
 		WHERE REQUEST_NO = #{requestNo}
 	</select>
-	
-	<!-- 가게 정보 요청 처리에 필요한 회원 번호 -->
-<!-- 	<select id="selectMemberNo">
-		
-	</select> -->
 	
 	<select id="selectReivewNo">
 			SELECT V.MEMBER_NO 

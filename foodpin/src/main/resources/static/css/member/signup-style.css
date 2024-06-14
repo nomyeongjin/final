@@ -21,6 +21,11 @@
       
   }
 
+  .required-box{
+    display: flex;
+    font-size: 0.9em;
+  }
+
   .form-section{
     display: flex;
       flex-direction: column;
@@ -52,7 +57,7 @@
     
     /* 필수 작성 */
     .required:first-child{
-      color: rgb(255, 48, 48);
+      color: rgb(255, 48, 48) !important;
     }
   
     .required:last-child{
