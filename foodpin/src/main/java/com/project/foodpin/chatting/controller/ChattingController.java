@@ -179,6 +179,24 @@ public class ChattingController {
 		return service.notReadChattingCount(memberNo);
 	}
     
+    
+ // 채팅 상대 검색
+    @GetMapping(value="selectTarget", produces="application/json; charset=UTF-8")
+    @ResponseBody
+    public List<ChattingRoom> selectTarget(
+    		@RequestParam("query") String query, 
+    		@SessionAttribute("loginMember") Member loginMember){
+    	Map<String, Object> map = new HashMap<>();
+    	map.put("memberNo", loginMember.getMemberNo());
+    	map.put("query", query);
+    	
+    	return service.selectTarget(map);
+    	
+    	
+    	
+    	
+    }
+    
 	
 	
 }

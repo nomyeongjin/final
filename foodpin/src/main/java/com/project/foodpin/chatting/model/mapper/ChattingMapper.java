@@ -24,7 +24,7 @@ public interface ChattingMapper {
 
     public List<Message> selectMessageList(int chattingNo);
 
-	public List<Member> selectTarget(Map<String, Object> map);
+	public List<ChattingRoom> selectTarget(Map<String, Object> map);
 
 	public int checkAskChattingNo(Map<String, Object> map);
 
