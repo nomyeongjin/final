@@ -72,7 +72,7 @@ form[name='member-myPageFrm']{
     margin-top: 30px;
   
     color: white;
-    background-color: #2B3151;
+    background-color: var(--main-color);
     cursor: pointer;
 }
 
@@ -174,7 +174,7 @@ form[name='member-myPageFrm']{
     font-size: 20px;
   
     color: white;
-    background-color: #2B3151;
+    background-color: var(--main-color);
     cursor: pointer;
 }
 

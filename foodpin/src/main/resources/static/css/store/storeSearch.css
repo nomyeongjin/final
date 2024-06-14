@@ -374,14 +374,18 @@ i{
 .searchCat-btn{
    margin: 5px;
    cursor: pointer;
-   width: 70px;
-   height: 25px;
+   width: 90px;
+   height: 40px;
+   font-size: 14px;
    border-radius: 15px;
-   font-size: 10px;
    border: 1px solid var(--main-color);
-
+   background-color: white;
 }
 
+.searchCat-btn:hover {
+   border: 1px solid rgb(252, 57, 57);
+   color: rgb(252, 57, 57);
+}
 
 /* 가게 검색 페이지 찜 */
 
