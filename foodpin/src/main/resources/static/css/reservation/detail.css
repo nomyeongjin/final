@@ -121,7 +121,7 @@
 .info-content {
     font-size: 16px;
     width: 500px;
-    height: 100px;
+    /* height: 100px; */
     margin-bottom: 20px;
 }
 
@@ -182,7 +182,7 @@
 }
 
 .review-count{
-    color: var(--border-color);
+    color: var( --submit-color);
 }
 
 

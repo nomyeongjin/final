@@ -858,6 +858,7 @@ header>section:nth-child(3) {
    background-color: white;
    border-radius: 10px;
    margin-bottom: 10px;
+   cursor: pointer;
 }
 
 .reservation-info{
@@ -899,9 +900,6 @@ header>section:nth-child(3) {
 }
 
 .notification-content-container>.notification-content>.notification-message{
-   display: flex;
-   align-items: center;
-   justify-content: center;
    color: #717171;
 }
 
@@ -917,7 +915,7 @@ header>section:nth-child(3) {
    font-size: 20px;
    display: flex;
    position: absolute;
-   right: 20px;
+   right: 30px;
 }
 
 #chat{

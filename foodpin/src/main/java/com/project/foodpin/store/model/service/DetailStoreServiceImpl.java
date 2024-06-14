@@ -144,9 +144,45 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 		return mapper.hashTitle(hashNo);
 	}
 
+	// 가게 해시태그 추가
+	@Override
+	public List<Store> addHash(List<Hash> hashList) {
+		
+		List<Hash> hashNoList = new ArrayList<>();
+		for(int i = 0; i < hashList.size(); i++) {
+			if(!hashList.isEmpty()) {
+				
+				Hash hash = Hash.builder()
+						.hashNo(hashList.get(i).getHashNo())
+						.build();
+				hashNoList.add(hash);
+			}
+		}
+		if(hashList.isEmpty()) return null;
+		
+		
+		return mapper.addHash(hashNoList);
+	}
 
-
-
+	// 해시태그 추가(해시태그 타이틀
+	@Override
+	public List<Hash> hashTitle(List<Hash> hashList) {
+		List<Hash> hashNoList = new ArrayList<>();
+		for(int i = 0; i < hashList.size(); i++) {
+			if(!hashList.isEmpty()) {
+				
+				Hash hash = Hash.builder()
+						.hashNo(hashList.get(i).getHashNo())
+						.build();
+				hashNoList.add(hash);
+			}
+		}
+		if(hashList.isEmpty()) return null;
+		
+		
+		return mapper.hashTitleList(hashNoList);
+	}
+	
 
 	
 	

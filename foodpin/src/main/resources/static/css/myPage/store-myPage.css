@@ -961,7 +961,7 @@
 
 .storereview-top{
    padding: 24px 0;
-   border-bottom: 1px solid rgb(204, 204, 204);
+   /* border-bottom: 1px solid rgb(204, 204, 204); */
    display: flex;
    justify-content: space-between;
 }
@@ -1006,7 +1006,6 @@
    justify-content: center;
    width: 72px;
    height: 51px;
-   
 }
 
 .review-btn > button{
@@ -1032,6 +1031,7 @@
    width: 100%;
    overflow: auto;
    padding: 25px;
+   font-size: 17px;
 }
 
 .storereview-bottom{
@@ -1046,10 +1046,13 @@
    
    width: 100px;
    height: 25px;
-   
+   font-size: 15px;
+   font-style: italic;
+   background-color: rgb(240, 196, 52);
    text-align: center;
-   border: 1px solid rgb(204, 204, 204);
-   border-radius:24px;
+   font-weight: bold;
+   /* border: 1px solid var(--submit-color); */
+   /* border-radius:24px; */
    margin: 10px 0;
 }
 
@@ -1060,14 +1063,17 @@
    border-radius: 5px;
 }
 
-.review-hashtag{
-   margin: 18px 0;
+.review-hashtag span{
+   margin: 18px 5px 0 0;
+   color: var(--border-color);
 }
+
 
 .store-reply{
    padding: 0 25px;
+   padding-top: 7px;
    display: flex;
-   margin: 30px 0;
+   border-top: 1px solid var(--submit-color);
    margin-bottom: 0px;
    justify-content: center;
    align-items: center;
@@ -1085,17 +1091,17 @@
    position:relative;
    margin: 20px 0px;
    margin-bottom: 10px;
-   margin-left: 13px;
+   margin-left: 15px;
    padding: 20px;
    width: 480px;
-   background:#666;
-   color: #fff;
+   background: #EFEFCB;
+   color: black;
    border-radius: 10px;
-   border: 2px solid #666;
+   border: none;
 }
 
 .reply-content-bubble:after {
-   border-top:15px solid #666;
+   border-top:15px solid var(--border-color);
    border-left: 16px solid transparent;
    border-right: 0px solid transparent;
    border-bottom: 0px solid transparent;
@@ -1117,7 +1123,7 @@
    width: 300px;
    height: 35px;
    margin-bottom: 20px;
-   font-size: 15px;
+   font-size: 13px;
    color: rgb(46, 41, 41);
    background-color: white;
 }
@@ -1133,7 +1139,7 @@
 
 .review{
    width: 600px;
-   border: 1px solid rgb(204, 204, 204);
+   border: 1px solid var(--submit-color);
    border-radius: 15px;
    padding: 24px;
    padding-top: 12px;
@@ -1204,15 +1210,24 @@
    cursor: pointer;
    margin-left: 15px;
    margin-top: 3px;
-   border: 1px solid var(--main-color);
    border-radius: 7px;
    width: 75px;
-   height: 25px;
-   font-size: 15px;
-   color: rgb(46, 41, 41);
-   background-color: white;
+   height: 30px;
+   font-size: 13px;
 }
 
+.replyDeleteBtn {
+   background-color: var(--submit-color);
+   color: white;
+   border: none;
+}
+
+.replyUpdateBtn {
+   /* background-color: var(--main-font-color) !important; */
+   border: 1px solid var(--main-color);
+   background-color: white;
+   color: var(--main-color);
+}
 .review-count{
    margin-bottom: 15px;
    width: 100%;
