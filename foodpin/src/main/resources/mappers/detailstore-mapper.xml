@@ -319,8 +319,21 @@
 		WHERE HASH_NO = #{hashNo}
 	</select>
 
+	<!-- 가게 영업시간, 휴무일, 브레이크타임 조회 -->
+	<select id="storeOpen">
+		SELECT OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END
+		FROM "STORE"
+		WHERE STORE_NO = #{storeNo}
+	</select>
+	
+	<!-- 고정 휴무일 조회 -->
+	<select id="selectWeekOff">
+		SELECT OFF_WEEK FROM "OFF_WEEK" WHERE STORE_NO = #{storeNo}
+	</select>
 
 
+
+	
    
 
 

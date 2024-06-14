@@ -61,6 +61,14 @@ public interface DetailStoreService {
 	Hash hashTitle(String hashNo);
 
 
+	/** 가게 영업시간, 휴무일, 브레이크타임 조회
+	 * @param storeNo
+	 * @return
+	 * @throws Exception 
+	 */
+	Map<String, Object> storeOpen(String storeNo);
+
+
 
 
 

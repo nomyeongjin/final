@@ -2,6 +2,7 @@ package com.project.foodpin.store.model.service;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import com.project.foodpin.review.model.dto.ReviewHash;
 import com.project.foodpin.store.model.dto.Store;
 import com.project.foodpin.store.model.mapper.DetailStoreMapper;
 
+import kotlin.jvm.Throws;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -142,6 +144,35 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 	@Override
 	public Hash hashTitle(String hashNo) {
 		return mapper.hashTitle(hashNo);
+	}
+
+
+	// 가게 영업시간, 휴무일, 브레이크타임 조회
+	@Override
+	public Map<String, Object> storeOpen(String storeNo) {
+		
+		String offWeek = "";
+		
+		// 영업시간, 브레이크타임 조회
+		Store openBreak = mapper.storeOpen(storeNo); 
+		
+		// 고정 휴무일 조회
+		List<String> offWeekList = mapper.selectWeekOff(storeNo); 
+		
+		for (String off : offWeekList) { // 고정 휴무(요일) 구분자 넣어서 String 형태로 전달 
+			offWeek += off + "/";
+		}
+		
+		
+		
+		
+//		List<Off> offWeekList = mapper.selectWeekOff(storeNo); // 고정 휴무일 조회
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("openBreak", openBreak);
+		map.put("offWeek", offWeek);
+		
+		return map;
 	}
 
 
