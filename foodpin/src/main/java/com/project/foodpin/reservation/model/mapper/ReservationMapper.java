@@ -24,9 +24,6 @@ public interface ReservationMapper {
 	// 예약하려는 날짜의 예약 건수 조회
 	List<Reservation> confirmReservDate(Reservation reservation);
 
-	// 예약 가능 상태 변경
-//	int updateStoreStatus(Store store);
-
 	// 가게 이름 조회
 	String selectStoreName(Store store);
 

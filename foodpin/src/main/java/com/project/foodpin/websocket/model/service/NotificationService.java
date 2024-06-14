@@ -62,9 +62,6 @@ public interface NotificationService {
 	// 회원이 방문 리뷰 작성할 때 필요안 데이터 조회
 	Reservation selectReservationData(String pkNo);
 
-	// 가게 회원 번호
-//	int selectStoreMemberNo(int i);
-
 	// 리뷰 신고를 위한 데이터 조회
 	Review selectReivewReportData(String pkNo);
 

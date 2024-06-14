@@ -34,11 +34,6 @@
                     <div class="store-name-container">
                         <div class="store" th:text="${store.storeName}">가게이름</div>
                     </div>
-                    <!-- <div class="title-container">
-                                                    <i class="fa-regular fa-clock"></i>
-                                                    <h3 class="title">예약 안내</h3>
-                                                    </div>
-                                                    -->
             
                     <div class="content-container">
                         <i class="fa-solid fa-message"></i>
@@ -103,12 +98,6 @@
                             <th:block th:text="|가게 정보 준비중 입니다.|"></th:block>
                         </div>
                     </th:block>
-
-                    <!-- <div class="images">
-                        <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage" th:src="*{storeImg}">
-                        <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage" th:src="*{storeImg}">
-                        <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage" th:src="*{storeImg}">
-                    </div> -->
                 </div>
     
             </section>
@@ -153,7 +142,7 @@
                                         <ul class="contentUl">
                                             <li><strong>노쇼 발생 기준:</strong> 예약 후 아무런 통보 없이 예약 시간에 나타나지 않는 경우를 노쇼로 간주합니다.</li>
                                             <li><strong>노쇼 경고 알림:</strong> 노쇼가 발생할 경우 고객님께 경고 알림이 발송됩니다.</li>
-                                            <li><strong>계정 정지 조치:</strong> 노쇼가 누적 3회 발생 시, 해당 고객님의 계정이 정지됩니다.</li>
+                                            <li><strong>계정 정지 조치:</strong> 노쇼가 누적 3회 발생할 경우, 고객님의 계정이 정지되며 정지 안내 메시지가 발송됩니다.</li>
                                         </ul>
                                         
                                         <h2 class="titleH2">고객님께 드리는 당부 말씀</h2>

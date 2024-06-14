@@ -81,11 +81,6 @@ public class NotificationServiceImpl implements NotificationService{
 			return 0;
 		}
 	
-//	@Override
-//	public Store selectStoreName(int memberNo) {
-//		return mapper.selectStoreName(memberNo);
-//	}
-	
 	// 가게 이름 조회
 	@Override
 	public Store selectStoreName(String storeNo) {

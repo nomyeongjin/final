@@ -91,10 +91,6 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 		Report report = null;
 		handleNotification(notification, sendMember, store, review, reservation, report);
 
-//		log.info("전달 받은 내용 : {}", notification);
-//		if (notification.getNotificationContent() == null)
-//			return;
-
 		// /notification.send로 연결된 객체를 만든 클라리언트들(sessions)중
 		// 회원번호가 받는 회원 번호와 같은 사람에게 베시지 전달
 		for (WebSocketSession ws : sessions) {
@@ -176,10 +172,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 			store = service.selectStoreData(notification.getPkNo());
 			
 			// 보내는 사람 : 회원
-//			sendMember.setMemberNo(reservMemerNo);
-			
 			// 받는 사람 : 사장
-//			reservMemerNo = store.getMemberNo();
 			reservMemerNo = sendMember.getMemberNo();
 			
 
@@ -289,7 +282,6 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 
 			urlForMember = "/myPage/member/memberReview";
 
-//			notiCode = 0;
 			break;
 
 		/*
@@ -308,7 +300,6 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 					member.getMemberNickname(), notification.getReservDate());
 			urlForMember = "/myPage/member/reservation/cancelNoshow";
 
-//			notiCode = 0;
 			break;
 
 		// 예약 노쇼 알림(2회)
@@ -321,7 +312,6 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 					"<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다.<br>" + "경고 > 노쇼 누적 2회 (노쇼 3회 처리 시 계정이 정지 됩니다.)",
 					member.getMemberNickname(), notification.getReservDate());
 			urlForMember = "/myPage/member/reservation/cancelNoshow";
-//			notiCode = 0;
 			break;
 
 		// 리뷰 신고 ( 삭제 조치 )
@@ -331,7 +321,6 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 			report = service.selectReportData(notification.getPkNo());
 			reviewMemerNo = service.selectReviewNo(notification.getPkNo());
 
-//				store = service.selectStoreData(notification.getPkNo());
 			contentForMember = String.format(
 					"안녕하세요. 푸드핀 운영 관리자 입니다.<br>" + "<b>%s<b> <b>%s<b> 가게의 리뷰 신고 접수되어 <br>"
 							+ "확인 결과 해당 댓글은 부적절한 댓글로 삭제 조치 되었습니다.<br>" + "자세한 사항은 관리자에게 문의해 주세요.",
