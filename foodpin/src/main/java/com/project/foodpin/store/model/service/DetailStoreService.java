@@ -61,6 +61,20 @@ public interface DetailStoreService {
 	Hash hashTitle(String hashNo);
 
 
+	/** 가게 해시태그 추가
+	 * @param map
+	 * @return
+	 */
+	List<Store> addHash(List<Hash> hashList);
+
+
+	/** 가게 해시태그 추가 (해시태그 타이틀)
+	 * @param hashList
+	 * @return
+	 */
+	List<Hash> hashTitle(List<Hash> hashList);
+
+
 
 
 
