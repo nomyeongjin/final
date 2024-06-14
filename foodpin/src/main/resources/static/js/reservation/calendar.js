@@ -19,11 +19,8 @@ const selectTimeFn = async (reservDate) => {
     .then(resp => resp.json())
     .then(result => {
         
-        // console.log(result);
         const reservTimes = result.reservTimes;
         const confirmReservDate = result.confirmReservDate; // 시간별 예약 개수를 List로 조회한 결과
-        console.log(typeof(confirmReservDate));
-        console.log(confirmReservDate);
         
         const selectReservTime = confirmReservDate.length > 0 ? confirmReservDate[0].reservTime : null;
 
@@ -34,7 +31,6 @@ const selectTimeFn = async (reservDate) => {
 
             // item.counts를 숫자로 변환하여 비교
             const counts = Number(item.counts);
-            console.log("counts : ", counts);
 
             // storeMaxTable이 0이라면 return
             if (storeMaxTable === 0) return;
@@ -57,7 +53,6 @@ const selectTimeFn = async (reservDate) => {
 
         let openHour = reservTimes.openHour; // 오픈시간
         let closeHour = reservTimes.closeHour; // 마감시간
-        // console.log("opeenHour : ", openHour, "closeHour : ", closeHour);
 
         // 시간 문자열을 다음 정각으로 변환
         const roundUpToNextHour = (timeString) => {
@@ -84,10 +79,9 @@ const selectTimeFn = async (reservDate) => {
         } 
 
         // 만약 closeHour가 00:00이라면
-        if (closeHour == "00:00") {
+        if (closeHour >= "00:00") {
             let end = "22:00";
             closeHour = end;
-            console.log(closeHour);
             getTimeSplit(openHour, end, 30);
         }
 
@@ -98,8 +92,6 @@ const selectTimeFn = async (reservDate) => {
 
         // closeHour 보다 1시간 이전까지만 출력해야 함
         const hour = closeHour.split(":")[0]-1;
-        console.log(`${hour}:00`);
-
         const tempHour = `${hour}:00`;
         
         const times = getTimeSplit(openHour, tempHour, 30);
@@ -111,10 +103,6 @@ const selectTimeFn = async (reservDate) => {
         // ----- li 태그 생성 -----
         const timeList = document.querySelector(".time-list");
         timeList.innerText = "";
-
-        // console.log("filteredArray", filteredArray);
-        // console.log("fullTimeList", fullTimeList);
-
         
         // 브레이크 타임을 뺀 예약 가능 시간
         for (let i of filteredArray) {
@@ -123,7 +111,6 @@ const selectTimeFn = async (reservDate) => {
             timeItem.className = "time-item";
 
             timeItem.innerText = `${i}`;
-            // console.log(timeItem);
 
             const currentTime = new Date();
         
@@ -147,9 +134,6 @@ const selectTimeFn = async (reservDate) => {
             // 오전/오후 구분
             const isAM = selectedHours < 12 || (selectedHours === 12 && selectedMinutes === 0);
             const selectedTimeIsPast = selectedDateTime <= currentTime; // true = 오전, false = 오후
-
-            console.log(selectedTimeIsPast);
-            
 
             if (isToday && selectedTimeIsPast || fullTimeList.includes(i)) {
                
@@ -215,7 +199,6 @@ const selectTimeFn = async (reservDate) => {
                     // 시간
                     time.classList.add("select");
                     checkObj.reservTime = true;
-                    // console.log(time.innerText);
 
                 });
             }
@@ -230,7 +213,6 @@ const selectTimeFn = async (reservDate) => {
                     checkObj.reservTime = false;
                 }
             }
-            // console.log(checkObj);
 
         }
     })
@@ -246,9 +228,6 @@ const fixedOffWeek = async () => {
     });
 
     const offWeekList = await resp.json();
-
-    
-    console.log("offWeekList : ", offWeekList);
 
     offWeek = offWeekList.map(item => item.offWeek);
 
@@ -271,7 +250,6 @@ const fixedOffWeek = async () => {
                 const aTag = firstDivChild.querySelector("div > a");
                 
                 if (aTag) {
-                    // console.log(aTag);
                     aTag.classList.add("innerTextColor");
                 // 필요한 추가 작업을 여기에 작성합니다.
                 }
@@ -302,15 +280,10 @@ const fiexdOffDay = () => {
     })
     .then(resp => resp.json())
     .then(offDayList=> {
-        
-        console.log("offDayList : ", offDayList);
 
         offDayList.forEach(item => {
-            console.log(item);
         
             // 숫자를 두 자리로 포맷하는 함수
-        
-        
             // 날짜를 "YYYY년 MM월 DD일" 형식으로 변환하는 함수
             
             // 휴무 시작일("YYYY-MM-DD" 형식)
@@ -330,8 +303,6 @@ const fiexdOffDay = () => {
             dateArray.push(formatFullDate(startDate));
             startDate += 1000 * 60 * 60 * 24;
             }
-
-            console.log("dateArray :", dateArray);
         
             // td 요소를 반복해서 div 태그를 찾고 그 안에 있는 a 태그에 접근
 
@@ -347,13 +318,9 @@ const fiexdOffDay = () => {
                     if (aTag) {
                         const ariaLabel = aTag.getAttribute("aria-label") // a 태그의 aria-label 속성 값
 
-                        // console.log("a 태그 속성 :", ariaLabel);
-
-                        // dateArray의 배열에 ariableLabel 이 포함되어 있는지 (안되고 있음.. 왜???)
                         if (dateArray.includes(ariaLabel)) {
 
                             aTag.classList.add("day-off"); // 휴무일인 경우 off-day 클래스를 추가
-                            console.log(ariaLabel);
 
                             // a 태그의 가장 가까운 td 태그에 off-day 클래스 추가
                             const closestTd = aTag.closest("td");
@@ -400,10 +367,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             // 지정 휴무일인 경우 클릭X
             if(info.dayEl.classList.contains("day-off")) return;
             
-            // console.log(info);
-            console.log(info.dateStr);
-            // console.log(dayArr[info.date.getDay()]);
-            
             const selectDate = document.querySelector(".select-date");
 
             const month = info.dateStr.slice(5,7);
@@ -412,7 +375,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             // const date = month + "." + day + "(" + ")";
             const date = `${month}.${day}(${dayArr[info.date.getDay()]})`;
 
-            // console.log(date);
             selectDate.innerText = date;
 
             // 달력 날짜 클릭 시 bg 색상 변함
@@ -446,8 +408,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // 날짜 형식으로 수정한 오늘 날짜("YYYY-MM-DD")
     const nowDate = `${temp.getFullYear()}-${currentMonth}-${currentDay}`;
-    // console.log(nowDate);
-    // console.log(now);
     document.querySelector(".select-date").innerText = now;
 
     fiexdOffDay();

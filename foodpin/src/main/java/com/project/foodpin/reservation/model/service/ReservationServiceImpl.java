@@ -62,12 +62,6 @@ public class ReservationServiceImpl implements ReservationService{
 		return 0; 
 	}
 	
-	// 예약 가능 상태 변경
-//	@Override
-//	public int updateStoreStatus(Store store) {
-//		return mapper.updateStoreStatus(store);
-//	}
-	
 	// 가게 이름 조회
 	@Override
 	public String selectStoreName(Store store) {

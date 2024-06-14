@@ -95,11 +95,9 @@ if(document.querySelector("#reservCount") != null){
             countList.innerText = `${i}명`;
             
             buttonList.append(countList); // ui>li
-            
         }
     }
 }
-
 
 // 예약 인원 수 체크
 
@@ -119,15 +117,11 @@ if(buttonItem != null && buttonItem.length > 0) {
 
             const count = li.innerText;
   
-            console.log(count);
             return;
         });
     };
 }
 
-
-
-// ----------------------------------------------------------------------------------------
 
 // 처음 예약 페이지에서 '다음' 버튼 클릭 시 로그인 여부 확인 
 const nextBtn = document.querySelector("#nextCheckBtn");
@@ -179,7 +173,6 @@ if(nextBtn != null){
         // 인원 선택한 값 저장 input
         const input1 = document.createElement("input");
         const selectCount = document.querySelector(".button-item.select").innerText
-        console.log(selectCount);
 
         input1.type="hidden";
         input1.name="reservCount";
@@ -189,14 +182,11 @@ if(nextBtn != null){
         // 달력
         const input2 = document.createElement("input");
         const selectDate = document.querySelector(".select-date").innerText;
-        console.log(selectDate);
 
         input2.type="hidden";
         input2.name="reservDate";
         input2.className="select-date";
         input2.value = selectDate;
-        
-        // console.log("input2" , input2);
 
         // 시간 선택
         const input3 = document.createElement("input");
@@ -250,7 +240,6 @@ const getTimeSplit = (startTime, endTime, interval) => {
 
         times.push(`${hours}:${mins}`);
     }
-    // console.log(times);
     return times;
 }
 getTimeSplit(startTime, endTime, interval);
@@ -346,19 +335,15 @@ if(confirmBtn != null) {
 
         /* 날짜, 시간 둘 다 사용해야 할 값 */
         const finalDate = document.querySelector(".reserv-date-count").innerText;
-        // console.log(finalDate);
         input1.type="hidden";
         input1.name="reservDate";
         
         const datePart = finalDate.slice(0,5); // 00.00 날짜만 가져옴
-        console.log(datePart);
         const [month, day] = datePart.split(".").map(Number); // .을 기준으로 month와 day 분리
         const year = new Date().getFullYear(); // 현재 년도를 가져옴
         const dateObj = new Date(year, month-1, day+1);
         const dateString = dateObj.toISOString().split("T")[0];   // ex) 2024-05-23T14:48:00.000Z을
                                                                 //"YYYY-MM-DD" 형식으로 저장
-
-        console.log(dateString);
 
         // 최종적으로 form 태그에 담겨 DB에 저장될 값
         input1.value=dateString;
@@ -376,7 +361,6 @@ if(confirmBtn != null) {
         input3.name="reservTime";
 
         const reservTime = finalDate.slice(9); // 8번째 인덱스 이후부터 잘라냄 (시간만 분리)
-        console.log(reservTime);
         input3.value = reservTime;
 
         // 예약 인원
@@ -388,9 +372,7 @@ if(confirmBtn != null) {
         // input4.value=finalCount;
         
         const reservCount = finalCount.replace("명", ""); // "2명" 에서 "2" 만 추출
-        // const reservCount = Number(countPart); // 문자를 숫자로 변환
         input4.value=reservCount; // DB 저장용 
-        // console.log(reservCount);
 
         // 요청사항
         const input5 = document.createElement("input");
