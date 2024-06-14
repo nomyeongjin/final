@@ -120,10 +120,6 @@
       
                                 <div class="storereview-top-right">
 
-                                    <div class="review-btn">
-                                      
-                                    </div>
-
                                     <div class="review-date">
                                       <span th:text="*{reviewRegDate}">2024-05-17</span>
                                     </div>
@@ -149,7 +145,7 @@
                                       </th:block>
                                     </div>
   
-                                  <p>해시태그</p>
+                                  <!-- <p>#</p> -->
                                     <div class="review-hashtag">
       
                                       <th:block th:each=" hash : *{hashList}">
@@ -169,8 +165,8 @@
                                             <input type="text" class="reply-content-bubble" th:value="${reply.replyConent}" id="replyConent" name="replyConent">
                                         </div>
                                         <div class="store-reply-btn">
-                                            <button type="button" class="replyUpdateBtn" th:attr="data-reply-no=${reply.replyNo}">댓글 수정</button>
                                             <button type="button" class="replyDeleteBtn" th:attr="data-reply-no=${reply.replyNo}">댓글 삭제</button>
+                                            <button type="button" class="replyUpdateBtn" th:attr="data-reply-no=${reply.replyNo}">댓글 수정</button>
                                         </div>
                                     </div>
                                 </th:block>
