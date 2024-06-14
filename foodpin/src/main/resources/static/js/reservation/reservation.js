@@ -6,11 +6,24 @@ if(storereservationbutton != null) {
     storereservationbutton.addEventListener("click", e => {
 
         // 로그인한 회원의 memberCode가 1이 아닌 경우
-        if(memberCode != 1 && loginMember != null || memberFlag > 2){
+        if(memberCode != 1 || memberFlag > 2){
             // alert("현재 로그인한 정보로 접근할 수 없는 서비스 입니다.");
             Swal.fire({
                 title: "",
                 text: "현재 로그인한 정보로 접근할 수 없는 서비스 입니다.",
+                icon: "warning",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "확인"
+            })
+            e.preventDefault();
+            return;
+        }
+        if(loginMember == null){
+            Swal.fire({
+                title: "",
+                text: "로그인 후 이용해 주세요",
                 icon: "warning",
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",

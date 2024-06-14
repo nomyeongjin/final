@@ -350,3 +350,20 @@ document.addEventListener("DOMContentLoaded", () => {
         notiList.classList.add("notification-show");
     })
 })
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const params = new URLSearchParams(location.search)
+    const targetId = "c" + params.get("cn");
+
+    let targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+        const scrollPosition = targetElement.offsetTop;
+        window.scrollTo({
+            top: scrollPosition - 200,
+            behavior: 'smooth'
+        });
+    }
+})
