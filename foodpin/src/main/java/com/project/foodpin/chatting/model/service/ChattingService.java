@@ -21,7 +21,7 @@ public interface ChattingService {
 
     List<Message> selectMessageList( Map<String, Object> paramMap);
 
-	List<Member> selectTarget(Map<String, Object> map);
+	List<ChattingRoom> selectTarget(Map<String, Object> map);
 
 	List<Message> selectMsgList(int chattingNo);
 
