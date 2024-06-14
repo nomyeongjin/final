@@ -711,7 +711,7 @@ const reservPopup = (reservNo) => {
        */
       cancelBtn.addEventListener("click", () => {
 
-         popupFrm.classList.add("blind");
+         popupFrm.remove();
       })
 
       // 팝업창 외 다른 클릭 이벤트 방지
