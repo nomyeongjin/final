@@ -3,12 +3,13 @@
 <mapper namespace="com.project.foodpin.main.model.mapper.MainMapper">
 
 	<select id="selectStoreList"  resultType="store">
-    	SELECT STORE_IMG, STORE_NAME, STORE_NO
-		FROM "STORE"
-   		JOIN "MEMBER" USING (MEMBER_NO)
-   		WHERE STORE_CLOSED='N'
-   		AND MEMBER_STATUS='N'
-   		ORDER BY STORE_NO DESC
+		SELECT STORE_IMG, STORE_NAME, STORE_NO, 
+       		(SELECT COUNT(*) FROM BOOKMARK WHERE BOOKMARK.STORE_NO = STORE.STORE_NO) AS LIKE_COUNT
+  		FROM "STORE"
+  		JOIN "MEMBER" USING (MEMBER_NO)
+  		WHERE STORE_CLOSED = 'N'
+	    AND MEMBER_STATUS = 'N'
+  		ORDER BY LIKE_COUNT DESC, STORE_NO DESC
  	</select>
  
  	<select id="selectMainCategoryList" resultType="Category">

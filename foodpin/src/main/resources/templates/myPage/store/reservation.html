@@ -12,7 +12,7 @@
    <link rel="stylesheet" href="/css/myPage/store-myPage.css">
 
 </head>
-<body>
+<body id="bodyTop">
 
    <main>
 
@@ -106,9 +106,20 @@
       </section>
    </div>  
    </main>
+
+   <aside>
+      <a href="#bodyTop"><i class="fa-solid fa-angles-up"></i></a>
+      
+      <a id="chat"><i class="fa-solid fa-headset"></i></a>
+      
+      <a href="/store/storeSearch/1"><i class="fa-solid fa-location-dot"></i></a>
+      
+      <a href="#bodyBottom"><i class="fa-solid fa-angles-down"></i></a>        
+   </aside>
    
    <script th:inline="javascript">
       const storeNo = /*[[${storeNo}]]*/ '가게번호';
+      const loginMemberCode = /*[[${session.loginMember?.memberCode}]]*/'로그인멤버코드';
    </script>
 
    <!-- templetes/common/footer.html  조각 추가 -->
