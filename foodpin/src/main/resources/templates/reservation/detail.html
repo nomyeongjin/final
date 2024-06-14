@@ -92,9 +92,18 @@
                         <h3 class="title">예약 안내</h3>
                     </div>
 
+                    <th:block th:if="${store.storeInfo}">
+                        <div class="info-content">
+                            <th:block th:text="${store.storeInfo}"></th:block>
+                        </div>
+                    </th:block>
+
                     <th:block th:unless="${store.storeInfo}">
-                        <span class="content" name="storeInfo" id="storeId" th:text="|가게 정보 준비중 입니다.|"></span>
-                    </th:block> 
+                        <div class="info-content">
+                            <th:block th:text="|가게 정보 준비중 입니다.|"></th:block>
+                        </div>
+                    </th:block>
+
                     <!-- <div class="images">
                         <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage" th:src="*{storeImg}">
                         <img src="#" alt="가게 이미지 최대 3개 150x100" id="storeImage" name="storeImage" th:src="*{storeImg}">
