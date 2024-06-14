@@ -736,10 +736,6 @@ const reservPopup = (reservNo) => {
          popupFrm.remove();
       })
 
-      window.addEventListener("click", () => {
-         popupFrm.remove();
-      })
-
       // 팝업창 외 다른 클릭 이벤트 방지
    })
 

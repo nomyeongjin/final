@@ -9,16 +9,18 @@ let calendar;
 
 const selectWeekOff = () => {
 
-      // 고정 휴무일 DB값 조회 
-      fetch("/myPage/store/selectWeekOff", {
-         method : "POST",
-         headers : {"content-Type" : "application/json"},
-         body : JSON.stringify(storeNo)
-      })
-      .then(resp => resp.json())
-      .then(offList => {
-         // console.log(offList);
-   
+   // 고정 휴무일 DB값 조회 
+   fetch("/myPage/store/selectWeekOff", {
+      method : "POST",
+      headers : {"content-Type" : "application/json"},
+      body : JSON.stringify(storeNo)
+   })
+   .then(resp => resp.json())
+   .then(offList => {
+      // console.log(offList);
+      
+      if(offList.isEmpty) return;
+
          for(let off of offList){
             
             // 기존 고정 휴무일 값과 li중 index 값이 일치시 -> 해당하는 li에 'checked' 클래스 추가
@@ -61,18 +63,15 @@ const selectWeekOff = () => {
                }); break;
             }
          }
-         
-         // li 체크시 checked 클래스 toggle
-         const weekList = document.querySelectorAll(".week-li");
-         for(const li of weekList) {
-   
-            li.addEventListener("click", () => {
-   
-               li.classList.toggle("checked");
-            })
-         }
-   
-      })
+   })
+
+   // li 체크시 checked 클래스 toggle
+   document.querySelectorAll(".week-li").forEach(item => {
+
+      item.addEventListener("click", e => {
+         e.target.classList.toggle("checked");
+      });
+   });
 }
 
 
@@ -98,14 +97,11 @@ function calendar_rendering() {
       calendar = new FullCalendar.Calendar(calendarEl, {
 
          locale: 'kr',
-         timeZone: 'UTC',
+         timeZone: 'KST',
          initialView: 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
-         editable: false,
-         dayMaxEvents: true,
          eventColor : '#E14C54',
          eventClick : function(info){ updatePopup(info) },
          dateClick: function(info){ insertPopup(info) },
-         
          
          // 헤더
          headerToolbar: { left: 'addEventButton', center: 'title' },

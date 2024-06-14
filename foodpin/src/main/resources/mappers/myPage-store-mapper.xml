@@ -174,7 +174,7 @@
 	<!-- 지정 휴무일 조회 (달력) -->
 	<select id="calendarOffSelect">
 		SELECT OFF_DAY_NO, OFF_DAY_TITLE, TO_CHAR(OFF_DAY_START, 'YYYY-MM-DD') OFF_DAY_START, 
-			TO_CHAR(OFF_DAY_END, 'YYYY-MM-DD') OFF_DAY_END
+			TO_CHAR(OFF_DAY_END+1, 'YYYY-MM-DD') OFF_DAY_END
 		FROM "OFF_DAY"
 		WHERE STORE_NO = #{storeNo}
 	</select>
