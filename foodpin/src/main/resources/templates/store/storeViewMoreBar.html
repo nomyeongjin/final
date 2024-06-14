@@ -16,7 +16,19 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
 
-                    <input type="text" class="input-box" placeholder="지역, 가게 검색">
+                    <th:block th:if="${mainSearch!=null}">
+                        
+                        <input type="text" class="input-box" 
+                         th:value="${mainSearch}"
+                         name="searchStoreR" id="searchStoreR" >
+                    </th:block>
+                    <th:block th:if="${mainSearch==null}">
+                        
+                        <input type="text" class="input-box" 
+                         placeholder="지역, 카테고리, 가게 검색"
+                         name="searchStoreR" id="searchStoreR" >
+                    </th:block>
+                    
                 </div>
 
             </div>
@@ -44,14 +56,34 @@
 
             
             <div class="searchcategory-Btnbox" th:each="category : ${searchCategory}">
-                <button class="searchCat-btn" th:text="${category.categoryTitle}">카테고리 버튼</button>
+                <button class="searchCat-btn" th:text="${category.categoryTitle}" th:data-category="${category.categoryCode}">카테고리 버튼</button>
             </div>
             
             
         </div>
 
         <div>
-            <span>지역 선택</span>
+            <label for="region">지역 선택</label>
+            <select name="region" id="region">
+                <option>서울</option>
+                <option>경기</option>
+                <option>인천</option>
+                <option>제주</option>
+                <option>세종</option>
+                <option>광주</option>
+                <option>대구</option>
+                <option>대전</option>
+                <option>부산</option>
+                <option>울산</option>
+                <option>강원</option>
+                <option>경북</option>
+                <option>경남</option>
+                <option>전북</option>
+                <option>전남</option>
+                <option>충북</option>
+                <option>충남</option>
+            </select>
+          
         </div>
 
         <span class="searchbar-line">-</span>
@@ -87,10 +119,10 @@
 
                 <div class="storelist-typeBtnbox">
                     
-                    <button>❈ 거리순</button>
-                    <button>❈ 리뷰순</button>
-                    <button>❈ 좋아요순</button>
-                    <button>❈ 평점순</button>
+                    <button id="storeSearchBasicBtn">❈ 거리순</button>
+                    <button id="storeSearchReviewBtn">❈ 리뷰순</button>
+                    <button id="storeSearchLikeBtn">❈ 좋아요순</button>
+                    <button id="storeRatingBtn">❈ 평점순</button>
                     
                 </div>
 
@@ -151,13 +183,13 @@
 
                                 </th:block>
                             
-                                    <!-- 좋아요 개수 -->
-                                    <th:block th:if="${session.loginMember?.memberCode !=1}">
-                                    <i class="fa-solid fa-heart"> </i>
-                                    </th:block>
-                                    <!-- &nbsp; -->
-                                    <span id="storeLikeCount" th:text="*{likeCount}">0</span>
-                                
+                                <!-- 좋아요 개수 -->
+                                <th:block th:if="${session.loginMember?.memberCode !=1}">
+                                <i class="fa-solid fa-heart"> </i>
+                                </th:block>
+                                <!-- &nbsp; -->
+                                <span id="storeLikeCount" th:text="*{likeCount}">0</span>
+                            
                                
                             
                             </div>

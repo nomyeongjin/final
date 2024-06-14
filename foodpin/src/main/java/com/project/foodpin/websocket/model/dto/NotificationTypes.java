@@ -35,7 +35,7 @@ public class NotificationTypes {
 	private final String reservSecondNoshow = "reservSecondNoshow";
 	
 	/* 예약 노쇼 알림 (3회) */
-	private final String reservThirdNoshow = "reservThirdNoshow";
+//	private final String reservThirdNoshow = "reservThirdNoshow";
 	
 	/* 리뷰 신고 (접수) */
 	private final String reviewReport = "reviewReport";

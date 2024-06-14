@@ -514,7 +514,7 @@
    flex-direction: row;
    justify-content: center;
 }
-.reserv-btn, .reserv-reject-btn, .reserv-noshow-btn{
+.reserv-btn, .reserv-reject-btn, .reserv-noshow-btn, .noshow-cancel-btn{
    width: 100px;
    height: 26px;
    color: white;

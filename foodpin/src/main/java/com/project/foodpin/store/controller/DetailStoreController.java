@@ -54,12 +54,7 @@ public class DetailStoreController {
 
 		List<Review> reviewList = service.reviewDetail(storeNo);
 		
-		/* List<Off> offList = service.storeOffList(storeNo); */
 
-		/* Store offday = service.storeOff(storeNo); */
-		// request scope 값 세팅
-		
-		
 
 
 		model.addAttribute("reviewList",reviewList); 
@@ -87,8 +82,9 @@ public class DetailStoreController {
 			model.addAttribute("storeHashList", store.getStoreHashList());
 			model.addAttribute("menuList", store.getMenuList());
 			model.addAttribute("imageList", store.getImageList());
-			model.addAttribute("storeOffDay", store.getImageList());
-
+			/*
+			 * model.addAttribute("offList", store.getOffList());
+			 */
 			path = "/store/storeDetail";
 
 		

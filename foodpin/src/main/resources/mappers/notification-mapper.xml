@@ -209,4 +209,11 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
+	<select id="selectStoreNo">
+		SELECT MEMBER_NO
+		FROM "MEMBER"
+		JOIN "STORE" USING (MEMBER_NO)
+		WHERE STORE_NO = #{storeNo}
+	</select>
+	
 </mapper>

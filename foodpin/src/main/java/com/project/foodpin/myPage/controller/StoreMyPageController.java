@@ -276,9 +276,9 @@ public class StoreMyPageController {
 	 */
 	@PostMapping("calendaroffDelete")
 	@ResponseBody
-	public int calendaroffDelete(@RequestBody String storeNo) {
+	public int calendaroffDelete(@RequestBody int offDayNo) {
 		
-		return service.calendaroffDelete(storeNo);
+		return service.calendaroffDelete(offDayNo);
 	}
 	
 	// ------ 예약 관리 ------
@@ -341,6 +341,16 @@ public class StoreMyPageController {
 		map.put("reservNo", reservNo);
 		
 		return service.noshowReserv(map);
+	}
+	
+	/** 노쇼 취소 (비동기)
+	 * @return result
+	 */
+	@ResponseBody
+	@GetMapping("NoshowCancel")
+	public int NoshowCancel(@RequestParam("reservNo") int reservNo) {
+		
+		return service.noshowReserv(reservNo);
 	}
 	
 	/** 캘린더에 맞는 형태로 확정된 예약 전체 조회 (비동기)

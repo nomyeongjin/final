@@ -195,6 +195,12 @@ public interface StoreMyPageMapper {
 	 */
 	int noshowReservStatus(Map<String, Object> map);
 	
+	/** 노쇼 취소 
+	 * @param reservNo
+	 * @return
+	 */
+	int noshowReserv(int reservNo);
+	
 	/** 회원 경고 횟수 조회
 	 * @param map
 	 * @return
@@ -301,6 +307,7 @@ public interface StoreMyPageMapper {
 	 * @return
 	 */
 	String selectStoreImg(String storeNo);
+
 
 
 

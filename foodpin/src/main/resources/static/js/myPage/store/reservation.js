@@ -458,8 +458,30 @@ const createReservList = (reservStatusFl) => {
                   // 알림
                   // 우선 주석 처리 해뒀습니다.!!! result 1 : 경고 누적 / result 2 : 탈퇴
                   // sendNotificationFn("confirmReservation", null, reservNo,  reservDate, null);
-               })
-            } // 노쇼 버튼 생성
+               })// 노쇼 버튼 생성
+            }
+            // 노쇼 처리된 경우 취소 버튼 활성화
+            else if (reserv.reservStatusFl == 'X'){
+               const NoshowCancelBtn = document.createElement("button");
+               NoshowCancelBtn.classList.add("noshow-cancel-btn");
+               NoshowCancelBtn.innerText = "노쇼 취소";
+
+               listBtnArea.append(NoshowCancelBtn);
+               listContent.append(listBtnArea);
+
+               NoshowCancelBtn.addEventListener("click", e => {
+                  const reservNo = e.target.closest("section").querySelector(".reserv-no").innerText;
+                  fetch("/myPage/store/NoshowCancel?reservNo=" + reservNo)
+                  .then(resp => resp.json())
+                  .then(result => {
+      
+                     if (result > 0) alert("예약 번호 " + reservNo + "번 노쇼 취소 처리되었습니다.");
+                     else alert("예약 번호 " + reservNo + "번 노쇼 취소 처리에 실패했습니다.");
+                  })
+                  .catch(err => console.log(err)); // 예약 승인 처리 fetch
+               }); // NoshowCancelBtn.addEventListener("click"
+            }
+
          } // 지난 내역 조회
 
          reservCard.append(listTitleArea, listContent);

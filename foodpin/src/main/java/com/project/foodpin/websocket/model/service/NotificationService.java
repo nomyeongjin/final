@@ -81,6 +81,8 @@ public interface NotificationService {
 
 	int selectNoshowMemberNo(int memberNo);
 
+	int selectStoreNo(int storeNo);
+
 	// 가게 정보 요청 처리에 필요한 회원 번호
 //	int selectMemberNo(String storeNo);
 

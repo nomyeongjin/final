@@ -219,6 +219,8 @@ if (notificationLoginCheck) {
                 //사진
                 const img = document.createElement("img");
                 img.classList.add("image");
+                if (data.sendMemberProfileImg == null) img.src = notificationDefaultImage;   //기본 이미지
+                else img.src = data.sendMemberProfileImg; // 프로필 이미지
 
                 const notiTitle = document.createElement("span");
                 notiTitle.classList.add("notification-store");
