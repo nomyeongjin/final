@@ -192,7 +192,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				urlForMember = "/myPage/member/reservation/wait";
 				urlForStore = "/myPage/store/reservation";
 
-				notiCode=0;
+				notiCode=3;
 				break;
 
 			case "cancelReservation":
@@ -203,7 +203,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 				urlForMember = "/myPage/member/reservation/cancelNoshow";
 				urlForStore = "/myPage/store/reservation";
 
-				notiCode = 0;
+				notiCode = 4;
 				break;
 			}
 
@@ -285,11 +285,11 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 			// reviewNo
 			review = service.selectReviewData(notification.getPkNo());
 			reviewMemerNo = service.memberNo(review.getReviewNo());
-			contentForMember = String.format("<b>%s<b> 님이 남겨주신 후기에 사장님이 답글을 작성 하셨습니다.", review.getMemberNickname());
+			contentForMember = String.format("<b>%s<b> 님이 남겨주신 후기에 사장님이 답글을 작성 하셨습니다.<br>" + "<u>내가 쓴 리뷰 확인하러 가기<u> >", review.getMemberNickname());
 
-			urlForMember = "/store/storeDetail/";
+			urlForMember = "/myPage/member/memberReview";
 
-			notiCode = 0;
+//			notiCode = 0;
 			break;
 
 		/*
@@ -308,7 +308,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 					member.getMemberNickname(), notification.getReservDate());
 			urlForMember = "/myPage/member/reservation/cancelNoshow";
 
-			notiCode = 0;
+//			notiCode = 0;
 			break;
 
 		// 예약 노쇼 알림(2회)
@@ -321,7 +321,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 					"<b>%s<b>님 <b>%s<b> 예약 날짜에 방문하지 않았습니다.<br>" + "경고 > 노쇼 누적 2회 (노쇼 3회 처리 시 계정이 정지 됩니다.)",
 					member.getMemberNickname(), notification.getReservDate());
 			urlForMember = "/myPage/member/reservation/cancelNoshow";
-			notiCode = 0;
+//			notiCode = 0;
 			break;
 
 		// 리뷰 신고 ( 삭제 조치 )
@@ -338,7 +338,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 					report.getStoreName(), notification.getReportDate());
 			urlForMember = "/myPage/member/memberReview";
 
-			notiCode = 4;
+			notiCode = 6;
 
 //				memberNotification = Notification.builder()
 //						.receiveMemberNo(reviewMemerNo)
@@ -386,12 +386,12 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 
 			memberNo = service.selectStoreMemberNo(reservation.getStoreNo());
 
-			contentForStore = String.format("<b>%s<b>이 <b>%s<b> 방문 후 후기를 남겨 주셨습니다.", reservation.getMemberNickname(),
+			contentForStore = String.format("<b>%s<b>이 <b>%s<b> 방문 후 후기를 남겨 주셨습니다.<br>" + "<u>답변 작성하러 가기<u> >", reservation.getMemberNickname(),
 					reservation.getReservDate() + " " + reservation.getReservTime());
 
 			urlForStore = "/myPage/store/reviewUnanswered";
 
-			notiCode = 3;
+			notiCode = 5;
 			break;
 
 		// 리뷰 신고 (해결여부)
@@ -404,10 +404,10 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 //				store = service.selectStoreData(notification.getPkNo());
 			contentForStore = String.format("안녕하세요. 푸드핀 운영 관리자 입니다.<br>" + "<b>%s<b> 해당 가게에서 발생한 리뷰 신고에 발생으로 확인한 결과<br>"
 					+ "해당 댓글은 부적절한 댓글로 삭제 조치 되었습니다.<br>" + "가게 운영에 참고 해주세요.<br>"
-					+ "자세한 사항은 관리자에게 문의해 주세요. <u>리뷰 조회하기<u> >", report.getStoreName());
+					+ "자세한 사항은 관리자에게 문의해 주세요.<br>" + " <u>리뷰 조회하기<u> >", report.getStoreName());
 			
 			urlForStore = "/myPage/store/review";
-			notiCode = 4;
+			notiCode = 6;
 			break;
 
 		case "storeReportComplete":
@@ -423,7 +423,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 					store.getStoreName());
 
 			urlForStore = "/myPage/store/storeInfo";
-			notiCode = 5;
+			notiCode = 7;
 			break;
 		}
 
@@ -457,7 +457,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 			contentForManager = String.format("<b>%s<b> 가게의 리뷰 신고가 들어왔습니다. 확인 해주세요.", review.getStoreName());
 			urlForManager = "/myPage/manager/reportReview";
 			
-			notiCode = 4;
+			notiCode = 6;
 			break;
 
 		case "storeReport":
@@ -468,7 +468,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 					store.getStoreName());
 
 			urlForManager = "/myPage/manager/managerStoreInfo";
-			notiCode = 5;
+			notiCode = 7;
 			break;
 
 		}

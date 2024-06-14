@@ -401,3 +401,142 @@ function chattingEnter(e){
 	})
 	.catch(err => console.log(err));
 }
+
+
+
+/* 검색 */
+
+const inputSearch = document.querySelector("#inputSearch");
+
+inputSearch.addEventListener("input", e => {
+  const query = e.target.value.trim();
+
+  if(query.length == 0){
+		selectRoomList(); // 이전 검색 결과 비우기
+
+		return;
+	}
+  
+
+  
+  // 검색 결과가 있을 경우
+  if(query.length > 0){
+    fetch("/chatting/selectTarget?query="+query)
+    .then(resp => resp.json())
+    .then(list => {
+      
+      console.log(list);
+
+      const roomList = document.querySelector(".room-list");
+      roomList.innerHTML = "";
+      
+      
+      if(list.length==0){
+        
+        const li = document.createElement("li");
+        li.classList.add("chatting-item");
+        li.setAttribute("target-no", 0);
+        li.setAttribute("chat-no", 0);
+        li.innerHTML = "검색 결과가 없습니다.";
+        roomList.append(li);
+        return;
+        }
+        
+        
+        for(let room of list){
+          const li = document.createElement("li");
+          li.classList.add("chatting-item");
+          li.setAttribute("chat-no", room.chattingNo);
+          li.setAttribute("target-no", room.targetNo);
+
+          if(room.chattingNo == selectChattingNo){
+              li.classList.add("select");
+          }
+
+          // item-header 부분
+          const itemHeader = document.createElement("div");
+          itemHeader.classList.add("item-header");
+
+          const listProfile = document.createElement("img");
+          listProfile.classList.add("list-profile");
+
+
+            if(room.targetProfile == undefined)	
+                listProfile.setAttribute("src", userDefaultImage);
+            else								
+                listProfile.setAttribute("src", room.targetProfile);
+
+          itemHeader.append(listProfile);
+
+          // item-body 부분
+          const itemBody = document.createElement("div");
+          itemBody.classList.add("item-body");
+
+          const p = document.createElement("p");
+
+          const targetName = document.createElement("span");
+          targetName.classList.add("target-name");
+          targetName.innerText = room.targetNickname;
+          
+          const recentSendTime = document.createElement("span");
+          recentSendTime.classList.add("recent-send-time");
+          recentSendTime.innerText = room.sendTime;
+          
+          
+          p.append(targetName, recentSendTime);
+          
+          
+          const div = document.createElement("div");
+          div.classList.add("recent-message-box");
+          
+          const recentMessage = document.createElement("p");
+          recentMessage.classList.add("recent-message");
+
+          if(room.lastMessage != undefined){
+              recentMessage.innerHTML = room.lastMessage;
+          }
+          
+          div.append(recentMessage);
+
+          itemBody.append(p,div);
+
+          // 현재 채팅방을 보고있는게 아니고 읽지 않은 개수가 0개 이상인 경우 -> 읽지 않은 메세지 개수 출력
+          if(room.notReadCount > 0 && room.chattingNo != selectChattingNo ){
+              const notReadCount = document.createElement("p");
+              notReadCount.classList.add("not-read-count");
+              notReadCount.innerText = room.notReadCount;
+              div.append(notReadCount);
+          }else{
+
+              // 현재 채팅방을 보고있는 경우
+              // 비동기로 해당 채팅방 글을 읽음으로 표시
+              fetch("/chatting/updateReadFlag",{
+                  method : "PUT",
+                  headers : {"Content-Type": "application/json"},
+                  body : JSON.stringify({"chattingNo" : selectChattingNo})
+              })
+              .then(resp => resp.text())
+              .then(result => console.log(result))
+              .catch(err => console.log(err));
+
+          }
+          
+
+          li.append(itemHeader, itemBody);
+          roomList.append(li);
+
+          li.addEventListener('click', chattingEnter);
+      }
+
+      roomListAddEvent();
+    })
+
+
+
+  .catch(err => console.log(err));
+  }
+
+
+
+})
+

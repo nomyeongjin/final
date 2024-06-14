@@ -319,7 +319,51 @@
 		WHERE HASH_NO = #{hashNo}
 	</select>
 
-	<!-- 가게 영업시간, 휴무일, 브레이크타임 조회 -->
+	<select id="addHash" parameterType="list">
+		SELECT
+		    STORE_WITH_HASH_COUNT.STORE_NO, STORE_NAME, STORE_LOCATION, OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START,
+		    BREAKTIME_END, 
+		    	(SELECT ROUND(AVG(REVIEW_RATING), 2)
+				  FROM REVIEW
+				  WHERE STORE_NO = STORE_WITH_HASH_COUNT.STORE_NO
+				  AND REVIEW_DEL_FL = 'N') TOTAL_RATING, HASH_COUNT
+		    REVIEW_COUNT, STORE_WITH_HASH_COUNT.STORE_IMG
+		FROM (
+		    SELECT S.STORE_NO, S.STORE_NAME,  S.STORE_LOCATION,  S.OPEN_HOUR,  S.CLOSE_HOUR,  S.BREAKTIME_START, 
+		    	S.BREAKTIME_END, S.TOTAL_RATING, COUNT(RH.HASH_NO) HASH_COUNT, S.STORE_IMG
+		    FROM STORE S
+		    JOIN REVIEW R ON R.STORE_NO = S.STORE_NO
+		    JOIN REVIEW_HASH RH ON RH.REVIEW_NO = R.REVIEW_NO
+		    WHERE RH.HASH_NO IN
+		    	<foreach collection="list" item="hash" open="(" close=")" separator=" , ">
+		    		#{hash.hashNo}
+		    	</foreach>
+		    AND REVIEW_DEL_FL = 'N'
+		    AND STORE_CLOSED = 'N'
+		    GROUP BY S.STORE_NO, S.STORE_NAME,  S.STORE_LOCATION, S.OPEN_HOUR,  S.CLOSE_HOUR,
+		        S.BREAKTIME_START, S.BREAKTIME_END, S.TOTAL_RATING, S.STORE_IMG
+		) STORE_WITH_HASH_COUNT
+		JOIN (
+		    SELECT
+		        STORE_NO,
+		        COUNT(REVIEW_NO) REVIEW_COUNT
+		    FROM REVIEW
+		    WHERE REVIEW_DEL_FL = 'N'
+		    GROUP BY STORE_NO
+		) REVIEW_COUNTS ON STORE_WITH_HASH_COUNT.STORE_NO = REVIEW_COUNTS.STORE_NO
+		ORDER BY HASH_COUNT DESC
+	</select>
+   
+	<select id="hashTitleList" parameterType="list">
+		SELECT HASH_TITLE
+		FROM HASH
+		WHERE HASH_NO IN
+			<foreach collection="list" item="hash" open="(" close=")" separator=" , ">
+		    	#{hash.hashNo}
+		    </foreach>
+	</select>
+	
+		<!-- 가게 영업시간, 휴무일, 브레이크타임 조회 -->
 	<select id="storeOpen">
 		SELECT OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END
 		FROM "STORE"
@@ -330,12 +374,6 @@
 	<select id="selectWeekOff">
 		SELECT OFF_WEEK FROM "OFF_WEEK" WHERE STORE_NO = #{storeNo}
 	</select>
-
-
-
-	
-   
-
 
    
   

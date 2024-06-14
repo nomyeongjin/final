@@ -168,6 +168,38 @@ public class DetailStoreController {
 		return "store/hashSearch"; 
 	}
 	
+	@ResponseBody
+	@PostMapping("addHash")
+	public Map<String, Object> addHash(@RequestBody Map<String, List<Hash>> map) {
+	    Map<String, Object> result = new HashMap<>();
+	    
+	    List<Hash> hashList = map.get("checkedValues");
+	    
+	    List<Store> storeList = service.addHash(hashList);
+	    List<Hash> hashTitle = service.hashTitle(hashList);
+	    
+	    for (Store store : storeList) {
+	        String storeLocation = store.getStoreLocation();
+	        String[] arr = storeLocation.split("\\^\\^\\^");
+	        
+	        if (arr.length == 3) {
+	            store.setPostcode(arr[0]);
+	            store.setAddress(arr[1]);
+	            store.setDetailAddress(arr[2]);
+	        } else {
+	            // 주소 정보가 정확히 3부분으로 나뉘지 않을 경우 빈 값으로 설정
+	            store.setPostcode("");
+	            store.setAddress("");
+	            store.setDetailAddress("");
+	        }
+	    }
+	    
+	    result.put("storeList", storeList);
+	    result.put("hashTitle", hashTitle);
+	    
+	    return result;
+	}
+	
 	/** 가게 영업시간, 휴무일, 브레이크타임 조회
 	 * @param storeNo
 	 * @return
@@ -179,6 +211,8 @@ public class DetailStoreController {
 		return service.storeOpen(storeNo);
 	}
 	
+	
+
 	
 
 	

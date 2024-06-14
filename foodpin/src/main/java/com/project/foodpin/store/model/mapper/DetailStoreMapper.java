@@ -108,6 +108,19 @@ public interface DetailStoreMapper {
 	 */
 	Hash hashTitle(String hashNo);
 
+	/** 해시태그 추가
+	 * @param map
+	 * @return
+	 */
+	List<Store> addHash(List<Hash> hashNoList);
+
+	/** 해시태그 추가 (해시태그 타이틀)
+	 * @param hashNoList
+	 * @return
+	 */
+	List<Hash> hashTitleList(List<Hash> hashNoList);
+
+	
 	/** 가게 영업시간, 휴무일, 브레이크타임 조회
 	 * @param storeNo
 	 * @return

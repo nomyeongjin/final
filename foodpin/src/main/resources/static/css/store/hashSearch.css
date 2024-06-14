@@ -41,7 +41,7 @@
 
 .hashtag{
   border: 1px solid var(--main-color);
-  width: 200px;
+  width: 170px;
   height: 35px;
   display: flex;
   align-items: center;
@@ -52,6 +52,10 @@
   padding: 10px;
   font-size: 14px;  
   margin-top: 13px;
+}
+
+.hashtagList{
+  display: flex;
 }
 
 .storeList-left{
@@ -125,15 +129,19 @@
 }
 
 #totalScoreR{
-  width: 25px;
+  width: 50px;
   position: absolute;
-  left: 110px;
+  left: 115px;
   z-index: 1000;
 }
 
 .store-info > a:first-child{
   font-size: 23px;
   font-weight: bold;
+}
+
+.store-info > a:first-child:hover{
+  color:  rgb(135, 135, 135);
 }
 
 .store-address{
@@ -336,4 +344,12 @@
 
 .review-count{
   margin-top: 10px;
+}
+
+.storeList-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

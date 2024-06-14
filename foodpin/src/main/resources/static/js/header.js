@@ -14,18 +14,31 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
+    // 알림 아이콘 클릭 시 팝업 껐다 켰다
     const notificationBellBtn = document.querySelector(".notification-bell-btn");
-
-    if (notificationBellBtn != null) {
-
-        notificationBellBtn.addEventListener("click", () => {
-            const notificationList = document.querySelector(".box-content");
-
+    const notificationList = document.querySelector(".box-content");
+    
+    if (notificationBellBtn != null && notificationList != null) {
+    
+        notificationBellBtn.addEventListener("click", (event) => {
             notificationList.classList.toggle("notification-show");
             notificationBellBtn.classList.toggle("action");
-
+            event.stopPropagation();
         });
-    };
+    
+        window.addEventListener("click", () => {
+            if (notificationList.classList.contains("notification-show")) {
+                notificationList.classList.remove("notification-show");
+                notificationBellBtn.classList.remove("action");
+            }
+        });
+    
+        notificationList.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+    }
+
+
 
     // 알림 카테고리 클릭 시 색상 변환
     const category = document.querySelectorAll(".category");
@@ -42,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 });
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 let chattingSock;
@@ -155,9 +169,11 @@ if (notificationLoginCheck) {
 
     /* ******** 알림 조회 할 때 파라미터 전달을 다르게.... ********* */
     /* 비동기 알림조회 */
-    selectnNotificationFn = () => {
+    selectnNotificationFn = (url) => {
 
-        fetch("/notification")
+        const requestUrl = url == undefined ? "/notification" : url;
+
+        fetch(requestUrl)
         .then(resp => resp.json())
         .then(selectList => {
 
@@ -195,17 +211,6 @@ if (notificationLoginCheck) {
 
                     location.href = data.notificationUrl;
                 })
-
-                //알림 보낸 회원의 프로필 이미지
-                // const senderProfile = document.createElement(img);
-                // if (data.senderProfile == null) senderProfile.src = notificationDefaultImage;   //기본 이미지
-                // else senderProfile.src = data.sendMemberProfileImg; // 프로필 이미지
-
-                // const notiItem = document.createElement("div");
-                // notiItem.classList.add("notification-item");
-
-                // const notiText = document.createElement("div");
-                // notiText.classList.add("notification-text");
 
                 const temp = document.createElement("div");
                 temp.classList.add("temp");
@@ -246,11 +251,6 @@ if (notificationLoginCheck) {
 
                 const xmark = document.createElement("i");
                 xmark.classList.add('fa-regular',"fa-circle-xmark");
-
-                // 알림 클릭 후 경로 이동시 읽음으로 처리해서 알림 삭제
-                // border.addEventListener("click", e => {
-                    
-                // })
                 
                 // 알림 삭제
                 xmark.addEventListener("click", e => {
@@ -284,9 +284,6 @@ if (notificationLoginCheck) {
 
 
                 /* 조립 */
-
-                // notiList.append(notiItem);
-                // notiList.append(notiText);
                 notiList.append(border);
                 // border.append(temp);
                 border.append(contentContainer);
@@ -348,8 +345,6 @@ document.addEventListener("DOMContentLoaded", () => {
         
     })
 
-
-
     notificationBtn.addEventListener("click", e => {
         const notiList = document.querySelector(".notification-list");
 
@@ -360,6 +355,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
         selectnNotificationFn();
         notiList.classList.add("notification-show");
-
     })
 })
