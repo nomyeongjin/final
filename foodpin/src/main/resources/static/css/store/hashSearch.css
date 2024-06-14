@@ -41,7 +41,7 @@
 
 .hashtag{
   border: 1px solid var(--main-color);
-  width: 170px;
+  width: 200px;
   height: 35px;
   display: flex;
   align-items: center;
@@ -142,6 +142,7 @@
 
 .store-info > a:first-child:hover{
   color:  rgb(135, 135, 135);
+  transition: 0.2s;
 }
 
 .store-address{
@@ -175,6 +176,7 @@
 .store-reservation:hover{
   background-color: white;
   color: #E14C54;
+  transition: 0.2s;
 }
 
 .store-hashtag-container{
