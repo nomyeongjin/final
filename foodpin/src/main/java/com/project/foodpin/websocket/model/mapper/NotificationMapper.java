@@ -1,6 +1,7 @@
 package com.project.foodpin.websocket.model.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -84,8 +85,9 @@ public interface NotificationMapper {
 
 	int selectStoreNo(int storeNo);
 
-	// 가게 정보 요청 처리에 필요한 회원 번호
-//	int selectMemberNo(String storeNo);
+	// 알림 카테고리별 조회
+	List<Notification> selectList(Map<String, Object> map);
+
 
 
 }

@@ -182,35 +182,25 @@
     </main>
 
     <!-- footer.html 추가 -->
-    <th:block th:replace="~{common/footer}"></th:block> 
-
+    <th:block th:replace="~{common/footer}"></th:block>
+    
     <script th:inline="javascript">
         const loginMember = /*[[${session.loginMember?.memberNo}]]*/ "로그인회원"
 
         const storeNo = /*[[${storeNo}]]*/ "사업자등록번호"
 
         document.addEventListener("DOMContentLoaded", () => {
-        // 주소에 #아이디속성명 이 작성되어 있으면서
-        // 해당 아이디를 가진 요소가 존재하는 경우
-        // 해당 요소의 위치로 스크롤 옮기기
-        // const targetId = location.href.substring(location.href.indexOf("#") + 1);
-        
-        // 쿼리스트링 파라미터 중 cn 값을 얻어와 같은 아이디를 가지는 요소로 이동
-        //const params = new URLSearchParams(location.search) /* ex) ?cn=100&key=t 라면 100만 가져옴 */
-        //const targetId = "c" +  params.get("cn"); /* ex) c13, c16 */
+            let targetElement = document.querySelector(".nav-list");
 
-        // let targetElement = document.getElementById(targetId);
-        let targetElement = document.querySelector(".nav-list");
+            if (targetElement) {
+                const scrollPosition = targetElement.offsetTop;
+                window.scrollTo({
+                    top: scrollPosition - 150, /* 스크롤 됐을 때 위에서 작성한 위치 만큼 떨어진 위치에서 보여줌 */
+                    behavior: 'smooth'
+                });
+            }
+        })
 
-        if (targetElement) {
-            const scrollPosition = targetElement.offsetTop;
-            window.scrollTo({
-                top: scrollPosition - 150, /* 스크롤 됐을 때 위에서 200px 떨어진 위치에서 보여줌 */
-                behavior: 'smooth'
-            });
-        }
-    })
-        
     </script>
 
 
