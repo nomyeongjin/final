@@ -408,7 +408,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 
 			contentForStore = String.format(
 					"안녕하세요. 푸드핀 운영 관리자 입니다.<br>" + "<b>%s</b> 해당 가게에서 발생한 폐업 및 가게 정보 정정 신고 처리가 완료 되었습니다.<br>"
-							+ "가게 운영에 참고 해주세요.<br>" + "자세한 사항은 관리자에게 문의 부탁드립니다. <u>가게 정보 수정 페이지로 이동<u> >",
+							+ "가게 운영에 참고 해주세요.<br>" + "자세한 사항은 관리자에게 문의 부탁드립니다.<br>" + "<u>가게 정보 수정 페이지로 이동<u> >",
 					store.getStoreName());
 
 			urlForStore = "/myPage/store/storeInfo";
