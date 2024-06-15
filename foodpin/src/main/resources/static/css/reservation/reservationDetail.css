@@ -131,6 +131,11 @@
     color: white !important;
 }
 
+.reserv-info:active{
+    background-color: #afafaf;
+    color: white !important;
+}
+
 .click-a {
     background-color: #afafaf;
     color: white !important;
@@ -541,6 +546,3 @@
     color: #E14C54;
     font-weight: bold;
 }
-
-
-
