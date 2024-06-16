@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.CloseStatus;
@@ -36,7 +37,8 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 	private Set<WebSocketSession> sessions = Collections.synchronizedSet(new HashSet<WebSocketSession>());
 	
 	// notificationType 만 따로 모아 둔 클래스 의존성 주입
-	private final NotificationTypes notificationTypes;
+	@Autowired
+	private NotificationTypes notificationTypes;
 	
 	// 일반 회원에게 보낼 메시지
 	String contentForMember = null;
@@ -328,6 +330,8 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 			urlForMember = "/myPage/member/memberReview";
 
 			notiCode = 6;
+			
+			// build를 이용해 알림 객체 생성하는 방법
 
 //				memberNotification = Notification.builder()
 //						.receiveMemberNo(reviewMemerNo)
@@ -400,7 +404,6 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 			break;
 
 		case "storeReportComplete":
-//				store = service.selectStoreData(notification.getPkNo());
 
 			// 가게 신고 (해결 완료)
 			store = service.storeReportComplete(notification.getPkNo());
