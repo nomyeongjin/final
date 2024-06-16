@@ -123,15 +123,9 @@
     background-color:#F5F5F5;
     border-radius: 5px;
     cursor: pointer;
-
 }   
 
 .reserv-info:hover{
-    background-color: #afafaf;
-    color: white !important;
-}
-
-.reserv-info:active{
     background-color: #afafaf;
     color: white !important;
 }
