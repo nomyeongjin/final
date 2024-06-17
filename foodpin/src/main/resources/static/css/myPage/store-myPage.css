@@ -857,6 +857,7 @@
    height: 80px;
    border-radius: 5px;
    border: 1px solid var(--main-color);
+   object-fit: cover;
 }
 
 /* 이미지 제거 x 버튼 */
