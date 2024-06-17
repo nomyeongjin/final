@@ -1250,3 +1250,8 @@
 .reviewAll a, .reviewAnswered a, .reviewUnanswered a{
    color: #2B3151 !important;
 }
+
+.review-menu{
+   color: #696969;
+   font-size: 15px;
+}

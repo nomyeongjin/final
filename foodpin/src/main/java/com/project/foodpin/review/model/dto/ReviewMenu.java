@@ -16,4 +16,6 @@ public class ReviewMenu {
 	private int reviewNo;
 	private int menuNo;
 	
+	private String menuTitle;
+	
 }

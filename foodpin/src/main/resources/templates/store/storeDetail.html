@@ -672,6 +672,8 @@
         
                             <th:block>
                                 <div class="storereview-bottom">
+                                   
+                                    
                                     
                                     <th:block th:if="${!#lists.isEmpty(uploadList)}">
                                         <p th:if="*{uploadList}">주문 내역</p>
@@ -681,7 +683,13 @@
                                         <th:block th:each=" upload : *{uploadList}">
                                             <img class="review-look" th:src="|${upload.imagePath}${upload.imgRename}|">
                                         </th:block>
+
                                     </div>
+                                    <th:block>
+                                        <div>
+                                            메뉴 :<span th:each=" menu : *{reviewMenuList}" th:text="| ${menu.menuTitle}. |" class="review-menu"></span>
+                                        </div>
+                                    </th:block>
     
                                     <p>해시태그</p>
                                     <div class="review-hashtag">
@@ -709,6 +717,7 @@
                                     </p>
                                 </div>
                             </th:block>
+
 
                         </div>
                     </th:block>

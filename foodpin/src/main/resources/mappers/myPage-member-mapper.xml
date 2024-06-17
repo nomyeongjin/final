@@ -29,6 +29,14 @@
 			ofType = "ReviewReply"
 		/>
 		
+		<collection 
+			property="reviewMenuList"
+			select = "reviewUpdateMenu"
+			column = "REVIEW_NO"
+			javaType = "java.util.ArrayList"
+			ofType = "ReviewMenu"
+		/>
+		
 	</resultMap>
 
 	<!-- 회원 정보 수정 -->
@@ -242,6 +250,12 @@
 		JOIN STORE S ON (R.STORE_NO = S.STORE_NO)
 		WHERE REVIEW_NO = #{reviewNo}
 		AND REPLY_DEL_FL = 'N'
+	</select>
+	
+	<select id="reviewUpdateMenu" resultType="ReviewMenu">
+		SELECT * FROM REVIEW_MENU
+		JOIN MENU USING (MENU_NO)
+		WHERE REVIEW_NO = #{reviewNo}
 	</select>
 	
 
