@@ -205,11 +205,15 @@ header {
    font-weight: bold;
 }
 
+#logoutBtn{
+   width: 80px;
+}
+
 .profileArea{
    display: flex;
-   align-content: center;
    align-items: center;
-   justify-content: center;
+   justify-content: end;
+   /* width: 200px; */
 }
 .profileArea>a{
    display: flex;
@@ -232,7 +236,7 @@ header {
 /* 로고(사진, 글) */
 .home-logo-area {
    width: 100%;
-   height: 80px;
+   height: 90px;
    display: flex;
    align-items: flex-end;
    justify-content: center;
