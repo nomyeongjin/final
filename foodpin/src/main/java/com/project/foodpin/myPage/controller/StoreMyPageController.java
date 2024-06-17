@@ -364,7 +364,6 @@ public class StoreMyPageController {
 		List<Reservation> reservList = service.reservConfirm(storeNo);
 		
 		// 확정된 예약 조회 결과 없는 경우
-//		if(reservList.isEmpty()) return null; 
 			
 		List<Map<String, Object>> listMap = new ArrayList<>();
 		
