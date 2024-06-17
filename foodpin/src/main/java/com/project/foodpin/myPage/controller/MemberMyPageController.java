@@ -50,11 +50,18 @@ public class MemberMyPageController {
 	public String updateInfo(
 		Member inputMember,
 		@RequestParam("uploadImg") MultipartFile profileImg,
+		@RequestParam(value = "statusCheck", required = false, defaultValue = "-1") int statusCheck,
 		@SessionAttribute("loginMember") Member loginMember,
 		RedirectAttributes ra) throws IllegalStateException, IOException {
 		
 		int memberNo = loginMember.getMemberNo();
 		inputMember.setMemberNo(memberNo);
+		
+		if(statusCheck == 0) {
+			inputMember.setProfileImg("/images/user.png");
+		} else if(profileImg.isEmpty()) {
+			inputMember.setProfileImg(loginMember.getProfileImg());
+		}
 		
 		int result = service.updateInfo(profileImg, inputMember);
 		
