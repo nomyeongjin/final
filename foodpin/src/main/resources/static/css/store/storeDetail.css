@@ -996,7 +996,7 @@ hr{
 
 .storereview-top{
     padding: 24px 0;
-    border-bottom: 1px solid var(--main-color);
+    border-bottom: 1px solid #f7aeb1;
     display: flex;
     justify-content: space-between;
 }
@@ -1083,7 +1083,7 @@ hr{
     height: 25px;
     
     text-align: center;
-    border: 1px solid var(--main-color);
+    border: 1px solid #f7aeb1;
     border-radius:24px;
     margin: 10px 0;
 }
@@ -1124,13 +1124,13 @@ hr{
     margin-left: 10px;
     padding: 20px;
     width: 480px;
-    background:#666;
-    color: #fff;
+    background:#EFEFCB;
+    color: #121a49;
     border-radius: 10px;
 }
 
 .reply-content-bubble:after {
-    border-top:15px solid #666;
+    border-top:15px solid #EFEFCB;
     border-left: 16px solid transparent;
     border-right: 0px solid transparent;
     border-bottom: 0px solid transparent;
@@ -1307,7 +1307,7 @@ hr{
 
 .review{
     width: 600px;
-    border: 1px solid var(--main-color);
+    border: 1px solid #ff727a;
     border-radius: 15px;
     padding: 24px;
     padding-top: 12px;
