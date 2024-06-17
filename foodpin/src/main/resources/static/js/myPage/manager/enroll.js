@@ -74,7 +74,7 @@ openStoreDetail.forEach(link => {
 });
 
 function openPopup(row) {
-    popup.querySelector(".storeInfo").innerText = row.getAttribute("data-store-info");
+    // popup.querySelector(".storeInfo").innerText = row.getAttribute("data-store-info");
     popup.querySelector(".storeName").innerText = row.getAttribute("data-store-name");
     popup.querySelector(".ceoName").innerText = `대표자 : ${row.getAttribute("data-member-name")}`;
     popup.querySelector(".ceoTel").innerText = `대표자 전화번호 : ${row.getAttribute("data-member-tel")}`;
