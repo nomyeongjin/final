@@ -204,10 +204,10 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 			offWeek += off + "/";
 		}
 		
-        LocalDate today = LocalDate.now(); // 오늘 날짜
-        LocalDate lastDay = today.plus(7, ChronoUnit.DAYS);
-        
-		List<Off> offDay = mapper.selecDayOff(storeNo); // 고정 휴무일 조회
+//        LocalDate today = LocalDate.now(); // 오늘 날짜
+//        LocalDate lastDay = today.plus(7, ChronoUnit.DAYS);
+//        
+//		List<Off> offDay = mapper.selecDayOff(storeNo); // 고정 휴무일 조회
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("openBreak", openBreak);
