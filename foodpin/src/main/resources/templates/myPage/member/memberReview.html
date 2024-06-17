@@ -114,7 +114,13 @@
                                                     <img class="review-look" th:src="|${upload.imagePath}${upload.imgRename}|">
                                                 </th:block>
                                             </div>
-            
+
+                                            <th:block>
+                                                <div>
+                                                    메뉴 :<span th:each=" menu : *{reviewMenuList}" th:text="| ${menu.menuTitle}. |" class="review-menu"></span>
+                                                </div>
+                                            </th:block>
+                    
                                             <p>해시태그</p>
                                             <div class="review-hashtag">
                                                 <th:block th:each=" hash : *{hashList}">

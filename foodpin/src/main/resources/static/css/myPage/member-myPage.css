@@ -698,3 +698,8 @@ label[for='agree']{
     align-items: center;
     justify-content: center; 
 }
+
+.review-menu{
+    color: #696969;
+    font-size: 15px;
+}
