@@ -3,6 +3,12 @@
    --hotpink : #E14C54;
 }
 
+.archivo-black-regular {
+   font-family: "Archivo Black", sans-serif;
+   font-weight: 400;
+   font-style: normal;
+ }
+ 
 * {
    /* border: 1px solid var(--main-color); */
    box-sizing: border-box;
@@ -243,7 +249,11 @@ header {
    font-size: 46px;
    font-weight: bold;
    color: #363f75;
-   font-family: 'SBAggroB';
+   font-family: 'Archivo Black';
+}
+
+.foodpin-logo{
+   display: flex;
 }
 
 /* ************************************************************************** */
@@ -255,22 +265,33 @@ header {
    position: relative;
    flex-direction: column;
    justify-content: center;
+   margin-bottom: 40px;
    align-items: center;
-   background-color: #EFEFCB;
+   overflow: hidden;
 }
 
-.main-search-container img {
-   height: 100%;
+.swiper-slide img {
    width: 100%;
+   object-fit: contain;
    background-size: cover;
-   opacity: 0.3;
+   opacity: 0.6;
 }
+
+.swiper-slide {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+   cursor: pointer;
+}
+
 
 .search-wrap {
    position: absolute;
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
+   z-index: 1000;
 }
 
 .main-category-container{
@@ -320,7 +341,7 @@ header {
    cursor: pointer;
    display: inline-block;
    width: 100px;
-   height: 40px;
+   height: 60px;
    background-color: white;
    color: black;
    letter-spacing: 1px;
@@ -366,7 +387,8 @@ header {
 }
 
 .main-category-list a button {
-   font-size: 15px;
+   font-size: 17px;
+   font-weight: bold;
 }
 
 /* @keyframes mainCatBtn {
@@ -398,8 +420,6 @@ header {
 
 #main-store-text{
    margin-left: 50px;
-   padding-left: 20px;
-   background-color: #F3C186;
    width: 700px;
    height: 34px;
    display: flex;

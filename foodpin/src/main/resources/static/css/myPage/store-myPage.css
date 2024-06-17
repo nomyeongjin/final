@@ -844,6 +844,7 @@
    height: 80px;
    border-radius: 5px;
    border: 1px solid var(--main-color);
+   object-fit: cover;
 }
 
 /* 이미지 제거 x 버튼 */
@@ -1049,6 +1050,9 @@
    height: 205px;
    border-radius: 5px;
 }
+.review-hashtag{
+   margin-top: 10px;
+}
 
 .review-hashtag span{
    margin: 18px 5px 0 0;
@@ -1076,15 +1080,19 @@
 
 .reply-content-bubble {
    position:relative;
+   font-size: 15px;
    margin: 20px 0px;
    margin-bottom: 10px;
    margin-left: 15px;
-   padding: 20px;
+   height: auto;
+   padding: 10px;
+   overflow: hidden;
    width: 480px;
    background: #EFEFCB;
    color: black;
    border-radius: 10px;
    border: none;
+   resize: none;
 }
 
 .reply-content-bubble:after {

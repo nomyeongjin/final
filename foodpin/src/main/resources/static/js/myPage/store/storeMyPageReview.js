@@ -96,9 +96,16 @@ const storeNo = document.querySelector("#storeNo").value;
 // 답글 제출하는 form
 const replyForm = document.querySelector(".reply-form");
 const replyBtn = document.querySelector(".reply-btn");
+const replyConent = document.querySelector("#replyConent");
 
 replyForm.addEventListener("submit",  e => {
 
+  if(replyConent.value.trim().length == 0){
+    alert("답글을 작성해주세요.");
+    replyConent.focus();
+    e.preventDefault();
+    return;
+  }
   // 버튼 클릭 될 때 form 태그 제출을 막음
   e.preventDefault();
 
@@ -109,3 +116,21 @@ replyForm.addEventListener("submit",  e => {
     replyForm.submit();
   }, 300)
 });
+
+function autoResizeTextarea(textarea) {
+  textarea.style.height = 'auto';
+  textarea.style.height = (textarea.scrollHeight) + 'px';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const textarea = document.getElementById('replyConent');
+  
+  // 초기에 높이를 조정
+  autoResizeTextarea(textarea);
+
+  // 이벤트 리스너 추가
+  textarea.addEventListener('input', function() {
+      autoResizeTextarea(textarea);
+  });
+});
+

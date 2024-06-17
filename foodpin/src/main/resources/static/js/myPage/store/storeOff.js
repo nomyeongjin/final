@@ -184,18 +184,30 @@ dayoffBtn.addEventListener("click", () => {
 
       console.log("폼제출");
       const weekList = document.querySelectorAll(".checked"); // 선택된 li 요소 얻어오기
+      let data;
       const dataList = []; // 값 하나로 묶을 배열 생성
 
-      for(const li of weekList) {
+      // if(weekList.length == 0) {
+      //    data = {
+      //       "offWeek" : null,
+      //       "storeNo" : storeNo
+      //    };
+      // }
 
-         data = {
-            "offWeek" : li.value,
-            "storeNo" : storeNo
-         };
+      // else {
+         for(const li of weekList) {
+            data = {
+               "offWeek" : li.value,
+               "storeNo" : storeNo
+            };
+   
+            dataList.push(data);
+         }
+      // }
 
-         dataList.push(data);
-      }
-      // console.log(dataList);
+
+
+      console.log(dataList);
 
       fetch("/myPage/store/insertOffWeek", {
          method : "POST",

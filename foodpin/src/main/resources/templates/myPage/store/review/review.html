@@ -162,11 +162,11 @@
                                     <div class="store-reply-box">
                                         <div class="store-reply">
                                             <img class="review-store-profile" th:src="${reply.storeImg}" alt="가게 프로필 이미지">
-                                            <input type="text" class="reply-content-bubble" th:value="${reply.replyConent}" id="replyConent" name="replyConent">
+                                            <textarea type="text" id="replyConent" class="reply-content-bubble" name="replyConent" th:text="${reply.replyConent}"></textarea>
                                         </div>
                                         <div class="store-reply-btn">
-                                            <button type="button" class="replyDeleteBtn" th:attr="data-reply-no=${reply.replyNo}">댓글 삭제</button>
-                                            <button type="button" class="replyUpdateBtn" th:attr="data-reply-no=${reply.replyNo}">댓글 수정</button>
+                                            <button type="button" class="replyDeleteBtn" th:attr="data-reply-no=${reply.replyNo}">답글 삭제</button>
+                                            <button type="button" class="replyUpdateBtn" th:attr="data-reply-no=${reply.replyNo}">답글 수정</button>
                                         </div>
                                     </div>
                                 </th:block>
