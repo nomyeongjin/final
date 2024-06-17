@@ -374,6 +374,16 @@
 	<select id="selectWeekOff">
 		SELECT OFF_WEEK FROM "OFF_WEEK" WHERE STORE_NO = #{storeNo}
 	</select>
+	
+	<!-- 지정 휴무일 조회 -->
+	<select id="selectDayOff">
+		SELECT COUNT(*) 
+		FROM OFF_DAY 
+		WHERE STORE_NO = 1 AND 
+		<foreach collection="arr" item="item" open = "(" close=")" >
+			TRUNC(SYSDATE + item) BETWEEN TRUNC(OFF_DAY_START) AND TRUNC(OFF_DAY_END)
+		</foreach>
+	</select>
 
    
   

@@ -42,14 +42,8 @@
 	<select id="selectstoreInfo">
 		SELECT STORE_NO, STORE_IMG, STORE_NAME, STORE_TEL, STORE_LOCATION, OPEN_HOUR, CLOSE_HOUR, 
 			BREAKTIME_START, BREAKTIME_END, STORE_STATUS, STORE_MAX_NUMBER, STORE_MAX_TABLE, STORE_INFO
-			
 		FROM "STORE"
-		WHERE STORE_NO = (
-			SELECT STORE_NO
-			FROM "STORE"
-			JOIN MEMBER USING(MEMBER_NO)
-			WHERE MEMBER_NO = #{memberNo}
-		)
+		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
 	<!-- 가게 정보 조회 -->
@@ -81,28 +75,19 @@
 	
 	<!-- 가게 정보 수정 -->
 	<update id="storeInfoUpdate">
-		UPDATE "STORE" SET STORE_IMG = #{storeImg}, 
+		UPDATE "STORE" SET STORE_IMG = #{storeImg}, STORE_STATUS = #{storeStatus},
 			STORE_MAX_NUMBER = #{storeMaxNumber}, STORE_MAX_TABLE = #{storeMaxTable}, 
 			OPEN_HOUR = #{openHour}, CLOSE_HOUR = #{closeHour}, 
 			BREAKTIME_START = #{breaktimeStart}, BREAKTIME_END = #{breaktimeEnd}, STORE_INFO = #{storeInfo}
 		
 		<if test='storeNo == null'>
-		WHERE STORE_NO =(
-			SELECT STORE_NO FROM "STORE"
-			JOIN MEMBER USING(MEMBER_NO)
-			WHERE MEMBER_NO = #{memberNo}
-		)
+		WHERE MEMBER_NO = #{memberNo}
 		</if>
 		
 		<if test='storeNo != null'>
 		WHERE STORE_NO = #{storeNo} 
 		</if>
 		
-	</update>
-	
-	<!-- 예약 여부 변경 -->
-	<update id="storeStautusUpdate">
-		UPDATE "STORE" STORE_STATUS = #{storeStatus} WHERE STORE_NO = #{storeNo}
 	</update>
 	
 	<!-- 카테고리 삭제 -->

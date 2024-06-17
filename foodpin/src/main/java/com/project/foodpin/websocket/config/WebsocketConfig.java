@@ -8,6 +8,7 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import com.project.foodpin.chatting.handler.ChattingWebsocketHandler;
 import com.project.foodpin.websocket.handler.NotiWebsocketHandler;
+import com.project.foodpin.websocket.handler.NotificationWebsocketHandler;
 
 import lombok.RequiredArgsConstructor;
 

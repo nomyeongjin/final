@@ -133,6 +133,12 @@ public interface DetailStoreMapper {
 	 */
 	List<String> selectWeekOff(String storeNo);
 
+	/** 지정 휴무일 조회
+	 * @param storeNo
+	 * @return
+	 */
+	List<Off> selecDayOff(String storeNo);
+
 
 
 

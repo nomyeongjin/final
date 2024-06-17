@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return new Date().getDay();
     }
 
+    
+
     // let opened = ""; // 영업중/휴무일 표시할 변수s
 
     async function generateSchedule() {
@@ -44,9 +46,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const schedule = []; // 영업 시간 담을 배열
 
-        const offWeekArr = [];
-        offWeekArr.push(map.offWeek.split('/'));
-        console.log(offWeekArr);
+        let offWeekArr = [];
+        offWeekArr.push(map.offWeek.slice(0, -1).split('/'));
+        // console.log(offWeekArr);
+
+        // span에 영업 상태 표시
+        if (offWeekArr.includes(currentDay)) storeStatusText.innerText = "휴무일";
+        else storeStatusText.innerText = "영업일";
 
         let openClose = "";
         let breaktime = "";
@@ -55,17 +61,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const dayIndex = (currentDay + i) % 7; // dayIndex : 0:일요일 ~ 6:토요일
             const day = daysOfWeek[dayIndex]; // day : 해당 요일의 이름
 
-            // span에 영업 상태 표시
-            offWeekArr.forEach(item => {
-                if(item == dayIndex) {
-                    storeStatusText.innerText = "휴무일";
-                    console.log("휴무일");
-                }
-                else {
-                    storeStatusText.innerText = "영업일";
-                    console.log("영업일");
-                }
-            });
 
             const date = new Date(currentDate);
             date.setDate(currentDate.getDate() + i); // date : 해당 날짜

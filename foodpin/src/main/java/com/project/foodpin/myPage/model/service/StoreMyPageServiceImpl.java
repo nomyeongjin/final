@@ -83,35 +83,34 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 		
 		String updatePath = "";
 		String rename = "";
+		String storeNo = inputStore.getStoreNo();
 		
 
-		// 변경된 이미지가 있는 경우
-		if( !inputStore.getStoreImgInput().isEmpty()) { 
-			
-			rename = Utility.fileRename(inputStore.getStoreImgInput().getOriginalFilename());
-			updatePath = storeWebPath + rename;
-		} 
-		
-		inputStore.setStoreImg(updatePath);
-		
-		int result = mapper.storeInfoUpdate(inputStore);
+	    // 이미지 업로드 처리
+	    if (inputStore.getImgStatus() == 1) { 
+	        rename = Utility.fileRename(inputStore.getStoreImgInput().getOriginalFilename());
+	        updatePath = storeWebPath + rename;
+	    } else if (inputStore.getImgStatus() == -1) {
+	        // 새로운 이미지가 업로드되지 않았고 상태가 -1인 경우 기존 이미지 경로 유지
+	        updatePath = mapper.selectStoreImg(storeNo);
+	    }
+
+	    // 가게 객체에 이미지 경로 설정
+	    inputStore.setStoreImg(updatePath);
+
+	    // 가게 정보 업데이트
+	    int result = mapper.storeInfoUpdate(inputStore);
 		
 		// 변경된 이미지가 있는 경우만 이미지 파일 저장
-		if(result > 0 || inputStore.getImgStatus() == 1) {
-			
-		} 
-			
+		if(result > 0 && inputStore.getImgStatus() == 1) {
 			try {
 				inputStore.getStoreImgInput().transferTo(new File(storeFolderPath + rename));
 				
 			} catch (Exception e) {
 				
 				e.printStackTrace();
-			} 
-		
-		
-		
-		
+			}
+		} 
 		
 		// 카테고리 변경
 		String[] inputCategorys = inputStore.getCategorys().split("/");
@@ -133,16 +132,6 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 				mapper.categoryUpdate(categoryMap); 
 	        }
 		}
-		
-		
-		
-		
-
-
-
-
-
-		
 		return result;
 	}
 	
@@ -150,7 +139,7 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 
 	// 메뉴 조회
 	@Override
-	public List<Menu> menuSelect(int storeNo) {
+	public List<Menu> menuSelect(String storeNo) {
 		
 		return mapper.menuSelect(storeNo);
 	}
@@ -225,14 +214,14 @@ public class StoreMyPageServiceImpl implements StoreMyPageService{
 	
 	// 고정 휴무일 조회
 	@Override
-	public List<Off> selectWeekOff(int storeNo) {
+	public List<Off> selectWeekOff(String storeNo) {
 
 		return mapper.selectWeekOff(storeNo);
 	}
 	
 	// 지정 휴무일 조회
 	@Override
-	public List<Off> calendarOffSelect(int storeNo) {
+	public List<Off> calendarOffSelect(String storeNo) {
 		
 		return mapper.calendarOffSelect(storeNo);
 	}
