@@ -156,7 +156,7 @@ public class StoreMyPageController {
 	 */
 	@GetMapping("menuSelect")
 	@ResponseBody
-	public List<Menu> menuSelect(@RequestParam("storeNo") int storeNo) {
+	public List<Menu> menuSelect(@RequestParam("storeNo") String storeNo) {
 		
 		return service.menuSelect(storeNo);
 	}
@@ -200,22 +200,20 @@ public class StoreMyPageController {
 	 * @param storeNo
 	 * @return offList
 	 */
-	@PostMapping("selectWeekOff")
+	@GetMapping("selectWeekOff")
 	@ResponseBody
-	public List<Off> selectWeekOff(@RequestBody int storeNo) {
+	public List<Off> selectWeekOff(@RequestParam("storeNo") String storeNo) {
 		
-		List<Off> list = service.selectWeekOff(storeNo);
-	
-		return list;
+		return service.selectWeekOff(storeNo);
 	}
 	
 	/** 지정 휴무일 조회 (비동기, 캘린더로 불러오기)
 	 * @param storeNo
 	 * @return map
 	 */
-	@PostMapping("calendarOffSelect")
+	@GetMapping("calendarOffSelect")
 	@ResponseBody
-	public List<Map<String, Object>> calendarOffSelect(@RequestBody int storeNo) {
+	public List<Map<String, Object>> calendarOffSelect(@RequestParam("storeNo") String storeNo) {
 		
 		List<Off> offList = service.calendarOffSelect(storeNo);
 		

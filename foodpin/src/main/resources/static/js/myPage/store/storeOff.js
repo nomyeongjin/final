@@ -9,18 +9,16 @@ let calendar;
 
 const selectWeekOff = () => {
 
+   // console.log(storeNo);
    // 고정 휴무일 DB값 조회 
-   fetch("/myPage/store/selectWeekOff", {
-      method : "POST",
-      headers : {"content-Type" : "application/json"},
-      body : JSON.stringify(storeNo)
-   })
+   fetch("/myPage/store/selectWeekOff?storeNo=" + storeNo)
    .then(resp => resp.json())
    .then(offList => {
-      // console.log(offList);
-      
+      console.log(offList);
+
       if(offList.isEmpty) return;
 
+      else {
          for(let off of offList){
             
             // 기존 고정 휴무일 값과 li중 index 값이 일치시 -> 해당하는 li에 'checked' 클래스 추가
@@ -63,6 +61,7 @@ const selectWeekOff = () => {
                }); break;
             }
          }
+      }
    })
 
    // li 체크시 checked 클래스 toggle
@@ -81,16 +80,12 @@ const selectWeekOff = () => {
  * full Calendar 생성하는 함수
  */
 function calendar_rendering() {
-
+   // console.log(storeNo);
    /*  DB에서 휴무일 목록 조회 */
-   fetch("/myPage/store/calendarOffSelect", {
-      method : "POST",
-      headers : {"content-Type" : "application/json"},
-      body : JSON.stringify(storeNo)
-   })
+   fetch("/myPage/store/calendarOffSelect?storeNo=" + storeNo)
    .then(resp => resp.json())
    .then(listMap => {
-      // console.log(listMap);
+      console.log(listMap);
 
       selectWeekOff();
       // 캘린더 생성
@@ -170,7 +165,7 @@ dayoffBtn.addEventListener("click", () => {
       ul.append(li);
    })
 
-   selectWeekOff();
+   // selectWeekOff();
 
    // 버튼 생성
    const weekBtn = document.createElement("button");
@@ -407,7 +402,7 @@ const updatePopup = (info) => {
 
    const headRow = document.createElement("div"); // 휴무일 수정
    headRow.classList.add("popup-title");
-   headRow.innerText = "휴무일 수정";
+   headRow.innerText = "휴무일 수정"; // 
 
    const titleRow = document.createElement("div"); // 일정명
    titleRow.classList.add("popup-row");
@@ -465,12 +460,11 @@ const updatePopup = (info) => {
    btnRow.append(cancelBtn);
    popupFrm.append(headRow, titleRow, startRow, endRow, btnRow);
    StoreOffContainer.append(popupFrm);
+
+   
    //-------
 
-   /**
-    * (버튼) 취소 - 팝업창
-    */
-   cancelBtn.addEventListener("click", () => {popupFrm.classList.add("blind");})
+
 
 
    // // 중복 휴무 체크
@@ -546,9 +540,10 @@ const updatePopup = (info) => {
       popupFrm.remove();
    })
 
-   window.addEventListener("click", () => {
-      popupFrm.remove();
-   })
+   // window.addEventListener("click", () => {
+   //    popupFrm.remove();
+   // })
+
 
 }
 

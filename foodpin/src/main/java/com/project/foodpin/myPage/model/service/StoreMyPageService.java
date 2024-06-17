@@ -55,7 +55,7 @@ public interface StoreMyPageService {
 	 * @param memberNo
 	 * @return menuList
 	 */
-	List<Menu> menuSelect(int storeNo);
+	List<Menu> menuSelect(String storeNo);
 
 	/** 메뉴 수정
 	 * @param imgUrlList 
@@ -76,13 +76,13 @@ public interface StoreMyPageService {
 	 * @param storeNo
 	 * @return offList
 	 */
-	List<Off> selectWeekOff(int storeNo);
+	List<Off> selectWeekOff(String storeNo);
 
 	/** 지정 휴무일 조회
 	 * @param storeNo
 	 * @return offList
 	 */
-	List<Off> calendarOffSelect(int storeNo);
+	List<Off> calendarOffSelect(String storeNo);
 	
 	/** 지정 휴무일 중복 검색
 	 * @param inputOff

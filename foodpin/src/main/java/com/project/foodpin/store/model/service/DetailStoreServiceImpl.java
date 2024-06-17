@@ -1,6 +1,8 @@
 package com.project.foodpin.store.model.service;
 
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -202,10 +204,10 @@ public class DetailStoreServiceImpl implements DetailStoreService{
 			offWeek += off + "/";
 		}
 		
-		
-		
-		
-//		List<Off> offWeekList = mapper.selectWeekOff(storeNo); // 고정 휴무일 조회
+        LocalDate today = LocalDate.now(); // 오늘 날짜
+        LocalDate lastDay = today.plus(7, ChronoUnit.DAYS);
+        
+		List<Off> offDay = mapper.selecDayOff(storeNo); // 고정 휴무일 조회
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("openBreak", openBreak);

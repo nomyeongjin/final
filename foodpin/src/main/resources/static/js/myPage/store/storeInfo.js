@@ -1,11 +1,11 @@
 /* 본문 영역, 서브 메뉴 버튼 변수 선언 */
 const StoreInfoContainer = document.querySelector(".myPage-content-container"); // 본문 div 영역
 const storeEditFrm = document.querySelector("#storeEditFrm"); // form
+let imgStatus = document.querySelector("#imgStatus"); // form
 
 //-------------- 가게 이미지 --------------
 
 
-let imgStatus = -1; // DB에서 조회한 상태(변화 없음) //  1 : 새 이미지 선택 선택
 let backupInput; // 요소 복제해서 백업하는 변수
 
 /**
@@ -22,7 +22,7 @@ const storeImgDel = () => {
    document.querySelector(".store-img-del").classList.add('hidden'); // x 버튼
    document.querySelector("#storeImgLabel").classList.remove('hidden'); // input label
 
-   imgStatus = 0; // 이미지 여부 체크 0 (삭제)
+   imgStatus.value = "0"; // 이미지 삭제됨
 } // storeImgDel
 
 // x 버튼 클릭시 이미지 삭제
@@ -61,9 +61,10 @@ const changeImageFn = e => {
       document.querySelector(".store-img-del").classList.remove('hidden'); // x 버튼
       document.querySelector("#storeImgLabel").classList.add('hidden'); // input label
    
-      imgStatus = 1; // 1 <- 새 이미지 선택됨
+      imgStatus.value = "1"; // 이미지 변경됨
    
       backupInput = storeImgInput.cloneNode(true);
+
    })
 
    // console.log(storeNo);
@@ -250,8 +251,6 @@ infoBtn.addEventListener("click", () => {
       const storeEditFrm = document.createElement("form"); // storeEditFrm
       storeEditFrm.id = "storeEditFrm";
       storeEditFrm.setAttribute('enctype', 'multipart/form-data');
-      // storeEditFrm.setAttribute('action', '/myPage/store/storeInfoUpdate');
-      // storeEditFrm.setAttribute('method', 'POST');
 
       // 이미지
       const storeImgContainer = document.createElement("div"); // storeImgContainer
@@ -362,6 +361,7 @@ infoBtn.addEventListener("click", () => {
       divMax.classList.add("input-row");
    
       const storeMaxNumber = document.createElement("input"); // input
+      storeMaxNumber.id = "storeMaxNumber";
       storeMaxNumber.classList.add("s-input");
 
       const spanMaxNumber = document.createElement("span");
@@ -369,6 +369,7 @@ infoBtn.addEventListener("click", () => {
       storeMaxNumber.append(spanMaxNumber);
 
       const storeMaxTable = document.createElement("input"); // input
+      storeMaxTable.id = "storeMaxTable";
       storeMaxTable.classList.add("s-input");
 
       const spanMaxTable = document.createElement("span");
@@ -595,14 +596,17 @@ infoBtn.addEventListener("click", () => {
 
       storeInfoEditBtn.addEventListener("click", e => {
 
-         let status = "";
+         let storeStatus = "";
+
          document.querySelectorAll(".store-status-btn").forEach(btn => {
-            if(btn.classList.contains("checked")) status = btn.value;
+            if(btn.classList.contains("checked")) storeStatus = btn.value;
          });
          // console.log(status);
 
          let categorys = "";
          let str = "";
+         console.log(storeStatus);
+
          document.querySelectorAll(".category-btn").forEach(btn => {
       
             if(btn.classList.contains("checked")) {
@@ -610,13 +614,10 @@ infoBtn.addEventListener("click", () => {
                categorys += str;
             } 
          }); // (".category-btn").forEach
-         // console.log(categorys);
+         console.log(categorys);
 
-         categorysinput.value = ctg;
-         console.log(categorysinput.value);
-      
          // 유효성 검사
-         if(ctg.length < 1){
+         if(categorys.length < 1){
             alert("하나 이상의 카테고리를 선택해주세요.");
             e.preventDefault();
             return;
@@ -624,6 +625,9 @@ infoBtn.addEventListener("click", () => {
       
          // 최대 인원수
          const storeMaxNumber = document.querySelector("#storeMaxNumber");
+
+         console.log(storeMaxNumber);
+         console.log(storeMaxNumber.value);
          if(storeMaxNumber.value.length === 0) {
             alert("한 테이블당 착석 가능한 최대 인원을 입력해주세요.");
             e.preventDefault();
@@ -669,8 +673,8 @@ infoBtn.addEventListener("click", () => {
          let formData = new FormData();
 
          formData.append('storeNo', storeNo);
-         formData.append('storeImgInput',document.querySelector("#storeImgInput").files[0]);
-         formData.append('storeStatus', status);
+         formData.append('image',document.querySelector("#storeImgInput").files[0]);
+         formData.append('imgStatus', imgStatus); // 이미지 변경 상태
          formData.append('openHour', document.querySelector("#openHour").value);
          formData.append('closeHour', document.querySelector("#closeHour").value);
          formData.append('breaktimeStart', document.querySelector("#breaktimeStart").value);
@@ -680,9 +684,10 @@ infoBtn.addEventListener("click", () => {
 
          fetch("/myPage/store/storeInfoUpdateJs", {
             method : "POST",
+            headers : {},
             body : formData
          })
-         .then(resp => resp.json())
+         .then(resp => resp.text())
          .then(result => {
             console.log(result);
          }).catch( err => console.log(err));
@@ -701,8 +706,7 @@ document.querySelector("#storeEditFrm").addEventListener("submit", e => {
    document.querySelectorAll(".store-status-btn").forEach(btn => {
 
       if(btn.classList.contains("checked")) {
-
-         // checkData.category = true;
+         console.log(btn.value);
          storeStatustInput.value = btn.value;
       } 
    });
@@ -749,12 +753,17 @@ document.querySelector("#storeEditFrm").addEventListener("submit", e => {
 
    // 테이블수
    const storeMaxTable = document.querySelector("#storeMaxTable");
+   const pattern = /^[0-9]$/;
    if(storeMaxTable.value.length === 0 || storeMaxTable.value < 1) {
-      alert("예약 가능한 가게의 테이블 수를 입력해주세요.");
+      alert("가게의 테이블 수는 최소 1개 이상만 입력이 가능합니다.");
       e.preventDefault();
       return;
-   } else if(storeMaxNumber.value < 1) {
-      alert("가게의 테이블 수는 최소 1개 이상만 입력이 가능합니다.");
+   } else if(storeMaxNumber.value.length === 0 || storeMaxNumber.value < 1) {
+      alert("한 테이블에 착석 가능한 최소 인원이 올바르지 않습니다.");
+      e.preventDefault();
+      return;
+   } else if(pattern.test(storeMaxTable) || pattern.test(storeMaxNumber)){
+      alert("숫자만 입력해주세요.");
       e.preventDefault();
       return;
    }

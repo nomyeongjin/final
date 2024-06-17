@@ -43,6 +43,12 @@ public interface StoreMyPageMapper {
 	 */
 	List<StoreCategory> selectCategory(String storeNo);
 	
+	/** 기존 가게 사진 패스 조회
+	 * @param storeNo
+	 * @return
+	 */
+	String selectStoreImg(String storeNo);
+	
 	/** 가게 정보 수정
 	 * @param inputStore
 	 * @return result
@@ -59,7 +65,7 @@ public interface StoreMyPageMapper {
 	 * @param string
 	 * @return 
 	 */
-	int categoryDelete(String string);
+	int categoryDelete(String storeNo);
 
 	/** 카테고리 수정
 	 * @param categoryMap
@@ -73,7 +79,7 @@ public interface StoreMyPageMapper {
 	 * @param memberNo
 	 * @return menuList
 	 */
-	List<Menu> menuSelect(int storeNo);
+	List<Menu> menuSelect(String storeNo);
 	
 	/** 메뉴 번호 조회
 	 * @param inputMenuList
@@ -137,13 +143,13 @@ public interface StoreMyPageMapper {
 	 * @param storeNo
 	 * @return offList
 	 */
-	List<Off> selectWeekOff(int storeNo);
+	List<Off> selectWeekOff(String storeNo);
 
 	/** 지정 휴무일 변경
 	 * @param storeNo
 	 * @return offList
 	 */
-	List<Off> calendarOffSelect(int storeNo);
+	List<Off> calendarOffSelect(String storeNo);
 	
 	/** 지정 휴무일 등록
 	 * @param inputOff
@@ -302,11 +308,8 @@ public interface StoreMyPageMapper {
 	 */
 	int deleteReply(int replyNo);
 
-	/** 기존 가게 사진 패스 조회
-	 * @param storeNo
-	 * @return
-	 */
-	String selectStoreImg(String storeNo);
+
+
 
 
 
