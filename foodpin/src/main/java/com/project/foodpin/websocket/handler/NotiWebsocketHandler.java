@@ -37,8 +37,7 @@ public class NotiWebsocketHandler extends TextWebSocketHandler {
 	private Set<WebSocketSession> sessions = Collections.synchronizedSet(new HashSet<WebSocketSession>());
 	
 	// notificationType 만 따로 모아 둔 클래스 의존성 주입
-	@Autowired
-	private NotificationTypes notificationTypes;
+	private final NotificationTypes notificationTypes;
 	
 	// 일반 회원에게 보낼 메시지
 	String contentForMember = null;
