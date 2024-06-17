@@ -436,7 +436,7 @@ header {
 }
 
 .store-name{
-   margin: 20px;
+   margin: 20px 0;
 }
 .main-store-img{
    width: 100%;
@@ -455,6 +455,13 @@ header {
 
 .likeCount {
    position: absolute;
+   border: 1px solid var(--hotpink);
+   border-radius: 15px;
+   width: 50px;
+   height: 25px;
+   text-align: center;
+   padding-top: 3px;
+   background-color: white;
    top: 10px;
    right: 10px;
    font-size: 15px;

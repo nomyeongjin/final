@@ -53,7 +53,6 @@
 
                             <th:block th:unless="${#lists.isEmpty(storeMember)}">
                                 <tr th:each="member : ${storeMember}"
-                                    th:data-store-info="${member.storeInfo}"
                                     th:data-member-name="${member.memberName}" 
                                     th:data-store-name="${member.storeName}"
                                     th:data-member-email="${member.memberEmail}"
@@ -79,7 +78,6 @@
                     <div id="popup" class="popup" >
                         <div class="popup-content">
                             <span class="close-popup">&times;</span>
-                            <p class="storeInfo"></p>
                             <h2 class="storeName"></h2>
                             <div class="ceoName"></div>
                             <div class="ceoTel"></div>
