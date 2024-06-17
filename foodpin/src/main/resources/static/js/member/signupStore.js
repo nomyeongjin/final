@@ -667,7 +667,7 @@ storeName.addEventListener("input", e => {
       return;
     }
   
-    const regExp = /^(02\d{7,8}|0\d{2}\d{7,8}|01[016789]\d{7,8})$/;
+    const regExp = /^(0\d{1,2}\d{3,4}\d{4}|010\d{4}\d{4})$/;
 
     if( !regExp.test(inputStoreTel) ){
       storeTelMessage.innerText = "유효하지 않은 전화번호 형식입니다";
