@@ -5,7 +5,9 @@
 const bookmarkCheck = document.querySelector("#bookmarkCheck");
 bookmarkCheck.addEventListener("click", e=>{
 
-  
+  console.log( "memberNo" , loginMember);
+  console.log( "storeNo"  ,storeNo);
+  console.log( "bookmark", bookmark);
     // 3. 준비된 3개의 변수를 객체로 저장 -> (Json 변환 예정)
     const obj = {
         "memberNo" : loginMember,

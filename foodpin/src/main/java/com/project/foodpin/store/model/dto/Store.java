@@ -63,6 +63,9 @@ public class Store {
 	
 	// 가게 검색 페이지의 가게 해시태그 목록
 	public List<ReviewHash>searchStoreHashList;
+	
+	// 가게 검색 가게 상세 내용
+	public List<Store>searchStoreList;
 
 	// 찜
 	private int likeCount;
@@ -92,5 +95,5 @@ public class Store {
     private String postcode;
     private String address;
     private String detailAddress;
-	
+
 }

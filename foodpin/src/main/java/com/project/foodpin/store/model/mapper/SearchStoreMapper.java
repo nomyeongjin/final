@@ -13,6 +13,8 @@ import com.project.foodpin.store.model.dto.StoreCategory;
 @Mapper
 public interface SearchStoreMapper {
 
+	
+	List<Store> searchStore(Map<String, Object> map);
 	/**
 	 * 카테고리에 해당하는 가게 리스트 조회
 	 * 
@@ -48,32 +50,7 @@ public interface SearchStoreMapper {
 	 */
 	List<Category> selectSearchCategory();
 
-	/*	
-		*//**
-			 * 가게 찜 해제
-			 * 
-			 * @param map
-			 * @return
-			 */
-	/*
-	 * int deleteSearchStoreLike(Map<String, Object> map);
-	 * 
-	 *//**
-		 * 가게 찜 체크
-		 * 
-		 * @param map
-		 * @return
-		 */
-	/*
-	 * int insertSearchStoreLike(Map<String, Object> map);
-	 * 
-	 *//**
-		 * 가게 찜 개수 조회
-		 * 
-		 * @param object
-		 * @return
-		 *//*
-			 * int selectSearchLikeCount(Object object);
-			 */
+	
+
 
 }

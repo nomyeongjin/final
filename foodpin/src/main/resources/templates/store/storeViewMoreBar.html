@@ -25,7 +25,7 @@
                     <th:block th:if="${mainSearch==null}">
                         
                         <input type="text" class="input-box" 
-                         placeholder="지역, 카테고리, 가게 검색"
+                         placeholder="주소, 카테고리, 가게 검색"
                          name="searchStoreR" id="searchStoreR" >
                     </th:block>
                     
@@ -62,29 +62,28 @@
             
         </div>
 
-        <div class="search-region">
-            <label for="region">지역 선택</label>
-            <select name="region" id="region">
-                <option>서울</option>
-                <option>경기</option>
-                <option>인천</option>
-                <option>제주</option>
-                <option>세종</option>
-                <option>광주</option>
-                <option>대구</option>
-                <option>대전</option>
-                <option>부산</option>
-                <option>울산</option>
-                <option>강원</option>
-                <option>경북</option>
-                <option>경남</option>
-                <option>전북</option>
-                <option>전남</option>
-                <option>충북</option>
-                <option>충남</option>
-            </select>
-          
-        </div>
+         <div class="search-region">
+        <label for="region">지역 선택</label>
+        <select id="region-select">
+            <option value="">-선택-</option>
+            <option value='1'>서울</option>
+            <option value='2'>부산</option>
+            <option value='3'>대구</option>
+            <option value='4'>인천</option>
+            <option value='5'>광주</option>
+            <option value='6'>대전</option>
+            <option value='7'>울산</option>
+            <option value='8'>강원</option>
+            <option value='9'>경기</option>
+            <option value='10'>경남</option>
+            <option value='11'>경북</option>
+            <option value='12'>전남</option>
+            <option value='13'>전북</option>
+            <option value='14'>제주</option>
+            <option value='15'>충남</option>
+            <option value='16'>충북</option>
+        </select>
+    </div>
 
         <span class="searchbar-line">-</span>
         <!-- 검색창 아래 내용 -->
@@ -97,34 +96,20 @@
                 <div class="storelist-typecontainer">
 
                     <div>
-                        <span>주변 가게</span>
+                        <span>내 주변 가게</span>
                     </div>
 
-    <!--                  <div>
-                        
-                        <div>
-                            <span >
-                                <i class="fa-solid fa-angle-down"></i>
-                            </span>
-                            <span >
-                                <i class="fa-solid fa-angle-up"></i>
-                            </span>
-    
-                        </div>
-                        
-                    </div>
--->
                 </div>
                 
 
-                <div class="storelist-typeBtnbox">
+         <!--        <div class="storelist-typeBtnbox">
                     
                     <button id="storeSearchReviewBtn">• 리뷰순</button>
                     <button id="storeSearchLikeBtn">• 좋아요순</button>
                     <button id="storeRatingBtn">• 평점순</button>
                     
                 </div>
-
+ -->
                 
             </div>
 
@@ -134,18 +119,18 @@
             <div class="searchstore-detailcontainer">
 
              
-                <th:block th:if="${#lists.isEmpty(searchStoreList) and #lists.isEmpty(storeAllList)}">
+                <div th:if="${#lists.isEmpty(searchStoreList) and #lists.isEmpty(storeAllList)}" >
                     <div class="searchstore-none">
                         <span>해당 가게가 없습니다.</span> 
                     </div>
-                </th:block>
+                </div>
 
                 
                 <div class="searchstore-storeList" th:each="store : ${searchStoreList}" th:object="${store}" >
                     
                     
-                    <div>
-
+                    <div  class="storeNoI" th:data-storeNo="${store.storeNo}">
+                        
                         <div>
                             <a th:href="'/store/storeDetail/' + ${store.storeNo}" >
                             <img th:src="${store.storeImg}" id="searchStoreImg">
@@ -174,8 +159,7 @@
                             <div class="bookmark-box">
                                   
                                 <th:block th:if="${session.loginMember?.memberCode == 1}">
-                                    <i class="fa-heart" id="bookmarkCheck"
-                                    
+                                    <i class="fa-heart bookmarkCheck" th:data-bookmark="${store.bookmark}"
                                     th:classappend="*{bookmark == 1} ? fa-solid : fa-regular"></i
                                     
                                     >
@@ -296,7 +280,8 @@
                 <div class="searchstore-storeList" th:each="store : ${storeAllList}" th:object="${store}" >
                     
                     
-                    <div>
+                    <div class="storeNoI" th:data-storeNo="${store.storeNo}"></div>
+                       
 
                         <div>
                             <a th:href="'/store/storeDetail/' + ${store.storeNo}" >
@@ -315,8 +300,7 @@
                                     가게 이름
                                 </span>
                                 </a>
-
-                                <th:block th:each="category : ${searchStoreCategoryList}">
+                                <th:block th:each="category : ${store.searchStoreCategoryList}">
                                     <span  class="searchstore-categoryL" th:text="${category.categoryTitle}">가게 카테고리</span>
                                 </th:block>
                                 <a class="storesearch-reservationLink" th:href="'/store/storeDetail/' + ${store.storeNo} + '/reservation'" >예약</a>
@@ -326,11 +310,12 @@
                             <div class="bookmark-box">
                                   
                                 <th:block th:if="${session.loginMember?.memberCode == 1}">
-                                    <i class="fa-heart" id="bookmarkCheck"
+                                    <i class="fa-heart bookmarkCheck" th:data-bookmark="${bookmark}"
                                     
                                     th:classappend="*{bookmark == 1} ? fa-solid : fa-regular"></i
                                     
                                     >
+
 
                                 </th:block>
                             
