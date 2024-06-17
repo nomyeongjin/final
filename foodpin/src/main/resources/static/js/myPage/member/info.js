@@ -35,20 +35,25 @@ document.addEventListener('DOMContentLoaded', function() {
 /* 회원정보 수정 */
 const memberInfo = document.querySelector("#updateInfo");
 
+let statusCheck = -1;
 let backupInput;
 
 if(memberInfo != null) {
 
     const profileImg = document.querySelector("#profileImg");
-    const profileInput = document.querySelector("#profileInput");
+    let profileInput = document.querySelector("#profileInput");
     const deleteImage = document.querySelector("#deleteImage");
 
     const changeImageFn = e => {
         const maxSize = 1024 * 1024 * 5;
-
         const file = e.target.files[0];
 
         if(file == undefined) {
+            return;
+        }
+
+        if(file.size > maxSize) {
+            alert("5MB 이하의 이미지 파일을 선택해 주세요");
             const temp = backupInput.cloneNode(true);
             profileInput.after(backupInput);
             profileInput.remove();
@@ -58,25 +63,12 @@ if(memberInfo != null) {
             return;
         }
 
-        if(file.size > maxSize) {
-            alert("5MB 이하의 이미지 파일을 선택해 주세요");
-
-                const temp = backupInput.cloneNode(true);
-                profileInput.after(backupInput);
-                profileInput.remove();
-                profileInput = backupInput;
-                profileInput.addEventListener("change", changeImageFn);
-                backupInput = temp;
-                return;
-        }
-        
-
         const reader = new FileReader();
-
         reader.readAsDataURL(file);
         reader.addEventListener("load", e => {
             const url = e.target.result;
             profileImg.setAttribute("src", url);
+            statusCheck = 1;
             backupInput = profileInput.cloneNode(true);
         });
     }
@@ -84,6 +76,7 @@ if(memberInfo != null) {
     profileInput.addEventListener("change", changeImageFn);
 
     deleteImage.addEventListener("click", () => {
+        statusCheck = 0;
         profileImg.src = "/images/user.png";
         profileInput.value = '';
         backupInput = undefined;
@@ -128,6 +121,13 @@ if(memberInfo != null) {
             e.preventDefault();
             return;
         }
+
+        const statusCheckInput = document.createElement("input");
+        statusCheckInput.type = "hidden";
+        statusCheckInput.name = "statusCheck";
+        statusCheckInput.value = statusCheck;
+        memberInfo.appendChild(statusCheckInput);
+
     });
 }
 
