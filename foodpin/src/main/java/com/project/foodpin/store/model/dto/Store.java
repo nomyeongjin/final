@@ -41,6 +41,7 @@ public class Store {
 	public int memberNo;
 	
 	private MultipartFile storeImgInput;
+	private MultipartFile image;
 	private int imgStatus;
 	
 	//가게 휴무일 목록
