@@ -780,11 +780,20 @@ document.querySelector("#storeEditFrm").addEventListener("submit", e => {
 
    if(categorys.isEmpty) {
       alert("하나 이상의 카테고리를 선택해주세요.");
+      e.preventDefault();
+      return;
    }
 
    const storeInfo = document.querySelector("#storeInfo").value;
    if(storeInfo.trim().length === 0) {
       alert("가게 소개를 입력해주세요.");
+      e.preventDefault();
+      return;
+   }
+   if(storeInfo.length > 999) {
+      alert("입력 내용은 너무 길게 입력할 수 없습니다.");
+      e.preventDefault();
+      return;
    }
 
 });
