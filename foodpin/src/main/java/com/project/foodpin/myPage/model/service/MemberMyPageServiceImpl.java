@@ -49,8 +49,9 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		
 		if(!profileImg.isEmpty()) {
 			rename = Utility.fileRename(profileImg.getOriginalFilename());
-			
 			updatePath = profileWebPath + rename;
+		} else {
+			updatePath = inputMember.getProfileImg();
 		}
 		
 		Member mem = Member.builder()
@@ -63,12 +64,10 @@ public class MemberMyPageServiceImpl implements MemberMyPageService{
 		
 		int result = mapper.updateInfo(mem);
 
-		if(result > 0) {
-			if(!profileImg.isEmpty()) {
-				profileImg.transferTo(new File(profileFolderPath + rename));
-			}
-			inputMember.setProfileImg(updatePath);
+		if(result > 0 && !profileImg.isEmpty()) {
+			profileImg.transferTo(new File(profileFolderPath + rename));
 		}
+			inputMember.setProfileImg(updatePath);
 		return result;
 	}
 
