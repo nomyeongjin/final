@@ -78,7 +78,14 @@ const selectTimeFn = async (reservDate) => {
             getTimeSplit(start, end, 30);
         } 
 
-        // 만약 closeHour가 00:00이라면
+        // openHour가 00:00이라면 임시로 10:00로 지정
+        if(openHour >= "00:00") {
+            let start = "10:00";
+            openHour = start;
+            getTimeSplit(start, closeHour, 30);
+        }
+
+        // 만약 closeHour가 00:00이라면 임시로 22:00로 지정
         if (closeHour >= "00:00") {
             let end = "22:00";
             closeHour = end;
