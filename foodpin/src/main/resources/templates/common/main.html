@@ -55,7 +55,7 @@
                   </button>
 
                   <input type="text" class="input-box" name="mainSearch" id="mainSearch" 
-                   placeholder="지역, 카테고리 또는 식당명 입력">
+                   placeholder="카테고리 또는 식당명 입력">
 
    
                 </div>
@@ -113,12 +113,12 @@
         <div class="main-store-image-content">
 
           <div id="main-store-text">
-            <p>내 근처 맛집</p>
+            <p>실시간 인기 맛집</p>
           </div>
           
           <div class="main-store-img" >
             
-              <a class="store-img" th:each="store : ${storeList}"  th:if="${storeStat.index} lt 4"
+              <a class="store-img" th:each="store : ${storeList}"  th:if="${storeStat.index} lt 8"
               th:href="'/store/storeDetail/' + ${store.storeNo}"> 
                 <img th:src="${store.storeImg}" class="store-thumbnail">
                 <span class="store-name" th:text="${store.storeName}">가게 이름</span>

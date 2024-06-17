@@ -84,203 +84,197 @@ const searchCategoryBtnBox = document.querySelector('.searchcategory-Btnbox')
 const bars = document.querySelector('.bars')
 const shortBar = document.querySelector('.short-bar')
 
-shortBar.addEventListener('click', ()=>{
+
+shortBar.addEventListener('click', () => {
     shortBar.style.display = 'none';
     bars.style.display = 'flex';
 
-    searchCategoryCon.style.transform = 'translateY(-100%)';
-    searchCategoryCon.style.transition = 'transform 0.4s ease-out';
-    searchCategoryCon.style.transition = 'transition:height 1s';
-    /* searchCategoryCon.style.height = '166px'; */
- 
-})
+    // 트랜지션 설정 (transform과 height 모두 포함)
+    searchCategoryCon.style.transition = 'transform 0.6s ease-in, height 1s';
+    searchCategoryCon.style.transform = 'translateY(-700%)';
+    searchCategoryCon.style.height = '0px';
+});
 
-bars.addEventListener('click', ()=>{
+bars.addEventListener('click', () => {
     bars.style.display = 'none';
     shortBar.style.display = 'flex';
-    
+
+    // 트랜지션 설정 (transform과 height 모두 포함)
+    searchCategoryCon.style.transition = 'transform 0.6s ease-out, height 0.4s';
+    searchCategoryCon.style.height = '170px';
     searchCategoryCon.style.transform = 'translateY(0%)';
-    searchCategoryCon.style.transition = 'transform 0.4s ease-out';
-    
-    
-})
+});
+  /* ************************************************************ */
 
-
- 
 /* ************************************* 지도 ******************************************* */
 var mapContainer;
 var map;
+let markers = [];
+
+// 각 지역의 중심 좌표를 저장할 객체
+const regionCenters = {
+    '1': new kakao.maps.LatLng(37.5665, 126.9780), // 서울
+    '2': new kakao.maps.LatLng(35.1796, 129.0756), // 부산
+    '3': new kakao.maps.LatLng(35.8722, 128.6014), // 대구
+    '4': new kakao.maps.LatLng(37.4562557, 126.7052062), // 인천
+    '5': new kakao.maps.LatLng(35.1595, 126.8526), // 광주
+    '6': new kakao.maps.LatLng(36.3504, 127.3845), // 대전
+    '7': new kakao.maps.LatLng(35.5396, 129.3115), // 울산
+    '8': new kakao.maps.LatLng(37.8853, 127.7298), // 강원
+    '9': new kakao.maps.LatLng(37.567167, 127.190292), // 경기
+    '10': new kakao.maps.LatLng(35.2383, 128.6925), // 경남
+    '11': new kakao.maps.LatLng(36.5760, 128.5056), // 경북
+    '12': new kakao.maps.LatLng(37.4171413, 127.2561413), // 전남
+    '13': new kakao.maps.LatLng(35.8242238, 127.1479532), // 전북
+    '14': new kakao.maps.LatLng(33.4996, 126.5312), // 제주
+    '15': new kakao.maps.LatLng(36.6580, 126.6728), // 충남
+    '16': new kakao.maps.LatLng(36.6350, 127.4914)  // 충북
+};
+
 function storelocation() {
     mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-        mapOption = { 
-            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-            level: 4 // 지도의 확대 레벨 
-        }; 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 4 // 지도의 확대 레벨 
+    }; 
 
     map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-
-    // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+    // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다
     var zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHTTOP);
 
-    /* 현재 내 위치를 기본으로 표시 */
-    function detaillocation() {
-        // HTML5의 geolocation을 사용할 수 있는지 확인
-        if (navigator.geolocation) {
-            // GeoLocation을 이용해서 접속 위치를 얻어옴
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var lat = position.coords.latitude, // 위도
-                    lon = position.coords.longitude; // 경도
-                
-                var locPosition = new kakao.maps.LatLng(lat, lon); // 현재 위치
+    detaillocation(); // 현재 위치를 지도 중심으로 설정
 
-                // 지도 중심을 현재 위치로 변경
-                map.setCenter(locPosition);
-            }, function(error) {
-                console.error("현재 위치를 불러올 수 없습니다.", error);
-            });
-        } else { 
-            // HTML5의 GeoLocation을 사용할 수 없을때
-            console.error("HTML5의 GeoLocation을 사용할 수 없습니다.");
+    // 지역 선택 이벤트 핸들러 설정
+    document.getElementById('region-select').addEventListener('change', function() {
+        var selectedRegion = this.value;
+        if (selectedRegion && regionCenters[selectedRegion]) {
+            map.setCenter(regionCenters[selectedRegion]);
+            map.setLevel(6); 
+        } else {
+            detaillocation(); // 선택된 지역이 없으면 현재 위치를 중심으로 설정
         }
+    });
+
+    addMarker(); // 마커 추가 함수 호출
+}
+
+// 현재 위치를 지도 중심으로 설정하는 함수
+function detaillocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude, // 위도
+                lon = position.coords.longitude; // 경도
+            var locPosition = new kakao.maps.LatLng(lat, lon); // 현재 위치
+            map.panTo(locPosition); // 지도 중심을 현재 위치로 변경
+        }, function(error) {
+            console.error("현재 위치를 불러올 수 없습니다.", error);
+        });
+    } else {
+        console.error("HTML5의 GeoLocation을 사용할 수 없습니다.");
     }
+}
 
-    detaillocation();// 나중에 호출해서 지도 중심을 현재 위치로 함
-    
-    
 
- 
-   // 마커를 추가하는 함수
-   function addMarker() {
-        // 실행 시 초기 마커 생성
-        const storeAddressList = document.querySelectorAll(".detailLoc"); //.getAttribute("data-address");
-        const storeNameList = document.querySelectorAll(".storeNameS"); //.getAttribute("data-storeName");
 
-        let geocoder = new kakao.maps.services.Geocoder();
 
+// 모든 마커를 지도에서 제거하는 함수
+function removeMarkers() {
+    for (let i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+    markers = []; // 마커 배열 초기화
+}
+
+// 마커를 추가하는 함수
+function addMarker(storeName, coords) {
+
+
+    var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+    var imageSize = new kakao.maps.Size(24, 35); 
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords,
+        image: markerImage,
+        clickable: true
+    });
+
+    var iwContent = '<div id="smn" style="padding:5px;">' + storeName + '</div>';
+    var infowindow = new kakao.maps.InfoWindow({
+        content: iwContent,
+        removable: true
+    });
+
+    kakao.maps.event.addListener(marker, 'click', function() {
         
+        map.panTo(marker.getPosition());
+    });
 
+    kakao.maps.event.addListener(marker, 'mouseover', function() {
+        infowindow.open(map, marker);
+    });
+    kakao.maps.event.addListener(marker, 'mouseout', function() {
+        infowindow.close(map, marker);
+    });
 
-
-        storeAddressList.forEach((storeAddress, i) => {
-
-            geocoder.addressSearch(storeAddress.innerText, function(result, status) {
-                if (status === kakao.maps.services.Status.OK) {
-                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-    
-                    // positions.push({  title: storeNameList[i].innerText,  latlng: coords  })
-                    // console.log("positions:", positions);
-
-                    // 마커 이미지의 이미지 주소입니다
-                    var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-
-                    // 마커 이미지의 이미지 크기입니다
-                    var imageSize = new kakao.maps.Size(24, 35); 
-
-                    // 마커 이미지를 생성합니다    
-                    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-
-                    // 마커를 생성합니다
-                    var marker = new kakao.maps.Marker({
-                        map: map, // 마커를 표시할 지도
-                        position: coords, // 마커를 표시할 위치
-                      /*   title: storeNameList[i].title,  */// 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                        image: markerImage, // 마커 이미지 
-                        clickable : true
-                    });
-
-                        var iwContent= '<div id="smn" style="padding:5px;">'
-                                         +storeNameList[i].innerText+
-                                        '</div>', 
-                        iwRemoveable = true;
-
-                        var infowindow = new kakao.maps.InfoWindow({
-                            content : iwContent,
-                            removable : iwRemoveable
-                        });
-                    console.log("Marker created:", marker); // 마커가 제대로 생성되었는지 콘솔 확인
-
-                   
-
-                    kakao.maps.event.addListener(marker, 'mouseover', function() {
-                        // 마커 위에 인포윈도우를 표시합니다
-                        infowindow.open(map, marker);  
-                  });
-                    kakao.maps.event.addListener(marker, 'mouseout', function() {
-                        // 마커 위에 인포윈도우를 표시합니다
-                        infowindow.close(map, marker);  
-                  });
-
-
-
-                   
-                }
-            });
-
-        })
-         
-     
-    
-    }
-
-    addMarker();
-
+    markers.push(marker); 
 }
 
 // 화면 크기가 변경될 때마다 지도 중심을 유지
 window.addEventListener('resize', function() {
     detaillocation();
-    
-    // 지도 크기 조정
     mapContainer.style.height = window.innerHeight + 'px';
     mapContainer.style.width = window.innerWidth + 'px';
-
-    // 지도를 재배치하여 크기를 적용
     map.relayout();
-
-    // 지도의 중심을 현재 중심으로 다시 설정
     var center = map.getCenter();
     map.setCenter(center);
 });
 
 
-/* 화면 생성 시 자동 실행 */
+// 화면 생성 시 자동 실행
 window.onload = function() {
     storelocation();
 };
-
-
 /* ************************************* 지도 ******************************************* */
+
+
+
 
 /* 가게 주소  */
 
+/* 가게 주소 및 '더 보기/접기' 기능 추가 */
 document.addEventListener('DOMContentLoaded', function () {
-    const searchStoreLocContent =document.querySelector('.searchstore-detailInfo-container');
-    const storelocboxTwo =document.querySelector('.storelocbox-two');
-    const moreAddress =document.querySelector('.more-address');
-    const lessAddress =document.querySelector('.less-address');
-    
-    moreAddress.addEventListener("click", () => {
-      
-      moreAddress.style.display = 'none'; 
-      lessAddress.style.display = 'block'; 
-      storelocboxTwo.style.display = 'inline';
-    });
-    
-    
-    lessAddress.addEventListener("click", ()=>{
-     
-     
-      
-      lessAddress.style.display = 'none'; 
-      moreAddress.style.display = 'flex';
-      storelocboxTwo.style.display ='none'; 
+    // 가게 주소를 감싸는 컨테이너들 가져오기
+    const searchStoreLocContents = document.querySelectorAll('.searchstore-detailInfo-container');
+
+    // 각 컨테이너에 대해 반복
+    searchStoreLocContents.forEach(function (searchStoreLocContent) {
+        // 해당 컨테이너 내의 요소들 선택
+        const storelocboxTwo = searchStoreLocContent.querySelector('.storelocbox-two');
+        const moreAddress = searchStoreLocContent.querySelector('.more-address');
+        const lessAddress = searchStoreLocContent.querySelector('.less-address');
+
+        // '더보기' 버튼 클릭 이벤트
+        moreAddress.addEventListener('click', () => {
+            moreAddress.style.display = 'none';
+            lessAddress.style.display = 'block';
+            storelocboxTwo.style.display = 'block'; // 'inline'에서 'block'으로 변경
+        });
+
+        // '접기' 버튼 클릭 이벤트
+        lessAddress.addEventListener('click', () => {
+            lessAddress.style.display = 'none';
+            moreAddress.style.display = 'flex';
+            storelocboxTwo.style.display = 'none';
+        });
     });
 });
 
 /*  가게 전화번호 */
-
+/* 가게 전화번호 포맷팅 */
 document.addEventListener('DOMContentLoaded', function () {
     // phoneFormatter 함수 정의
     function phoneFormatter(storeTel) {
@@ -290,17 +284,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   
     // storeTel 값을 가져옴
-    var storeTelElement = document.getElementById('searchMemberTel');
-    var storeTel = storeTelElement.textContent.trim();
-  
-    // 포맷팅된 전화번호로 업데이트
-    var formattedTel = phoneFormatter(storeTel);
-    storeTelElement.textContent = formattedTel;
-  });
+    var storeTelElements = document.querySelectorAll('#searchMemberTel');
+    
+    storeTelElements.forEach(function(storeTelElement) {
+        var storeTel = storeTelElement.textContent.trim();
+    
+        // 포맷팅된 전화번호로 업데이트
+        var formattedTel = phoneFormatter(storeTel);
+        storeTelElement.textContent = formattedTel;
+    });
+});
+
+/* 비동기로 거리순 리뷰순 좋아요순 평점순  */
 
 
 
-  /* ************************************************************ */
 
 // 비동기로 내용 불러올 공간
 const searchstoreStoreCon = document.querySelector(".searchstore-storeList");
@@ -332,6 +330,9 @@ const searchCatSList =(categoryCode)=>{
 
     .then(result=>{
 
+        removeMarkers();
+
+
      const searchStoreList = result.searchStoreList;
 
         console.log(searchStoreList);
@@ -348,12 +349,26 @@ const searchCatSList =(categoryCode)=>{
         searchstoreStoreCon.append(message);
 
 	 }else{
-                searchStoreList.forEach(store => {
+        searchStoreList.forEach(store => {
+            // 각 가게의 주소를 좌표로 변환
+            let geocoder = new kakao.maps.services.Geocoder();
+            geocoder.addressSearch(store.address, function(result, status) {
+                if (status === kakao.maps.services.Status.OK) {
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                    
+                    // 마커 추가
+                    addMarker(store.storeName, coords);
+        
+                    // 가게 요소 생성 및 추가
                     const storeElement = createStoreElement(store);
                     searchstoreStoreCon.append(storeElement);
-                });
-            }
+                } else {
+                    console.error('주소를 좌표로 변환할 수 없습니다.');
+                }
+            });
         });
+        }
+    });
 }
 
 const createStoreElement = (store) => {
@@ -379,7 +394,7 @@ const createStoreElement = (store) => {
                     <a class="storesearch-reservationLink" href="/store/storeDetail/${store.storeNo}/reservation">예약</a>
                 </div>
                 <div class="bookmark-box">
-                    <i class="fa-heart" id="bookmarkCheck" class="${store.bookmark == 1 ? 'fa-solid' : 'fa-regular'}"></i>
+                    <i class="${store.bookmark == 1 ? 'fa-solid' : 'fa-regular'} fa-heart" id="bookmarkCheck"></i>
                     <span id="storeLikeCount">${store.likeCount}</span>
                 </div>
             </div>
@@ -457,69 +472,57 @@ if (searchStoreR) {
 
 /* 비동기로 가게 검색하기 */
 
-const searchButton = document.getElementById("searchButton");
+document.addEventListener('DOMContentLoaded', () => {
+    const searchButton = document.getElementById("searchButton");
+    const searchStoreR = document.getElementById("searchStoreR");
 
-// 검색 버튼 클릭 시 이벤트 리스너 추가
-searchButton.addEventListener("click", () => {
-    const searchR = searchStoreR.value.trim(); // 검색어 가져오기 및 공백 제거
-
-    if (searchStoreR !== "") {
-        searchStores(searchStoreR); 
-    } else {
-        alert("검색어를 입력해주세요.");
-    }
-});
-
-// Enter 키 눌렀을 때 검색 이벤트 처리
-searchButton.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-        const searchStoreR = searchStoreR.value.trim(); 
-
-        if (searchStoreR !== "") {
-            searchStores(searchStoreR); // 검색 함수 호출
-        } else {
-            alert("검색어를 입력해주세요.");
+    if (searchStoreR) {
+        const mainSearchValue = searchStoreR.value.trim();
+        if (mainSearchValue !== "") {
+            searchStoreR.value = mainSearchValue;
         }
     }
-});
 
-// 검색 함수 정의
+    const searchStores = (searchStoreR) => {
+        fetch("/store/search?searchStoreR=" + searchStoreR)
+            .then(resp => resp.json())
+            .then(result => {
+                const storeAllList = result.storeAllList;
+                const searchstoreStoreCon = document.querySelector(".searchstore-storeList");
+                searchstoreStoreCon.innerHTML = "";
 
+                if (storeAllList == null || storeAllList.length === 0) {
+                    let message = document.createElement("div");
+                    message.id = "noCommentMessage";
+                    message.innerText = "해당 가게가 없습니다.";
+                    searchstoreStoreCon.append(message);
+                } else {
+                    storeAllList.forEach(store => {
+                        // 각 가게의 주소를 좌표로 변환
+                        let geocoder = new kakao.maps.services.Geocoder();
+                        geocoder.addressSearch(store.address, function(result, status) {
+                            if (status === kakao.maps.services.Status.OK) {
+                                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                                
+                                // 마커 추가
+                                addMarker(store.storeName, coords);
+                    
+                                // 가게 요소 생성 및 추가
+                                const storeElement = createStoreElement(store);
+                                searchstoreStoreCon.append(storeElement);
+                            } else {
+                                console.error('주소를 좌표로 변환할 수 없습니다.');
+                            }
+                        });
+                    });
+                }
+            });
+    }
 
-const searchStores = (searchStoreR) => {
-    // 서버로 검색어를 보내는 비동기 요청
-    fetch("/store/search?searchStoreR=" + searchStoreR)
-        .then(resp => resp.json())
-        .then(result => {
-           
-   const storeAllList = result.storeAllList;
+    const createStoreElement = (store) => {
+        const div = document.createElement("div");
 
-        console.log(storeAllList);
-
-     const searchstoreStoreCon = document.querySelector(".searchstore-storeList");
-     searchstoreStoreCon.innerHTML ="";
-     
-     if(storeAllList ==null || storeAllList.length ===0){
-		 let message = document.createElement("div");
-        message.id = "noCommentMessage";
-        message.innerText = "해당 가게가 없습니다.";
-
-     
-        searchstoreStoreCon.append(message);
-
-	 }else{
-                storeAllList.forEach(store => {
-                    const storeElement = createStoreElement(store);
-                    searchstoreStoreCon.append(storeElement);
-                });
-            }
-        });
-}
-
-const createStoreElements = (store) => {
-    const div = document.createElement("div");
-
-    div.innerHTML = `
+        div.innerHTML = `
         <div>
             <div>
                 <a href="/store/storeDetail/${store.storeNo}">
@@ -539,7 +542,7 @@ const createStoreElements = (store) => {
                     <a class="storesearch-reservationLink" href="/store/storeDetail/${store.storeNo}/reservation">예약</a>
                 </div>
                 <div class="bookmark-box">
-                    <i class="fa-heart" id="bookmarkCheck" class="${store.bookmark == 1 ? 'fa-solid' : 'fa-regular'}"></i>
+                    <i class="${store.bookmark == 1 ? 'fa-solid' : 'fa-regular'} fa-heart" id="bookmarkCheck"></i>
                     <span id="storeLikeCount">${store.likeCount}</span>
                 </div>
             </div>
@@ -602,28 +605,27 @@ const createStoreElements = (store) => {
     return div;
 }
 
+    searchButton.addEventListener("click", () => {
+        const searchStoreRValue = searchStoreR.value.trim();
+        if (searchStoreRValue !== "") {
+            searchStores(searchStoreRValue);
+        } else {
+            alert("검색어를 입력해주세요.");
+        }
+    });
 
-
-
-/* 비동기로 거리순 리뷰순 좋아요순 평점순  */
-
-
-
-/* 화면 비동기로 바꾸는 버튼 얻어오기 */
-//-> 버튼 값만 보내서 조회 순서를 바꾸는게 가능한가?
-
-// 리뷰 많은 순으로 조회하는 버튼
-const storeSearchReviewBtn = document.querySelector("#storeSearchReviewBtn");
-
-// 찜 많은 순으로 조회하는 버튼
-const storeSearchLikeBtn = document.querySelector("#storeSearchLikeBtn");
-
-// 평점 높은 순으로 조회하는 버튼
-const storeRatingBtn = document.querySelector("#storeRatingBtn");
-
+    searchStoreR.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            const searchStoreRValue = searchStoreR.value.trim();
+            if (searchStoreRValue !== "") {
+                searchStores(searchStoreRValue);
+            } else {
+                alert("검색어를 입력해주세요.");
+            }
+        }
+    });
+});
 
 
 /* ----------------------------------------------------------- */
-
-
 

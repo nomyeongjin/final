@@ -28,6 +28,9 @@ quickLoginBtn.forEach((item) =>{
 
 const chatBtn = document.querySelector("#chat");
 
+if(chatBtn !=null){
+
+
 chatBtn.addEventListener("click", ()=>{
     
     if(loginMemberCode==3){
@@ -38,7 +41,7 @@ chatBtn.addEventListener("click", ()=>{
 
 
 })
-
+}
 
 
 const searchStoreList = document.querySelector("#searchStoreList");

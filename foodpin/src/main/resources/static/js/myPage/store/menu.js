@@ -615,7 +615,7 @@ menuBtn.addEventListener("click", () => {
       /**
        * (버튼) 메뉴 수정
        */
-      menuSubmitBtn.addEventListener("click", () => {
+      menuSubmitBtn.addEventListener("click", e => {
 
          // const formData = new FormData(document.querySelector("#menuEditFrm")) // 폼 내부 input 내용 자동으로 들어감
          const formData = new FormData(); 
@@ -625,7 +625,7 @@ menuBtn.addEventListener("click", () => {
 
             const input = row.querySelector(".input-menu-img");
             const file = input.files[0]; // 업로드 된 파일 정보 (단일 이미지 -> [0])
-
+            const pattern = /^[0-9]$/;
             data = {
                "menuImg" : file,
                "menuTitle" : row.querySelector(".menu-title").value,
@@ -647,6 +647,10 @@ menuBtn.addEventListener("click", () => {
             }
             if(data.menuAmount.trim().length === 0) {
                alert("메뉴가격을 입력해주세요.");
+               e.preventDefault();
+               return;
+            } else if(pattern.test(data.menuAmount) || pattern.test(storeMaxNumber)){
+               alert("숫자만 입력해주세요.");
                e.preventDefault();
                return;
             }

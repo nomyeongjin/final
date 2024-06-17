@@ -42,9 +42,6 @@ body{
 
 }
 
-.map_wrap{
-  
-}
 
 #map{
    
@@ -350,6 +347,8 @@ i{
    flex-direction: row;
    flex-wrap: wrap;
    align-items: center;
+   height: 170px;
+   transition: transform 0.7s ease-out, height 1.5s ease-out;
  
 
 }
@@ -474,6 +473,9 @@ cursor: pointer;
    font-size: 17px;
    font-weight: bold;
    color: rgb(78, 78, 78);
+   -webkit-line-clamp: 1;
+   display: -webkit-box;
+
 }
 
 .searchstore-categoryL{

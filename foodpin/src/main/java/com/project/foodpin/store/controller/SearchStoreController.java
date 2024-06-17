@@ -189,7 +189,7 @@ public class SearchStoreController {
 	  @GetMapping("search")
 		public  Map<String, Object> searchStoreList(
 				@SessionAttribute(value = "loginMember", required = false) Member loginMember, Model model,
-				@RequestParam("searchStoreR") String mainSearch,
+				@RequestParam("searchStoreR") String searchStoreR,
 				RedirectAttributes ra) {
 
 			Map<String, Object> map = new HashMap<>();
@@ -199,11 +199,11 @@ public class SearchStoreController {
 				map.put("memberNo", memberNo);
 			}
 
-			map.put("mainSearch", mainSearch);
+			map.put("searchStoreR", searchStoreR);
 
 
 			List<Store> storeAllList = service.mainStoreList(map);
-			List<Category> searchCategory = service.selectSearchCategory();
+			
 
 			for (Store store : storeAllList) {
 				String storeLocation = store.getStoreLocation();

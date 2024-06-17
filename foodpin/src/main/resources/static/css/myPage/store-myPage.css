@@ -274,6 +274,7 @@
    padding: 0px 20px;
    margin: 5px;
    border: 1px solid var(--main-color);
+   background: white;
    border-radius: 20px;
    cursor: pointer;
    list-style: none;
