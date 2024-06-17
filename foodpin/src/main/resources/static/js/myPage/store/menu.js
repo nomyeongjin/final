@@ -153,7 +153,6 @@ menuBtn.addEventListener("click", () => {
    
                // console.log(file);
    
-               // 파일 업로드 취소 + 백업본 (추가예정)
    
                /* 선택된 이미지 미리보기 */
                const reader = new FileReader();
@@ -365,8 +364,7 @@ menuBtn.addEventListener("click", () => {
          menuRowContainer.append(menuRow);//menu_row 까지 폼에 추가
 
          // 조회 내용 
-         if(menu.menuImgUrl == null)   menuImg.src = menuDefaultImage; // 기본 이미지
-         else  menuImg.src = menu.menuImgUrl; // 조회된 이미지
+         menuImg.src = menu.menuImgUrl; // 조회된 이미지
 
          menuTitle.value = menu.menuTitle;
          menuAmount.value = menu.menuAmount;
@@ -628,8 +626,6 @@ menuBtn.addEventListener("click", () => {
             const input = row.querySelector(".input-menu-img");
             const file = input.files[0]; // 업로드 된 파일 정보 (단일 이미지 -> [0])
 
-            console.log(file);
-
             data = {
                "menuImg" : file,
                "menuTitle" : row.querySelector(".menu-title").value,
@@ -638,8 +634,27 @@ menuBtn.addEventListener("click", () => {
                "storeNo" : storeNo
             };
 
-            console.log(data);
-            formData.append(`menuList[${index}].menuImg`, data.menuImg);
+            if(input.files.length === 0) {
+               alert("메뉴 이미지를 등록해주세요.");
+               e.preventDefault();
+               return;
+            }
+
+            if(data.menuTitle.trim().length === 0) {
+               alert("메뉴 이름을 입력해주세요.");
+               e.preventDefault();
+               return;
+            }
+            if(data.menuAmount.trim().length === 0) {
+               alert("메뉴가격을 입력해주세요.");
+               e.preventDefault();
+               return;
+            }
+
+            if(file && input.files.length === 1){
+               // 등록된 메뉴 이미지가 있는 경우
+               if(input.files.length === 1) formData.append(`menuList[${index}].menuImg`, data.menuImg);
+            }
             formData.append(`menuList[${index}].menuTitle`, data.menuTitle);
             formData.append(`menuList[${index}].menuAmount`, data.menuAmount);
             formData.append(`menuList[${index}].menuContent`, data.menuContent);
