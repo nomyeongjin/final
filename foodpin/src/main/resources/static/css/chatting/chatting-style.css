@@ -62,6 +62,10 @@
 .recent-message{
     font-size: 0.95em;
     margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 170px;
 }
 
 .item-body{
