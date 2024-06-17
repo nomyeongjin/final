@@ -6,6 +6,7 @@
     <title>FOODPIN</title>
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0a61513c1f514ea458fa903130cb59a&libraries=services,clusterer,drawing"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
       <!-- templetes/common/common.html  조각 추가 -->
      <th:block th:replace="~{common/common}"></th:block>
@@ -17,29 +18,28 @@
      <!-- templetes/common/header.html  조각 추가 -->
      <th:block th:replace="~{common/header}"></th:block>
 
-      <!-- section 2  카테고리 공간 -->
-      <section class="main-category-container">
-
-        <div class="main-category-content">
-  
-          <div class="main-category-button" >
-            <div class="main-category-list" th:each="category :${mainCategoryList}">
-  
-              <a th:href="'/store/storeSearch/' + ${category.categoryCode}">
-  
-                <button class="mainCatBtn" th:text="${category.categoryTitle}"></button>
-              </a>
-              
-            </div>
-          </div>
-            
-        </div>
-        
-      </section>
-
      <!-- section 1 검색하는 공간 -->
-       <div class="main-search-container">
-        <!-- <img src="/images/table.jpg"> -->
+      <div class="main-search-container swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <a href="/store/storeSearch/1">
+              <img src="images/mandoo.jpg">
+            </a>
+          </div>
+
+          <div class="swiper-slide">
+            <a href="/store/storeSearch/1">
+              <img src="images/food-table.jpg">
+            </a>
+          </div>
+
+          <div class="swiper-slide">
+            <a href="/store/storeSearch/1">
+              <img src="images/toast.jpg">
+            </a>
+          </div>
+
+        </div>
        
             <!-- 검색하는 박스 -->
 
@@ -67,6 +67,25 @@
 
       </div>
       
+      <!-- section 2  카테고리 공간 -->
+      <section class="main-category-container">
+
+        <div class="main-category-content">
+  
+          <div class="main-category-button" >
+            <div class="main-category-list" th:each="category :${mainCategoryList}">
+  
+              <a th:href="'/store/storeSearch/' + ${category.categoryCode}">
+  
+                <button class="mainCatBtn" th:text="${category.categoryTitle}"></button>
+              </a>
+              
+            </div>
+          </div>
+            
+        </div>
+        
+      </section>
 
      <!-- section 2  카테고리 공간 -->
      <!-- <section class="main-category-container">
@@ -139,6 +158,8 @@
    <!-- templetes/common/footer.html  조각 추가 -->
    <th:block th:replace="~{common/footer}"></th:block> 
 
+   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+   <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> -->
    <script src="/js/main.js"></script>
    <script src="/js/store/storeSearch.js"></script>
 

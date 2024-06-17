@@ -54,4 +54,18 @@ if(searchStoreList != null){
     })
 }
 
+/* SWIPER */
+if(document.querySelector(".swiper-container") != null) {
 
+    /* banner swipe */
+    var swiper = new Swiper(".swiper-container", {
+        slidesPerView: 1,
+        direction: 'horizontal',
+        autoplay: {
+            delay: 3000,
+        },
+        loop: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+    });
+}
