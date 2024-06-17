@@ -90,9 +90,10 @@
 	<select id="checkStoreNo">
 	SELECT COUNT(*)
 	FROM "STORE"
+	JOIN "MEMBER" USING(MEMBER_NO)
 	WHERE STORE_CLOSED = 'N'
 	AND STORE_NO = #{storeNo}
-	
+	AND MEMBER_STATUS != 'Y'
 	</select>
 	
 	<!-- 인증번호 DB에 저장 -->
