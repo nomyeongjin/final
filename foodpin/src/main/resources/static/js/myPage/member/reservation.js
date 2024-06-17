@@ -65,24 +65,5 @@ function cancelReservation(reservNo) {
     });
 }
 
-// 알림 보내기 위한 데이터
-
-const memberNickname = loginMember.memberNickname;
-// const memberNo = loginMember.memberNo;
-
-let reservDate = document.querySelector(".reservationDate").innerText;
-const reservTime = document.querySelector(".reservationTime").innerText;
-
-const date = new Date(reservDate);
-
-const options = { weekday: 'short' };
-const dayOfWeek = date.toLocaleDateString('ko-KR', options);
-
-// 형식화
-const formattedReservDate = `${reservDate.slice(6, 8)}.${reservDate.slice(10, 12)}(${dayOfWeek}) ${reservTime}`;
-
-reservDate = formattedReservDate;
-console.log(reservDate);
-
 
 

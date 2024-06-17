@@ -326,6 +326,10 @@ const createPopup = (info) => {
       popupFrm.remove();
    })
 
+   popupFrm.addEventListener("click", (event) => {
+      event.stopPropagation();
+   });
+
    // 팝업창 외 다른 클릭 이벤트 방지
 };
 

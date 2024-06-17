@@ -62,7 +62,7 @@
             
         </div>
 
-        <div>
+        <div class="search-region">
             <label for="region">지역 선택</label>
             <select name="region" id="region">
                 <option>서울</option>
@@ -97,7 +97,7 @@
                 <div class="storelist-typecontainer">
 
                     <div>
-                        <span>지역</span>
+                        <span>주변 가게</span>
                     </div>
 
     <!--                  <div>
@@ -119,10 +119,9 @@
 
                 <div class="storelist-typeBtnbox">
                     
-                    <button id="storeSearchBasicBtn">❈ 거리순</button>
-                    <button id="storeSearchReviewBtn">❈ 리뷰순</button>
-                    <button id="storeSearchLikeBtn">❈ 좋아요순</button>
-                    <button id="storeRatingBtn">❈ 평점순</button>
+                    <button id="storeSearchReviewBtn">• 리뷰순</button>
+                    <button id="storeSearchLikeBtn">• 좋아요순</button>
+                    <button id="storeRatingBtn">• 평점순</button>
                     
                 </div>
 
@@ -160,8 +159,8 @@
                                 
                                 <a class="searchstore-nameLink" th:href="'/store/storeDetail/' + ${store.storeNo}" >
 
-                                <span th:text="${store.storeName}">
-                                    가게 이름
+                                <span  class="storeNameS" th:text="${store.storeName}" th:data-storeName="${storeName}">
+                                    가게 이름 
                                 </span>
                                 </a>
 
@@ -208,10 +207,7 @@
                               <span th:text="${store.reviewCount}">리뷰 개수</span> 
                             </div>
                          
-                            <div>
-                                <span th:text="${store.storeStatus}">영업 중인지 아닌지</span>
-
-                            </div>
+                           
                       </div>
 
                         <div class="searchstore-detailInfo-container">
@@ -219,7 +215,7 @@
                             <div class="detailstoreloc-content">
 
                                 <div class="storelocbox-one">
-                                    <span id="detailLoc" th:text="${store.address}" th:data-address="${address}"></span>
+                                    <span class="detailLoc" th:text="${store.address}" th:data-address="${store.address}"></span>
                                
 
                                     <div>
@@ -315,12 +311,12 @@
                                 
                                 <a class="searchstore-nameLink" th:href="'/store/storeDetail/' + ${store.storeNo}" >
 
-                                <span th:text="${store.storeName}">
+                                <span class="storeNameS" th:text="${store.storeName}">
                                     가게 이름
                                 </span>
                                 </a>
 
-                                <th:block th:each="category : ${store.searchStoreCategoryList}">
+                                <th:block th:each="category : ${searchStoreCategoryList}">
                                     <span  class="searchstore-categoryL" th:text="${category.categoryTitle}">가게 카테고리</span>
                                 </th:block>
                                 <a class="storesearch-reservationLink" th:href="'/store/storeDetail/' + ${store.storeNo} + '/reservation'" >예약</a>
@@ -364,10 +360,7 @@
                                 <span th:text="${store.reviewCount}">리뷰 개수</span> 
                               </div>
                            
-                              <div>
-                                  <span th:text="${store.storeStatus}">영업 중인지 아닌지</span>
-
-                              </div>
+                             
                         </div>
                         
 
@@ -376,7 +369,7 @@
                             <div class="detailstoreloc-content">
 
                                 <div class="storelocbox-one">
-                                    <span id="detailLoc" th:text="${store.address}" th:data-address="${address}"></span>
+                                    <span class="detailLoc" th:text="${store.address}" th:data-address="${store.address}"></span>
                                
 
                                     <div>
