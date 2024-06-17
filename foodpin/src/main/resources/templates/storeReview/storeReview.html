@@ -47,7 +47,7 @@
                     <tbody id="menuBody">
                       <tr th:each=" menu : ${menuList}">
                         <td>
-                          <img src="/images/storeDetail/hotdog.jpg">
+                          <img th:src="${menu.menuImgUrl}">
                         </td>
                         <td>
                           <p th:text="${menu.menuTitle}">메뉴</p>
