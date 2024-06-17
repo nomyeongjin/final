@@ -16,6 +16,9 @@ public interface SearchStoreService {
 	 * @param map
 	 * @return
 	 */
+	List<Store> searchStore(Map<String, Object> map);
+	
+	// 카테고리에 해당하는 가게 상세 조
 	List<Store> searchStoreList(Map<String, Object> map);
 
 	List<StoreCategory> searchStoreCategoryList(String storeNo);
@@ -46,4 +49,6 @@ public interface SearchStoreService {
 				 * int storeLike(Map<String, Object> map);
 				 * 
 				 */
+
+	
 }
