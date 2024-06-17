@@ -9,25 +9,35 @@ document.addEventListener('DOMContentLoaded', function () {
       fetch("/myPage/store/reservConfirm?storeNo=" + storeNo)
       .then(resp => resp.json())
       .then(reservList => {
-   
-         // console.log(reservList);
-
+         console.log(reservList);
          /* Full Calendar */
          let calendarEl = document.getElementById('calendar');
+         let calendar = "";
 
          // 캘린더 설정
-         let calendar = new FullCalendar.Calendar(calendarEl, {
+         if(reservList.length === 0) {
+            calendar = new FullCalendar.Calendar(calendarEl, {
          
-         locale: 'kr',
-         timeZone: 'UTC',
-         initialView: 'dayGridMonth',
-         editable: false,
-         dayMaxEvents: true,
-         eventColor : '#e14c54ba',
-         events: reservList,
-         eventClick : function(info) { reservPopup(info.event.id); },
+               locale: 'kr',
+               timeZone: 'UTC',
+               initialView: 'dayGridMonth',
+               editable: false,
+               dayMaxEvents: true
+               });
+         }
+         else {
+            calendar = new FullCalendar.Calendar(calendarEl, {
+         
+            locale: 'kr',
+            timeZone: 'UTC',
+            initialView: 'dayGridMonth',
+            editable: false,
+            dayMaxEvents: true,
+            eventColor : '#e14c54ba',
+            events: reservList,
+            eventClick : function(info) { reservPopup(info.event.id); },
          });
-
+         }
          calendar.render();
       })
       .catch( err => console.log(err)); // 예약 승인 처리 fetch
