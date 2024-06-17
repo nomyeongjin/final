@@ -467,8 +467,8 @@ header {
    text-align: center;
    padding-top: 3px;
    background-color: white;
-   top: 10px;
-   right: 10px;
+   top: 8px;
+   right: 50px;
    font-size: 15px;
    color: var(--hotpink);
    font-weight: bold;
