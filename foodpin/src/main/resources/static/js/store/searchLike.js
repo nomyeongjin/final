@@ -20,6 +20,12 @@ const addStoeLikeFn = async () => {
     
     bookmarkCheckElements.forEach((bookmarkCheck, index) => {
         bookmarkCheck.addEventListener("click", e => {
+
+            if(!loginMember){
+                alert("로그인 후 이용해 주세요");
+                return;
+            } 
+
             const storeNo = storeNoList[index];
             const bookmark = bookmarkList[index];
             
