@@ -99,15 +99,15 @@ function calendar_rendering() {
          dateClick: function(info){ insertPopup(info) },
          
          // 헤더
-         headerToolbar: { left: 'addEventButton', center: 'title' },
+         // headerToolbar: {/*  left: 'addEventButton',  */center: 'title' },
          
          // 커스텀 버튼 설정에서 일정 추가 버튼 추가
-         customButtons: {
-            addEventButton: { // 추가한 버튼 설정
-                  text : "일정 추가",  // 버튼 내용
-                  click : function(){ createPopup(); }
-            }
-         },
+         // customButtons: {
+         //    addEventButton: { // 추가한 버튼 설정
+         //          text : "일정 추가",  // 버튼 내용
+         //          click : function(){ createPopup(); }
+         //    }
+         // },
          events: listMap // 화면 구현용 샘플 데이터 
       });
       calendar.render();

@@ -402,12 +402,12 @@
 }
 
 /* 버튼 (일정 추가) */
-.fc-addEventButton-button.fc-button.fc-button-primary{
+/* .fc-addEventButton-button.fc-button.fc-button-primary{
    background: var(--submit-color);
    border: 1px solid var(--submit-color);
    border-radius: 20px;
    width: 80px;
-}
+} */
 
 /* 버튼 (today) */
 .fc-today-button.fc-button.fc-button-primary{
@@ -711,6 +711,18 @@
    display: flex;
    align-items: center;
    justify-content: space-between;
+}
+.popup-row-reserv{
+   width: 80%;
+   padding: 10px;
+   margin: 10px;
+   position: relative;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.popup-row-reserv > p{
+   padding-left: 5px;
 }
 .popup-title{
    width: 80%;
