@@ -214,6 +214,16 @@
     
     
             </section>
+
+            <!-- 버튼 section -->
+            <section class="button-area">
+            
+                <div class="buttons" th:if="${!#lists.isEmpty(reviewList)}">
+                    <a th:href="'/store/storeDetail/' + ${storeNo} + '/reservation'" class="next-btn" id="nextBtn">예약하기 &nbsp;<i
+                            class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            
+            </section>
     
         </section>
 
