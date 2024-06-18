@@ -71,7 +71,7 @@
 		NULL,
 		NULL,
 		DEFAULT,
-		'/images/storeDetail/store.jpg',
+		'/images/storeimage.png',
 		0,
 		#{memberNo},
 		0
