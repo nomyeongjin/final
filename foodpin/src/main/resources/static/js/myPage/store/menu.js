@@ -649,7 +649,7 @@ menuBtn.addEventListener("click", () => {
                alert("메뉴가격을 입력해주세요.");
                e.preventDefault();
                return;
-            } else if(pattern.test(data.menuAmount) || pattern.test(storeMaxNumber)){
+            } else if(pattern.test(data.menuAmount)){
                alert("숫자만 입력해주세요.");
                e.preventDefault();
                return;
