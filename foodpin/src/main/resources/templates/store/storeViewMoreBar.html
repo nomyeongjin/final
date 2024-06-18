@@ -1,4 +1,3 @@
-
 <!-- 더보기 바 -->
 
 <div class="search-sidebarbox">
@@ -17,30 +16,28 @@
                     </button>
 
                     <th:block th:if="${mainSearch!=null}">
-                        
-                        <input type="text" class="input-box" 
-                         th:value="${mainSearch}"
-                         name="searchStoreR" id="searchStoreR" >
+
+                        <input type="text" class="input-box" th:value="${mainSearch}" name="searchStoreR"
+                            id="searchStoreR">
                     </th:block>
                     <th:block th:if="${mainSearch==null}">
-                        
-                        <input type="text" class="input-box" 
-                         placeholder="주소, 카테고리, 가게 검색"
-                         name="searchStoreR" id="searchStoreR" >
+
+                        <input type="text" class="input-box" placeholder="주소, 카테고리, 가게 검색" name="searchStoreR"
+                            id="searchStoreR">
                     </th:block>
-                    
+
                 </div>
 
             </div>
 
 
-        
+
         </div>
 
-            <!-- 검색창 카테고리 -->
+        <!-- 검색창 카테고리 -->
 
 
-        
+
         <div class="search-categoryContainer-hide">
             <span class="bars">
                 <i class="fa-solid fa-bars"></i>
@@ -51,45 +48,46 @@
 
         </div>
 
-            
+
         <div class="search-categoryContainer">
 
-            
+
             <div class="searchcategory-Btnbox" th:each="category : ${searchCategory}">
-                <button class="searchCat-btn" th:text="${category.categoryTitle}" th:data-category="${category.categoryCode}">카테고리 버튼</button>
+                <button class="searchCat-btn" th:text="${category.categoryTitle}"
+                    th:data-category="${category.categoryCode}">카테고리 버튼</button>
             </div>
-            
-            
+
+
         </div>
 
-         <div class="search-region">
-        <label for="region">지역 선택</label>
-        <select id="region-select">
-            <option value="">-선택-</option>
-            <option value='1'>서울</option>
-            <option value='2'>부산</option>
-            <option value='3'>대구</option>
-            <option value='4'>인천</option>
-            <option value='5'>광주</option>
-            <option value='6'>대전</option>
-            <option value='7'>울산</option>
-            <option value='8'>강원</option>
-            <option value='9'>경기</option>
-            <option value='10'>경남</option>
-            <option value='11'>경북</option>
-            <option value='12'>전남</option>
-            <option value='13'>전북</option>
-            <option value='14'>제주</option>
-            <option value='15'>충남</option>
-            <option value='16'>충북</option>
-        </select>
-    </div>
+        <div class="search-region">
+            <label for="region">지역 선택</label>
+            <select id="region-select">
+                <option value="">-선택-</option>
+                <option value='1'>서울</option>
+                <option value='2'>부산</option>
+                <option value='3'>대구</option>
+                <option value='4'>인천</option>
+                <option value='5'>광주</option>
+                <option value='6'>대전</option>
+                <option value='7'>울산</option>
+                <option value='8'>강원</option>
+                <option value='9'>경기</option>
+                <option value='10'>경남</option>
+                <option value='11'>경북</option>
+                <option value='12'>전남</option>
+                <option value='13'>전북</option>
+                <option value='14'>제주</option>
+                <option value='15'>충남</option>
+                <option value='16'>충북</option>
+            </select>
+        </div>
 
         <span class="searchbar-line">-</span>
         <!-- 검색창 아래 내용 -->
         <div class="search-panelContent">
 
-          
+
 
             <div class="search-storelist-type">
 
@@ -100,9 +98,9 @@
                     </div>
 
                 </div>
-                
 
-         <!--        <div class="storelist-typeBtnbox">
+
+                <!--        <div class="storelist-typeBtnbox">
                     
                     <button id="storeSearchReviewBtn">• 리뷰순</button>
                     <button id="storeSearchLikeBtn">• 좋아요순</button>
@@ -110,346 +108,342 @@
                     
                 </div>
  -->
-                
+
             </div>
 
 
             <!-- 가게 카드 -->
-        
+
             <div class="searchstore-detailcontainer">
 
-             
-                <div th:if="${#lists.isEmpty(searchStoreList) and #lists.isEmpty(storeAllList)}" >
+
+                <div th:if="${#lists.isEmpty(searchStoreList) and #lists.isEmpty(storeAllList)}">
                     <div class="searchstore-none">
-                        <span>해당 가게가 없습니다.</span> 
+                        <span>해당 가게가 없습니다.</span>
                     </div>
                 </div>
 
-                
-                <div class="searchstore-storeList" th:each="store : ${searchStoreList}" th:object="${store}" >
-                    
-                    
-                    <div  class="storeNoI" th:data-storeNo="${store.storeNo}">
-                        
-                        <div>
-                            <a th:href="'/store/storeDetail/' + ${store.storeNo}" >
-                            <img th:src="${store.storeImg}" id="searchStoreImg">
-                            </a>
-                                
-                        </div>
-                        
 
-                        <div class="storesearch-firstrow">
+                <div class="searchstore-storeList" id="storeList-a">
+                    <div  th:each="store : ${searchStoreList}" th:object="${store}">
+                        <div class="storeNoI" th:data-storeNo="${store.storeNo}">
+
                             <div>
-                                
-                                <a class="searchstore-nameLink" th:href="'/store/storeDetail/' + ${store.storeNo}" >
-
-                                <span  class="storeNameS" th:text="${store.storeName}" th:data-storeName="${storeName}">
-                                    가게 이름 
-                                </span>
+                                <a th:href="'/store/storeDetail/' + ${store.storeNo}">
+                                    <img th:src="${store.storeImg}" id="searchStoreImg">
                                 </a>
-
-                                <th:block th:each="category : ${store.searchStoreCategoryList}">
-                                    <span  class="searchstore-categoryL" th:text="${category.categoryTitle}">가게 카테고리</span>
-                                </th:block>
-                                <a class="storesearch-reservationLink" th:href="'/store/storeDetail/' + ${store.storeNo} + '/reservation'" >예약</a>
-                            </div>
-
-                            
-                            <div class="bookmark-box">
-                                  
-                                <th:block th:if="${session.loginMember?.memberCode == 1}">
-                                    <i class="fa-heart bookmarkCheck" th:data-bookmark="${store.bookmark}"
-                                    th:classappend="*{bookmark == 1} ? fa-solid : fa-regular"></i
-                                    
-                                    >
-
-                                </th:block>
-                            
-                                <!-- 좋아요 개수 -->
-                                <th:block th:if="${session.loginMember?.memberCode !=1}">
-                                <i class="fa-solid fa-heart"> </i>
-                                </th:block>
-                                <!-- &nbsp; -->
-                                <span id="storeLikeCount" th:text="*{likeCount}">0</span>
-                            
-                               
-                            
-                            </div>
-                        </div>
-
-                        <div class="searchstore-detailinfo">
-                            
-                            <div>
-                              <i class="total_star fas fa-star"> </i>
-                              <span th:text="${store.totalRating}">가게 별점</span>
-                          
-                            </div>
-                            
-                            <div>
-                                <span>리뷰</span>
-                              <span th:text="${store.reviewCount}">리뷰 개수</span> 
-                            </div>
-                         
-                           
-                      </div>
-
-                        <div class="searchstore-detailInfo-container">
-                            
-                            <div class="detailstoreloc-content">
-
-                                <div class="storelocbox-one">
-                                    <span class="detailLoc" th:text="${store.address}" th:data-address="${store.address}"></span>
-                               
-
-                                    <div>
-                                        <span  class="more-address">
-                                            <i class="fa-solid fa-chevron-down"></i>
-                                        </span>
-                                        <span  class="less-address">
-                                            <i class="fa-solid fa-chevron-up"></i>
-                                        </span>
-                
-                                    </div>
-                                  
-                                
-                                </div>
-                                
-                               
-                                  <div class="storelocbox-two">
-
-                                    <div class="detailLocHide">
-                                        <div class="detailLoc-m">
-
-                                            <span class="storeloc-detail">도로명</span>
-                                            <span th:text="${store.address}"></span>
-                                        </div>
-                                        <div class="detailLoc-m">
-                                            <span class="storeloc-detail">지번</span>
-                                            <span th:text="${store.detailAddress}"></span>
-                                        </div>
-                                       
-                                        <div class="detailLoc-m">
-                                            <span class="storeloc-detail">우</span>
-                                            <span th:text="${store.postcode}"></span>
-                                        </div>
-                                    </div>
-                                   
-                                  </div>          
-                              
-                            </div>
-                
-
-                            <div>
-                                <span type="text" id="searchMemberTel" th:text="*{storeTel}">
-                                    가게 전화번호
-                                </span>
-                            </div>
-
-                        </div>
-
-                        
-
-                        <div>
-                            <a class="storesearch-info" th:href="'/store/storeDetail/' + ${store.storeNo}" >
-                                <th:block th:if="${store.storeInfo != null}">
-
-                    
-                                 <div class="store-detail-content">
     
-                               
-                                <pre class="store-detail-text" th:text="${store.storeInfo}">
-                                
-                                </pre>
-    
-                            
-                               
-                                </div>
-                               </th:block>
-                            </a>
-                            
-                        </div>
-
-
-                    </div>
-                    
-                    
-            
-                </div>
-               
-                <div class="searchstore-storeList" th:each="store : ${storeAllList}" th:object="${store}" >
-                    
-                    
-                    <div class="storeNoI" th:data-storeNo="${store.storeNo}"></div>
-                       
-
-                        <div>
-                            <a th:href="'/store/storeDetail/' + ${store.storeNo}" >
-                            <img th:src="${store.storeImg}" id="searchStoreImg">
-                            </a>
-                                
-                        </div>
-                        
-
-                        <div class="storesearch-firstrow">
-                            <div>
-                                
-                                <a class="searchstore-nameLink" th:href="'/store/storeDetail/' + ${store.storeNo}" >
-
-                                <span class="storeNameS" th:text="${store.storeName}">
-                                    가게 이름
-                                </span>
-                                </a>
-                                <th:block th:each="category : ${store.searchStoreCategoryList}">
-                                    <span  class="searchstore-categoryL" th:text="${category.categoryTitle}">가게 카테고리</span>
-                                </th:block>
-                                <a class="storesearch-reservationLink" th:href="'/store/storeDetail/' + ${store.storeNo} + '/reservation'" >예약</a>
                             </div>
-
-                             
-                            <div class="bookmark-box">
-                                  
-                                <th:block th:if="${session.loginMember?.memberCode == 1}">
-                                    <i class="fa-heart bookmarkCheck" th:data-bookmark="${bookmark}"
-                                    
-                                    th:classappend="*{bookmark == 1} ? fa-solid : fa-regular"></i
-                                    
-                                    >
-
-
-                                </th:block>
-                            
+    
+    
+                            <div class="storesearch-firstrow">
+                                <div>
+    
+                                    <a class="searchstore-nameLink" th:href="'/store/storeDetail/' + ${store.storeNo}">
+    
+                                        <span class="storeNameS" th:text="${store.storeName}"
+                                            th:data-storeName="${storeName}">
+                                            가게 이름
+                                        </span>
+                                    </a>
+    
+                                    <th:block th:each="category : ${store.searchStoreCategoryList}">
+                                        <span class="searchstore-categoryL" th:text="${category.categoryTitle}">가게
+                                            카테고리</span>
+                                    </th:block>
+                                    <a class="storesearch-reservationLink"
+                                        th:href="'/store/storeDetail/' + ${store.storeNo} + '/reservation'">예약</a>
+                                </div>
+    
+    
+                                <div class="bookmark-box">
+    
+                                    <th:block th:if="${session.loginMember?.memberCode == 1}">
+                                        <i class="fa-heart bookmarkCheck" th:data-bookmark="${store.bookmark}"
+                                            th:classappend="*{bookmark == 1} ? fa-solid : fa-regular"></i>
+    
+                                    </th:block>
+    
                                     <!-- 좋아요 개수 -->
                                     <th:block th:if="${session.loginMember?.memberCode !=1}">
-                                    <i class="fa-solid fa-heart"> </i>
+                                        <i class="fa-solid fa-heart"> </i>
                                     </th:block>
                                     <!-- &nbsp; -->
                                     <span id="storeLikeCount" th:text="*{likeCount}">0</span>
-                                
-                               
-                            
-                            </div>
-                        </div>
-
-                        
-                        <div class="searchstore-detailinfo">
-                            
-                              <div>
-                                <i class="total_star fas fa-star"> </i>
-                                <span th:text="${store.totalRating}">가게 별점</span>
-                            
-                              </div>
-                              
-                              <div>
-                                <span>리뷰</span>
-                                <span th:text="${store.reviewCount}">리뷰 개수</span> 
-                              </div>
-                           
-                             
-                        </div>
-                        
-
-                        <div class="searchstore-detailInfo-container">
-                            
-                            <div class="detailstoreloc-content">
-
-                                <div class="storelocbox-one">
-                                    <span class="detailLoc" th:text="${store.address}" th:data-address="${store.address}"></span>
-                               
-
-                                    <div>
-                                        <span  class="more-address">
-                                            <i class="fa-solid fa-chevron-down"></i>
-                                        </span>
-                                        <span  class="less-address">
-                                            <i class="fa-solid fa-chevron-up"></i>
-                                        </span>
-                
-                                    </div>
-                                  
-                                
+    
+    
+    
                                 </div>
-                                
-                               
-                                  <div class="storelocbox-two">
-
-                                    <div class="detailLocHide">
-                                        <div class="detailLoc-m">
-
-                                            <span class="storeloc-detail">도로명</span>
-                                            <span th:text="${store.address}"></span>
-                                        </div>
-                                        <div class="detailLoc-m">
-                                            <span class="storeloc-detail">지번</span>
-                                            <span th:text="${store.detailAddress}"></span>
-                                        </div>
-                                       
-                                        <div class="detailLoc-m">
-                                            <span class="storeloc-detail">우</span>
-                                            <span th:text="${store.postcode}"></span>
-                                        </div>
-                                    </div>
-                                   
-                                  </div>          
-                              
                             </div>
-                
-
+    
+                            <div class="searchstore-detailinfo">
+    
+                                <div>
+                                    <i class="total_star fas fa-star"> </i>
+                                    <span th:text="${store.totalRating}">가게 별점</span>
+    
+                                </div>
+    
+                                <div>
+                                    <span>리뷰</span>
+                                    <span th:text="${store.reviewCount}">리뷰 개수</span>
+                                </div>
+    
+    
+                            </div>
+    
+                            <div class="searchstore-detailInfo-container">
+    
+                                <div class="detailstoreloc-content">
+    
+                                    <div class="storelocbox-one">
+                                        <span class="detailLoc" th:text="${store.address}"
+                                            th:data-address="${store.address}"></span>
+    
+    
+                                        <div>
+                                            <span class="more-address">
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </span>
+                                            <span class="less-address">
+                                                <i class="fa-solid fa-chevron-up"></i>
+                                            </span>
+    
+                                        </div>
+    
+    
+                                    </div>
+    
+    
+                                    <div class="storelocbox-two">
+    
+                                        <div class="detailLocHide">
+                                            <div class="detailLoc-m">
+    
+                                                <span class="storeloc-detail">도로명</span>
+                                                <span th:text="${store.address}"></span>
+                                            </div>
+                                            <div class="detailLoc-m">
+                                                <span class="storeloc-detail">지번</span>
+                                                <span th:text="${store.detailAddress}"></span>
+                                            </div>
+    
+                                            <div class="detailLoc-m">
+                                                <span class="storeloc-detail">우</span>
+                                                <span th:text="${store.postcode}"></span>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+    
+                                </div>
+    
+    
+                                <div>
+                                    <span type="text" class="searchMemberTel" th:text="*{storeTel}">
+                                        가게 전화번호
+                                    </span>
+                                </div>
+    
+                            </div>
+    
+    
+    
                             <div>
-                                <span type="text" id="searchMemberTel" th:text="*{storeTel}">
-                                    가게 전화번호
-                                </span>
+                                <a class="storesearch-info" th:href="'/store/storeDetail/' + ${store.storeNo}">
+                                    <th:block th:if="${store.storeInfo != null}">
+    
+    
+                                        <div class="store-detail-content">
+    
+    
+                                            <pre class="store-detail-text" th:text="${store.storeInfo}">
+    
+                                    </pre>
+    
+    
+    
+                                        </div>
+                                    </th:block>
+                                </a>
+    
                             </div>
-
-                        </div>
-
-                        
-                        <div>
-                            <a class="storesearch-info" th:href="'/store/storeDetail/' + ${store.storeNo}" >
-                                <th:block th:if="${store.storeInfo != null}">
-
-                    
-                                 <div class="store-detail-content">
     
-                               
-                                <pre class="store-detail-text" th:text="${store.storeInfo}">
-                                
-                                </pre>
     
-                            
-                               
-                                </div>
-                               </th:block>
-                            </a>
-                            
                         </div>
-
                     </div>
-                    
-                    
-            
                 </div>
-                
-                
-                
-            </div>
 
+                <div class="searchstore-storeList" id="storeList-b">
+
+<div  th:each="store : ${storeAllList}" th:object="${store}">
+	<div class="storeNoI" th:data-storeNo="${store.storeNo}"></div>
+	<div>
+	    <a th:href="'/store/storeDetail/' + ${store.storeNo}">
+	        <img th:src="${store.storeImg}" id="searchStoreImg">
+	    </a>
+	
+	</div>
+	
+	
+	<div class="storesearch-firstrow">
+	    <div>
+	
+	        <a class="searchstore-nameLink" th:href="'/store/storeDetail/' + ${store.storeNo}">
+	
+	            <span class="storeNameS" th:text="${store.storeName}">
+	                가게 이름
+	            </span>
+	        </a>
+	        <th:block th:each="category : ${store.searchStoreCategoryList}">
+	            <span class="searchstore-categoryL" th:text="${category.categoryTitle}">가게 카테고리</span>
+	        </th:block>
+	        <a class="storesearch-reservationLink"
+	            th:href="'/store/storeDetail/' + ${store.storeNo} + '/reservation'">예약</a>
+	    </div>
+	
+	
+	    <div class="bookmark-box">
+	
+	        <th:block th:if="${session.loginMember?.memberCode == 1}">
+	            <i class="fa-heart bookmarkCheck" th:data-bookmark="${store.bookmark}"
+	                th:classappend="*{bookmark == 1} ? fa-solid : fa-regular"></i>
+	
+	
+	        </th:block>
+	
+	        <!-- 좋아요 개수 -->
+	        <th:block th:if="${session.loginMember?.memberCode !=1}">
+	            <i class="fa-solid fa-heart"> </i>
+	        </th:block>
+	        <!-- &nbsp; -->
+	        <span id="storeLikeCount" th:text="*{likeCount}">0</span>
+	
+	
+	
+	    </div>
+	</div>
+	
+	
+	<div class="searchstore-detailinfo">
+	
+	    <div>
+	        <i class="total_star fas fa-star"> </i>
+	        <span th:text="${store.totalRating}">가게 별점</span>
+	
+	    </div>
+	
+	    <div>
+	        <span>리뷰</span>
+	        <span th:text="${store.reviewCount}">리뷰 개수</span>
+	    </div>
+	
+	
+	</div>
+	
+	
+	<div class="searchstore-detailInfo-container">
+	
+	    <div class="detailstoreloc-content">
+	
+	        <div class="storelocbox-one">
+	            <span class="detailLoc" th:text="${store.address}"
+	                th:data-address="${store.address}"></span>
+	
+	
+	            <div>
+	                <span class="more-address">
+	                    <i class="fa-solid fa-chevron-down"></i>
+	                </span>
+	                <span class="less-address">
+	                    <i class="fa-solid fa-chevron-up"></i>
+	                </span>
+	
+	            </div>
+	
+	
+	        </div>
+	
+	
+	        <div class="storelocbox-two">
+	
+	            <div class="detailLocHide">
+	                <div class="detailLoc-m">
+	
+	                    <span class="storeloc-detail">도로명</span>
+	                    <span th:text="${store.address}"></span>
+	                </div>
+	                <div class="detailLoc-m">
+	                    <span class="storeloc-detail">지번</span>
+	                    <span th:text="${store.detailAddress}"></span>
+	                </div>
+	
+	                <div class="detailLoc-m">
+	                    <span class="storeloc-detail">우</span>
+	                    <span th:text="${store.postcode}"></span>
+	                </div>
+	            </div>
+	
+	        </div>
+	
+	    </div>
+	
+	
+	    <div>
+	        <span type="text" class="searchMemberTel" th:text="*{storeTel}">
+	            가게 전화번호
+	        </span>
+	    </div>
+	
+	</div>
+	
+	
+	<div>
+	    <a class="storesearch-info" th:href="'/store/storeDetail/' + ${store.storeNo}">
+	        <th:block th:if="${store.storeInfo != null}">
+	
+	
+	            <div class="store-detail-content">
+	
+	
+	                <pre class="store-detail-text" th:text="${store.storeInfo}">
+	
+	            </pre>
+	
+	
+	
+	            </div>
+	        </th:block>
+	    </a>
+	
+	</div>
+</div>
+
+
+                </div>
+
+
+
+            </div>
 
 
 
         </div>
 
-        <button id="hideSideBar" aria-expanded="true">
-            <span class="blind">
-                <i class="fa-solid fa-chevron-left"></i>
-            </span>
-            <span class="show">   
-                <i class="fa-solid fa-chevron-right"></i>
-            </span>
-        </button>
+
 
 
     </div>
+
+    <button id="hideSideBar" aria-expanded="true">
+        <span class="blind">
+            <i class="fa-solid fa-chevron-left"></i>
+        </span>
+        <span class="show">
+            <i class="fa-solid fa-chevron-right"></i>
+        </span>
+    </button>
+
+
 </div>
-
-
+</div>

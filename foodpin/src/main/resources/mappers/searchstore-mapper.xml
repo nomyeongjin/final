@@ -78,48 +78,49 @@
  
    <!-- 메인에서 검색한 가게 리스트 -->
 	<select id="mainSearchStore">
-	 SELECT DISTINCT STORE_NO, STORE_NAME, STORE_INFO, STORE_LOCATION, STORE_STATUS, STORE_TEL,
-	 OPEN_HOUR, CLOSE_HOUR, BREAKTIME_START, BREAKTIME_END, STORE_CLOSED, STORE_IMG, 
+	 SELECT DISTINCT MAIN.STORE_NO, MAIN.STORE_NAME, MAIN.STORE_INFO, MAIN.STORE_LOCATION, MAIN.STORE_STATUS, MAIN.STORE_TEL,
+	 MAIN.OPEN_HOUR, MAIN.CLOSE_HOUR, MAIN.BREAKTIME_START, MAIN.BREAKTIME_END, MAIN.STORE_CLOSED, MAIN.STORE_IMG, 
 	 
 	
 	   (SELECT COUNT(*) 
-       FROM "REVIEW"
-       WHERE STORE_NO = #{storeNo}
-      AND REVIEW_DEL_FL = 'N') REVIEW_COUNT,
+       FROM "REVIEW" R
+       WHERE R.STORE_NO = MAIN.STORE_NO
+       AND R.REVIEW_DEL_FL = 'N') REVIEW_COUNT,
 
 
        	(SELECT COUNT(*) 
-		 FROM "BOOKMARK"
-		 WHERE STORE_NO = #{storeNo}) LIKE_COUNT,
+		 FROM "BOOKMARK" SUB
+		 WHERE SUB.STORE_NO = MAIN.STORE_NO)  LIKE_COUNT,
 		 
 
 	     (SELECT ROUND(AVG(REVIEW_RATING), 1)
-		  FROM REVIEW
-		  WHERE STORE_NO =#{storeNo}
-		  AND REVIEW_DEL_FL = 'N') TOTAL_RATING
+		  FROM REVIEW R2
+		  WHERE R2.STORE_NO = MAIN.STORE_NO
+		  AND R2.REVIEW_DEL_FL = 'N') TOTAL_RATING
 		 
 		 <if test="memberNo!=null">
 		 
-		 , (SELECT COUNT(*)FROM "BOOKMARK"
-	    WHERE MEMBER_NO = #{memberNo}
-	    AND STORE_NO =#{storeNo}) BOOKMARK
+			 , (SELECT COUNT(*)
+			 FROM "BOOKMARK" BM
+		    WHERE BM.MEMBER_NO = #{memberNo}
+		    AND BM.STORE_NO = MAIN.STORE_NO) BOOKMARK
 	    </if>
 		  
 	  
-	FROM "STORE" 
-	JOIN "STORE_CATEGORY" USING (STORE_NO) 
-	JOIN "CATEGORY" USING (CATEGORY_CODE) 
-	JOIN "MEMBER" USING(MEMBER_NO) 
+	FROM "STORE"  MAIN
+	JOIN "STORE_CATEGORY" SCT ON MAIN.STORE_NO = SCT.STORE_NO  
+	JOIN "CATEGORY" CT ON SCT.CATEGORY_CODE = CT.CATEGORY_CODE  
+	JOIN "MEMBER" M ON MAIN.MEMBER_NO = M.MEMBER_NO 
 	WHERE STORE_CLOSED='N'
 	    <if test="searchStoreR != null and searchStoreR != ''">
-	     AND (STORE_NAME LIKE '%' || #{searchStoreR} || '%' 
-	     OR STORE_LOCATION LIKE '%' || #{searchStoreR} || '%' 
-	     OR CATEGORY_TITLE LIKE '%' || #{searchStoreR} || '%')
+	     AND (MAIN.STORE_NAME LIKE '%' || #{searchStoreR} || '%' 
+	     OR MAIN.STORE_LOCATION LIKE '%' || #{searchStoreR} || '%' 
+	     OR CT.CATEGORY_TITLE LIKE '%' || #{searchStoreR} || '%')
 	</if>
 	<if test="searchStoreR == null or searchStoreR == ''">
-	     AND (STORE_NAME LIKE '%' || #{mainSearch} || '%' 
-	     OR STORE_LOCATION LIKE '%' || #{mainSearch} || '%' 
-	     OR CATEGORY_TITLE LIKE '%' || #{mainSearch} || '%')
+	     AND (MAIN.STORE_NAME LIKE '%' || #{mainSearch} || '%' 
+	     OR MAIN.STORE_LOCATION LIKE '%' || #{mainSearch} || '%' 
+	     OR CT.CATEGORY_TITLE LIKE '%' || #{mainSearch} || '%')
 	</if>
 	</select>
 
