@@ -310,6 +310,9 @@ const createStoreElementForCategory = (store) => {
                     <a class="storesearch-reservationLink" href="/store/storeDetail/${store.storeNo}/reservation">예약</a>
                 </div>
                 <div class="bookmark-box">
+
+                    
+
                     <i class="${store.bookmark == 1 ? 'fa-solid' : 'fa-regular'} fa-heart bookmarkCheck" data-bookmark="${store.bookmark}"></i>
                     <span id="storeLikeCount">${store.likeCount}</span>
                 </div>
