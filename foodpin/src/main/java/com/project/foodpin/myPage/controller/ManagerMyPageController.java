@@ -104,9 +104,9 @@ public class ManagerMyPageController {
 	        String formattedTel = memberTel.substring(0, 3) + "-" + memberTel.substring(3, 7) + "-" + memberTel.substring(7);
 	        stores.setMemberTel(formattedTel);
 	        
-//	        String storeNo = stores.getStoreNo();
-//	        String formattedStoreNo = storeNo.substring(0, 3) + "-" + storeNo.substring(3, 5) + "-" + storeNo.substring(5);
-//	        stores.setStoreNo(formattedStoreNo);
+	        String storeNo = stores.getStoreNo();
+	        String formattedStoreNo = storeNo.substring(0, 3) + "-" + storeNo.substring(3, 5) + "-" + storeNo.substring(5);
+	        stores.setStoreNo(formattedStoreNo);
 	    }	
 		
 		model.addAttribute("storeMember", storeMember);
