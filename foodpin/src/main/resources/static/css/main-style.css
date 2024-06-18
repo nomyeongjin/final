@@ -231,6 +231,7 @@ header {
 
 .header-top-menu a {
    padding: 0 10px;
+   z-index: 100
 }
 /* 로고(사진, 글) */
 .home-logo-area {
